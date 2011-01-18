@@ -1,0 +1,80 @@
+/*---------Content-Header----------*/
+.big_button, .small_button{
+	float:left;
+	cursor:pointer;
+}
+.big_button{
+	width: 114px;
+	height: 37px;
+	background: url(../../img/big_button_off.png) no-repeat;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#878787;
+	padding-top:6px;
+	margin-left: 10px;
+	text-align:center;
+}
+
+.big_button.on{
+	background: url(../../img/big_button_on.png) no-repeat;
+	color:#859f5e;
+}
+
+.big_button:hover{
+	background:url(../../img/big_button_over.png) no-repeat;
+	color:#5a5a5a;
+}
+.big_button.on:hover{
+	background: url(../../img/big_button_on.png) no-repeat;
+	color:#859f5e;
+}
+
+.small_button{
+	width:44px;
+	height:37px;
+	background: url(../../img/small_button_off.png) no-repeat;
+	margin-left:30px;
+}
+
+.small_button.on{
+	background: url(../../img/small_button_on.png) no-repeat;
+}
+
+.small_button:hover{
+	background:url(../../img/small_button_over.png) no-repeat;
+}
+
+.small_button.on:hover{
+	background: url(../../img/small_button_on.png) no-repeat;
+}
+
+#home_button{
+	margin-left:30px;
+}
+
+#home_button div{
+	width:15px;
+	height:15px;
+	margin-top:8px;
+	margin-left: 14px;
+	background:url(../../img/icon_home_off.png) no-repeat;
+}
+
+#home_button.on div{
+	background:url(../../img/icon_home_active.png) no-repeat;
+} 
+
+#home_button:hover div{
+	background:url(../../img/icon_home_over.png) no-repeat;
+}
+
+#home_button.on:hover div{
+	background:url(../../img/icon_home_active.png) no-repeat;
+}
+
+#topmenu{
+	float: left;
+	width: 100%;
+	z-index: 10;
+	position:relative;
+	}
+	

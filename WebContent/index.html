@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>anycook</title>
+<link rel="SHORTCUT ICON" href="./icons/zombiecon.png" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="css/fileuploader.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+<script src="http://connect.facebook.net/de_DE/all.js"></script>
+<script type="text/javascript" src="scripts/fileuploader.js"></script>
+<script type="text/javascript" src="scripts/jquery.address-1.2.1.js"></script>
+<script type="text/javascript" src="scripts/initscript.js"></script>
+<script type="text/javascript" src="scripts/xmlParsing.js"></script>
+<script type="text/javascript" src="scripts/handleLogin.js"></script>
+<script type="text/javascript" src="scripts/handleSearch.js"></script>
+<script type="text/javascript" src="scripts/handleFilters.js"></script>
+<script type="text/javascript" src="scripts/handleNewRecipe.js"></script>
+<script type="text/javascript" src="scripts/handleTags.js"></script>
+<script type="text/javascript" src="scripts/addressChange.js"></script>
+<script type="text/javascript" src="scripts/handleDiscover.js"></script>
+<script type="text/javascript" src="scripts/handleRecipe.js"></script>
+<script type="text/javascript" src="scripts/handleTime.js"></script>
+<script type="text/javascript" src="scripts/handlepopups.js"></script>
+<script type="text/javascript" src="scripts/handleScroll.js"></script>
+<script type="text/javascript" src="scripts/handleLive.js"></script>
+<script type="text/javascript" src="scripts/activation.js"></script>
+<script type="text/javascript" src="scripts/userProfile.js"></script>
+<script type="text/javascript" src="scripts/facebook.js"></script>
+</head>
+<body>
+<div id="fb-root"></div>
+	<div id="header_container">
+		<div id="header">
+			<div id="header_main">
+				<div id="header_left"></div>
+				<a href="/" id="logo"></a>
+				<div id="searchbar">
+					<div id="loupe"></div>
+					<form id="search_form"><input type="text" id="search"/></form>
+					<div id="search_reset"></div>
+				</div>
+				<div id="login_container">
+				</div>
+				<div id="header_right"></div>
+			</div>
+			<div id="header_peak"></div>
+		</div>
+	</div>
+	<div id="right"><div id="right_inside"></div></div>
+	<div id="container">
+		<div id="filter_container">
+			<div id="filter_box">
+				<div id="filter_head">
+					<div id="filter_head_top"></div>
+					<div id="filter_head_main"><div id="filter_headline"></div><div id="filter_reset"></div></div>
+					<div id="filter_head_bottom"></div>
+				</div>
+				<div id="filter_main">
+				<div class="kategorie_filter">
+					<div id="kategorie_filter_left"></div>
+					<div id="kategorie_filter_name">Keine Kategorie</div>
+					<div id="kategorie_filter_right"></div>
+					<input type="hidden" id="kategorie_filter_hidden" value="Keine Kategorie"/>
+				</div>
+				<ul class="kategorie_filter"></ul>
+				<div id="filter_main_box">
+						<table id="filter_table">
+							<tr>
+								<td class="filter_table_left"><img id="uhr" alt="uhr" src="./icons/uhr.png" />Dauer: </td>
+								<td class="filter_table_right"><form id="time_form"><input type="text" id="time_std" value="00" size="2" maxlength="2" />: <input type="text" id="time_min" value="00" size="2" maxlength="2" />h</form></td>
+							</tr>
+
+							<tr>
+								<td class="filter_table_left">Schwierigkeit:</td>
+								<td class="filter_table_right">
+									<label class="label_chefhats" for="chef_1">
+		                            	<input type="radio" class="chefhats" id="chef_1" value="1" name="chefhats" />
+		                            </label>
+		                            <label class="label_chefhats" for="chef_2">
+		                            	<input type="radio" class="chefhats" id="chef_2" value="2" name="chefhats" />
+		                            </label>
+		                            <label class="label_chefhats" for="chef_3">
+		                            	<input type="radio" class="chefhats" id="chef_3" value="3" name="chefhats" />
+		                            </label>
+		                            <label class="label_chefhats" for="chef_4">
+		                            	<input type="radio" class="chefhats" id="chef_4" value="4" name="chefhats" />
+		                            </label>
+		                            <label class="label_chefhats" for="chef_5">
+		                            	<input type="radio" class="chefhats" id="chef_5" value="5" name="chefhats" />
+		                            </label>
+								</td>
+							</tr>
+							<tr>
+								<td class="filter_table_left">Kalorien:</td>
+								<td class="filter_table_right">
+									<label class="label_muffins" for="muffin_1">
+		                            	<input type="radio" class="muffins" id="muffin_1" value="1" name="muffins" />
+		                           	</label>
+		                           	<label class="label_muffins" for="muffin_2">
+		                            	<input type="radio" class="muffins" id="muffin_2" value="2" name="muffins" />
+		                            </label>
+		                            <label class="label_muffins" for="muffin_3">
+		                            	<input type="radio" class="muffins" id="muffin_3" value="3" name="muffins" />
+		                            </label>
+		                            <label class="label_muffins" for="muffin_4">
+		                           		<input type="radio" class="muffins" id="muffin_4" value="4" name="muffins" />
+		                            </label>
+		                            <label class="label_muffins" for="muffin_5">
+		                            	<input type="radio" class="muffins" id="muffin_5" value="5" name="muffins" />
+		                            </label>
+								</td>
+							</tr>			
+						</table>
+						<div id="filter_devider"></div>
+						Zutaten:
+						<table id="zutaten_table">
+						</table>
+						<table id="tags_table">
+							<tr>
+								<td class="tags_table_left">Tags: </td>
+								<td class="tags_table_right"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div id="filter_bottom"></div>
+			</div>
+			<div id="buchmitte"></div>
+		</div>
+		<div id="content">
+			<div id="content_header">
+			</div>
+			<div id="content_main">
+
+			</div>
+			<div id="content_footer"><span>©2010 Anycook</span><div id="footer_links"><a href="#">Startseite</a> · <a href="#">Hilfe</a> · <a href="#">Über uns</a> · <a href="#">Impressum</a></div></div>
+		</div>
+	</div>
+	<div id="right_stripe"></div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+body{
+	background-color: #f7f4f1;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#page{
+	width:1016px;
+	height: 100%;
+	position: relative;
+	left: 50%;
+	margin-left: -508px;	
+}
+
+#content_main {
+	z-index: 1;
+	position:absolute;
+	margin-top:26px;
+	border: 1px solid;
+	border-color: #CCC;
+	float:left;
+	min-height:100px;
+	width:100%;
+	background-color: #fff;
+}
+
+#rezeptTable{
+	/*font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
+	list-style:none;
+	float:left;
+	margin:10px;
+	width:75%;
+	min-height:10px;
+	background-color: #fff;
+	}
+	
+.rezObject{
+	width:100%;
+	min-height:20px;
+	float:left;
+	margin:5px;
+	background-color: #e0eecb;
+	border: 2px solid;
+	border-color: #859f5e;
+	}	
+
+.rezObject h1{
+	margin: 0px;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	}
+
+.rezObject ul li{
+	display:block;
+	list-style:none;
+	list-style-type:none;
+	}
+
+.rezObject ul {
+	display:block;
+	list-style:none;
+	list-style-type:none;
+	}
+
+
+#tagCloud{
+	float:left;
+	margin:10px;
+	width:15%;
+	min-height:10px;
+	background-color: #ff0;
+	}
+
+#statistics{
+	position:absolute;
+	min-width:20px;
+	min-height:10px;
+	background-color: #ff0;
+	}
+
+#rezeptActions{
+	float:left;
+	margin:10px;
+	width:15%;
+	min-height:10px;
+	background-color: #f7f4f1;
+	}
+
+.not_active{
+	background-color: #eecbe0;
+	border: 2px solid;
+	border-color: #9f5e85;
+	}
+
+.rez_selected{
+	background-color: #cbe0ee;
+	border: 2px solid;
+	border-color: #5e859f;
+	}
+
+	
+.button{
+	width: 114px;
+	height: 37px;
+	background: url(../img/button.png) no-repeat;
+	color:#878787;
+	padding-top:6px;
+	margin-left: 10px;
+	text-align:center;
+}
+
+.action_possible{
+	color:#000;
+	}
+	
+/*	
+.rezept_zutaten{
+	float:left;
+	
+	}
+
+.rezept_bild{
+	float:left;
+	}
+*/
+
+.step{
+	float:left;
+	}
+
+.step_number{
+	margin:8px 0;
+	float: left;
+	height: 123px;
+	width: 110px;
+	font:  45pt Georgia;
+	line-height: 110px;
+	color: #404040;
+	text-align: center;
+	border-right: 1pt solid #d7d3c7;
+	margin-right: 15px;
+}
+
+.step_text{
+	float: left;
+	width: 356px;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
+}

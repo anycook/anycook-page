@@ -1,0 +1,344 @@
+// alle Filter
+function setFiltersfromSession(){
+	resetFilter();
+	$.ajax({
+		url:"/anycook/GetfromSession",
+		async:false,
+		dataType: 'json',
+		success:function(json){
+			if(json.kategorie!=null){
+				$("#kategorie_filter_name").text(json.kategorie);
+				$("#kategorie_filter_hidden").val(json.kategorie);
+			}
+			if(json.skill!=null){
+				checkOn("#chef_"+json.skill);
+				handleRadios(".label_chefhats");
+			}
+			if(json.wertung!=null){
+				checkOn("#star_"+json.wertung);
+				handleRadios(".label_stars");
+			}
+			if(json.kalorien!=null){
+				checkOn("#muffin_"+json.kalorien);
+				handleRadios(".label_muffins");
+			}
+			
+			if(json.std != null && json.min != null){
+				fillMin(json.min);
+				fillStd(json.std);
+			}
+			
+			for(num in json.zutaten)
+				addZutatRow(json.zutaten[num]);
+			
+			for(num in json.tags)
+				$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+json.tags[num]+"</div><div class='tag_remove'>x</div></div>");
+			
+
+			
+	},
+	error:function(XMLHttpRequest, textStatus, errorThrown){
+		alert(XMLHttpRequest+" "+textStatus+" "+errorThrown);
+	}
+	});
+}
+
+function resetFilter(){
+	$("#progress_1, #progress_2, #progress_3, #progress_4").remove();
+	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"}).children().not("ul.kategorie_filter").show().css("opacity", 1);
+	$("#filter_headline").text("Filter");
+	$("#time_std, #time_min").val("00");
+	$("#time_std, #time_min").removeAttr("readonly");
+	removeChecked();
+	blockFilter(false);
+	handleRadios(".label_stars, .label_chefhats, .label_muffins");
+	
+	$("#zutaten_table > *").remove();
+	
+	$(".tags_table_right > *").remove();
+	
+	$("#kategorie_filter_name").text("Keine Kategorie");
+	$("#kategorie_filter_hidden").val("Keine Kategorie");
+	
+}
+
+
+//kategorie
+
+function loadAllKategories(target){
+	if(!target.children().size() > 0){
+		if(target.parents(".step_1_right").length == 0)
+			target.append("<li>Keine Kategorie</li>");
+		$.ajax({
+			url:"/anycook/GetAllKategories",
+			async:false,
+			dataType: 'json',
+			success:function(json){
+				for(var i=0; i<json.length; i++){
+					target.append("<li>"+json[i]+"</li>");
+				}
+		}
+		});
+	}
+}
+
+function handleKategories(obj){
+	if(blocked==false){
+		$("ul.kategorie_filter").toggle();
+		$("div.kategorie_filter").toggleClass("on");
+		if($("div.kategorie_filter").hasClass("on")){
+			$("ul.kategorie_filter li").mouseenter(kategorieOver).mouseout(kategorieOut).click(kategorieClick);
+	    	$(document).click(closeKategorien);
+	    	
+		}
+		else{
+			$("ul.kategorie_filter li").unbind("mouseenter", kategorieOver).unbind("mouseout", kategorieOut).unbind("click", kategorieClick);
+	    	$(document).unbind("click", closeKategorien);
+		}
+		return false;
+	}
+}
+
+function kategorieOver(event){
+	var target = $(event.target);	
+	var text = target.text();
+	target.parent().prev().children("#kategorie_filter_name").html(text);
+}
+
+function kategorieOut(event){
+	var target = $(event.target);
+	var oldtext = target.parent().prev().children("#kategorie_filter_hidden").val();
+	target.parent().prev().children("#kategorie_filter_name").html(oldtext);
+}
+
+function kategorieClick(obj){
+	var text = $(obj.target).text();
+	
+	setKategorie(text);
+	removeKategorie(text);
+	
+	
+	handleKategories(obj);
+}
+
+function setKategorie(text){
+	var hiddenval = $("#kategorie_filter_hidden").val();
+	if(text!="Keine Kategorie" && hiddenval != text){
+		addtoSession("kategorie="+text);
+		$("#kategorie_filter_name").html(text);
+		$("#kategorie_filter_hidden").val(text);
+	}
+	
+}
+
+function removeKategorie(text){
+	var hiddenval = $("#kategorie_filter_hidden").val();
+	if(text=="Keine Kategorie" && hiddenval!="Keine Kategorie"){
+		removefromSession("kategorie");
+		$("#kategorie_filter_name").html(text);
+		$("#kategorie_filter_hidden").val(text);
+	}
+	
+}
+
+
+function closeKategorien(obj){
+	var menu = $('.kategorie_filter');
+	var target = $(obj.target);
+	if (target.parents().andSelf().not(menu) && $("div.kategorie_filter").hasClass("on"))
+		handleKategories(obj);
+}
+
+
+//radiobuttons
+
+var blocked = false;
+
+function handleRadios(obj){
+		$(obj).removeClass('on');
+		$(obj).siblings().removeClass('on');
+		
+	    $('label input:checked').each(function(){ 
+	        $(this).parent('label').addClass('on');
+	        $(this).parent('label').prevAll().addClass('on');
+	    });	
+}
+
+function blockFilter(onoff){
+	var objs = $(".label_stars, .label_chefhats, .label_muffins, div.kategorie_filter");
+	blocked = onoff;
+	if(onoff){
+		objs.css("cursor", "default");
+		$("#time_std, #time_min").attr("disabled", "disabled");
+		$("div.kategorie_filter > div").addClass("off");
+	}
+	else{
+		objs.css("cursor", "pointer");
+		$("#time_std, #time_min").removeAttr("disabled");
+		$("div.kategorie_filter > div").removeClass("off");
+	}
+}
+
+function mouseoverRadio(obj){
+	$(obj).nextAll().removeClass('on');
+	$(obj).prevAll().andSelf().addClass('on');
+}
+
+function removeChecked(){
+	$('label input:checked').removeAttr("checked");
+}
+
+function checkOnOff(obj){
+	obj=$(obj).children().first();
+	if($.address.pathNames()[0]!="newrecipe"){
+		if($(obj).attr("checked")){
+			$.ajax({
+				url:"/anycook/RemovefromSession",
+				async:false,
+				data: $(obj).attr("class"),
+				success:function(response){
+					if(response == "false" && !checkTextSearch())
+						$.address.path("");
+					else
+						fullTextSearch();
+			}
+			});
+			obj.removeAttr("checked");
+		}
+		else{
+			$.ajax({
+				url:"/anycook/AddtoSession",
+				async:false,
+				data: $(obj).attr("class")+"="+$(obj).val()
+			});
+			$(obj).attr("checked", "checked");
+			
+			var patharray = $.address.pathNames();
+			if(patharray.length>0 && patharray[0]=="search")
+				fullTextSearch();
+			else
+				$.address.path("search");
+		}
+	}
+	else{
+		if($(obj).attr("checked")){
+			obj.removeAttr("checked");
+		}
+		else{
+			$(obj).attr("checked", "checked");
+		}
+	}
+}
+
+function checkOn(obj){
+	if($(obj).attr("ckecked")==null){
+		$(obj).siblings().removeAttr("checked");
+		$(obj).attr("checked", "checked");
+	}
+}
+
+function textReplacement(input){
+	var originalvalue = input.val();
+	 input.focus( function(){
+	  if( $.trim(input.val()) == originalvalue ){ input.val(''); }
+	 });
+	 input.blur( function(){
+	  if( $.trim(input.val()) == '' ){ input.val(originalvalue); }
+	 });
+}
+
+
+//zutaten
+function zutatentableclick(){
+	if(blocked == false){
+		if($("#zutat_input").val()=="")
+			$("#zutat_input").focus();
+		else{
+			$("#zutaten_table").append("<tr><td class='zutaten_table_left'><form id='zutat_form'><input type='text' id='zutat_input'/></form></td><td class='zutaten_table_right'></td></tr>");
+			$("#zutat_input").focus();
+			$("#zutat_input").keyup(function(event){
+				if(event.keyCode>40)
+					addRemoveZutat();
+	    	});
+	    	/*$("#zutat_input").focusout(function(obj){
+	    			saveZutat();	    		
+	    	});*/
+	    	$("#zutat_input").autocomplete({
+	    		source:function(req,resp){
+        			var array = [];
+        		var term = req.term;
+        		$.ajax({
+        			url:"/anycook/AutocompleteZutat",
+        			dataType: "json",
+        			async:false,
+        			data:"q="+term,
+        			success:function(data){
+        				resp($.map(data, function(item){
+        					return{
+        						label:item
+        						};
+        					}));        			
+        					}
+        				});
+        			},
+        			minlength:1,
+        			position:{
+        				offset:"-5 2"
+        			}, 
+        			select:function(event, ui){
+        				var text = ui.item.label;
+        				$("#zutat_input").autocomplete("destroy");
+        				$("#zutat_input").parents("tr").remove();
+        				addZutat(text);
+        				return false;
+        			}
+	    	});
+	    	$(".ui-autocomplete").last().addClass("zutat-autocomplete");
+	    	
+	    	$("#zutat_form").submit(function(obj){
+	    		saveZutat();
+	    		zutatentableclick();
+	    		return false;
+	    	});
+	    	
+	    	
+		}
+	}
+}
+
+function addRemoveZutat(){
+	var obj = $("#zutat_input")[0];
+	var tdright = obj.parentNode.parentNode.parentNode.children[1];
+	if($(obj).val()!="" && $(tdright).children().size()==0){
+		$(tdright).append("<div class='remove_zutat'></div>");
+	}
+	else if($(obj).val()==""){
+		$(tdright).children().remove();
+	}
+}
+
+function removeZutatField(event){
+	var obj = event.target.parentNode.parentNode;
+	var zutat = $(obj.children[0]).text();
+	$(obj).remove();
+	removeZutat(zutat);
+}
+
+/*function saveZutat(){
+		var obj = $("#zutat_input");
+		if(obj.length>0){
+			$("#zutat_complete").remove();
+			if($(obj).val()!=""){		
+				var inputval = obj.val();
+				var parent = obj.parent().parent();
+				$(obj).parent().remove();
+				parent.text(inputval);
+				
+				addZutat(inputval);
+			}
+		}
+}*/
+
+function addZutatRow(zutat){
+	$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'><div class='remove_zutat'></div></td></tr>");
+}

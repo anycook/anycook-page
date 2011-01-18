@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <template id="home">
+    <div id="new_events"></div>
+    <div id="home_content"></div>
+    <div id="statistics"></div>
+    </template>
+    <template id="rezepte">
+    <div id="rezeptTable"></div>
+    <div id="rezeptActions">Aktionen
+    	<div id="edit_btn">Bearbeiten</div>
+    	<div id="activate_btn">Aktivieren</div>
+    	<div id="delete_btn">Löschen</div>
+    	
+    </div>
+    <div id="tagCloud">tagCloud</div>
+    </template>
+</templates>

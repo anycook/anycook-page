@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <template id="home">
+    <div id="home">
+        <div id="display">
+					
+				</div>
+				<div id="informationbox">
+					<div id="rezept_des_tages">
+						<div class="startpage_headline_small">Rezept des Tages:</div>
+						<a id="tagesrezept_inhalt" class="frame_main_small small_rezept" href=""></a>
+						<div class="frame_right"></div>
+					</div>
+					<div id="news">
+						<div class="startpage_headline_small">kürzlich gekocht:</div>
+							<div class="frame_main_small">
+							<ul id="news_inhalt"></ul>
+							<div id="news_fade"></div>
+						</div>
+						<div class="frame_right"></div>
+					</div>
+					<div id="famous_tags"><div id="tags_label"></div><div id="famous_tags_cloud"></div></div>
+				</div>
+	</div>
+    </template>
+    <template id="home_discover">
+    	<div id="discover">
+    			<div id="neuste" class="entdecken">
+					<div class="entdecken_headline_small">neuste Rezepte:</div>
+					<div id="neuste_container"></div>
+					<div class="entdecken_back">zurück</div>
+					<div class="entdecken_next">weiter</div>
+				</div>
+				<div id="leckerste" class="entdecken">
+					<div class="entdecken_headline_small">leckerste Rezepte:</div>
+					<div id="leckerste_container"></div>
+					<div class="entdecken_back">zurück</div>
+					<div class="entdecken_next">weiter</div>
+				</div>
+				<div id="beliebte" class="entdecken">
+					<div class="entdecken_headline_small">beliebte Rezepte:</div>
+					<div id="beliebte_container"></div>
+					<div class="entdecken_back">zurück</div>
+					<div class="entdecken_next">weiter</div>
+				</div>
+    	</div>
+    </template>
+    <template id="search">
+       <div id="result_container"></div>
+    </template>
+    <template id="recipe">
+    	<div id="recipe_container">
+    		<h1 id="rezept_headline"></h1>
+    		<img id="rezept_bild"/>
+    		<p id="beschreibung"></p>
+    		<div id="rezept_begin">
+    			<div class="bezeichner">Zubereitung</div>
+    		</div>
+    		<div id="step_container"></div>
+    		<div id="rezept_footer">
+    			<div id="social">
+    			</div>
+    		</div>
+    	</div>
+    </template>
+    <template id="recipe_discussion">
+    	<div id="discussion_container">
+    		<h1 id="discussion_headline"></h1>
+    		<div id="comment_container">
+    			<div id="comment_discussion"></div>
+    			<div id="discussion_footer"></div>
+    		</div>
+    	</div>
+    </template>
+    <template id="newrecipe">
+    	<div id="new_recipe_step1" class='new_recipe_steps'>
+					<div class="new_recipe_headline">Hallo!<br/>Schön, dass Du ein Rezept erstellen möchtest.</div>
+					<div id="step_1_form"  name="form" method="post">
+						<table>
+							<tr>
+								<td class="step_1_left">Rezeptname:</td>
+								<td class="step_1_right"><input type="text" id="recipe_name" maxlength="50" value="kurz &amp; knapp" /></td>
+							</tr>
+							<tr>
+								<td class="step_1_left">Kategorie:</td>
+								<td class="step_1_right">
+									<div class="recipe_kategorie">
+										<div id="recipe_kategorie_name">
+											<div class="kategorie_filter">
+											<div id="kategorie_filter_name">Keine Kategorie</div>
+											<div id="kategorie_filter_right"></div>
+											<input type="hidden" class="kategorie_filter_hidden" value="Keine Kategorie"/>
+											</div>
+											<ul class="kategorie_filter"></ul>
+										</div>
+										<div id="kategorie_filter_right"></div>
+										<input type="hidden" id="kategorie_filter_hidden" value="Keine Kategorie"/>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="step_1_left" id="einleitung_label">Einleitung:</td>
+								<td class="step_1_right"><textarea name="beschreibung" id="recipe_beschreibung" class="required">Aller Anfang ist schwer</textarea><div class="beschreibung_character">250</div></td>
+							</tr>
+							<tr>
+								<td class="step_1_left" id="bild_label">Bild:</td>
+								<td class="step_1_right"><div id="file_uploader"></div></td>
+							</tr>
+						</table>
+					</div>
+					<div class="next_step" id="next_step1">weiter</div>
+				</div>
+				<div id="new_recipe_step2" class='new_recipe_steps'>
+					<div class="new_recipe_headline">Weiter gehts! Nicht vergessen, kurz und<br /> einfach erklärt, dann versteht es auch jeder.</div>
+					<div id="step_2_form"  name="form" method="post">
+					<table id="step_table">
+						<tr>
+							<td>
+									<div class="new_step">
+										<div class="step_left">
+											<p class="step_number">1.</p>
+											<textarea class="step_textarea"></textarea>
+										</div>
+										<div class="step_right"></div>
+									</div>					
+							</td>
+							<td>
+								<div class="step_character">260</div>
+								<div class="minus_btn remove_schritt"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+									<div class="new_step">
+										<div class="step_left">
+											<p class="step_number">2.</p>
+											<textarea class="step_textarea"></textarea>
+										</div>
+										<div class="step_right"></div>
+									</div>					
+							</td>
+							<td>
+								<div class="step_character">260</div>
+								<div class="minus_btn remove_schritt"></div>
+							</td>	
+						</tr>
+					</table>
+					</div>
+					<div class="plus_btn" id="neuer_schritt"></div>
+					<div class="next_step" id="next_step2">weiter</div>
+				</div>
+				<div id="new_recipe_step3" class='new_recipe_steps'>
+					<div class="new_recipe_headline">Fast geschafft!<br />Kommen wir zu den Zutaten.</div>
+						<form id="step_3_form"  name="form" method="post">
+						<table id="new_zutat_table">
+
+						</table>
+						</form>
+						<div class="plus_btn" id="new_zutat"></div>
+						<div class="next_step" id="next_step3">weiter</div>
+				</div>
+				<div id="new_recipe_step4" class='new_recipe_steps'>
+					<div class="new_recipe_headline">Noch ein paar Details!<br />Dann ist das Rezept auch schon fertig.</div>
+					<form id="step_4_form"  name="form" method="post">
+						<table>
+							<tr>
+								<td id="step_4_tags">Tags: <div name="tags" id="recipe_tags" ></div></td>
+								<td class="step_4_right">
+									<div id="tagcloud">
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td id="step_4_duration"><img id="new_durationclock" alt="uhr" src="./icons/uhr.png" /><span id="new_durationtext">Dauer:</span><div id="time_block"><input type="text" class="new_time" id="nr_time_std" value="00" size="2" maxlength="2" />: <input type="text" class="new_time" id="nr_time_min" value="00" size="2" maxlength="2" /> h</div></td>
+								<td class="step_4_right"></td>
+							</tr>
+							<tr>
+								<td id="step_4_person">Personen:<span><input type="text" id="nr_person" value="00" size="2" maxlength="2" /></span></td>
+								<td class="step_4_right"></td>
+							</tr>
+							<tr>
+								<td class="step_4_left">Schwierigkeit: 
+										<div id="table_skill">
+											<label class="label_chefhats" for="chef_1">
+			                            		<input type="radio" class="chefhats" id="chef_1" value="1" name="chefhats" />
+			                            	</label>
+			                            	<label class="label_chefhats" for="chef_2">
+			                            		<input type="radio" class="chefhats" id="chef_2" value="2" name="chefhats" />
+			                           		</label>
+			                            	<label class="label_chefhats" for="chef_3">
+			                            		<input type="radio" class="chefhats" id="chef_3" value="3" name="chefhats" />
+			                            	</label>
+			                            	<label class="label_chefhats" for="chef_4">
+			                            		<input type="radio" class="chefhats" id="chef_4" value="4" name="chefhats" />
+			                            	</label>
+			                            	<label class="label_chefhats" for="chef_5">
+			                            		<input type="radio" class="chefhats" id="chef_5" value="5" name="chefhats" />
+			                            	</label>
+			                            </div>
+								</td>
+								<td class="step_4_right"></td>
+							</tr>
+							<tr>
+								<td class="step_4_left">Kalorien:
+									<div id="table_kalorien">
+										<label class="label_muffins" for="muffin_1">
+		                            		<input type="radio" class="muffins" id="muffin_1" value="1" name="muffins" />
+		                           		</label>
+		                           		<label class="label_muffins" for="muffin_2">
+		                            		<input type="radio" class="muffins" id="muffin_2" value="2" name="muffins" />
+		                           		</label>
+		                            	<label class="label_muffins" for="muffin_3">
+		                            		<input type="radio" class="muffins" id="muffin_3" value="3" name="muffins" />
+		                            	</label>
+		                            	<label class="label_muffins" for="muffin_4">
+		                           			<input type="radio" class="muffins" id="muffin_4" value="4" name="muffins" />
+		                            	</label>
+		                            	<label class="label_muffins" for="muffin_5">
+		                            		<input type="radio" class="muffins" id="muffin_5" value="5" name="muffins" />
+		                           		</label>
+		                            </div>
+								</td>
+								<td class="step_4_right"></td>
+							</tr>
+						</table>
+					</form>
+					<div id="end_newrecipe">
+						<!--<div class="last_step_btn" id="recipe_preview">Vorschau</div>-->
+						<div class="last_step_btn" id="recipe_ready">Fertig</div>
+					</div>
+				  </div>
+			</template>
+			<template id="activate">
+				<div id='new_activation' class="content_message"><h5></h5><p></p></div>
+			</template>
+			
+			<template id="profile">
+				<h1>Userprofil</h1>
+			</template>
+</templates>
