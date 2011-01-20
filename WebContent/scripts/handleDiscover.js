@@ -4,9 +4,7 @@ var position = new Object();
 var length = new Object();
 function loadDiscover(){
 	$("#neuste_container > *, #leckerste_container > *, #beliebte_container > *").remove();
-	fillDiscover("leckerste");
-	fillDiscover("neuste");
-	fillDiscover("beliebte");
+	fillDiscover();
 	$(".entdecken_back").click(function(event){
 		var target = event.target;
 		var type = $(target.parentNode).attr("id");
@@ -20,19 +18,28 @@ function loadDiscover(){
 	
 }
 
-function fillDiscover(type){
-		position[type] = 0;	
-	
-		var json;
+function fillDiscover(){
 		$.ajax({
 			  url: "/anycook/GetDiscoverRecipes",
 			  dataType: 'json',
 			  async:false,
-			  data:"type="+type,
-			  success: function(response){json=response;}
+			  success: function(json){
+				  for(var type in json){
+					  var typelength = 0;
+					  for(var gericht in json[type]){
+						  loadDiscoverRecipe(json[type][gericht], type);
+						  typelength++;
+					  }
+					  $("#"+type+"_container > .frame_small").first().css("marginRight", "8px");
+					  $("#"+type+" .entdecken_back").hide();
+					  $("#"+type+" .entdecken_next").show();
+					  position[type] = 0;
+					  length[type] = typelength;
+				  }
+			  }
 			});
 	
-		length[type] = json.length;
+		/*length[type] = json.length;
 		for(var i=0; i<json.length;i++){
 			$.ajax({
 		  		  url: "/anycook/LoadRecipeforSmallView",
@@ -45,7 +52,7 @@ function fillDiscover(type){
 		
 		$("#"+type+"_container > .frame_small").first().css("marginRight", "8px");
 		$("#"+type+" .entdecken_back").hide();
-		$("#"+type+" .entdecken_next").show();
+		$("#"+type+" .entdecken_next").show();*/
 }
 
 function loadDiscoverRecipe(response, type){
