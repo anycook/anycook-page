@@ -5,6 +5,13 @@ $(document).ready(function(){
         contentType: "application/x-www-form-urlencoded; charset=utf8"
 	});
 	
+	 //Login
+    $.ajax({
+		url:"/anycook/Login",
+		dataType:"json",
+		success:checkLogin
+	});
+	
 	$.address.change(changePage);
 	
 	$("#home_button").click(function(){
@@ -19,35 +26,44 @@ $(document).ready(function(){
 		$.address.value("user");
 		});
 	
+	
+	
 });
 
 function changePage(event){
 	$(".small_button, .big_button").removeClass("on");
-	if(event.pathNames.length == 0){
+	
+	var sitename;
+	if(event.pathNames.length == 0)
+		sitename = "home";
+	else
+		sitename = event.pathNames[0];
+	
+	
+	$("#content_main").empty();
+	$.ajax({
+		url: "/backend/xml/template.xml",
+		dataType: "xml",
+		async:false,
+		success: function(xml){parseXML(xml, sitename);}
+	});
+	
+	if(sitename == "home"){
 		$("#home_button").addClass("on");
-		$("#content_main").empty();
-		$.ajax({
-			url: "/zombiecooking/backend/xml/template.xml",
-			dataType: "xml",
-			async:false,
-			success: function(xml){parseXML(xml, "home");}
-		});
 	}
-	if(event.pathNames[0] == "rezepte"){
+	if(sitename == "rezepte"){
 		$("#rezepte").addClass("on");
-		$("#content_main").empty();
-		$.ajax({
-			url: "/zombiecooking/backend/xml/template.xml",
-			dataType: "xml",
-			async:false,
-			success: function(xml){parseXML(xml, "rezepte");}
-		});
 		loadRezTable();
 	}
-	if(event.pathNames[0] == "user"){
+	if(sitename == "user"){
 		$("#user").addClass("on");
-		$("#content_main").empty();
+		$.ajax({
+			url:"/anycook/GetUsers",
+			dataType:"json",
+			success:loadUsers
+		});
 	}
+	
 }
 
 

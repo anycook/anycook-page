@@ -11,7 +11,7 @@ function login(mail, pwd){
 			else{
 				$("#login_dropdown").hide();
 				$("#signin_btn").removeClass("on");
-				makeUsermenuText(response);
+				//makeUsermenuText(response);
 				
 				window.location.reload();
 			}
@@ -20,6 +20,7 @@ function login(mail, pwd){
 }
 
 function loginChecker(){
+	
 	var logincheck = false;
 	$.ajax({
 		url: "/anycook/Login",
@@ -48,13 +49,15 @@ function schmecktChecker(gericht){
 
 
 function logout(event){
+		/*FB.logout(function(response) {
+		  // user is now logged out
+		});*/
 		$.ajax({
 			url:"/anycook/Logout"
 		});
-		$("#login_dropdown").hide();
+		/*$("#login_dropdown").hide();
 		$("#signin_btn").removeClass("on");
-		makeLoginText();
-		//TODO nur zwischenlösung für logout (reload)
+		makeLoginText();*/
 		window.location.reload();
 }
 
@@ -108,14 +111,14 @@ function makeLoginText(){
 
 	$("#login_top").append(htmlstring);
 	//FB.XFBML.parse(document.getElementById('login_top'));
-	/*$("#login_mail, #login_pwd").focus(focusInputs);		
+	$("#login_mail, #login_pwd").focus(focusInputs);		
 	$("#login_mail, #login_pwd").focusout(focusoutInputs);
 	$("#login_mail, #login_pwd").keypress(keypressInputs);
 	$("#login_mail, #login_pwd").keydown(keydownInputs);
 	
 	
 	$("#login_btn").click(clickLogin);
-	$("#login_form").submit(submitForm);*/
+	$("#login_form").submit(submitForm);
 	
 	$("#register_btn").click(clickRegister);
 	$("#fb_login").click(fbLogin);
@@ -123,12 +126,15 @@ function makeLoginText(){
 
 }
 
-function makeUsermenuText(username){
+function makeUsermenuText(json){
 	$("#login_top>*").remove();
 	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
 	
-	var htmlstring = "<div id='login_user'><div id='user'>"+username+"</div><a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
-		"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a><a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a><a id='logout' class='user_menu_btn'>Abmelden</a></div>";
+	var htmlstring = "<div id='login_user'><div id='user'>"+json.nickname+"</div><a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
+		"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a><a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
+	if(json.level == "admin")
+		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
+	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
 	$("#login_top").html(htmlstring);	
 	$("#logout").click(logout);
 	$("#login_user > a").click(closeUserMenu);

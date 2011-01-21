@@ -1,13 +1,17 @@
 function loadRezTable(){
 	$.ajax({
-		url:"/zombiecooking/GetRezeptValues",
+		url:"/anycook/GetRezeptValues",
 		dataType: "json",
 		async:false,
 		success:function(json){
-			
 				for(var i in json){
-					$("#rezeptTable").append("<div class='rezObject'><div class='recipeName'>" + json[i].name+"</div> " +
-							json[i].version_nr + " " + json[i].username + " " + json[i].date + "</div>"); 
+					var htmlstring = "<div class='rezObject";
+					
+					if(json[i].active_id == 0) htmlstring += " not_active";
+					
+					htmlstring+="'><div class='recipeName'>" + json[i].name+"</div> " +
+					json[i].active_id + " " + json[i].username + " " + json[i].date + "</div>";
+					$("#rezeptTable").append(htmlstring);						
 				}
 				//$(".moreContent").hide();
 				$(".rezObject").click(clickRez);
@@ -22,7 +26,7 @@ function clickRez(event){
 	if(!(target.children(".recipeName").hasClass("open"))){
 		target.children(".recipeName").addClass("open");
 		$.ajax({
-			url:"/zombiecooking/LoadRecipe",
+			url:"/anycook/LoadRecipe",
 			dataType: "json",
 			data: "recipe="+name,
 			async:false,
@@ -37,7 +41,7 @@ function clickRez(event){
 					schritte += "<div class='step'><div class='step_number'>"+i+"</div><div class='step_text'>"+json.schritte[i]+"</div></div>";
 				}
 				target.append("<div class='rezept_schritte'>"+schritte+"</div>");
-				var appendtext = "<div class='rezept_bild'><img src='/zombiecooking/gerichtebilder/small/"+json.imagename+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'></div><div class='time_corner_right'></div></div></div><p></p>";
+				var appendtext = "<div class='rezept_bild'><img src='/gerichtebilder/small/"+json.imagename+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'></div><div class='time_corner_right'></div></div></div><p></p>";
 				target.append(appendtext);
 				
 			}

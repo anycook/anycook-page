@@ -16,7 +16,7 @@ function loadHome(json)
 	$.ajax({
 		  url: "/anycook/GetPopularTags",
 		  dataType: 'json',
-		  data: "num=15",
+		  data: "num=14",
 		  async:false,
 		  success: function(response){
 				if(response != "false")

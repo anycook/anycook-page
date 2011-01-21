@@ -15,4 +15,7 @@
     </div>
     <div id="tagCloud">tagCloud</div>
     </template>
+    <template id="user">
+    	<table id="usertable"></table>
+    </template>
 </templates>
