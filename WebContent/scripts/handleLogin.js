@@ -127,7 +127,7 @@ function makeUsermenuText(username){
 	$("#login_top>*").remove();
 	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
 	
-	var htmlstring = "<div id='login_user'><div id='user'>"+username+"</div><a href='#/profile' id='settings' class='user_menu_btn'>Einstellungen</a>"+
+	var htmlstring = "<div id='login_user'><div id='user'>"+username+"</div><a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
 		"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a><a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a><a id='logout' class='user_menu_btn'>Abmelden</a></div>";
 	$("#login_top").html(htmlstring);	
 	$("#logout").click(logout);
