@@ -164,6 +164,11 @@ body{
 	cursor:pointer;
 }
 
+#usertable th.on{
+	text-decoration: underline;
+	
+}
+
 #usertable td{
 	padding: 2px 5px 2px 5px;
 	border: 1px solid #aaaaaa;
@@ -213,17 +218,17 @@ body{
 /*----footer-----*/
 #footer{
 	background-color: #fff;
-	width:100%;
+	width:1006px;
 	float:left;	
 	border: 1px solid;
 	border-color: #CCC;
 	border-top:none;
+	text-align: right;
+	padding: 5px 10px 5px 0;
 }
 	
 #footer a{
-	float:right;
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #859F5E;
-	padding:2px;
-	margin-right:10px;
+	padding: 0 5px;
 }

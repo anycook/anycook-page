@@ -44,6 +44,9 @@ function orderUserTable(event){
 	
 	var target = $(event.target);
 	if(target.children().length == 0 && !target.is("input")){
+		$("#usertable th+th").removeClass("on");
+		target.addClass("on");
+		
 		var oldOrder = $.address.parameter("orderBy");
 		var oldDesc = $.address.parameter("desc");
 		var order;

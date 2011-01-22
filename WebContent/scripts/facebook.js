@@ -15,3 +15,7 @@ function fbLogin(){
 	    }
 	  });
 }
+
+function fbStatusChange(event){
+	//TODO login statusänderungen behandeln
+}

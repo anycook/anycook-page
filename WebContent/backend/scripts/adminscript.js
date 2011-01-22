@@ -31,14 +31,15 @@ function changePage(event){
 	else
 		sitename = event.pathNames[0];
 	
-	
-	$("#content_main").empty();
-	$.ajax({
-		url: "/backend/xml/template.xml",
-		dataType: "xml",
-		async:false,
-		success: function(xml){parseXML(xml, sitename);}
-	});
+	if(sitename != lastPage){
+		$("#content_main").empty();
+		$.ajax({
+			url: "/backend/xml/template.xml",
+			dataType: "xml",
+			async:false,
+			success: function(xml){parseXML(xml, sitename);}
+		});
+	}
 	
 	if(sitename == "home"){
 		$("#home_button").addClass("on");
@@ -48,7 +49,11 @@ function changePage(event){
 		loadRezTable();
 	}
 	if(sitename == "user"){
+		if(sitename != lastPage)
+			$("#usertable th").click(orderUserTable);
 		$("#user").addClass("on");
+		$("#usertable tr").not("#usertable tr:first").remove();
+		$("#user_info table *").remove();
 		if(event.parameterNames == 0){
 			$.ajax({
 				url:"/anycook/GetUsers",
@@ -68,9 +73,9 @@ function changePage(event){
 			}
 		}
 		
-		$("#usertable th").click(orderUserTable);
+		
 	}
-	
+	lastPage = sitename;
 }
 
-
+var lastPage;

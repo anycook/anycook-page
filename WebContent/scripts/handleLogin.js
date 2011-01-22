@@ -49,9 +49,9 @@ function schmecktChecker(gericht){
 
 
 function logout(event){
-		/*FB.logout(function(response) {
-		  // user is now logged out
-		});*/
+		FB.logout(function(response) {
+		  var lalal = response;
+		});
 		$.ajax({
 			url:"/anycook/Logout"
 		});
@@ -70,7 +70,7 @@ function checkLogin(response){
 	$("#login_dropdown").hide();
 	$("#login_dropdown").css("visibility", "visible");
 	$("#signin_btn").click(clickSignin);
-	if(response=="false"){
+	if(response== false){
 		makeLoginText();
 	}
 	else{
