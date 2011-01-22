@@ -36,3 +36,38 @@ function parseDate(toParse){
 	toParse = toParse.split("-");
 	return toParse[2]+"."+toParse[1]+"."+toParse[0];	
 }
+
+function orderUserTable(event){
+	
+	var target = $(event.target);
+	var oldOrder = $.address.parameter("orderBy");
+	var oldDesc = $.address.parameter("desc");
+	var order;
+	var desc = 0;
+	switch(target.text()){
+	case "Username":
+		order = "nickname";
+		break;
+	case "Mail":
+		order = "email";
+		break;
+	case "Registrierung":
+		order = "createdate";
+		break;
+	case "last login":
+		order = "lastlogin";
+		break;
+	case "facebook id":
+		order = "facebook_id";
+		break;
+	case "Rezepte":
+		order = "versions";
+		break;
+	case "Userlevel":
+		order = "fullname";
+		break;
+	}
+	if(order==oldOrder && oldDesc == "0") desc = 1;
+	$.address.value("user?orderBy="+order+"&desc="+desc);
+	
+}

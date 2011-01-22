@@ -49,11 +49,26 @@ function changePage(event){
 	}
 	if(sitename == "user"){
 		$("#user").addClass("on");
-		$.ajax({
-			url:"/anycook/GetUsers",
-			dataType:"json",
-			success:loadUsers
-		});
+		if(event.parameterNames == 0){
+			$.ajax({
+				url:"/anycook/GetUsers",
+				dataType:"json",
+				success:loadUsers
+			});
+		}else{
+			var orderBy = event.parameters["orderBy"];
+			var desc = event.parameters["desc"];
+			if(orderBy != null && desc != null){
+				$.ajax({
+					url:"/anycook/GetUsers",
+					data: "order="+orderBy+"&desc="+desc,
+					dataType:"json",
+					success:loadUsers
+				});
+			}
+		}
+		
+		$("#usertable th").click(orderUserTable);
 	}
 	
 }
