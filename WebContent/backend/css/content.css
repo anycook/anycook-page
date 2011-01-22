@@ -213,8 +213,41 @@ body{
 }
 
 #confirm{
+	float:left;
 	display:none;
+	background-color: #e0eecb;
+	padding:5px;
+	margin:10px 0 10px 0;
+	border: 1px solid #CCC;
 }
+
+#confirm_text ul{
+	list-style:none;
+	font:  7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin: 7px 0 5px 0;
+	padding:0 0 0 0;
+}
+
+.confirm_buttons{
+	
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#confirm_yes{
+	float:left;
+	margin:5px 0 0 20px;
+	width: 40px;
+}
+
+#confirm_no{
+	float:right;
+	margin:5px 20px 0 0;
+}
+.confirm_buttons:hover{
+	text-decoration: underline;
+}
+
 /*----footer-----*/
 #footer{
 	background-color: #fff;

@@ -102,22 +102,46 @@ function selectedUserAction(event){
 	var option = $("#user_info select option:selected").val();
 	var checked = $("#usertable input:checked");
 	
+	if(checked.length==0 || option == "in Ruhe lassen"){
+		$("#user_info select option:selected").removeAttr("selected");
+		$("#user_info select option:first").attr("selected", "selected");
+		return false;
+	}
 	
-	var text = "Möchtest du wirklich die User: ";
+	$("#confirm_text ul").empty();
 	var mails = new Array(checked.length);
 	for(var i = 0; i<checked.length; i++){
 		var val = $(checked[i]).val();
 		if(val!="all"){
 			mails[i] = val;
-			text+=mails[i]+" ";
+			$("#confirm_text ul").append("<li>"+mails[i]+"</li>");			
 		}
 	}
-	text+= option;
+	var confirmheight = $("#confirm").css("height");
+	confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30;
+	$("#user_info h3").animate({"marginTop": confirmheight},{duration:500, complete:function(){
+		$("#user_info h3").css("marginTop", 30);
+		$("#confirm").fadeIn(500);
+	}});
+	$(".confirm_buttons").click(confirmedClick);
 	
-	$("#confirm_text").text(text);
-	$("#confirm").fadeIn(20);
 	
+}
+
+function confirmedClick(event){
+	var target = $(event.target);
+	if(target.attr("id") == "confirm_yes"){
+		
+	}
 	
+	$(".confirm_buttons").unbind("click", confirmedClick);
+	var confirmheight = $("#confirm").css("height");
+	confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30;
+	$("#confirm").fadeOut(500, function(){
+		$("#user_info h3").css("marginTop", confirmheight+30);
+		$("#user_info h3").animate({"marginTop": 30},{duration:500});
+	});
 	
-	
+	$("#user_info select option:selected").removeAttr("selected");
+	$("#user_info select option:first").attr("selected", "selected");
 }
