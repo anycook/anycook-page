@@ -149,8 +149,9 @@ body{
 
 /* user */
 #usertable{
+	float:left;
 	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	margin:15px;
+	margin:15px 0 15px 15px;
 	width:800px;
 	border-spacing: 0px;
 }
@@ -166,6 +167,25 @@ body{
 	border: 1px solid #aaaaaa;
 }
 
+#user_info{
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
+	width:160px;
+	float:left;
+	margin-top:15px;
+	margin-left:15px;
+	border-left:1px solid #CCC;
+	min-height: 200px;
+}
+
+#user_info table{
+	
+	width:100px;
+	margin:0 0 0 10px;
+	padding:5px;
+	list-style:none;
+}
+
 /*----footer-----*/
 #footer{
 	background-color: #fff;
@@ -174,7 +194,7 @@ body{
 	border: 1px solid;
 	border-color: #CCC;
 	border-top:none;
-	}
+}
 	
 #footer a{
 	float:right;

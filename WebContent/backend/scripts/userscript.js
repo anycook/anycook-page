@@ -23,12 +23,12 @@ function loadUsers(json){
 		var versions = json[i].versions;
 		if(versions == null)
 			versions = 0;
-		$("#usertable").append("<tr><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
+		$("#usertable").append("<tr><td><input type=\"checkbox\" value=\""+json[i].name+"\"/></td><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
 				createdate+"</td><td>"+lastlogin+"</td><td>"+json[i].facebook_id+"</td><td>"+json[i].level+"</td><td>"+versions+"</td></tr>");
 	}
-	$("#user_info").append("<li>User gesamt: "+usercounter+"</li>");
-	$("#user_info").append("<li>Facebookuser: "+facebookcounter+"</li>");
-	$("#user_info").append("<li>Inaktive User: "+inactivecounter+"</li>");
+	$("#user_info table").append("<tr><td>User gesamt:</td><td>"+usercounter+"</td></tr>");
+	$("#user_info table").append("<tr><td>Facebookuser:</td><td>"+facebookcounter+"</td></tr>");
+	$("#user_info table").append("<tr><td>Inaktive User:</td><td>"+inactivecounter+"</td></tr>");
 	
 }
 
@@ -40,34 +40,43 @@ function parseDate(toParse){
 function orderUserTable(event){
 	
 	var target = $(event.target);
-	var oldOrder = $.address.parameter("orderBy");
-	var oldDesc = $.address.parameter("desc");
-	var order;
-	var desc = 0;
-	switch(target.text()){
-	case "Username":
-		order = "nickname";
-		break;
-	case "Mail":
-		order = "email";
-		break;
-	case "Registrierung":
-		order = "createdate";
-		break;
-	case "last login":
-		order = "lastlogin";
-		break;
-	case "facebook id":
-		order = "facebook_id";
-		break;
-	case "Rezepte":
-		order = "versions";
-		break;
-	case "Userlevel":
-		order = "fullname";
-		break;
+	if(target.has("input") == 0){
+		var oldOrder = $.address.parameter("orderBy");
+		var oldDesc = $.address.parameter("desc");
+		var order;
+		var desc = 0;
+		switch(target.text()){
+		case "Username":
+			order = "nickname";
+			break;
+		case "Mail":
+			order = "email";
+			break;
+		case "Registrierung":
+			order = "createdate";
+			break;
+		case "last login":
+			order = "lastlogin";
+			break;
+		case "facebook id":
+			order = "facebook_id";
+			break;
+		case "Rezepte":
+			order = "versions";
+			break;
+		case "Userlevel":
+			order = "fullname";
+			break;
+		}
+		if(order==oldOrder && oldDesc == "0") desc = 1;
+		$.address.value("user?orderBy="+order+"&desc="+desc);
+	
+	}else{
+		var checked = $($("#usertable input")[0]).attr("checked");
+		if(checked == false)
+			$("#usertable input").removeAttr("checked");
+		else
+			$("#usertable input").attr("checked", "checked");
 	}
-	if(order==oldOrder && oldDesc == "0") desc = 1;
-	$.address.value("user?orderBy="+order+"&desc="+desc);
 	
 }
