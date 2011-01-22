@@ -69,7 +69,11 @@ function orderUserTable(event){
 			order = "fullname";
 			break;
 		}
+		if(oldOrder==undefined && order == "nickname")
+			desc=1;
+		
 		if(order==oldOrder && oldDesc == "0") desc = 1;
+		
 		$.address.value("user?orderBy="+order+"&desc="+desc);
 	
 	}else{
