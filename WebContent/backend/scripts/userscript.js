@@ -23,13 +23,15 @@ function loadUsers(json){
 		var versions = json[i].versions;
 		if(versions == null)
 			versions = 0;
-		$("#usertable").append("<tr><td><input type=\"checkbox\" value=\""+json[i].name+"\"/></td><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
+		$("#usertable").append("<tr><td><input type=\"checkbox\" value=\""+json[i].mail+"\"/></td><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
 				createdate+"</td><td>"+lastlogin+"</td><td>"+json[i].facebook_id+"</td><td>"+json[i].level+"</td><td>"+versions+"</td></tr>");
 	}
 	$("#user_info table").append("<tr><td>User gesamt:</td><td>"+usercounter+"</td></tr>");
 	$("#user_info table").append("<tr><td>Facebookuser:</td><td>"+facebookcounter+"</td></tr>");
 	$("#user_info table").append("<tr><td>Inaktive User:</td><td>"+inactivecounter+"</td></tr>");
+	
 	$("#usertable td input").click(checkBoxClick);
+	$("#user_info select").change(selectedUserAction);
 	
 }
 
@@ -91,4 +93,28 @@ function checkBoxClick(event){
 	if(target.attr("checked") == false && $($("#usertable input")[0]).attr("checked") == true)
 		$($("#usertable input")[0]).removeAttr("checked");
 		
+}
+
+function selectedUserAction(event){
+	var option = $("#user_info select option:selected").val();
+	var checked = $("#usertable input:checked");
+	
+	
+	var text = "Möchtest du wirklich die User: ";
+	var mails = new Array(checked.length);
+	for(var i = 0; i<checked.length; i++){
+		var val = $(checked[i]).val();
+		if(val!="all"){
+			mails[i] = val;
+			text+=mails[i]+" ";
+		}
+	}
+	text+= option;
+	
+	$("#confirm_text").text(text);
+	$("#confirm").fadeIn(20);
+	
+	
+	
+	
 }

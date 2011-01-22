@@ -182,8 +182,8 @@ body{
 	min-height: 200px;
 }
 
-#user_info p{
-	margin: 5px 0 30px 0;
+#user_info>p{
+	margin: 5px 0 0 0;
 }
 
 #user_info select{
@@ -193,6 +193,7 @@ body{
 
 #user_info h3{
 	margin: 0;
+	margin-top:30px;
 }
 
 #user_info table{
@@ -204,6 +205,10 @@ body{
 
 #user_info td+td{
 	text-align:right;
+}
+
+#confirm{
+	display:none;
 }
 /*----footer-----*/
 #footer{
