@@ -13,10 +13,10 @@ body{
 
 #content_main {
 	z-index: 1;
-	position:absolute;
-	margin-top:26px;
+	margin-top:-17px;
 	border: 1px solid;
 	border-color: #CCC;
+	border-bottom:none;
 	float:left;
 	min-height:600px;
 	width:100%;
@@ -151,10 +151,12 @@ body{
 #usertable{
 	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	margin:15px;
+	width:800px;
 	border-spacing: 0px;
 }
 
 #usertable th{
+	cursor:pointer;
 	padding:2px;
 	border: 1px solid #aaaaaa;
 }
@@ -162,4 +164,22 @@ body{
 #usertable td{
 	padding: 2px 5px 2px 5px;
 	border: 1px solid #aaaaaa;
+}
+
+/*----footer-----*/
+#footer{
+	background-color: #fff;
+	width:100%;
+	float:left;	
+	border: 1px solid;
+	border-color: #CCC;
+	border-top:none;
+	}
+	
+#footer a{
+	float:right;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #859F5E;
+	padding:2px;
+	margin-right:10px;
 }

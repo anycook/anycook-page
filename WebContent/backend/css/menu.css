@@ -73,11 +73,22 @@
 }
 
 #topmenu{
-	float: left;
+	float: right;
 	width: 100%;
 	z-index: 10;
 	position:relative;
-	}
+}
+
+#login{
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	float: right;
+	margin-right:-2px;
+	padding:5px;
+	background-color:#fff;
+	border: 1px solid;
+	border-color: #CCC;
+	border-bottom:none;
+}
 	
 
 	
