@@ -2,6 +2,7 @@
 .big_button, .small_button{
 	float:left;
 	cursor:pointer;
+	text-decoration: none;
 }
 .big_button{
 	width: 114px;
@@ -77,4 +78,6 @@
 	z-index: 10;
 	position:relative;
 	}
+	
+
 	

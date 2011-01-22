@@ -18,7 +18,7 @@ body{
 	border: 1px solid;
 	border-color: #CCC;
 	float:left;
-	min-height:100px;
+	min-height:600px;
 	width:100%;
 	background-color: #fff;
 }
@@ -144,4 +144,22 @@ body{
 	width: 356px;
 	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
+}
+
+
+/* user */
+#usertable{
+	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin:15px;
+	border-spacing: 0px;
+}
+
+#usertable th{
+	padding:2px;
+	border: 1px solid #aaaaaa;
+}
+
+#usertable td{
+	padding: 2px 5px 2px 5px;
+	border: 1px solid #aaaaaa;
 }

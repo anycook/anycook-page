@@ -18,14 +18,6 @@ $(document).ready(function(){
 		$.address.value("");
 		});
 	
-	$("#rezepte").click(function(){
-		$.address.value("rezepte");
-		});
-	
-	$("#user").click(function(){
-		$.address.value("user");
-		});
-	
 	
 	
 });

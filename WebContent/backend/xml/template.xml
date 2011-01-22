@@ -16,6 +16,7 @@
     <div id="tagCloud">tagCloud</div>
     </template>
     <template id="user">
-    	<table id="usertable"></table>
+    	<table id="usertable"><tr><th>Username</th><th>Mail</th><th>Registrierung</th><th>last login</th><th>facebook id</th><th>Userlevel</th><th>Rezepte</th></tr></table>
+    	<ul id="user_info"></ul>
     </template>
 </templates>
