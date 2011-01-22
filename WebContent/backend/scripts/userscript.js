@@ -1,6 +1,7 @@
 function loadUsers(json){
 	var usercounter = 0;
 	var facebookcounter = 0;
+	var inactivecounter = 0;
 	
 	for(var i in json){
 		
@@ -8,8 +9,10 @@ function loadUsers(json){
 		
 		if(json[i].facebook_id != 0) facebookcounter++;
 		var lastlogin;
-		if(json[i].lastlogin == null)
+		if(json[i].lastlogin == null){
 			lastlogin = "noch nie";
+			inactivecounter++;
+		}
 		else{
 			var split = json[i].lastlogin.split(" ");
 			lastlogin = split[1].split(".")[0]+" ";
@@ -23,8 +26,9 @@ function loadUsers(json){
 		$("#usertable").append("<tr><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
 				createdate+"</td><td>"+lastlogin+"</td><td>"+json[i].facebook_id+"</td><td>"+json[i].level+"</td><td>"+versions+"</td></tr>");
 	}
-	$("#user_info").append("<li>Anzahl User: "+usercounter+"</li>");
-	$("#user_info").append("<li>Anzahl Facebookuser: "+facebookcounter+"</li>");
+	$("#user_info").append("<li>User gesamt: "+usercounter+"</li>");
+	$("#user_info").append("<li>Facebookuser: "+facebookcounter+"</li>");
+	$("#user_info").append("<li>Inaktive User: "+inactivecounter+"</li>");
 	
 }
 
