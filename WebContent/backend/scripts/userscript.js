@@ -29,6 +29,7 @@ function loadUsers(json){
 	$("#user_info table").append("<tr><td>User gesamt:</td><td>"+usercounter+"</td></tr>");
 	$("#user_info table").append("<tr><td>Facebookuser:</td><td>"+facebookcounter+"</td></tr>");
 	$("#user_info table").append("<tr><td>Inaktive User:</td><td>"+inactivecounter+"</td></tr>");
+	$("#usertable td input").click(checkBoxClick);
 	
 }
 
@@ -40,7 +41,7 @@ function parseDate(toParse){
 function orderUserTable(event){
 	
 	var target = $(event.target);
-	if(target.has("input") == 0){
+	if(target.children("input").length == 0){
 		var oldOrder = $.address.parameter("orderBy");
 		var oldDesc = $.address.parameter("desc");
 		var order;
@@ -79,4 +80,11 @@ function orderUserTable(event){
 			$("#usertable input").attr("checked", "checked");
 	}
 	
+}
+
+function checkBoxClick(event){
+	var target = $(event.target);
+	if(target.attr("checked") == false && $($("#usertable input")[0]).attr("checked") == true)
+		$($("#usertable input")[0]).removeAttr("checked");
+		
 }

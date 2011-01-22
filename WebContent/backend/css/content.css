@@ -174,18 +174,35 @@ body{
 	float:left;
 	margin-top:15px;
 	margin-left:15px;
+	padding-left:10px;
+	padding-bottom:50px;
 	border-left:1px solid #CCC;
 	min-height: 200px;
 }
 
-#user_info table{
-	
-	width:100px;
-	margin:0 0 0 10px;
-	padding:5px;
-	list-style:none;
+#user_info p{
+	margin: 5px 0 30px 0;
 }
 
+#user_info select{
+	margin-top: 5px;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#user_info h3{
+	margin: 0;
+}
+
+#user_info table{
+	
+	width:130px;
+	padding:5px 0 5px 0;
+	border-spacing: 0;
+}
+
+#user_info td+td{
+	text-align:right;
+}
 /*----footer-----*/
 #footer{
 	background-color: #fff;
