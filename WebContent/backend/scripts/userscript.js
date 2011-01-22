@@ -41,7 +41,7 @@ function parseDate(toParse){
 function orderUserTable(event){
 	
 	var target = $(event.target);
-	if(target.children("input").length == 0){
+	if(target.children().length == 0 && !target.is("input")){
 		var oldOrder = $.address.parameter("orderBy");
 		var oldDesc = $.address.parameter("desc");
 		var order;

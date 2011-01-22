@@ -156,10 +156,12 @@ body{
 	border-spacing: 0px;
 }
 
-#usertable th{
-	cursor:pointer;
+#usertable th{	
 	padding:2px;
 	border: 1px solid #aaaaaa;
+}
+#usertable th+th{
+	cursor:pointer;
 }
 
 #usertable td{
