@@ -5,21 +5,19 @@ function loadRezTable(){
 		async:false,
 		success:function(json){
 				for(var i in json){
-					var htmlstring = "<div class='rezObject";
+					var htmlstring = "<tr><th";
+					if(json[i].active_id == "-1")
+						htmlstring += " class=\"inactive\"";
 					
-					if(json[i].active_id == 0) htmlstring += " not_active";
-					
-					htmlstring+="'><div class='recipeName'>" + json[i].name+"</div> " +
-					json[i].active_id + " " + json[i].username + " " + json[i].date + "</div>";
-					$("#rezeptTable").append(htmlstring);						
+					htmlstring += ">"+json[i].name+"</th><th>"+json[i].eingefuegt+"</th>" +
+							"<th>"+json[i].viewed+"</th><th>"+json[i].schmeckt+"</th></tr>";
+					$("#rezepttable").append(htmlstring);					
 				}
-				//$(".moreContent").hide();
-				$(".rezObject").click(clickRez);
 			}
 		});
-	$("#edit_btn, #activate_btn, #delete_btn").addClass("button");
 }
 
+/*
 function clickRez(event){
 	var target = $(this);
 	var name = target.children(".recipeName").text();
@@ -55,7 +53,7 @@ function clickRez(event){
 	}
 	
 	return false;
-}
+}*/
 
 function updateActionBtnState(){
 	if(!$("#rezeptTable").children(".rez_selected").hasClass("rez_selected")){

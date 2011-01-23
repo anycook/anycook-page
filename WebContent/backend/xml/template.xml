@@ -6,17 +6,10 @@
     <div id="statistics"></div>
     </template>
     <template id="rezepte">
-    <div id="rezeptTable"></div>
-    <div id="rezeptActions">Aktionen
-    	<div id="edit_btn">Bearbeiten</div>
-    	<div id="activate_btn">Aktivieren</div>
-    	<div id="delete_btn">Löschen</div>
-    	
-    </div>
-    <div id="tagCloud">tagCloud</div>
+    <table id="rezepttable" class="backendtable"></table>
     </template>
     <template id="user">
-    	<table id="usertable"><tr><th><input type="checkbox" value="all"/></th><th>Username</th><th>Mail</th><th>Registrierung</th><th>last login</th><th>facebook id</th><th>Userlevel</th><th>Rezepte</th></tr></table>
+    	<table id="usertable" class="backendtable"><tr><th><input type="checkbox" value="all"/></th><th>Username</th><th>Mail</th><th>Registrierung</th><th>last login</th><th>facebook id</th><th>Userlevel</th><th>Rezepte</th></tr></table>
     	<div id="user_info">
     		<p>markierte User: <br /><select size="1"><option>in Ruhe lassen</option><option>aktivieren</option><option>deaktivieren</option><option>löschen</option><option>zu Moderatoren</option><option>zu Administratoren</option></select></p>
     		<div id="confirm"><div id="confirm_text">Aktion wirklich für diese User durchführen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
