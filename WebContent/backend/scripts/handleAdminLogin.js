@@ -1,6 +1,6 @@
 function checkLogin(json){
 	if(json["nickname"]==undefined)
-		window.navigate("top.jsp");
+		window.location.replace("/");
 	else{
 		$("#login").text("Login: "+json.nickname);
 	}
