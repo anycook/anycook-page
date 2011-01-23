@@ -31,6 +31,7 @@ function loadUsers(json){
 	$("#user_info table").append("<tr><td>Inaktive User:</td><td>"+inactivecounter+"</td></tr>");
 	
 	$("#usertable td input").click(checkBoxClick);
+	$("#user_info ul").empty();
 	
 	
 }
@@ -82,19 +83,37 @@ function orderUserTable(event){
 		$.address.value("user?orderBy="+order+"&desc="+desc);
 	
 	}else{
+		$("#confirm ul").empty();
 		var checked = $($("#usertable input")[0]).attr("checked");
-		if(checked == false)
-			$("#usertable input").removeAttr("checked");
-		else
+		if(checked == false){
+			$("#usertable input").removeAttr("checked");			
+		}
+		else{
 			$("#usertable input").attr("checked", "checked");
+			var tds = $("#usertable td input");
+			for(var i = 0; i<tds.length; i++){
+				$("#confirm ul").append("<li>"+$(tds[i]).val()+"</li>");
+			}
+		}
+		
 	}
 	
 }
 
 function checkBoxClick(event){
 	var target = $(event.target);
-	if(target.attr("checked") == false && $($("#usertable input")[0]).attr("checked") == true)
-		$($("#usertable input")[0]).removeAttr("checked");
+	if(target.attr("checked") == false && $($("#usertable input")[0]).attr("checked") == true){
+		$($("#usertable input")[0]).removeAttr("checked");		
+	}
+	if(target.attr("checked") == false){
+		var lis = $("#confirm li");
+		for(var i = 0; i<lis.length; i++){
+			if($(lis[i]).text() == target.val()) $(lis[i]).remove();
+		}
+	}else{
+		$("#confirm ul").append("<li>"+target.val()+"</li>");
+	}
+		
 		
 }
 
@@ -102,7 +121,7 @@ function selectedUserAction(event){
 	var option = $("#user_info select option:selected").val();
 	var checked = $("#usertable input:checked");
 	
-	if(checked.length==0 || option == "in Ruhe lassen"){
+	if(option == "in Ruhe lassen"){
 		$("#user_info select option:selected").removeAttr("selected");
 		$("#user_info select option:first").attr("selected", "selected");
 		if($("#confirm").css("display")!="none"){
@@ -114,14 +133,6 @@ function selectedUserAction(event){
 			});
 		}
 		return false;
-	}
-	
-	$("#confirm_text ul").empty();
-	for(var i = 0; i<checked.length; i++){
-		var val = $(checked[i]).val();
-		if(val!="all"){
-			$("#confirm_text ul").append("<li>"+val+"</li>");			
-		}
 	}
 	
 	if($("#confirm").css("display")=="none"){
@@ -150,6 +161,7 @@ function confirmedClick(event){
 		}
 		$("#usertable tr").not("#usertable tr:first").remove();
 		$("#user_info table").empty();
+		
 		if($.address.parameterNames.length > 0)
 			$.address.value("user");
 		else{
