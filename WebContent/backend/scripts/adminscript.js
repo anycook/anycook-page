@@ -49,11 +49,14 @@ function changePage(event){
 		loadRezTable();
 	}
 	if(sitename == "user"){
-		if(sitename != lastPage)
+		if(sitename != lastPage){
 			$("#usertable th").click(orderUserTable);
+			$(".confirm_buttons").click(confirmedClick);
+			$("#user_info select").change(selectedUserAction);
+		}
 		$("#user").addClass("on");
 		$("#usertable tr").not("#usertable tr:first").remove();
-		$("#user_info table *").remove();
+		$("#user_info table").empty();
 		if(event.parameterNames == 0){
 			$.ajax({
 				url:"/anycook/GetUsers",

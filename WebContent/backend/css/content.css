@@ -197,14 +197,22 @@ body{
 }
 
 #user_info h3{
+	border:1px solid #CCC;
+	border-bottom:0;
 	margin: 0;
 	margin-top:30px;
+	width:153px;
+	float:left;
+	padding:5px 0 0 5px;
+	background-color: #ece9e3;
 }
 
 #user_info table{
-	
-	width:130px;
-	padding:5px 0 5px 0;
+	border:1px solid #CCC;
+	border-top:0;
+	background-color: #ece9e3;
+	width:160px;
+	padding:5px 5px 5px 5px;
 	border-spacing: 0;
 }
 
