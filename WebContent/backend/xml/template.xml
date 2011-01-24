@@ -6,7 +6,7 @@
     <div id="statistics"></div>
     </template>
     <template id="rezepte">
-    <table id="rezepttable" class="backendtable"></table>
+    <ul id="rezeptelist"></ul>
     </template>
     <template id="user">
     	<table id="usertable" class="backendtable"><tr><th><input type="checkbox" value="all"/></th><th>Username</th><th>Mail</th><th>Registrierung</th><th>last login</th><th>facebook id</th><th>Userlevel</th><th>Rezepte</th></tr></table>

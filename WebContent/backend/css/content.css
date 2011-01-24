@@ -42,16 +42,54 @@ body{
 	
 }
 
-/*rezepttable*/
+/*rezeptelist*/
 
-#rezepttable th{
-	font-weight:normal;
-	text-align: left;
+#rezeptelist{
+	float:left;
+	margin:30px 0 15px 15px;
+	width:800px;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	list-style-image: url("../icons/arrow-close.png");
 }
 
-#rezepttable th.inactive{
+#rezeptelist li{
+	padding:2px 0 2px 10px;
+	margin-top:2px;
+	cursor:pointer;
+}
+
+#rezeptelist div{
+	float:left;
+}
+
+#rezeptelist .rezept_name{
+	width:200px;
+}
+
+#rezeptelist .rezept_name.inactive{
 	color:#e52929;
 }
+
+#rezeptelist .rezept_date{
+	width:100px;
+}
+
+#rezeptelist .rezept_viewed, #rezeptelist .rezept_schmeckt{
+	width:50px;
+	text-align: right;
+}
+
+#rezepttable th.arrow{
+	width:10px;
+	background: url("../icons/arrow-close.png") no-repeat 0 5px;
+	
+	
+}
+#rezepttable th.arrow.open{
+	background: url("../icons/arrow-open.png") no-repeat 0 5px;
+}
+
+
 
 
 /* user */

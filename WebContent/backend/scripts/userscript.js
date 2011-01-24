@@ -36,10 +36,7 @@ function loadUsers(json){
 	
 }
 
-function parseDate(toParse){
-	toParse = toParse.split("-");
-	return toParse[2]+"."+toParse[1]+"."+toParse[0];	
-}
+
 
 function orderUserTable(event){
 	

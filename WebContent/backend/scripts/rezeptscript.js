@@ -5,16 +5,47 @@ function loadRezTable(){
 		async:false,
 		success:function(json){
 				for(var i in json){
-					var htmlstring = "<tr><th";
+					var htmlstring = "<li><div class=\"rezept_name";
 					if(json[i].active_id == "-1")
-						htmlstring += " class=\"inactive\"";
+						htmlstring += " inactive";
 					
-					htmlstring += ">"+json[i].name+"</th><th>"+json[i].eingefuegt+"</th>" +
-							"<th>"+json[i].viewed+"</th><th>"+json[i].schmeckt+"</th></tr>";
-					$("#rezepttable").append(htmlstring);					
+					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
+					
+					htmlstring += "\">"+json[i].name+"</div><div class=\"rezept_date\">"+eingefuegt+"</div>" +
+							"<div class=\"rezept_viewed\">"+json[i].viewed+"</div><div class=\"rezept_schmeckt\">"+json[i].schmeckt+"</div></li>";
+					$("#rezeptelist").append(htmlstring);					
 				}
 			}
 		});
+	$("#rezepttable th.arrow").click(clickArrow);
+}
+
+function clickArrow(event){
+	var target = $(event.target);
+	var gericht = target.next().text();
+	if(!target.hasClass("open")){
+		target.addClass("open");
+		$.ajax({
+			url:"/anycook/GetRezeptValues",
+			dataType: "json",
+			data:"rezept="+gericht,
+			async:false,
+			success:function(json){
+				var htmlstring = "<tr><table class=\"versiontable\">";
+				for(var i in json){					
+					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
+					
+					htmlstring += "<tr><td></td><td>"+json[i].id+"</td><td>"+eingefuegt+"</td>" +
+							"<td>"+json[i].email+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td></tr>";
+					
+				}
+				htmlstring += "</table></tr>";
+				target.parent().after(htmlstring);
+			}				
+		});
+	}else{
+		target.removeClass("open");
+	}
 }
 
 /*

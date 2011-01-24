@@ -81,4 +81,9 @@ function changePage(event){
 	lastPage = sitename;
 }
 
+function parseDate(toParse){
+	toParse = toParse.split("-");
+	return toParse[2]+"."+toParse[1]+"."+toParse[0];	
+}
+
 var lastPage;
