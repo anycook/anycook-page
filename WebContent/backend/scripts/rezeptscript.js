@@ -12,39 +12,41 @@ function loadRezTable(){
 					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
 					
 					htmlstring += "\">"+json[i].name+"</div><div class=\"rezept_date\">"+eingefuegt+"</div>" +
-							"<div class=\"rezept_viewed\">"+json[i].viewed+"</div><div class=\"rezept_schmeckt\">"+json[i].schmeckt+"</div></li>";
+							"<div class=\"rezept_viewed\">"+json[i].viewed+" views</div><div class=\"rezept_schmeckt\">"+json[i].schmeckt+" schmeckt</div></li>";
 					$("#rezeptelist").append(htmlstring);					
 				}
 			}
 		});
-	$("#rezepttable th.arrow").click(clickArrow);
+	$("#rezeptelist .rezept_name").click(clickRezept);
 }
 
-function clickArrow(event){
+function clickRezept(event){
 	var target = $(event.target);
-	var gericht = target.next().text();
-	if(!target.hasClass("open")){
-		target.addClass("open");
+	var li = target.parent();
+	var gericht = target.text();
+	if(!li.hasClass("open")){
+		li.addClass("open");
 		$.ajax({
 			url:"/anycook/GetRezeptValues",
 			dataType: "json",
 			data:"rezept="+gericht,
 			async:false,
 			success:function(json){
-				var htmlstring = "<tr><table class=\"versiontable\">";
+				var htmlstring = "<table class=\"versiontable\"><tr><th>ID</th><th>User</th><th>eingefügt</th><th>Zutaten</th><th>Schritte</th><th></th></tr>";
 				for(var i in json){					
 					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
 					
-					htmlstring += "<tr><td></td><td>"+json[i].id+"</td><td>"+eingefuegt+"</td>" +
-							"<td>"+json[i].email+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td></tr>";
+					htmlstring += "<tr><td>"+json[i].id+"</td><td>"+json[i].email+"</td>" +
+							"<td>"+eingefuegt+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td><td>details</td></tr>";
 					
 				}
-				htmlstring += "</table></tr>";
-				target.parent().after(htmlstring);
+				htmlstring += "</table>";
+				li.append(htmlstring);
 			}				
 		});
 	}else{
-		target.removeClass("open");
+		li.removeClass("open");
+		li.children(".versiontable").remove();
 	}
 }
 
