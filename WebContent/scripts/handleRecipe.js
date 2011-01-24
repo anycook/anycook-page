@@ -121,11 +121,29 @@ function loadRecipe(json){
 		}
 	}
 	
-	$("#social").append("<fb:like href=\""+window.location+"\" layout=\"button_count\" width=\"90\" action=\"recommend\" font=\"lucida grande\"></fb:like>");
+	//$("#social").append("<fb:like href=\"http://anycook.de#/recipe/"+json.name+"\" layout=\"button_count\" width=\"90\" action=\"recommend\" font=\"lucida grande\"></fb:like>");
 	
 	$.address.title("anycook | "+json.name);
 	
 	FB.XFBML.parse(document.getElementById('social'));
+	
+	//add meta tags
+	/*setOrCreateMetaTag("property", "og:title", json.name);
+	setOrCreateMetaTag("property", "og:type", "food");
+	setOrCreateMetaTag("property", "og:url", "http://anycook.de#/recipe/"+json.name);
+	setOrCreateMetaTag("property", "og:image", "http://anycook.de/gerichtebilder/small/"+json.imagename);
+	setOrCreateMetaTag("property", "og:site_name", "anycook");*/
+	
+}
+
+function setOrCreateMetaTag(metaName, name, value) {
+    var t = 'meta['+metaName+'='+name+']';
+    var mt = $(t);
+    if (mt.length === 0) {
+        t = '<meta '+metaName+'="'+name+'" />';
+        mt = $(t).appendTo('head');
+    }
+    mt.attr('content', value);
 }
 
 function loadDiscussion(gericht){
