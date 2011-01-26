@@ -26,8 +26,15 @@ function loginChecker(){
 		url: "/anycook/Login",
 		async: false,
 		success: function(response){
-			if(response != "false")
+			if(response != "false"){
+				if(logindata == null){
+					logindata = new Object();
+					for(var i in response)
+						logindata[i] = response[i];
+				}
 				logincheck = true;
+			}
+				
 		}
 	});
 	return logincheck;
@@ -74,6 +81,10 @@ function checkLogin(response){
 		makeLoginText();
 	}
 	else{
+		
+		logindata = new Object();
+		for(var i in response)
+			logindata[i] = response[i];
 		makeUsermenuText(response);
 	}
 	
@@ -406,3 +417,4 @@ function submitForm(event){
 	return false;
 }
 var loginerrors = new Object();
+var logindata  = null;

@@ -136,16 +136,6 @@ function loadRecipe(json){
 	
 }
 
-function setOrCreateMetaTag(metaName, name, value) {
-    var t = 'meta['+metaName+'='+name+']';
-    var mt = $(t);
-    if (mt.length === 0) {
-        t = '<meta '+metaName+'="'+name+'" />';
-        mt = $(t).appendTo('head');
-    }
-    mt.attr('content', value);
-}
-
 function loadDiscussion(gericht){
 	var login = loginChecker();
 	$("#discussion_headline").html("Diskussion zum Rezept<br/>"+gericht);
@@ -188,7 +178,7 @@ function loadDiscussion(gericht){
 	});
 	
 	if(login){
-		$("#discussion_footer").html("<h6 id='yes_comment'>Was meinst du dazu?</h6><a href='#'><img src='./userbilder/medium/nouserpic.png'/></a><div class='comment_arrow'></div><div class='recipe_comment'><textarea></textarea><div class='comment_btn'>Abschicken</div></div>");
+		$("#discussion_footer").html("<h6 id='yes_comment'>Was meinst du dazu?</h6><a href='#'><img src='"+logindata.image+"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><textarea></textarea><div class='comment_btn'>Abschicken</div></div>");
 		$(".comment_btn").click(comment);
 		$(".answer_btn").live("click", answerBtnClick);
 		$(".like, .dislike").live("click", discussionLike);
@@ -242,7 +232,7 @@ function answerBtnClick(event){
 	if(ul.length == 0)
 		ul = target.closest("ul");
 	if($(ul).children(".child_comment").length == 0){
-		$(ul).append("<li class='child_comment'><a href='#'><img src='./userbilder/small/nouserpic.png'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><textarea></textarea><div class='comment_btn'>Abschicken</div><div></li>");
+		$(ul).append("<li class='child_comment'><a href='#'><img src='"+logindata.image+"'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><textarea></textarea><div class='comment_btn'>Abschicken</div><div></li>");
 		var comment = $(ul).children(".child_comment");
 		comment.find(".comment_btn").click(childComment);
 		var commentoffset = comment.offset();
