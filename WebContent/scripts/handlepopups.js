@@ -19,7 +19,7 @@ function closePopup(){
 function makeRegisterPopup(username, mail){
 	
 	$("body").append("<div id='registerpopup' class='popup'><div class='closepopup'></div><div id='register_headline'>Hey "+username+"!</div><div id='register" +
-			"_text'>Vielen Dank für deine Anmeldung. Damit Du gleich loslegen kannst, müsstest Du noch deine E-Mail-Adresse bestätigen.</div></div><div class='background_popup'></div>");
+			"_text'>Vielen Dank fÃ¼r deine Anmeldung. Damit Du gleich loslegen kannst, mÃ¼sstest Du noch deine E-Mail-Adresse bestÃ¤tigen.</div></div><div class='background_popup'></div>");
 	
 	var domain = mail.split("@")[1];
 	$.ajax({
@@ -32,7 +32,7 @@ function makeRegisterPopup(username, mail){
 				var shortname = json.shortname;
 				var fullname = json.fullname;
 				var redirect = json.redirect;
-				$("#registerpopup").append("<div id='register_forward'>Wir können dich auch direkt <a href='"+redirect+"' target='_blank'>weiterleiten</a>!</div><div id='register_mailprovider'><a href='"+redirect+"' target='_blank'><img src='./img/maillogos/"+image+"' alt='"+shortname+"'/></a><div id='register_copyright'>&copy; "+fullname+"</div></div>");
+				$("#registerpopup").append("<div id='register_forward'>Wir kÃ¶nnen dich auch direkt <a href='"+redirect+"' target='_blank'>weiterleiten</a>!</div><div id='register_mailprovider'><a href='"+redirect+"' target='_blank'><img src='./img/maillogos/"+image+"' alt='"+shortname+"'/></a><div id='register_copyright'>&copy; "+fullname+"</div></div>");
 			}
 		}
 	});

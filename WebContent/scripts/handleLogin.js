@@ -57,23 +57,15 @@ function schmecktChecker(gericht){
 
 
 function logout(event){
-		/*FB.logout(function(response) {
-		  var lalal = response;
-		});*/
 		$.ajax({
-			url:"/anycook/Logout",
-			success:function(){
-				if(Number(logindata.facebook_id) > 0){
-					FB.logout();
-				}
-				logindata = null;
-				window.location.reload();				
-			}
+			url:"/anycook/Logout"
 		});
-		/*$("#login_dropdown").hide();
-		$("#signin_btn").removeClass("on");
-		makeLoginText();*/
-		
+		if(logindata.facebook_id !="0"){
+			FB.logout(function(response) {
+				  window.location.reload();
+				});
+		}else
+			window.location.reload();		
 }
 
 function checkLogin(response){
