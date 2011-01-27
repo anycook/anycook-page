@@ -160,7 +160,7 @@ function loadDiscussion(gericht){
 					else if(Number(likes)<0)
 						likeclass = "minus";
 					var datetime = json[i].eingefuegt.split(/[ :-]/);
-					var litext = "<li><a href='#'><img src='./userbilder/medium/"+json[i].image+
+					var litext = "<li><a href='#'><img src='"+json[i].image+
 						"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><div class='comment_headline'><a href='#'>"+json[i].nickname+"</a> schrieb am "+datetime[2]+"."+datetime[1]+"."+datetime[0]+" um "+datetime[3]+":"+datetime[4]+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
 						"</div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
 					
@@ -209,7 +209,7 @@ function loadChildren(i, id, gericht, login){
 					}
 					else if(Number(likes)<0)
 					likeclass = "minus";
-					var childlitext = "<li><a href='#'><img src='./userbilder/small/"+childjson[j].image+
+					var childlitext = "<li><a href='#'><img src='"+childjson[j].image+
 					"'/></a><div class='comment_arrow_small'></div><div class='recipe_comment_small'><div class='comment_headline'><a href='#'>"+childjson[j].nickname+"</a> schrieb am "+childdatetime[2]+"."+childdatetime[1]+"."+childdatetime[0]+" um "+childdatetime[3]+":"+childdatetime[4]+"</div><div class='comment_number'>#"+(Number(childjson[j].id)+1)+
 					"</div><div class='comment_text'>"+childjson[j].text+"</div><div class='comment_footer'>";
 					if(login)
@@ -328,9 +328,9 @@ function loadNewDiscussion(ul, pid, gericht, oldmaxID){
 				var arrow = "comment_arrow";
 				var comment = "recipe_comment";
 				if(pid==-1){
-					image = "./userbilder/medium/"+json[i].image;					
+					image = json[i].image;					
 				}else{
-					image = "./userbilder/small/"+json[i].image;
+					image = json[i].image;
 					arrow+="_small";
 					comment+="_small";
 				}

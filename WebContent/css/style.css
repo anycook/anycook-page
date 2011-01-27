@@ -1537,6 +1537,7 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 }
 
 #signin_btn{
+	position:absolute;
 	float:right;
 	margin-left:138px;
 	height: 24px;
@@ -1580,13 +1581,12 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	z-index: 9;
 	background-color: #edf6dc;
 	border-left: 1px solid #87a347;
-	border-right: 1px solid #87a347;
 }
 
 #login_top{
 	border-top: 5px solid #87a347;
 	border-bottom: 6px solid #87a347;
-	/*margin: 5px 0 0 -94px;*/
+	margin: 0 0 0 -2px;
 }
 
 #login_form{
@@ -1729,7 +1729,7 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 
 #user{
 	float: left;
-	width: 100%;
+	width:100%;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #87a347;
 	padding: 0 0 3px 4px;
@@ -1739,10 +1739,14 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 
 #user img{
 	float: left;
-	margin: 0 0 2px 0; 
+	margin: 3px 0 2px 0; 
 	height: 50px;
 	width: 50px;
-}	
+}
+#user p{
+	float:left;
+	margin: 5px 0 0 10px;
+}
 
 .user_menu_btn{
 	display:block;
