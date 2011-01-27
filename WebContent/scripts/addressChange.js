@@ -197,6 +197,9 @@ function handleChange(event){
 			else if(path[0] == "profile"){
 				loadUserProfile();
 			}
+			else if(path[0]=="kontakt"){
+				loadCaptcha();
+			}
 			break;
 		case 2:
 			if(path[0]== "recipe"){
@@ -249,7 +252,6 @@ function handleChange(event){
 			$("#first_search_layout").addClass("on");
 			$("#second_search_layout").addClass("inactive");
 			$("#third_search_layout").addClass("inactive");
-			
 		}
 	}
 }
@@ -346,16 +348,6 @@ function changePage(event){
 					$("#progress_4 > *").animate({"opacity": 1.0}, {duration: 500});
 					}});
 			}
-		}
-		else if(page=="kontakt"){
-			Recaptcha.create("6Ldg7sASAAAAAOz6GnBiyL-LowhB_6PXF4pPQTb8",
-				    "recaptcha_div",
-				    {
-				      theme: "red",
-				      callback: Recaptcha.focus_response_field
-				    }
-				  );
-			alert('hey!');
 		}
 		else{
 			$.address.queryString("");

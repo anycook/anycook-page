@@ -46,7 +46,7 @@
     	</div>
     </template>
     <template id="impressum">
-    	<div id="impressum">
+    	<div id="impressum" class="footerpages">
     	<h1>Impressum</h1><p>
 			<h2>Website</h2>
 			<p>Diese Website wird von Jan Grassegger<br/>Eckermannstr. 2<br/>99423 Weimar, Deutschland<br/>und  Daniel Plath<br/>betrieben.</p>
@@ -244,13 +244,55 @@
 				<div id='new_activation' class="content_message"><h5></h5><p></p></div>
 			</template>
 			<template id="kontakt">
-				<div id='kontakt'>
+				<div id='kontakt' class="footerpages">
 					<h1>Kontakt</h1>
-					<form id='contact' name='form' method='post'>
-					
-      				
-					</form>
-					<div id="recaptcha_div"></div>
+					<div id="contactform">
+						<form id='contactform' name='form' method='post'>
+						
+						<table>
+						<tr>
+							<td class="formdescription">
+								Name:
+							</td>
+							<td class="forminput">
+								<input type="text" name="name" />
+							</td>
+						</tr>
+						<tr>
+							<td class="formdescription">
+								E-Mail:
+							</td>
+							<td class="forminput">
+								<input type="text" name="email" />
+							</td>
+						</tr>
+						<tr>
+							<td class="formdescription">
+								Betreff:
+							</td>
+							<td class="forminput">
+								<input type="text" name="betreff" />
+							</td>
+						</tr>
+						<tr>
+							<td class="formdescription">
+								Nachricht:
+							</td>
+							<td class="forminput">
+								<textarea name="message"></textarea>
+							</td>
+						</tr>
+						<tr>
+						<td class="formdescription"></td>
+						<td class="forminput">
+							<div id="recaptcha_div"></div>
+						</td>
+						</tr>
+						
+						</table>
+						</form>
+						
+					</div>
 				</div>
 			</template>
 			<template id="profile">
