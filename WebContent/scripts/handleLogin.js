@@ -72,7 +72,7 @@ function logout(event){
 function checkLogin(response){
 	$(document).click(clickOthers);
 	$("#login_container > *").remove();
-	var htmlstring = "<div id='signin_btn'></div><div id='login_dropdown'><div id='login_top'></div></div>";
+	var htmlstring = "<div id='signin_btn'></div><div id='login_dropdown'></div>";
 	
 	$("#login_container").append(htmlstring);
 	$("#login_dropdown").hide();
@@ -122,7 +122,7 @@ function makeLoginText(){
 		
 	
 
-	$("#login_top").append(htmlstring);
+	$("#login_dropdown").append(htmlstring);
 	//FB.XFBML.parse(document.getElementById('login_top'));
 	$("#login_mail, #login_pwd").focus(focusInputs);		
 	$("#login_mail, #login_pwd").focusout(focusoutInputs);
@@ -148,7 +148,7 @@ function makeUsermenuText(json){
 	if(json.level == "2")
 		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
 	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
-	$("#login_top").html(htmlstring);	
+	$("#login_dropdown").html(htmlstring);	
 	$("#logout").click(logout);
 	$("#login_user > a").click(closeUserMenu);
 }
