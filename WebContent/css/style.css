@@ -1297,6 +1297,16 @@ ul.kategorie_filter li:HOVER{
 	border: 0;
 }
 
+#comment_discussion li img{
+	width:50px;
+	height:50px;
+}
+
+#comment_discussion li li img{
+	width:32px;
+	height:32px;
+}
+
 .comment_arrow, .comment_arrow_small, .child_comment .comment_arrow_answer {
 	float: left;
 	width: 20px;
