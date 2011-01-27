@@ -243,7 +243,16 @@
 			<template id="activate">
 				<div id='new_activation' class="content_message"><h5></h5><p></p></div>
 			</template>
-			
+			<template id="kontakt">
+				<div id='kontakt'>
+					<h1>Kontakt</h1>
+					<form id='contact' name='form' method='post'>
+					
+      				
+					</form>
+					<div id="recaptcha_div"></div>
+				</div>
+			</template>
 			<template id="profile">
 				<h1>Userprofil</h1>
 			</template>

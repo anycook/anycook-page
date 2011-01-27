@@ -347,6 +347,16 @@ function changePage(event){
 					}});
 			}
 		}
+		else if(page=="kontakt"){
+			Recaptcha.create("6Ldg7sASAAAAAOz6GnBiyL-LowhB_6PXF4pPQTb8",
+				    "recaptcha_div",
+				    {
+				      theme: "red",
+				      callback: Recaptcha.focus_response_field
+				    }
+				  );
+			alert('hey!');
+		}
 		else{
 			$.address.queryString("");
 		}
