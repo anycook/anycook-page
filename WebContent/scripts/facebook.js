@@ -16,6 +16,11 @@ function fbLogin(){
 	  });
 }
 
-function fbStatusChange(event){
-	//TODO login statusänderungen behandeln
+function fbSessionChange(event){
+	if(event.status == "connected" && logindata == null){
+		window.location.reload();
+	}
+	if((event.status == "unknown" || event.status == "notConnected") && logindata != null){
+		logout();
+	}
 }
