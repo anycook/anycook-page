@@ -26,8 +26,8 @@ function fillDiscover(){
 			  success: function(json){
 				  for(var type in json){
 					  var typelength = 0;
-					  for(var gericht in json[type]){
-						  loadDiscoverRecipe(json[type][gericht], type);
+					  for(var i in json[type]){
+						  loadDiscoverRecipe(json[type][i], type);
 						  typelength++;
 					  }
 					  $("#"+type+"_container > .frame_small").first().css("marginRight", "8px");
