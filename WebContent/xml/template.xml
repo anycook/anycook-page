@@ -246,7 +246,6 @@
 			<template id="kontakt">
 				<div id='kontakt' class="footerpages">
 					<h1>Kontakt</h1>
-					<div id="contactform">
 						<form id='contactform' name='form' method='post'>
 						
 						<table>
@@ -292,9 +291,8 @@
 						</table>
 						<div id="SendButton">Senden</div>
 						</form>
-						
 					</div>
-				</div>
+				
 			</template>
 			<template id="profile">
 				<h1>Userprofil</h1>
