@@ -14,16 +14,16 @@ function loadCaptcha(){
 		  );
 }
 function sendForm(){
-	var responseField = $("#recaptcha_response_field").val();
-	var challengeField = $("#recaptcha_challenge_field").val();
-	var message = $("#message").val();
-	var subject = $("#betreff").val();
-	var email = $("#email").val();
-	var name = $("#name").val();
+	var response = $("#recaptcha_response_field").val();
+	var challenge = $("#recaptcha_challenge_field").val();
+	var message = $("#conmessage").val();
+	var subject = $("#conbetreff").val();
+	var email = $("#conemail").val();
+	var name = $("#conname").val();
 	
 	$.ajax({
 		url:"/anycook/SendForm",
-		data:"challenge="+challenge+"&response="+response+"&name="+name+"&email="+email+"&message="+message,
+		data:"challenge="+challenge+"&response="+response+"&name="+name+"&email="+email+"&message="+message+"&subject="+subject,
 		success:function(response){
 			if(response=="true"){
 				alert("message send!");

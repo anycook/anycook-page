@@ -246,7 +246,7 @@
 			<template id="kontakt">
 				<div id='kontakt' class="footerpages">
 					<h1>Kontakt</h1>
-						<form id='contactform' name='form' method='post'>
+						<form id='contactform'>
 						
 						<table>
 						<tr>
@@ -254,7 +254,7 @@
 								Name:
 							</td>
 							<td class="forminput">
-								<input type="text" name="name" />
+								<input type="text" id="conname" />
 							</td>
 						</tr>
 						<tr>
@@ -262,7 +262,7 @@
 								E-Mail:
 							</td>
 							<td class="forminput">
-								<input type="text" name="email" />
+								<input type="text" id="conemail" />
 							</td>
 						</tr>
 						<tr>
@@ -270,7 +270,7 @@
 								Betreff:
 							</td>
 							<td class="forminput">
-								<input type="text" name="betreff" />
+								<input type="text" id="conbetreff" />
 							</td>
 						</tr>
 						<tr>
@@ -278,7 +278,7 @@
 								Nachricht:
 							</td>
 							<td class="forminput">
-								<textarea name="message"></textarea>
+								<textarea id="conmessage"></textarea>
 							</td>
 						</tr>
 						<tr>
