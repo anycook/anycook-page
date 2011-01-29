@@ -1,4 +1,6 @@
 function loadRezTable(){
+	$(".activate").die("click", clickActivate);
+	$(".deactivate").die("click", clickDeactivate);
 	$("#rezeptelist").empty();
 	$.ajax({
 		url:"/anycook/GetRezeptValues",
@@ -79,7 +81,7 @@ function updateActionBtnState(){
 function clickActivate(event){
 	var target = $(event.target);
 	var gericht = $(target.closest("li").children(".rezept_name")[0]).text();
-	var id = target.prevAll(".version_id");
+	var id = $(target.prevAll(".version_id")[0]).text();
 	activateVersion(gericht, id);
 }
 
