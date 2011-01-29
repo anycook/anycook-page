@@ -44,6 +44,9 @@ function makeSearchHeader(){
 
 
 function handleSearchResults(result, terms){
+	if($.address.pathNames()[0] != "search")
+		return;
+	
 	if(terms == "Gerichte, Zutaten, Tags, ...")
 		terms="";
 	
