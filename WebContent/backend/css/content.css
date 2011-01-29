@@ -103,7 +103,23 @@ body{
 
 .versiontable tr, .versiontable td, .versiontable th{
 	border: 1px solid #aaaaaa;
+	
+}
+
+.versiontable tr{
 	background-color: #ece9e3;
+}
+
+.versiontable tr.active{
+	background-color:#e0eecb;
+}
+
+.versiontable td.activate, .versiontable td.deactivate{
+	cursor:pointer;
+}
+
+.versiontable td.activate:hover, .versiontable td.deactivate:hover{
+	text-decoration: underline;
 }
 
 /* user */

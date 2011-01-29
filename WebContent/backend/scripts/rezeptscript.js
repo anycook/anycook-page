@@ -1,4 +1,5 @@
 function loadRezTable(){
+	$("#rezeptelist").empty();
 	$.ajax({
 		url:"/anycook/GetRezeptValues",
 		dataType: "json",
@@ -18,6 +19,8 @@ function loadRezTable(){
 			}
 		});
 	$("#rezeptelist .rezept_name").click(clickRezept);
+	$(".activate").live("click", clickActivate);
+	$(".deactivate").live("click", clickDeactivate);
 }
 
 function clickRezept(event){
@@ -36,12 +39,24 @@ function clickRezept(event){
 				for(var i in json){					
 					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
 					
-					htmlstring += "<tr><td>"+json[i].id+"</td><td>"+json[i].email+"</td>" +
-							"<td>"+eingefuegt+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td><td>details</td></tr>";
+					if(json[i].active == "1")
+						htmlstring += "<tr class=\"active\">";
+					else
+						htmlstring += "<tr>";
+					htmlstring += "<td class=\"version_id\">"+json[i].id+"</td><td>"+json[i].email+"</td>" +
+							"<td>"+eingefuegt+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td>";
+					
+					if(json[i].active == "0")
+						htmlstring +="<td class=\"activate\">aktivieren</td>";
+					else
+						htmlstring +="<td class=\"deactivate\">deaktivieren</td>";
+					
+					htmlstring += "</tr>";
 					
 				}
 				htmlstring += "</table>";
 				li.append(htmlstring);
+				
 			}				
 		});
 	}else{
@@ -49,44 +64,6 @@ function clickRezept(event){
 		li.children(".versiontable").remove();
 	}
 }
-
-/*
-function clickRez(event){
-	var target = $(this);
-	var name = target.children(".recipeName").text();
-	if(!(target.children(".recipeName").hasClass("open"))){
-		target.children(".recipeName").addClass("open");
-		$.ajax({
-			url:"/anycook/LoadRecipe",
-			dataType: "json",
-			data: "recipe="+name,
-			async:false,
-			success:function(json){
-				var zutaten;
-				for(var i in json.zutaten){
-					zutaten += "<div>"+i+" "+json.zutaten[i]+"</div>";
-				}
-				target.append("<div class='rezept_zutaten'>"+zutaten+"</div>");
-				var schritte;
-				for(var i in json.schritte){
-					schritte += "<div class='step'><div class='step_number'>"+i+"</div><div class='step_text'>"+json.schritte[i]+"</div></div>";
-				}
-				target.append("<div class='rezept_schritte'>"+schritte+"</div>");
-				var appendtext = "<div class='rezept_bild'><img src='/gerichtebilder/small/"+json.imagename+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'></div><div class='time_corner_right'></div></div></div><p></p>";
-				target.append(appendtext);
-				
-			}
-		});
-	}
-	else{
-		target.children(".rezept_zutaten").remove();
-		target.children(".rezept_schritte").remove();
-		target.children(".rezept_bild").remove();
-		target.children(".recipeName").removeClass("open");
-	}
-	
-	return false;
-}*/
 
 function updateActionBtnState(){
 	if(!$("#rezeptTable").children(".rez_selected").hasClass("rez_selected")){
@@ -98,17 +75,25 @@ function updateActionBtnState(){
 	}
 }
 
-function activateRez(){
-	alert($("rezeptTable").children(".rez_selected").children("h1").text());
-	/*$.ajax({
-		url:"/zombiecooking/Activate",
-		data: "q="+json[i].name,
-		dataType: "json",
-		async:false,
-		success:function(jtag){
-			for(var j in jtag){
-				tags += jtag[j] + " ";
-			}
+
+function clickActivate(event){
+	var target = $(event.target);
+	var gericht = $(target.closest("li").children(".rezept_name")[0]).text();
+	var id = target.prevAll(".version_id");
+	activateVersion(gericht, id);
+}
+
+function clickDeactivate(event){
+	var target = $(event.target);
+	var gericht = $(target.closest("li").children(".rezept_name")[0]).text();
+	activateVersion(gericht, -1);
+}
+function activateVersion(gericht, id){
+	$.ajax({
+		url:"/anycook/EditVersion",
+		data: "todo=activate&gericht="+gericht+"&id="+id,
+		success:function(){
+			loadRezTable();
 		}
-	});*/
+	});
 }
