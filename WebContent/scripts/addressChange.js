@@ -198,7 +198,7 @@ function handleChange(event){
 				loadUserProfile();
 			}
 			else if(path[0]=="kontakt"){
-				loadCaptcha();
+				loadContact();
 			}
 			break;
 		case 2:
