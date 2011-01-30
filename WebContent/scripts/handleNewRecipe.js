@@ -527,6 +527,7 @@ function finishStep4(){
 		var tag = $(value).text();
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
+			async:false,
 			data:"tag="+tag
 		});
 	});
