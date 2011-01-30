@@ -123,6 +123,8 @@ function clearContent(){
 	$("#content_header > *").remove();
 }
 
+
+// behandelt change bei $.address.path
 function handleChange(event){
 	if(lastPath != event.path){
 		lastPath = event.path;
@@ -169,7 +171,6 @@ function handleChange(event){
 			$.ajax({
 	  		  url: "/anycook/LoadRecipeforSmallView",
 	  		  dataType: 'json',
-	  		  async:false,
 	  		  success: loadHome
 			});
 			break;
@@ -243,6 +244,7 @@ function handleChange(event){
 	}
 }
 
+// behandelt change bei $.address.parameters
 function changePage(event){
 	var page = event.parameters["page"];
 	if(event.pathNames.length == 0){
