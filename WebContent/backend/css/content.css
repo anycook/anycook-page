@@ -47,9 +47,11 @@ body{
 #rezeptelist{
 	margin:30px 0 15px 15px;
 	padding:0px;
-	width:785px;
+	
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	list-style-type: none;
+	float:left;
+	width:800px;
 }
 
 #rezeptelist li{
@@ -57,7 +59,7 @@ body{
 	padding:2px 0 2px 15px;
 	margin:2px 0 0 10px;
 	float:left;
-	width:760px;
+	width:700px;
 }
 
 #rezeptelist li.open{
@@ -69,9 +71,15 @@ body{
 }
 
 #rezeptelist .rezept_name{
-	padding-left:10px;
+	padding-left:5px;
 	cursor:pointer;
-	width:200px;
+	width:250px;
+}
+
+#rezeptelist .new{
+	color: #859F5E;
+	width:50px;
+	margin-left:-50px;
 }
 
 #rezeptelist .rezept_name.inactive{
@@ -144,7 +152,7 @@ body{
 
 
 
-#user_info{
+#info{
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	width:160px;
@@ -157,16 +165,16 @@ body{
 	min-height: 200px;
 }
 
-#user_info>p{
+#info>p{
 	margin: 5px 0 0 0;
 }
 
-#user_info select{
+#info select{
 	margin-top: 5px;
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-#user_info h3{
+#info h3{
 	border:1px solid #CCC;
 	border-bottom:0;
 	margin: 0;
@@ -177,7 +185,7 @@ body{
 	background-color: #ece9e3;
 }
 
-#user_info table{
+#info table{
 	border:1px solid #CCC;
 	border-top:0;
 	background-color: #ece9e3;
@@ -186,7 +194,7 @@ body{
 	border-spacing: 0;
 }
 
-#user_info td+td{
+#info td+td{
 	text-align:right;
 }
 

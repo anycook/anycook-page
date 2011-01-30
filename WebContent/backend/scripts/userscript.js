@@ -26,12 +26,12 @@ function loadUsers(json){
 		$("#usertable").append("<tr><td><input type=\"checkbox\" value=\""+json[i].mail+"\"/></td><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
 				createdate+"</td><td>"+lastlogin+"</td><td>"+json[i].facebook_id+"</td><td>"+json[i].level+"</td><td>"+versions+"</td></tr>");
 	}
-	$("#user_info table").append("<tr><td>User gesamt:</td><td>"+usercounter+"</td></tr>");
-	$("#user_info table").append("<tr><td>Facebookuser:</td><td>"+facebookcounter+"</td></tr>");
-	$("#user_info table").append("<tr><td>Inaktive User:</td><td>"+inactivecounter+"</td></tr>");
+	$("#info table").append("<tr><td>User gesamt:</td><td>"+usercounter+"</td></tr>");
+	$("#info table").append("<tr><td>Facebookuser:</td><td>"+facebookcounter+"</td></tr>");
+	$("#nfo table").append("<tr><td>Inaktive User:</td><td>"+inactivecounter+"</td></tr>");
 	
 	$("#usertable td input").click(checkBoxClick);
-	$("#user_info ul").empty();
+	$("#info ul").empty();
 	
 	
 }
@@ -115,18 +115,18 @@ function checkBoxClick(event){
 }
 
 function selectedUserAction(event){
-	var option = $("#user_info select option:selected").val();
+	var option = $("#info select option:selected").val();
 	var checked = $("#usertable input:checked");
 	
 	if(option == "in Ruhe lassen"){
-		$("#user_info select option:selected").removeAttr("selected");
-		$("#user_info select option:first").attr("selected", "selected");
+		$("#info select option:selected").removeAttr("selected");
+		$("#info select option:first").attr("selected", "selected");
 		if($("#confirm").css("display")!="none"){
 			var confirmheight = $("#confirm").css("height");
 			confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30;
 			$("#confirm").fadeOut(500, function(){
-				$("#user_info h3").css("marginTop", confirmheight+30);
-				$("#user_info h3").animate({"marginTop": 30},{duration:500});
+				$("#info h3").css("marginTop", confirmheight+30);
+				$("#info h3").animate({"marginTop": 30},{duration:500});
 			});
 		}
 		return false;
@@ -135,8 +135,8 @@ function selectedUserAction(event){
 	if($("#confirm").css("display")=="none"){
 		var confirmheight = $("#confirm").css("height");
 		confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30+30;
-		$("#user_info h3").animate({"marginTop": confirmheight},{duration:500, complete:function(){
-			$("#user_info h3").css("marginTop", 30);
+		$("#info h3").animate({"marginTop": confirmheight},{duration:500, complete:function(){
+			$("#info h3").css("marginTop", 30);
 			$("#confirm").fadeIn(500);
 		}});
 	}
@@ -147,7 +147,7 @@ function selectedUserAction(event){
 function confirmedClick(event){
 	var target = $(event.target);
 	if(target.attr("id") == "confirm_yes"){
-		var option = $("#user_info select option:selected").val();
+		var option = $("#info select option:selected").val();
 		var mails = $("#confirm_text li");
 		for(var i = 0; i<mails.length; i++){
 			var val = $(mails[i]).text();
@@ -157,7 +157,7 @@ function confirmedClick(event){
 			});			
 		}
 		$("#usertable tr").not("#usertable tr:first").remove();
-		$("#user_info table").empty();
+		$("#info table").empty();
 		
 		if($.address.parameterNames.length > 0)
 			$.address.value("user");
@@ -172,10 +172,10 @@ function confirmedClick(event){
 	var confirmheight = $("#confirm").css("height");
 	confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30;
 	$("#confirm").fadeOut(500, function(){
-		$("#user_info h3").css("marginTop", confirmheight+30);
-		$("#user_info h3").animate({"marginTop": 30},{duration:500});
+		$("#info h3").css("marginTop", confirmheight+30);
+		$("#info h3").animate({"marginTop": 30},{duration:500});
 	});
 	
-	$("#user_info select option:selected").removeAttr("selected");
-	$("#user_info select option:first").attr("selected", "selected");
+	$("#info select option:selected").removeAttr("selected");
+	$("#info select option:first").attr("selected", "selected");
 }

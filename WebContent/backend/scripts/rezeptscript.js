@@ -7,17 +7,33 @@ function loadRezTable(){
 		dataType: "json",
 		async:false,
 		success:function(json){
+			var rezeptcounter = 0;
+			var inactivecounter = 0;
+			
 				for(var i in json){
-					var htmlstring = "<li><div class=\"rezept_name";
-					if(json[i].active_id == "-1")
+					rezeptcounter++;
+					var htmlstring = "<li>";
+					
+					
+					htmlstring += "<div class=\"rezept_name";
+					if(json[i].active_id == "-1"){
+						inactivecounter++;
 						htmlstring += " inactive";
+					}
 					
 					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
 					
-					htmlstring += "\">"+json[i].name+"</div><div class=\"rezept_date\">"+eingefuegt+"</div>" +
+					htmlstring += "\">"+json[i].name+"</div>";
+					
+					if(Number(json[i].admin_viewed) == 0)
+						htmlstring += "<div class=\"new\">*Neu*</div>";
+					
+					htmlstring += "<div class=\"rezept_date\">"+eingefuegt+"</div>" +
 							"<div class=\"rezept_viewed\">"+json[i].viewed+" views</div><div class=\"rezept_schmeckt\">"+json[i].schmeckt+" schmeckt</div></li>";
 					$("#rezeptelist").append(htmlstring);					
 				}
+				$("#info table").append("<tr><td>Rezepte gesamt:</td><td>"+rezeptcounter+"</td></tr>");
+				$("#info table").append("<tr><td>Inaktive Rezepte:</td><td>"+inactivecounter+"</td></tr>");	
 			}
 		});
 	$("#rezeptelist .rezept_name").click(clickRezept);
