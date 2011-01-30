@@ -85,3 +85,18 @@ function addTag(tag){
 function removeTagfromSession(tag){
 	removefromSession("tag="+tag);
 }
+
+function loadFamousTags(tags){
+	for(tag in tags){
+		$("#famous_tags_cloud").append("<span><span>"+tag+"</span></span> ");
+		$("#famous_tags_cloud span span").last().css({"font-size":Math.round(tags[tag]*7),
+				"opacity": tags[tag]/3
+		});
+	}
+	$("#famous_tags span span").click(clickFamousTag);
+}
+
+function clickFamousTag(event){
+	var text = $(event.target).text();
+	saveTag(text);
+}

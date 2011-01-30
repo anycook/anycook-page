@@ -12,28 +12,15 @@ function loadHome(json)
 	cutSmallFrameText($("#tagesrezept_inhalt"));
 	$("#tagesrezept_inhalt").attr("href", "#/recipe/"+json.name);
 	
-	var tags = null;
 	$.ajax({
 		  url: "/anycook/GetPopularTags",
 		  dataType: 'json',
 		  data: "num=14",
-		  async:false,
-		  success: function(response){
-				if(response != "false")
-					tags=response;
-	}
+		  success: loadFamousTags
 		});
 	
-	for(tag in tags){
-		$("#famous_tags_cloud").append("<span><span>"+tag+"</span></span> ");
-		$("#famous_tags_cloud span span").last().css({"font-size":Math.round(tags[tag]*7),
-				"opacity": tags[tag]/3
-		});
-	}
-	$("#famous_tags span span").click(function(event){
-		var text = $(event.target).text();
-		saveTag(text);
-	});
+	
+	
 	
 	
 	//liveupdatestuff
