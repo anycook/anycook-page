@@ -7,7 +7,7 @@
     </template>
     <template id="rezepte">
     <ul id="rezeptelist"></ul>
-    <div id="info"><h3>Statistik</h3><table></table></div>
+    <div id="info"><h3>Statistik</h3><table></table><div id="new_index">Index neu generieren</div></div>
     </template>
     <template id="user">
     	<table id="usertable" class="backendtable"><tr><th><input type="checkbox" value="all"/></th><th>Username</th><th>Mail</th><th>Registrierung</th><th>last login</th><th>facebook id</th><th>Userlevel</th><th>Rezepte</th></tr></table>

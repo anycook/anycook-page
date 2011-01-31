@@ -1,6 +1,8 @@
 function loadRezTable(){
 	$(".activate").die("click", clickActivate);
 	$(".deactivate").die("click", clickDeactivate);
+	$("#new_index").unbind("click", makeNewIndex);
+	
 	$("#rezeptelist").empty();
 	$.ajax({
 		url:"/anycook/GetRezeptValues",
@@ -39,6 +41,8 @@ function loadRezTable(){
 	$("#rezeptelist .rezept_name").click(clickRezept);
 	$(".activate").live("click", clickActivate);
 	$(".deactivate").live("click", clickDeactivate);
+	
+	$("#new_index").click(makeNewIndex);
 }
 
 function clickRezept(event){
@@ -113,5 +117,11 @@ function activateVersion(gericht, id){
 		success:function(){
 			loadRezTable();
 		}
+	});
+}
+
+function makeNewIndex(){
+	$.ajax({
+		url:"/anycook/MakeNewIndex"
 	});
 }
