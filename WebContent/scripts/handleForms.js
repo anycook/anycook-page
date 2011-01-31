@@ -1,5 +1,6 @@
 function loadContact(){
-	loadCaptcha();
+	if(logindata == null)
+		loadCaptcha();
 	$("#SendButton").click(sendForm);
 	$("#contactform").submit(sendForm);
 }
@@ -13,6 +14,7 @@ function loadCaptcha(){
 		    }
 		  );
 }
+
 function sendForm(){
 	var response = $("#recaptcha_response_field").val();
 	var challenge = $("#recaptcha_challenge_field").val();
