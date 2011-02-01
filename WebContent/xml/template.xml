@@ -251,19 +251,19 @@
 						<table>
 						<tr>
 							<td class="formdescription">
-								Name:
+								<div id="formDescriptionName">Name:</div>
+								<div id="formDescriptionSender">Absender:</div>
 							</td>
 							<td class="forminput">
 								<div id="conname_login"></div>
 								<input type="text" id="conname" />
 							</td>
 						</tr>
-						<tr>
+						<tr id="formDescriptionEmail">
 							<td class="formdescription">
-								E-Mail:
+								<div >E-Mail:</div>
 							</td>
 							<td class="forminput">
-								<div id="conemail_login"></div>
 								<input type="text" id="conemail" />
 							</td>
 						</tr>
@@ -289,9 +289,15 @@
 							<div id="recaptcha_div"></div>
 						</td>
 						</tr>
+						<tr>
+						<td class="formdescription"></td>
+						<td class="forminput" id="fromSendCell">
+							<div id="SendButton">Senden</div>
+						</td>
+						</tr>
 						
 						</table>
-						<div id="SendButton">Senden</div>
+						
 						</form>
 					</div>
 				

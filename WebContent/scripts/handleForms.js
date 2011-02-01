@@ -2,13 +2,14 @@ function loadContact(){
 	if(logindata == null&&!loginChecker()){
 		loadCaptcha();
 		$("#conname_login").hide();
-		$("#conemail_login").hide();
+		$("#formDescriptionSender").hide();
 	}
 	else{
 		$("#conname").hide();
 		$("#conemail").hide();
+		$("#formDescriptionName").hide();
+		$("#formDescriptionEmail").hide();
 		$("#conname_login").show();
-		$("#conemail_login").show();
 		fillLoginFields();
 	}
 	$("#SendButton").click(sendForm);
@@ -25,6 +26,15 @@ function loadCaptcha(){
 		  );
 }
 
+function clearLoginField(){
+	$("#conname_login").hide();
+	$("#formDescriptionSender").hide();
+	$("#conname").show();
+	$("#conemail").show();
+	$("#formDescriptionName").show();
+	$("#formDescriptionEmail").show();
+}
+
 function fillLoginFields(){
 	var nameString = "<div id='formUserPicture'><img src='"+logindata.image+"'></div>" +
 			"<div id='absInfo'>"+
@@ -34,6 +44,14 @@ function fillLoginFields(){
 	$("#conname_login").html(nameString);
 	$("#conname").val(logindata.nickname);
 	$("#conemail").val(logindata.email);
+	$("#formDeleteBtn").click(clearLoginField);
+	$("#formDeleteBtn").hide();
+	$("#conname_login").mouseenter(toggleDeleteBtn);
+	$("#conname_login").mouseleave(toggleDeleteBtn);
+}
+
+function toggleDeleteBtn(){
+	$("#formDeleteBtn").fadeToggle(300);
 }
 
 function sendForm(){
