@@ -76,7 +76,7 @@ td.formvalue{
  }
  
  #recaptcha_div{
- 	/*float: right;*/
+ 	margin-left:-9px;
  }
  
  .recaptcha_image_cell{
@@ -135,7 +135,12 @@ td.formvalue{
  }
  
  #SendButton{
+ 	cursor: pointer;
  	float:right;
+ 	vertical-align: center;
+ 	horizontal-align: center;
+ 	padding:4px 0 0 20px;
+ 	margin-right: -15px;
  	width:101px;
  	height:33px;
  	background: url("/img/send_btn.png") no-repeat;
@@ -145,7 +150,7 @@ td.formvalue{
  }
  
  #fromSendCell{
- 	float:
+ 	float:right;
  }
  
  #SendButton:hover{
@@ -154,3 +159,11 @@ td.formvalue{
  	background: url("/img/send_btn_over.png") no-repeat;
 
  }
+ 
+ #fromResponseField{
+ 	color: #5a5a5a;
+	background-color: #ecc3c3;
+	font-size: 10;
+	font-weight: bold;
+ }
+ 

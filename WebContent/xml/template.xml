@@ -288,6 +288,7 @@
 						<td class="formdescription"></td>
 						<td class="forminput">
 							<div id="recaptcha_div"></div>
+							<div id='fromResponseField'></div>
 						</td>
 						</tr>
 						<tr>

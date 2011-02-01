@@ -21,9 +21,17 @@ function loadCaptcha(){
 		    "recaptcha_div",
 		    {
 		      theme: "clean",
-		      callback: Recaptcha.focus_response_field
+		      lang: "de"
 		    }
 		  );
+	/*var RecaptchaOptions = {
+		    theme : 'custom',
+		    custom_theme_widget: 'recaptcha_div'
+		 };
+	
+	var RecaptchaString = "<div id='recaptcha_image'></div>" +
+			"<div class='recaptcha_only_if_incorrect_sol'>Bot?!?</div> " +
+			"<input type='text' id='recaptcha_response_field' name='recaptcha_response_field' />"; */
 }
 
 function clearLoginField(){
@@ -67,13 +75,29 @@ function sendForm(){
 		data:"challenge="+challenge+"&response="+response+"&name="+name+"&email="+email+"&message="+message+"&subject="+subject,
 		success:function(response){
 			if(response=="true"){
-				alert("message send!");
+				formShowSuccess();
 			}
 			else{
-				alert("message not send!");
+				formShowFail();
 			}
 	}
 	});
 	
 	return false;
+}
+
+function formShowSuccess(){
+	$("#content_main > *").fadeOut(400, function(){
+		$("#content_main").contents().empty();
+		$("#content_main").append("<div id='new_recipe_ready' class='content_message'><h5>Danke!</h5><p>" +
+		"Deine Nachricht wurde an uns gesendet.<br /> Wir benachrichtigen dich!</p></div>");
+	});
+	
+}
+
+function formShowFail(){
+	Recaptcha.reload();
+	$("#fromResponseField").empty();
+	$("#fromResponseField").append("CAPTCHA bitte richtig eingeben! Oder bist du ein Bot?");
+	
 }
