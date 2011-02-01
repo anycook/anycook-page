@@ -98,7 +98,7 @@
 	            $("#search").keydown(function (event) {
 					  if (event.keyCode == 13){
 						  $("ul.ui-autocomplete").hide();
-						  $("#search_form").submit();
+						  //$("#search_form").submit();
 					  }
 						  
 				});

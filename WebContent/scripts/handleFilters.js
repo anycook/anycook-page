@@ -34,6 +34,12 @@ function setFiltersfromSession(){
 			for(num in json.tags)
 				$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+json.tags[num]+"</div><div class='tag_remove'>x</div></div>");
 			
+			if(json.terms!=undefined){
+				$("#search_terms").show();
+				for(i in json.terms)
+					addTerms(json.terms[i], false);
+			}
+			
 
 			
 	},

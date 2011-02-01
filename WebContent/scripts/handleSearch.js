@@ -69,8 +69,38 @@ function handleSearchResults(result, terms){
 			saveTag(result.tags[0]);
 		
 	}else{
-		addtoSession("query="+terms);
+		addTerms(terms, true);
+	}
+	return false;
+	
+}
 
+function addTerms(terms, send){
+	if($(".search_term").length == 0){ 
+		$("#search_terms").show();
+		$(".close_term").live("click", removeTerm);
+	}
+	
+	var split = terms.split(" ");
+	for(var i in split){
+		$("#search_terms").append("<div class=\"search_term\"><span>"+split[i]+"</span><div class=\"close_term\">x</div></div>");
+	}
+	if(send){
+		addtoSession("query="+terms);
+		$("#search").val("");
+		$("#search").focus();
+	}
+}
+
+function removeTerm(event){
+	var target = $(event.target);
+	var term = target.prev().text();
+	removefromSession("term="+term);
+	
+	target.parent().remove();
+	if($(".search_term").length == 0){ 
+		$("#search_terms").hide();
+		$(".close_term").die("click", removeTerm);
 	}
 	
 }

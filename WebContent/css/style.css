@@ -1007,7 +1007,7 @@ ul.kategorie_filter li:HOVER{
 /*----*/
 
 #result_container{
-	float:left;
+	clear: both;
 	
 }
 
@@ -1098,9 +1098,35 @@ ul.kategorie_filter li:HOVER{
 /*---------- verwendete suchbegriffe-------- */
 
 #search_terms{
-	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
-	
+	margin-left:5px;
+	display:none;
+}
+#terms_text{
+	float:left;
+}
+
+.search_term{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	float:left;
+	color:#5a5a5a;
+	background:#e0eecb;
+	padding:0 4px 1px 4px;
+	margin-left:5px;
+	margin-bottom:4px;
+	border: 1pt solid #b5b5b5;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	line-height: 12pt;
+}
+
+.close_term{
+	float:right;
+	margin-left: 2px;
+	color:#7a7a7a;
+	cursor: pointer;	
 }
 
 /*-------Rezept------*/
