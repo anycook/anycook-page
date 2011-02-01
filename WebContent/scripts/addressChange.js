@@ -2,7 +2,6 @@ function loadHome(json)
 {
 	var headertext = "<div id='home_button' class='small_button'><div></div></div><div id='discover_button' class='big_button'>Entdecken</div>";
 	$("#content_header").html(headertext);
-	$("#home_button").addClass("on");
 	$("#home_button").click(function(event){$.address.parameter("page", "");});
 	$("#discover_button").click(function(event){$.address.parameter("page", "discover");});
 	
@@ -171,6 +170,7 @@ function handleChange(event){
 			$.ajax({
 	  		  url: "/anycook/LoadRecipeforSmallView",
 	  		  dataType: 'json',
+	  		  async:false,
 	  		  success: loadHome
 			});
 			break;
