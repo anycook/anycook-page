@@ -254,7 +254,7 @@
 								Name:
 							</td>
 							<td class="forminput">
-								
+								<div id="conname_login"></div>
 								<input type="text" id="conname" />
 							</td>
 						</tr>
@@ -263,6 +263,7 @@
 								E-Mail:
 							</td>
 							<td class="forminput">
+								<div id="conemail_login"></div>
 								<input type="text" id="conemail" />
 							</td>
 						</tr>

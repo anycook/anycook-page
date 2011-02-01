@@ -82,4 +82,41 @@ td.formvalue{
  	margin-left:-7px;
  }
  
+ #formUserPicture{
+ 	float:left;
+ 	height:56px;
+ 	width:56px;
+ 	padding:3px;
+ }
+ 
+ #formUserName{
+ 	float:left;
+ 	width:200px;
+ 	font-size:10pt;
+ }
+ 
+ #formUserEmail{
+ 	float:left;
+ 	width:200px;
+ }
+ 
+ #conname_login{
+ 	color: #5a5a5a;
+ 	background-color: #ece9e3;
+ 	height: 56px;
+ 	width: 307px;
+ 	border: 1px solid #979694; /*d1cec9*/
+	outline: none; /*Remove Chrome and Safari glows on focus*/
+	resize: none;
+ }
+ 
+ #formDeleteBtn{
+ 	float:right;
+	height:9px;
+	width:8px;
+	padding:5px;
+	margin-right:12px;
+	margin-top:3px;
+	background: url("/img/delete_filter_on.png") no-repeat;
+ }
 	
