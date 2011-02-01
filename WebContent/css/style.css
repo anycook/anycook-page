@@ -1006,6 +1006,11 @@ ul.kategorie_filter li:HOVER{
 }
 /*----*/
 
+#result_container{
+	float:left;
+	
+}
+
 .frame_big{
 	float: left;
 	border-top: 1pt solid #b5b5b5;
@@ -1088,6 +1093,16 @@ ul.kategorie_filter li:HOVER{
 	background: url("/icons/heart.png") no-repeat;
 
 }
+
+
+/*---------- verwendete suchbegriffe-------- */
+
+#search_terms{
+	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
+	
+}
+
 /*-------Rezept------*/
 .float_right_header{
 	float: right;

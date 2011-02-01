@@ -1,35 +1,27 @@
 function fullTextSearch(){
 	
-	var terms = "";
-	var pathNames = $.address.pathNames();
-	if(pathNames.length > 1)
-		terms = pathNames[1]; 
-	$("#content_main").children().remove();
+	$("#result_container").empty();
 	$.ajax({
 		  url: "/anycook/FullTextSearch",
 		  dataType: 'json',
 		  async:false,
-		  data: "q="+terms,
 		  success: function(json){
 			if(json==null)
 				$.address.path("");
 			else{
 				if(json.length>0){					
 					for(var i = json.length-1; i>=0; i--){
-						$("#content_main").append(getBigFrameText(json[i]));						
+						$("#result_container").append(getBigFrameText(json[i]));						
 					}
-					$("#content_main").append("<div id='result_end'></div>");
+					$("#result_container").append("<div id='result_end'></div>");
 				}
 				else
-					$("#content_main").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
+					$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
 					
 	  		}
 			
 		  }
 		});
-	if(terms!= ""){
-		$("#search").val(terms);
-	}
 }
 
 
@@ -44,11 +36,9 @@ function makeSearchHeader(){
 
 
 function handleSearchResults(result, terms){
-	if($.address.pathNames()[0] != "search")
-		return;
 	
 	if(terms == "Gerichte, Zutaten, Tags, ...")
-		terms="";
+		return;
 	
 	var length =0;
 	if(result.gerichte!=null)
@@ -79,7 +69,7 @@ function handleSearchResults(result, terms){
 			saveTag(result.tags[0]);
 		
 	}else{
-		$.address.path("search/"+terms);
+		addtoSession("query="+terms);
 
 	}
 	
