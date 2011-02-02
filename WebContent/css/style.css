@@ -1101,10 +1101,12 @@ ul.kategorie_filter li:HOVER{
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	margin-left:5px;
-	display:none;
+	height:22px;
 }
 #terms_text{
+	padding-top:1px;
 	float:left;
+	display:none;
 }
 
 .search_term{

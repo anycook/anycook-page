@@ -77,13 +77,17 @@ function handleSearchResults(result, terms){
 
 function addTerms(terms, send){
 	if($(".search_term").length == 0){ 
-		$("#search_terms").show();
+		$("#terms_text").show();
 		$(".close_term").live("click", removeTerm);
+		searchterms = new Object();
 	}
 	
 	var split = terms.split(" ");
 	for(var i in split){
-		$("#search_terms").append("<div class=\"search_term\"><span>"+split[i]+"</span><div class=\"close_term\">x</div></div>");
+		if(searchterms[split[i]]==undefined || searchterms[split[i]]==false){
+			$("#search_terms").append("<div class=\"search_term\"><span>"+split[i]+"</span><div class=\"close_term\">x</div></div>");
+			searchterms[split[i]] = true;
+		}
 	}
 	if(send){
 		addtoSession("query="+terms);
@@ -96,10 +100,10 @@ function removeTerm(event){
 	var target = $(event.target);
 	var term = target.prev().text();
 	removefromSession("term="+term);
-	
+	searchterms[term]=false;
 	target.parent().remove();
 	if($(".search_term").length == 0){ 
-		$("#search_terms").hide();
+		$("#terms_text").hide();
 		$(".close_term").die("click", removeTerm);
 	}
 	
@@ -174,3 +178,5 @@ function checkTextSearch(){
 	else
 		return false;
 }
+
+var searchterms = null;
