@@ -73,6 +73,9 @@ body{
 	width: 233px;*/
 	
 }
+#logo img{
+	border:0;
+}
 
 #searchbar{
 	float: left;

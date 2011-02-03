@@ -44,7 +44,8 @@ function loadNewRecipe(){
 				$("#nr_general_btn").addClass("on");
 				$("#filter_main").after("<div id='progress_1'><div id='nr_name'>Rezeptname</div><div id='nr_kategorie'>Keine Kategorie</div><div id='nr_upload'>Bildupload:</div><div id='upload'><div id='progressborder'><div id='progress'><div id='progress_percent'></div></div></div></div></div>");
 				$("#progress_1 > *").animate({"opacity":.0}, 0);
-				$("#filter_main").animate({height:0, paddingBottom:0},1000).contents().animate({"opacity":0}, {duration:1000, complete:function(){
+				$("#filter_main").animate({height:0, paddingBottom:0},1000);
+				$("#filter_main").contents().animate({"opacity":0}, {duration:1000, complete:function(){
 					$("#filter_main").hide();
 					$("#progress_1 > *").animate({"opacity":1}, 500);
 					$("#filter_main > *").hide();
