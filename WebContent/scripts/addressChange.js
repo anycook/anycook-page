@@ -185,7 +185,7 @@ function handleChange(event){
 			else if(path[0] == "profile"){
 				loadUserProfile();
 			}
-			else if(path[0]=="kontakt"){
+			else if(path[0]=="feedback"){
 				loadContact();
 			}
 			break;

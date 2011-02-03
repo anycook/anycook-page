@@ -244,9 +244,9 @@
 			<template id="activate">
 				<div id='new_activation' class="content_message"><h5></h5><p></p></div>
 			</template>
-			<template id="kontakt">
+			<template id="feedback">
 				<div id='kontakt' class="footerpages">
-					<h1>Kontakt</h1>
+					<h1>Feedback</h1>
 						<form id='contactform'>
 						
 						<table>
