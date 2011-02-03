@@ -304,6 +304,9 @@
 					</div>
 				
 			</template>
+			<template id="about_us">
+			
+			</template>
 			<template id="profile">
 				<h1>Userprofil</h1>
 			</template>
