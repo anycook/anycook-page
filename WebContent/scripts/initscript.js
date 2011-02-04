@@ -120,15 +120,10 @@
             	});
 				$("#search_reset").click(function(){
 					var val = $("#search").val();
-					if(val!="" && val != "Gerichte, Zutaten, Tags, ..."){
-						$("#search").val("");
-						$.address.path("search");
-					}else{
-						if($.address.pathNames().length > 0)
-							$.address.path("");
-						else
-							resetAll();
-					}
+					if($.address.pathNames().length > 0)
+						$.address.path("");
+					else
+						resetAll();
 				});
 				
 				$("#filter_reset").click(function(){history.back();});
