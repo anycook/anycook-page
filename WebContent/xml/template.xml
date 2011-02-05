@@ -273,7 +273,21 @@
 								Betreff:
 							</td>
 							<td class="forminput">
-								<input type="text" id="conbetreff" />
+								<div id="formSubjectField">
+								<div id="formSubjectFieldFilter">
+									<div id="formSubjectFieldName">Thema wählen</div>
+									<div id="formSubjectFieldMore"></div>
+								</div>
+								<ul id="formSubjectChoice">
+									<li>Ich will meine Meinung loswerden</li>
+									<li>Ich habe einen Fehler gefunden!</li>									
+									<li>Ich habe ein Problem mit der Anmeldung</li>
+									<li>Ich habe ein Problem mit einem Rezept</li>
+									<li>Ich habe ein Problem mit einem User</li>
+									<li>Ich wollt euch einfach mal schreiben</li>
+								</ul>
+								<input type="hidden" id="conbetreff" value="Kein Betreff" />
+								</div>
 							</td>
 						</tr>
 						<tr>

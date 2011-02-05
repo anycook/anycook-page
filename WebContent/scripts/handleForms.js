@@ -12,9 +12,47 @@ function loadContact(){
 		$("#conname_login").show();
 		fillLoginFields();
 	}
+	
+	$("#formSubjectFieldFilter").click(showSubjects);
 	$("#SendButton").click(sendForm);
 	$("#contactform").submit(sendForm);
 }
+
+
+function showSubjects(){
+	$("#formSubjectChoice").toggle();
+	$("#formSubjectChoice").toggleClass("on");
+	if($("#formSubjectChoice").hasClass("on")){
+		$("#formSubjectChoice li").mouseenter(subjectOver).click(subjectClick);
+		$(document).click(subjectClose);
+	}
+	else{
+		$("#formSubjectChoice li").unbind("mouseenter", subjectOver).unbind("click", subjectClick);
+		$(document).unbind("click", subjectClose);
+	}
+	return false;
+}
+
+function subjectOver(event){
+	$("#formSubjectFieldName").empty();
+	var target = $(event.target);	
+	var text = target.text();
+	$("#formSubjectFieldName").append(text);
+}
+
+function subjectClose(){
+	$("#formSubjectChoice").hide();
+	$("#formSubjectChoice").removeClass("on");
+}
+
+
+function subjectClick(event){
+	var target = $(event.target);	
+	var text = target.text();
+	$("#conbetreff").val(text);
+	$("#formSubjectChoice").toggle();
+	$("#formSubjectChoice").toggleClass("on");
+} 
 
 function loadCaptcha(){
 	Recaptcha.create("6Ldg7sASAAAAAOz6GnBiyL-LowhB_6PXF4pPQTb8",
@@ -91,6 +129,8 @@ function formShowSuccess(){
 		$("#content_main").contents().empty();
 		$("#content_main").append("<div id='new_recipe_ready' class='content_message'><h5>Danke!</h5><p>" +
 		"Deine Nachricht wurde an uns gesendet.<br /> Wir benachrichtigen dich!</p></div>");
+		$("#content").click(readyClick);
+		window.setTimeout(readyClick, 4000);
 	});
 	
 }
@@ -98,6 +138,6 @@ function formShowSuccess(){
 function formShowFail(){
 	Recaptcha.reload();
 	$("#fromResponseField").empty();
-	$("#fromResponseField").append("CAPTCHA bitte richtig eingeben! Oder bist du ein Bot?");
-	
+	$("#fromResponseField").append("CAPTCHA bitte richtig eingeben! Oder bist du ein Bot?");	
 }
+

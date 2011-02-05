@@ -186,3 +186,68 @@ td.formvalue{
 	font-weight: bold;
  }
  
+ #formSubjectField{
+ 	background-color: #ece9e3;
+	width:307px;
+	margin: 0;
+	border: 1pt solid #979694;
+ }
+ 
+ #formSubjectFieldFilter{
+ 	background-color: #ece9e3;
+ 	width:307px;;
+ 	height: 28px;
+ 	cursor: pointer;
+ }
+ 
+ #formSubjectFieldName{
+ 	float: left;
+	width: 270px;
+	height: 28px;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #5a5a5a;
+	text-align: inherit;
+	padding: 5px 0 0 5px;
+ }
+ 
+ #formSubjectFieldMore{
+ 	float: right;
+	width: 28px;
+	height: 28px;
+	background: url("/img/arrow_down.png") no-repeat;
+	
+ }
+ 
+ ul#formSubjectChoice{
+ 	margin:1px 0 0 -1px;
+ 	display:none;
+ 	position: absolute;
+	width: 307px;
+	background-color: #ece9e3;
+	border: 1pt solid #93948d;
+	border-top: none;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	text-align: left;
+	color: #5a5a5a;
+	list-style:  none;
+	letter-spacing: 0.8pt;
+	line-height: 17.5pt;
+	cursor: pointer;
+	/* Gecko-based, Mozilla */
+	-moz-user-select:none;
+	/* Safari */
+	-khtml-user-select: none;	
+	overflow: hidden;
+	z-index: 99999;
+ }
+ 
+ #formSubjectChoice li{
+	border-bottom: 1pt solid #d1cfca;
+	padding-left: 7px;
+	margin: 0;
+}
+
+#formSubjectChoice li:HOVER{
+	background-color: #f7f4f1;
+}
+ 
