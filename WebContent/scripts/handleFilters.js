@@ -51,7 +51,8 @@ function setFiltersfromSession(){
 
 function resetFilter(){
 	$("#progress_1, #progress_2, #progress_3, #progress_4").remove();
-	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"}).children().not("ul.kategorie_filter").show().css("opacity", 1);
+	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
+	$("#filter_main *").not("ul.kategorie_filter").show().css("opacity", 1);
 	$("#filter_headline").text("Filter");
 	$("#time_std, #time_min").val("00");
 	$("#time_std, #time_min").removeAttr("readonly");
