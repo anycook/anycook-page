@@ -68,7 +68,7 @@ function handleSearchResults(result, terms){
 		if(result.tags!=null)
 			saveTag(result.tags[0]);
 		
-	}else{
+	}else if(terms!= ""){
 		addTerms(terms, true);
 	}
 	return false;
@@ -84,9 +84,11 @@ function addTerms(terms, send){
 	
 	var split = terms.split(" ");
 	for(var i in split){
-		if(searchterms[split[i]]==undefined || searchterms[split[i]]==false){
-			$("#search_terms").append("<div class=\"search_term\"><span>"+split[i]+"</span><div class=\"close_term\">x</div></div>");
-			searchterms[split[i]] = true;
+		if(split[i]!= ""){
+			if(searchterms[split[i]]==undefined || searchterms[split[i]]==false){
+				$("#search_terms").append("<div class=\"search_term\"><span>"+split[i]+"</span><div class=\"close_term\">x</div></div>");
+				searchterms[split[i]] = true;
+			}
 		}
 	}
 	if(send){

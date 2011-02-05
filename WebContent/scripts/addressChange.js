@@ -1,3 +1,5 @@
+
+
 function loadHome(json)
 {
 	var headertext = "<div id='home_button' class='small_button'><div></div></div><div id='discover_button' class='big_button'>Entdecken</div>";
@@ -364,5 +366,10 @@ function clearSession(){
 	  	  url: "/anycook/ClearSession"
 	      });
 }
+
+function checkBrowser(){
+	return navigator.appName;
+}
+
 var lastPath="";
 $.address.change(handleChange);

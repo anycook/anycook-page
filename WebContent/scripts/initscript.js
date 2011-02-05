@@ -1,4 +1,8 @@
- $(document).ready(function(){   
+ $(document).ready(function(){
+	 if(checkBrowser() == "Microsoft Internet Explorer")
+		 document.location.href="http://anycook.de/not-supported.html";
+	 
+	 
         	$.ajaxSetup({
             	type:"POST", 
                 scriptCharset: "utf8" , 
