@@ -4,6 +4,7 @@ function loadRezTable(){
 	$("#new_index").unbind("click", makeNewIndex);
 	
 	$("#rezeptelist").empty();
+	$("#info table").empty();
 	$.ajax({
 		url:"/anycook/GetRezeptValues",
 		dataType: "json",
@@ -31,7 +32,7 @@ function loadRezTable(){
 						htmlstring += "<div class=\"new\">*Neu*</div>";
 					
 					htmlstring += "<div class=\"rezept_date\">"+eingefuegt+"</div>" +
-							"<div class=\"rezept_viewed\">"+json[i].viewed+" views</div><div class=\"rezept_schmeckt\">"+json[i].schmeckt+" schmeckt</div></li>";
+							"<div class=\"rezept_viewed\">"+json[i].viewed+" views</div><div class=\"rezept_schmeckt\">"+json[i].schmeckt+" schmeckt</div><div class=\"rezept_delete\">löschen</div></li>";
 					$("#rezeptelist").append(htmlstring);					
 				}
 				$("#info table").append("<tr><td>Rezepte gesamt:</td><td>"+rezeptcounter+"</td></tr>");
@@ -41,6 +42,7 @@ function loadRezTable(){
 	$("#rezeptelist .rezept_name").click(clickRezept);
 	$(".activate").live("click", clickActivate);
 	$(".deactivate").live("click", clickDeactivate);
+	$(".rezept_delete").click(clickDeleteRecipe);
 	
 	$("#new_index").click(makeNewIndex);
 }
@@ -85,6 +87,42 @@ function clickRezept(event){
 		li.removeClass("open");
 		li.children(".versiontable").remove();
 	}
+}
+
+function clickDeleteRecipe(event){
+	var target = $(event.target);
+	var name = $(target.prevAll(".rezept_name")[0]).text();
+	
+	$("#selected_recipe").text(name);
+	if($("#confirm").css("display")=="none"){		
+		var confirmheight = $("#confirm").css("height");
+		confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30+30;
+		$("#info h3").animate({"marginTop": confirmheight},{duration:500, complete:function(){
+			$("#info h3").css("marginTop", 30);
+			$("#confirm").fadeIn(500);
+		}});
+		$("#confirm_yes, #confirm_no").click(rezeptConfirmedClick);
+	}
+}
+
+function rezeptConfirmedClick(event){
+	var target = $(event.target);
+	if(target.attr("id")== "confirm_yes"){
+		var recipe = $("#selected_recipe").text();
+		$.ajax({
+			url:"/anycook/EditRecipe",
+			data:"todo=delete&recipe="+recipe
+		});
+		loadRezTable();
+	}
+	
+	var confirmheight = $("#confirm").css("height");
+	confirmheight = Number(confirmheight.substring(0, confirmheight.length-2))+30;
+	$("#confirm").fadeOut(500, function(){
+		$("#info h3").css("marginTop", confirmheight+30);
+		$("#info h3").animate({"marginTop": 30},{duration:500});
+	});
+	$("#confirm_yes, #confirm_no").unbind("click", rezeptConfirmedClick);
 }
 
 function updateActionBtnState(){

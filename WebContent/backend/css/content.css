@@ -95,9 +95,19 @@ body{
 	text-align:right;
 }
 
-#rezeptelist .rezept_viewed, #rezeptelist .rezept_schmeckt{
+#rezeptelist .rezept_viewed, #rezeptelist .rezept_schmeckt, #rezeptelist .rezept_delete{
 	width:90px;
 	text-align: right;
+}
+
+#rezeptelist .rezept_delete{
+	width:60px;
+	color:red;
+	cursor: pointer;
+}
+
+#rezeptelist .rezept_delete:hover{
+	text-decoration:underline;
 }
 
 .versiontable{
@@ -241,6 +251,10 @@ body{
 }
 .confirm_buttons:hover{
 	text-decoration: underline;
+}
+
+#selected_recipe{
+	font-weight:bold;
 }
 
 /*----footer-----*/
