@@ -149,6 +149,17 @@ body{
 	text-decoration: underline;
 }
 
+/* zutaten */
+#zutatenlist{
+	margin:30px 0 15px 15px;
+	padding:0px;
+	
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	list-style-type: none;
+	float:left;
+	width:800px;
+}
+
 /* user */
 #usertable td{	
 	border: 1px solid #aaaaaa;

@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <template id="home">
-    <div id="new_events"></div>
-    <div id="home_content"></div>
-    <div id="statistics"></div>
+    	<div id="new_events"></div>
+    	<div id="home_content"></div>
+    	<div id="statistics"></div>
     </template>
-    <template id="rezepte">
-    <ul id="rezeptelist"></ul>
     
-    <div id="info">
-    <div id="confirm"><div id="confirm_text">Möchtest du wirklich das Rezept "<span id="selected_recipe"></span>" löschen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
-    <h3>Statistik</h3><table></table><div id="new_index">Index neu generieren</div></div>
+    <template id="rezepte">
+    	<ul id="rezeptelist"></ul>    
+    	<div id="info">
+   		<div id="confirm"><div id="confirm_text">Möchtest du wirklich das Rezept "<span id="selected_recipe"></span>" löschen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
+    	<h3>Statistik</h3><table></table><div id="new_index">Index neu generieren</div></div>
     </template>
+    
+    <template id="zutaten">
+    	<ul id="zutatenlist"></ul>
+    	<div id="info">
+   		<div id="confirm"><div id="confirm_text">Möchtest du wirklich die Zutat "<span id="selected_zutat"></span>" löschen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
+    	<h3>Statistik</h3><table></table></div>
+    </template>
+    
     <template id="user">
     	<table id="usertable" class="backendtable"><tr><th><input type="checkbox" value="all"/></th><th>Username</th><th>Mail</th><th>Registrierung</th><th>last login</th><th>facebook id</th><th>Userlevel</th><th>Rezepte</th></tr></table>
     	<div id="info">
     		<p>markierte User: <br /><select size="1"><option>in Ruhe lassen</option><option>aktivieren</option><option>deaktivieren</option><option>löschen</option><option>zu Mitgliedern</option><option>zu Moderatoren</option><option>zu Administratoren</option></select></p>
     		<div id="confirm"><div id="confirm_text">Aktion wirklich für diese User durchführen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
-    		<h3>Statistik</h3><table></table></div>
+    		<h3>Statistik</h3><table></table>
+    	</div>
     </template>
+    
 </templates>

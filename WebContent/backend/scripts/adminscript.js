@@ -44,11 +44,11 @@ function changePage(event){
 	if(sitename == "home"){
 		$("#home_button").addClass("on");
 	}
-	if(sitename == "rezepte"){
+	else if(sitename == "rezepte"){
 		$("#rezepte").addClass("on");
 		loadRezTable();
 	}
-	if(sitename == "user"){
+	else if(sitename == "user"){
 		if(sitename != lastPage){
 			$("#usertable th").click(orderUserTable);
 			$(".confirm_buttons").click(confirmedClick);
@@ -77,7 +77,15 @@ function changePage(event){
 		}
 		
 		
+	}else if(sitename == "zutaten"){
+		$("#zutaten").addClass("on");
+		$.ajax({
+			url:"/anycook/GetZutaten",
+			dataType:"json",
+			success:loadZutaten
+		});
 	}
+	
 	lastPage = sitename;
 }
 
