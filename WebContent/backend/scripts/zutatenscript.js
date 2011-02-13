@@ -16,8 +16,8 @@ function loadZutaten(json){
 		if(childs>0)
 			htmlstring+="<div class=\"zutatenopen\"></div>";
 		
-		htmlstring += "<div class=\"zutatenname\">"+json[i].name+"</div><div class=\"zutatenstem\">Stem: "+stem+"</div><div class=\"zutatengerichte\">Count: "+
-		json[i].gerichte+"</div><div class=\"setparent\">set parent</div></li>";
+		htmlstring += "<div class=\"zutatenname\">"+json[i].name+"</div><div class=\"zutatenstem\">Stem: "+stem+"</div><div class=\"zutatengerichte\">Gerichte: "+
+		json[i].gerichte+"</div><div class=\"children\">Childs: "+json[i].childs+"</div><div class=\"setparent\">set parent</div></li>";
 		$("#zutatenlist").append(htmlstring);
 	}
 	
