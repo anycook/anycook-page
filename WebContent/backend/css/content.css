@@ -160,6 +160,59 @@ body{
 	width:800px;
 }
 
+#zutatenlist li{
+	width:800px;
+	float:left;
+	
+	margin-bottom: 3px;
+}
+
+#zutatenlist div{
+	float:left;
+}
+
+.zutatenopen{
+	background: url("../icons/arrow-close.png") no-repeat 0 5px;
+	padding:0 5px;
+	width:20px;
+	height:15px;
+	cursor: pointer;	
+}
+
+.zutatenopen:hover{
+	background: url("../icons/arrow-open.png") no-repeat 0 5px;
+}
+
+.zutatenopen.open{
+	background: url("../icons/arrow-open.png") no-repeat 0 5px;
+}
+
+.zutatenname{
+	width:170px;
+	margin-left:10px;
+}
+
+.zutatenstem{
+	width:170px;
+}
+
+.zutatengerichte{
+	width:90px;
+}
+
+.setparent{
+	cursor:pointer;
+	color: #859F5E;
+	margin-left: 20px;
+}
+
+.setparent:hover{
+	text-decoration:underline;	
+}
+
+
+
+
 /* user */
 #usertable td{	
 	border: 1px solid #aaaaaa;
@@ -267,6 +320,32 @@ body{
 #selected_recipe{
 	font-weight:bold;
 }
+
+#confirm_input{
+	margin-top:10px;
+	
+}
+
+/* new zutat */
+
+#new_zutat{
+	width:148px;
+	padding:5px;
+	float:left;
+	background-color: #ece9e3;
+	border:1px solid #CCC;
+	border-top:0;
+}
+
+#new_zutat *{
+	float:left;
+}
+
+#new_zutat_name{
+	width:105px;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
+}
+
 
 /*----footer-----*/
 #footer{

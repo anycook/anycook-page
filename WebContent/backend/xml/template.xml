@@ -16,8 +16,10 @@
     <template id="zutaten">
     	<ul id="zutatenlist"></ul>
     	<div id="info">
-   		<div id="confirm"><div id="confirm_text">Möchtest du wirklich die Zutat "<span id="selected_zutat"></span>" löschen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
-    	<h3>Statistik</h3><table></table></div>
+   			<div id="confirm"><div id="confirm_text">Namen der neuen Parent-Zutat für "<span id="selected_zutat"></span>" eingeben:</div><input type="text" id="confirm_input"/><div id="confirm_ok"></div></div>
+    		<h3>Statistik</h3><table></table>
+    		<h3>Neue Zutat:</h3><div id="new_zutat"><input id="new_zutat_name" type="text" /><input type="submit" value="OK" /></div>
+    	</div>
     </template>
     
     <template id="user">
