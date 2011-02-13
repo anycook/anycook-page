@@ -413,6 +413,7 @@ ul.kategorie_filter li:HOVER{
 
 /*----------Filter Zutaten----------*/
 #zutaten_table {
+	padding-top:4px;
 	min-height:176px;
 	width:100%;
 	margin: 0 0 10px 0;
@@ -427,12 +428,11 @@ ul.kategorie_filter li:HOVER{
 	color: #878787;
 	display: block;
 	width: 100%;
-	height: 23px;
+	line-height:23px;
 }
 
 .zutaten_table_left{
 	text-align: left;
-	padding-top:3px;
 	padding-left: 3px;
 	width: 150px;
 	height:100%;
