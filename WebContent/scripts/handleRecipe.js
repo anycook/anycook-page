@@ -95,8 +95,12 @@ function loadRecipe(json){
 	
 	$("#zutaten_table > *").remove();
 	var zutaten = json.zutaten;
-	for(zutat in zutaten)
-		$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+zutaten[zutat]+"</td></tr>");
+	for(zutat in zutaten){
+		if(zutaten[zutat]=="")
+			$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td></tr>");
+		else
+			$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+zutaten[zutat]+"</td></tr>");
+	}
 	
 	$(".tags_table_right > *").remove();
 	var tags = json.tags;
