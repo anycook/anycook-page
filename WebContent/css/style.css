@@ -466,7 +466,7 @@ ul.kategorie_filter li:HOVER{
 	height:11px;
 	background: url(/img/delete_off.png) no-repeat;
 	cursor: pointer;
-	padding-bottom: 2px;
+	padding-bottom: 6px;
 }
 
 .remove_zutat:hover{
