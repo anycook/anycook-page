@@ -3,6 +3,10 @@ body{
 	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
+ul{
+	list-style:none;
+}
+
 #page{
 	width:1016px;
 	height: 100%;

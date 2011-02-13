@@ -1,6 +1,7 @@
 function loadZutaten(json){
 	$("#zutatenlist").empty();
 	$(".setparent").die("click", setParent);
+	$(".zutatenopen").die("click", openZutat);
 	$("#new_zutat").unbind("submit", newZutat);
 	$("#confirm_form").unbind("submit", parentConfirmed);
 	
@@ -17,13 +18,33 @@ function loadZutaten(json){
 			htmlstring+="<div class=\"zutatenopen\"></div>";
 		
 		htmlstring += "<div class=\"zutatenname\">"+json[i].name+"</div><div class=\"zutatenstem\">Stem: "+stem+"</div><div class=\"zutatengerichte\">Gerichte: "+
-		json[i].gerichte+"</div><div class=\"children\">Childs: "+json[i].childs+"</div><div class=\"setparent\">set parent</div></li>";
+		json[i].gerichte+"</div><div class=\"children\">Childs: "+json[i].childs+"</div><div class=\"setparent\">set parent</div><ul></ul></li>";
 		$("#zutatenlist").append(htmlstring);
 	}
 	
 	$(".setparent").live("click", setParent);
+	$(".zutatenopen").live("click", openZutat);
 	$("#new_zutat").submit(newZutat);
 	$("#confirm_form").submit(parentConfirmed);
+}
+
+function loadChilds(json, ul){
+	for(var i in json){
+		var stem = json[i].stem;
+		if(stem == null)
+			stem="";
+		
+		var childs = Number(json[i].childs);
+		
+		var htmlstring = "<li>";
+		
+		if(childs>0)
+			htmlstring+="<div class=\"zutatenopen\"></div>";
+		
+		htmlstring += "<div class=\"zutatenname\">"+json[i].name+"</div><div class=\"zutatenstem\">Stem: "+stem+"</div><div class=\"zutatengerichte\">Gerichte: "+
+		json[i].gerichte+"</div><div class=\"children\">Childs: "+json[i].childs+"</div><div class=\"setparent\">set parent</div><ul></ul></li>";
+		ul.append(htmlstring);
+	}
 }
 
 function setParent(event){	
@@ -40,6 +61,24 @@ function setParent(event){
 		}});
 	}
 	
+}
+
+function openZutat(event){
+	var target = $(event.target);
+	var zutat = target.siblings(".zutatenname").first().text();
+	var ul = target.siblings("ul").first();
+	if(ul.children().length>0)
+		ul.empty();
+	else{
+		$.ajax({
+			url:"/anycook/GetZutaten",
+			data:"parent="+zutat,
+			dataType:"json",
+			success:function(json){
+				loadChilds(json, ul);
+			}
+		});
+	}
 }
 
 function parentConfirmed(){
