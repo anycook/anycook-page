@@ -68,7 +68,11 @@ function loadRecipe(json){
 	$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
 	$("#recipe_discussion_btn").click(function(event){$.address.parameter("page", "discussion");});
 	
-	$("#zutat_head").html("Zutaten für "+json.personen+" Personen:");
+	var personen = Number(json.personen);
+	if(personen>1)
+		$("#zutat_head").html("Zutaten für "+json.personen+" Personen:");
+	else
+		$("#zutat_head").html("Zutaten für "+json.personen+" Person:");
 	
 	$("#filter_headline").text("Status");
 	
