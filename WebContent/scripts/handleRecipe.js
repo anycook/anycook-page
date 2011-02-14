@@ -68,6 +68,7 @@ function loadRecipe(json){
 	$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
 	$("#recipe_discussion_btn").click(function(event){$.address.parameter("page", "discussion");});
 	
+	$("#zutat_head").html("Zutaten für "+json.personen+" Personen:");
 	
 	$("#filter_headline").text("Status");
 	

@@ -132,7 +132,7 @@ function handleChange(event){
 	if(lastPath != event.path){
 		lastPath = event.path;
 		
-		
+		$("#zutat_head").text("Zutaten:");
 		if($.address.title() != "anycook")
 			$.address.title("anycook");
 		
