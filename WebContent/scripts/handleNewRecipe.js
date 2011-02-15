@@ -268,8 +268,8 @@ function makeTagCloud(){
 	
 	for(tag in json){
 		$("#tagcloud").append("<span><span>"+tag+"</span></span> ");
-		$("#tagcloud span span").last().css({"font-size":json[tag]*7,
-				"opacity": json[tag]/4
+		$("#tagcloud span span").last().css({"font-size":json[tag]*8,
+				"opacity": json[tag]/3
 		});
 	}
 }

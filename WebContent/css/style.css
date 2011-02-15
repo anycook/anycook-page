@@ -1,29 +1,31 @@
 @charset "UTF-8";
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td {  
-	margin:0; 
-	padding:0; 
-} 
 
-body{
-	background-color: #f7f4f1; 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td
+	{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #f7f4f1;
 	overflow-y: scroll; /*scrollbalken wird immer angezeigt*/
 }
 
-a img{
-	border:0;
+a img {
+	border: 0;
 }
 
-.greenlink{
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.greenlink {
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #859F5E;
 }
 
-.greenlink:HOVER{
+.greenlink:HOVER {
 	text-decoration: underline;
 }
 
 /*----------Header----------*/
-#header_container{
+#header_container {
 	position: fixed;
 	height: 100px;
 	width: 100%;
@@ -31,26 +33,25 @@ a img{
 	z-index: 100;
 }
 
-#header{
+#header {
 	height: 100px;
 	width: 980px;
 	margin: 0 auto;
 	background: url("/img/headermain_bg.png") repeat-x;
 }
 
-#header_main{
+#header_main {
 	height: 72px;
 	width: 100%;
 }
 
-#header_peak{
+#header_peak {
 	height: 28px;
 	width: 100%;
 	background: url("/img/headerpeak_bg.png");
 }
 
-
-#header_left{
+#header_left {
 	position: relative;
 	float: left;
 	width: 9px;
@@ -58,7 +59,7 @@ a img{
 	background: url("/img/headerleft_bg.png");
 }
 
-#header_right{
+#header_right {
 	position: relative;
 	float: right;
 	width: 9px;
@@ -66,7 +67,7 @@ a img{
 	background: url("/img/headerright_bg.png");
 }
 
-#logo{
+#logo {
 	float: left;
 	height: 50px;
 	width: 127px;
@@ -74,284 +75,287 @@ a img{
 	/*alte größe
 	height: 29px;
 	width: 233px;*/
-	
-}
-#logo img{
-	border:0;
 }
 
-#searchbar{
+#logo img {
+	border: 0;
+}
+
+#searchbar {
 	float: left;
 	margin: 22px 0 0 128px;
 	width: 400px;
 }
 
-#loupe{
+#loupe {
 	float: left;
 	width: 37px;
 	height: 36px;
 	background: url("/img/loupe.png") no-repeat;
 }
 
-#search{
-	font:  13pt Georgia;
+#search {
+	font: 13pt Georgia;
 	color: #5a5a5a;
 	float: left;
 	height: 36px;
 	width: 310px;
-	padding: 0; margin: 0; border: 0;
+	padding: 0;
+	margin: 0;
+	border: 0;
 	background: url("/img/searchbar_bg.png") repeat-x;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 }
 
-#search_reset{
+#search_reset {
 	float: left;
 	width: 28px;
 	height: 36px;
 	background: url("/img/searchreset_off.png") no-repeat;
 }
 
-#search_reset.on{
+#search_reset.on {
 	background: url("/img/searchreset_on.png") no-repeat;
 	cursor: pointer;
 }
 
 /*----------Right-Stripes----------*/
-#right_stripe{
+#right_stripe {
 	position: fixed;
 	float: left;
 	width: 10px;
 	left: 50%;
-	height:100%;
+	height: 100%;
 	margin: 0 0 0 508px;
 	background: #f2efeb;
 }
 
-#right{
+#right {
 	position: fixed;
-	left:50%;
+	left: 50%;
 	height: 100%;
 	margin-top: 0;
 	width: 50%;
 	background: #ece9e3;
 }
 
-#right_inside{
-	position:relative;
-	height:100%;
-	width:518px;
-	background:#f7f4f1;
+#right_inside {
+	position: relative;
+	height: 100%;
+	width: 518px;
+	background: #f7f4f1;
 }
 
 /*----------Container----------*/
-#container{
+#container {
 	position: relative;
 	float: left;
 	width: 1016px;
 	left: 50%;
-	margin-top:100px;
+	margin-top: 100px;
 	margin-left: -508px;
 	height: 100%;
 	background-color: #f7f4f1;
 }
 
-
 /*----------Filterbox----------*/
-#filter_container{
+#filter_container {
 	float: left;
 	height: 600px;
 	background: url("/img/nr_statusbg.png") no-repeat;
 	background-position: 125px 122px;
 }
 
-#filter_box{
+#filter_box {
 	float: left;
 	background: url("/img/filter_bg.png") repeat-y;
 	margin: 6px 0 0 15px;
 	width: 268px;
 }
 
-#filter_head{
+#filter_head {
 	background: url("/img/filter_head_main.png") repeat-y;
 }
 
-#filter_head_top{
+#filter_head_top {
 	height: 26px;
 	background: url("/img/filter_head_top.png") no-repeat;
 }
 
-#filter_head_main{
+#filter_head_main {
 	height: 25px;
 	margin-top: -4px;
-	padding-left:45px;
-	font:  15pt Georgia;
+	padding-left: 45px;
+	font: 15pt Georgia;
 	font-style: italic;
 	color: #9fbd70;
 }
 
-#filter_headline{
-	float:left;
+#filter_headline {
+	float: left;
 }
 
-#filter_reset{
-	float:right;
-	height:9px;
-	width:8px;
-	padding:5px;
-	margin-right:12px;
-	margin-top:3px;
+#filter_reset {
+	float: right;
+	height: 9px;
+	width: 8px;
+	padding: 5px;
+	margin-right: 12px;
+	margin-top: 3px;
 }
 
-#filter_reset.on{
-	background:url(/img/delete_off.png) no-repeat;
-	background-position:center;
+#filter_reset.on {
+	background: url(/img/delete_off.png) no-repeat;
+	background-position: center;
 	cursor: pointer;
 }
-#filter_reset.on:hover{
-	background:url(/img/delete_filter_on.png) no-repeat;
-	background-position:center;
+
+#filter_reset.on:hover {
+	background: url(/img/delete_filter_on.png) no-repeat;
+	background-position: center;
 }
-#filter_head_bottom{
+
+#filter_head_bottom {
 	height: 13px;
 	background: url("/img/filter_head_bottom.png") no-repeat;
 }
 
-#filter_main{
+#filter_main {
 	margin: 0 5px;
-	padding-bottom: 20px; 
+	padding-bottom: 20px;
 	background-color: #f9f8f6;
 }
 
-#filter_bottom{
+#filter_bottom {
 	height: 18px;
 	background: url("/img/filter_bottom.png") no-repeat;
 }
 
-div.kategorie_filter{
+div.kategorie_filter {
 	background-color: #ece9e3;
 	border: 1pt solid #d5d6d2;
 	margin-top: 10px;
 	height: 28px;
 	cursor: pointer;
 	/* Gecko-based, Mozilla */
-	-moz-user-select:none;
+	-moz-user-select: none;
 	/* Safari */
-	-khtml-user-select: none;	
+	-khtml-user-select: none;
 }
 
-#kategorie_filter_left,#kategorie_filter_right{
+#kategorie_filter_left,#kategorie_filter_right {
 	float: left;
 	width: 28px;
 	height: 100%;
 	background: url("/img/arrow_down.png") no-repeat;
 }
-#kategorie_filter_left.off,#kategorie_filter_right.off{
+
+#kategorie_filter_left.off,#kategorie_filter_right.off {
 	background: none;
-	border:0;
+	border: 0;
 }
 
-#kategorie_filter_left{
+#kategorie_filter_left {
 	border-right: 1pt solid #d5d6d2;
 }
 
-#kategorie_filter_right{
+#kategorie_filter_right {
 	border-left: 1pt solid #d5d6d2;
 }
 
-#kategorie_filter_name{
+#kategorie_filter_name {
 	float: left;
 	width: 198px;
 	height: 100%;
-	font:  13pt Georgia;
+	font: 13pt Georgia;
 	color: #5a5a5a;
 	text-align: center;
 	padding-top: 4px;
 }
 
-.kategorie_filter.on{
- 	border-color: #93948d;
+.kategorie_filter.on {
+	border-color: #93948d;
 }
 
-.kategorie_filter.on #kategorie_filter_left, .kategorie_filter.on #kategorie_filter_right{
+.kategorie_filter.on #kategorie_filter_left,.kategorie_filter.on #kategorie_filter_right
+	{
 	background: url("/img/arrow_up.png") no-repeat;
 	border-bottom: 1pt solid #93948d;
 }
 
-ul.kategorie_filter{
+ul.kategorie_filter {
 	position: absolute;
 	width: 198px;
 	margin-left: 29px;
 	background-color: #ece9e3;
 	border: 1pt solid #93948d;
 	border-top: none;
-	font:  11pt Georgia;
+	font: 11pt Georgia;
 	text-align: left;
 	color: #5a5a5a;
-	list-style:  none;
+	list-style: none;
 	letter-spacing: 0.8pt;
 	line-height: 17.5pt;
 	cursor: pointer;
 	/* Gecko-based, Mozilla */
-	-moz-user-select:none;
+	-moz-user-select: none;
 	/* Safari */
-	-khtml-user-select: none;	
+	-khtml-user-select: none;
 	overflow: hidden;
 	z-index: 99999;
 }
 
-
-ul.kategorie_filter li{
+ul.kategorie_filter li {
 	border-bottom: 1pt solid #d1cfca;
 	padding-left: 7px;
 }
 
-ul.kategorie_filter li:HOVER{
+ul.kategorie_filter li:HOVER {
 	background-color: #f7f4f1;
 }
 
-#filter_main_box{
+#filter_main_box {
 	margin: 0 14px;
-	font:  13pt Georgia;
+	font: 13pt Georgia;
 	color: #5a5a5a;
 }
 
-#filter_table{
+#filter_table {
 	float: left;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-#filter_table tr td *{
+#filter_table tr td * {
 	float: left;
 }
 
-#filter_table tr{
+#filter_table tr {
 	display: block;
 	margin-top: 10px;
 }
 
-.filter_table_left{
+.filter_table_left {
 	width: 130px;
 }
 
-.filter_table_right{
+.filter_table_right {
 	width: 100px;
-	
 }
 
-#filter_table * input:focus{
+#filter_table * input:focus {
 	background-color: #ece9e3;
 	border: 1pt solid #93948d;
 }
 
 /*----------Filter Dauer----------*/
-#uhr{
+#uhr {
 	margin: -3px 3px 0 -3px;
 }
 
-#filter_table * input{
+#filter_table * input {
 	float: none !important;
-	font:  14pt Times New Roman;
+	font: 14pt Times New Roman;
 	font-weight: 500;
 	height: 20px;
 	width: 24px;
@@ -368,41 +372,43 @@ ul.kategorie_filter li:HOVER{
 	*/
 }
 
-#filter_table * input:focus{
+#filter_table * input:focus {
 	width: 25px;
 	border: 0;
 	border-bottom: 1pt solid #5a5a5a;
 	background: none;
 }
 
-
 /* -------Filter Radiobuttons------- */
-.label_chefhats,.label_muffins{
-	display:table-cell;
+.label_chefhats,.label_muffins {
+	display: table-cell;
 	cursor: pointer;
-	padding:10px;
+	padding: 10px;
 }
 
-.label_chefhats input, .label_muffins input{
-	position: absolute; left: -9999px;
+.label_chefhats input,.label_muffins input {
+	position: absolute;
+	left: -9999px;
 }
 
-.label_chefhats{
-    background:url(/icons/chefhat-off.png) no-repeat;
-}
-.label_chefhats.on{
-	background: url(/icons/chefhat-on.png) no-repeat; 
+.label_chefhats {
+	background: url(/icons/chefhat-off.png) no-repeat;
 }
 
-.label_muffins{
-    background:url(/icons/muffin-off.png) no-repeat;
+.label_chefhats.on {
+	background: url(/icons/chefhat-on.png) no-repeat;
 }
-.label_muffins.on{
-	background: url(/icons/muffin-on.png) no-repeat; 
+
+.label_muffins {
+	background: url(/icons/muffin-off.png) no-repeat;
+}
+
+.label_muffins.on {
+	background: url(/icons/muffin-on.png) no-repeat;
 }
 
 /*----------Filter Punkte Devider----------*/
-#filter_devider{
+#filter_devider {
 	float: left;
 	margin: 14px 0 10px 0;
 	width: 100%;
@@ -412,131 +418,130 @@ ul.kategorie_filter li:HOVER{
 
 /*----------Filter Zutaten----------*/
 #zutaten_table {
-	padding-top:4px;
-	min-height:176px;
-	width:100%;
+	padding-top: 4px;
+	min-height: 176px;
+	width: 100%;
 	margin: 0 0 10px 0;
 	background: url(/img/zutaten_tags_bg.png) repeat;
-	display:block; 
+	display: block;
 	border-spacing: 0;
 }
-	
-#zutaten_table tr{
-	font:  11pt Georgia;
+
+#zutaten_table tr {
+	font: 11pt Georgia;
 	font-style: italic;
 	color: #878787;
 	display: block;
 	width: 100%;
-	line-height:23px;
+	line-height: 23px;
 }
 
-.zutaten_table_left{
+.zutaten_table_left {
 	text-align: left;
 	padding-left: 3px;
 	min-width: 150px;
-	height:100%;
-	
+	height: 100%;
 }
 
-.zutaten_table_right{
+.zutaten_table_right {
 	text-align: right;
 	padding: 0 3px;
 	vertical-align: bottom;
-	white-space:nowrap;
+	white-space: nowrap;
 	width: 70px;
-	height:100%;
+	height: 100%;
 }
 
-#zutat_input{
-	background:0;
+#zutat_input {
+	background: 0;
 	outline: none;
-	border:0;
-	font:  11pt Georgia;
+	border: 0;
+	font: 11pt Georgia;
 	font-style: italic;
 	color: #5a5a5a;
 	padding: 0;
-	height:100%;
-	
+	height: 100%;
 }
 
-.remove_zutat{
-	float:right;
-	width:8px;
-	height:11px;
+.remove_zutat {
+	float: right;
+	width: 8px;
+	height: 11px;
 	background: url(/img/delete_off.png) no-repeat;
 	cursor: pointer;
 	padding-bottom: 6px;
 }
 
-.remove_zutat:hover{
+.remove_zutat:hover {
 	background: url(/img/delete_zutat_on.png) no-repeat;
-	
 }
 
 /*---------Zutat Autocomplete ------*/
-#zutat_complete{
+#zutat_complete {
 	position: absolute;
-	width:150px;
+	width: 150px;
 	list-style-position: outside;
-	list-style:none;
+	list-style: none;
 	z-index: 1000;
 	background: #ece9e3;
-	border:1px solid #bababa;
-	border-top:0;
+	border: 1px solid #bababa;
+	border-top: 0;
 }
 
-#zutat_complete li{
-	cursor:pointer;
+#zutat_complete li {
+	cursor: pointer;
 	width: 100%;
 	line-height: 15px;
 	font: menu;
 	font-size: 12px;
 }
 
-#zutat_complete li.over{
+#zutat_complete li.over {
 	background-color: #f7f4f1;
 }
+
 /*----------Filter Tags----------*/
-#tags_table{
+#tags_table {
 	margin: 10px 0 10px 0;
 	border-spacing: 0;
 }
 
-.tags_table_left{
+.tags_table_left {
 	vertical-align: top;
 	width: 25%;
 	padding-top: 4px;
 }
 
-.tags_table_right{
-	display:block;
-	padding-top:4px;
-	padding-left:1px;
+.tags_table_right {
+	display: block;
+	padding-top: 4px;
+	padding-left: 1px;
 	background: url("/img/zutaten_tags_bg.png") repeat;
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: 500;
 	color: #5a5a5a;
 	height: 69px;
 	width: 169px;
 }
-.tags_table_right input{
-	float:left;
-	border:0;
+
+.tags_table_right input {
+	float: left;
+	border: 0;
 	outline: none;
-	width:40%;
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	width: 40%;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	background: none;
-	margin:0;
-	margin-left:2px;
+	margin: 0;
+	margin-left: 2px;
 }
 
-.tag{
+.tag {
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	float:left;
-	background:#ece9e3;
-	padding:0 4px 1px 4px;
-	margin-left:3px;
-	margin-bottom:4px;
+	float: left;
+	background: #ece9e3;
+	padding: 0 4px 1px 4px;
+	margin-left: 3px;
+	margin-bottom: 4px;
 	border: 1pt solid #b5b5b5;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -544,20 +549,20 @@ ul.kategorie_filter li:HOVER{
 	line-height: 12pt;
 }
 
-.tag_text{
-	float:left;
+.tag_text {
+	float: left;
 }
 
-.tag_remove{
-	float:left;
+.tag_remove {
+	float: left;
 	color: grey;
-	margin-left:2px;
-	cursor:pointer;
+	margin-left: 2px;
+	cursor: pointer;
 	color: #808080;
 }
 
 /*----------Buchmitte strich----------*/
-#buchmitte{
+#buchmitte {
 	float: left;
 	height: 525px;
 	width: 1px;
@@ -566,13 +571,13 @@ ul.kategorie_filter li:HOVER{
 }
 
 /*----------Kasten mit riffeligen Rand----------*/
-
 /*-------frame_small---------------------*/
-.frame_small{
-	float:left;
+.frame_small {
+	float: left;
 }
-.frame_main_small{
-	padding:12px 16px;
+
+.frame_main_small {
+	padding: 12px 16px;
 	float: left;
 	height: 111px;
 	width: 284px;
@@ -582,7 +587,7 @@ ul.kategorie_filter li:HOVER{
 	text-decoration: none;
 }
 
-.frame_right{
+.frame_right {
 	float: right;
 	height: 135px;
 	width: 6px;
@@ -592,265 +597,262 @@ ul.kategorie_filter li:HOVER{
 }
 
 /*----------Content----------*/
-#content{
+#content {
 	float: left;
 	width: 655px;
 	min-height: 580px;
 	margin: -27px 0 0 45px;
 }
 
-#content_header{
+#content_header {
 	width: 100%;
 	height: 37px;
 	margin: 20px 0 0 0;
 	background: url("/img/navi_bottomline.png") repeat-x;
 }
 
-
-#content_main{
+#content_main {
 	min-height: 515px;
 	width: 100%;
 }
 
-
 /*---------Content-Header----------*/
-.big_button, .small_button{
-	float:left;
-	cursor:pointer;
+.big_button,.small_button {
+	float: left;
+	cursor: pointer;
 }
-.big_button{
+
+.big_button {
 	width: 114px;
 	height: 37px;
 	background: url(/img/big_button_off.png) no-repeat;
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color:#878787;
-	padding-top:6px;
-	text-align:center;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #878787;
+	padding-top: 6px;
+	text-align: center;
 }
 
-.big_button.on{
+.big_button.on {
 	background: url(/img/big_button_on.png) no-repeat;
-	color:#859f5e;
+	color: #859f5e;
 }
 
-.big_button:hover{
-	background:url(/img/big_button_over.png) no-repeat;
-	color:#5a5a5a;
+.big_button:hover {
+	background: url(/img/big_button_over.png) no-repeat;
+	color: #5a5a5a;
 }
-.big_button.on:hover{
+
+.big_button.on:hover {
 	background: url(/img/big_button_on.png) no-repeat;
-	color:#859f5e;
+	color: #859f5e;
 }
 
-.big_button.inactive{
+.big_button.inactive {
 	background: url(/img/big_button_inactive.png) no-repeat;
-	color:#d1cec9;
+	color: #d1cec9;
 	cursor: default;
 }
 
-.small_button{
-	width:44px;
-	height:37px;
+.small_button {
+	width: 44px;
+	height: 37px;
 	background: url(/img/small_button_off.png) no-repeat;
 }
 
-.small_button.on{
+.small_button.on {
 	background: url(/img/small_button_on.png) no-repeat;
 }
 
-.small_button:hover{
-	background:url(/img/small_button_over.png) no-repeat;
+.small_button:hover {
+	background: url(/img/small_button_over.png) no-repeat;
 }
 
-.small_button.on:hover{
+.small_button.on:hover {
 	background: url(/img/small_button_on.png) no-repeat;
 }
 
-.small_button.inactive{
+.small_button.inactive {
 	background: url(/img/small_button_inactive.png) no-repeat;
-	color:#d1cec9;
+	color: #d1cec9;
 	cursor: wait;
 }
 
-#home_button{
-	margin-left:30px;
+#home_button {
+	margin-left: 30px;
 }
 
-#home_button div{
-	width:15px;
-	height:15px;
-	margin-top:8px;
+#home_button div {
+	width: 15px;
+	height: 15px;
+	margin-top: 8px;
 	margin-left: 14px;
-	background:url(/img/icon_home_off.png) no-repeat;
+	background: url(/img/icon_home_off.png) no-repeat;
 }
 
-#home_button.on div{
-	background:url(/img/icon_home_active.png) no-repeat;
-} 
-
-#home_button:hover div{
-	background:url(/img/icon_home_over.png) no-repeat;
+#home_button.on div {
+	background: url(/img/icon_home_active.png) no-repeat;
 }
 
-#home_button.on:hover div{
-	background:url(/img/icon_home_active.png) no-repeat;
+#home_button:hover div {
+	background: url(/img/icon_home_over.png) no-repeat;
 }
 
-#discover_button{
-	margin-left:10px;
+#home_button.on:hover div {
+	background: url(/img/icon_home_active.png) no-repeat;
+}
+
+#discover_button {
+	margin-left: 10px;
 }
 
 /*---------Content-Main----------*/
-#display{
+#display {
 	height: 185px;
 	padding-top: 39px;
 	margin-top: -10px;
-	background:url(/img/startpageimg.png) no-repeat;
+	background: url(/img/startpageimg.png) no-repeat;
 }
 
 /*--<div id="headline"><p>Willkommen!</p><p>Suche nach leckeren Rezepten.</p></div>--*/
-#headline{
-	font:  25pt Georgia;
+#headline {
+	font: 25pt Georgia;
 	letter-spacing: 0.5px;
 	color: #404040;
 	text-align: left;
 }
 
-#informationbox{
+#informationbox {
 	width: 100%;
 	height: 300px;
 	border-top: 1pt solid #d7d3c7;
 }
 
-.startpage_headline_small{
+.startpage_headline_small {
 	margin-top: 20px;
-	font:  14pt Georgia;
+	font: 14pt Georgia;
 	color: #404040;
 	text-align: left;
 	margin-bottom: 10px;
 	padding-left: 15px;
 }
 
-#rezept_des_tages{
+#rezept_des_tages {
 	float: left;
 	height: 190px;
 }
 
-.small_rezept,.big_rezept{
+.small_rezept,.big_rezept {
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	cursor: pointer;
 }
 
-.small_rezept:hover{
+.small_rezept:hover {
 	background: #e0eecb url("/img/frame_left_pattern_over.png") repeat-y;
 }
 
-.small_rezept:hover +.frame_right{
+.small_rezept:hover+.frame_right {
 	background: url("/img/frame_right_pattern_over.png") repeat-y;
 }
 
-.rezept_bild{
+.rezept_bild {
 	float: left;
 	width: 108px;
 	height: 108px;
 	margin-right: 10px;
-	border:1px solid #D7D3C7;
+	border: 1px solid #D7D3C7;
 }
 
-
-.time_gericht{
+.time_gericht {
 	margin: 94px 0 0 32px;
-	font:  7pt Lucida Grande;
-	position:absolute;
+	font: 7pt Lucida Grande;
+	position: absolute;
 }
 
-.time_gericht_mid{
+.time_gericht_mid {
 	float: left;
 	height: 12px;
 	width: 36px;
 	color: #404040;
-	padding: 1px 0 0 2px; 
+	padding: 1px 0 0 2px;
 	background-color: #F9F8F6;
 	text-align: center;
 }
 
-.time_corner_left{
+.time_corner_left {
 	float: left;
 	height: 10px;
 	width: 5px;
 	background: url("/img/timecorner_left.png") repeat-y;
 }
 
-.time_corner_right{
+.time_corner_right {
 	float: left;
 	height: 10px;
 	width: 5px;
 	background: url("/img/timecorner_right.png") repeat-y;
 }
 
-.small_rezept img,.big_rezept img{
+.small_rezept img,.big_rezept img {
 	float: left;
 	border: 3pt solid #F9F8F6;
-	
 }
 
-.small_rezept h5,.big_rezept h5{
-	font:  14pt Georgia;
+.small_rezept h5,.big_rezept h5 {
+	font: 14pt Georgia;
 	color: #404040;
 	margin: 2px 0 1px 0;
 }
 
-.small_rezept p,.big_rezept p{
+.small_rezept p,.big_rezept p {
 	color: #404040;
 	line-height: 15px;
 }
 
-.big_rezept p{
+.big_rezept p {
 	margin-top: 5px;
-
 }
 
 /*-------NEWS-------*/
-#news{
+#news {
 	float: right;
-	height: 190px;	
+	height: 190px;
 }
 
-#news_inhalt{
+#news_inhalt {
 	width: 100%;
 	height: 102%;
-	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	line-height: 20px;
 	overflow: hidden;
 }
 
-#news_inhalt div{
+#news_inhalt div {
 	position: relative;
 	padding: 0 3px;
-	padding-bottom: 3px; 
-	margin:0;
-	
+	padding-bottom: 3px;
+	margin: 0;
 }
 
-#news_inhalt div + div{
+#news_inhalt div+div {
 	padding-top: 3px; /*da border top*/
 	border-top: 1pt solid #b5b5b5;
-	padding-bottom: 3px; 
+	padding-bottom: 3px;
 }
 
-#news_inhalt a{
+#news_inhalt a {
 	color: #859f5e;
 	text-decoration: none;
 }
 
-#news_inhalt a:hover{
+#news_inhalt a:hover {
 	text-decoration: underline;
 }
 
-#news_fade{
+#news_fade {
 	position: relative;
-	background: url("/img/news_fade.png") repeat-x scroll center bottom transparent;
+	background: url("/img/news_fade.png") repeat-x scroll center bottom
+		transparent;
 	height: 25px;
 	width: 105%;
 	margin: -15px 0 0 -5px;
@@ -859,13 +861,12 @@ ul.kategorie_filter li:HOVER{
 }
 
 /*-------NEWS-ENDE-------*/
-
-#famous_tags{
+#famous_tags {
 	float: left;
 	margin-top: 15px;
-	padding:3px 14px 11px 14px;	
-	text-align:inherit;
-	color:#404040;
+	padding: 3px 14px 11px 14px;
+	text-align: inherit;
+	color: #404040;
 	border-top: 1pt solid #B5B5B5;
 	-moz-border-radius-bottomright: 4px;
 	-webkit-bottom-right-radius: 4px;
@@ -874,10 +875,10 @@ ul.kategorie_filter li:HOVER{
 	-webkit-bottom-left-radius: 4px;
 	border-bottom-left-radius: 4px;
 	font-style: italic;
-	background:#ece9e3 url("/img/dot.png") repeat-x 0 3px;
+	background: #ece9e3 url("/img/dot.png") repeat-x 0 3px;
 }
 
-#tags_label{
+#tags_label {
 	position: absolute;
 	width: 44px;
 	height: 31px;
@@ -885,22 +886,20 @@ ul.kategorie_filter li:HOVER{
 	background: url("/img/tags_label.png") no-repeat;
 }
 
-#famous_tags_cloud{
-	/*float:left;*/
+#famous_tags_cloud { /*float:left;*/
 	margin: 18px 0 12px 0;
 }
 
-#famous_tags_cloud span span{
-	cursor:pointer;	
-	 white-space: nowrap;
+#famous_tags_cloud span span {
+	cursor: pointer;
+	white-space: nowrap;
 }
 
-#famous_tags_cloud  > span{
+#famous_tags_cloud>span {
 	padding: 2px 1px;
-	
 }
 
-#famous_tags_cloud > span:hover{
+#famous_tags_cloud>span:hover {
 	background-color: #e0ddd7;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -908,116 +907,118 @@ ul.kategorie_filter li:HOVER{
 }
 
 /*---------Entdecken----------*/
-.entdecken{
-	margin-top:8px;
+.entdecken {
+	height:202px;
+	margin-top: 8px;
 }
 
-.entdecken_headline_small{
-	font:  14pt Georgia;
+.entdecken_headline_small {
+	font: 14pt Georgia;
 	color: #404040;
 	text-align: left;
 	margin-bottom: 10px;
 	padding-left: 17px;
 }
 
-.frame_right +.frame_main_small{
+.frame_right+.frame_main_small {
 	margin-left: 11px;
 }
 
-.entdecken_back, .entdecken_next{
+.entdecken_back,.entdecken_next {
 	height: 17px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size:  9pt;
+	font-size: 9pt;
 	color: #919191;
 	margin-top: 7px;
 	background-color: #f7f4f1;
 	cursor: pointer;
 }
 
-.entdecken_back{
+.entdecken_back {
 	float: left;
 	margin-left: 3px;
 	padding-left: 13px;
 	background: url("/img/back_btn_small.png") no-repeat;
-	background-position:0 5px;
+	background-position: 0 5px;
 }
 
-.entdecken_back:hover{
+.entdecken_back:hover {
 	color: #585858;
 	background: url("/img/back_btn_small_over.png") no-repeat;
-	background-position:0 5px;
-} 
-	
-.entdecken_next{
+	background-position: 0 5px;
+}
+
+.entdecken_next {
 	float: right;
 	padding-right: 13px;
 	background: url("/img/next_btn_small.png") no-repeat;
-	background-position:40px 5px;
+	background-position: 40px 5px;
 }
 
-.entdecken_next:hover{
+.entdecken_next:hover {
 	color: #585858;
 	background: url("/img/next_btn_small_over.png") no-repeat;
-	background-position:40px 5px;
+	background-position: 40px 5px;
 }
 
-#neuste, #leckerste, #beliebte{
-	float: left;
+#neuste,#leckerste,#beliebte {
+
 }
 
 /*--suchergebnisse--*/
-#first_search_layout{
-	margin-right:10px;
+#first_search_layout {
+	margin-right: 10px;
 }
 
-#first_search_layout div{
-	height:15px;
-	margin-top:8px;
+#first_search_layout div {
+	height: 15px;
+	margin-top: 8px;
 	margin-left: 11px;
-	background:url(/img/darstellung_bildtext_off.png) no-repeat;
+	background: url(/img/darstellung_bildtext_off.png) no-repeat;
 }
 
-#first_search_layout.on div{
-	background:url(/img/darstellung_bildtext_active.png) no-repeat;
-} 
-
-#first_search_layout:hover div{
-	background:url(/img/darstellung_bildtext_over.png) no-repeat;
+#first_search_layout.on div {
+	background: url(/img/darstellung_bildtext_active.png) no-repeat;
 }
 
-#first_search_layout.on:hover div{
-	background:url(/img/darstellung_bildtext_active.png) no-repeat;
+#first_search_layout:hover div {
+	background: url(/img/darstellung_bildtext_over.png) no-repeat;
 }
+
+#first_search_layout.on:hover div {
+	background: url(/img/darstellung_bildtext_active.png) no-repeat;
+}
+
 /*---*/
-#second_search_layout{
-	margin-right:10px;
+#second_search_layout {
+	margin-right: 10px;
 }
 
-#second_search_layout div{
-	height:15px;
-	margin-top:8px;
+#second_search_layout div {
+	height: 15px;
+	margin-top: 8px;
 	margin-left: 11px;
-	background:url(/img/darstellung_nurbild_inactive.png) no-repeat;
-}
-/*----*/
-#third_search_layout{
-	margin-right:10px;
+	background: url(/img/darstellung_nurbild_inactive.png) no-repeat;
 }
 
-#third_search_layout div{
-	height:15px;
-	margin-top:8px;
+/*----*/
+#third_search_layout {
+	margin-right: 10px;
+}
+
+#third_search_layout div {
+	height: 15px;
+	margin-top: 8px;
 	margin-left: 11px;
-	background:url(/img/darstellung_nurtext_inactive.png) no-repeat;
+	background: url(/img/darstellung_nurtext_inactive.png) no-repeat;
 }
-/*----*/
 
-#result_container{
+/*----*/
+#result_container {
 	clear: both;
-	
 }
 
-.frame_big{
+.frame_big {
 	float: left;
 	border-top: 1pt solid #b5b5b5;
 	border-bottom: 1pt solid #b5b5b5;
@@ -1025,12 +1026,12 @@ ul.kategorie_filter li:HOVER{
 	text-decoration: none;
 }
 
-.frame_big + .frame_big{
+.frame_big+.frame_big {
 	border-top: 0;
 	margin-top: 0;
 }
 
-.frame_main_big{
+.frame_main_big {
 	float: left;
 	height: 110px;
 	width: 455px;
@@ -1038,91 +1039,89 @@ ul.kategorie_filter li:HOVER{
 	color: #878787;
 }
 
-.frame_main_big:hover{
+.frame_main_big:hover {
 	background: #ece9e3 url("/img/frame_left_pattern.png") repeat-y;
 }
 
-.result_schmeckt{
+.result_schmeckt {
 	float: right;
 	margin: -16px 5px 0 5px;
 }
 
-.heart_img{
+.heart_img {
 	float: right;
 	background: url("/icons/heart.png") no-repeat;
 	width: 12px;
 	height: 13px;
 }
 
-.heart_number{
+.heart_number {
 	width: 100%;
-	margin:13px 3px 0 0;
-	font-size:  7pt;
+	margin: 13px 3px 0 0;
+	font-size: 7pt;
 	line-height: 14px;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	text-align:center;
+	text-align: center;
 	color: #b5b5b5;
 }
 
-.frame_main_big p{
+.frame_main_big p {
 	color: #878787;
 	margin-right: 22px;
-	height:65px;
+	height: 65px;
 }
 
-.frame_main_big:hover p{
+.frame_main_big:hover p {
 	color: #5a5a5a;
 }
 
-.frame_right_big{
+.frame_right_big {
 	float: left;
 	height: 132px;
 	width: 6px;
 }
 
-.frame_main_big:hover +.frame_right_big{
+.frame_main_big:hover+.frame_right_big {
 	background: url("/img/frame_right_pattern.png") repeat-y;
 }
 
-.result_bewertung{
+.result_bewertung {
 	float: left;
-	height:12px;
+	height: 12px;
 	width: 70px;
-	margin-top:3px;
+	margin-top: 3px;
 }
 
-.result_bewertung img{
-	border:0;
-	}
+.result_bewertung img {
+	border: 0;
+}
 
-#result_end{
+#result_end {
 	background: url("/icons/heart.png") no-repeat;
-
 }
-
 
 /*---------- verwendete suchbegriffe-------- */
-
-#search_terms{
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color: #404040;
-	margin-left:5px;
-	height:22px;
-}
-#terms_text{
-	padding-top:1px;
-	float:left;
-	display:none;
-}
-
-.search_term{
+#search_terms {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	float:left;
-	color:#5a5a5a;
-	background:#e0eecb;
-	padding:0 4px 1px 4px;
-	margin-left:5px;
-	margin-bottom:4px;
+	color: #404040;
+	margin-left: 5px;
+	height: 22px;
+}
+
+#terms_text {
+	padding-top: 1px;
+	float: left;
+	display: none;
+}
+
+.search_term {
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	float: left;
+	color: #5a5a5a;
+	background: #e0eecb;
+	padding: 0 4px 1px 4px;
+	margin-left: 5px;
+	margin-bottom: 4px;
 	border: 1pt solid #b5b5b5;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -1130,32 +1129,31 @@ ul.kategorie_filter li:HOVER{
 	line-height: 12pt;
 }
 
-.close_term{
-	float:right;
+.close_term {
+	float: right;
 	margin-left: 2px;
-	color:#7a7a7a;
-	cursor: pointer;	
+	color: #7a7a7a;
+	cursor: pointer;
 }
 
 /*-------Rezept------*/
-.float_right_header{
+.float_right_header {
 	float: right;
 }
 
-#recipe_discussion_btn{
+#recipe_discussion_btn {
 	margin: 0 10px;
 }
 
-#rezept_headline{
-	font:  23pt Georgia;
+#rezept_headline {
+	font: 23pt Georgia;
 	color: #404040;
 	text-align: left;
 	margin-top: 2px;
 	margin-bottom: 7px;
 }
 
-
-#rezept_bild{ /*grosses Bild im Rezept selbst*/
+#rezept_bild { /*grosses Bild im Rezept selbst*/
 	float: left;
 	width: 450px;
 	background-color: grey;
@@ -1163,13 +1161,13 @@ ul.kategorie_filter li:HOVER{
 	margin: 0 10px 0 2px;
 }
 
-#beschreibung{
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+#beschreibung {
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #919191;
 	margin-right: 4px;
 }
 
-#rezept_begin{
+#rezept_begin {
 	float: left;
 	width: 100%;
 	height: 37px;
@@ -1177,21 +1175,23 @@ ul.kategorie_filter li:HOVER{
 	background: url("/img/navi_bottomline.png") repeat-x;
 }
 
-.bezeichner{
+.bezeichner {
 	float: right;
 	width: 114px;
 	height: 37px;
 	background: url(/img/bezeichner.png) no-repeat;
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color:#878787;
-	padding-top:6px;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #878787;
+	padding-top: 6px;
 	margin-right: 10px;
-	text-align:center;
+	text-align: center;
 }
-#step_container{
-	width:510px;	
+
+#step_container {
+	width: 510px;
 }
-.step{
+
+.step {
 	float: left;
 	height: 147px;
 	width: 510px;
@@ -1201,26 +1201,26 @@ ul.kategorie_filter li:HOVER{
 	margin-bottom: 15px;
 }
 
-.step_left{
+.step_left {
 	float: left;
 	height: 140px;
 	padding: 0px 0px 0px 10px;
 	background: url(/img/rezept_frame_left.png) no-repeat;
 }
 
-.step_right{
+.step_right {
 	float: right;
 	height: 100%;
 	width: 8px;
 	background: url(/img/rezept_frame_right.png) no-repeat;
 }
 
-.step_number{
-	margin:8px 0;
+.step_number {
+	margin: 8px 0;
 	float: left;
 	height: 123px;
 	width: 110px;
-	font:  45pt Georgia;
+	font: 45pt Georgia;
 	line-height: 110px;
 	color: #404040;
 	text-align: center;
@@ -1228,103 +1228,102 @@ ul.kategorie_filter li:HOVER{
 	margin-right: 15px;
 }
 
-.step_text{
+.step_text {
 	float: left;
 	width: 356px;
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 }
 
-#rezept_footer{
+#rezept_footer {
 	float: left;
 	width: 100%;
 	height: 60px;
 	border-top: 1pt solid #b5b5b5;
 	margin-top: 3px;
-	padding-top: 5px;	
+	padding-top: 5px;
 }
 
-#rezept_footer p{
+#rezept_footer p {
 	float: left;
-	font:  14pt Georgia;
+	font: 14pt Georgia;
 	color: #404040;
 }
 
-#rezept_footer span{
+#rezept_footer span {
 	float: left;
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	text-decoration: none;
 	cursor: default;
 }
 
-#rezept_schmeckt, #tag_vorschlag{
+#rezept_schmeckt,#tag_vorschlag {
 	float: left;
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #859f5e;
 	text-decoration: none;
 	cursor: pointer;
 }
 
-#rezept_schmeckt:hover, #tag_vorschlag:hover{
+#rezept_schmeckt:hover,#tag_vorschlag:hover {
 	text-decoration: underline;
-}	
+}
 
 /*social icons*/
-#social{
+#social {
 	float: right;
 	width: 90px;
 	height: 20px;
 	margin: 0 10px 0 0;
 }
 
-.socialicon{
+.socialicon {
 	float: left;
 	width: 17px;
 	height: 17px;
 	cursor: pointer;
 }
 
-#facebook{
-	background: url(/icons/facebook_off.png) no-repeat; 
+#facebook {
+	background: url(/icons/facebook_off.png) no-repeat;
 }
 
-#facebook:hover{
-	background: url(/icons/facebook_on.png) no-repeat; 
+#facebook:hover {
+	background: url(/icons/facebook_on.png) no-repeat;
 }
 
-#tumblr{
-	background: url(/icons/tumblr_off.png) no-repeat; 
-
+#tumblr {
+	background: url(/icons/tumblr_off.png) no-repeat;
 }
 
-#tumblr:hover{
-	background: url(/icons/tumblr_on.png) no-repeat; 
+#tumblr:hover {
+	background: url(/icons/tumblr_on.png) no-repeat;
 }
 
-#twitter{
+#twitter {
 	background: url(/icons/twitter_off.png) no-repeat;
 }
 
-#twitter:hover{
-	background: url(/icons/twitter_on.png) no-repeat; 
+#twitter:hover {
+	background: url(/icons/twitter_on.png) no-repeat;
 }
 
-#mail{
-	background: url(/icons/email_on.png) no-repeat; 
+#mail {
+	background: url(/icons/email_on.png) no-repeat;
 }
 
 /*--Discussion Rubrik--*/
 /*@import url("discussion.css");*/
-#discussion_headline{
-	font:  23pt Georgia;
+#discussion_headline {
+	font: 23pt Georgia;
 	color: #404040;
 	text-align: left;
 	margin-top: 2px;
 	margin-bottom: 2px;
 }
 
-#comment_discussion{
+#comment_discussion {
 	float: left;
 	width: 100%;
 	background: url("/img/navi_bottomline.png") repeat-x;
@@ -1333,133 +1332,136 @@ ul.kategorie_filter li:HOVER{
 	padding: 10px 0 0 0;
 }
 
-#comment_discussion li{
+#comment_discussion li {
 	float: left;
 	list-style-type: none;
 	width: 100%;
 	margin: 10px 0 0 0;
 }
 
-#comment_discussion li img{
+#comment_discussion li img {
 	float: left;
 	border: 0;
 }
 
-#comment_discussion li img{
-	width:50px;
-	height:50px;
+#comment_discussion li img {
+	width: 50px;
+	height: 50px;
 }
 
-#comment_discussion li li img{
-	width:32px;
-	height:32px;
+#comment_discussion li li img {
+	width: 32px;
+	height: 32px;
 }
 
-.comment_arrow, .comment_arrow_small, .child_comment .comment_arrow_answer {
+.comment_arrow,.comment_arrow_small,.child_comment .comment_arrow_answer
+	{
 	float: left;
 	width: 20px;
 	height: 50px;
-    background: url("/img/comment_arrow_left.png") no-repeat;
-	background-position:5px 10px;
+	background: url("/img/comment_arrow_left.png") no-repeat;
+	background-position: 5px 10px;
 }
 
-.comment_arrow_small{
-	background-position:5px 8px;
+.comment_arrow_small {
+	background-position: 5px 8px;
 }
 
-#comment_discussion li.odd img{
+#comment_discussion li.odd img {
 	float: right;
 	margin-right: 10px;
 }
 
-#comment_discussion li.odd li img{
+#comment_discussion li.odd li img {
 	float: right;
 	margin: 0 10px 0 0;
 }
 
-#comment_discussion li.odd li.odd img{
+#comment_discussion li.odd li.odd img {
 	float: right;
 	margin: 0;
 }
 
-li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.odd .comment_arrow_small{
+li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd .comment_arrow_small
+	{
 	float: right;
 	width: 20px;
 	height: 50px;
-    background: url("/img/comment_arrow_right.png") no-repeat;
-	background-position:0px 10px;
+	background: url("/img/comment_arrow_right.png") no-repeat;
+	background-position: 0px 10px;
 }
 
-.recipe_comment, .recipe_comment_small, .child_comment .recipe_comment, .recipe_comment_answer{
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.recipe_comment,.recipe_comment_small,.child_comment .recipe_comment,.recipe_comment_answer
+	{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	background-color: #ece9e3;
 	color: #404040;
 	float: left;
 	padding: 7px 11px 3px 11px;
 }
 
-.recipe_comment{
+.recipe_comment {
 	width: 482px;
 }
 
-.recipe_comment_small, .recipe_comment_answer{
+.recipe_comment_small,.recipe_comment_answer {
 	width: 429px;
 }
 
-#comment_discussion li ul{
+#comment_discussion li ul {
 	margin: 0 71px;
 }
 
-#comment_discussion li.odd .recipe_comment{
+#comment_discussion li.odd .recipe_comment {
 	float: right;
 }
 
-#comment_discussion li.odd img{
+#comment_discussion li.odd img {
 	float: right;
 }
 
-.comment_headline{
-	float:left;
+.comment_headline {
+	float: left;
 }
 
-.comment_headline a{
+.comment_headline a {
 	color: #859f5e;
 	text-decoration: none;
 }
 
-.comment_headline a:HOVER{
+.comment_headline a:HOVER {
 	text-decoration: underline;
 }
 
-.comment_number{
-	float:right;
+.comment_number {
+	float: right;
 	color: #b5b5b5;
 }
 
-.comment_text{
+.comment_text {
 	border-top: 1pt solid #c8c8c8;
 	margin: 20px 0 0 0;
 	padding: 3px 0 0 0;
 	width: 100%;
 }
 
-.comment_footer{
+.comment_footer {
 	height: 17px;
 	width: 100%;
 }
 
-.answer_btn{
+.answer_btn {
 	color: #c7c7c7;
 	float: right;
 	cursor: pointer;
 	margin-left: 5px;
 }
 
-.answer_btn:hover{
+.answer_btn:hover {
 	color: #b5b5b5;
 }
 
-.comment_btn{
+.comment_btn {
 	float: right;
 	margin: 2px 1px 0 0;
 	cursor: pointer;
@@ -1467,37 +1469,37 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	text-decoration: none;
 }
 
-.comment_btn:hover{
+.comment_btn:hover {
 	text-decoration: underline;
 }
 
-#discussion_footer{
+#discussion_footer {
 	float: left;
 	/*margin: 10px 0 0 0;*/
 	width: 100%;
 }
 
-#yes_comment{
-	font:  14pt Georgia;
+#yes_comment {
+	font: 14pt Georgia;
 	font-style: italic;
 	color: #404040;
 	text-align: left;
 	margin: 12px 0 8px 0;
 }
 
-#discussion_footer img{
+#discussion_footer img {
 	float: left;
 }
 
-#discussion_footer textarea{
+#discussion_footer textarea {
 	width: 477px;
 	height: 77px;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;
 }
 
-#no_comment{ /*wenn man nicht eingeloggt bei discussion footer*/
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+#no_comment { /*wenn man nicht eingeloggt bei discussion footer*/
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	/*font-style: italic;*/
 	color: #859F5E;
 	text-align: center;
@@ -1505,13 +1507,13 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	margin-top: 5px;
 }
 
-#no_comment:hover{
+#no_comment:hover {
 	text-decoration: underline;
 }
 
-.discussion_info{/*sonderpost admins/moderatoren */
+.discussion_info { /*sonderpost admins/moderatoren */
 	width: 492px;
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	background-color: #ffffff;
 	color: #878787;
 	float: left;
@@ -1523,93 +1525,96 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	border-radius: 4px;
 }
 
-.no_discussion{
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.no_discussion {
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #878787;
 	text-align: left;
-	margin: 0 0 6px 0;	
+	margin: 0 0 6px 0;
 }
 
-.child_comment .recipe_comment{/*Erscheinendes Element nach AntwortButton*/
+.child_comment .recipe_comment {
+	/*Erscheinendes Element nach AntwortButton*/
 	width: 429px;
 }
 
-#comment_discussion li.odd .comment_arrow_answer{/*Erscheinendes Element nach AntwortButton*/
+#comment_discussion li.odd .comment_arrow_answer {
+	/*Erscheinendes Element nach AntwortButton*/
 	float: right;
 	background: url("/img/comment_arrow_right.png") no-repeat;
 	background-position: 0px 10px;
 }
 
-.child_comment .comment_arrow_answer{/*Erscheinendes Element nach AntwortButton*/
+.child_comment .comment_arrow_answer {
+	/*Erscheinendes Element nach AntwortButton*/
 	float: left;
 }
 
-.child_comment textarea{
+.child_comment textarea {
 	width: 423px;
 	height: 50px;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;
 }
 
-.child_comment .comment_btn{
+.child_comment .comment_btn {
 	margin: 2px 1px 0 0;
 }
 
-.like, .dislike{
+.like,.dislike {
 	float: right;
 	width: 14px;
 	height: 19px;
-	background-image:url(/img/likeit.png);
-	background-repeat:no-repeat;
+	background-image: url(/img/likeit.png);
+	background-repeat: no-repeat;
 	margin: 0 2px;
 	cursor: pointer;
 }
 
-.like{
-	background-position:0 0;
+.like {
+	background-position: 0 0;
 }
 
-.dislike{
-	background-position:-15px 0;
+.dislike {
+	background-position: -15px 0;
 }
 
-.like_nr{
+.like_nr {
 	float: right;
 	color: #C7C7C7;
 	height: 19px;
 	text-align: center;
 }
 
-.like_nr.plus{
+.like_nr.plus {
 	color: #74ac6d;
 }
-.like_nr.minus{
+
+.like_nr.minus {
 	color: #e45b5b;
 }
 
 /*--login formular--*/
-#login_container{
+#login_container {
 	float: left;
 	margin-top: 22px;
-	margin-left:19px;
+	margin-left: 19px;
 }
 
-#signin_btn{
-	position:absolute;
-	float:right;
-	margin-left:138px;
+#signin_btn {
+	position: absolute;
+	float: right;
+	margin-left: 138px;
 	height: 24px;
 	width: 59px;
-	background: url(/img/signin_bg_off.png) repeat; 
-	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	background: url(/img/signin_bg_off.png) repeat;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #fff;
 	text-decoration: none;
 	padding: 6px 1px 0 8px;
 	cursor: pointer;
-	
 }
 
-#signin_btn.on{
+#signin_btn.on {
 	height: 23px;
 	width: 57px;
 	background: #edf6dc;
@@ -1620,7 +1625,7 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	z-index: 10;
 }
 
-#login_arrow{
+#login_arrow {
 	float: right;
 	height: 5px;
 	width: 7px;
@@ -1628,35 +1633,35 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	margin: 6px 9px 0 4px;
 }
 
-#signin_btn.on #login_arrow{
+#signin_btn.on #login_arrow {
 	background: url(/img/signin_arrow_on.png) no-repeat;
 }
 
-#login_dropdown{
+#login_dropdown {
 	position: absolute;
-	visibility:hidden;
-	margin-top:25px;
+	visibility: hidden;
+	margin-top: 25px;
 	margin-left: -1px;
 	z-index: 9;
 	background-color: #edf6dc;
-	
 	border-top: 5px solid #87a347;
 	border-bottom: 6px solid #87a347;
 	border-right: 1px solid #87a347;
 	border-left: 1px solid #87a347;
 }
-#login_form{
+
+#login_form {
 	height: 81px;
 	width: 185px;
 	border-bottom: 3px solid #a4c259;
 	padding: 0 10px 17px 10px;
 }
 
-#login_form input{
-	float:left;
+#login_form input {
+	float: left;
 	width: 162px;
 	height: 25px;
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #b5b5b5;
 	padding: 0 0 0 5px;
 	margin: 3px 0 2px 0;
@@ -1664,90 +1669,91 @@ li.odd .comment_arrow, li li.odd .comment_arrow_small, #comment_discussion li.od
 	border-right: 0pt;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 }
-#username_end, #email_end, #password_end{
+
+#username_end,#email_end,#password_end {
 	margin: 3px 0 2px 0;
-	float:left;
+	float: left;
 	width: 16px;
 	height: 25px;
-	border:1pt solid #87a347;
-	border-left:0;
-	background: #fff; 
+	border: 1pt solid #87a347;
+	border-left: 0;
+	background: #fff;
 }
 
-input.right + #username_end, input.right + #email_end, input.right + #password_end{
-	background:	url(/img/login_form_correct.png);
+input.right+#username_end,input.right+#email_end,input.right+#password_end
+	{
+	background: url(/img/login_form_correct.png);
 }
 
-input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_end{
-	background:	url(/img/login_form_fault.png);
+input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
+	{
+	background: url(/img/login_form_fault.png);
 }
-
 
 /*-----------facebook-login ------------------------*/
-#fb_login{
-	cursor:pointer;
-	font:  7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+#fb_login {
+	cursor: pointer;
+	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
 	padding: 6px 0 0 105px;
 }
 
-#fb_login:hover{
+#fb_login:hover {
 	color: #5a5a5a;
 	text-decoration: underline;
 }
 
-.fb_logo{
-	margin-right:8px;
-	float:right;
+.fb_logo {
+	margin-right: 8px;
+	float: right;
 	background: url(/icons/facebook_off.png) no-repeat;
-	width:20px;
-	height:20px;
+	width: 20px;
+	height: 20px;
 }
 
-#fb_login:hover .fb_logo{
+#fb_login:hover .fb_logo {
 	background: url(/icons/facebook_on.png) no-repeat;
 }
 
 /*------------end facebook-login------------------*/
-
-.btn_style{
-	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.btn_style {
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
 	text-decoration: none;
 	margin: 0 1px 0 1px;
 	cursor: pointer;
 }
 
-.btn_style:hover{
+.btn_style:hover {
 	color: #5a5a5a;
 	text-decoration: underline;
 }
 
-.btn_style.on{
-	 color:#5a5a5a;
+.btn_style.on {
+	color: #5a5a5a;
 }
 
-#register_btn{
-	float:left;
-	margin: 7px 0 0 0;
-}
-
-#login_btn{
-	float:right;
-	margin: 7px 0 0 0;
-}
-
-#error_login{
+#register_btn {
 	float: left;
-	position:fixed;
+	margin: 7px 0 0 0;
+}
+
+#login_btn {
+	float: right;
+	margin: 7px 0 0 0;
+}
+
+#error_login {
+	float: left;
+	position: fixed;
 	height: 20px;
 }
 
-#error_login_left{
+#error_login_left {
 	float: left;
 	width: 150px;
 	height: 100%;
-	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #c05c54;
 	padding: 5px 0 0 5px;
 	border: 1pt solid #c05c54;
@@ -1755,13 +1761,13 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 	background-color: #fcebea;
 }
 
-#error_login_right{
+#error_login_right {
 	float: left;
 	width: 8px;
 	height: 100%;
 	padding-top: 7px;
 	background: url(/img/login_error_peak.png) no-repeat;
-	background-position:center;
+	background-position: center;
 }
 
 /*
@@ -1770,11 +1776,10 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 	<div id='error_login_right'></div>
 </div>
 */
-
 /*-- nach der Anmeldung --*/
-#login_user{
+#login_user {
 	width: 185px;
-	font:  8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #5a5a5a;
 	background-color: #edf6dc;
 	/*border-left: 1px solid #87a347;
@@ -1783,9 +1788,9 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 	padding: 5px 10px 3px 10px;
 }
 
-#user{
+#user {
 	float: left;
-	width:100%;
+	width: 100%;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #87a347;
 	padding: 0 0 3px 4px;
@@ -1793,56 +1798,58 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 	border-bottom: 1px solid #87a347;
 }
 
-#user img{
+#user img {
 	float: left;
-	margin: 3px 0 2px 0; 
+	margin: 3px 0 2px 0;
 	height: 50px;
 	width: 50px;
 }
-#user p{
-	float:left;
+
+#user p {
+	float: left;
 	margin: 5px 0 0 10px;
 }
 
-.user_menu_btn{
-	display:block;
+.user_menu_btn {
+	display: block;
 	cursor: pointer;
 	margin-left: 4px;
 	margin-bottom: 3px;
 	text-decoration: none;
-	color:#5a5a5a;
+	color: #5a5a5a;
 }
-.user_menu_btn:hover{
+
+.user_menu_btn:hover {
 	text-decoration: underline;
 }
 
 /*-----new recipe------------*/
-#nr_general_btn{
-	margin-left:49px;
+#nr_general_btn {
+	margin-left: 49px;
 }
 
-	
-.nr_dots{
-	margin:14px 8px 0px 8px;
-	float:left;
+.nr_dots {
+	margin: 14px 8px 0px 8px;
+	float: left;
 	background: url("/img/dot.png") repeat-x;
-	height:3px;
-	width:18px;
+	height: 3px;
+	width: 18px;
 }
 
 /*-------Rezept erstellen -Danielp ist good for me-------*/
-.new_recipe_steps{
-	height: 550px;
+.new_recipe_steps {
+	min-height: 550px;
 }
 
-#new_recipe_step1,#new_recipe_step2,#new_recipe_step3,#new_recipe_step4{ 
-	font:  14pt Georgia;
+#new_recipe_step1,#new_recipe_step2,#new_recipe_step3,#new_recipe_step4
+	{
+	font: 14pt Georgia;
 	font-style: italic;
 	color: #5a5a5a;
 }
 
-.new_recipe_headline{
-	font:  22pt Georgia;
+.new_recipe_headline {
+	font: 22pt Georgia;
 	letter-spacing: 0.5px;
 	color: #404040;
 	text-align: left;
@@ -1851,7 +1858,7 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 	border-bottom: 1px solid #b5b5b5;
 }
 
-.next_step{
+.next_step {
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #878787;
 	width: 85px;
@@ -1861,63 +1868,63 @@ input.wrong + #username_end, input.wrong + #email_end, input.wrong + #password_e
 	cursor: pointer;
 }
 
-.next_step:hover{
-	color:#5a5a5a;
+.next_step:hover {
+	color: #5a5a5a;
 }
 
-#next_step1{
+#next_step1 {
 	float: right;
 	margin-right: 197px;
 }
 
-#next_step2{
-	float: right;
-	margin: -3px 182px 0 0;
+#next_step2 {
+	margin: -3px 182px 0 370px;
 }
 
-#next_step3{
-	float: right;
-	margin-right: 197px;
+#next_step3 {
+	margin-left: 357px;
 }
 
-#step_1_form td,#step_3_form td{
+#step_1_form td,#step_3_form td {
 	height: 40px;
 }
 
-td.step_1_left{
+td.step_1_left {
 	width: 140px;
 }
 
-td.step_1_right{
+td.step_1_right {
 	width: 450px;
 }
 
-#recipe_beschreibung,.beschreibung_character{
-	float: left;	
+#recipe_beschreibung,.beschreibung_character {
+	float: left;
 }
 
-.beschreibung_character{
-	font:  14pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.beschreibung_character {
+	font: 14pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 	color: #878787;
 	margin: 5px 0 0 5px;
 }
 
-#step_1_form input,#step_1_form textarea,#step_3_form input,#step_3_form textarea,#step_4_form input,#step_4_form textarea{
+#step_1_form input,#step_1_form textarea,#step_3_form input,#step_3_form textarea,#step_4_form input,#step_4_form textarea
+	{
 	background-color: #ece9e3;
 	border: 1px solid #979694; /*d1cec9*/
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;
 }
 
-#recipe_name{
+#recipe_name {
 	width: 300px;
 	height: 28px;
 	padding: 0 0 0 5px;
-	color:#9b9b9a;
+	color: #9b9b9a;
 }
 
-#step_1_form input.wrong,#step_1_form textarea.wrong, #step_3_form input.wrong,#step_3_form textarea.wrong, #step_4_form input.wrong,#step_4_form textarea.wrong{
+#step_1_form input.wrong,#step_1_form textarea.wrong,#step_3_form input.wrong,#step_3_form textarea.wrong,#step_4_form input.wrong,#step_4_form textarea.wrong
+	{
 	background-color: #fcebea;
 	color: #c05c54;
 	border: 1pt solid #c05c54;
@@ -1926,115 +1933,112 @@ td.step_1_right{
 }
 
 /*-----Kategorie DropDown neues Rezept-----*/
-.step_1_right .recipe_kategorie{
+.step_1_right .recipe_kategorie {
 	margin-top: 5px;
-	width:190px;
+	width: 190px;
 }
 
-.step_1_right .kategorie_filter{
+.step_1_right .kategorie_filter {
 	margin: 0;
 	border: 1pt solid #979694;
 }
 
-.step_1_right #kategorie_filter_right{
+.step_1_right #kategorie_filter_right {
 	float: right;
 	width: 28px;
 	height: 100%;
 	background: url("/img/arrow_down.png") no-repeat;
 }
 
-.step_1_right #kategorie_filter_name{
+.step_1_right #kategorie_filter_name {
 	float: left;
 	width: 153px;
 	height: 100%;
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #5a5a5a;
 	text-align: inherit;
 	padding: 5px 0 0 5px;
 }
 
-.step_1_right ul.kategorie_filter{
+.step_1_right ul.kategorie_filter {
 	width: 188px;
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	letter-spacing: normal;
 	text-align: inherit;
 	padding-top: 0;
 	border-top: 0;
 }
 
-.step_1_right .kategorie_filter li{
+.step_1_right .kategorie_filter li {
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
 
-.step_1_right .kategorie_filter.wrong{
+.step_1_right .kategorie_filter.wrong {
 	background-color: #fcebea;
 	border: 1pt solid #c05c54;
 }
 
-.step_1_right .kategorie_filter.wrong #kategorie_filter_right{
+.step_1_right .kategorie_filter.wrong #kategorie_filter_right {
 	background: url("/img/arrow_down_error.png") no-repeat;
 }
 
-.step_1_right .kategorie_filter.wrong #kategorie_filter_name{
+.step_1_right .kategorie_filter.wrong #kategorie_filter_name {
 	color: #c05c54;
 }
 
-.step_1_right .kategorie_filter.wrong #kategorie_filter_right{
+.step_1_right .kategorie_filter.wrong #kategorie_filter_right {
 	border-left: 1pt solid #e5dddc;
 }
 
 /*-----Kategorie DropDown Ende-----*/
-
-#recipe_beschreibung,#beschreibung_character{
+#recipe_beschreibung,#beschreibung_character {
 	margin-top: 7px;
 	margin-bottom: 5px;
 }
 
-#einleitung_label{
+#einleitung_label {
 	vertical-align: text-top;
 	padding-top: 9px;
 }
 
-#recipe_beschreibung{
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+#recipe_beschreibung {
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	width: 300px;
 	height: 100px;
-	color:#9b9b9a;
+	color: #9b9b9a;
 	padding: 3px 0 0 5px;
 }
 
-#bild_label{
+#bild_label {
 	vertical-align: text-top;
-	padding-top: 9px;	
+	padding-top: 9px;
 }
 
-#file_uploader{
+#file_uploader {
 	margin-top: 5px;
 }
 
-#step_2_form{
-	float: left;
+#step_2_form {
 	width: 100%;
 }
 
-#step_2_form td{
+#step_2_form td {
 	vertical-align: top;
-} 
+}
 
-#step_2_form input, #step_2_form textarea{
+#step_2_form input,#step_2_form textarea {
 	background-color: #f7f4f1;
 	border: 1px solid #979694;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;
 }
 
-#step_table .step_character,#step_table  .minus_btn{
+#step_table .step_character,#step_table  .minus_btn {
 	margin-left: 8px;
-	
 }
 
-.new_step{
+.new_step {
 	float: left;
 	height: 147px;
 	width: 461px;
@@ -2044,37 +2048,38 @@ td.step_1_right{
 	margin: 3px 0 10px 0;
 }
 
-.step_textarea{
-	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.step_textarea {
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	width: 300px;
 	height: 115px;
 	margin: 9px 5px 0 0;
 }
 
-.step_character{
-	font:  14pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.step_character {
+	font: 14pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 	color: #878787;
 	margin-top: 7px;
 }
 
-.plus_btn{
+.plus_btn {
 	float: left;
 	width: 25px;
 	height: 25px;
 	background: url(/img/new_step_off.png) no-repeat;
 	cursor: pointer;
 }
-.plus_btn:hover{
+
+.plus_btn:hover {
 	background: url(/img/new_step_on.png) no-repeat;
 }
 
-#neuer_schritt{
+#neuer_schritt {
 	margin: -1px 0 0 5px;
 }
 
-.minus_btn{
+.minus_btn {
 	float: left;
 	width: 25px;
 	height: 25px;
@@ -2082,49 +2087,49 @@ td.step_1_right{
 	cursor: pointer;
 }
 
-.minus_btn:hover{
+.minus_btn:hover {
 	background: url(/img/delete_step_on.png) no-repeat;
 }
 
-#step_3_form th{
+#step_3_form th {
 	font-weight: normal;
 	text-align: left;
 	height: 27px;
 }
 
-#step_3_form span{
+#step_3_form span {
 	margin-left: 2px;
 }
 
-#step_3_form input{
+#step_3_form input {
 	height: 28px;
 	padding: 0 0 0 5px;
 	color: #5a5a5a;
 }
 
-.step_3_left{
+.step_3_left {
 	padding: 0 0 0 3px;
 	width: 310px;
 }
 
-.step_3_right{
+.step_3_right {
 	padding: 0 0 0 15px;
 	width: 110px;
 }
 
-.step_3_left input,.step_3_right input{
+.step_3_left input,.step_3_right input {
 	width: 100%;
 }
 
-#new_zutat_step3{
+#new_zutat_step3 {
 	margin: 3px 0 0 9px;
 }
 
-.step_3_delete{
+.step_3_delete {
 	padding: 0 0 0 12px;
 }
 
-.step_3_deletebtn{
+.step_3_deletebtn {
 	float: left;
 	width: 25px;
 	height: 25px;
@@ -2132,80 +2137,81 @@ td.step_1_right{
 	cursor: pointer;
 }
 
-.step_3_deletebtn:hover{
+.step_3_deletebtn:hover {
 	background: url(/img/delete_step_on.png) no-repeat;
 }
 
-.step_4_left{
+.step_4_left {
 	width: 300px;
 	padding: 0 0 12px 0;
 }
 
-#step_4_tags, #step_4_duration, #step_4_person{
+#step_4_tags,#step_4_duration,#step_4_person {
 	width: 300px;
 	padding: 0 0 10px 0;
 }
 
-.step_4_left div{
+.step_4_left div {
 	float: right;
 }
 
-.step_4_left .label_stars,.step_4_left .label_chefhats,.step_4_left .label_muffins{
-	height:19px;
+.step_4_left .label_stars,.step_4_left .label_chefhats,.step_4_left .label_muffins
+	{
+	height: 19px;
 	width: 19px;
-	display:table-cell;
+	display: table-cell;
 	cursor: pointer;
-	padding:0;
+	padding: 0;
 }
 
-.step_4_right{
+.step_4_right {
 	padding-left: 50px;
 }
 
-#table_skill, #table_kalorien{
+#table_skill,#table_kalorien {
 	border: 1pt solid #f7f4f1;
 }
-#table_skill.wrong, #table_kalorien.wrong{
+
+#table_skill.wrong,#table_kalorien.wrong {
 	background-color: #fcebea;
 	border: 1pt solid #c05c54;
 }
 
-#recipe_tags{
+#recipe_tags {
 	background-color: #ECE9E3;
-	width:100%;
+	width: 100%;
 	height: 100px;
 	margin-top: 10px;
 	border: 1pt #979694 solid;
 }
 
-#recipe_tags input{
+#recipe_tags input {
 	background: none;
-	border:0;
+	border: 0;
 }
 
-#recipe_tags .tag{
+#recipe_tags .tag {
 	margin-top: 2px;
-	background-color:#e0ddd7;
+	background-color: #e0ddd7;
 }
 
-#new_durationclock{
+#new_durationclock {
 	float: left;
 	margin-top: 3px;
 }
 
-#new_durationtext{
+#new_durationtext {
 	float: left;
 	margin: 4px 0 0 2px;
 }
 
-	
-#time_block{
+#time_block {
 	float: right;
 	margin-left: 30px;
 	font-style: normal;
 }
 
-.new_time{
+.new_time {
 	height: 20px;
 	width: 20px;
 	color: #5a5a5a;
@@ -2214,8 +2220,7 @@ td.step_1_right{
 	padding: 0 0 0 3px;
 }
 
-
-#nr_person{
+#nr_person {
 	height: 20px;
 	width: 20px;
 	color: #5a5a5a;
@@ -2223,29 +2228,28 @@ td.step_1_right{
 	padding: 0 0 0 3px;
 }
 
-#step_4_person span{
+#step_4_person span {
 	float: right;
 }
 
-#end_newrecipe{
-	width:100%;
+#end_newrecipe {
+	width: 100%;
 }
 
 /*-----TAGCloud-------*/
-#tagcloud{
+#tagcloud {
 	margin-top: 22px;
 	width: 290px;
 	text-align: center;
 }
 
-#tagcloud  span{
-	
+#tagcloud  span {
 	margin: 0 2px;
 	vertical-align: baseline;
-	cursor: pointer;	
+	cursor: pointer;
 }
 
-#tagcloud > span:hover{
+#tagcloud>span:hover {
 	margin: 2px;
 	background-color: #ece9e3;
 	-moz-border-radius: 4px;
@@ -2253,11 +2257,11 @@ td.step_1_right{
 	border-radius: 4px;
 }
 
-.last_step_btn{
+.last_step_btn {
 	
 }
 
-#recipe_ready{
+#recipe_ready {
 	float: right;
 	font: 10pt Lucida Sans Unicode;
 	color: #878787;
@@ -2270,58 +2274,59 @@ td.step_1_right{
 	cursor: pointer;
 }
 
-#progress_1, #progress_2, #progress_3, #progress_4{
-	color:#585858;
+#progress_1,#progress_2,#progress_3,#progress_4 {
+	color: #585858;
 	font: 14pt Georgia;
-	background-color: #f9f8f6; 
+	background-color: #f9f8f6;
 }
 
-#progress_1{
-	height:135px;
+#progress_1 {
+	height: 135px;
 }
 
-#progress_2{
-	/*  is set with jQuery 
+#progress_2 { /*  is set with jQuery 
 	*height:100px;
 	*/
+	
 }
 
-#progress_3{
-	/*  is set with jQuery 
+#progress_3 { /*  is set with jQuery 
 	*height:100px;
 	*/
+	
 }
-#progress_4{
-	/*  is set with jQuery 
+
+#progress_4 { /*  is set with jQuery 
 	*height:100px;
 	*/
+	
 }
 
 /* Progress Neues Rezept, Seitenleiste */
-#nr_progress{
-	height:auto;
+#nr_progress {
+	height: auto;
 }
 
-#nr_name, #nr_kategorie{
-	color:#b5b5b5;
+#nr_name,#nr_kategorie {
+	color: #b5b5b5;
 	font: 14pt Georgia;
 	width: 248px;
 	margin: 0 1px 10px 1px;
 }
 
-#nr_upload{
-	color:#585858;
+#nr_upload {
+	color: #585858;
 	font: 14pt Georgia;
 	width: 248px;
 	margin: 10px 1px 5px 1px;
 }
 
-#progress_1, #progress_2, #progress_3, #progress_4{
-    margin: 0 5px 0 5px;
-    padding: 10px 14px 0 14px;
+#progress_1,#progress_2,#progress_3,#progress_4 {
+	margin: 0 5px 0 5px;
+	padding: 10px 14px 0 14px;
 }
 
-#upload{
+#upload {
 	width: 222px;
 	height: 20px;
 	margin-left: 3px;
@@ -2329,13 +2334,13 @@ td.step_1_right{
 	border: 1pt solid #585858;
 }
 
-#progress{
-	width:1px;
-	height:20px;
-	background:#585858;
+#progress {
+	width: 1px;
+	height: 20px;
+	background: #585858;
 }
 
-#progress_percent{
+#progress_percent {
 	float: right;
 	height: 20px;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -2345,81 +2350,82 @@ td.step_1_right{
 	overflow: hidden;
 }
 
-.nr_devider{
+.nr_devider {
 	height: 10px;
 	background: url("/img/dot.png") repeat-x;
 	margin-top: -10px;
 }
 
-#nr_statussteps, #nr_statuszutaten, #nr_statustags{
+#nr_statussteps,#nr_statuszutaten,#nr_statustags {
 	margin: 15px 0 0 1px;
 }
 
 /*--Step2,3,4--*/
-#nr_stepnumber, #nr_zutatennumber, #nr_tagnumber{
-	color:#b5b5b5;
+#nr_stepnumber,#nr_zutatennumber,#nr_tagnumber {
+	color: #b5b5b5;
 }
+
 /* ende Progress Neues Rezept, Seitenleist */
-
 /*-----Nichts gefunden Seite-----*/
-#noresult_headline{
+#noresult_headline {
 	padding-top: 41px;
-	font:  25pt Georgia;
-	letter-spacing: 0.5px;
-	color: #404040;
-	text-align: left;
-}
-#noresult_subline{
-	margin-top: 3px;
-	font:  14pt Georgia;
+	font: 25pt Georgia;
 	letter-spacing: 0.5px;
 	color: #404040;
 	text-align: left;
 }
 
-#noresult_reset{
+#noresult_subline {
+	margin-top: 3px;
+	font: 14pt Georgia;
+	letter-spacing: 0.5px;
+	color: #404040;
+	text-align: left;
+}
+
+#noresult_reset {
 	float: left;
 	margin-top: 15px;
-	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #859f5e;
 	text-decoration: none;
 	cursor: pointer;
 }
 
-#noresult_reset:hover{
+#noresult_reset:hover {
 	text-decoration: underline;
 }
 
 /*-----Nichts gefunden SeitenENDE-----*/
-
 /*--------Popups-Allgemein------------*/
-.background_popup{
-	opacity:.6;   
-	position:fixed;
-	height:100%;  
-	width:100%;  
-	top:0;  
-	left:0;  
-	background:#000000;  
-	border:1px solid #cecece;  
-	z-index:100;
-	display:none;  
+.background_popup {
+	opacity: .6;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #000000;
+	border: 1px solid #cecece;
+	z-index: 100;
+	display: none;
 }
 
-.popup{
-	position:fixed;
+.popup {
+	position: fixed;
 	width: 620px;
-	height:380px;
-	display:none;
+	height: 380px;
+	display: none;
 	padding: 10px;
 	background-color: #ece9e3;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-	z-index:101;
+	z-index: 101;
 }
-.closepopup{
-	float:right;
+
+.closepopup {
+	float: right;
 	width: 12px;
 	height: 12px;
 	cursor: pointer;
@@ -2427,61 +2433,61 @@ td.step_1_right{
 }
 
 /*--------Popups-Allgemein-ENDE-----------*/
-
 /*--------Popups-registrieren------------*/
-#register_headline{
+#register_headline {
 	float: left;
 	width: 80%;
 	margin: 70px 0 0 50px;
 	color: #252525;
-	font:  29pt Georgia;
+	font: 29pt Georgia;
 }
 
-#register_text, #register_forward{
+#register_text,#register_forward {
 	font: 11pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 }
 
-#register_text{
+#register_text {
 	float: left;
 	margin: 20px 70px 0 50px;
 }
 
-#register_forward{
+#register_forward {
 	float: left;
 	margin: 30px 70px 0 50px;
-	width:80%;
+	width: 80%;
 }
 
-#register_forward a{
+#register_forward a {
 	color: #859f5e;
 	text-decoration: none;
 }
 
-#register_forward a:hover{
+#register_forward a:hover {
 	text-decoration: underline;
 }
 
-#register_mailprovider img{
+#register_mailprovider img {
 	float: left;
 	margin: 10px 0 0 50px;
 	border: 0;
 }
 
-#register_copyright{
+#register_copyright {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	float: left;
 	width: 90%;
 	margin: 0 0 0 50px;
 }
+
 /*----- Content Message ------*/
-.content_message{
+.content_message {
 	position: relative;
 	padding: 10px;
 	background-color: #e2eccc;
 	color: #899b61;
-	border:1px solid #899b61;
+	border: 1px solid #899b61;
 	-moz-border-radius: 7px;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
@@ -2491,88 +2497,85 @@ td.step_1_right{
 	margin-left: -201px;
 }
 
-.content_message h5, .content_message p{
-	margin-left: 25px;	
+.content_message h5,.content_message p {
+	margin-left: 25px;
 }
 
-.content_message h5{
-	font:  17pt Georgia;
+.content_message h5 {
+	font: 17pt Georgia;
 	margin-top: 17px;
 }
 
-.content_message p{
+.content_message p {
 	margin-top: 6px;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	line-height: 11pt;
 }
-/*----- Content Message ENDE------*/
 
+/*----- Content Message ENDE------*/
 /*------Rezept ist fertig-------*/
-#new_recipe_ready{	
+#new_recipe_ready {
 	width: 380px;
-	height:100px;	
+	height: 100px;
 }
 
 /*------Rezept ist fertig Ende-------*/
-
 /*------- Aktivierungsnachricht --------*/
-#new_activation{
+#new_activation {
 	width: 380px;
-	height:100px;
+	height: 100px;
 }
-/*------- Aktivierungsnachricht  Ende--------*/
 
+/*------- Aktivierungsnachricht  Ende--------*/
 /*------ backtothetop -----------------*/
-#backtothetop{
-	position:fixed;
+#backtothetop {
+	position: fixed;
 	background: url("/img/backtothetop.png") no-repeat;
-	height:64px;
-	width:64px;
-	top:100px;
-	display:none;
+	height: 64px;
+	width: 64px;
+	top: 100px;
+	display: none;
 	cursor: pointer;
 }
+
 /*---------footer---------*/
-#content_footer{
+#content_footer {
+	clear:both;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	border-top: 1pt solid #B5B5B5;
-	margin-top: 10px;
-	padding-top: 3px;	
+	margin-top: 30px;
+	padding-top: 3px;
 	width: 100%;
 	height: 60px;
-	float: left;
 }
 
-#content_footer span{
+#content_footer span {
 	float: left;
 	color: #919191;
 	margin: 0 15px;
 }
 
-#footer_links{
+#footer_links {
 	float: right;
 	margin: 0 15px;
 }
 
-#footer_links a{
+#footer_links a {
 	color: #859f5e;
 	text-decoration: none;
 }
 
-#footer_links a:hover{
+#footer_links a:hover {
 	text-decoration: underline;
 }
 
 /*---------facebookpopup---------*/
-#facebookpopup{
-	width:500px;
-	height:auto;
+#facebookpopup {
+	width: 500px;
+	height: auto;
 }
 
-#fb_registration{
-	float:left;
-	margin-top:5px;
-	
+#fb_registration {
+	float: left;
+	margin-top: 5px;
 }
-
-
