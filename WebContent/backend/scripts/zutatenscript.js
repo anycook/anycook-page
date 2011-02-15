@@ -4,6 +4,7 @@ function loadZutaten(json){
 	$(".zutatenopen").die("click", openZutat);
 	$("#new_zutat").unbind("submit", newZutat);
 	$("#confirm_form").unbind("submit", parentConfirmed);
+	$("#new_index").unbind("click", newZutatenIndex);
 	
 	for(var i in json){
 		var stem = json[i].stem;
@@ -26,6 +27,7 @@ function loadZutaten(json){
 	$(".zutatenopen").live("click", openZutat);
 	$("#new_zutat").submit(newZutat);
 	$("#confirm_form").submit(parentConfirmed);
+	$("#new_index").click(newZutatenIndex);
 }
 
 function loadChilds(json, ul){
@@ -120,4 +122,11 @@ function newZutat(event){
 		}
 	});
 	return false;
+}
+
+function newZutatenIndex(){
+	$.ajax({
+		url:"/anycook/MakeNewIndex",
+		data:"index=zutatenindex"
+	});
 }

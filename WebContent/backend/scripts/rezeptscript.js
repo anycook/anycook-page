@@ -160,6 +160,7 @@ function activateVersion(gericht, id){
 
 function makeNewIndex(){
 	$.ajax({
-		url:"/anycook/MakeNewIndex"
+		url:"/anycook/MakeNewIndex",
+		data:"index=fulltextindex"
 	});
 }
