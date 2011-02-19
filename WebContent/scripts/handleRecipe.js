@@ -70,9 +70,17 @@ function loadRecipe(json){
 	
 	var personen = Number(json.personen);
 	if(personen>1)
-		$("#zutat_head").html("Zutaten für "+json.personen+" Personen:");
+		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+json.personen+"' size='2' maxlength='2' /> Personen:");
 	else
-		$("#zutat_head").html("Zutaten für "+json.personen+" Person:");
+		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+json.personen+"' size='2' maxlength='2' /> Person:");
+	
+	$("#person_number").click(function(){$("#person_number").val('');});
+	$("#person_number").bind('keypress', function(e){
+		if(e.keyCode==13){
+			var persCount = $("#person_number").val();
+			multiZutaten(persCount);
+		}
+	});
 	
 	$("#filter_headline").text("Status");
 	
@@ -135,6 +143,44 @@ function loadRecipe(json){
 	FB.XFBML.parse(document.getElementById('social'));
 	
 }
+
+zutatValues = new Array();
+
+function multiZutaten(perscount){
+	
+	$("td.zutaten_table_right").each(function(i){
+		var newValue = '';
+		if(zutatValues[i] == null){
+			zutatValues[i] = $(this).text();
+			newValue = getNumbersFromString($(this).text(), perscount);			
+		}
+		else{
+			newValue =  getNumbersFromString(zutatValues[i], perscount);
+		}
+			
+		$(this).empty();
+		$(this).append(newValue);
+	});
+	
+}
+
+function getNumbersFromString(inputstring, factor)
+{
+	var finalNumber = "";
+	var restString = "";
+	
+	for(var n=0; n<inputstring.length; n++){
+		var i = inputstring.substring(n,n+1);
+		if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0")
+			finalNumber += i;
+		else{
+			restString += inputstring.substring(n,inputstring.length);
+			break;
+			}
+		}
+	return (parseInt(finalNumber)*factor)+restString;
+}
+
 
 function loadDiscussion(gericht){
 	var login = loginChecker();
