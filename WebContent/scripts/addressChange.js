@@ -195,15 +195,15 @@ function handleChange(event){
 			break;
 		case 2:
 			if(path[0]== "recipe"){
-				$.ajax({
-		  		  url: "/anycook/LoadRecipe",
-		  		  dataType: 'json',
-		  		  async:false,
-		  		  data: {recipe:path[1]},
-		  		  success: function(json){
-					loadRecipe(json);
-				}
-		  		});
+					$.ajax({
+			  		  url: "/anycook/LoadRecipe",
+			  		  dataType: 'json',
+			  		  async:false,
+			  		  data: {recipe:path[1]},
+			  		  success: function(json){
+						loadRecipe(json);
+					}
+			  		});
 				$("#content_footer").hide();
 			}
 			if(path[0] == "search"){
@@ -215,7 +215,20 @@ function handleChange(event){
 			if(path[0] == "activate"){
 				activateUser(path[1]);
 			}
-			break;	
+			break;
+		case 3:
+			if(path[0] == "recipe"){
+				$.ajax({
+			  		  url: "/anycook/LoadRecipe",
+			  		  dataType: 'json',
+			  		  async:false,
+			  		  data: {recipe:path[1], version:path[2]},
+			  		  success: function(json){
+						loadRecipe(json);
+					}
+			  	});
+				$("#content_footer").hide();
+			}
 		}
 	}
 	$("#content_header div").removeClass("on");

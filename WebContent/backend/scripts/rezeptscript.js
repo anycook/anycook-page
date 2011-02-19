@@ -67,7 +67,7 @@ function clickRezept(event){
 						htmlstring += "<tr class=\"active\">";
 					else
 						htmlstring += "<tr>";
-					htmlstring += "<td class=\"version_id\">"+json[i].id+"</td><td>"+json[i].email+"</td>" +
+					htmlstring += "<td class=\"version_id\"><a href=\"/#/recipe/"+gericht+"/"+json[i].id+"\" target=\"_blank\">"+json[i].id+"</a></td><td>"+json[i].email+"</td>" +
 							"<td>"+eingefuegt+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td>";
 					
 					if(json[i].active == "0")
