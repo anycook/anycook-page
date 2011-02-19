@@ -1,9 +1,12 @@
 
 
-function login(mail, pwd){	
+function login(mail, pwd, stayloggedin){
+	var data = "mail="+mail+"&pwd="+pwd;
+	if(stayloggedin)
+		data+="&stayloggedin";
 	$.ajax({
 		url:"/anycook/Login",
-		data:"mail="+mail+"&pwd="+pwd,
+		data:data,
 		success:function(response){
 			if(response=="false"){
 				$("#login_mail, #login_pwd").addClass("wrong");
@@ -120,7 +123,9 @@ function makeLoginText(){
 	
 	//new facebook plugin
 	var htmlstring = "<div id='fb_login'>einloggen mit <div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
-	"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div><div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
+	"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div>" +
+	"<input type='checkbox' id='check_stayloggedin' /><div id='stayloggedin'>angemeldet bleiben</div>" +
+	"<div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
 	"</form>";
 	
 		
@@ -199,7 +204,8 @@ function clickSignin(event){
 		$("#register_btn, #login_btn").removeClass("on");
 	}
 	$("#login_dropdown").toggle();
-	$("#login_form").css("height", 81);
+	$("#check_stayloggedin, #stayloggedin").show();
+	$("#login_form").css("height", 114);
 	$("#signin_btn").toggleClass("on");
 	$("#login_btn").addClass("on");	
 	return false;
@@ -211,24 +217,13 @@ function clickLogin(event){
 	else{
 		$("#register_btn, #login_btn").toggleClass("on");
 		$("#login_username").val("");
+		$("#check_stayloggedin, #stayloggedin").fadeIn(500);
 		$("#login_username, #username_end").animate({"height":0, "opacity":.0, "margin":0},{duration:500, complete:function(){$("#login_username, #username_end").remove();}});
-		$("#login_form").animate({"height":81},500);			
+		$("#login_form").animate({"height":114},500);			
 	}
 }
 
 function clickRegister(event){
-	//new facebookstuff
-	/*var htmlstring = "<fb:registration"+
-	  " fields=\"name,email\" "+ 
-		  "redirect-uri=\"http://localhost:8080/anycook/NewUser\" "+
-		  "width=\"300\">"+
-		"</fb:registration>";
-	
-	$("#login_top").html(htmlstring);
-	//FB.XFBML.parse(document.getElementById('login_top'));
-	*/
-	
-	//old
 	if($("#register_btn").hasClass("on")){
 		$("#login_form").submit();
 	}
@@ -238,6 +233,7 @@ function clickRegister(event){
 		$("#password_end").after("<input type='text' name='username' id='login_username'/><div id='username_end'></div>");
 		$("#login_username, #username_end").css("height",0).css("opacity",.0);
 		$("#login_form").animate({"height":116},{duration:500, queue:false});
+		$("#check_stayloggedin, #stayloggedin").fadeOut(500);
 		$("#login_username, #username_end").animate({"height":25, "opacity":1},{duration:500, complete:function(){$("#login_username").val("Username");}});
 		//$("#fb_login").text("r")
 		
@@ -412,8 +408,9 @@ function submitForm(event){
 	if(!$("#login_mail, #login_pwd, #login_username").hasClass("wrong")){
 		var mail = $("#login_mail").val();
 		var pwd = $("#login_pwd").val();
+		var stayloggedin =$("#check_stayloggedin").is(":checked");
 		if($("#login_username").length == 0)
-			login(mail, pwd);
+			login(mail, pwd, stayloggedin);
 		else{
 			var username = $("#login_username").val();
 			register(mail, pwd, username);

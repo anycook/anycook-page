@@ -1662,10 +1662,10 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 }
 
 #login_form {
-	height: 81px;
 	width: 185px;
 	border-bottom: 3px solid #a4c259;
-	padding: 0 10px 17px 10px;
+	padding: 0 10px 5px 10px;
+	float:left;
 }
 
 #login_form input {
@@ -1679,6 +1679,10 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	border: 1pt solid #87a347;
 	border-right: 0pt;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
+}
+
+#login_form input#check_stayloggedin{
+	width:20px;
 }
 
 #username_end,#email_end,#password_end {
@@ -1699,6 +1703,14 @@ input.right+#username_end,input.right+#email_end,input.right+#password_end
 input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	{
 	background: url(/img/login_form_fault.png);
+}
+
+
+#stayloggedin{
+	margin-top:8px;
+	float:left;
+	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #a2a896;
 }
 
 /*-----------facebook-login ------------------------*/
@@ -1745,8 +1757,10 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 }
 
 #register_btn {
-	float: left;
 	margin: 7px 0 0 0;
+	clear:left;
+	float:left;
+	width:50px;
 }
 
 #login_btn {
