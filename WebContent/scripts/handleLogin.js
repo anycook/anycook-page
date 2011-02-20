@@ -138,6 +138,12 @@ function makeLoginText(){
 	$("#login_mail, #login_pwd").keypress(keypressInputs);
 	$("#login_mail, #login_pwd").keydown(keydownInputs);
 	
+	$("#stayloggedin").click(function(){
+		if($("#check_stayloggedin").is(":checked"))
+			$("#check_stayloggedin").removeAttr("checked");
+		else
+			$("#check_stayloggedin").attr("checked", "checked");
+	});
 	
 	$("#login_btn").click(clickLogin);
 	$("#login_form").submit(submitForm);

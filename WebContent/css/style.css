@@ -1711,6 +1711,11 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	float:left;
 	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
+	cursor: pointer;
+}
+
+#stayloggedin:hover{
+	color: #5a5a5a;
 }
 
 /*-----------facebook-login ------------------------*/
