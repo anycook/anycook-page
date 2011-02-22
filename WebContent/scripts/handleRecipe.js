@@ -62,13 +62,15 @@ function getBigFrameText(json){
 	return htmlstring;
 }
 
+var personen;
+
 function loadRecipe(json){
 	var headertext = "<div class='float_right_header'><div id='recipe_general_btn' class='big_button'>Rezept</div><div id='recipe_discussion_btn' class='big_button'>Diskussion</div></div>";
 	$("#content_header").html(headertext);
 	$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
 	$("#recipe_discussion_btn").click(function(event){$.address.parameter("page", "discussion");});
 	
-	var personen = Number(json.personen);
+	personen = Number(json.personen);
 	if(personen>1)
 		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+json.personen+"' size='2' maxlength='2' /> Personen:");
 	else
@@ -178,6 +180,8 @@ function getNumbersFromString(inputstring, factor)
 			break;
 			}
 		}
+	factor = factor / personen;
+	if(finalNumber == "") return restString;
 	return (parseInt(finalNumber)*factor)+restString;
 }
 
