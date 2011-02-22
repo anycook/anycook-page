@@ -77,11 +77,28 @@ function loadRecipe(json){
 		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+json.personen+"' size='2' maxlength='2' /> Person:");
 	
 	$("#person_number").click(function(){$("#person_number").val('');});
+	var persCount;
 	$("#person_number").bind('keypress', function(e){
+		var cleanString =String.fromCharCode(e.keyCode).match(/[0-9]+/); 
 		if(e.keyCode==13){
-			var persCount = $("#person_number").val();
+			persCount = $("#person_number").val();
+			multiZutaten(persCount);
+			$("#person_number").blur();
+		}
+		else if(cleanString == null) return false;
+		
+	});
+	
+	$("#person_number").focusout(function(){
+		if($("#person_number").val()==''){
+			if(persCount == null) $("#person_number").val(personen);
+			else $("#person_number").val(persCount);
+		}
+		else{
+			persCount = $("#person_number").val();
 			multiZutaten(persCount);
 		}
+			
 	});
 	
 	$("#filter_headline").text("Status");
@@ -168,23 +185,88 @@ function multiZutaten(perscount){
 
 function getNumbersFromString(inputstring, factor)
 {
-	var finalNumber = "";
+	var beginString = "";
+	var valueFromString = "";
 	var restString = "";
+	
+	var postProc = false;
 	
 	for(var n=0; n<inputstring.length; n++){
 		var i = inputstring.substring(n,n+1);
-		if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0")
-			finalNumber += i;
-		else{
-			restString += inputstring.substring(n,inputstring.length);
+		if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0"){
+			valueFromString += i;
+			for(var m=n+1; m<inputstring.length; m++){
+				var i = inputstring.substring(m,m+1);
+				if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0")
+					valueFromString += i;
+				else if(i==","||i=="."){
+					valueFromString += ".";
+				}
+				else if(i=="-"||i=="/"){
+					valueFromString += i;
+					postProc= true;
+				}
+				else{
+					restString += inputstring.substring(m,inputstring.length);
+					break;
+					}
+				}
 			break;
 			}
-		}
+		else
+			beginString += i;
+		}			
+		
 	factor = factor / personen;
-	if(finalNumber == "") return restString;
-	return (parseInt(finalNumber)*factor)+restString;
+	if(beginString.length == inputstring.length)
+		return beginString;
+	if(postProc)
+		return beginString + postProcessString(valueFromString, factor).toString().replace(".",",") + restString;
+	var finalValue = parseFloat(valueFromString)*factor;
+	return beginString+handleTrailingNumbers(finalValue).toString().replace(".",",")+restString;
+	
 }
 
+
+function handleTrailingNumbers(string){
+	var count = 0;
+	string = string.toString();
+	for(var n=0; n<string.length; n++){
+		var i = string.substring(n,n+1);
+		if(i==".") count=string.substring(n+1,string.length).length;
+	}
+	if(count < 2)
+		return parseFloat(string);
+	return parseFloat(string).toFixed(2);
+}
+
+function postProcessString(string, factor){
+	var first = "";
+	var delimiter = "";
+	var second = "";
+	var trail = false;
+	for(var n=0; n<string.length; n++){
+		var i = string.substring(n,n+1);
+		
+		if(i=="-" || i == "/"){
+				delimiter=i;
+				trail=true;
+			}
+		else if(trail)
+			second +=i;
+		else
+			first +=i;
+		}
+	if(delimiter == "-"){
+		var mean = (parseInt(first) + parseInt(second)) / 2;
+		return handleTrailingNumbers((mean*factor).toString());
+	}
+	if(delimiter == "/"){
+		var quotient = parseInt(first) / parseInt(second);
+		return handleTrailingNumbers((quotient*factor).toString());
+	}
+		
+}
 
 function loadDiscussion(gericht){
 	var login = loginChecker();
