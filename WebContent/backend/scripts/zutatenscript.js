@@ -67,7 +67,7 @@ function clickRenameZutat(event){
 
 function focusOutNewZutat(event){
 	var target = $(event.target);
-	target.parent().text($("#old_zutatname").val());
+	target.parents(".zutatenname").text($("#old_zutatname").val());
 }
 
 function sendRenameZutat(event){
