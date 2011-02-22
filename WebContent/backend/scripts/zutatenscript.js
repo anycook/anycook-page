@@ -57,6 +57,8 @@ function clickRenameZutat(event){
 	var zutatennamediv = $(event.target);
 	var zutatenname = $(zutatennamediv).text();
 	$(zutatennamediv).html("<form id=\"newzutat_form\"><input type=\"text\" id=\"new_zutatname\" /><input type=\"hidden\" id=\"old_zutatname\" value=\""+zutatenname+"\" /></form>");
+	
+	
 	$("#new_zutatname").focus();
 	$("#new_zutatname").focusout(focusOutNewZutat);
 	$("#newzutat_form").submit(sendRenameZutat);
