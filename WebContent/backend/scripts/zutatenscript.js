@@ -31,6 +31,7 @@ function loadZutaten(json){
 	$("#new_zutat").submit(newZutat);
 	$("#confirm_form").submit(parentConfirmed);
 	$("#new_index").click(newZutatenIndex);
+	$("#reset_zutaten").click(resetZutaten);
 }
 
 function loadChilds(json, ul){
@@ -168,5 +169,12 @@ function newZutatenIndex(){
 	$.ajax({
 		url:"/anycook/MakeNewIndex",
 		data:"index=zutatenindex"
+	});
+}
+
+function resetZutaten(){
+	$.ajax({
+		url:"/anycook/EditZutaten",
+		data:"todo=reset"
 	});
 }

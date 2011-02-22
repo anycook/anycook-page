@@ -144,12 +144,12 @@ ul{
 	text-decoration: underline;
 }
 
-#new_index{
+#new_index, #reset_zutaten{
 	margin-top:10px;
 	cursor: pointer;
 }
 
-#new_index:hover{
+#new_index:hover, #reset_zutaten:hover{
 	text-decoration: underline;
 }
 
