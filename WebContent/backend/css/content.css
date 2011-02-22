@@ -194,6 +194,9 @@ ul{
 .zutatenname{
 	width:170px;
 	margin-left:10px;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
 }
 
 .zutatenstem{
@@ -204,13 +207,13 @@ ul{
 	width:90px;
 }
 
-.setparent{
+.setparent, .zutat_rename{
 	cursor:pointer;
 	color: #859F5E;
 	margin-left: 20px;
 }
 
-.setparent:hover{
+.setparent:hover, .zutat_rename:hover{
 	text-decoration:underline;	
 }
 

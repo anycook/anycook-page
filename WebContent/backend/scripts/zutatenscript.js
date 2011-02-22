@@ -18,13 +18,16 @@ function loadZutaten(json){
 		if(childs>0)
 			htmlstring+="<div class=\"zutatenopen\"></div>";
 		
-		htmlstring += "<div class=\"zutatenname\">"+json[i].name+"</div><div class=\"zutatenstem\">Stem: "+stem+"</div><div class=\"zutatengerichte\">Gerichte: "+
+		htmlstring += "<div class=\"zutatenname\">"+json[i].name+"</div>" +
+				//"<div class=\"zutatenstem\">Stem: "+stem+"</div>" +
+						"<div class=\"zutatengerichte\">Gerichte: "+
 		json[i].gerichte+"</div><div class=\"children\">Childs: "+json[i].childs+"</div><div class=\"setparent\">set parent</div><ul></ul></li>";
 		$("#zutatenlist").append(htmlstring);
 	}
 	
 	$(".setparent").live("click", setParent);
 	$(".zutatenopen").live("click", openZutat);
+	$(".zutatenname").live("dblclick", clickRenameZutat);
 	$("#new_zutat").submit(newZutat);
 	$("#confirm_form").submit(parentConfirmed);
 	$("#new_index").click(newZutatenIndex);
@@ -47,6 +50,43 @@ function loadChilds(json, ul){
 		json[i].gerichte+"</div><div class=\"children\">Childs: "+json[i].childs+"</div><div class=\"setparent\">set parent</div><ul></ul></li>";
 		ul.append(htmlstring);
 	}
+}
+
+function clickRenameZutat(event){
+	var zutatennamediv = $(event.target);
+	var zutatenname = $(zutatennamediv).text();
+	$(zutatennamediv).html("<form id=\"newzutat_form\"><input type=\"text\" id=\"new_zutatname\" /><input type=\"hidden\" id=\"old_zutatname\" value=\""+zutatenname+"\" /></form>");
+	$("#new_zutatname").focus();
+	$("#new_zutatname").focusout(focusOutNewZutat);
+	$("#newzutat_form").submit(sendRenameZutat);
+	
+}
+
+function focusOutNewZutat(event){
+	var target = $(event.target);
+	target.parent().text($("#old_zutatname").val());
+}
+
+function sendRenameZutat(event){
+	var target = $(event.target);
+	var oldName = $("#old_zutatname").val();
+	var newName = $("#new_zutatname").val();
+	renameZutat(oldName, newName);
+	return false;
+}
+
+function renameZutat(oldName, newName){
+	$.ajax({
+		url:"/anycook/EditZutaten",
+		data:"todo=rename&zutat="+oldName+"&newname="+newName,
+		success:function(){
+			$.ajax({
+				url:"/anycook/GetZutaten",
+				dataType:"json",
+				success:loadZutaten
+			});
+		}
+	});
 }
 
 function setParent(event){	
