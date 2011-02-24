@@ -899,6 +899,8 @@ ul.kategorie_filter li:HOVER {
 
 #famous_tags_cloud { /*float:left;*/
 	margin: 18px 0 12px 0;
+	height:60px;
+	overflow: hidden;
 }
 
 #famous_tags_cloud span span {
