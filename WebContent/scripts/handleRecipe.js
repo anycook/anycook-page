@@ -159,8 +159,14 @@ function loadRecipe(json){
 	
 	$.address.title("anycook | "+json.name);
 	
-	FB.XFBML.parse(document.getElementById('social'));
+	//FB.XFBML.parse(document.getElementById('social'));
 	
+	if($.address.pathNames().length == 3 && Number(logindata.level) > 0){
+		/*$.ajaxSetup({async:false});
+		$.getScript("/backend/scripts/recipeediting.js");
+		$.ajaxSetup({async:true});*/
+		addEditingHandler();
+	}
 }
 
 zutatValues = new Array();
