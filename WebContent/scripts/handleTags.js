@@ -89,7 +89,7 @@ function removeTagfromSession(tag){
 function loadFamousTags(tags){
 	for(tag in tags){
 		$("#famous_tags_cloud").append("<span><span>"+tag+"</span></span> ");
-		$("#famous_tags_cloud span span").last().css({"font-size":Math.round(tags[tag]*9.6),
+		$("#famous_tags_cloud span span").last().css({"font-size":Math.round(tags[tag]*9),
 				"opacity": tags[tag]/3
 		});
 	}

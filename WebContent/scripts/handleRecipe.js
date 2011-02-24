@@ -319,7 +319,8 @@ function loadDiscussion(gericht){
 		$("#no_comment").click(clickSignin);
 	}
 	
-	commenttimeout = window.setTimeout(checkNewDiscussion, 5000);	
+	window.setTimeout(checkNewDiscussion, 5000);
+	//commenttimeout = window.setTimeout(checkNewDiscussion, 5000);	
 }
 
 function loadChildren(i, id, gericht, login){
@@ -438,7 +439,7 @@ function checkNewDiscussion(){
 						loadNewDiscussion(ul, id, gericht, oldmaxID);
 					}
 				}
-				checkNewDiscussion();
+				window.setTimeout(checkNewDiscussion, 2000);
 				
 			}
 		});	
