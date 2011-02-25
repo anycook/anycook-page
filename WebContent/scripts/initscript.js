@@ -1,13 +1,20 @@
  $(document).ready(function(){
+	 //setup
 	 if(checkBrowser() == "Microsoft Internet Explorer")
 		 document.location.href="http://anycook.de/not-supported.html";
 	 
 	 
-        	$.ajaxSetup({
-            	type:"POST", 
-                scriptCharset: "utf8" , 
-                contentType: "application/x-www-form-urlencoded; charset=utf8"
-        });       
+    	$.ajaxSetup({
+        	type:"POST", 
+            scriptCharset: "utf8" , 
+            contentType: "application/x-www-form-urlencoded; charset=utf8"
+        }); 
+    	
+    	jQuery.extend(jQuery.expr[':'], {
+    	    focus: function(element) { 
+    	        return element == document.activeElement; 
+    	    }
+    	});
 
             //Login
             $.ajax({

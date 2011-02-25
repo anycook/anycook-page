@@ -452,6 +452,10 @@ ul.kategorie_filter li:HOVER {
 	height: 100%;
 }
 
+.zutaten_table_right input{
+	text-align:right;
+}
+
 #zutat_input {
 	background: 0;
 	outline: none;
@@ -1189,6 +1193,15 @@ ul.kategorie_filter li:HOVER {
 	margin-right: 4px;
 }
 
+#beschreibung textarea{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	width:175px;
+	height:200px;
+}
+
+#beschreibung input{
+	float:left;
+}
 #rezept_begin {
 	float: left;
 	width: 100%;

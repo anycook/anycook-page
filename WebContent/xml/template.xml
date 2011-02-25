@@ -75,7 +75,7 @@
     	<div id="recipe_container">
     		<h1 id="rezept_headline"></h1>
     		<img id="rezept_bild"/>
-    		<p id="beschreibung"></p>
+    		<div id="beschreibung"></div>
     		<div id="rezept_begin">
     			<div class="bezeichner">Zubereitung</div>
     		</div>
