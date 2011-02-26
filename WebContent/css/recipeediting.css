@@ -1,0 +1,19 @@
+/*beschreibung  */
+#submit_beschreibung_edit_form, #undo_beschreibung_edit_form{
+	font-weight: bold;
+	cursor: pointer;
+	float:left;
+	
+}
+
+#submit_beschreibung_edit_form:hover, #undo_beschreibung_edit_form:hover{
+	text-decoration: underline;
+}
+
+#beschreibung_edit_counter{
+	float:right;
+}
+
+#undo_beschreibung_edit_form, #beschreibung_edit_counter{
+	margin-left: 10px;
+}
