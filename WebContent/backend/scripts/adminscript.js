@@ -43,6 +43,7 @@ function changePage(event){
 	
 	if(sitename == "home"){
 		$("#home_button").addClass("on");
+		loadHome();
 	}
 	else if(sitename == "rezepte"){
 		$("#rezepte").addClass("on");

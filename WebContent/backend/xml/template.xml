@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <template id="home">
-    	<div id="new_events"></div>
+    	<div id="new_events">
+	    	<h3>Neue Diskussionsbeiträge</h3>
+	    	<div id="disc_entries"></div>
+	    	<div id="disc_refresh">refresh</div>
+	    	<div id="disc_more">more</div>
+    	</div>
     	<div id="home_content"></div>
     	<div id="statistics"></div>
     </template>

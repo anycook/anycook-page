@@ -1,0 +1,42 @@
+#new_events{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
+	width:400px;
+	margin: 10px;
+	float: left;
+	padding: 5px;
+	border: 1px solid #CCC;
+	}
+	
+.discdate{
+	width:150px;
+	float: left;
+	}
+.discgername{
+	font-size: 10pt;
+	font-style: italic;
+	}
+
+.discname{
+	width:195px;
+	float: left;
+	font-weight: bold;
+	}
+
+.newDiscEntry{
+	margin-top: 5px;
+	border: 1px solid #CCC;
+	background-color: #ECE9E3;
+	}
+
+#disc_refresh{
+	cursor:pointer;
+	width:50px;
+	float:left;
+	}
+
+#disc_more{
+	cursor:pointer;
+	width:50px;
+	float:left;
+	}
