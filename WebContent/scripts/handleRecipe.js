@@ -126,8 +126,8 @@ function loadRecipe(json){
 	
 	$("#search").attr("value", recipe.name);
 	$("#search, #time_std, #time_min").attr("readonly", "readonly");
-	fillStd(json.std);
-	fillMin(json.min);
+	fillStd(recipe.std);
+	fillMin(recipe.min);
 	
 	$("#zutaten_table > *").remove();
 	for(zutat in recipe.zutaten){

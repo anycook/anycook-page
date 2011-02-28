@@ -7,6 +7,9 @@ function Recipe(){
 	this.beschreibung;
 	this.imagename;
 	this.skill;
+	this.kalorien;
+	this.std;
+	this.min;
 	this.personen;
 	this.schritte = new Array();
 	this.zutaten = new Object();
@@ -22,6 +25,9 @@ Recipe.prototype.loadJSON = function(json){
 	this.personen = json.personen;
 	this.schritte = json.schritte;
 	this.skill = json.skill;
+	this.kalorien = json.kalorien;
+	this.std = json.std;
+	this.min = json.min;
 	this.tags = json.tags;
 	this.zutaten = json.zutaten;
 };	
