@@ -1,3 +1,94 @@
+var newrecipe;
+
+function loadNewRecipe(){
+	if(!loginChecker())
+		$.address.path("");
+	else{
+		newrecipe = new Recipe();
+		
+		var headertext = "<div id='nr_general_btn' class='big_button'>Generelles</div>" +
+				"<div class='nr_dots'></div><div id='nr_schritte_btn' class='big_button inactive'>Schritte</div>" +
+				"<div class='nr_dots'></div><div id='nr_zutaten_btn' class='big_button inactive'>Zutaten</div>" +
+				"<div class='nr_dots'></div><div id='nr_abschluss_btn' class='big_button inactive'>Abschluss</div>";
+		$("#content_header").html(headertext);
+		$("#filter_headline").text("Fortschritt");
+		$("#nr_general_btn").addClass("on");
+		$("#filter_main").after("<div id='progress_1'><div id='nr_name'>Rezeptname</div><div id='nr_kategorie'>Keine Kategorie</div><div id='nr_upload'>Bildupload:</div><div id='upload'><div id='progressborder'><div id='progress'><div id='progress_percent'></div></div></div></div></div>");
+		$("#progress_1 > *").animate({"opacity":.0}, 0);
+		$("#filter_main").animate({height:0, paddingBottom:0},1000);
+		var filter_content = $("#filter_main *");
+		filter_content.animate({"opacity":0}, {duration:1000, complete:function(){
+			$("#filter_main").hide();
+			$("#progress_1 > *").animate({"opacity":1}, 500);
+			$("#filter_main > *").hide();
+		}});
+		
+		$("#filter_main").css("height", "auto");
+		
+		
+		//actionListener
+		$("#recipe_name, #recipe_beschreibung").focus(function(event){
+			var target = $(event.target);
+			target.removeClass("wrong");
+		});
+		$(".step_1_right .kategorie_filter").click(function(){
+			$(".step_1_right .kategorie_filter").removeClass("wrong");
+		});
+		
+		//header
+		$("#nr_general_btn").click(clickNewRecipeHeader);
+		$(".next_step").click(nextStep);
+		
+		//step1
+		$("#recipe_name").focus(focusNewRecipe);
+		$("#recipe_name").focusout(focusoutNewRecipe);
+		$("#recipe_name").keypress(newRecipeKeypress).keydown(newRecipeKeydown);
+		
+		$("#recipe_beschreibung").focus(focusNRBeschreibung);
+		$("#recipe_beschreibung").focusout(focusoutNRBeschreibung);
+		$("#recipe_beschreibung").keydown(beschreibungCounter);
+		
+		loadAllKategories($(".step_1_right ul.kategorie_filter"));
+		$(".step_1_right ul.kategorie_filter").hide();
+		$(".step_1_right .recipe_kategorie").click(handleNRKategories);
+		
+		var uploader = new qq.FileUploader({
+		    // pass the dom node (ex. $(selector)[0] for jQuery users)
+		    element: document.getElementById('file_uploader'),
+		    onSubmit:addProgressBar,
+		    onProgress:nrProgress,
+		    onComplete:completeUpload,
+		    // path to server-side upload script
+		    action: '/anycook/UploadImage'
+		});
+		
+		
+		//step2
+		$("#neuer_schritt").click(addNewSchritt);
+		$(".remove_schritt").live("click", removeNewSchritt);
+		$(".step_textarea").live("keydown", schrittCounter);
+		
+		//step3
+		$(".step_3_deletebtn").live("click", deleteNewZutat);
+		$(".new_zutat_name").live("keyup", keyupNewZutat);
+		$("#new_zutat").click(addNewZutat);
+		
+		//step4
+		makeTagCloud();
+		$("#tagcloud span span").live("click", addNewTag);
+		$("#recipe_tags").click(handleNewTagClick);
+		$(".step_4_left .label_chefhats, .step_4_left .label_muffins").mouseover(function(event){
+				mouseoverRadio(event.target);
+    	});
+		$(".label_stars, .label_chefhats, .label_muffins").mouseleave(function(event){
+    			handleRadios(event.target);
+    	});
+		$(".step_4_left .label_chefhats, .step_4_left .label_muffins").click(checkNewOnOff);
+		$("#recipe_ready").click(finishNewRecipe);
+	}
+}
+
+
 function clickNewRecipeHeader(event){
 	var target = $(event.target);
 	var id = target.attr("id");
@@ -417,48 +508,55 @@ function finishStep1(){
 		return false;
 	
 	
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"recipe_name="+gerichtname+"&kategorie="+kategorie+"&beschreibung="+beschreibung
-	});
+	newrecipe.setName(gerichtname);
+	newrecipe.setKategorie(kategorie);
+	newrecipe.setBeschreibung(beschreibung);
 	
-	$("#nr_schritte_btn").click(clickNewRecipeHeader);
 	return true;
 	
 	
+}
+
+function loadStep2(){
+	if(newrecipe.name ==null || newrecipe.beschreibung == null || newrecipe.kategorie == null)
+		$.address.parameter("page", "");
+	$("#nr_schritte_btn").click(clickNewRecipeHeader);
 }
 
 function finishStep2(){
 	if($(".step_textarea").first().val()=="")
 		return false;
 	
-	
+	newrecipe.resetSchritte();
 	$(".step_textarea").each(function(index, value){
 		var text = $(value).val();
 		if(text!=""){
-			$.ajax({
-				url:"/anycook/AddtoNewRecipe",
-				data:"schritt="+text+"&num="+(index+1)
-			});
+			newrecipe.addSchritt(index+1, text);
 		}
 	});
 	
+	
+	return true;
+}
+
+function loadStep3(){
+	if(newrecipe.schritte.length == 0)
+		$.address.parameter("page", "schritte");
+	$("#new_zutat_table").empty();
 	var reihen = 0;
-	$.ajax({
-		url:"/anycook/GetZutatenfromSchritte",
-		dataType:"json",
-		async:false,
-		success:function(json){
-		if(json.error == null){
-				for(zutat in json){
-					var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="'+json[zutat]+'" /></td>'+
-											'<td class="step_3_right"><input type="text" class="new_zutat_menge"/></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
-					$("#new_zutat_table").append(htmlstring);
-					reihen++;
-				}
-			}
-		}
-	});
+	
+	if(newrecipe.zutaten == null)
+		getZutatenfromSchritte();
+	
+	var zutaten = newrecipe.zutaten;
+	for(zutat in zutaten){
+		var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="'+zutaten[zutat]+'" /></td>'+
+								'<td class="step_3_right"><input type="text" class="new_zutat_menge"/></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
+		$("#new_zutat_table").append(htmlstring);
+		reihen++;
+	}
+	
+				
 	var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="" /></td>'+
 						'<td class="step_3_right"><input type="text" class="new_zutat_menge" value="" /></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
 	
@@ -469,27 +567,29 @@ function finishStep2(){
 	}
 	
 	$("#nr_zutaten_btn").click(clickNewRecipeHeader);
-	return true;
 }
 
 function finishStep3(){
 	if($(".new_zutat_name").first().val().length=="")
 		return false;
 	
+	newrecipe.resetZutaten();
 	$("#new_zutat_table tr").each(function(index, value){
 		var zutat = $(value).find(".new_zutat_name").val();
 		var menge = $(value).find(".new_zutat_menge").val();
 		if(zutat!=""){
-			$.ajax({
-				url:"/anycook/AddtoNewRecipe",
-				data:"zutat="+zutat+"&menge="+menge
-			});
+			newrecipe.addZutat(zutat, menge);
 		}
 	});
 	
 	
-	$("#nr_abschluss_btn").click(clickNewRecipeHeader);
 	return true;
+}
+
+function loadStep4(){
+	if(newrecipe.zutaten == null)
+		$.address.parameter("page", "zutaten");
+	$("#nr_abschluss_btn").click(clickNewRecipeHeader);
 }
 
 function finishStep4(){
@@ -518,35 +618,18 @@ function finishStep4(){
 	if(!checker)
 		return false;
 	
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"std="+std+"&min="+min+"&skill="+skill+"&kalorien="+kalorien+"&personen="+personen
-	});
+	newrecipe.setPersonen(personen);
+	newrecipe.setSkill(skill);
+	newrecipe.setKalorien(kalorien);
+	newrecipe.setTime(std, min);
 	
 	$("#recipe_tags .tag_text").each(function(index, value){
 		var tag = $(value).text();
-		$.ajax({
-			url:"/anycook/AddtoNewRecipe",
-			async:false,
-			data:"tag="+tag
-		});
+		newrecipe.addTag(tag);
 	});
 	
 	
-	$.ajax({
-		url:"/anycook/CheckRecipe",
-		async:false,
-		success:function(response){
-			if(response == "false"){
-				alert("Ups! Fehler bei der Erstellung des Rezeptes!");
-				checker=false;
-			}
-			else
-				checker = true;
-		}
-	});
-	
-	return checker;
+	return newrecipe.checkRecipe();	
 	
 }
 function finishNewRecipe(){
@@ -569,7 +652,16 @@ function readyClick(){
 		$("#content_main").unbind("click");
 		$.address.value("");
 	});
-	
-	//$("#content_main").unbind("click");
-	//$.address.value("");
+}
+
+function getZutatenfromSchritte() {
+	$.ajax({
+		url:"/anycook/GetZutatenfromSchritte",
+		dataType:"json",
+		async:false,
+		success:function(json)
+		{
+			newrecipe.addZutaten(json);
+		}
+	});
 }

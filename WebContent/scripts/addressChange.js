@@ -29,98 +29,6 @@ function loadHome(json)
 	updateLiveAtHome();
 }
 
-
-
-
-function loadNewRecipe(){
-	$.ajax({
-		url: "/anycook/Login",
-		success: function(response){
-		if(response=="false")
-			$.address.path("");
-		else
-			{
-				var headertext = "<div id='nr_general_btn' class='big_button'>Generelles</div><div class='nr_dots'></div><div id='nr_schritte_btn' class='big_button inactive'>Schritte</div><div class='nr_dots'></div><div id='nr_zutaten_btn' class='big_button inactive'>Zutaten</div><div class='nr_dots'></div><div id='nr_abschluss_btn' class='big_button inactive'>Abschluss</div>";
-				$("#content_header").html(headertext);
-				$("#filter_headline").text("Fortschritt");
-				$("#nr_general_btn").addClass("on");
-				$("#filter_main").after("<div id='progress_1'><div id='nr_name'>Rezeptname</div><div id='nr_kategorie'>Keine Kategorie</div><div id='nr_upload'>Bildupload:</div><div id='upload'><div id='progressborder'><div id='progress'><div id='progress_percent'></div></div></div></div></div>");
-				$("#progress_1 > *").animate({"opacity":.0}, 0);
-				$("#filter_main").animate({height:0, paddingBottom:0},1000);
-				var filter_content = $("#filter_main *");
-				filter_content.animate({"opacity":0}, {duration:1000, complete:function(){
-					$("#filter_main").hide();
-					$("#progress_1 > *").animate({"opacity":1}, 500);
-					$("#filter_main > *").hide();
-				}});
-				
-				$("#filter_main").css("height", "auto");
-				
-				
-				//actionListener
-				$("#recipe_name, #recipe_beschreibung").focus(function(event){
-					var target = $(event.target);
-					target.removeClass("wrong");
-				});
-				$(".step_1_right .kategorie_filter").click(function(){
-					$(".step_1_right .kategorie_filter").removeClass("wrong");
-				});
-				
-				//header
-				$("#nr_general_btn").click(clickNewRecipeHeader);
-				$(".next_step").click(nextStep);
-				
-				//step1
-				$("#recipe_name").focus(focusNewRecipe);
-				$("#recipe_name").focusout(focusoutNewRecipe);
-				$("#recipe_name").keypress(newRecipeKeypress).keydown(newRecipeKeydown);
-				
-				$("#recipe_beschreibung").focus(focusNRBeschreibung);
-				$("#recipe_beschreibung").focusout(focusoutNRBeschreibung);
-				$("#recipe_beschreibung").keydown(beschreibungCounter);
-				
-				loadAllKategories($(".step_1_right ul.kategorie_filter"));
-				$(".step_1_right ul.kategorie_filter").hide();
-				$(".step_1_right .recipe_kategorie").click(handleNRKategories);
-				
-				var uploader = new qq.FileUploader({
-				    // pass the dom node (ex. $(selector)[0] for jQuery users)
-				    element: document.getElementById('file_uploader'),
-				    onSubmit:addProgressBar,
-				    onProgress:nrProgress,
-				    onComplete:completeUpload,
-				    // path to server-side upload script
-				    action: '/anycook/UploadImage'
-				});
-				
-				
-				//step2
-				$("#neuer_schritt").click(addNewSchritt);
-				$(".remove_schritt").live("click", removeNewSchritt);
-				$(".step_textarea").live("keydown", schrittCounter);
-				
-				//step3
-				$(".step_3_deletebtn").live("click", deleteNewZutat);
-				$(".new_zutat_name").live("keyup", keyupNewZutat);
-				$("#new_zutat").click(addNewZutat);
-				
-				//step4
-				makeTagCloud();
-				$("#tagcloud span span").live("click", addNewTag);
-				$("#recipe_tags").click(handleNewTagClick);
-				$(".step_4_left .label_chefhats, .step_4_left .label_muffins").mouseover(function(event){
-						mouseoverRadio(event.target);
-            	});
-				$(".label_stars, .label_chefhats, .label_muffins").mouseleave(function(event){
-            			handleRadios(event.target);
-            	});
-				$(".step_4_left .label_chefhats, .step_4_left .label_muffins").click(checkNewOnOff);
-				$("#recipe_ready").click(finishNewRecipe);
-			}
-	}
-	});
-}
-
 function clearContent(){
 	$("#content_main > *").remove();
 	$("#content_header > *").remove();
@@ -309,6 +217,7 @@ function changePage(event){
 	else if(event.pathNames[0] == "newrecipe"){
 		$(".new_recipe_steps").hide();
 		if(page=="schritte"){
+			loadStep2();
 			$("#nr_schritte_btn").addClass("on");			
 			$("#new_recipe_step2").show();
 			if($("#progress_2").length == 0){
@@ -322,6 +231,7 @@ function changePage(event){
 			}
 		}
 		else if(page=="zutaten"){
+			loadStep3();
 			$("#nr_zutaten_btn").addClass("on");
 			$("#new_recipe_step3").show();
 			if($("#progress_3").length == 0){
@@ -344,6 +254,7 @@ function changePage(event){
 			
 		}
 		else if(page=="abschluss"){
+			loadStep4();
 			$("#nr_abschluss_btn").addClass("on");
 			$("#new_recipe_step4").show();
 			if($("#progress_4").length == 0){
