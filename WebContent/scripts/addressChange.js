@@ -216,59 +216,14 @@ function changePage(event){
 	}
 	else if(event.pathNames[0] == "newrecipe"){
 		$(".new_recipe_steps").hide();
-		if(page=="schritte"){
+		if(page=="schritte")
 			loadStep2();
-			$("#nr_schritte_btn").addClass("on");			
-			$("#new_recipe_step2").show();
-			if($("#progress_2").length == 0){
-				$("#progress_1").after("<div id='progress_2'></div>");
-				$("#progress_2").animate({"height": 90}, {duration:1000,complete:function(){
-					$("#progress_2").append("<div class='nr_devider'></div><div id='nr_statussteps'>Du hast<br /><span id='nr_stepnumber'>00</span> Schritte eingerichtet.</div>");
-					$("#progress_2 > *").animate({"opacity": .0}, 0);
-					$("#progress_2 > *").animate({"opacity": 1.0}, 500);}});
-				
-				
-			}
-		}
-		else if(page=="zutaten"){
-			loadStep3();
-			$("#nr_zutaten_btn").addClass("on");
-			$("#new_recipe_step3").show();
-			if($("#progress_3").length == 0){
-				$("#progress_2").after("<div id='progress_3'></div>");
-				$("#progress_3").animate({"height": 90}, {duration:1000,complete:function(){
-					$("#progress_3").append("<div class='nr_devider'></div><div id='nr_statuszutaten'>Dein Rezept hat ganze<br /><span id='nr_zutatennumber'>00</span> Zutaten.</div>");
-					$("#progress_3 > *").animate({"opacity": .0}, 0);
-					$("#progress_3 > *").animate({"opacity": 1.0}, {duration:500, complete:function(){
-						//setzt zähler auf den ersten Stand
-						var reihen = 0;
-						$(".new_zutat_name").each(function(index, value){
-							if($(value).val().length > 0)
-								reihen++;
-						});
-						if(reihen<10)
-							reihen="0"+reihen;
-						$("#nr_zutatennumber").text(reihen);
-					}});}});
-			}
-			
-		}
-		else if(page=="abschluss"){
-			loadStep4();
-			$("#nr_abschluss_btn").addClass("on");
-			$("#new_recipe_step4").show();
-			if($("#progress_4").length == 0){
-				$("#progress_3").after("<div id='progress_4'></div>");
-				$("#progress_4").animate({"height": 90}, {duration:1000,complete:function(){
-					$("#progress_4").append("<div class='nr_devider'></div><div id='nr_statustags'>Mit <span id='nr_tagnumber'>00</span> Tags lässt sich<br /> dein Rezept besser finden.</div>");
-					$("#progress_4 > *").animate({"opacity": .0}, 0);
-					$("#progress_4 > *").animate({"opacity": 1.0}, {duration: 500});
-					}});
-			}
-		}
-		else{
+		else if(page=="zutaten")
+			loadStep3();		
+		else if(page=="abschluss")
+			loadStep4();	
+		else
 			$.address.queryString("");
-		}
 	}else{
 		$.address.queryString("");
 	}
