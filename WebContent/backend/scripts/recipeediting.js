@@ -2,6 +2,47 @@ function addEditingHandler(){
 	$("#zutaten_table td").dblclick(zutatTableEditClick);
 	$("#beschreibung").dblclick(beschreibungEditClick);
 	$("#rezept_headline").dblclick(nameEditClick);
+	
+	$("#zutaten_table tr").each(function(i){
+		$(this).append("<td class=\"edit_removeZutat\"><div></div></td>");
+	});	
+	$(".edit_removeZutat div").click(editRemoveZutatClick);	
+	$("#zutaten_table").css({width: function(index, value) {
+        return parseFloat(value) +15;
+        }
+	});
+	
+	$("#zutaten_table").append("<tr><td id=\"edit_addZutatRow\"><div></div></td>");
+	$("#edit_addZutatRow").click(editaddZutatRow);
+	$("#newZutatForm").live("submit", submitNewZutat);
+}
+
+//zutaten
+function editaddZutatRow(event){
+	var target = $(event.target);
+	var tr = target.parents("tr").first();
+	tr.before("<form id=\"newZutatForm\">" +
+			"<input type=\"text\" class=\"newZutatName\" />" +
+			"<input type=\"text\" class=\"newZutatMenge\" />" +
+			"<input type=\"submit\" value=\"speichern\" />" +
+			"</form>");
+	
+}
+
+function submitNewZutat(event){
+	var zutat = $(this).find(".newZutatName").val();
+	var menge = $(this).find(".newZutatMenge").val();
+	
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	var version = pathNames[2];
+	if(zutat!="")
+		editRecipe("todo=addzutat&recipe="+recipe+"&version="+version+"&zutat="+zutat+"&menge="+menge);
+	
+	return false;
+}
+function editRemoveZutatClick(event){
+	//TODO
 }
 
 //name

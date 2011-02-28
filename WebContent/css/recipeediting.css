@@ -17,3 +17,25 @@
 #undo_beschreibung_edit_form, #beschreibung_edit_counter{
 	margin-left: 10px;
 }
+
+.edit_removeZutat div{
+	width: 15px;
+	height: 15px;
+	background: url(/img/delete_step_off_small.png) no-repeat;
+	cursor: pointer;
+}
+
+.edit_removeZutat div:hover {
+	background: url(/img/delete_step_on_small.png) no-repeat;
+}
+
+#edit_addZutatRow div{
+	width: 15px;
+	height: 15px;
+	background: url(/img/new_step_off_small.png) no-repeat;
+	cursor: pointer;
+}
+
+#edit_addZutatRow div:hover {
+	background: url(/img/new_step_on_small.png) no-repeat;
+}
