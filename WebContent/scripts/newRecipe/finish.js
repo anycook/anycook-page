@@ -117,12 +117,14 @@ function finishStep4(){
 	});
 	
 	
-	return newrecipe.checkRecipe();	
+	return true;	
 	
 }
 function finishNewRecipe(){
 	if(!finishStep4())
 		return false;
+	
+	newrecipe.sendRecipe();
 	
 	$.ajax({
 		url:"/anycook/SaveNewRecipe"

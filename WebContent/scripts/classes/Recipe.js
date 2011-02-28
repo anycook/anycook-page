@@ -48,29 +48,14 @@ Recipe.prototype.checkRecipe = function(){
 
 Recipe.prototype.resetSchritte = function(){
 	this.schritte = new Array();
-	$.ajax({
-		url:"/anycook/ResetNewRecipe",
-		async:false,
-		data:"type=schritte"
-	});
 };
 
 Recipe.prototype.resetZutaten = function() {
 	this.zutaten = null;
-	$.ajax({
-		url:"/anycook/ResetNewRecipe",
-		async:false,
-		data:"type=zutaten"
-	});
 };
 
 Recipe.prototype.resetTags = function(){
 	tags = new Array();
-	$.ajax({
-		url:"/anycook/ResetNewRecipe",
-		async:false,
-		data:"type=tags"
-	});
 };
 
 
@@ -78,42 +63,23 @@ Recipe.prototype.resetTags = function(){
 //setter
 Recipe.prototype.setName = function(name){
 	this.name = name;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"recipe_name="+name
-	});
+	
 };
 
 Recipe.prototype.setKategorie = function(kategorie){
 	this.kategorie = kategorie;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"kategorie="+kategorie
-	});
 };
 
 Recipe.prototype.setBeschreibung = function(beschreibung){
 	this.beschreibung = beschreibung;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"beschreibung="+beschreibung
-	});
 };
 
 Recipe.prototype.setPersonen = function(personen){
 	this.personen = personen;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"personen="+personen
-	});
 };
 
 Recipe.prototype.setSkill = function(skill) {
 	this.skill = skill;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"skill="+skill
-	});
 };
 
 Recipe.prototype.setImagename = function(imagename) {
@@ -122,38 +88,22 @@ Recipe.prototype.setImagename = function(imagename) {
 
 Recipe.prototype.setKalorien = function(kalorien){
 	this.kalorien = kalorien;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"kalorien="+kalorien
-	});
 };
 
 Recipe.prototype.setTime = function(std, min) {
 	this.std = std;
 	this.min = min;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"std="+std+"&min="+min
-	});
 };
 
 Recipe.prototype.addSchritt = function(number, text){
 	this.schritte[number] = text;
-	$.ajax({
-		async:false,
-		url:"/anycook/AddtoNewRecipe",
-		data:"schritt="+text+"&num="+number
-	});
+	
 };
 
 Recipe.prototype.addZutat = function(zutat, menge) {
 	if(this.zutaten == null)
 		this.zutaten = new Object();
 	this.zutaten[zutat] = menge;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		data:"zutat="+zutat+"&menge="+menge
-	});
 };
 
 Recipe.prototype.addZutaten = function(zutaten){
@@ -163,17 +113,70 @@ Recipe.prototype.addZutaten = function(zutaten){
 
 Recipe.prototype.addTag = function(tag){
 	this.tags[this.tags.length] = tag;
-	$.ajax({
-		url:"/anycook/AddtoNewRecipe",
-		async:false,
-		data:"tag="+tag
-	});
 };
 
 Recipe.prototype.addUsername = function(username){
 	this.usernames[this.usernames.length] = username;
 };
 
+
+//send to Server
+Recipe.prototype.sendRecipe = function(){
+	this.sendRecipeData();
+	this.sendSchritte();
+	this.sendTags();
+	this.sendZutaten();
+};
+
+Recipe.prototype.sendRecipeData = function(){
+	$.ajax({
+		url:"/anycook/AddtoNewRecipe",
+		data:"recipe_name="+this.name+"&beschreibung="+this.beschreibung+
+			"&kategorie="+this.kategorie+"&std="+this.std+"&min="+this.min+
+			"&skill="+this.skill+"&kalorien="+this.kalorien+"&personen="+this.personen
+	});
+};
+Recipe.prototype.sendSchritte = function(){
+	$.ajax({
+		url:"/anycook/ResetNewRecipe",
+		async:false,
+		data:"type=schritte"
+	});
+	for(var i in this.schritte){
+		$.ajax({
+			url:"/anycook/AddtoNewRecipe",
+			data:"schritt="+this.schritte[i]+"&num="+(i+1)
+		});
+	}
+};
+
+Recipe.prototype.sendZutaten = function(){
+	$.ajax({
+		url:"/anycook/ResetNewRecipe",
+		async:false,
+		data:"type=zutaten"
+	});
+	for(var zutat in this.zutaten){
+		$.ajax({
+			url:"/anycook/AddtoNewRecipe",
+			data:"zutat="+zutat+"&menge="+this.zutaten[zutat]
+		});
+	}
+};
+
+Recipe.prototype.sendTags = function(){
+	$.ajax({
+		url:"/anycook/ResetNewRecipe",
+		async:false,
+		data:"type=tags"
+	});
+	for(var i in this.tags){
+		$.ajax({
+			url:"/anycook/AddtoNewRecipe",
+			data:"tag="+this.tags[i]
+		});
+	}
+};
 //getter
 
 /*Recipe.prototype.getName = function(){

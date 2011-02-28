@@ -123,6 +123,8 @@ function loadStep3(){
 	$("#new_zutat_table").empty();
 	var reihen = 0;
 	
+	newrecipe.sendSchritte();
+	
 	if(newrecipe.zutaten == null)
 		getZutatenfromSchritte();
 	
