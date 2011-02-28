@@ -65,6 +65,10 @@ function getBigFrameText(json){
 var personen;
 
 function loadRecipe(json){
+	
+	var recipe = new Recipe();
+	recipe.loadJSON(json);
+	
 	var headertext = "<div class='float_right_header'><div id='recipe_general_btn' class='big_button'>Rezept</div><div id='recipe_discussion_btn' class='big_button'>Diskussion</div></div>";
 	$("#content_header").html(headertext);
 	$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
@@ -72,9 +76,9 @@ function loadRecipe(json){
 	
 	personen = Number(json.personen);
 	if(personen>1)
-		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+json.personen+"' size='2' maxlength='2' /> Personen:");
+		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+recipe.personen+"' size='2' maxlength='2' /> Personen:");
 	else
-		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+json.personen+"' size='2' maxlength='2' /> Person:");
+		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+recipe.personen+"' size='2' maxlength='2' /> Person:");
 	
 	$("#person_number").click(function(){$("#person_number").val('');});
 	var persCount;
@@ -103,13 +107,13 @@ function loadRecipe(json){
 	
 	$("#filter_headline").text("Status");
 	
-    $("#kategorie_filter_name").text(json.kategorie);
-    $("#rezept_headline").append(json.name);
-    $("#beschreibung").append(json.beschreibung);
+    $("#kategorie_filter_name").text(recipe.kategorie);
+    $("#rezept_headline").append(recipe.name);
+    $("#beschreibung").append(recipe.beschreibung);
     
-    $("#rezept_bild").attr("src", "./gerichtebilder/big/"+json.imagename);
+    $("#rezept_bild").attr("src", "./gerichtebilder/big/"+recipe.imagename);
     	
-	var steps = json.schritte;
+	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){
 		$("#step_container").append('<div class="step"><div class="step_left"><p class="step_number">'+(j+1)+'.</p><p class="step_text">'+steps[j]+'</p></div><div class="step_right"></div></div>');
 		var step = $(".step_left:last");
@@ -120,32 +124,30 @@ function loadRecipe(json){
 	
 	}
 	
-	$("#search").attr("value", json.name);
+	$("#search").attr("value", recipe.name);
 	$("#search, #time_std, #time_min").attr("readonly", "readonly");
 	fillStd(json.std);
 	fillMin(json.min);
 	
 	$("#zutaten_table > *").remove();
-	var zutaten = json.zutaten;
-	for(zutat in zutaten){
-		$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+zutaten[zutat]+"</td></tr>");
+	for(zutat in recipe.zutaten){
+		$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+recipe.zutaten[zutat]+"</td></tr>");
 	}
 	
 	$(".tags_table_right > *").remove();
-	var tags = json.tags;
+	var tags = recipe.tags;
 	for(var i = 0; i<tags.length; i++)
 		$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+tags[i]+"</div></div>");
 
 	
-	checkOn("#star_"+json.wertung);
-	checkOn("#chef_"+json.skill);
-	checkOn("#muffin_"+json.kalorien);
+	checkOn("#chef_"+recipe.skill);
+	checkOn("#muffin_"+recipe.kalorien);
 	handleRadios(".label_stars, .label_chefhats, .label_muffins");
 	blockFilter(true);
 	
 	//schmeckt-button
 	if(loginChecker()){
-		if(schmecktChecker(json.name)){
+		if(schmecktChecker(recipe.name)){
 			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir!</div><span>·</span><div id='tag_vorschlag'>Tags vorschlagen</div>");
 			$("#rezept_schmeckt").click(schmecktmir);	
 		}else{
@@ -154,7 +156,7 @@ function loadRecipe(json){
 		}
 	}
 	
-	$.address.title("anycook | "+json.name);
+	$.address.title("anycook | "+recipe.name);
 	
 	//FB.XFBML.parse(document.getElementById('social'));
 	
