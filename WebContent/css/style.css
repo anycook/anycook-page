@@ -481,6 +481,8 @@ ul.kategorie_filter li:HOVER {
 }
 
 #person_number {
+	font: 13pt Georgia;
+	color: #5A5A5A;
 	color: #5A5A5A;
 	height: 100%;
 	outline: none;
@@ -488,7 +490,7 @@ ul.kategorie_filter li:HOVER {
 	text-align: right;
 	background-color: #ECE9E3;
 	border: 1pt solid #D5D6D2;
-	height: 25px;
+	height: 14pt;
 	width: 16px;
 }
 /*---------Zutat Autocomplete ------*/
