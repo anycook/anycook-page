@@ -171,6 +171,34 @@ function loadRecipe(recipe){
 		$.ajaxSetup({async:true});*/
 		addEditingHandler();
 	}
+	
+	//bezeichner
+	$("#zubereitung").addClass("on");
+	$("#zubereitung").click(showZubereitung);
+	$("#addtags").click(showaddTags);
+}
+
+function showZubereitung(){
+	
+	if(!$(this).hasClass("on")){
+		$(".bezeichner").removeClass("on");
+		$(this).addClass("on");
+		$("#step_container").show();
+		$("#addtags_container").hide();
+	}
+}
+
+function showaddTags(){
+	
+	if(!$(this).hasClass("on")){
+		$(".bezeichner").removeClass("on");
+		$(this).addClass("on");
+		$("#step_container").hide();
+		$("#addtags_container").show();
+	}
+	if($("#tagcloud").children().length == 0){
+		makeTagCloud();
+	}
 }
 
 zutatValues = new Array();

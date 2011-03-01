@@ -212,27 +212,6 @@ function keyupNewZutat(event){
 
 
 //tags
-function makeTagCloud(){
-	var json = null;
-	$.ajax({
-		  url: "/anycook/GetPopularTags",
-		  dataType: 'json',
-		  data: "num=14",
-		  async:false,
-		  success: function(response){
-				if(response != "false")
-					json=response;
-	}
-		});
-	
-	for(tag in json){
-		$("#tagcloud").append("<span><span>"+tag+"</span></span> ");
-		$("#tagcloud span span").last().css({"font-size":json[tag]*8,
-				"opacity": json[tag]/3
-		});
-	}
-}
-
 function addNewTag(event){
 	
 	var target = $(event.target);
