@@ -195,28 +195,26 @@ function showaddTags(){
 		$(this).addClass("on");
 		$("#step_container").hide();
 		$("#addtags_container").show();
-	}
-	if($("#tagcloud").children().length == 0){
-		makeTagCloud();
-		$("#tagcloud span span").click(addSuggestTag);
+		
+		if($("#tagcloud").children().length == 0){
+			makeTagCloud();
+			$("#tagcloud span span").click(addNewTag);
+			$("#recipe_tags").click(handleNewTagClick);
+			$("#suggest_tags_btn").click(submitSuggestTags);
+		}
 	}
 }
 
-function addSuggestTag(event){
-	var target = $(event.target);
-	var text = target.text();
-	saveSuggestTag(text);
-}
-
-function saveSuggestTag(text){
-	if(text[0]=="," || text[0]==" ")
-		text = text.substring(1,text.length);
-	
-	removeNewInput();	
-	if($("#recipe_tags .tag_text:contains("+text+")").length == 0){		
-		var htmlstring = "<div class='tag'><div class='tag_text'>"+text+"</div><div class='tag_remove'>x</div></div>";
-		$("#recipe_tags").append(htmlstring);
-		$("#recipe_tags .tag_remove").last().click(removeNewTag);
+function submitSuggestTags(){
+	var tags = $("#recipe_tags .tag_text").text();
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	for(var i in tags){
+		$.ajax({
+			url:"/anycook/SuggestTags",
+			data:"recipe="+recipe+"&tag="+tag,
+			async:false
+		});
 	}
 }
 

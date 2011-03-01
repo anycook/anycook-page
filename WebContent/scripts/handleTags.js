@@ -34,7 +34,7 @@ function saveTag(text){
 }
 
 function getDivLength(){
-	var divs = $(".tag");
+	var divs = $("#recipe_tags .tag");
 	var divlength=0;
 	for(var i=0;i<divs.length;i++){
 		var width = $(divs[i]).css("width");
@@ -119,5 +119,89 @@ function makeTagCloud(){
 		$("#tagcloud span span").last().css({"font-size":json[tag]*8,
 				"opacity": json[tag]/3
 		});
+	}
+}
+
+//tags
+function addNewTag(event){
+	
+	var target = $(event.target);
+	var text = target.text();
+	saveNewTag(text);	
+}
+
+function handleNewTagClick(event){
+		makeNewRInput();
+}
+
+function removeNewTag(event){
+	var target = $(event.target);
+	target.parent().remove();
+	removeNewInput();
+	
+	var count = $("#recipe_tags .tag").length;
+	
+	if(count<10)
+		count = "0"+count;
+	
+	$("#nr_tagnumber").text(count);
+}
+
+function removeNewInput(){
+	$("#recipe_tags input").remove();
+}
+
+function keyNewTag(event) {
+	var text = $(event.target).val();
+
+	if((event.keyCode == 13 || event.keyCode == 188 || event.keyCode == 32) && text!="" ){
+		saveNewTag(text);
+		makeNewRInput();		
+	}
+	else if(event.keyCode == 8 && text ==""){
+		$("#recipe_tags .tag").last().remove();
+		removeNewInput();
+		makeNewRInput();
+		
+		var count = $("#recipe_tags .tag").length;
+		
+		if(count<10)
+			count = "0"+count;
+		
+		$("#nr_tagnumber").text(count);
+		
+		return false;
+	}
+	
+}
+
+function makeNewRInput(){
+		if($("#recipe_tags input").length==0){
+			var divlength = getDivLength();
+			//make new input field
+			$("#recipe_tags").append("<input type='text'/>");
+			$("#recipe_tags input").keydown(keyNewTag);
+			$("#recipe_tags input").focus();
+		}
+		else 
+			$("#recipe_tags input").focus();
+}
+
+function saveNewTag(text){
+	if(text[0]=="," || text[0]==" ")
+		text = text.substring(1,text.length);
+	
+	removeNewInput();	
+	if($("#recipe_tags .tag_text:contains("+text+")").length == 0){		
+		var htmlstring = "<div class='tag'><div class='tag_text'>"+text+"</div><div class='tag_remove'>x</div></div>";
+		$("#recipe_tags").append(htmlstring);
+		$("#recipe_tags .tag_remove").last().click(removeNewTag);
+		
+		var count = $("#recipe_tags .tag").length;
+		
+		if(count<10)
+			count = "0"+count;
+		
+		$("#nr_tagnumber").text(count);
 	}
 }
