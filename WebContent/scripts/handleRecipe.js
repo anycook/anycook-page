@@ -206,16 +206,16 @@ function showaddTags(){
 }
 
 function submitSuggestTags(){
-	var tags = $("#recipe_tags .tag_text").text();
 	var pathNames = $.address.pathNames();
 	var recipe = pathNames[1];
-	for(var i in tags){
+	$("#recipe_tags .tag_text").each(function(index){
+		var tag = $(this).text();
 		$.ajax({
 			url:"/anycook/SuggestTags",
 			data:"recipe="+recipe+"&tag="+tag,
 			async:false
 		});
-	}
+	});
 }
 
 zutatValues = new Array();
