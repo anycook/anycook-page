@@ -64,17 +64,22 @@ function getBigFrameText(json){
 
 var personen;
 
-function loadRecipe(json){
-	
+function loadRecipewJSON(json){
 	var recipe = new Recipe();
 	recipe.loadJSON(json);
+	loadRecipe(recipe);
+}
+
+function loadRecipe(recipe){
+	
+	
 	
 	var headertext = "<div class='float_right_header'><div id='recipe_general_btn' class='big_button'>Rezept</div><div id='recipe_discussion_btn' class='big_button'>Diskussion</div></div>";
 	$("#content_header").html(headertext);
 	$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
 	$("#recipe_discussion_btn").click(function(event){$.address.parameter("page", "discussion");});
 	
-	personen = Number(json.personen);
+	personen = Number(recipe.personen);
 	if(personen>1)
 		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+recipe.personen+"' size='2' maxlength='2' /> Personen:");
 	else

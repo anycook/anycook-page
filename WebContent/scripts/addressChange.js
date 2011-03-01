@@ -109,7 +109,7 @@ function handleChange(event){
 			  		  async:false,
 			  		  data: {recipe:path[1]},
 			  		  success: function(json){
-						loadRecipe(json);
+						loadRecipewJSON(json);
 					}
 			  		});
 				$("#content_footer").hide();
