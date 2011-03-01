@@ -1247,8 +1247,10 @@ ul.kategorie_filter li:HOVER {
 #addtags_container{
 	float:left;
 	display:none;
+	height:500px;
 }
 #addtags_container table{
+	margin:50px 0 50px 0;
 	font: 14pt Georgia;
 	font-style: italic;
 	color: #5A5A5A;

@@ -153,10 +153,10 @@ function loadRecipe(recipe){
 	//schmeckt-button
 	if(loginChecker()){
 		if(schmecktChecker(recipe.name)){
-			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir!</div><span>·</span><div id='tag_vorschlag'>Tags vorschlagen</div>");
+			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir!</div>");
 			$("#rezept_schmeckt").click(schmecktmir);	
 		}else{
-			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir nicht mehr!</div><span>·</span><div id='tag_vorschlag'>Tags vorschlagen</div>");
+			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir nicht mehr!</div>");
 			$("#rezept_schmeckt").click(schmecktmirnicht);
 		}
 	}

@@ -91,6 +91,9 @@
 								</td>
 							</tr>
 						</table>
+						<div id="end_newrecipe">
+						<div class="last_step_btn" id="recipe_ready">Fertig</div>
+					</div>
     			</div>
     		</div>
     		<div id="rezept_footer">
