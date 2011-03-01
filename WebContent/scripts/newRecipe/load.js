@@ -130,8 +130,8 @@ function loadStep3(){
 	
 	var zutaten = newrecipe.zutaten;
 	for(zutat in zutaten){
-		var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="'+zutaten[zutat]+'" /></td>'+
-								'<td class="step_3_right"><input type="text" class="new_zutat_menge"/></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
+		var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="'+zutat+'" /></td>'+
+								'<td class="step_3_right"><input type="text" class="new_zutat_menge" value="'+zutaten[zutat]+'"/></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
 		$("#new_zutat_table").append(htmlstring);
 		reihen++;
 	}

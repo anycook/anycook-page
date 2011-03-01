@@ -6,7 +6,8 @@ function getZutatenfromSchritte() {
 		async:false,
 		success:function(json)
 		{
-			newrecipe.addZutaten(json);
+			for(var i in json)
+				newrecipe.addZutat(json[i], "");
 		}
 	});
 }
