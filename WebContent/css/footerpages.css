@@ -54,10 +54,11 @@
 #kontakt textarea{
 	background-color: #ece9e3;
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	width: 300px;
+	width: 302px;
 	height: 150px;
 	color:#9b9b9a;
 	padding: 3px 0 0 5px;
+	border: 1px solid #979694;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;	
 }

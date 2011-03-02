@@ -14,7 +14,7 @@ function loadContact(){
 	}
 	
 	$("#formSubjectFieldFilter").click(showSubjects);
-	$("#SendButton").click(sendForm);
+	$("#SendButton").click(function(){$("#contactform").submit();});
 	$("#contactform").submit(sendForm);
 }
 
@@ -101,6 +101,7 @@ function toggleDeleteBtn(){
 }
 
 function sendForm(){
+	if(!checkFeedbackForm()) return;
 	var response = $("#recaptcha_response_field").val();
 	var challenge = $("#recaptcha_challenge_field").val();
 	var message = $("#conmessage").val();
@@ -124,12 +125,20 @@ function sendForm(){
 	return false;
 }
 
+function checkFeedbackForm(){
+	if($("#conmessage").val() =="") return false;
+	
+	if($("#conbetreff").val() == "Thema wählen") return false;
+	
+	return true;
+}
+
 function formShowSuccess(){
 	$("#content_main > *").fadeOut(400, function(){
-		$("#content_main").contents().empty();
+		$("#content_main").empty();
 		$("#content_main").append("<div id='new_recipe_ready' class='content_message'><h5>Danke!</h5><p>" +
 		"Deine Nachricht wurde an uns gesendet.<br /> Wir benachrichtigen dich!</p></div>");
-		$("#content").click(readyClick);
+		$("#content_main").click(readyClick);
 		window.setTimeout(readyClick, 4000);
 	});
 	
@@ -139,5 +148,12 @@ function formShowFail(){
 	Recaptcha.reload();
 	$("#fromResponseField").empty();
 	$("#fromResponseField").append("CAPTCHA bitte richtig eingeben! Oder bist du ein Bot?");	
+}
+
+function readyClick(){
+	$("#new_recipe_ready").fadeOut(400, function(){
+		$("#content_main").unbind("click");
+		$.address.value("");
+	});
 }
 

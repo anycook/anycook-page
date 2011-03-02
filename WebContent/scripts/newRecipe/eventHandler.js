@@ -232,9 +232,3 @@ function checkNewOnOff(event){
 	
 }
 
-function readyClick(){
-	$("#new_recipe_ready").fadeOut(400, function(){
-		$("#content_main").unbind("click");
-		$.address.value("");
-	});
-}
