@@ -101,7 +101,7 @@ function toggleDeleteBtn(){
 }
 
 function sendForm(){
-	if(!checkFeedbackForm()) return;
+	if(!checkFeedbackForm()) return false;
 	var response = $("#recaptcha_response_field").val();
 	var challenge = $("#recaptcha_challenge_field").val();
 	var message = $("#conmessage").val();
