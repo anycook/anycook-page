@@ -63,7 +63,7 @@ function finishStep2(){
 
 
 function finishStep3(){
-	if($(".new_zutat_name").first().val().length=="")
+	if($(".new_zutat_name").first().val()=="")
 		return false;
 	
 	newrecipe.resetZutaten();

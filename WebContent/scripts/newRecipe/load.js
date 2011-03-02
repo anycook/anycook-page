@@ -119,21 +119,21 @@ function loadStep2(){
 
 function loadStep3(){
 	if(newrecipe.schritte.length == 0)
-		$.address.parameter("page", "schritte");
-	$("#new_zutat_table").empty();
-	var reihen = 0;
+		$.address.parameter("page", "schritte");	
 	
-	newrecipe.sendSchritte();
-	
-	if(newrecipe.zutaten == null)
+	if($("#new_zutat_table .new_zutat_name").length == 0 || $("#new_zutat_table .new_zutat_name").first().val() == ""){
+		newrecipe.sendSchritte();
+		var reihen = 0;
+		$("#new_zutat_table").empty();
 		getZutatenfromSchritte();
 	
-	var zutaten = newrecipe.zutaten;
-	for(zutat in zutaten){
-		var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="'+zutat+'" /></td>'+
-								'<td class="step_3_right"><input type="text" class="new_zutat_menge" value="'+zutaten[zutat]+'"/></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
-		$("#new_zutat_table").append(htmlstring);
-		reihen++;
+		var zutaten = newrecipe.zutaten;
+		for(zutat in zutaten){
+			var htmlstring = '<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="'+zutat+'" /></td>'+
+									'<td class="step_3_right"><input type="text" class="new_zutat_menge" value="'+zutaten[zutat]+'"/></td><td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>';
+			$("#new_zutat_table").append(htmlstring);
+			reihen++;
+		}
 	}
 	
 				
