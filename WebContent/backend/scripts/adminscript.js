@@ -86,6 +86,14 @@ function changePage(event){
 			success:loadZutaten
 		});
 	}
+	else if(sitename == "tags"){
+		$("#tags").addClass("on");
+		$.ajax({
+			url:"/anycook/GetTags",
+			dataType:"json",
+			success:loadTags
+		});
+	}
 	
 	lastPage = sitename;
 }

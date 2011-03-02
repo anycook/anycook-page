@@ -355,6 +355,37 @@ ul{
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;	
 }
 
+/*----tags-----*/
+.tagDelete{
+	color: #FF0000;
+	width: 30px;
+	float: left;
+}
+
+.tagGerichte{
+	width:100px;
+	float: left;
+	}
+
+.tagName{
+	width:200px;
+	float: left;
+	}
+	
+#taglist {
+	padding:0px;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	list-style-type: none;
+	float:left;
+	width:800px;
+}
+
+#taglist li{
+	padding:2px 0 2px 15px;
+	margin:2px 0 0 10px;
+	float:left;
+	width:700px;
+	}
 
 /*----footer-----*/
 #footer{

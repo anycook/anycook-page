@@ -41,4 +41,8 @@
     	</div>
     </template>
     
+    <template id="tags">
+    	<ul id="taglist"></ul>
+    </template>
+    
 </templates>
