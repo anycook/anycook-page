@@ -180,9 +180,9 @@ function loadRecipe(recipe){
 
 function showZubereitung(){
 	
-	if(!$(this).hasClass("on")){
+	if(!$("#zubereitung").hasClass("on")){
 		$(".bezeichner").removeClass("on");
-		$(this).addClass("on");
+		$("#zubereitung").addClass("on");
 		$("#step_container").show();
 		$("#addtags_container").hide();
 	}
@@ -195,12 +195,17 @@ function showaddTags(){
 		$(this).addClass("on");
 		$("#step_container").hide();
 		$("#addtags_container").show();
-		
-		if($("#tagcloud").children().length == 0){
-			makeTagCloud();
-			$("#tagcloud span span").click(addNewTag);
-			$("#recipe_tags").click(handleNewTagClick);
-			$("#suggest_tags_btn").click(submitSuggestTags);
+		if(loginChecker()){
+			if($("#tagcloud").children().length == 0){
+				makeTagCloud();
+				$("#tagcloud span span").click(addNewTag);
+				$("#recipe_tags").click(handleNewTagClick);
+				$("#suggest_tags_btn").click(submitSuggestTags);
+			}
+		}else{
+			$("#addtags_container table, #suggest_tags_btn").remove();
+			$("#addtags_container").append("<h6 id=\"no_tags\">Log dich ein und schlage auch Tags vor!</h6>");
+			$("#no_tags").click(clickSignin);
 		}
 	}
 }
@@ -215,6 +220,21 @@ function submitSuggestTags(){
 			data:"recipe="+recipe+"&tag="+tag,
 			async:false
 		});
+	});
+	$("#recipe_tags").empty();
+	$("#addtags_container").fadeOut(200, function(){
+		$("#bezeichner_container").append("<div id='suggestedtags_message' class='content_message'>" +
+				"<h5>Danke!</h5><p>Wir schauen uns deine Vorschläge gleich einmal an.<br /> " +
+				"Wir benachrichtigen dich!</p></div>");
+		$("#content").click(addTagreadyClick);
+		window.setTimeout(addTagreadyClick, 4000);
+	});
+}
+
+function addTagreadyClick(){
+	$("#suggestedtags_message").fadeOut(500, function(){
+		$("#suggestedtags_message").remove();
+		showZubereitung();
 	});
 }
 

@@ -1568,7 +1568,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	resize: none;
 }
 
-#no_comment { /*wenn man nicht eingeloggt bei discussion footer*/
+#no_comment, #no_tags { /*wenn man nicht eingeloggt bei discussion footer*/
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	/*font-style: italic;*/
 	color: #859F5E;
@@ -1577,7 +1577,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	margin-top: 5px;
 }
 
-#no_comment:hover {
+#no_comment:hover, #no_tags:hover {
 	text-decoration: underline;
 }
 
@@ -2673,4 +2673,13 @@ td.step_1_right {
 #fb_registration {
 	float: left;
 	margin-top: 5px;
+}
+
+/*-----addTags--------*/
+#suggestedtags_message{
+	float:left;
+	width: 380px;
+	height: 100px;
+	margin-top:189px;
+	margin-bottom: 189px;
 }
