@@ -71,7 +71,8 @@ function loadRecipewJSON(json){
 }
 
 function loadRecipe(recipe){
-	
+	if(logindata == null)
+		$("#addtags").hide();
 	
 	
 	var headertext = "<div class='float_right_header'><div id='recipe_general_btn' class='big_button'>Rezept</div><div id='recipe_discussion_btn' class='big_button'>Diskussion</div></div>";
