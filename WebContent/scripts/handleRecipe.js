@@ -89,7 +89,8 @@ function loadRecipe(recipe){
 	$("#person_number").click(function(){$("#person_number").val('');});
 	var persCount;
 	$("#person_number").bind('keypress', function(e){
-		var cleanString =String.fromCharCode(e.keyCode).match(/[0-9]+/); 
+		var inputString = String.fromCharCode(e.charCode);
+		var cleanString =inputString.match(/[0-9]+/); 
 		if(e.keyCode==13){
 			persCount = $("#person_number").val();
 			multiZutaten(persCount);
