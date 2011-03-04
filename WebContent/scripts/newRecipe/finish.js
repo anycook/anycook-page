@@ -124,7 +124,10 @@ function finishNewRecipe(){
 	if(!finishStep4())
 		return false;
 	
-	newrecipe.sendRecipe();
+	if(!newrecipe.sendRecipe()){
+		alert("Es ist uns überaus peinlich, aber irgendwas hat da nicht funktioniert...");
+		return false;
+	}
 	
 	$("#content_main > *").fadeOut(400, function(){$("#content_main").contents().remove();});
 	$("#content_header > *").fadeOut(400, function(){$("#content_header").contents().remove();});
