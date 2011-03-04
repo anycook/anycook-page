@@ -13,20 +13,27 @@ function getZutatenfromSchritte() {
 }
 
 function clickNewRecipeHeader(event){
+	var page = $.address.parameter("page");
+	if(page ==null || page==undefined || page=="") finishStep1();
+	else if(page=="schritte") finishStep2();
+	else if(page=="zutaten") finishStep3();
+	
 	var target = $(event.target);
-	var id = target.attr("id");
-	if(id.match("general")!=null){
-		$.address.parameter("page", "");
+	if(!target.hasClass("inactive")){
+		var id = target.attr("id");
+		if(id.match("general")!=null){
+			$.address.parameter("page", "");
+		}
+		else if(id.match("schritte")!=null){
+			$.address.parameter("page", "schritte");
+		}
+		else if(id.match("zutaten")!=null){
+			$.address.parameter("page", "zutaten");
+		}
+		else if(id.match("abschluss")!=null){
+			$.address.parameter("page", "abschluss");
+		}
 	}
-	else if(id.match("schritte")!=null){
-		$.address.parameter("page", "schritte");
-	}
-	else if(id.match("zutaten")!=null){
-		$.address.parameter("page", "zutaten");
-	}
-	else if(id.match("abschluss")!=null){
-		$.address.parameter("page", "abschluss");
-	}		
 }
 
 function nextStep(event){

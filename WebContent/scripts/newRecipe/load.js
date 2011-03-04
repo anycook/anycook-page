@@ -47,7 +47,7 @@ function loadNewRecipe(){
 		});
 		
 		//header
-		$("#nr_general_btn").click(clickNewRecipeHeader);
+		$("#nr_general_btn, #nr_schritte_btn, #nr_zutaten_btn, #nr_abschluss_btn").click(clickNewRecipeHeader);
 		$(".next_step").click(nextStep);
 		
 		//step1
@@ -72,7 +72,6 @@ function loadNewRecipe(){
 		    // path to server-side upload script
 		    action: '/anycook/UploadImage'
 		});
-		
 		
 		//step2
 		$("#neuer_schritt").click(addNewSchritt);
@@ -102,7 +101,6 @@ function loadNewRecipe(){
 function loadStep2(){
 	if(newrecipe.name ==null || newrecipe.beschreibung == null || newrecipe.kategorie == null)
 		$.address.parameter("page", "");
-	$("#nr_schritte_btn").click(clickNewRecipeHeader);
 	
 	$("#nr_schritte_btn").addClass("on");			
 	$("#new_recipe_step2").show();
@@ -145,8 +143,7 @@ function loadStep3(){
 		for(reihen; reihen <=8; reihen++)
 			$("#new_zutat_table").append(htmlstring);			
 	}
-	
-	$("#nr_zutaten_btn").click(clickNewRecipeHeader);
+
 	
 	$("#nr_zutaten_btn").addClass("on");
 	$("#new_recipe_step3").show();
@@ -173,7 +170,6 @@ function loadStep3(){
 function loadStep4(){
 	if(newrecipe.zutaten == null)
 		$.address.parameter("page", "zutaten");
-	$("#nr_abschluss_btn").click(clickNewRecipeHeader);
 	
 	$("#nr_abschluss_btn").addClass("on");
 	$("#new_recipe_step4").show();

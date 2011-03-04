@@ -116,8 +116,8 @@ function addZutat(addzutat){
 		url:"/anycook/AddtoSession",
 		data: "zutat="+addzutat,
 		success:function(response){
-			if(response == "true") {
-				addZutatRow(addzutat);
+			if(response != "false") {
+				addZutatRow(response);
 				var array = $.address.pathNames();
 				if(array.length >0 && array[0]=="search")
 					fullTextSearch();

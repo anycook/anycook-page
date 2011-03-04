@@ -126,6 +126,7 @@ Recipe.prototype.sendRecipe = function(){
 	this.sendSchritte();
 	this.sendTags();
 	this.sendZutaten();
+	this.saveRecipe();
 };
 
 Recipe.prototype.sendRecipeData = function(){
@@ -176,6 +177,13 @@ Recipe.prototype.sendTags = function(){
 			data:"tag="+this.tags[i]
 		});
 	}
+};
+
+Recipe.prototype.saveRecipe = function(){
+	$.ajax({
+		async:false,
+		url:"/anycook/SaveNewRecipe"
+	});
 };
 //getter
 

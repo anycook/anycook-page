@@ -302,9 +302,12 @@ function zutatentableclick(){
 	    	});
 	    	$(".ui-autocomplete").last().addClass("zutat-autocomplete");
 	    	
-	    	$("#zutat_form").submit(function(obj){
-	    		saveZutat();
-	    		zutatentableclick();
+	    	$("#zutat_form").submit(function(event){
+	    		var zutat = $("#zutat_input").val();
+	    		$("#zutat_input").autocomplete("destroy");
+				$("#zutat_input").parents("tr").remove();
+	    		addZutat(zutat);
+	    		//zutatentableclick();
 	    		return false;
 	    	});
 	    	
