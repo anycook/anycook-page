@@ -126,7 +126,7 @@ Recipe.prototype.sendRecipe = function(){
 	this.sendSchritte();
 	this.sendTags();
 	this.sendZutaten();
-	this.saveRecipe();
+	return this.saveRecipe();
 };
 
 Recipe.prototype.sendRecipeData = function(){
@@ -180,10 +180,16 @@ Recipe.prototype.sendTags = function(){
 };
 
 Recipe.prototype.saveRecipe = function(){
+	var checker =false;
 	$.ajax({
 		async:false,
-		url:"/anycook/SaveNewRecipe"
+		url:"/anycook/SaveNewRecipe",
+		success:function(response){
+			if(response == "true")
+				checker=true;
+		}
 	});
+	return checker;
 };
 //getter
 
