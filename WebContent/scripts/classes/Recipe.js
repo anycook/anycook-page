@@ -146,7 +146,7 @@ Recipe.prototype.sendSchritte = function(){
 	for(var i = 0; i<this.schritte.length; i++){
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
-			data:"schritt="+this.schritte[i]+"&num="+(i+1),
+			data:"schritt="+this.schritte[i]+"&num="+(i+1)
 		});
 	}
 };
@@ -160,7 +160,7 @@ Recipe.prototype.sendZutaten = function(){
 	for(var zutat in this.zutaten){
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
-			data:"zutat="+zutat+"&menge="+this.zutaten[zutat],
+			data:"zutat="+zutat+"&menge="+this.zutaten[zutat]
 		});
 	}
 };
@@ -174,7 +174,7 @@ Recipe.prototype.sendTags = function(){
 	for(var i = 0; i<this.tags.length; i++){
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
-			data:"tag="+this.tags[i],
+			data:"tag="+this.tags[i]
 		});
 	}
 };

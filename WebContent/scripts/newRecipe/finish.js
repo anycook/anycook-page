@@ -52,7 +52,7 @@ function finishStep2(){
 	$(".step_textarea").each(function(index, value){
 		var text = $(value).val();
 		if(text!=""){
-			newrecipe.addSchritt(index+1, text);
+			newrecipe.addSchritt(index, text);
 		}
 	});
 	
