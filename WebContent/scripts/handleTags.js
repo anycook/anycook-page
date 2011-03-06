@@ -101,12 +101,18 @@ function clickFamousTag(event){
 	saveTag(text);
 }
 
-function makeTagCloud(){
+function makeTagCloud(recipe){
+	
+	var data = "num=14";
+	if(recipe != undefined)
+		data+="&recipe="+recipe;
+	
 	var json = null;
+	
 	$.ajax({
 		  url: "/anycook/GetPopularTags",
 		  dataType: 'json',
-		  data: "num=14",
+		  data: data,
 		  async:false,
 		  success: function(response){
 				if(response != "false")

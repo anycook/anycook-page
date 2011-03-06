@@ -196,8 +196,10 @@ function showaddTags(){
 		$("#step_container").hide();
 		$("#addtags_container").show();
 		if(loginChecker()){
+			var pathNames = $.address.pathNames();
+			var recipe = pathNames[1];
 			if($("#tagcloud").children().length == 0){
-				makeTagCloud();
+				makeTagCloud(recipe);
 				$("#tagcloud span span").click(addNewTag);
 				$("#recipe_tags").click(handleNewTagClick);
 				$("#suggest_tags_btn").click(submitSuggestTags);
