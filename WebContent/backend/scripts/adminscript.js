@@ -18,7 +18,8 @@ $(document).ready(function(){
 		$.address.value("");
 		});
 	
-	
+	//scrollListener
+	$(document).scroll(infoScrollListener);
 	
 });
 
@@ -101,6 +102,24 @@ function changePage(event){
 function parseDate(toParse){
 	toParse = toParse.split("-");
 	return toParse[2]+"."+toParse[1]+"."+toParse[0];	
+}
+
+function infoScrollListener(){
+	var scrollTop = $(document).scrollTop();
+	if(scrollTop > 50 ){
+		if($("#info").css("position") == "relative"){
+			var left =$("#info").offset().left;
+			$("#info").css("left", left);
+			$("#info").css("top", 0);
+			$("#info").css("position", "fixed");
+		}
+	}else{
+		if($("#info").css("position") == "fixed"){
+			$("#info").css("left", "0");
+			$("#info").css("top", "0");
+			$("#info").css("position", "relative");
+		}
+	}
 }
 
 var lastPage;
