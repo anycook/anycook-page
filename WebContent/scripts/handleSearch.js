@@ -27,7 +27,11 @@ function fullTextSearch(){
 
 function makeSearchHeader(){
 	if($("#first_search_layout").length == 0){
-		var headertext = "<div class='float_right_header'><div id='first_search_layout' class='small_button'><div></div></div><div id='second_search_layout' class='small_button'><div></div></div><div id='third_search_layout' class='small_button'><div></div></div></div>";
+		var headertext = "<div class='float_right_header'>" +
+				"<div id='first_search_layout' class='small_button'><div></div></div>" +
+				//"<div id='second_search_layout' class='small_button'><div></div></div>" +
+				//"<div id='third_search_layout' class='small_button'><div></div></div>" +
+				"</div>";
 		$("#content_header").html(headertext);
 		$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
 	}

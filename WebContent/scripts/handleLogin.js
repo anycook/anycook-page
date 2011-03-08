@@ -158,8 +158,10 @@ function makeUsermenuText(json){
 	$("#login_top>*").remove();
 	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
 	
-	var htmlstring = "<div id='login_user'><div id='user'><img src='"+json.image+"'/><p>"+json.nickname+"</p></div><a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
-		"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a><a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
+	var htmlstring = "<div id='login_user'><div id='user'><img src='"+json.image+"'/><p>"+json.nickname+"</p></div>" +
+			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
+		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
+		"<a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
 	if(json.level == "2")
 		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
 	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
