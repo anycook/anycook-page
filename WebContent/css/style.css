@@ -530,14 +530,14 @@ ul.kategorie_filter li:HOVER {
 }
 
 .tags_table_right {
+	float:left;
 	display: block;
-	padding-top: 4px;
-	padding-left: 1px;
+	padding:4px 0 1px 1px;
 	background: url("/img/zutaten_tags_bg.png") repeat;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: 500;
 	color: #5a5a5a;
-	height: 69px;
+	min-height: 69px;
 	width: 169px;
 }
 
@@ -545,7 +545,7 @@ ul.kategorie_filter li:HOVER {
 	float: left;
 	border: 0;
 	outline: none;
-	width: 40%;
+	width: 100%;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	background: none;
 	margin: 0;

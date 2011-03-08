@@ -38,6 +38,19 @@
 	border-top:0;	
 }
 
+.tag-autocomplete .ui-menu-item a.ui-state-hover,
+.tag-autocomplete .ui-menu-item a.ui-state-active {
+	background-color: #ffffff;
+}
+
+.tag-autocomplete{
+	color:#404040;
+	width:168px;
+	background-color: #f7f4f1;
+	border: 1pt solid #bababa;
+	border-top:0;	
+}
+
 .zutat-autocomplete .ui-menu-item a.ui-state-hover,
 .zutat-autocomplete .ui-menu-item a.ui-state-active {
 	background-color: #ffffff;

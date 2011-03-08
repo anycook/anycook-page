@@ -1,8 +1,8 @@
 function keyTag(event) {
 	var text = $(event.target).val();
 
-	if((event.keyCode == 13 || event.keyCode == 188 || event.keyCode == 32) && text!="" ){
-		saveTag(text);		
+	if((event.keyCode == 188 || event.keyCode == 32) && text!="" ){
+		$(".tags_table_right form").submit();
 		makeNewInput();		
 	}
 	else if(event.keyCode == 8 && text ==""){
@@ -15,7 +15,14 @@ function keyTag(event) {
 	
 }
 
+function submitTag(event){
+	var text = $(this).children().first().val();
+	saveTag(text);
+	return false;
+}
 function saveTag(text){
+	
+	
 	if(text[0]=="," || text[0]==" ")
 		text = text.substring(1,text.length);
 	
@@ -23,14 +30,14 @@ function saveTag(text){
 	for(var i = 0; i<tags.length; i++){
 		if($(tags[i]).text() == text){
 			$(".tags_table_right input").val("");
-			return;
+			return ;
 		}
 	}
 			
-		removeInput();
-		$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+text+"</div><div class='tag_remove'>x</div></div>");
-		//$(".tags_table_right .tag_remove").last().click(function(event){removeTag(event.target.parentNode);});
-		addTag(text);
+	removeInput();
+	$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+text+"</div><div class='tag_remove'>x</div></div>");
+	//$(".tags_table_right .tag_remove").last().click(function(event){removeTag(event.target.parentNode);});
+	addTag(text);
 }
 
 function getDivLength(){
@@ -56,9 +63,42 @@ function makeNewInput(){
 			var divlength = getDivLength();
 			//make new input field
 			if(divlength<320){
-				$(".tags_table_right").append("<input type='text'/>");
+				$(".tags_table_right").append("<form><input type='text'/></form>");
 				$(".tags_table_right input").keydown(keyTag);
 				$(".tags_table_right input").focus();
+				
+				$(".tags_table_right input").autocomplete({
+		    		source:function(req,resp){
+	        			var array = [];
+	        		var term = req.term;
+	        		$.ajax({
+	        			url:"/anycook/AutocompleteTags",
+	        			dataType: "json",
+	        			async:false,
+	        			data:"q="+term,
+	        			success:function(data){
+	        				resp($.map(data, function(item){
+	        					return{
+	        						label:item
+	        						};
+	        					}));        			
+	        					}
+	        				});
+	        			},
+	        			minlength:1,
+	        			position:{
+	        				offset:"-3 1"
+	        			}, 
+	        			select:function(event, ui){
+	        				var text = ui.item.label;
+	        				$(".tags_table_right input").autocomplete("destroy");
+	        				saveTag(text);
+	        				makeNewInput();
+	        				return false;
+	        			}
+		    	});
+				$(".ui-autocomplete").last().addClass("tag-autocomplete");
+				$(".tags_table_right form").submit(submitTag);
 			}
 		}
 		else 
