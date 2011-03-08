@@ -43,6 +43,10 @@
     
     <template id="tags">
     	<ul id="taglist"></ul>
+    	<div id="info">
+    		<div id="confirm"><div id="confirm_text">Möchtest du wirklich den Tag "<span id="selected_tag"></span>" löschen?<ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
+    		<h3>Statistik</h3><table></table>
+    	</div>
     </template>
     
 </templates>

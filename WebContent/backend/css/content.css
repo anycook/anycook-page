@@ -361,6 +361,7 @@ ul{
 	color: #FF0000;
 	width: 30px;
 	float: left;
+	cursor: pointer;
 }
 
 .tagGerichte{
@@ -372,6 +373,8 @@ ul{
 	width:200px;
 	float: left;
 	}
+	
+
 	
 #taglist {
 	padding:0px;
