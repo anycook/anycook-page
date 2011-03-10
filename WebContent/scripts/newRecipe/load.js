@@ -1,4 +1,4 @@
-var newrecipe;
+var newrecipe =null;
 
 function loadNewRecipe(){
 	if(!loginChecker())
@@ -95,6 +95,11 @@ function loadNewRecipe(){
     	});
 		$(".step_4_left .label_chefhats, .step_4_left .label_muffins").click(checkNewOnOff);
 		$("#recipe_ready").click(finishNewRecipe);
+		$("#recipe_preview").click(function()
+				{
+			if(finishStep4())
+				$.address.path("preview");
+			});
 	}
 }
 
@@ -181,4 +186,16 @@ function loadStep4(){
 			$("#progress_4 > *").animate({"opacity": 1.0}, {duration: 500});
 			}});
 	}
+}
+
+function loadPreview(){
+	if(!loginChecker()||newrecipe == null){
+		$.address.path("");
+		return;
+	}
+	newrecipe.setImagename("nopicture.png");
+	$("#progress_1, #progress_2, #progress_3, #progress_4").hide();
+	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
+	$("#filter_main *").not("ul.kategorie_filter").show().css("opacity", 1);
+	loadRecipe(newrecipe);
 }

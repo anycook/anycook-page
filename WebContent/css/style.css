@@ -2349,13 +2349,13 @@ td.step_1_right {
 }
 
 .last_step_btn {
-	float: right;
+	
 	font: 10pt Lucida Sans Unicode;
 	color: #878787;
 	width: 114px;
 	height: 22px;
 	padding: 12px 0 0 0;
-	margin: 10px 277px 0 0;
+	margin: 10px 100px 0 100px;
 	text-align: center;
 	background: url("/img/fertig_btn.png") no-repeat;
 	cursor: pointer;
@@ -2366,7 +2366,11 @@ td.step_1_right {
 }
 
 #recipe_ready {
-	
+	float: right;
+}
+
+#recipe_preview{
+	float:left;
 }
 
 #progress_1,#progress_2,#progress_3,#progress_4 {

@@ -111,6 +111,19 @@
     		</div>
     	</div>
     </template>
+    <template id="preview">
+    	<div id="recipe_container">
+    		<h1 id="rezept_headline"></h1>
+    		<img id="rezept_bild"/>
+    		<div id="beschreibung"></div>
+    		<div id="rezept_begin">
+    			<div class="bezeichner" id="zubereitung">Zubereitung</div>
+    		</div>
+    		<div id="bezeichner_container">
+    			<div id="step_container"></div>
+    		</div>
+    	</div>
+    </template>
     <template id="newrecipe">
     	<div id="new_recipe_step1" class='new_recipe_steps'>
 					<div class="new_recipe_headline">Hallo!<br/>Schön, dass Du ein Rezept erstellen möchtest.</div>
@@ -264,7 +277,7 @@
 						</table>
 					</form>
 					<div id="end_newrecipe">
-						<!--<div class="last_step_btn" id="recipe_preview">Vorschau</div>-->
+						<div class="last_step_btn" id="recipe_preview">Vorschau</div>
 						<div class="last_step_btn" id="recipe_ready">Fertig</div>
 					</div>
 				  </div>

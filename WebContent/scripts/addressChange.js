@@ -100,6 +100,9 @@ function handleChange(event){
 			else if(path[0]=="feedback"){
 				loadContact();
 			}
+			else if(path[0] == "preview"){
+				loadPreview();
+			}
 			break;
 		case 2:
 			if(path[0]== "recipe"){
