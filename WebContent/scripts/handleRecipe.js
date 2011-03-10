@@ -65,7 +65,7 @@ function getBigFrameText(json){
 var personen;
 
 function loadRecipewJSON(json){
-	var recipe = new Recipe();
+	recipe = new Recipe();
 	recipe.loadJSON(json);
 	loadRecipe(recipe);
 }
@@ -135,8 +135,13 @@ function loadRecipe(recipe){
 	fillMin(recipe.min);
 	
 	$("#zutaten_table > *").remove();
-	for(zutat in recipe.zutaten){
-		$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+recipe.zutaten[zutat]+"</td></tr>");
+	for(var zutat in recipe.zutaten){
+		var menge = recipe.zutaten[zutat].menge;
+		var singular = recipe.zutaten[zutat].singular;
+		if(singular != null &&getValuefromString(menge) == 1)
+			zutat = singular;
+		
+		$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+menge+"</td></tr>");
 	}
 	
 	$(".tags_table_right > *").remove();
@@ -253,9 +258,16 @@ function multiZutaten(perscount){
 		else{
 			newValue =  getNumbersFromString(zutatValues[i], perscount);
 		}
-			
-		$(this).empty();
-		$(this).append(newValue);
+		
+		var zutat = recipe.getZutatOnPosition(i);
+		var currentzutattext = $(this).prev().text();
+		if(zutat.singular != null){
+			if(getValuefromString(newValue) == 1){
+				$(this).prev().text(zutat.singular);
+			}else
+				$(this).prev().text(zutat.name);
+		}
+		$(this).text(newValue);
 	});
 	
 }
@@ -302,6 +314,32 @@ function getNumbersFromString(inputstring, factor)
 	var finalValue = parseFloat(valueFromString)*factor;
 	return beginString+handleTrailingNumbers(finalValue).toString().replace(".",",")+restString;
 	
+}
+
+function getValuefromString(inputstring){
+	var valueFromString = "";
+	for(var n=0; n<inputstring.length; n++){
+		var i = inputstring.substring(n,n+1);
+		if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0"){
+			valueFromString += i;
+			for(var m=n+1; m<inputstring.length; m++){
+				var i = inputstring.substring(m,m+1);
+				if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0")
+					valueFromString += i;
+				else if(i==","||i=="."){
+					valueFromString += ".";
+				}
+				else if(i=="-"||i=="/"){
+					valueFromString += i;
+				}
+				else{
+					break;
+				}
+			}
+			break;
+		}
+	}
+	return Number(valueFromString);
 }
 
 
@@ -619,4 +657,5 @@ function discussionLike(event){
 
 
 var maxID = -1;
+var recipe = null;
 //var commenttimeout;

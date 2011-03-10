@@ -101,9 +101,12 @@ Recipe.prototype.addSchritt = function(number, text){
 };
 
 Recipe.prototype.addZutat = function(zutat, menge) {
-	if(this.zutaten == null)
+	var temp = new Object();
+	temp["menge"] = menge;
+	if(this.zutaten==null)
 		this.zutaten = new Object();
-	this.zutaten[zutat] = menge;
+	
+	this.zutaten[zutat] = temp;
 };
 
 Recipe.prototype.addZutaten = function(zutaten){
@@ -160,7 +163,7 @@ Recipe.prototype.sendZutaten = function(){
 	for(var zutat in this.zutaten){
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
-			data:"zutat="+zutat+"&menge="+this.zutaten[zutat]
+			data:"zutat="+zutat+"&menge="+this.zutaten[zutat].menge
 		});
 	}
 };
@@ -192,6 +195,20 @@ Recipe.prototype.saveRecipe = function(){
 	return checker;
 };
 //getter
+
+Recipe.prototype.getZutatOnPosition = function(position){
+	var i = 0;
+	for(var zutat in this.zutaten){
+		if(i == position){
+			var temp = new Object();
+			temp["name"] = zutat;
+			temp["menge"] = this.zutaten[zutat].menge;
+			temp["singular"] = this.zutaten[zutat].singular;
+			return temp;
+		}
+		i++;
+	}
+};
 
 /*Recipe.prototype.getName = function(){
 	return this.name;
