@@ -200,7 +200,7 @@ ul{
 	
 }
 
-.zutatenstem{
+.zutatensingular{
 	width:170px;
 }
 
@@ -208,17 +208,19 @@ ul{
 	width:90px;
 }
 
-.setparent, .zutat_rename{
+.setparent, .zutat_rename, .setsingular{
 	cursor:pointer;
 	color: #859F5E;
 	margin-left: 20px;
 }
 
-.setparent:hover, .zutat_rename:hover{
+.setparent:hover, .zutat_rename:hover, .setsingular:hover{
 	text-decoration:underline;	
 }
 
-
+.zutatenchildren{
+	width:80px;
+}
 
 
 /* user */
