@@ -17,7 +17,6 @@ function loadTags(json){
 	});
 	
 	$("#info table").append("<tr><td>Tags gesamt:</td><td>"+tagCount+"</td></tr>");
-	$("#info table").append("<tr><td>Vorgeschlagene Tags:</td><td></td></tr>");
 	
 	$(".tagDelete").click(deleteTagConfirm);
 	
@@ -53,11 +52,14 @@ function deleteTag(){
 }
 
 function loadSuggestions(json){
+	var counter = 0;
 	for(i in json){
 		$("#newSuggestion").append("<li><div class='tagName'>"+json[i].tags_name+"</div>" +
-				"<div class='suggGericht'>für: "+json[i].gerichte_name+"</div>" +
+				"<div class='suggGericht'>"+json[i].gerichte_name+"</div>" +
 		"<div class='tagDeny'>ablehnen </div><div class='tagAccept'> akzeptieren</div></li>");
+		counter++;
 	}
+	$("#info table").append("<tr><td>Neue Vorschläge:</td><td>"+counter+"</td></tr>");
 	$(".tagDeny").click(denyTagConfirm);
 	$(".tagAccept").click(acceptTagConfirm);
 }
@@ -65,23 +67,65 @@ function loadSuggestions(json){
 function denyTagConfirm(event){
 	$("#confirm_text").empty();
 	var tagName = $(this).parent().children(".tagName").first().text();
-	$("#confirm_text").append('Möchtest du wirklich den Tag "<span id="selected_tag"></span>" ablehnen?');
+	var gerName = $(this).parent().children(".suggGericht").first().text();
+	$("#confirm_text").append('Möchtest du wirklich den Tag "<span id="selected_tag"></span>" aus Gericht "<span id="selected_tagGer"></span>" ablehnen?');
 	$("#selected_tag").html(tagName);
+	$("#selected_tagGer").html(gerName);
 	$("#confirm").fadeIn(500);
 	$("#confirm_no").click(function(){
 		$("#confirm").fadeOut(500);
 		$("#confirm_text").empty();
 	});
+	$("#confirm_yes").click(denyTag);
 }
 
 function acceptTagConfirm(event){
 	$("#confirm_text").empty();
 	var tagName = $(this).parent().children(".tagName").first().text();
-	$("#confirm_text").append('Möchtest du wirklich den Tag "<span id="selected_tag"></span>" akzeptieren?');
+	var gerName = $(this).parent().children(".suggGericht").first().text();
+	$("#confirm_text").append('Möchtest du wirklich den Tag "<span id="selected_tag"></span>" aus Gericht "<span id="selected_tagGer"></span>" akzeptieren?');
 	$("#selected_tag").html(tagName);
+	$("#selected_tagGer").html(gerName);
 	$("#confirm").fadeIn(500);
 	$("#confirm_no").click(function(){
 		$("#confirm").fadeOut(500);
 		$("#confirm_text").empty();
+	});
+	$("#confirm_yes").click(acceptTag);
+}
+
+function acceptTag(){
+	var tagName =$("#selected_tag").text();
+	var gerName =$("#selected_tagGer").text(); 
+	$.ajax({
+		url:"/anycook/EditTags",
+		data: "tagName="+tagName+"&gerName="+gerName+"&todo=accept",
+		dataType:"json",
+		success:function(){
+			$("#confirm").fadeOut(500);
+			$.ajax({
+				url:"/anycook/GetTags",
+				dataType:"json",
+				success:loadTags
+			});
+		}
+	});
+}
+
+function denyTag(){
+	var tagName =$("#selected_tag").text();
+	var gerName =$("#selected_tagGer").text(); 
+	$.ajax({
+		url:"/anycook/EditTags",
+		data: "tagName="+tagName+"&gerName="+gerName+"&todo=deny",
+		dataType:"json",
+		success:function(){
+			$("#confirm").fadeOut(500);
+			$.ajax({
+				url:"/anycook/GetTags",
+				dataType:"json",
+				success:loadTags
+			});
+		}
 	});
 }
