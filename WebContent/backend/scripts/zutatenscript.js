@@ -70,12 +70,12 @@ function clickRenameZutat(event){
 }
 
 function focusOutNewZutat(event){
-	var target = $(event.target);
+	var target = $(this);
 	target.parents(".zutatenname").text($("#old_zutatname").val());
 }
 
 function sendRenameZutat(event){
-	var target = $(event.target);
+	var target = $(this);
 	var oldName = $("#old_zutatname").val();
 	var newName = $("#new_zutatname").val();
 	renameZutat(oldName, newName);
