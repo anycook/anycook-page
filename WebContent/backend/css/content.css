@@ -360,9 +360,16 @@ ul{
 
 /*----tags-----*/
 
+#tagContent{
+	width:800px;
+	float:left;
+	}
+
 #allTags{
-	width:350px;
+	width:800px;
+	height:500px;
 	float: left;
+	overflow: hide;
 	}
 
 .tagDelete{
@@ -389,19 +396,39 @@ ul{
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	list-style-type: none;
 	float:left;
-	width:400px;
+	width:800px;
+	height:400px;
+	overflow: auto;
 }
 
 #taglist li{
 	padding:2px 0 2px 15px;
 	margin:2px 0 0 10px;
 	float:left;
-	width:400px;
+	width:350px;
+	
 	}
 
 #Suggestions{
 	float:left;
-	width: 400px;
+	width: 800px;
+	max-height: 500px;
+	overflow: auto;
+	}
+
+#newSuggestion{
+	padding:0px;
+	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	list-style-type: none;
+	float:left;
+}
+
+#newSuggestion li{
+	padding:2px 0 2px 15px;
+	margin:2px 0 0 10px;
+	float:left;
+	width:700px;
+	
 	}
 
 .suggGericht{

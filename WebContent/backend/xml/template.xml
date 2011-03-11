@@ -42,13 +42,15 @@
     </template>
     
     <template id="tags">
-    	<div id="allTags">
+    	<div id="tagContent">
+	    	<h3>Vorgeschlagene Tags</h3>
+	    	<div id="Suggestions">
+	    		<ul id="newSuggestion"></ul>
+	    	</div>
 	    	<h3>Alle Tags</h3>
-	    	<ul id="taglist"></ul>
-    	</div>
-    	<div id="Suggestions">
-    		<h3>Vorgeschlagene Tags</h3>
-    		<ul id="newSuggestion"></ul>
+	    	<div id="allTags">
+		    	<ul id="taglist"></ul>
+	    	</div>
     	</div>
     	<div id="info">
     		<div id="confirm"><div id="confirm_text"><ul></ul></div><div id="confirm_yes" class="confirm_buttons">Ja</div><div id="confirm_no" class="confirm_buttons">Nein</div></div>
