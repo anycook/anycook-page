@@ -1,7 +1,7 @@
 var newrecipe =null;
 
 function loadNewRecipe(){
-	if(!loginChecker())
+	if(!user.checkLogin())
 		$.address.path("");
 	else{
 		
@@ -95,11 +95,15 @@ function loadNewRecipe(){
     	});
 		$(".step_4_left .label_chefhats, .step_4_left .label_muffins").click(checkNewOnOff);
 		$("#recipe_ready").click(finishNewRecipe);
-		$("#recipe_preview").click(function()
-				{
-			if(finishStep4())
-				$.address.path("preview");
-			});
+		
+		if(user.level==2){
+			$("#end_newrecipe").prepend("<div class=\"last_step_btn\" id=\"recipe_preview\">Vorschau</div>");
+			$("#recipe_preview").click(function()
+					{
+				if(finishStep4())
+					$.address.path("preview");
+				});
+		}
 	}
 }
 

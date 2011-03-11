@@ -1,5 +1,5 @@
 function loadContact(){
-	if(logindata == null&&!loginChecker()){
+	if(!user.checkLogin()){
 		loadCaptcha();
 		$("#conname_login").hide();
 		$("#formDescriptionSender").hide();
@@ -82,14 +82,14 @@ function clearLoginField(){
 }
 
 function fillLoginFields(){
-	var nameString = "<div id='formUserPicture'><img src='"+logindata.image+"'></div>" +
+	var nameString = "<div id='formUserPicture'><img src='"+user.image+"'></div>" +
 			"<div id='absInfo'>"+
-			"<div id='formUserName'>"+logindata.nickname+"</div>" +
-			"<div id='formUserEmail'>"+logindata.email+"</div>"+
+			"<div id='formUserName'>"+user.name+"</div>" +
+			"<div id='formUserEmail'>"+user.mail+"</div>"+
 					"</div><div id='formDeleteBtn'></div>"; 
 	$("#conname_login").html(nameString);
-	$("#conname").val(logindata.nickname);
-	$("#conemail").val(logindata.email);
+	$("#conname").val(user.name);
+	$("#conemail").val(user.mail);
 	$("#formDeleteBtn").click(clearLoginField);
 	$("#formDeleteBtn").hide();
 	$("#conname_login").mouseenter(toggleDeleteBtn);

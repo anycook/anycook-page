@@ -17,11 +17,8 @@
     	});
 
             //Login
-            $.ajax({
-				url:"/anycook/Login",
-				dataType:"json",
-				success:checkLogin
-			});
+    	user = User.init();
+    	buildLogin();
 
 
             //searchbar 

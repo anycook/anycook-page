@@ -1,7 +1,7 @@
 function fbLogin(){
 	FB.login(function(response) {
 	    if (response.session) {
-	    	if(loginChecker())
+	    	if(user.checkLogin())
 	    		window.location.reload();
 	    	else{
 	    		$("#login_dropdown").hide();
@@ -17,10 +17,10 @@ function fbLogin(){
 }
 
 function fbSessionChange(event){
-	if(event.status == "connected" && logindata == null){
+	if(event.status == "connected" && !user.checkLogin()){
 		window.location.reload();
 	}
-	if((event.status == "unknown" || event.status == "notConnected") && logindata != null){
+	if((event.status == "unknown" || event.status == "notConnected") && user.checkLogin()){
 		logout();
 	}
 }

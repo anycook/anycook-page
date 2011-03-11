@@ -277,7 +277,7 @@
 						</table>
 					</form>
 					<div id="end_newrecipe">
-						<div class="last_step_btn" id="recipe_preview">Vorschau</div>
+						<!-- <div class="last_step_btn" id="recipe_preview">Vorschau</div> -->
 						<div class="last_step_btn" id="recipe_ready">Fertig</div>
 					</div>
 				  </div>

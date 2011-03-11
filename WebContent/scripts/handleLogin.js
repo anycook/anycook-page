@@ -1,47 +1,34 @@
 
-
-function login(mail, pwd, stayloggedin){
-	var data = "mail="+mail+"&pwd="+pwd;
-	if(stayloggedin)
-		data+="&stayloggedin";
-	$.ajax({
-		url:"/anycook/Login",
-		data:data,
-		success:function(response){
-			if(response=="false"){
-				$("#login_mail, #login_pwd").addClass("wrong");
-			}
-			else{
-				$("#login_dropdown").hide();
-				$("#signin_btn").removeClass("on");
-				//makeUsermenuText(response);
-				
-				window.location.reload();
-			}
-	}
-	});
-}
-
-function loginChecker(){
+function buildLogin(){
+	$(document).click(clickOthers);
+	$("#login_container > *").remove();
+	var htmlstring = "<div id='signin_btn'></div><div id='login_dropdown'></div>";
 	
-	var logincheck = false;
-	$.ajax({
-		url: "/anycook/Login",
-		async: false,
-		dataType: "json",
-		success: function(response){
-			if(response != false){
-				if(logindata == null){
-					logindata = new Object();
-					for(var i in response)
-						logindata[i] = response[i];
-				}
-				logincheck = true;
-			}
-				
-		}
-	});
-	return logincheck;
+	$("#login_container").append(htmlstring);
+	$("#login_dropdown").hide();
+	$("#login_dropdown").css("visibility", "visible");
+	$("#signin_btn").click(clickSignin);
+	if(user.checkLogin())
+		makeUsermenuText();
+	else
+		makeLoginText();
+		
+};
+
+function makeUsermenuText(){
+	$("#login_top>*").remove();
+	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
+	
+	var htmlstring = "<div id='login_user'><div id='user'><img src='"+user.image+"'/><p>"+user.name+"</p></div>" +
+			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
+		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
+		"<a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
+	if(user.level == 2)
+		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
+	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
+	$("#login_dropdown").html(htmlstring);	
+	$("#logout").click(logout);
+	$("#login_user > a").click(closeUserMenu);
 }
 
 function schmecktChecker(gericht){
@@ -56,60 +43,6 @@ function schmecktChecker(gericht){
 		}
 	});
 	return schmecktcheck;
-}
-
-
-function logout(){
-		$.ajax({
-			url:"/anycook/Logout",
-			success:function(){
-				FB.getLoginStatus(function(response){
-					if(response.status == "connected"){
-						FB.logout(function(response) {
-							  window.location.reload();
-							});
-					}else
-						window.location.reload();
-				});	
-			}
-		});
-		
-}
-
-function checkLogin(response){
-	$(document).click(clickOthers);
-	$("#login_container > *").remove();
-	var htmlstring = "<div id='signin_btn'></div><div id='login_dropdown'></div>";
-	
-	$("#login_container").append(htmlstring);
-	$("#login_dropdown").hide();
-	$("#login_dropdown").css("visibility", "visible");
-	$("#signin_btn").click(clickSignin);
-	if(response== false){
-		makeLoginText();
-	}
-	else{
-		if(logindata == null){
-			logindata = new Object();
-			for(var i in response)
-				logindata[i] = response[i];
-		}
-		makeUsermenuText(response);
-	}
-	
-}
-
-function register(mail, pwd, username){
-	$.ajax({
-		url:"/anycook/NewUser",
-		data:"mail="+mail+"&pwd="+pwd+"&username="+username,
-		success:function(response){
-			if(response=="true"){
-				$("#login_dropdown").hide();
-				$("#signin_btn").removeClass("on");
-				makeRegisterPopup(username, mail);
-			}
-	}});
 }
 
 function makeLoginText(){
@@ -154,21 +87,7 @@ function makeLoginText(){
 
 }
 
-function makeUsermenuText(json){
-	$("#login_top>*").remove();
-	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
-	
-	var htmlstring = "<div id='login_user'><div id='user'><img src='"+json.image+"'/><p>"+json.nickname+"</p></div>" +
-			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
-		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
-		"<a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
-	if(json.level == "2")
-		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
-	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
-	$("#login_dropdown").html(htmlstring);	
-	$("#logout").click(logout);
-	$("#login_user > a").click(closeUserMenu);
-}
+
 
 function showLoginErrorPopups(event){
 	var target = $(event.target);
@@ -418,14 +337,14 @@ function submitForm(event){
 		var pwd = $("#login_pwd").val();
 		var stayloggedin =$("#check_stayloggedin").is(":checked");
 		if($("#login_username").length == 0)
-			login(mail, pwd, stayloggedin);
+			User.login(mail, pwd, stayloggedin);
 		else{
 			var username = $("#login_username").val();
-			register(mail, pwd, username);
+			User.register(mail, pwd, username);
 		}
 	}
 	
 	return false;
 }
 var loginerrors = new Object();
-var logindata  = null;
+var user  = new User();

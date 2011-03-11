@@ -156,7 +156,7 @@ function loadRecipe(recipe){
 	blockFilter(true);
 	
 	//schmeckt-button
-	if(loginChecker()){
+	if(user.checkLogin()){
 		if(schmecktChecker(recipe.name)){
 			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir!</div>");
 			$("#rezept_schmeckt").click(schmecktmir);	
@@ -170,7 +170,7 @@ function loadRecipe(recipe){
 	
 	//FB.XFBML.parse(document.getElementById('social'));
 	
-	if($.address.pathNames().length == 3 && Number(logindata.level) > 0){
+	if($.address.pathNames().length == 3 && user.level > 0){
 		/*$.ajaxSetup({async:false});
 		$.getScript("/backend/scripts/recipeediting.js");
 		$.ajaxSetup({async:true});*/
@@ -200,7 +200,7 @@ function showaddTags(){
 		$(this).addClass("on");
 		$("#step_container").hide();
 		$("#addtags_container").show();
-		if(loginChecker()){
+		if(user.checkLogin()){
 			var pathNames = $.address.pathNames();
 			var recipe = pathNames[1];
 			if($("#tagcloud").children().length == 0){
@@ -384,7 +384,7 @@ function postProcessString(string, factor){
 }
 
 function loadDiscussion(gericht){
-	var login = loginChecker();
+	var login = user.checkLogin();
 	$("#discussion_headline").html("Diskussion zum Rezept<br/>"+gericht);
 	
 	$.ajax({
@@ -425,7 +425,7 @@ function loadDiscussion(gericht){
 	});
 	
 	if(login){
-		$("#discussion_footer").html("<h6 id='yes_comment'>Was meinst du dazu?</h6><a href='#'><img src='"+logindata.image+"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><textarea></textarea><div class='comment_btn'>Abschicken</div></div>");
+		$("#discussion_footer").html("<h6 id='yes_comment'>Was meinst du dazu?</h6><a href='#'><img src='"+user.image+"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><textarea></textarea><div class='comment_btn'>Abschicken</div></div>");
 		$(".comment_btn").click(comment);
 		$(".answer_btn").live("click", answerBtnClick);
 		$(".like, .dislike").live("click", discussionLike);
@@ -480,7 +480,7 @@ function answerBtnClick(event){
 	if(ul.length == 0)
 		ul = target.closest("ul");
 	if($(ul).children(".child_comment").length == 0){
-		$(ul).append("<li class='child_comment'><a href='#'><img src='"+logindata.image+"'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><textarea></textarea><div class='comment_btn'>Abschicken</div><div></li>");
+		$(ul).append("<li class='child_comment'><a href='#'><img src='"+user.image+"'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><textarea></textarea><div class='comment_btn'>Abschicken</div><div></li>");
 		var comment = $(ul).children(".child_comment");
 		comment.find(".comment_btn").click(childComment);
 		var commentoffset = comment.offset();
@@ -570,7 +570,7 @@ function loadNewDiscussion(ul, pid, gericht, oldmaxID){
 		success:function(json){
 			for(var i in json){
 				
-				var login = loginChecker();
+				var login = user.checkLogin();
 				maxID = Math.max(maxID, Number(json[i].id));
 				var image;
 				var arrow = "comment_arrow";
