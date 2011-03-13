@@ -58,20 +58,30 @@ User.login = function(mail, pwd, stayloggedin){
 	});
 };
 
-User.logout = function(){
-	$.ajax({
-		url:"/anycook/Logout",
-		success:function(){
-			FB.getLoginStatus(function(response){
-				if(response.status == "connected"){
-					FB.logout(function(response) {
-						  window.location.reload();
-						});
-				}else
-					window.location.reload();
-			});
-		}
-	});
+User.prototype.logout = function(){
+	if(this.checkLogin()){
+		this.level = -1;
+		this.name = null;
+		this.mail = null;
+		this.facebook_id = null;
+		this.image = null;
+		$.ajax({
+			url:"/anycook/Logout",
+			success:function(){
+				FB.getLoginStatus(function(response){
+					if(response.status == "connected"){
+						FB.logout(function() {
+							  window.location.reload();
+							});
+					}else
+						window.location.reload();
+				});
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert(textStatus+": "+errorThrown);
+			}
+		});
+	}
 };
 
 User.register = function(mail, pwd, username){

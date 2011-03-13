@@ -27,7 +27,9 @@ function makeUsermenuText(){
 		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
 	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
 	$("#login_dropdown").html(htmlstring);	
-	$("#logout").click(logout);
+	$("#logout").click(function(){
+		user.logout();
+	});
 	$("#login_user > a").click(closeUserMenu);
 }
 

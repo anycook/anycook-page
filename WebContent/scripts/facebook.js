@@ -21,6 +21,6 @@ function fbSessionChange(event){
 		window.location.reload();
 	}
 	if((event.status == "unknown" || event.status == "notConnected") && user.checkLogin()){
-		logout();
+		user.logout();
 	}
 }
