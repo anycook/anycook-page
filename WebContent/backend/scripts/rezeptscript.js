@@ -62,12 +62,12 @@ function clickRezept(event){
 				var htmlstring = "<table class=\"versiontable\"><tr><th>ID</th><th>User</th><th>eingefügt</th><th>Zutaten</th><th>Schritte</th><th></th></tr>";
 				for(var i in json){					
 					var eingefuegt = parseDate(json[i].eingefuegt.split(" ")[0]);
-					
+					var uri = encodeURI("/#/recipe/"+gericht+"/"+json[i].id);
 					if(json[i].active == "1")
 						htmlstring += "<tr class=\"active\">";
 					else
 						htmlstring += "<tr>";
-					htmlstring += "<td class=\"version_id\"><a href=\"/#/recipe/"+gericht+"/"+json[i].id+"\" target=\"_blank\">"+json[i].id+"</a></td><td>"+json[i].email+"</td>" +
+					htmlstring += "<td class=\"version_id\"><a href=\""+uri+"\" target=\"_blank\">"+json[i].id+"</a></td><td>"+json[i].email+"</td>" +
 							"<td>"+eingefuegt+"</td><td>"+json[i].zutaten+"</td><td>"+json[i].schritte+"</td>";
 					
 					if(json[i].active == "0")

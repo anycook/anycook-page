@@ -22,10 +22,12 @@ function parseAndAddLiveAtHome(json){
 		
 		for(var i =json.length-1; i>=0; --i){
 			var text = json[i]["syntax"];
-			var pos = text.search("%");
+			var regex = /#[ug]/;
+			var pos = text.search(regex);
+			
 			while(pos>=0){
 				if(text[pos+1]=="u"){
-					var array = text.split("%u");
+					var array = text.split("#u");
 					text = "";
 					for(var j = 0; j<array.length-1;++j){
 						text+=array[j]+json[i]["user"];
@@ -33,16 +35,19 @@ function parseAndAddLiveAtHome(json){
 					text+=array[array.length-1];
 				}
 				else if(text[pos+1]=="g"){
-					var array = text.split("%g");
+					var array = text.split("#g");
 					text = "";
 					for(var j = 0; j<array.length-1;++j){
-						text+=array[j]+json[i]["gericht"];
+						var uri = encodeURI("/#/recipe/"+json[i].gericht);
+						var link = "<a href=\""+uri+"\">"+json[i].gericht+"</a>";
+						text+=array[j]+link;
 					}
 					text+=array[array.length-1];
 				}
 					
-				pos = text.search("%");
+				pos = text.search(regex);
 			}
+			
 			if($("#news_inhalt").children().length>=6)
 				$("#news_inhalt").children().last().remove();
 			

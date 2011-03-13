@@ -56,7 +56,8 @@ function getBigFrameText(json){
 	if(min.length==1)
 		min="0"+min;
 	
-	var htmlstring = "<a href='#/recipe/"+json.name+"' class='frame_big'><div class='frame_main_big big_rezept'><div class='rezept_bild'><img src='/gerichtebilder/small/"+json.imagename+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><div class='result_schmeckt'><div class='heart_img'></div><div class='heart_number'>"+json.schmeckt+"</div></div><p>"+beschreibung+"</p>";
+	var uri = encodeURI("#/recipe/"+json.name);
+	var htmlstring = "<a href='"+uri+"' class='frame_big'><div class='frame_main_big big_rezept'><div class='rezept_bild'><img src='/gerichtebilder/small/"+json.imagename+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><div class='result_schmeckt'><div class='heart_img'></div><div class='heart_number'>"+json.schmeckt+"</div></div><p>"+beschreibung+"</p>";
 	
 	htmlstring+="</div><div class='frame_right_big'></div></a>";
 	return htmlstring;

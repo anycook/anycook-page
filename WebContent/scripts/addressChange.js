@@ -11,7 +11,8 @@ function loadHome(json)
 	//new stuff
 	$("#tagesrezept_inhalt").append(getSmallFrameText(json));
 	cutSmallFrameText($("#tagesrezept_inhalt"));
-	$("#tagesrezept_inhalt").attr("href", "#/recipe/"+json.name);
+	var uri = encodeURI("#/recipe/"+json.name);
+	$("#tagesrezept_inhalt").attr("href", uri);
 	
 	$.ajax({
 		  url: "/anycook/GetPopularTags",
