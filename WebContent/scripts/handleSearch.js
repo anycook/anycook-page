@@ -169,20 +169,12 @@ function removefromSession(data){
 		url:"/anycook/RemovefromSession",
 		data: data,
 		success:function(response){
-			if(response == "false" && !checkTextSearch())
+			if(response == "false")
 				$.address.path("");
 			else
 				fullTextSearch();
 			}
 	});
-}
-
-function checkTextSearch(){
-	var pathNames = $.address.pathNames();
-	if(pathNames[0] == "search")
-		return $.address.pathNames().length > 1;
-	else
-		return false;
 }
 
 var searchterms = null;

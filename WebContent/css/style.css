@@ -360,6 +360,7 @@ ul.kategorie_filter li:HOVER {
 	height: 20px;
 	width: 24px;
 	color: #5a5a5a;
+	text-align:right;
 	border: 1pt solid #f9f8f6;
 	margin: 0;
 	margin-left: -4px;
