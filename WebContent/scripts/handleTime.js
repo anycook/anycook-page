@@ -60,3 +60,21 @@ function focusoutTime(event){
 	}
 	
 }
+
+function fillStd(std){
+	if(std=="" || std =="0" || parseInt(std)>23)
+		std = "00";
+	else if(std.length==1)
+		std="0"+std;
+	
+	$("#time_std").val(std);
+}
+
+function fillMin(min){
+	if(min=="" || min =="0" || parseInt(min)>59)
+		min = "00";
+	else if(min.length==1)
+		min="0"+min;
+	
+	$("#time_min").val(min);
+}
