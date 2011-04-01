@@ -389,8 +389,6 @@ ul{
 	float: left;
 	}
 	
-
-	
 #taglist {
 	padding:0px;
 	font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -435,6 +433,15 @@ ul{
 	width: 120px;
 	float:left;
 	}
+	
+.suggGericht a{
+	color: #000000;
+	text-decoration: none;
+	}
+
+.suggGericht a:HOVER, .tagAccept:HOVER, .tagDeny:HOVER, .tagDelete:HOVER {
+	text-decoration: underline;
+	}
 
 .tagAccept{
 	float:left;
@@ -443,11 +450,17 @@ ul{
 	cursor: pointer;
 	}
 	
+	
 .tagDeny{
 	float:left;
 	margin:2px;
 	cursor: pointer;
 	color: #FF0000;
+	}
+	
+.username{
+	width: 100px;
+	float:left;
 	}
 
 /*----footer-----*/

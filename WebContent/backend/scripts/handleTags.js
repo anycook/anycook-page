@@ -23,6 +23,7 @@ function loadTags(json){
 }
 
 function deleteTagConfirm(event){
+	$("#confirm_text").empty();
 	var tagName = $(this).parent().children(".tagName").first().text();
 	$("#confirm_text").append('Möchtest du wirklich den Tag "<span id="selected_tag"></span>" löschen?');
 	$("#selected_tag").html(tagName);
@@ -54,8 +55,10 @@ function deleteTag(){
 function loadSuggestions(json){
 	var counter = 0;
 	for(i in json){
+		var uri = encodeURI("/#/recipe/"+json[i].gerichte_name);
 		$("#newSuggestion").append("<li><div class='tagName'>"+json[i].tags_name+"</div>" +
-				"<div class='suggGericht'>"+json[i].gerichte_name+"</div>" +
+				"<div class='suggGericht'><a href='"+uri+"' target='_blank'>"+json[i].gerichte_name+"</a></div>" +
+				"<div class='username'>"+json[i].username+"</div>"+
 		"<div class='tagDeny'>ablehnen </div><div class='tagAccept'> akzeptieren</div></li>");
 		counter++;
 	}
