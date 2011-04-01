@@ -22,11 +22,12 @@ function loadNewDiscussions(){
 function showNewDiscussions(json){
 	$("#disc_entries").empty();
 	for(i in json){
+		var datetime = getDateString(json[i].eingefuegt);
 		$("#disc_entries").append("<div class='newDiscEntry'>" +
-				"<div class='discdate'>"+json[i].eingefuegt+"</div>" +
 				"<div class='discname'>"+json[i].nickname+"</div>" +
+				"<div class='discdate'>"+datetime+"</div>" +				
 				"<div class='discgername'>"+json[i].gerichte_name+"</div>" +
 				"<div class='disctext'>"+json[i].text+"</div>" +
-						"</div>");
+			"</div>");
 	}
 }

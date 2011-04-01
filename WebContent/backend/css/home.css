@@ -9,6 +9,7 @@
 	}
 	
 .discdate{
+	font-size:7pt;
 	width:150px;
 	float: left;
 	}
@@ -16,7 +17,9 @@
 	font-size: 10pt;
 	font-style: italic;
 	}
-
+.disctext{
+	font-size:7pt;
+}
 .discname{
 	width:195px;
 	float: left;
