@@ -8,6 +8,21 @@ function loadHome(){
 		numberdisc+=5;
 		loadNewDiscussions();
 	});
+	
+	loadSystemStatus();
+}
+
+function loadSystemStatus(){
+	$.ajax({
+		url:"/anycook/GetSystemStatus",
+		dataType:"json",
+		success:function(json){
+			$("#activeconn").text(json.activeconnections);
+			$("#maxconn").text(json.maxactiveconnections);
+			if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home")
+				setTimeout(loadSystemStatus(), 2000);
+		}
+	});
 }
 
 function loadNewDiscussions(){
