@@ -20,7 +20,7 @@ function loadSystemStatus(){
 			$("#activeconn").text(json.activeconnections);
 			$("#maxconn").text(json.maxactiveconnections);
 			if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home")
-				setTimeout(loadSystemStatus(), 2000);
+				window.setTimeout(loadSystemStatus, 5000);
 		}
 	});
 }
