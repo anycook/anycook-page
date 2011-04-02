@@ -407,9 +407,9 @@ function loadDiscussion(gericht){
 					}
 					else if(Number(likes)<0)
 						likeclass = "minus";
-					var datetime = json[i].eingefuegt.split(/[ :-]/);
+					var datetime = getDateString(json[i].eingefuegt);
 					var litext = "<li><a href='#'><img src='"+json[i].image+
-						"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><div class='comment_headline'><a href='#'>"+json[i].nickname+"</a> schrieb am "+datetime[2]+"."+datetime[1]+"."+datetime[0]+" um "+datetime[3]+":"+datetime[4]+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
+						"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><div class='comment_headline'><a href='#'>"+json[i].nickname+"</a> schrieb "+datetime+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
 						"</div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
 					
 					if(login)
@@ -449,7 +449,7 @@ function loadChildren(i, id, gericht, login){
 				var ul = $("#comment_discussion > ul > li > ul")[i];
 				for(var j in childjson){
 					maxID = Math.max(maxID, Number(childjson[j].id));
-					var childdatetime = childjson[j].eingefuegt.split(/[ :-]/);
+					var childdatetime = getDateString(childjson[j].eingefuegt);
 					var likes = childjson[j].likes;
 					var likeclass = "";
 					if(Number(likes)>0){
@@ -459,7 +459,7 @@ function loadChildren(i, id, gericht, login){
 					else if(Number(likes)<0)
 					likeclass = "minus";
 					var childlitext = "<li><a href='#'><img src='"+childjson[j].image+
-					"'/></a><div class='comment_arrow_small'></div><div class='recipe_comment_small'><div class='comment_headline'><a href='#'>"+childjson[j].nickname+"</a> schrieb am "+childdatetime[2]+"."+childdatetime[1]+"."+childdatetime[0]+" um "+childdatetime[3]+":"+childdatetime[4]+"</div><div class='comment_number'>#"+(Number(childjson[j].id)+1)+
+					"'/></a><div class='comment_arrow_small'></div><div class='recipe_comment_small'><div class='comment_headline'><a href='#'>"+childjson[j].nickname+"</a> schrieb "+childdatetime+"</div><div class='comment_number'>#"+(Number(childjson[j].id)+1)+
 					"</div><div class='comment_text'>"+childjson[j].text+"</div><div class='comment_footer'>";
 					if(login)
 						childlitext += "<a class='answer_btn'>antworten</a>";
@@ -593,9 +593,9 @@ function loadNewDiscussion(ul, pid, gericht, oldmaxID){
 				else if(Number(likes)<0)
 					likeclass = "minus";
 				
-				var datetime = json[i].eingefuegt.split(/[ :-]/);
+				var datetime = getDateString(json[i].eingefuegt);
 				var litext = "<li><a href='#'><img src='"+image+
-					"'/></a><div class='"+arrow+"'></div><div class='"+comment+"'><div class='comment_headline'><a href='#'>"+json[i].nickname+"</a> schrieb am "+datetime[2]+"."+datetime[1]+"."+datetime[0]+" um "+datetime[3]+":"+datetime[4]+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
+					"'/></a><div class='"+arrow+"'></div><div class='"+comment+"'><div class='comment_headline'><a href='#'>"+json[i].nickname+"</a> schrieb "+datetime+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
 					"</div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
 				if(login)
 					litext+="<a class='answer_btn'>antworten</a>";
