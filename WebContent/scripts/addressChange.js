@@ -42,8 +42,7 @@ function handleChange(event){
 		lastPath = event.path;
 		
 		$("#zutat_head").text("Zutaten:");
-		if($.address.title() != "anycook")
-			$.address.title("anycook");
+		$.address.title("anycook");
 		
 		resetSearchBar();
 		
@@ -99,10 +98,17 @@ function handleChange(event){
 				loadUserProfile();
 			}
 			else if(path[0]=="feedback"){
+				$.address.title("anycook | Feedback");
 				loadContact();
 			}
 			else if(path[0] == "preview"){
 				loadPreview();
+			}
+			else if(path[0] == "about_us"){
+				$.address.title("anycook | Über uns");
+			}
+			else if(path[0] == "impressum"){
+				$.address.title("anycook | Impressum");
 			}
 			break;
 		case 2:
