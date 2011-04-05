@@ -20,8 +20,11 @@ function linkTo_UnCryptMailto( s )
     location.href=UnCryptMailto( s );
 }
 
-function getDateString(fromdatetime){	
-	var discdate = new Date(fromdatetime);
+function getDateString(fromdatetime){
+	var datetime = fromdatetime.split(".")[0].split(" ");
+	var date = datetime[0].split("-");
+	var time = datetime[1].split(":");
+	var discdate = new Date(date[0], Number(date[1])-1, date[2], time[0], time[1]);
 	var today = new Date();
 	var yeardifference = today.getFullYear() -discdate.getFullYear();
 	var monthdifference = today.getMonth() - discdate.getMonth();
@@ -35,7 +38,7 @@ function getDateString(fromdatetime){
 	var date = discdate.getDate();
 	var month = formatNumberLength(discdate.getMonth()+1, 2);
 	var year = discdate.getFullYear();
-	var daystring = formatNumberLength(discdate.getDay(), 2);
+	var daystring = getDayString(discdate.getDay());
 	if(yeardifference > 0)
 		return "am "+date+"."+month+"."+year+timestring;
 	if(monthdifference > 0)
@@ -49,8 +52,8 @@ function getDateString(fromdatetime){
 	if(daydifference == 1)
 		return "gestern"+timestring;
 	if(daydifference < 7)
-		return daystring+timestring;
-	return "vor "+difference+" Tagen";
+		return "am "+daystring+timestring;
+	return "vor "+daydifference+" Tagen";
 }
 
 function formatNumberLength(num, length) {
@@ -59,4 +62,23 @@ function formatNumberLength(num, length) {
         r = "0" + r;
     }
     return r;
+}
+
+function getDayString(daynumber){
+	switch(daynumber){
+	case 0:
+		return "Sonntag";
+	case 1:
+		return "Montag";
+	case 2:
+		return "Dienstag";
+	case 3:
+		return "Mittwoch";
+	case 4:
+		return "Donnerstag";
+	case 5:
+		return "Freitag";
+	case 6:
+		return "Samstag";
+	}
 }
