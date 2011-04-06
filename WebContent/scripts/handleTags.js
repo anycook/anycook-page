@@ -60,46 +60,43 @@ function getDivLength(){
 function makeNewInput(){
 	if(blocked==false){
 		if($(".tags_table_right input").length==0){
-			var divlength = getDivLength();
 			//make new input field
-			if(divlength<320){
-				$(".tags_table_right").append("<form><input type='text'/></form>");
-				$(".tags_table_right input").keydown(keyTag);
-				$(".tags_table_right input").focus();
-				
-				$(".tags_table_right input").autocomplete({
-		    		source:function(req,resp){
-	        			var array = [];
-	        		var term = req.term;
-	        		$.ajax({
-	        			url:"/anycook/AutocompleteTags",
-	        			dataType: "json",
-	        			async:false,
-	        			data:"q="+term,
-	        			success:function(data){
-	        				resp($.map(data, function(item){
-	        					return{
-	        						label:item
-	        						};
-	        					}));        			
-	        					}
-	        				});
-	        			},
-	        			minlength:1,
-	        			position:{
-	        				offset:"-3 1"
-	        			}, 
-	        			select:function(event, ui){
-	        				var text = ui.item.label;
-	        				$(".tags_table_right input").autocomplete("destroy");
-	        				saveTag(text);
-	        				makeNewInput();
-	        				return false;
-	        			}
-		    	});
-				$(".ui-autocomplete").last().addClass("tag-autocomplete");
-				$(".tags_table_right form").submit(submitTag);
-			}
+			$(".tags_table_right").append("<form><input type='text'/></form>");
+			$(".tags_table_right input").keydown(keyTag);
+			$(".tags_table_right input").focus();
+			
+			$(".tags_table_right input").autocomplete({
+	    		source:function(req,resp){
+        			var array = [];
+        		var term = req.term;
+        		$.ajax({
+        			url:"/anycook/AutocompleteTags",
+        			dataType: "json",
+        			async:false,
+        			data:"q="+term,
+        			success:function(data){
+        				resp($.map(data, function(item){
+        					return{
+        						label:item
+        						};
+        					}));        			
+        					}
+        				});
+        			},
+        			minlength:1,
+        			position:{
+        				offset:"-3 1"
+        			}, 
+        			select:function(event, ui){
+        				var text = ui.item.label;
+        				$(".tags_table_right input").autocomplete("destroy");
+        				saveTag(text);
+        				makeNewInput();
+        				return false;
+        			}
+	    	});
+			$(".ui-autocomplete").last().addClass("tag-autocomplete");
+			$(".tags_table_right form").submit(submitTag);
 		}
 		else 
 			$(".tags_table_right input").focus();
@@ -228,6 +225,38 @@ function makeNewRInput(){
 			$("#recipe_tags").append("<input type='text'/>");
 			$("#recipe_tags input").keydown(keyNewTag);
 			$("#recipe_tags input").focus();
+			$("#recipe_tags input").autocomplete({
+	    		source:function(req,resp){
+        			var array = [];
+        		var term = req.term;
+        		$.ajax({
+        			url:"/anycook/AutocompleteTags",
+        			dataType: "json",
+        			async:false,
+        			data:"q="+term,
+        			success:function(data){
+        				resp($.map(data, function(item){
+        					return{
+        						label:item
+        						};
+        					}));        			
+        					}
+        				});
+        			},
+        			minlength:1,
+        			position:{
+        				offset:"-1 1"
+        			}, 
+        			select:function(event, ui){
+        				var text = ui.item.label;
+        				$("#recipe_tags input").autocomplete("destroy");
+        				saveTag(text);
+        				makeNewInput();
+        				return false;
+        			}
+	    	});
+			$(".ui-autocomplete").last().addClass("newtag-autocomplete");
+			$(".tags_table_right form").submit(submitTag);
 		}
 		else 
 			$("#recipe_tags input").focus();

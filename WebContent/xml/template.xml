@@ -68,7 +68,8 @@
 		</div>
     </template>
     <template id="search">
-    	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div> 
+    	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div>
+    	<div id="num_results"><span id="current_num"></span> von <span id="total_num"></span> Rezepten</div>
        <div id="result_container"></div>
     </template>
     <template id="recipe">

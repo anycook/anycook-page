@@ -1135,6 +1135,7 @@ ul.kategorie_filter li:HOVER {
 	color: #404040;
 	margin-left: 5px;
 	height: 22px;
+	width:100%;
 }
 
 #terms_text {
@@ -1163,6 +1164,16 @@ ul.kategorie_filter li:HOVER {
 	margin-left: 2px;
 	color: #7a7a7a;
 	cursor: pointer;
+}
+
+/*---- Anzahl Ergebnisse -------*/
+#num_results{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
+	margin-left: 5px;
+	height: 22px;
+	width:100%;
+	margin-top:2px;
 }
 
 /*-------Rezept------*/
@@ -2280,6 +2291,7 @@ td.step_1_right {
 	background: none;
 	outline:none;
 	border: 0;
+	width:100%;
 }
 
 #recipe_tags .tag {

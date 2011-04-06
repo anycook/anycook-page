@@ -3,21 +3,26 @@ function fullTextSearch(){
 	$("#result_container").empty();
 	$.ajax({
 		  url: "/anycook/FullTextSearch",
+		  data:"resultanz=10&startnum=0",
 		  dataType: 'json',
 		  async:false,
 		  success: function(json){
 			if(json==null)
 				$.address.path("");
 			else{
-				if(json.length>0){					
-					for(var i = json.length-1; i>=0; i--){
-						$("#result_container").append(getBigFrameText(json[i]));						
+				var gerichte = json.gerichte;
+				$("#total_num").text(json.size);
+				if(gerichte.length>0){					
+					for(var i in gerichte){
+						$("#result_container").append(getBigFrameText(gerichte[i]));
 					}
 					$("#result_container").append("<div id='result_end'></div>");
+					
 				}
 				else
 					$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
 					
+				$("#current_num").text($(".frame_big").length);
 	  		}
 			
 		  }
