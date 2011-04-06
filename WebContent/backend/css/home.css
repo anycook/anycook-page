@@ -43,3 +43,17 @@
 	width:50px;
 	float:left;
 	}
+	
+#new_sitemap{
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+#new_sitemap a{
+	text-decoration: none;
+	color: #404040;
+	}
+	
+#new_sitemap a:hover{
+	text-decoration: underline;
+	}
