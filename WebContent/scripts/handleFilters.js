@@ -204,7 +204,7 @@ function checkOnOff(obj){
 				async:false,
 				data: $(obj).attr("class"),
 				success:function(response){
-					if(response == "false" && !checkTextSearch())
+					if(response == "false")
 						$.address.path("");
 					else
 						fullTextSearch();

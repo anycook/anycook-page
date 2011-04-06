@@ -137,7 +137,7 @@ function removeZutat(zutat){
 		url:"/anycook/RemovefromSession",
 		data: "zutat="+zutat,
 		success:function(response){
-			if(response == "false" && !checkTextSearch())
+			if(response == "false")
 				$.address.path("");
 			else
 				fullTextSearch();
