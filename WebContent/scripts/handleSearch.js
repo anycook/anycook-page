@@ -20,8 +20,13 @@ function fullTextSearch(){
 				}
 				else
 					$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
-					
-				$("#current_num").text($(".frame_big").length);
+				
+				var currentResultNum = $(".frame_big").length;
+				$("#current_num").text(currentResultNum);
+				if(currentResultNum < json.size){
+					$("#result_container").append("<div id=\"moreresults\">more</div>");
+					$("#moreresults").click(addResults);
+				}
 	  		}
 			
 		  }
@@ -29,7 +34,8 @@ function fullTextSearch(){
 }
 
 function addResults(){
-	var currentResultsNum = $(".frame_big").length-1;
+	$("#moreresults").remove();
+	var currentResultsNum = $(".frame_big").length;
 	$.ajax({
 		  url: "/anycook/FullTextSearch",
 		  data:"resultanz=10&startnum="+currentResultsNum,
@@ -40,7 +46,6 @@ function addResults(){
 				$.address.path("");
 			else{
 				var gerichte = json.gerichte;
-				$("#total_num").text(json.size);
 				if(gerichte.length>0){					
 					for(var i in gerichte){
 						$("#result_container").append(getBigFrameText(gerichte[i]));
@@ -48,8 +53,14 @@ function addResults(){
 					
 				}
 	  		}
-			
+			currentResultsNum = $(".frame_big").length;
+			$("#current_num").text(currentResultsNum);
+			if(currentResultsNum < json.size){
+				$("#result_container").append("<div id=\"moreresults\">more</div>");
+				$("#moreresults").click(addResults);
+			}
 		  }
+	
 		});
 }
 
