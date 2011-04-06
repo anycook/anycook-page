@@ -48,11 +48,14 @@ User.login = function(mail, pwd, stayloggedin){
 				$("#login_mail, #login_pwd").addClass("wrong");
 			}
 			else{
-				$("#login_dropdown").hide();
-				$("#signin_btn").removeClass("on");
-				//makeUsermenuText(response);
-				
-				window.location.reload();
+				if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home"){
+					user = User.init();
+					makeUsermenuText();
+					$("#login_dropdown").hide();
+					$("#signin_btn").removeClass("on");
+				}
+				else
+					window.location.reload();
 			}
 	}
 	});
