@@ -24,8 +24,7 @@ function fullTextSearch(){
 				var currentResultNum = $(".frame_big").length;
 				$("#current_num").text(currentResultNum);
 				if(currentResultNum < json.size){
-					$("#result_container").append("<div id=\"moreresults\">more</div>");
-					$("#moreresults").click(addResults);
+					addMoreResultsButton();
 				}
 	  		}
 			
@@ -34,7 +33,7 @@ function fullTextSearch(){
 }
 
 function addResults(){
-	$("#moreresults").remove();
+	$("#more_results, #more_results_right").remove();
 	var currentResultsNum = $(".frame_big").length;
 	$.ajax({
 		  url: "/anycook/FullTextSearch",
@@ -56,12 +55,16 @@ function addResults(){
 			currentResultsNum = $(".frame_big").length;
 			$("#current_num").text(currentResultsNum);
 			if(currentResultsNum < json.size){
-				$("#result_container").append("<div id=\"moreresults\">more</div>");
-				$("#moreresults").click(addResults);
+				addMoreResultsButton();
 			}
 		  }
 	
 		});
+}
+
+function addMoreResultsButton(){
+	$("#result_container").append("<div id=\"more_results\">Mehr Rezepte laden</div><div id=\"more_results_right\"></div>");
+	$("#more_results").click(addResults);
 }
 
 

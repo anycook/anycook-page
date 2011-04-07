@@ -1072,6 +1072,32 @@ ul.kategorie_filter li:HOVER {
 	background: #ece9e3 url("/img/frame_left_pattern.png") repeat-y;
 }
 
+#more_results{
+	padding: 15px 0 15px 14px;
+	float:left;
+	border-bottom: 1pt solid #b5b5b5;
+	width:455px;
+	margin-bottom: 5px;
+	font: 14pt Georgia;
+	color: #404040;
+	cursor: pointer;
+}
+
+#more_results:hover{
+	background: #ece9e3 url("/img/frame_left_pattern.png") repeat-y;
+}
+
+#more_results_right{
+	float: left;
+	height: 53px;
+	width: 6px;
+	border-bottom: 1pt solid #b5b5b5;
+}
+
+#more_results:hover+#more_results_right{
+	background: url("/img/frame_right_pattern.png") repeat-y;
+}
+
 .result_schmeckt {
 	float: right;
 	margin: -16px 5px 0 5px;
