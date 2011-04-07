@@ -1044,15 +1044,16 @@ ul.kategorie_filter li:HOVER {
 
 /*----*/
 #result_container {
-	clear: both;
+	width:475px;
 }
 
 .frame_big {
-	float: left;
 	border-top: 1pt solid #b5b5b5;
 	border-bottom: 1pt solid #b5b5b5;
 	margin-top: 28px;
 	text-decoration: none;
+	width:100%;
+	display: block;
 }
 
 .frame_big+.frame_big {
@@ -1061,7 +1062,7 @@ ul.kategorie_filter li:HOVER {
 }
 
 .frame_main_big {
-	float: left;
+	float:left;
 	height: 110px;
 	width: 455px;
 	padding: 11px 0 11px 14px;
@@ -1074,10 +1075,8 @@ ul.kategorie_filter li:HOVER {
 
 #more_results{
 	padding: 15px 0 15px 14px;
-	float:left;
 	border-bottom: 1pt solid #b5b5b5;
 	width:455px;
-	margin-bottom: 5px;
 	font: 14pt Georgia;
 	color: #404040;
 	cursor: pointer;
@@ -1091,7 +1090,12 @@ ul.kategorie_filter li:HOVER {
 	float: left;
 	height: 53px;
 	width: 6px;
+	margin-left:469px;
 	border-bottom: 1pt solid #b5b5b5;
+}
+
+#more_results img{
+	float:right;
 }
 
 #more_results:hover+#more_results_right{
@@ -1131,9 +1135,9 @@ ul.kategorie_filter li:HOVER {
 }
 
 .frame_right_big {
-	float: left;
 	height: 132px;
 	width: 6px;
+	margin-left:469px;
 }
 
 .frame_main_big:hover+.frame_right_big {
