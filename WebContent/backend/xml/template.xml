@@ -11,7 +11,9 @@
     	<div id="info">
     		<h3>Statistik</h3><table>
     		<tr><td>active DBConn.:</td><td id="activeconn"></td></tr>
-    		<tr><td>max DBConn.:</td><td id="maxconn"></td></tr> 
+    		<tr><td>max DBConn.:</td><td id="maxconn"></td></tr>
+    		<tr><td>idle DBConn.:</td><td id="idleconn"></td></tr>
+    		<tr><td>max idle DBConn.:</td><td id="maxidleconn"></td></tr>
     		</table>
     		<div id="new_sitemap"><a href="http://anycook.de/anycook/SitemapGenerator">Sitemap neu generieren</a></div>
     	</div>
