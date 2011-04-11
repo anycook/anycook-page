@@ -39,3 +39,15 @@
 #edit_addZutatRow div:hover {
 	background: url(/img/new_step_on_small.png) no-repeat;
 }
+
+#edit_rezept_bild{
+	position: absolute;
+	padding:3px;
+	margin:4px 0 0 6px;
+	background-color:#d7d3c7;
+	border:1px solid #F7F4F1;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#919191;
+	cursor:pointer;
+	display: none;
+}

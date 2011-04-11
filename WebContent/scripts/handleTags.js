@@ -20,6 +20,12 @@ function submitTag(event){
 	saveTag(text);
 	return false;
 }
+
+function submitNewTag(event){
+	var text = $(this).children().first().val();
+	saveNewTag(text);
+	return false;
+}
 function saveTag(text){
 	
 	
@@ -87,12 +93,14 @@ function makeNewInput(){
         			position:{
         				offset:"-3 1"
         			}, 
-        			select:function(event, ui){
-        				var text = ui.item.label;
-        				$(".tags_table_right input").autocomplete("destroy");
-        				saveTag(text);
-        				makeNewInput();
-        				return false;
+        			select:function(event, ui){        				
+        				if(ui.item != undefined){
+        					var text = ui.item.label;
+	        				$(".tags_table_right input").autocomplete("destroy");
+	        				saveTag(text);
+	        				makeNewInput();
+	        				return false;
+        				}
         			}
 	    	});
 			$(".ui-autocomplete").last().addClass("tag-autocomplete");
@@ -250,7 +258,7 @@ function makeNewRInput(){
         			select:function(event, ui){
         				var text = ui.item.label;
         				$("#recipe_tags input").autocomplete("destroy");
-        				saveTag(text);
+        				saveNewTag(text);
         				makeNewInput();
         				return false;
         			}

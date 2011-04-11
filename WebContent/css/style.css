@@ -1231,6 +1231,11 @@ ul.kategorie_filter li:HOVER {
 	margin: 0 10px 0 2px;
 }
 
+#rezept_bild_container{
+	float:left;
+}
+
+
 #beschreibung {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #919191;

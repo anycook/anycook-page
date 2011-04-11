@@ -15,8 +15,35 @@ function addEditingHandler(){
 	$("#zutaten_table").append("<tr><td id=\"edit_addZutatRow\"><div></div></td>");
 	$("#edit_addZutatRow").click(editaddZutatRow);
 	$("#newZutatForm").live("submit", submitNewZutat);
+	
+	
+	$("#rezept_bild").after("<div id=\"edit_rezept_bild\">Neues Bild hochladen</div>");
+	$("#rezept_bild_container").mouseenter(showEditImage);
+	$("#rezept_bild_container").mouseleave(hideEditImage);
+	var uploader = new qq.FileUploader({
+	    // pass the dom node (ex. $(selector)[0] for jQuery users)
+	    element: document.getElementById('edit_rezept_bild'),
+	    // path to server-side upload script
+	    action: '/anycook/UploadImage',
+	    onComplete:saveImage
+	});
 }
 
+//rezept bild
+function showEditImage(){
+	$("#edit_rezept_bild").fadeIn(200);
+}
+
+function hideEditImage(){
+	$("#edit_rezept_bild").fadeOut(200);
+}
+
+function saveImage(){
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	var version = pathNames[2];
+	editRecipe("todo=saveimage&recipe="+recipe+"&version="+version);
+}
 //zutaten
 function editaddZutatRow(event){
 	var target = $(event.target);

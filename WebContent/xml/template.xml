@@ -75,7 +75,7 @@
     <template id="recipe">
     	<div id="recipe_container">
     		<h1 id="rezept_headline"></h1>
-    		<img id="rezept_bild"/>
+    		<div id="rezept_bild_container"><img id="rezept_bild"/></div>
     		<div id="beschreibung"></div>
     		<div id="rezept_begin">
     			<div class="bezeichner" id="zubereitung">Zubereitung</div><div class="bezeichner" id="addtags">+Tags</div>
