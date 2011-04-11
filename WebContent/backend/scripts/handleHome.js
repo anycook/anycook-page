@@ -19,6 +19,8 @@ function loadSystemStatus(){
 		success:function(json){
 			$("#activeconn").text(json.activeconnections);
 			$("#maxconn").text(json.maxactiveconnections);
+			$("#idleconn").text(json.idleconnections);
+			$("#maxidleconn").text(json.maxidleconnections);
 			if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home")
 				window.setTimeout(loadSystemStatus, 5000);
 		}
