@@ -238,4 +238,30 @@ function removefromSession(data){
 	});
 }
 
+function focusSearch(){
+	var value = $("#search").val();
+	var pathName = $.address.pathNames()[0];
+	var recipeName = $.address.pathNames()[1];
+	if(pathName == null || pathName == undefined)
+		pathName = "";
+	if(pathName == "recipe" && value == recipeName || pathName != "recipe" && value=="Gerichte, Zutaten, Tags, ..."){
+		$("#search").css("color","#404040");
+		$("#search").css("fontStyle","normal");
+		$("#search").val("");
+	}
+}
+
+function focusoutSearch(){
+	var value = $("#search").val();
+	if(value==""){
+		resetSearchBar();
+		var pathName = $.address.pathNames()[0];
+		var recipeName = $.address.pathNames()[1];
+		if(pathName == null || pathName == undefined)
+			pathName = "";
+		if(pathName == "recipe")
+			$("#search").val(recipeName);
+	}
+}
+
 var searchterms = null;

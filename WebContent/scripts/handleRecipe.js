@@ -131,7 +131,7 @@ function loadRecipe(recipe){
 	}
 	
 	$("#search").attr("value", recipe.name);
-	$("#search, #time_std, #time_min").attr("readonly", "readonly");
+	$("#time_std, #time_min").attr("readonly", "readonly");
 	fillStd(recipe.std);
 	fillMin(recipe.min);
 	

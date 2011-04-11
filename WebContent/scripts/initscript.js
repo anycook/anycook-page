@@ -140,22 +140,9 @@
 				$("#search").css("color","#b5b5b5");
 				$("#search").css("fontStyle","italic");
 				
-				$("#search").focus(function(){
-					var value = $("#search").val();
-					if(value=="Gerichte, Zutaten, Tags, ..."){
-						$("#search").css("color","#404040");
-						$("#search").css("fontStyle","normal");
-						$("#search").val("");
-					}
-				});
+				$("#search").focus(focusSearch);
 				
-				$("#search").focusout(function(){
-					
-					var value = $("#search").val();
-					if(value==""){
-						resetSearchBar();
-					}
-				});
+				$("#search").focusout(focusoutSearch);
             	
             	
             	//Kategoriefilter
