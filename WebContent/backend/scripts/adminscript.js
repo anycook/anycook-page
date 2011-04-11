@@ -5,13 +5,6 @@ $(document).ready(function(){
         contentType: "application/x-www-form-urlencoded; charset=utf8"
 	});
 	
-	 //Login
-    $.ajax({
-		url:"/anycook/Login",
-		dataType:"json",
-		success:checkLogin
-	});
-	
 	$.address.change(changePage);
 	
 	$("#home_button").click(function(){
@@ -24,6 +17,12 @@ $(document).ready(function(){
 });
 
 function changePage(event){
+	$.ajax({
+		url:"/anycook/Login",
+		dataType:"json",
+		success:checkLogin
+	});
+	
 	$(".small_button, .big_button").removeClass("on");
 	
 	var sitename;
