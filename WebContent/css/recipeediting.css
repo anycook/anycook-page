@@ -51,3 +51,38 @@
 	cursor:pointer;
 	display: none;
 }
+
+.step form{
+	float:left;
+	width:120px;
+}
+.edit_step{
+	width:356px;
+	height:120px;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
+	outline: none; /*Remove Chrome and Safari glows on focus*/
+	resize: none;
+}
+
+.step_submit, .step_undo{
+ 	font-weight: bold;
+	cursor: pointer;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#919191;
+	width:50px;
+}
+
+.step_submit:hover, .step_undo:hover{
+	color:#919191;
+	text-decoration: underline;
+}
+ 
+.step_submit{
+	float:left;
+}
+
+.step_undo{
+	margin:0 0 0 60px;
+}
+

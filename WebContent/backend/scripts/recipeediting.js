@@ -2,6 +2,8 @@ function addEditingHandler(){
 	$("#zutaten_table td").dblclick(zutatTableEditClick);
 	$("#beschreibung").dblclick(beschreibungEditClick);
 	$("#rezept_headline").dblclick(nameEditClick);
+	$(".step").dblclick(schrittEditClick);
+	
 	
 	$("#zutaten_table tr").each(function(i){
 		$(this).append("<td class=\"edit_removeZutat\"><div></div></td>");
@@ -27,6 +29,52 @@ function addEditingHandler(){
 	    action: '/anycook/UploadImage',
 	    onComplete:saveImage
 	});
+	
+}
+//schritte
+function schrittEditClick(event){
+	var steptext = $(this).find(".step_text").first();
+	var currentText = steptext.text();
+	steptext.remove();
+	$(this).children(".step_left").first().append("<form>" +
+			"<textarea class=\"edit_step\"></textarea>" +
+			"<input type=\"hidden\" class=\"old_step_text\"/>" +
+			"<div class=\"step_buttons\">"+
+			"<div class=\"step_submit\">submit</div>" +
+			"<div class=\"step_undo\">undo</div>" +
+			"</div>"+
+			"</form>");
+	$(this).find(".edit_step, .old_step_text").val(currentText);
+	$(this).find(".edit_step").focus();
+	$(this).find(".step_undo").click(undoStepEdit);	
+	$(this).find(".step_submit").click(submitStepEdit);
+}
+
+function undoStepEdit(){
+	var stepLeft = $(this).parents(".step_left").first();
+	var oldText = stepLeft.find(".old_step_text").val();
+	stepLeft.children("form").remove();
+	stepLeft.append("<div class=\"step_text\">"+oldText+"</div>");
+	var stepheight = stepLeft.css("height");
+	var heighttext = stepLeft.children(".step_text").css("height");
+	var newMargin = (parseInt(stepheight.substring(0, stepheight.length-2))-parseInt(heighttext.substring(0, heighttext.length-2)))/2;
+	stepLeft.children(".step_text").css("margin-top", newMargin);
+}
+
+function submitStepEdit(){
+	var stepLeft = $(this).parents(".step_left").first();
+	var newText = stepLeft.find(".edit_step").val();
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	var version = pathNames[2];
+	var schrittnr = 0;
+	$(".step_left").each(function(i){
+		if($(this).find(".edit_step").val()==newText)
+			schrittnr = i+1;
+	});
+	
+	editRecipe("todo=changeschritt&recipe="+recipe+"&version="+version+"&schrittnr="+schrittnr+"&newtext="+newText);
+	
 }
 
 //rezept bild
