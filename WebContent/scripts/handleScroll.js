@@ -13,5 +13,5 @@ function scrollListener(){
 }
 
 function backtothetop(){
-	$("body").animate({scrollTop:0}, {duration:1000, easing:"easeInOutQuart"});
+	$("html, body").animate({scrollTop:0}, {duration:1000, easing:"easeInOutQuart"});
 }
