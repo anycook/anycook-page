@@ -57,7 +57,7 @@ function makeLoginText(){
 								"</form>";*/
 	
 	//new facebook plugin
-	var htmlstring = "<div id='fb_login'>einloggen mit <div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
+	var htmlstring = "<div id='fb_login'><span>einloggen mit </span><div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
 	"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div>" +
 	"<input type='checkbox' id='check_stayloggedin' /><div id='stayloggedin'>angemeldet bleiben</div>" +
 	"<div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
@@ -145,6 +145,7 @@ function clickLogin(event){
 		$("#login_form").submit();
 	else{
 		$("#register_btn, #login_btn").toggleClass("on");
+		$("#fb_login span").text("einloggen mit ");
 		$("#login_username").val("");
 		$("#check_stayloggedin, #stayloggedin").fadeIn(500);
 		$("#login_username, #username_end").animate({"height":0, "opacity":.0, "margin":0},{duration:500, complete:function(){$("#login_username, #username_end").remove();}});
@@ -159,6 +160,7 @@ function clickRegister(event){
 	else{
 		$("#login_mail, #login_pwd").removeClass("wrong");
 		$("#register_btn, #login_btn").toggleClass("on");
+		$("#fb_login span").text("registrieren mit ");
 		$("#password_end").after("<input type='text' name='username' id='login_username'/><div id='username_end'></div>");
 		$("#login_username, #username_end").css("height",0).css("opacity",.0);
 		$("#login_form").animate({"height":116},{duration:500, queue:false});

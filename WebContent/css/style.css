@@ -1829,7 +1829,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	cursor: pointer;
 	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
-	padding: 6px 0 0 105px;
+	padding: 6px 0 0 0;
 }
 
 #fb_login:hover {
@@ -1837,9 +1837,13 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	text-decoration: underline;
 }
 
+#fb_login span{
+	float:right;
+	margin-right:30px;
+}
+
 .fb_logo {
-	margin-right: 8px;
-	float: right;
+	margin-left: 178px;
 	background: url(/icons/facebook_off.png) no-repeat;
 	width: 20px;
 	height: 20px;
