@@ -87,28 +87,32 @@ function handleChange(event){
 			});
 			break;
 		case 1:
-			if(path[0]=="search"){
+			switch(path[0]){
+			case "search":
 				setFiltersfromSession();
 				fullTextSearch();
-			}
-			else if(path[0]=="newrecipe"){
+				break;
+			case "newrecipe":
 				loadNewRecipe();
-			}
-			else if(path[0] == "profile"){
+				break;
+			case "profile":
 				loadUserProfile();
-			}
-			else if(path[0]=="feedback"){
+				break;
+			case "feedback":
 				$.address.title("anycook | Feedback");
 				loadContact();
-			}
-			else if(path[0] == "preview"){
+				break;
+			case "preview":
 				loadPreview();
-			}
-			else if(path[0] == "about_us"){
+				break;
+			case "about_us":
 				$.address.title("anycook | Über uns");
-			}
-			else if(path[0] == "impressum"){
+				break;
+			case "impressum":
 				$.address.title("anycook | Impressum");
+				break;
+			case "fbregistration":
+				loadFBRegistrationMessage();
 			}
 			break;
 		case 2:
@@ -234,7 +238,10 @@ function changePage(event){
 			loadStep4();	
 		else
 			$.address.queryString("");
-	}else{
+	}else if(event.pathNames[0] == "fbregistration"){
+		//nothing
+	}
+	else{
 		$.address.queryString("");
 	}
 }

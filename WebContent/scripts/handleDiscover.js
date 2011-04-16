@@ -57,7 +57,7 @@ function fillDiscover(){
 function loadDiscoverRecipe(response, type){
 	// Methode lädt neue Elemente hinzu. Sind bereits welche vorhanden, werden sie erst einmal versteckt.
 	//$("#"+type+"_container > .frame_main_small:first, #"+type+"_container > .frame_right:first").remove();
-	var uri = encodeURI("#/recipe/"+response.name);
+	var uri = encodeURI("#!/recipe/"+response.name);
 	$("#"+type+"_container").append("<div class=\"frame_small\">" +
 			"<a href=\""+uri+"\" class=\"frame_main_small small_rezept\">"+getSmallFrameText(response)+"</a>" +
 					"<div class=\"frame_right\"></div></div>");

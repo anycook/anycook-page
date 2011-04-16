@@ -10,6 +10,8 @@
             contentType: "application/x-www-form-urlencoded; charset=utf8"
         }); 
     	
+    	$.address.crawlable(true);
+    	
     	jQuery.extend(jQuery.expr[':'], {
     	    focus: function(element) { 
     	        return element == document.activeElement; 

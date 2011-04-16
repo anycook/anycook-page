@@ -389,4 +389,7 @@
 			<template id="profile">
 				<h1>Userprofil</h1>
 			</template>
+			<template id="fbregistration">
+					<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
+			</template>
 </templates>
