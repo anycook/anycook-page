@@ -1242,6 +1242,13 @@ ul.kategorie_filter li:HOVER {
 	margin-right: 4px;
 }
 
+#autoren{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #919191;
+	margin-right: 4px;
+	margin-top: 10px;
+	}
+
 #beschreibung textarea{
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	width:175px;

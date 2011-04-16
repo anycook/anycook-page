@@ -178,6 +178,25 @@ function loadRecipe(recipe){
 		addEditingHandler();
 	}
 	
+	
+	//Autoren
+	var num_autoren = recipe.usernames.length;
+	
+	for(var autor in recipe.usernames){
+		$("#autoren").append(recipe.usernames[autor]);
+		if(num_autoren>1){
+			if(autor <= num_autoren-3)
+				$("#autoren").append(", ");
+			if(autor == num_autoren-2)
+				$("#autoren").append(" und ");
+			if(autor == num_autoren-1)
+				$("#autoren").append(" haben ");
+		}		
+		if(num_autoren == 1)
+			$("#autoren").append(" hat ");
+	}
+	$("#autoren").append("dieses Rezept erstellt.");
+	
 	//bezeichner
 	$("#zubereitung").addClass("on");
 	$("#zubereitung").click(showZubereitung);

@@ -30,6 +30,7 @@ Recipe.prototype.loadJSON = function(json){
 	this.min = json.min;
 	this.tags = json.tags;
 	this.zutaten = json.zutaten;
+	this.usernames = json.authors;
 };
 
 Recipe.prototype.checkRecipe = function(){
