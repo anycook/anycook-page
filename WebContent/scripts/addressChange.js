@@ -11,7 +11,7 @@ function loadHome(json)
 	//new stuff
 	$("#tagesrezept_inhalt").append(getSmallFrameText(json));
 	cutSmallFrameText($("#tagesrezept_inhalt"));
-	var uri = encodeURI("#/recipe/"+json.name);
+	var uri = encodeURI("#!/recipe/"+json.name);
 	$("#tagesrezept_inhalt").attr("href", uri);
 	
 	$.ajax({
