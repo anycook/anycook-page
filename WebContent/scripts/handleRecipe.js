@@ -183,7 +183,9 @@ function loadRecipe(recipe){
 	var num_autoren = recipe.usernames.length;
 	
 	for(var autor in recipe.usernames){
-		$("#autoren").append(recipe.usernames[autor]);
+		var autorname = recipe.usernames[autor];
+		$("#autoren").append("<a href='http://anycook.de/#!/profile/'"+encodeURI(autorname)+"'>"
+				+autorname+"</a>");
 		if(num_autoren>1){
 			if(autor <= num_autoren-3)
 				$("#autoren").append(", ");

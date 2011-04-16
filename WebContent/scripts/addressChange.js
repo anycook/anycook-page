@@ -137,6 +137,9 @@ function handleChange(event){
 			if(path[0] == "activate"){
 				activateUser(path[1]);
 			}
+			if(path[0] == "profile"){
+				userSearch(path[1]);
+			}
 			break;
 		case 3:
 			if(path[0] == "recipe"){

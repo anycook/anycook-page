@@ -391,6 +391,8 @@
 			</template>
 			<template id="profile">
 				<h1>Userprofil</h1>
+    			<div id="num_results"><span id="current_num"></span> von <span id="total_num"></span> Rezepten</div>
+       			<div id="result_container"></div>
 			</template>
 			<template id="fbregistration">
 					<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
