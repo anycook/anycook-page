@@ -1249,6 +1249,15 @@ ul.kategorie_filter li:HOVER {
 	margin-top: 10px;
 	}
 
+#autoren a{
+	color: #859F5E;
+	text-decoration: none;
+	}
+	
+#autoren a:hover{
+	text-decoration: underline;
+	}
+
 #beschreibung textarea{
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	width:175px;
