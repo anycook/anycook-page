@@ -48,12 +48,7 @@
 	margin-top: 10px;
 	cursor: pointer;
 }
-
-#new_sitemap a{
-	text-decoration: none;
-	color: #404040;
-	}
 	
-#new_sitemap a:hover{
+#new_sitemap:hover{
 	text-decoration: underline;
 	}

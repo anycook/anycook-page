@@ -8,7 +8,7 @@ function loadHome(){
 		numberdisc+=5;
 		loadNewDiscussions();
 	});
-	
+	$("#new_sitemap").click(generateSitemaps);
 	loadSystemStatus();
 }
 
@@ -33,6 +33,12 @@ function loadNewDiscussions(){
 		dataType:"json",
 		data:"number="+numberdisc,
 		success: showNewDiscussions
+	});
+}
+
+function generateSitemaps(){
+	$.ajax({
+		url:"/anycook/GenerateSitemap"
 	});
 }
 

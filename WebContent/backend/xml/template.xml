@@ -15,7 +15,7 @@
     		<tr><td>idle DBConn.:</td><td id="idleconn"></td></tr>
     		<tr><td>max idle DBConn.:</td><td id="maxidleconn"></td></tr>
     		</table>
-    		<div id="new_sitemap"><a href="http://anycook.de/anycook/GenerateSitemap">Sitemap neu generieren</a></div>
+    		<div id="new_sitemap">Sitemap neu generieren</div>
     	</div>
     </template>
     
