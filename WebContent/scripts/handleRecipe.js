@@ -21,18 +21,25 @@ function getSmallFrameText(json){
 }
 
 function cutSmallFrameText(container){
-	var h5height = container.find("h5").css("height");
-	h5height = Number(h5height.substring(0, h5height.length-2));
-	var pheight = container.find("p").css("height");
-	pheight = Number(pheight.substring(0, pheight.length-2));
-	while(pheight+h5height>110){
+	var h5height;
+	var pheight;
+	
+	do{
 		h5height = container.find("h5").css("height");
 		h5height = Number(h5height.substring(0, h5height.length-2));
 		pheight = container.find("p").css("height");
 		pheight = Number(pheight.substring(0, pheight.length-2));
-		var text = container.find("p").text();
-		container.find("p").text(text.substring(0,text.lastIndexOf(" "))+"...");
-	}
+		
+		var p = container.find("p");
+		var h5 = container.find("h5");
+		if(h5height>110){
+			var h5text = h5.text();
+			h5.text(h5text.substring(0,h5text.lastIndexOf(" "))+"...");
+		}else if(pheight+h5height>110){
+			var ptext = p.text();
+			p.text(ptext.substring(0,ptext.lastIndexOf(" "))+"...");
+		}
+	}while(pheight+h5height>110);
 }
 
 

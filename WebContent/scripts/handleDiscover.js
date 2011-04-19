@@ -22,6 +22,7 @@ function fillDiscover(){
 		$.ajax({
 			  url: "/anycook/GetDiscoverRecipes",
 			  dataType: 'json',
+			  async:false,
 			  success: function(json){
 				  for(var type in json){
 					  var typelength = 0;
