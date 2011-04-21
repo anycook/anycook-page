@@ -99,17 +99,17 @@ function handleChange(event){
 				loadUserProfile();
 				break;
 			case "feedback":
-				$.address.title("anycook | Feedback");
+				$.address.title("Feedback | anycook");
 				loadContact();
 				break;
 			case "preview":
 				loadPreview();
 				break;
 			case "about_us":
-				$.address.title("anycook | Über uns");
+				$.address.title("Über uns | anycook");
 				break;
 			case "impressum":
-				$.address.title("anycook | Impressum");
+				$.address.title("Impressum | anycook");
 				break;
 			case "fbregistration":
 				loadFBRegistrationMessage();

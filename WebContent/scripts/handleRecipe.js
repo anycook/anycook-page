@@ -174,7 +174,7 @@ function loadRecipe(recipe){
 		}
 	}
 	
-	$.address.title("anycook | "+recipe.name);
+	$.address.title(recipe.name+" | anycook");
 	
 	//FB.XFBML.parse(document.getElementById('social'));
 	
