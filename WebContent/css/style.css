@@ -1044,9 +1044,41 @@ ul.kategorie_filter li:HOVER {
 
 /*----*/
 #userfilter{
+	width:144px;
+	padding:5px;
+	float:right;
+	display: none;
+	border:1px solid #CCC;
+	background-color: #ECE9E3;	
+}
+
+#userfilterremove{
+	background-image: url(/img/delete_off.png);
+	height:9px;
+	width: 8px;
+	cursor: pointer;
 	float:right;
 	
-	}
+}
+
+#userfilterremove:hover{
+	background-image: url(/img/delete_filter_on.png);
+}
+
+#userfilter p{
+	margin-top:3px;
+	font:9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#userfilter a{
+	text-decoration:none;
+	color:#859F5E;
+}
+
+#userfilter a:hover{
+	text-decoration:underline;
+}
+
 
 
 #result_container {

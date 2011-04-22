@@ -280,9 +280,11 @@ function setUserfilter(username){
 		  data:"username="+username,
 		  async:false,
 		  success: function(imagepath){
-			  $("#userfilter").html("<img src='"+imagepath+"'/>" +
-			  		"<div id='userfiltername'>"+username+"</div>"+
-			  		"<div id='userfilterremove'></div>");
+			  $("#userfilter a").attr("href", "/#!/profile/"+username);
+			  $("#userfilter img").attr("src", imagepath);
+			  var ptext = "<a href=\"/#!/profile/"+username+"\">"+username+"</a>'s Rezepte";
+			  $("#userfilter p").html(ptext);
+			  $("#userfilter").show();
 		  }
 		});
 	$("#userfilterremove").click(removeUserfilter);
