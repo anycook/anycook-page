@@ -103,7 +103,7 @@
 						saveTag(text);
 					}
 					else if(type == "user"){
-						addUsername("username="+text);
+						addUsername(text);
 					}
 					return false;
 					
