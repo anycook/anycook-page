@@ -103,7 +103,7 @@
 						saveTag(text);
 					}
 					else if(type == "user"){
-						addtoSession("username="+text);
+						addUsername("username="+text);
 					}
 					return false;
 					
