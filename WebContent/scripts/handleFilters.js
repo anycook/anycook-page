@@ -22,10 +22,12 @@ function setFiltersfromSession(){
 				checkOn("#muffin_"+json.kalorien);
 				handleRadios(".label_muffins");
 			}
-			
 			if(json.std != null && json.min != null){
 				fillMin(json.min);
 				fillStd(json.std);
+			}
+			if(json.user !=null){
+				setUserfilter(json.user);
 			}
 			
 			for(num in json.zutaten)

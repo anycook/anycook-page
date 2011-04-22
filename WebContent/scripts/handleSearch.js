@@ -271,14 +271,27 @@ function focusoutSearch(){
 
 function addUsername(username){
 	addtoSession("username="+username);
+	setUserfilter(username);
+}
+
+function setUserfilter(username){
 	$.ajax({
 		  url: "/anycook/GetUserInformation",
 		  data:"username="+username,
 		  async:false,
 		  success: function(imagepath){
-			  $("#userfilter").html("<img src='"+imagepath+"'/>");
+			  $("#userfilter").html("<img src='"+imagepath+"'/>" +
+			  		"<div id='userfiltername'>"+username+"</div>"+
+			  		"<div id='userfilterremove'></div>");
 		  }
 		});
+	$("#userfilterremove").click(removeUserfilter);
+}
+
+function removeUserfilter(){
+	$("#userfilter").hide();
+	var username = $("#userfiltername").text();
+	removefromSession("username="+userfilter);
 }
 
 var searchterms = null;
