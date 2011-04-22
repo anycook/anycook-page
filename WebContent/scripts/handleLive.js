@@ -30,7 +30,9 @@ function parseAndAddLiveAtHome(json){
 					var array = text.split("#u");
 					text = "";
 					for(var j = 0; j<array.length-1;++j){
-						text+=array[j]+json[i]["user"];
+						var uri = encodeURI("/#!/profile/"+json[i].user);
+						var link = "<a href=\""+uri+"\">"+json[i].user+"</a>";
+						text+=array[j]+link;
 					}
 					text+=array[array.length-1];
 				}

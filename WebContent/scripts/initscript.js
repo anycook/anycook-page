@@ -71,6 +71,15 @@
 	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
 	        	            }
         			 	}
+        			 	if(data.user!=undefined){
+	        	            for(var i=0; i<data.user.length; i++)
+	        	            {
+	        	            	if(i==0)
+	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i]+"</div>", value: data.user[i], data:"user"};
+	        			 		else
+	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i]+"</div>", value: data.user[i], data:"user"};
+	        	            }
+        			 	}
         			}
         		});
         		resp(array);},
@@ -92,6 +101,9 @@
 					}
 					else if(type == "tag"){
 						saveTag(text);
+					}
+					else if(type == "user"){
+						addtoSession("username="+text);
 					}
 					return false;
 					
