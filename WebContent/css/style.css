@@ -1043,8 +1043,14 @@ ul.kategorie_filter li:HOVER {
 }
 
 /*----*/
+#userfilter{
+	/*float:right;*/
+	}
+
+
 #result_container {
 	width:475px;
+	float:left;
 }
 
 .frame_big {

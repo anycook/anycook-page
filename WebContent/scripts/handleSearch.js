@@ -19,8 +19,7 @@ function searchResult(json){
 		if(gerichte.length>0){					
 			for(var i in gerichte){
 				$("#result_container").append(getBigFrameText(gerichte[i]));
-			}
-			
+			}			
 		}
 		else
 			$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
@@ -30,7 +29,7 @@ function searchResult(json){
 		if(currentResultNum < json.size){
 			addMoreResultsButton();
 		}
-		}
+	}
 	
 }
 
@@ -272,6 +271,14 @@ function focusoutSearch(){
 
 function addUsername(username){
 	addtoSession("username="+username);
+	$.ajax({
+		  url: "/anycook/GetUserInformation",
+		  data:"username="+username,
+		  async:false,
+		  success: function(imagepath){
+			  $("#userfilter").html("<img src='"+imagepath+"'/>");
+		  }
+		});
 }
 
 var searchterms = null;
