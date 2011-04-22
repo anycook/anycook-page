@@ -135,6 +135,10 @@ function handleSearchResults(result, terms){
 		if(result.tags!=null)
 			saveTag(result.tags[0]);
 		
+		if(result.user!=null){
+			addUsername(result.user[0]);
+		}
+		
 	}else if(terms!= ""){
 		addTerms(terms, true);
 	}
@@ -264,6 +268,10 @@ function focusoutSearch(){
 		if(pathName == "recipe")
 			$("#search").val(recipeName);
 	}
+}
+
+function addUsername(username){
+	addtoSession("username="+username);
 }
 
 var searchterms = null;
