@@ -278,7 +278,6 @@ function setUserfilter(username){
 	$.ajax({
 		  url: "/anycook/GetUserInformation",
 		  data:"username="+username,
-		  async:false,
 		  success: function(imagepath){
 			  $("#userfilter a").attr("href", "/#!/profile/"+username);
 			  $("#userfilter img").attr("src", imagepath);
