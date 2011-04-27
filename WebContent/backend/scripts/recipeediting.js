@@ -30,6 +30,16 @@ function addEditingHandler(){
 	    onComplete:saveImage
 	});
 	
+	var removezutathtml = "<div id=\"remove_zutat_request\"><p>\"<span></span>\"" +
+	" wirklich enfernen?</p>" +
+	"<div><div id=\"submit_remove_zutat\">submit</div>" +
+	"<div id=\"undo_remove_zutat\">undo</div></div>" +
+	"</div>";
+	$("#zutaten_table").after(removezutathtml);
+	$("#undo_remove_zutat").click(undoRemoveZutat);
+	$("#submit_remove_zutat").click(submitRemoveZutat);
+	
+	
 }
 //schritte
 function schrittEditClick(event){
@@ -117,7 +127,23 @@ function submitNewZutat(event){
 	return false;
 }
 function editRemoveZutatClick(event){
-	//TODO
+	var zutat = $(this).parent().siblings(".zutaten_table_left").first().text();
+	
+	$("#remove_zutat_request span").text(zutat);
+	
+	$("#remove_zutat_request").fadeIn(500);
+}
+
+function undoRemoveZutat(event){
+	$("#remove_zutat_request").fadeOut(500);
+}
+
+function submitRemoveZutat(event){
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	var version = pathNames[2];
+	var zutat = $("#remove_zutat_request span").text();
+	editRecipe("todo=removezutat&recipe="+recipe+"&version="+version+"&zutat="+zutat);
 }
 
 //name

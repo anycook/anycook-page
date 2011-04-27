@@ -86,3 +86,32 @@
 	margin:0 0 0 60px;
 }
 
+
+/* --- removeZutat */
+#remove_zutat_request{
+	display: none;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	border: 1px solid #CCC;
+	background-color: #ECE9E3;
+	
+}
+#undo_remove_zutat, #submit_remove_zutat{
+	cursor: pointer;
+	font-weight: bold;
+	width:50px;
+}
+
+#undo_remove_zutat:hover, #submit_remove_zutat:hover{
+	text-decoration: underline;
+}
+
+#submit_remove_zutat{
+	float: left;
+}
+
+#undo_remove_zutat{
+	margin-left:60px;
+}
+
+
+
