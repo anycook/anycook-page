@@ -274,25 +274,4 @@ function addUsername(username){
 	setUserfilter(username);
 }
 
-function setUserfilter(username){
-	$.ajax({
-		  url: "/anycook/GetUserInformation",
-		  data:"username="+username,
-		  success: function(imagepath){
-			  $("#userfilter a").attr("href", "/#!/profile/"+username);
-			  $("#userfilter img").attr("src", imagepath);
-			  var ptext = "<a href=\"/#!/profile/"+username+"\">"+username+"</a>'s Rezepte";
-			  $("#userfilter p").html(ptext);
-			  $("#userfilter").show();
-		  }
-		});
-	$("#userfilterremove").click(removeUserfilter);
-}
-
-function removeUserfilter(){
-	$("#userfilter").hide();
-	var username = $("#userfiltername").text();
-	removefromSession("username="+userfilter);
-}
-
 var searchterms = null;

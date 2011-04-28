@@ -1044,20 +1044,23 @@ ul.kategorie_filter li:HOVER {
 
 /*----*/
 #userfilter{
-	width:144px;
+	background-color:#ECE9E3;
+	border: 1pt solid #D5D6D2;
 	padding:5px;
-	float:right;
 	display: none;
-	border:1px solid #CCC;
-	background-color: #ECE9E3;	
+	margin-top:10px;
+	/*margin:5px 14px 0 14px*/;
+	height: 50px;
 }
 
 #userfilterremove{
+	margin: 2px 6px 0 ;
 	background-image: url(/img/delete_off.png);
 	height:9px;
 	width: 8px;
 	cursor: pointer;
 	float:right;
+	display:none;
 	
 }
 
@@ -1065,14 +1068,33 @@ ul.kategorie_filter li:HOVER {
 	background-image: url(/img/delete_filter_on.png);
 }
 
-#userfilter p{
-	margin-top:3px;
+#userfiltertext{
+	padding: 0 2px;
+	margin:0 24px 0 55px;
 	font:9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	line-height: 16px;
+	height:50px;
 }
 
-#userfilter a{
+#userfiltertext span{
+	vertical-align: bottom;
+}
+
+#userfiltertext a{
 	text-decoration:none;
 	color:#859F5E;
+}
+
+
+#userfilter > div > a{
+	float:left;
+	text-decoration:none;
+	color:#859F5E;
+}
+
+#userfilter img{
+	height: 50px;
+	width:50px;
 }
 
 #userfilter a:hover{

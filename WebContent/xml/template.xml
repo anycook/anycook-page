@@ -69,16 +69,8 @@
     </template>
     <template id="search">
     	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div>
-    	<div id="num_results"><span id="current_num"></span> von <span id="total_num"></span> Rezepten</div>
-    	<div id="result">
-    		<div id="userfilter">
-    		<div id="userfilterremove"></div>
-    		<a href=""><img src=""/></a>
-    		<p></p>		
-       		
-       		</div>
-       		<div id="result_container">	</div>
-       </div>
+    	<div id="num_results"><span id="current_num"></span> von <span id="total_num"></span> Rezepten</div>    		
+       	<div id="result_container">	</div>
     </template>
     <template id="recipe">
     	<div id="recipe_container">

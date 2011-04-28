@@ -204,6 +204,11 @@
             	$("#login_mail.wrong + #email_end, #login_pwd.wrong + #password_end, #login_username.wrong + #username_end").live("mouseenter", showLoginErrorPopups);
             	$("#login_mail.wrong + #email_end, #login_pwd.wrong + #password_end, #login_username.wrong + #username_end").live("mouseleave", hideLoginErrorPopups);
             	
+            	//userfilter
+            	$("#userfilter").mouseenter(showUserfilterremove);
+            	$("#userfilter").mouseleave(hideUserfilterremove);
+            	$("#userfilterremove").click(removeUserfilter);
+            	
             	//scrollListener
             	$(document).scroll(scrollListener);
             	

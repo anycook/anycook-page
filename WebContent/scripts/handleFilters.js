@@ -53,8 +53,9 @@ function setFiltersfromSession(){
 
 function resetFilter(){
 	$("#progress_1, #progress_2, #progress_3, #progress_4").remove();
+	$("#userfilter").hide();
 	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
-	$("#filter_main *").not("ul.kategorie_filter").show().css("opacity", 1);
+	$("#filter_main *").not("ul.kategorie_filter, #userfilter, #userfilter *").show().css("opacity", 1);
 	$("#filter_headline").text("Filter");
 	$("#time_std, #time_min").val("00");
 	$("#time_std, #time_min").removeAttr("readonly");
@@ -350,6 +351,42 @@ function removeZutatField(event){
 			}
 		}
 }*/
+
+//userfilter
+
+function setUserfilter(username){
+	$.ajax({
+		  url: "/anycook/GetUserInformation",
+		  data:"username="+username,
+		  success: function(imagepath){
+			  $("#userfilter a").attr("href", "/#!/profile/"+username);
+			  $("#userfilter img").attr("src", imagepath);
+			  var text = "<span><a href=\"/#!/profile/"+username+"\">"+username+"</a>'s<br/>Rezepte</span>";
+			  $("#userfiltertext").html(text);
+			  $("#userfilter").css({display:"block", opacity:0, height:0}).animate({height:50}, {duration:300, complete:function(){
+				  $(this).animate({opacity:1}, 400);
+			  }});
+		  }
+		});
+}
+
+function showUserfilterremove(event){
+	$("#userfilterremove").fadeIn(300);
+}
+
+function hideUserfilterremove(event){
+	$("#userfilterremove").fadeOut(300);
+}
+
+function removeUserfilter(){
+	$("#userfilter").animate({opacity:0}, {duration:400, complete:function(){
+		$(this).animate({height:0}, {duration:300, complete:function(){
+			$(this).css({display:"none", opacity:1, height:50});
+		}});
+	}});
+	var username = $("#userfiltername").text();
+	removefromSession("username="+userfilter);
+}
 
 function addZutatRow(zutat){
 	$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'><div class='remove_zutat'></div></td></tr>");
