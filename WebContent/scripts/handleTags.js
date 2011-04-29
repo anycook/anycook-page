@@ -123,7 +123,7 @@ function removeTag(tag){
 }
 
 function addTag(tag){
-	$("#searchbar").val("");
+	//$("#searchbar").val("");
 	addtoSession("tag="+tag);
 }
 

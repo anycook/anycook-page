@@ -116,29 +116,38 @@ function handleChange(event){
 			}
 			break;
 		case 2:
-			if(path[0]== "recipe"){
-					$.ajax({
-			  		  url: "/anycook/LoadRecipe",
-			  		  dataType: 'json',
-			  		  async:false,
-			  		  data: {recipe:path[1]},
-			  		  success: function(json){
-						loadRecipewJSON(json);
-					}
-			  		});
+			switch(path[0]){
+			case "recipe":
+				$.ajax({
+		  		  url: "/anycook/LoadRecipe",
+		  		  dataType: 'json',
+		  		  async:false,
+		  		  data: {recipe:path[1]},
+		  		  success: function(json){
+					loadRecipewJSON(json);
+				}
+		  		});
 				$("#content_footer").hide();
-			}
-			if(path[0] == "search"){
+				break;
+				
+			case "search":				
 				setFiltersfromSession();
 				$("#search").focus();
 				$("#search").val(path[1]);
 				fullTextSearch();
-			}
-			if(path[0] == "activate"){
+				break;
+				
+			case "activate":
 				activateUser(path[1]);
-			}
-			if(path[0] == "profile"){
+				break;
+				
+			case "profile":
 				userSearch(path[1]);
+				break;
+			
+			case "tagged":
+				addTag(path[1]);
+				break;
 			}
 			break;
 		case 3:
