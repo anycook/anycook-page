@@ -15,10 +15,10 @@ User.init = function(){
 		dataType: "json",
 		success: function(response){
 			if(response != false){
-				user.name = response.nickname;
+				user.name = response.name;
 				user.level = Number(response.level);
-				user.mail = response.email;
-				user.facebook_id = response.facebook_id;
+				user.mail = response.mail;
+				user.facebook_id = response.facebookID;
 				user.image = response.image;
 			}
 				
