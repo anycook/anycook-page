@@ -211,6 +211,11 @@ Recipe.prototype.getZutatOnPosition = function(position){
 	}
 };
 
+Recipe.prototype.getURI = function(){
+	var uri = "#!/recipe/"+encodeURIComponent(this.name);
+	return uri;
+};
+
 /*Recipe.prototype.getName = function(){
 	return this.name;
 };

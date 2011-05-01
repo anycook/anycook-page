@@ -2,10 +2,9 @@
 
 function loadHome(json)
 {
-	var headertext = "<div id='home_button' class='small_button'><div></div></div><div id='discover_button' class='big_button'>Entdecken</div>";
+	var headertext = "<a href=\"/#!\" id='home_button' class='small_button'><div></div></a>" +
+			"<a href=\"/#!/?page=discover\" id='discover_button' class='big_button'>Entdecken</a>";
 	$("#content_header").html(headertext);
-	$("#home_button").click(function(event){$.address.parameter("page", "");});
-	$("#discover_button").click(function(event){$.address.parameter("page", "discover");});
 	
 	
 	//new stuff
@@ -165,7 +164,7 @@ function handleChange(event){
 			}
 		}
 	}
-	$("#content_header div").removeClass("on");
+	$("#content_header *").removeClass("on");
 	if(event.parameterNames.length >0){
 		changePage(event);
 	}

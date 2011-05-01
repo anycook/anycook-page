@@ -80,11 +80,12 @@ function loadRecipewJSON(json){
 
 function loadRecipe(recipe){
 	
-	
-	var headertext = "<div class='float_right_header'><div id='recipe_general_btn' class='big_button'>Rezept</div><div id='recipe_discussion_btn' class='big_button'>Diskussion</div></div>";
+	var rezepturi = recipe.getURI();
+	var headertext = "<div class='float_right_header'>" +
+			"<a id=\"recipe_general_btn\" class=\"big_button\" href=\""+rezepturi+"\">Rezept</a>" +
+			"<a id=\"recipe_discussion_btn\" class=\"big_button\" href=\""+rezepturi+"?page=discussion\">Diskussion</a>" +
+			"</div>";
 	$("#content_header").html(headertext);
-	$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
-	$("#recipe_discussion_btn").click(function(event){$.address.parameter("page", "discussion");});
 	
 	personen = Number(recipe.personen);
 	if(personen>1)
