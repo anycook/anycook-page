@@ -5,6 +5,7 @@ $(document).ready(function(){
         contentType: "application/x-www-form-urlencoded; charset=utf8"
 	});
 	
+	
 	$.address.change(changePage);
 	
 	$("#home_button").click(function(){
@@ -14,14 +15,13 @@ $(document).ready(function(){
 	//scrollListener
 	$(document).scroll(infoScrollListener);
 	
+	user = User.init();
+	$("#login").text("Eingeloggt als: "+user.name);
+	
 });
 
 function changePage(event){
-	$.ajax({
-		url:"/anycook/Login",
-		dataType:"json",
-		success:checkLogin
-	});
+	if(!user.checkLogin()) window.location.replace("/");
 	
 	$(".small_button, .big_button").removeClass("on");
 	
@@ -122,3 +122,5 @@ function infoScrollListener(){
 }
 
 var lastPage;
+
+var user;
