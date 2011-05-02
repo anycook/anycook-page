@@ -23,8 +23,15 @@ function loadUsers(json){
 		var versions = json[i].versions;
 		if(versions == null)
 			versions = 0;
-		$("#usertable").append("<tr><td><input type=\"checkbox\" value=\""+json[i].mail+"\"/></td><td>"+json[i].name+"</td><td>"+json[i].mail+"</td><td>"+
-				createdate+"</td><td>"+lastlogin+"</td><td>"+json[i].facebook_id+"</td><td>"+json[i].level+"</td><td>"+versions+"</td></tr>");
+		
+		
+		$("#usertable").append("<tr><td><input type=\"checkbox\" value=\""+json[i].mail+"\"/></td>" +
+				"<td>"+json[i].name+"</td>" +
+				"<td class=\"mail\">"+json[i].mail+"</td>" +
+				"<td>"+createdate+"</td>" +
+				"<td>"+lastlogin+"</td>" +
+				"<td class=\"facebookid\">"+json[i].facebook_id+"</td>" +
+				"<td>"+json[i].level+"</td><td>"+versions+"</td></tr>");
 	}
 	$("#info table").append("<tr><td>User gesamt:</td><td>"+usercounter+"</td></tr>");
 	$("#info table").append("<tr><td>Facebookuser:</td><td>"+facebookcounter+"</td></tr>");
@@ -33,6 +40,26 @@ function loadUsers(json){
 	$("#usertable td input").click(checkBoxClick);
 	$("#info ul").empty();
 	
+	$(".facebookid").click(checkFacebookPermissions);
+	
+	
+}
+
+function checkFacebookPermissions(event){
+	var mail = $(this).siblings(".mail").text();
+	$.ajax({
+		url: "/anycook/GetFacebookPermissions",
+		data:"mail="+mail,
+		dataType:"json",
+		success: function(json){
+			var text = "Permissions: ";
+			for(var i in json.data){
+				for(var j in json.data[i])
+					text+=j;
+			}
+			$("#info h3+p").text(text);
+		}
+	});
 	
 }
 
