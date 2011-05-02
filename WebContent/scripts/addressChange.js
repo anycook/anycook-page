@@ -112,6 +112,10 @@ function handleChange(event){
 				break;
 			case "fbregistration":
 				loadFBRegistrationMessage();
+				break;
+			case "resetpassword":
+				loadResetPasswordStep1();
+				break;
 			}
 			break;
 		case 2:

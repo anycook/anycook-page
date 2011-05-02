@@ -63,3 +63,14 @@ function loadFBRegistrationMessage(){
 	$("#fbregister_message h5").text(headline);
 	$("#fbregister_message p").text(text);
 }
+
+
+function fbExtendPermissions(event){
+	var redirecturl = "http://anycook.de/";
+	 var permissionurl = "http://www.facebook.com/dialog/oauth?client_id=" +
+	 fbAppID + "&redirect_uri=" + encodeURI(redirecturl) + "&scope=email,publish_stream,offline_access";
+	top.location.href=permissionurl;
+	
+}
+
+var fbAppID = "143100952399957";

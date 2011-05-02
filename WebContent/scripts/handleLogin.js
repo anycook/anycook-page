@@ -23,14 +23,20 @@ function makeUsermenuText(){
 			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
 		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
 		"<a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
-	if(user.level == 2)
+	if(user.level == 2){
 		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
+		htmlstring+="<a id=\"extend_permissions\" class=\"user_menu_btn\">Extend Permissions(test)</a>";
+		$("#extend_permissions").click(fbExtendPermissions);
+		
+	}
 	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
 	$("#login_dropdown").html(htmlstring);	
 	$("#logout").click(function(){
 		user.logout();
-	});
+	});	
 	$("#login_user > a").click(closeUserMenu);
+	$("#extend_permissions").click(fbExtendPermissions);
+	
 }
 
 function schmecktChecker(gericht){

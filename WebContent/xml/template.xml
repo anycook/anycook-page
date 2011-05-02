@@ -399,4 +399,28 @@
 			<template id="fbregistration">
 					<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
 			</template>
+			<template id="resetpassword">
+				<div class="footerpages">
+					<h1>Passwort zurücksetzen</h1>
+					<div id="resetpwstep1">
+						<form id="resetpwform1">
+						<p>Bitte gibt deine Emailadresse oder deinen Usernamen ein:</p>
+							<table>
+							<tr><td>Email/Username:</td><td><input id="resetpwmail" type="text"/></td><td class="error"></td></tr>
+							<tr><td></td><td><input type="submit" value="Abschicken"/></td><td class="error"></td></tr>
+							</table>
+						</form>
+					</div>
+					<div id="resetpwstep2">
+						<form id="resetpwform2">
+						<p>Bitte gib dein neues Passwort ein:</p>
+							<table>
+							<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
+							<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
+							<tr><td></td><td><input type="submit" value="Abschicken"/></td><td class="error"></td></tr>
+							</table>
+						</form>
+					</div>				
+				</div>
+			</template>
 </templates>

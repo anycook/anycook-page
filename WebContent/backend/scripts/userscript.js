@@ -55,8 +55,9 @@ function checkFacebookPermissions(event){
 			var text = "Permissions: ";
 			for(var i in json.data){
 				for(var j in json.data[i])
-					text+=j;
+					text+=j+", ";
 			}
+			text = text.substring(0, text.length-2);
 			$("#info h3+p").text(text);
 		}
 	});
