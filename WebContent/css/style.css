@@ -2817,3 +2817,8 @@ td.step_1_right {
 	margin-top:189px;
 	margin-bottom: 189px;
 }
+
+/* ---- passwort reset -----*/
+.error{
+	color: #c05c54;
+}

@@ -151,6 +151,10 @@ function handleChange(event){
 			case "tagged":
 				addTag(path[1]);
 				break;
+				
+			case "resetpassword":
+				loadResetPasswordStep2();
+				break;
 			}
 			break;
 		case 3:
