@@ -22,7 +22,8 @@ function makeUsermenuText(){
 	var htmlstring = "<div id='login_user'><div id='user'><img src='"+user.image+"'/><p>"+user.name+"</p></div>" +
 			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
 		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
-		"<a class='user_menu_btn' href='#/newrecipe'>Neues Rezept erstellen</a>";
+		"<a class='user_menu_btn' href='#!/newrecipe'>Neues Rezept erstellen</a>" +
+		"<a class=\"user_menu_btn\" href=\"#!/profile/me\">Meine Rezepte</a>";
 	if(user.level == 2){
 		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
 		htmlstring+="<a id=\"extend_permissions\" class=\"user_menu_btn\">Extend Permissions(test)</a>";
