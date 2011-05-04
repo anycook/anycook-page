@@ -1859,7 +1859,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #b5b5b5;
 	padding: 0 0 0 5px;
-	margin: 3px 0 2px 0;
+	margin: 5px 0 0 0;
 	border: 1pt solid #87a347;
 	border-right: 0pt;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
@@ -1867,10 +1867,12 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 
 #login_form input#check_stayloggedin{
 	width:20px;
+	margin:-4px 0 0 0;
+	
 }
 
 #username_end,#email_end,#password_end {
-	margin: 3px 0 2px 0;
+	margin: 5px 0 0 0;
 	float: left;
 	width: 16px;
 	height: 25px;
@@ -1889,17 +1891,30 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	background: url(/img/login_form_fault.png);
 }
 
-
 #stayloggedin{
-	margin-top:8px;
+	margin-top:10px;
 	float:left;
-	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	height:21px;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
 	cursor: pointer;
 }
 
 #stayloggedin:hover{
 	color: #5a5a5a;
+}
+
+#forgotpassword{
+	float:right;
+	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #a2a896;
+	text-decoration: none;
+	height:17px;
+}
+
+#forgotpassword:hover{
+	color: #5a5a5a;
+	text-decoration: underline;
 }
 
 /*-----------facebook-login ------------------------*/

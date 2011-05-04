@@ -65,7 +65,8 @@ function makeLoginText(){
 	//new facebook plugin
 	var htmlstring = "<div id='fb_login'><span>einloggen mit </span><div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
 	"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div>" +
-	"<input type='checkbox' id='check_stayloggedin' /><div id='stayloggedin'>angemeldet bleiben</div>" +
+	"<a href=\"#!/resetpassword\" id=\"forgotpassword\">Passwort vergessen?</a>" +
+	"<div id=\"stayloggedin\"><input type='checkbox' id='check_stayloggedin' /><span>angemeldet bleiben</div></span>" +
 	"<div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
 	"</form>";
 	
@@ -79,7 +80,7 @@ function makeLoginText(){
 	$("#login_mail, #login_pwd").keypress(keypressInputs);
 	$("#login_mail, #login_pwd").keydown(keydownInputs);
 	
-	$("#stayloggedin").click(function(){
+	$("#stayloggedin span").click(function(){
 		if($("#check_stayloggedin").is(":checked"))
 			$("#check_stayloggedin").removeAttr("checked");
 		else
@@ -91,6 +92,10 @@ function makeLoginText(){
 	
 	$("#register_btn").click(clickRegister);
 	$("#fb_login").click(fbLogin);
+	
+	$("#forgotpassword").click(function(){
+		closeUserMenu(event);
+	});
 	//FB.XFBML.parse();
 
 }
@@ -139,8 +144,9 @@ function clickSignin(event){
 		$("#register_btn, #login_btn").removeClass("on");
 	}
 	$("#login_dropdown").toggle();
-	$("#check_stayloggedin, #stayloggedin").show();
-	$("#login_form").css("height", 114);
+	$("#stayloggedin").css({height:21, marginTop:10, opacity:1});
+	$("#resetpassword").css({height:17, opacity:1});
+	$("#login_form").css("height", 132);
 	$("#signin_btn").toggleClass("on");
 	$("#login_btn").addClass("on");	
 	return false;
@@ -153,9 +159,11 @@ function clickLogin(event){
 		$("#register_btn, #login_btn").toggleClass("on");
 		$("#fb_login span").text("einloggen mit ");
 		$("#login_username").val("");
-		$("#check_stayloggedin, #stayloggedin").fadeIn(500);
+		//$("#stayloggedin").fadeIn(500);
+		$("#stayloggedin").animate({height:21, marginTop:10, opacity:1},{duration:500});
 		$("#login_username, #username_end").animate({"height":0, "opacity":.0, "margin":0},{duration:500, complete:function(){$("#login_username, #username_end").remove();}});
-		$("#login_form").animate({"height":114},500);			
+		$("#login_form").animate({"height":132},500);
+		$("#forgotpassword").animate({height:17, opacity:1}, {duration:500});
 	}
 }
 
@@ -170,7 +178,8 @@ function clickRegister(event){
 		$("#password_end").after("<input type='text' name='username' id='login_username'/><div id='username_end'></div>");
 		$("#login_username, #username_end").css("height",0).css("opacity",.0);
 		$("#login_form").animate({"height":116},{duration:500, queue:false});
-		$("#check_stayloggedin, #stayloggedin").fadeOut(500);
+		//$("#stayloggedin").fadeOut(500);
+		$("#forgotpassword, , #stayloggedin").animate({"height":0, "opacity":.0, marginTop:0},{duration:500});
 		$("#login_username, #username_end").animate({"height":25, "opacity":1},{duration:500, complete:function(){$("#login_username").val("Username");}});
 		//$("#fb_login").text("r")
 		
