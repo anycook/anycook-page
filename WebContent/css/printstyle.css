@@ -1,5 +1,19 @@
-@MEDIA print {
+@media print{
+	/*@page land{
+		size:landscape;
+	}*/
+	
 	@page{
-		size:landscape
+		size:29cm 29cm;
+		
+		-webkit-transform: rotate(-90deg); -moz-transform:rotate(-90deg);
+     	filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 	}
+	
+	
+	p.step_text {
+	color:#FF0000;
+	}
+	
 }
+
