@@ -156,7 +156,7 @@ function loadRecipe(recipe){
 	$(".tags_table_right > *").remove();
 	var tags = recipe.tags;
 	for(var i = 0; i<tags.length; i++)
-		$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+tags[i]+"</div></div>");
+		$(".tags_table_right").append("<a class='tag' href=\"#!/search/tagged/"+tags[i]+"\"><div class='tag_text'>"+tags[i]+"</div></a>");
 
 	
 	checkOn("#chef_"+recipe.skill);

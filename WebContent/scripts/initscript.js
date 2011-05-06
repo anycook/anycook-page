@@ -21,6 +21,8 @@
             //Login
     	user = User.init();
     	buildLogin();
+    	
+    	search = new Search();
 
 
             //searchbar 
@@ -92,19 +94,23 @@
 						gotoGericht(text);
 					}
 					else if(type == "zutaten"){
-						addZutat(text);
+						search.addZutat(text);
+						search.flush();
 					}
 					else if(type == "kategorie"){
-						$("#kategorie_filter_name").html(text);
-						$("#kategorie_filter_hidden").val(text);
-						addtoSession("kategorie="+text);
+						search.setKategorie(text);
+						search.flush();
 					}
 					else if(type == "tag"){
-						saveTag(text);
+						//saveTag(text);
+						search.addTag(text);
+						search.flush();
 					}
 					else if(type == "user"){
-						addUsername(text);
+						search.setUsername(text);
+						search.flush();
 					}
+					
 					return false;
 					
 				},

@@ -26,7 +26,7 @@ function submitNewTag(event){
 	saveNewTag(text);
 	return false;
 }
-function saveTag(text){
+/*function saveTag(text){
 	
 	
 	if(text[0]=="," || text[0]==" ")
@@ -44,7 +44,7 @@ function saveTag(text){
 	$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+text+"</div><div class='tag_remove'>x</div></div>");
 	//$(".tags_table_right .tag_remove").last().click(function(event){removeTag(event.target.parentNode);});
 	addTag(text);
-}
+}*/
 
 function getDivLength(){
 	var divs = $("#recipe_tags .tag");
@@ -122,23 +122,19 @@ function removeTag(tag){
 	removeInput();
 }
 
-function addTag(tag){
-	//$("#searchbar").val("");
-	addtoSession("tag="+tag);
-}
-
 function removeTagfromSession(tag){
-	removefromSession("tag="+tag);
+	search.removeTag(tag);
+	search.flush();
 }
 
 function loadFamousTags(tags){
 	for(tag in tags){
-		$("#famous_tags_cloud").append("<span><span>"+tag+"</span></span> ");
-		$("#famous_tags_cloud span span").last().css({"font-size":Math.round(tags[tag]*9.3),
+		$("#famous_tags_cloud").append("<span><a href=\"#!/search/tagged/"+tag+"\">"+tag+"</span></a> ");
+		$("#famous_tags_cloud span a").last().css({"font-size":Math.round(tags[tag]*9.3),
 				"opacity": tags[tag]/3
 		});
 	}
-	$("#famous_tags span span").click(clickFamousTag);
+	//$("#famous_tags a span").click(clickFamousTag);
 }
 
 function clickFamousTag(event){

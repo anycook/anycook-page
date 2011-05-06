@@ -1,54 +1,46 @@
 // alle Filter
 function setFiltersfromSession(){
 	resetFilter();
-	$.ajax({
-		url:"/anycook/GetfromSession",
-		async:false,
-		dataType: 'json',
-		success:function(json){
-			if(json.kategorie!=null){
-				$("#kategorie_filter_name").text(json.kategorie);
-				$("#kategorie_filter_hidden").val(json.kategorie);
-			}
-			if(json.skill!=null){
-				checkOn("#chef_"+json.skill);
-				handleRadios(".label_chefhats");
-			}
-			if(json.wertung!=null){
-				checkOn("#star_"+json.wertung);
-				handleRadios(".label_stars");
-			}
-			if(json.kalorien!=null){
-				checkOn("#muffin_"+json.kalorien);
-				handleRadios(".label_muffins");
-			}
-			if(json.std != null && json.min != null){
-				fillMin(json.min);
-				fillStd(json.std);
-			}
-			if(json.user !=null){
-				setUserfilter(json.user);
-			}
-			
-			for(num in json.zutaten)
-				addZutatRow(json.zutaten[num]);
-			
-			for(num in json.tags)
-				$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+json.tags[num]+"</div><div class='tag_remove'>x</div></div>");
-			
-			if(json.terms!=undefined){
-				$("#search_terms").show();
-				for(i in json.terms)
-					addTerms(json.terms[i], false);
-			}
-			
-
-			
-	},
-	error:function(XMLHttpRequest, textStatus, errorThrown){
-		alert(XMLHttpRequest+" "+textStatus+" "+errorThrown);
+	
+	if(search != null){
+		if(search.kategorie!=null){
+			$("#kategorie_filter_name").text(search.kategorie);
+			$("#kategorie_filter_hidden").val(search.kategorie);
+		}
+		if(search.skill!=null){
+			checkOn("#chef_"+search.skill);
+			handleRadios(".label_chefhats");
+		}
+		if(search.wertung!=null){
+			checkOn("#star_"+search.wertung);
+			handleRadios(".label_stars");
+		}
+		if(search.kalorien!=null){
+			checkOn("#muffin_"+search.kalorien);
+			handleRadios(".label_muffins");
+		}
+		if(search.std != null && search.min != null){
+			fillMin(search.min);
+			fillStd(search.std);
+		}
+		if(search.user !=null){
+			setUserfilter(search.user);
+		}
+		
+		for(num in search.zutaten)
+			addZutatRow(search.zutaten[num]);
+		
+		for(num in search.tags)
+			$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+search.tags[num]+"</div><div class='tag_remove'>x</div></div>");
+		
+		if(search.terms!=undefined){
+			$("#search_terms").show();
+			for(i in search.terms){
+				addTerms(search.terms[i], false);
+				}
+		}
 	}
-	});
+
 }
 
 function resetFilter(){
@@ -125,7 +117,6 @@ function kategorieClick(obj){
 	var text = $(obj.target).text();
 	
 	setKategorie(text);
-	removeKategorie(text);
 	
 	
 	handleKategories(obj);
@@ -133,20 +124,12 @@ function kategorieClick(obj){
 
 function setKategorie(text){
 	var hiddenval = $("#kategorie_filter_hidden").val();
-	if(text!="Keine Kategorie" && hiddenval != text){
-		addtoSession("kategorie="+text);
-		$("#kategorie_filter_name").html(text);
-		$("#kategorie_filter_hidden").val(text);
-	}
-	
-}
+	if(hiddenval != text){
+		if(text == "Keine Kategorie")
+			text = null;
 
-function removeKategorie(text){
-	var hiddenval = $("#kategorie_filter_hidden").val();
-	if(text=="Keine Kategorie" && hiddenval!="Keine Kategorie"){
-		removefromSession("kategorie");
-		$("#kategorie_filter_name").html(text);
-		$("#kategorie_filter_hidden").val(text);
+		search.setKategorie(text);
+		search.flush();
 	}
 	
 }
@@ -201,34 +184,17 @@ function removeChecked(){
 function checkOnOff(obj){
 	obj=$(obj).children().first();
 	if($.address.pathNames()[0]!="newrecipe"){
-		if($(obj).attr("checked")){
-			$.ajax({
-				url:"/anycook/RemovefromSession",
-				async:false,
-				data: $(obj).attr("class"),
-				success:function(response){
-					if(response == "false")
-						$.address.path("");
-					else
-						fullTextSearch();
-			}
-			});
-			obj.removeAttr("checked");
-		}
-		else{
-			$.ajax({
-				url:"/anycook/AddtoSession",
-				async:false,
-				data: $(obj).attr("class")+"="+$(obj).val()
-			});
-			$(obj).attr("checked", "checked");
+		var value = $(obj).val();
 			
-			var patharray = $.address.pathNames();
-			if(patharray.length>0 && patharray[0]=="search")
-				fullTextSearch();
-			else
-				$.address.path("search");
+		switch($(obj).attr("class")){
+		case "chefhats":
+			search.setSkill(value);
+			break;
+		case "muffins":
+			search.setKalorien(value);
+			break;
 		}
+		search.flush();
 	}
 	else{
 		if($(obj).attr("checked")){
@@ -299,7 +265,8 @@ function zutatentableclick(){
         				var text = ui.item.label;
         				$("#zutat_input").autocomplete("destroy");
         				$("#zutat_input").parents("tr").remove();
-        				addZutat(text);
+        				search.addZutat(text);
+        				search.flush();
         				return false;
         			}
 	    	});
@@ -309,7 +276,8 @@ function zutatentableclick(){
 	    		var zutat = $("#zutat_input").val();
 	    		$("#zutat_input").autocomplete("destroy");
 				$("#zutat_input").parents("tr").remove();
-	    		addZutat(zutat);
+	    		search.addZutat(zutat);
+	    		search.flush();
 	    		//zutatentableclick();
 	    		return false;
 	    	});
@@ -333,41 +301,35 @@ function addRemoveZutat(){
 function removeZutatField(event){
 	var obj = event.target.parentNode.parentNode;
 	var zutat = $(obj.children[0]).text();
-	$(obj).remove();
-	removeZutat(zutat);
+	search.removeZutat(zutat);
+	search.flush();
 }
 
-/*function saveZutat(){
-		var obj = $("#zutat_input");
-		if(obj.length>0){
-			$("#zutat_complete").remove();
-			if($(obj).val()!=""){		
-				var inputval = obj.val();
-				var parent = obj.parent().parent();
-				$(obj).parent().remove();
-				parent.text(inputval);
-				
-				addZutat(inputval);
-			}
-		}
-}*/
 
 //userfilter
 
 function setUserfilter(username){
-	$.ajax({
-		  url: "/anycook/GetUserInformation",
-		  data:"username="+username,
-		  success: function(imagepath){
-			  $("#userfilter a").attr("href", "/#!/profile/"+username);
-			  $("#userfilter img").attr("src", imagepath);
-			  var text = "<span><a href=\"/#!/profile/"+username+"\">"+username+"</a>'s<br/>Rezepte</span>";
-			  $("#userfiltertext").html(text);
-			  $("#userfilter").css({display:"block", opacity:0, height:0}).animate({height:50}, {duration:300, complete:function(){
-				  $(this).animate({opacity:1}, 400);
-			  }});
-		  }
+	if($("#userfilter span>a").text() == username){
+		$("#userfilter").css({display:"block", opacity:1, height:50});
+	}else{
+	
+		$.ajax({
+			  url: "/anycook/GetUserInformation",
+			  data:"username="+username,
+			  success: function(imagepath){
+				  $("#userfilter a").attr("href", "/#!/profile/"+username);
+				  $("#userfilter img").attr("src", imagepath);
+				  var text = "<span><a href=\"/#!/profile/"+username+"\">"+username+"</a>'s<br/>Rezepte</span>";
+				  $("#userfiltertext").html(text);
+				  
+				  if($("#userfilter").css("display")=="none"){
+					  $("#userfilter").css({display:"block", opacity:0, height:0}).animate({height:50}, {duration:300, complete:function(){
+						  $(this).animate({opacity:1}, 400);
+					  }});
+				  }
+			  }
 		});
+	}
 }
 
 function showUserfilterremove(event){
@@ -383,7 +345,9 @@ function removeUserfilter(){
 		$(this).animate({height:0}, {duration:300, complete:function(){
 			$(this).css({display:"none", opacity:1, height:50});
 			var username = $("#userfiltername").text();
-			removefromSession("username="+username);
+			$("#userfiltertext").html("");
+			search.setUsername(null);
+			search.flush();
 		}});
 	}});
 	

@@ -559,12 +559,14 @@ ul.kategorie_filter li:HOVER {
 	background: #ece9e3;
 	padding: 0 4px 1px 4px;
 	margin-left: 3px;
+	color: #5a5a5a;
 	margin-bottom: 4px;
 	border: 1pt solid #b5b5b5;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
 	line-height: 12pt;
+	text-decoration: none;
 }
 
 .tag_text {
@@ -925,6 +927,12 @@ ul.kategorie_filter li:HOVER {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
+}
+
+#famous_tags_cloud span a {
+	white-space: nowrap;
+	color: #404040;
+	text-decoration: none;	
 }
 
 /*---------Entdecken----------*/

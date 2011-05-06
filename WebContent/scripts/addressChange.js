@@ -37,7 +37,7 @@ function clearContent(){
 
 // behandelt change bei $.address.path
 function handleChange(event){
-	if(lastPath != event.path){
+	//if(lastPath != event.path){
 		lastPath = event.path;
 		
 		$("#zutat_head").text("Zutaten:");
@@ -77,7 +77,7 @@ function handleChange(event){
 		
 		switch(path.length){
 		case 0:
-			resetAll();		
+			resetFilter();	
 			$.ajax({
 	  		  url: "/anycook/LoadRecipeforSmallView",
 	  		  dataType: 'json',
@@ -88,15 +88,17 @@ function handleChange(event){
 		case 1:
 			switch(path[0]){
 			case "search":
-				setFiltersfromSession();
-				fullTextSearch();
+				
+				//fullTextSearch();
+				search = Search.init();
+				search.search();
 				break;
 			case "newrecipe":
 				loadNewRecipe();
 				break;
-			case "profile":
+			/*case "profile":
 				loadUserProfile();
-				break;
+				break;*/
 			case "feedback":
 				$.address.title("Feedback | anycook");
 				loadContact();
@@ -133,23 +135,22 @@ function handleChange(event){
 				$("#content_footer").hide();
 				break;
 				
-			case "search":				
+			/*case "search":				
 				setFiltersfromSession();
 				$("#search").focus();
 				$("#search").val(path[1]);
 				fullTextSearch();
-				break;
+				break;*/
 				
 			case "activate":
 				activateUser(path[1]);
 				break;
 				
 			case "profile":
-				userSearch(path[1]);
-				break;
-			
-			case "tagged":
-				addTag(path[1]);
+				search = new Search();
+				search.setUsername(path[1]);
+				search.flush();
+				//userSearch(path[1]);
 				break;
 				
 			case "resetpassword":
@@ -158,7 +159,8 @@ function handleChange(event){
 			}
 			break;
 		case 3:
-			if(path[0] == "recipe"){
+			switch(path[0]){
+			case "recipe":
 				$.ajax({
 			  		  url: "/anycook/LoadRecipe",
 			  		  dataType: 'json',
@@ -169,9 +171,21 @@ function handleChange(event){
 					}
 			  	});
 				$("#content_footer").hide();
-			}
+				break;
+				
+			case "search":
+				switch(path[1]){
+				case "tagged":
+					//addTag(path[2]);
+					search = new Search();
+					search.addTag(path[2]);
+					search.search();
+					//search.flush();
+					
+					break;
+				}
+			};
 		}
-	}
 	$("#content_header *").removeClass("on");
 	if(event.parameterNames.length >0){
 		changePage(event);
@@ -221,9 +235,9 @@ function changePage(event){
 				$("#discover").show();
 			$("#discover_button").addClass("on");
 		}
-		else{
+		/*else{
 			$.address.queryString("");
-		}
+		}*/
 	}
 	else if(event.pathNames[0] == "recipe"){
 		if(page=="discussion"){
@@ -242,9 +256,9 @@ function changePage(event){
 			$("#recipe_discussion_btn").addClass("on");
 			
 		}
-		else{
-			$.address.queryString("");
-		}
+		/*else{
+		$.address.queryString("");
+		}*/
 		
 	}
 	else if(event.pathNames[0] == "newrecipe"){
@@ -260,26 +274,15 @@ function changePage(event){
 	}else if(event.pathNames[0] == "fbregistration"){
 		//nothing
 	}
-	else{
-		$.address.queryString("");
-	}
+	/*else{
+	$.address.queryString("");
+	}*/
 }
 
-
-function resetAll(){
-	clearSession();
-	resetFilter();
-}
 
 function resetSearchBar(){
 	$("#search").blur();
 	$("#search").val("Gerichte, Zutaten, Tags, ...").css({color : "#b5b5b5" , fontStyle : "italic"}).removeAttr("readonly");
-}
-
-function clearSession(){
-	$.ajax({
-	  	  url: "/anycook/ClearSession"
-	      });
 }
 
 function checkBrowser(){

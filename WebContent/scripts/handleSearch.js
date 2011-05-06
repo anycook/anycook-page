@@ -1,15 +1,3 @@
-function fullTextSearch(){
-	$("#result_container").empty();
-	$.ajax({
-		  url: "/anycook/FullTextSearch",
-		  data:"resultanz=10&startnum=0",
-		  dataType: 'json',
-		  async:false,
-		  success: searchResult
-		});
-}
-
-
 function searchResult(json){
 	if(json==null)
 		$.address.path("");
@@ -33,41 +21,30 @@ function searchResult(json){
 	
 }
 
-function addResults(){
-	$("#more_results").append("<img src=\"/icons/ajax-loader.gif\"/>");
-	var currentResultsNum = $(".frame_big").length;
-	$.ajax({
-		  url: "/anycook/FullTextSearch",
-		  data:"resultanz=10&startnum="+currentResultsNum,
-		  dataType: 'json',
-		  async:false,
-		  success: function(json){
-			if(json==null)
-				$.address.path("");
-			else{
-				var gerichte = json.gerichte;
-				if(gerichte.length>0){					
-					for(var i in gerichte){
-						$("#result_container").append(getBigFrameText(gerichte[i]));
-					}
-					
-				}
-	  		}
+function addResults(json){
+	if(json==null)
+		$.address.path("");
+	else{
+		var gerichte = json.gerichte;
+		if(gerichte.length>0){					
+			for(var i in gerichte){
+				$("#result_container").append(getBigFrameText(gerichte[i]));
+			}
 			$("#more_results, #more_results_right").remove();
-			currentResultsNum = $(".frame_big").length;
+			var currentResultsNum = $(".frame_big").length;
 			$("#current_num").text(currentResultsNum);
 			
 			if(currentResultsNum < json.size){
 				addMoreResultsButton();
 			}
-		  }
-	
-		});
+		}
+	}
+			
 }
 
 function addMoreResultsButton(){
 	$("#result_container").append("<div id=\"more_results\">Mehr Rezepte laden</div><div id=\"more_results_right\"></div>");
-	$("#more_results").click(addResults);
+	$("#more_results").click(search.searchMore);
 	$(document).scroll(moreresultsScrollListener);
 }
 
@@ -81,7 +58,7 @@ function moreresultsScrollListener(){
 	var top = $("#more_results").position().top;
 	if(scrollTop > top +170){
 		$(document).unbind("scroll", moreresultsScrollListener);
-		addResults();
+		search.searchMore();
 	}
 		
 }
@@ -181,36 +158,6 @@ function removeTerm(event){
 	
 }
 
-function addZutat(addzutat){
-	$.ajax({
-		url:"/anycook/AddtoSession",
-		data: "zutat="+addzutat,
-		success:function(response){
-			if(response != "false") {
-				addZutatRow(response);
-				var array = $.address.pathNames();
-				if(array.length >0 && array[0]=="search")
-					fullTextSearch();
-				else
-					$.address.path("search");
-			}
-		}
-	});
-}
-
-function removeZutat(zutat){
-	$.ajax({
-		url:"/anycook/RemovefromSession",
-		data: "zutat="+zutat,
-		success:function(response){
-			if(response == "false")
-				$.address.path("");
-			else
-				fullTextSearch();
-	}
-	});
-}
-
 function gotoGericht(gericht){
 	$.address.path("recipe/"+gericht);
 }
@@ -274,4 +221,6 @@ function addUsername(username){
 	setUserfilter(username);
 }
 
-var searchterms = null;
+//var searchterms = null;
+
+var search = null;
