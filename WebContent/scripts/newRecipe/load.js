@@ -6,11 +6,11 @@ function loadNewRecipe(){
 	else{
 		
 		//load other newRecipescripts
-		$.ajaxSetup({async:false});
+		/*$.ajaxSetup({async:false});
 		$.getScript("/scripts/newRecipe/finish.js");
 		$.getScript("/scripts/newRecipe/misc.js");
 		$.getScript("/scripts/newRecipe/eventHandler.js");
-		$.ajaxSetup({async:true});
+		$.ajaxSetup({async:true});*/
 		
 		
 		newrecipe = new Recipe();

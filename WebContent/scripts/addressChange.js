@@ -37,7 +37,7 @@ function clearContent(){
 
 // behandelt change bei $.address.path
 function handleChange(event){
-	//if(lastPath != event.path){
+	if(lastPath != event.path){
 		lastPath = event.path;
 		
 		$("#zutat_head").text("Zutaten:");
@@ -186,6 +186,7 @@ function handleChange(event){
 				}
 			};
 		}
+	}
 	$("#content_header *").removeClass("on");
 	if(event.parameterNames.length >0){
 		changePage(event);
@@ -273,6 +274,9 @@ function changePage(event){
 			$.address.queryString("");
 	}else if(event.pathNames[0] == "fbregistration"){
 		//nothing
+	}else if(event.pathNames[0] == "search"){
+		search = Search.init();
+		search.search();
 	}
 	/*else{
 	$.address.queryString("");

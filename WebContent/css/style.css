@@ -360,7 +360,7 @@ ul.kategorie_filter li:HOVER {
 	height: 20px;
 	width: 24px;
 	color: #5a5a5a;
-	text-align:right;
+	text-align: right;
 	border: 1pt solid #f9f8f6;
 	margin: 0;
 	margin-left: -4px;
@@ -453,8 +453,8 @@ ul.kategorie_filter li:HOVER {
 	height: 100%;
 }
 
-.zutaten_table_right input{
-	text-align:right;
+.zutaten_table_right input {
+	text-align: right;
 }
 
 #zutat_input {
@@ -481,8 +481,7 @@ ul.kategorie_filter li:HOVER {
 	background: url(/img/delete_zutat_on.png) no-repeat;
 }
 
-#person_number {
-	/*font: 13pt Georgia;*/
+#person_number { /*font: 13pt Georgia;*/
 	color: #5A5A5A;
 	color: #5A5A5A;
 	height: 100%;
@@ -494,6 +493,7 @@ ul.kategorie_filter li:HOVER {
 	height: 14pt;
 	width: 16px;
 }
+
 /*---------Zutat Autocomplete ------*/
 #zutat_complete {
 	position: absolute;
@@ -531,9 +531,9 @@ ul.kategorie_filter li:HOVER {
 }
 
 .tags_table_right {
-	float:left;
+	float: left;
 	display: block;
-	padding:4px 0 1px 1px;
+	padding: 4px 0 1px 1px;
 	background: url("/img/zutaten_tags_bg.png") repeat;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: 500;
@@ -909,7 +909,7 @@ ul.kategorie_filter li:HOVER {
 
 #famous_tags_cloud { /*float:left;*/
 	margin: 18px 0 12px 0;
-	height:60px;
+	height: 60px;
 	overflow: hidden;
 }
 
@@ -932,12 +932,12 @@ ul.kategorie_filter li:HOVER {
 #famous_tags_cloud span a {
 	white-space: nowrap;
 	color: #404040;
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 /*---------Entdecken----------*/
 .entdecken {
-	height:202px;
+	height: 202px;
 	margin-top: 8px;
 	-moz-user-select: none;
 	-khtml-user-select: none;
@@ -1000,7 +1000,7 @@ ul.kategorie_filter li:HOVER {
 }
 
 #neuste,#leckerste,#beliebte {
-
+	
 }
 
 /*--suchergebnisse--*/
@@ -1052,69 +1052,65 @@ ul.kategorie_filter li:HOVER {
 }
 
 /*----*/
-#userfilter{
-	background-color:#ECE9E3;
+#userfilter {
+	background-color: #ECE9E3;
 	border: 1pt solid #D5D6D2;
-	padding:5px;
+	padding: 5px;
 	display: none;
-	margin-top:10px;
+	margin-top: 10px;
 	/*margin:5px 14px 0 14px*/;
 	height: 50px;
 }
 
-#userfilterremove{
-	margin: 2px 6px 0 ;
+#userfilterremove {
+	margin: 2px 6px 0;
 	background-image: url(/img/delete_off.png);
-	height:9px;
+	height: 9px;
 	width: 8px;
 	cursor: pointer;
-	float:right;
-	display:none;
-	
+	float: right;
+	display: none;
 }
 
-#userfilterremove:hover{
+#userfilterremove:hover {
 	background-image: url(/img/delete_filter_on.png);
 }
 
-#userfiltertext{
+#userfiltertext {
 	padding: 0 2px;
-	margin:0 24px 0 55px;
-	font:9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin: 0 24px 0 55px;
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	line-height: 16px;
-	height:50px;
+	height: 50px;
 }
 
-#userfiltertext span{
+#userfiltertext span {
 	vertical-align: bottom;
 }
 
-#userfiltertext a{
-	text-decoration:none;
-	color:#859F5E;
+#userfiltertext a {
+	text-decoration: none;
+	color: #859F5E;
 }
 
-
-#userfilter > div > a{
-	float:left;
-	text-decoration:none;
-	color:#859F5E;
+#userfilter>div>a {
+	float: left;
+	text-decoration: none;
+	color: #859F5E;
 }
 
-#userfilter img{
+#userfilter img {
 	height: 50px;
-	width:50px;
+	width: 50px;
 }
 
-#userfilter a:hover{
-	text-decoration:underline;
+#userfilter a:hover {
+	text-decoration: underline;
 }
-
-
 
 #result_container {
-	width:475px;
-	margin:0;
+	width: 475px;
+	margin: 0;
 }
 
 .frame_big {
@@ -1122,7 +1118,7 @@ ul.kategorie_filter li:HOVER {
 	border-bottom: 1pt solid #b5b5b5;
 	margin-top: 28px;
 	text-decoration: none;
-	width:100%;
+	width: 100%;
 	display: block;
 }
 
@@ -1132,7 +1128,7 @@ ul.kategorie_filter li:HOVER {
 }
 
 .frame_main_big {
-	float:left;
+	float: left;
 	height: 110px;
 	width: 455px;
 	padding: 11px 0 11px 14px;
@@ -1143,32 +1139,32 @@ ul.kategorie_filter li:HOVER {
 	background: #ece9e3 url("/img/frame_left_pattern.png") repeat-y;
 }
 
-#more_results{
+#more_results {
 	padding: 15px 0 15px 14px;
 	border-bottom: 1pt solid #b5b5b5;
-	width:455px;
+	width: 455px;
 	font: 14pt Georgia;
 	color: #404040;
 	cursor: pointer;
 }
 
-#more_results:hover{
+#more_results:hover {
 	background: #ece9e3 url("/img/frame_left_pattern.png") repeat-y;
 }
 
-#more_results_right{
+#more_results_right {
 	float: left;
 	height: 53px;
 	width: 6px;
-	margin-left:469px;
+	margin-left: 469px;
 	border-bottom: 1pt solid #b5b5b5;
 }
 
-#more_results img{
-	float:right;
+#more_results img {
+	float: right;
 }
 
-#more_results:hover+#more_results_right{
+#more_results:hover+#more_results_right {
 	background: url("/img/frame_right_pattern.png") repeat-y;
 }
 
@@ -1207,7 +1203,7 @@ ul.kategorie_filter li:HOVER {
 .frame_right_big {
 	height: 132px;
 	width: 6px;
-	margin-left:469px;
+	margin-left: 469px;
 }
 
 .frame_main_big:hover+.frame_right_big {
@@ -1235,7 +1231,7 @@ ul.kategorie_filter li:HOVER {
 	color: #404040;
 	margin-left: 5px;
 	height: 22px;
-	width:100%;
+	width: 100%;
 }
 
 #terms_text {
@@ -1267,13 +1263,13 @@ ul.kategorie_filter li:HOVER {
 }
 
 /*---- Anzahl Ergebnisse -------*/
-#num_results{
+#num_results {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #404040;
 	margin-left: 5px;
 	height: 22px;
-	width:100%;
-	margin-top:2px;
+	width: 100%;
+	margin-top: 2px;
 }
 
 /*-------Rezept------*/
@@ -1301,10 +1297,9 @@ ul.kategorie_filter li:HOVER {
 	margin: 0 10px 0 2px;
 }
 
-#rezept_bild_container{
-	float:left;
+#rezept_bild_container {
+	float: left;
 }
-
 
 #beschreibung {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -1312,31 +1307,32 @@ ul.kategorie_filter li:HOVER {
 	margin-right: 4px;
 }
 
-#autoren{
+#autoren {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #919191;
 	margin-right: 4px;
 	margin-top: 10px;
-	}
+}
 
-#autoren a{
+#autoren a {
 	color: #859F5E;
 	text-decoration: none;
-	}
-	
-#autoren a:hover{
+}
+
+#autoren a:hover {
 	text-decoration: underline;
-	}
+}
 
-#beschreibung textarea{
+#beschreibung textarea {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	width:175px;
-	height:200px;
+	width: 175px;
+	height: 200px;
 }
 
-#beschreibung input{
-	float:left;
+#beschreibung input {
+	float: left;
 }
+
 #rezept_begin {
 	float: left;
 	width: 100%;
@@ -1353,37 +1349,38 @@ ul.kategorie_filter li:HOVER {
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #878787;
 	padding-top: 6px;
-	margin-left:10px;
+	margin-left: 10px;
 	text-align: center;
-	cursor:pointer;
+	cursor: pointer;
 }
 
-.bezeichner:hover{
+.bezeichner:hover {
 	background: url(/img/bezeichner_over.png) no-repeat;
-	color:#5A5A5A;
+	color: #5A5A5A;
 }
 
-.bezeichner.on{
+.bezeichner.on {
 	background: url(/img/bezeichner_on.png) no-repeat;
-	color:#859f5e;
+	color: #859f5e;
 }
 
-#zubereitung{
-	margin-left:405px;
+#zubereitung {
+	margin-left: 405px;
 }
 
-#bezeichner_container{
-	float:left;
-	width:655px;
+#bezeichner_container {
+	float: left;
+	width: 655px;
 }
 
-#addtags_container{
-	float:left;
-	display:none;
-	height:500px;
+#addtags_container {
+	float: left;
+	display: none;
+	height: 500px;
 }
-#addtags_container table{
-	margin:50px 0 50px 0;
+
+#addtags_container table {
+	margin: 50px 0 50px 0;
 	font: 14pt Georgia;
 	font-style: italic;
 	color: #5A5A5A;
@@ -1391,7 +1388,7 @@ ul.kategorie_filter li:HOVER {
 
 #step_container {
 	width: 510px;
-	float:left;
+	float: left;
 }
 
 .step {
@@ -1701,7 +1698,8 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	resize: none;
 }
 
-#no_comment, #no_tags { /*wenn man nicht eingeloggt bei discussion footer*/
+#no_comment,#no_tags {
+	/*wenn man nicht eingeloggt bei discussion footer*/
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	/*font-style: italic;*/
 	color: #859F5E;
@@ -1710,7 +1708,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	margin-top: 5px;
 }
 
-#no_comment:hover, #no_tags:hover {
+#no_comment:hover,#no_tags:hover {
 	text-decoration: underline;
 }
 
@@ -1857,7 +1855,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	width: 185px;
 	border-bottom: 3px solid #a4c259;
 	padding: 0 10px 5px 10px;
-	float:left;
+	float: left;
 }
 
 #login_form input {
@@ -1873,10 +1871,9 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 }
 
-#login_form input#check_stayloggedin{
-	width:20px;
-	margin:-4px 0 0 0;
-	
+#login_form input#check_stayloggedin {
+	width: 20px;
+	margin: -4px 0 0 0;
 }
 
 #username_end,#email_end,#password_end {
@@ -1899,28 +1896,28 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	background: url(/img/login_form_fault.png);
 }
 
-#stayloggedin{
-	margin-top:10px;
-	float:left;
-	height:21px;
+#stayloggedin {
+	margin-top: 10px;
+	float: left;
+	height: 21px;
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
 	cursor: pointer;
 }
 
-#stayloggedin:hover{
+#stayloggedin:hover {
 	color: #5a5a5a;
 }
 
-#forgotpassword{
-	float:right;
+#forgotpassword {
+	float: right;
 	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
 	text-decoration: none;
-	height:17px;
+	height: 17px;
 }
 
-#forgotpassword:hover{
+#forgotpassword:hover {
 	color: #5a5a5a;
 	text-decoration: underline;
 }
@@ -1938,9 +1935,9 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	text-decoration: underline;
 }
 
-#fb_login span{
-	float:right;
-	margin-right:30px;
+#fb_login span {
+	float: right;
+	margin-right: 30px;
 }
 
 .fb_logo {
@@ -1974,9 +1971,9 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 
 #register_btn {
 	margin: 7px 0 0 0;
-	clear:left;
-	float:left;
-	width:50px;
+	clear: left;
+	float: left;
+	width: 50px;
 }
 
 #login_btn {
@@ -2046,9 +2043,15 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	width: 50px;
 }
 
-#user p {
+#user a {
 	float: left;
 	margin: 5px 0 0 10px;
+	text-decoration: none;
+	color: #87a347;
+}
+
+#user a:hover {
+	text-decoration: underline;
 }
 
 .user_menu_btn {
@@ -2421,7 +2424,7 @@ td.step_1_right {
 #recipe_tags {
 	background-color: #ECE9E3;
 	width: 100%;
-	float:left;
+	float: left;
 	min-height: 100px;
 	margin-top: 10px;
 	border: 1pt #979694 solid;
@@ -2429,9 +2432,9 @@ td.step_1_right {
 
 #recipe_tags input {
 	background: none;
-	outline:none;
+	outline: none;
 	border: 0;
-	width:100%;
+	width: 100%;
 }
 
 #recipe_tags .tag {
@@ -2502,7 +2505,6 @@ td.step_1_right {
 }
 
 .last_step_btn {
-	
 	font: 10pt Lucida Sans Unicode;
 	color: #878787;
 	width: 114px;
@@ -2514,16 +2516,16 @@ td.step_1_right {
 	cursor: pointer;
 }
 
-.last_step_btn:hover{
-	color:#5A5A5A;
+.last_step_btn:hover {
+	color: #5A5A5A;
 }
 
 #recipe_ready {
 	float: right;
 }
 
-#recipe_preview{
-	float:left;
+#recipe_preview {
+	float: left;
 }
 
 #progress_1,#progress_2,#progress_3,#progress_4 {
@@ -2792,7 +2794,7 @@ td.step_1_right {
 
 /*---------footer---------*/
 #content_footer {
-	clear:both;
+	clear: both;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	border-top: 1pt solid #B5B5B5;
 	margin-top: 30px;
@@ -2833,15 +2835,15 @@ td.step_1_right {
 }
 
 /*-----addTags--------*/
-#suggestedtags_message{
-	float:left;
+#suggestedtags_message {
+	float: left;
 	width: 380px;
 	height: 100px;
-	margin-top:189px;
+	margin-top: 189px;
 	margin-bottom: 189px;
 }
 
 /* ---- passwort reset -----*/
-.error{
+.error {
 	color: #c05c54;
 }

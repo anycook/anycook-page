@@ -2,15 +2,15 @@
 
 //c'tor
 function Recipe(){
-	this.name;
-	this.kategorie;
-	this.beschreibung;
-	this.imagename;
-	this.skill;
-	this.kalorien;
-	this.std;
-	this.min;
-	this.personen;
+	this.name =null;
+	this.kategorie = null;
+	this.beschreibung = null;
+	this.imagename = null;
+	this.skill = null;
+	this.kalorien = null;
+	this.std = null;
+	this.min = null;
+	this.personen = null;
 	this.schritte = new Array();
 	this.zutaten = null;
 	this.tags = new Array();
