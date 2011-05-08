@@ -36,7 +36,7 @@ function makeUsermenuText(){
 	$("#logout").click(function(){
 		user.logout();
 	});	
-	$("#login_user > a").click(closeUserMenu);
+	$("#login_user a").click(closeUserMenu);
 	$("#extend_permissions").click(fbExtendPermissions);
 	
 }

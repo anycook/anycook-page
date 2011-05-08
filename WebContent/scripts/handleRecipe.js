@@ -79,6 +79,7 @@ function loadRecipewJSON(json){
 }
 
 function loadRecipe(recipe){
+	resetFilter();
 	
 	var rezepturi = recipe.getURI();
 	var headertext = "<div class='float_right_header'>" +
@@ -209,8 +210,10 @@ function loadRecipe(recipe){
 	
 	//bezeichner
 	$("#zubereitung").addClass("on");
-	$("#zubereitung").click(showZubereitung);
-	$("#addtags").click(showaddTags);
+	$("#zubereitung").attr("href", "#!/recipe/"+encodeURI(recipe.name));
+	$("#addtags").attr("href", "#!/recipe/"+encodeURI(recipe.name)+"?page=addtags");
+	//$("#zubereitung").click(showZubereitung);
+	//$("#addtags").click(showaddTags);
 }
 
 function showZubereitung(){
@@ -224,10 +227,12 @@ function showZubereitung(){
 }
 
 function showaddTags(){
+	$("#recipe_general_btn").addClass("on");
 	
-	if(!$(this).hasClass("on")){
+	if(!$("#addtags").hasClass("on")){
 		$(".bezeichner").removeClass("on");
-		$(this).addClass("on");
+		$("#addtags").addClass("on");
+		
 		$("#step_container").hide();
 		$("#addtags_container").show();
 		if(user.checkLogin()){

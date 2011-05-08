@@ -81,7 +81,7 @@
     			<div id="autoren"></div>
     		</div>
     		<div id="rezept_begin">
-    			<div class="bezeichner" id="zubereitung">Zubereitung</div><div class="bezeichner" id="addtags">+Tags</div>
+    			<a class="bezeichner" id="zubereitung">Zubereitung</a><a class="bezeichner" id="addtags">+Tags</a>
     		</div>
     		<div id="bezeichner_container">
     			<div id="step_container"></div>

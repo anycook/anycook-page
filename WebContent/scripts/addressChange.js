@@ -179,7 +179,7 @@ function handleChange(event){
 				case "tagged":
 					//addTag(path[2]);
 					search = new Search();
-					search.addTag(path[2]);
+					search.addTag(decodeURIComponent(path[2]));
 					search.search();
 					//search.flush();
 					
@@ -208,6 +208,7 @@ function handleChange(event){
 			$("#recipe_general_btn").addClass("on");
 			$("#discussion_container").hide();
 			$("#recipe_container").show();
+			showZubereitung();
 		}
 		else if(event.pathNames[0] == "search"){
 			makeSearchHeader();
@@ -221,8 +222,11 @@ function handleChange(event){
 // behandelt change bei $.address.parameters
 function changePage(event){
 	var page = event.parameters["page"];
-	if(event.pathNames.length == 0){
-		if(page=="discover"){
+	var firstpath = event.pathNames[0];
+	switch(event.pathNames.length){
+	case 0:
+		switch(page){
+		case "discover":
 			$("#home").hide();
 			if($("#discover").length==0){
 				$.ajax({
@@ -236,52 +240,75 @@ function changePage(event){
 			else
 				$("#discover").show();
 			$("#discover_button").addClass("on");
-		}
-		/*else{
-			$.address.queryString("");
-		}*/
-	}
-	else if(event.pathNames[0] == "recipe"){
-		if(page=="discussion"){
-			$("#recipe_container").hide();
-			if($("#discussion_container").length == 0){
-				$.ajax({
-					url: "/xml/template.xml",
-					dataType: "xml",
-					async:false,
-					success: function(xml){parseXML(xml, "recipe_discussion");}
-				});
-				loadDiscussion(event.pathNames[1]);
-			}
-			else
-				$("#discussion_container").show();
-			$("#recipe_discussion_btn").addClass("on");
+			break;
 			
+			default:
+				$.address.queryString("");
 		}
-		/*else{
-		$.address.queryString("");
-		}*/
+		break;
 		
-	}
-	else if(event.pathNames[0] == "newrecipe"){
-		$(".new_recipe_steps").hide();
-		if(page=="schritte")
-			loadStep2();
-		else if(page=="zutaten")
-			loadStep3();		
-		else if(page=="abschluss")
-			loadStep4();	
-		else
+	default:
+		switch(firstpath){
+		case "recipe":
+			switch(page){
+			case "discussion":
+				$("#recipe_container").hide();
+				if($("#discussion_container").length == 0){
+					$.ajax({
+						url: "/xml/template.xml",
+						dataType: "xml",
+						async:false,
+						success: function(xml){parseXML(xml, "recipe_discussion");}
+					});
+					loadDiscussion(event.pathNames[1]);
+				}
+				else
+					$("#discussion_container").show();
+				$("#recipe_discussion_btn").addClass("on");
+				break;
+				
+			case "addtags":
+				showaddTags();
+				break;
+				
+			default:
+				$.address.queryString("");
+			}
+			break;
+			
+		case "newrecipe":
+			$(".new_recipe_steps").hide();
+			switch(page){
+			case "schritte":
+				loadStep2();
+				break;
+				
+			case "zutaten":
+				loadStep3();
+				break;
+				
+			case "abschluss":
+				loadStep4();
+				break;
+				
+			default:
+				$.address.queryString("");
+			}
+			break;
+				
+		case "fbregistration":
+			//nothing
+			break;
+			
+		case "search":
+			search = Search.init();
+			search.search();
+			break;
+			
+		default:
 			$.address.queryString("");
-	}else if(event.pathNames[0] == "fbregistration"){
-		//nothing
-	}else if(event.pathNames[0] == "search"){
-		search = Search.init();
-		search.search();
+		}
 	}
-	/*else{
-	$.address.queryString("");
-	}*/
 }
 
 

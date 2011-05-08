@@ -1351,7 +1351,7 @@ ul.kategorie_filter li:HOVER {
 	padding-top: 6px;
 	margin-left: 10px;
 	text-align: center;
-	cursor: pointer;
+	text-decoration: none;
 }
 
 .bezeichner:hover {

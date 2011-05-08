@@ -63,6 +63,8 @@ function resetFilter(){
 	$("#kategorie_filter_name").text("Keine Kategorie");
 	$("#kategorie_filter_hidden").val("Keine Kategorie");
 	
+	$("#userfilter").hide();
+	
 	$(".search_term").remove();
 	$("#terms_text").hide();
 	$(".close_term").die("click", removeTerm);
