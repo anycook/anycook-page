@@ -39,6 +39,7 @@ function clearContent(){
 function handleChange(event){
 	if(lastPath != event.path){
 		lastPath = event.path;
+		search= new Search();
 		
 		$("#zutat_head").text("Zutaten:");
 		$.address.title("anycook");

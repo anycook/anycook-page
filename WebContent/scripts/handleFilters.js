@@ -19,9 +19,10 @@ function setFiltersfromSession(){
 			checkOn("#muffin_"+search.kalorien);
 			handleRadios(".label_muffins");
 		}
-		if(search.std != null && search.min != null){
-			fillMin(search.min);
-			fillStd(search.std);
+		if(search.time != null){
+			var time = search.time.split(":");
+			$("#time_std").val(time[0]);
+			$("#time_min").val(time[1]);
 		}
 		if(search.user !=null){
 			setUserfilter(search.user);
@@ -61,6 +62,10 @@ function resetFilter(){
 	
 	$("#kategorie_filter_name").text("Keine Kategorie");
 	$("#kategorie_filter_hidden").val("Keine Kategorie");
+	
+	$(".search_term").remove();
+	$("#terms_text").hide();
+	$(".close_term").die("click", removeTerm);
 	
 }
 

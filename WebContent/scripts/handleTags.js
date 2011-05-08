@@ -17,7 +17,8 @@ function keyTag(event) {
 
 function submitTag(event){
 	var text = $(this).children().first().val();
-	saveTag(text);
+	search.addTag(text);
+	search.flush();
 	return false;
 }
 
@@ -97,7 +98,8 @@ function makeNewInput(){
         				if(ui.item != undefined){
         					var text = ui.item.label;
 	        				$(".tags_table_right input").autocomplete("destroy");
-	        				saveTag(text);
+	        				search.addTag(text);
+	        				search.flush();
 	        				makeNewInput();
 	        				return false;
         				}

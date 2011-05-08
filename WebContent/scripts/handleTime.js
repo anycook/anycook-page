@@ -1,10 +1,6 @@
 function timeFormSubmit(event){
 	var std = Number($("#time_std").val());
 	var min = Number($("#time_min").val());
-	if(std == 0 && min ==0)
-		removefromSession("time");
-	else 
-		addtoSession("std="+std+"&min="+min);
 	
 	
 	if($("#time_std").is(":focus")){
@@ -14,6 +10,12 @@ function timeFormSubmit(event){
 	else{
 		$("#hidden_min").val(min);
 		$("#time_min").blur();
+		if(std == 0 && min ==0)
+			search.setTime(null);
+		else 
+			search.setTime(fillStd(std)+":"+fillMin(min));
+		
+		search.flush();
 	}
 	return false;
 }
@@ -62,19 +64,19 @@ function focusoutTime(event){
 }
 
 function fillStd(std){
-	if(std=="" || std =="0" || parseInt(std)>23)
+	if(std==0 || std>23)
 		std = "00";
-	else if(std.length==1)
+	else if(std<10)
 		std="0"+std;
 	
-	$("#time_std").val(std);
+	return std;
 }
 
 function fillMin(min){
-	if(min=="" || min =="0" || parseInt(min)>59)
+	if(min==0 || min>59)
 		min = "00";
-	else if(min.length==1)
+	else if(min < 10)
 		min="0"+min;
 	
-	$("#time_min").val(min);
+	return min;
 }

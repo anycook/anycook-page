@@ -87,6 +87,23 @@ Search.prototype.removeZutat = function(zutat){
 	}
 };
 
+Search.prototype.addTerm = function(term){
+	for(var i in this.terms){
+		if(this.terms[i] == term) return;
+	}
+	
+	this.terms[this.terms.length] = term;
+};
+
+Search.prototype.removeTerm = function(term){
+	for(var i = 0; i<this.terms.length; i++){
+		if(this.terms[i]==term){
+			this.terms.splice(i, 1);
+			break;
+		}
+	}
+};
+
 Search.prototype.setKategorie = function(kategorie){
 	this.kategorie = kategorie;
 };
@@ -122,12 +139,17 @@ Search.prototype.getData = function(){
 		data+="&kategorie="+encodeURIComponent(this.kategorie);
 	if(this.zutaten.length > 0)
 		data+="&zutaten="+encodeURIComponent(this.zutaten);
+	if(this.terms.length > 0)
+		data+="&terms="+encodeURIComponent(this.terms);
 	if(this.kalorien != null)
 		data+="&kalorien="+encodeURIComponent(this.kalorien);
 	if(this.skill != null)
 		data+="&skill="+encodeURIComponent(this.skill);
 	if(this.user != null)
 		data+="&user="+encodeURIComponent(this.user);
+	if(this.time != null){
+		data+="&time="+encodeURIComponent(this.time);
+	}
 	
 	return data;
 };
@@ -159,17 +181,35 @@ Search.prototype.searchMore = function(startnum){
 	});
 };
 
+Search.prototype.setTime = function(time){
+	this.time = time;
+};
+
 Search.prototype.flush = function(){
 	$.address.autoUpdate(false);
-	$.address.path("/search");
+	
+	if(this.hasData())		
+		$.address.path("/search");
+	else
+		$.address.path("");
+	
 	$.address.parameter("tags" , this.tags);
 	$.address.parameter("zutaten", this.zutaten);
+	$.address.parameter("terms", this.terms);
 	$.address.parameter("kategorie", this.kategorie);
 	$.address.parameter("skill", this.skill);
 	$.address.parameter("kalorien", this.kalorien);
 	$.address.parameter("user", this.user);
+	$.address.parameter("time", this.time);
 	$.address.autoUpdate(true);
 	$.address.update();
+};
+
+Search.prototype.hasData = function(){
+	var check = this.skill != null || this.kalorien != null || this.kategorie != null 
+		|| this.time != null || this.zutaten.length > 0 || this.tags.length > 0
+		|| this.terms.length > 0 || this.user != null;
+	return check;
 };
 
 

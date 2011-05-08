@@ -99,62 +99,62 @@ function handleSearchResults(result, terms){
 	
 	if(length >= 1){
 		$("#search").val("");
-		if(result.gerichte!=null)
+		if(result.gerichte!=null){
 			gotoGericht(result.gerichte);
-		
-		if(result.kategorien!=null)
-			setKategorie(result.kategorien[0]);
-		
-		if(result.zutaten!=null)
-			addZutat(result.zutaten);	
-		
-		if(result.tags!=null)
-			saveTag(result.tags[0]);
-		
-		if(result.user!=null){
-			addUsername(result.user[0]);
+			return false;
 		}
 		
+		if(result.kategorien!=null)
+			search.setKategorie(result.kategorien[0]);
+		
+		if(result.zutaten!=null)
+			search.addZutat(result.zutaten[0]);
+		
+		if(result.tags!=null)
+			search.addTag(result.tags[0]);			
+		
+		if(result.user!=null){
+			search.setUsername(result.user[0]);
+		}
+		search.flush();
+		
 	}else if(terms!= ""){
-		addTerms(terms, true);
+		var split = terms.split(" ");
+		for(var i in split){
+			search.addTerm(split[i]);
+		}
+		search.flush();
 	}
 	return false;
 	
 }
 
-function addTerms(terms, send){
+function addTerms(terms){
 	if($(".search_term").length == 0){ 
 		$("#terms_text").show();
 		$(".close_term").live("click", removeTerm);
-		searchterms = new Object();
 	}
 	
-	var split = terms.split(" ");
-	for(var i in split){
-		if(split[i]!= ""){
-			if(searchterms[split[i]]==undefined || searchterms[split[i]]==false){
-				$("#search_terms").append("<div class=\"search_term\"><span>"+split[i]+"</span><div class=\"close_term\">x</div></div>");
-				searchterms[split[i]] = true;
-			}
+	
+	for(var i in search.terms){
+		if(search.terms[i]!= ""){
+			$("#search_terms").append("<div class=\"search_term\"><span>"+search.terms[i]+"</span><div class=\"close_term\">x</div></div>");
 		}
-	}
-	if(send){
-		addtoSession("query="+terms);
-		$("#search").val("");
-		$("#search").focus();
-	}
+	}	
 }
 
 function removeTerm(event){
 	var target = $(event.target);
 	var term = target.prev().text();
-	removefromSession("term="+term);
+	/*removefromSession("term="+term);
 	searchterms[term]=false;
 	target.parent().remove();
 	if($(".search_term").length == 0){ 
 		$("#terms_text").hide();
 		$(".close_term").die("click", removeTerm);
-	}
+	}*/
+	search.removeTerm(term);
+	search.flush();
 	
 }
 
@@ -162,7 +162,7 @@ function gotoGericht(gericht){
 	$.address.path("recipe/"+gericht);
 }
 
-function addtoSession(data){
+/*function addtoSession(data){
 	$.ajax({
 		url:"/anycook/AddtoSession",
 		async:false,
@@ -188,7 +188,7 @@ function removefromSession(data){
 				fullTextSearch();
 			}
 	});
-}
+}*/
 
 function focusSearch(){
 	var value = $("#search").val();
@@ -214,11 +214,6 @@ function focusoutSearch(){
 		if(pathName == "recipe")
 			$("#search").val(recipeName);
 	}
-}
-
-function addUsername(username){
-	addtoSession("username="+username);
-	setUserfilter(username);
 }
 
 //var searchterms = null;
