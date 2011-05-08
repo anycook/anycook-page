@@ -140,8 +140,8 @@ function loadRecipe(recipe){
 	
 	$("#search").attr("value", recipe.name);
 	$("#time_std, #time_min").attr("readonly", "readonly");
-	fillStd(recipe.std);
-	fillMin(recipe.min);
+	$("#time_std").val(fillStd(recipe.std));
+	$("#time_min").val(fillMin(recipe.min));
 	
 	$("#zutaten_table > *").remove();
 	for(var zutat in recipe.zutaten){

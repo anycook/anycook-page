@@ -87,6 +87,13 @@ User.prototype.logout = function(){
 	}
 };
 
+User.prototype.getSmallImage = function(){
+	if(this.facebook_id != "0")
+		return "http://graph.facebook.com/"+this.facebook_id+"/picture";
+	
+	return "/userbilder/medium/"+this.image;
+};
+
 User.register = function(mail, pwd, username){
 	$.ajax({
 		url:"/anycook/NewUser",
