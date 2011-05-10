@@ -418,13 +418,13 @@ function postProcessString(string, factor){
 		
 }
 
-function loadDiscussion(gericht){
+function loadDiscussion(){
 	var login = user.checkLogin();
-	$("#discussion_headline").html("Diskussion zum Rezept<br/>"+gericht);
+	$("#discussion_headline").html("Diskussion zum Rezept<br/>"+recipe.name);
 	
 	$.ajax({
 		url:"/anycook/GetDiscussion",
-		data:"gericht="+gericht,
+		data:"gericht="+encodeURIComponent(recipe.name),
 		dataType:"json",
 		success:function(json){
 			if(json.length == 0){
@@ -453,7 +453,7 @@ function loadDiscussion(gericht){
 					
 					litext+="<div class='comment_like'><div class='like'></div><div class='like_nr "+likeclass+"'>"+likes+"</div><div class='dislike'></div></div></div></div><ul></ul></li>";
 					$("#comment_discussion > ul").append(litext);
-					loadChildren(i, json[i].id, gericht, login);					
+					loadChildren(i, json[i].id, login);					
 				}
 				$("#comment_discussion > ul > li:odd").addClass("odd");
 				
@@ -476,10 +476,10 @@ function loadDiscussion(gericht){
 	//commenttimeout = window.setTimeout(checkNewDiscussion, 5000);	
 }
 
-function loadChildren(i, id, gericht, login){
+function loadChildren(i, id, login){
 	$.ajax({
 		url:"/anycook/GetDiscussion",
-		data:"gericht="+gericht+"&pid="+id,
+		data:"gericht="+encodeURIComponent(recipe.name)+"&pid="+id,
 		dataType:"json",
 		success:function(childjson){
 			if(childjson.length>0){
@@ -542,7 +542,7 @@ function comment(event){
 	if(text!=""){
 		$.ajax({
 			url:"/anycook/Discuss",
-			data: "comment="+text+"&gericht="+gericht
+			data: "comment="+text+"&gericht="+encodeURIComponent(recipe.name)
 		});
 		$(target).prev().val("");
 		//window.clearTimeout(commenttimeout);
@@ -556,13 +556,11 @@ function childComment(event){
 	var ul = target.parents("ul").first();
 	var tempid =$(ul).siblings(".recipe_comment").find(".comment_number").text();
 	var pid = Number(tempid.substring(1, tempid.length))-1;
-	
-	var gericht = $.address.pathNames()[1];
 	var text = target.prev().val();
 	if(text!=""){
 		$.ajax({
 			url:"/anycook/Discuss",
-			data: "comment="+text+"&gericht="+gericht+"&pid="+pid
+			data: "comment="+text+"&gericht="+encodeURIComponent(recipe.name)+"&pid="+pid
 		});
 		target.parents(".child_comment").remove();
 		
@@ -575,10 +573,9 @@ function childComment(event){
 
 function checkNewDiscussion(){
 	if($.address.pathNames()[0] == "recipe"){
-		var gericht = $.address.pathNames()[1];
 		$.ajax({
 			url:"/anycook/CheckforNewDiscussion",
-			data:"gericht="+gericht+"&maxid="+maxID,
+			data:"gericht="+encodeURIComponent(recipe.name)+"&maxid="+maxID,
 			success:function(response){
 				if(response =="true"){
 					if($(".no_discussion").length > 0){
@@ -591,7 +588,7 @@ function checkNewDiscussion(){
 						var ul = uls[i];
 						var tempid = $(ul).siblings(".recipe_comment").children(".comment_number").text();
 						var id = Number(tempid.substring(1, tempid.length))-1;
-						loadNewDiscussion(ul, id, gericht, oldmaxID);
+						loadNewDiscussion(ul, id, oldmaxID);
 					}
 				}
 				window.setTimeout(checkNewDiscussion, 2000);
@@ -602,10 +599,10 @@ function checkNewDiscussion(){
 }
 
 // lalalalaa
-function loadNewDiscussion(ul, pid, gericht, oldmaxID){
+function loadNewDiscussion(ul, pid, oldmaxID){
 	$.ajax({
 		url:"/anycook/GetDiscussion",
-		data:"gericht="+gericht+"&pid="+pid+"&maxid="+oldmaxID,
+		data:"gericht="+encodeURIComponent(recipe.name)+"&pid="+pid+"&maxid="+oldmaxID,
 		dataType:"json",
 		success:function(json){
 			for(var i in json){
@@ -670,14 +667,13 @@ function discussionLike(event){
 	var target = $(event.target);
 	var tempid = target.parents(".comment_footer").siblings(".comment_number").text();
 	var id = Number(tempid.substring(1, tempid.length))-1;
-	var gericht = $.address.pathNames()[1];
 	var like = "&like";
 	if(target.hasClass("dislike"))
 		like = "";
 	
 	$.ajax({
 		url:"/anycook/LikeDislike",
-		data:"id="+id+"&gericht="+gericht+like,
+		data:"id="+id+"&gericht="+encodeURIComponent(recipe.name)+like,
 		success:function(response){
 			if(response != "false"){
 				var like_nr = target.siblings(".like_nr");
