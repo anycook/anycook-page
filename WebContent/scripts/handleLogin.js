@@ -19,8 +19,8 @@ function makeUsermenuText(){
 	$("#login_top>*").remove();
 	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
 	
-	var htmlstring = "<div id='login_user'><div id='user'><a href=\"#!/profile/me\"><img src='"+user.getSmallImage()+"'/></a>" +
-			"<a href=\"#!/profile/me\">"+user.name+"</a></div>" +
+	var htmlstring = "<div id='login_user'><div id='user'><img src='"+user.image+"'/>"+
+	"<a href=\"#!/profile/me\">"+user.name+"</a></div>" +
 			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
 		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
 		"<a class='user_menu_btn' href='#!/newrecipe'>Neues Rezept erstellen</a>" +

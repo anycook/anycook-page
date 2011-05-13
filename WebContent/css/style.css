@@ -2050,8 +2050,8 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	color: #87a347;
 }
 
-#user a:hover {
-	text-decoration: underline;
+#user a:hover{
+	text-decoration:underline;
 }
 
 .user_menu_btn {
