@@ -2043,7 +2043,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	width: 50px;
 }
 
-#user a {
+#user a+a {
 	float: left;
 	margin: 5px 0 0 10px;
 	text-decoration: none;

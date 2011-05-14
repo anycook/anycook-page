@@ -269,14 +269,13 @@ function submitSuggestTags(){
 				"<h5>Danke!</h5><p>Wir schauen uns deine Vorschläge gleich einmal an.<br /> " +
 				"Wir benachrichtigen dich!</p></div>");
 		$("#content").click(addTagreadyClick);
-		window.setTimeout(addTagreadyClick, 4000);
+		window.setTimeout(addTagreadyClick, 3000);
 	});
 }
 
 function addTagreadyClick(){
 	$("#suggestedtags_message").fadeOut(500, function(){
-		$("#suggestedtags_message").remove();
-		showZubereitung();
+		$.address.parameter("page", null);
 	});
 }
 
