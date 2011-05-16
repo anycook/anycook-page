@@ -1985,35 +1985,6 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	background-image: url(/img/twitter_login.png);
 }
 
-/*#fb_login {
-	background-image:url(/img/interface_button_off.png);
-	height:50%;
-	cursor: pointer;
-	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color: #a2a896;
-	padding: 6px 0 0 0;
-}
-
-#fb_login:hover {
-	color: #5a5a5a;
-	text-decoration: underline;
-}
-
-#fb_login span {
-	float: right;
-	margin-right: 30px;
-}
-
-.fb_logo {
-	background: url(/icons/facebook_off.png) no-repeat;
-	width: 20px;
-	height: 20px;
-}
-
-#fb_login:hover .fb_logo {
-	background: url(/icons/facebook_on.png) no-repeat;
-}*/
-
 /*------------end facebook-login------------------*/
 .btn_style {
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
