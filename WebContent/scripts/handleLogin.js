@@ -19,7 +19,8 @@ function makeUsermenuText(){
 	$("#login_top>*").remove();
 	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
 	
-	var htmlstring = "<div id='login_user'><div id='user'><img src='"+user.image+"'/>"+
+	var htmlstring = "<div id='login_user'><div id='user'>" +
+			"<a href=\"#!/profile/me\"><img src='"+user.image+"'/></a>"+
 	"<a href=\"#!/profile/me\">"+user.name+"</a></div>" +
 			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
 		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
@@ -59,23 +60,45 @@ function makeLoginText(){
 	$("#login_top>*").remove();
 	$("#signin_btn").html("Sign in<div id='login_arrow'></div>");
 	
-	//old
-	/*var htmlstring = "<form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
-								"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div><div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
-								"</form>";*/
+	var htmlstring = 
+					"<div id=\"login_left\">" +
+						"<div id='social_login'>" +
+							"<div id=\"facebook_login\"></div>" +
+							"<div id=\"openid_login\"></div>" +
+							"<div id=\"twitter_login\"></div>" +
+						"</div>" +
+						
+						"<div id=\"login_register\">" +
+							"<div id=\"register_button\"></div>" +
+						"</div>" +
+					"</div>" +
+					"<div id=\"login_right\">" +
+						"<form id=\"login_form\">" +
+							"<p>Email/Username</p>" +
+							"<input type='text' name='email' id='login_mail' autocomplete='on'/><div id='email_end'></div>" +
+							"<p>Passwort <a href=\"#!/resetpassword\"><img src=\"/icons/password_help.png\" /></a></p>" +
+							"<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>" +
+							"<div id=\"stayloggedin\"><input type='checkbox' id='check_stayloggedin' /><span>angemeldet bleiben</div>" +
+						"</form>" +
+						"<div id=\"login_button\"></div>" +
+					"</div>" +
+					"<div id=\"login_footer\"></div>";
+	$("#login_dropdown").append(htmlstring);
 	
+	
+	//old
 	//new facebook plugin
-	var htmlstring = "<div id='fb_login'><span>einloggen mit </span><div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
+	/*var htmlstring = "<div id='fb_login'><span>einloggen mit </span><div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
 	"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div>" +
 	"<a href=\"#!/resetpassword\" id=\"forgotpassword\">Passwort vergessen?</a>" +
 	"<div id=\"stayloggedin\"><input type='checkbox' id='check_stayloggedin' /><span>angemeldet bleiben</div></span>" +
 	"<div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
-	"</form>";
+	"</form>";*/
 	
 		
 	
 
-	$("#login_dropdown").append(htmlstring);
+	/*$("#login_dropdown").append(htmlstring);
 	//FB.XFBML.parse(document.getElementById('login_top'));
 	$("#login_mail, #login_pwd").focus(focusInputs);		
 	$("#login_mail, #login_pwd").focusout(focusoutInputs);
@@ -99,7 +122,7 @@ function makeLoginText(){
 		closeUserMenu(event);
 	});
 	//FB.XFBML.parse();
-
+	*/
 }
 
 
@@ -146,11 +169,11 @@ function clickSignin(event){
 		$("#register_btn, #login_btn").removeClass("on");
 	}
 	$("#login_dropdown").toggle();
-	$("#stayloggedin").css({height:21, marginTop:10, opacity:1});
-	$("#resetpassword").css({height:17, opacity:1});
-	$("#login_form").css("height", 132);
+	//$("#stayloggedin").css({height:21, marginTop:10, opacity:1});
+	//$("#resetpassword").css({height:17, opacity:1});
+	//$("#login_form").css("height", 132);
 	$("#signin_btn").toggleClass("on");
-	$("#login_btn").addClass("on");	
+	$("#login_btn").addClass("on");
 	return false;
 }
 

@@ -1838,11 +1838,14 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	background: url(/img/signin_arrow_on.png) no-repeat;
 }
 
+
+
 #login_dropdown {
 	position: absolute;
 	visibility: hidden;
 	margin-top: 25px;
-	margin-left: -1px;
+	margin-left: -175px;
+	width:auto;
 	z-index: 9;
 	background-color: #edf6dc;
 	border-top: 5px solid #87a347;
@@ -1851,21 +1854,64 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	border-left: 1px solid #87a347;
 }
 
-#login_form {
-	width: 185px;
-	border-bottom: 3px solid #a4c259;
-	padding: 0 10px 5px 10px;
-	float: left;
+#login_left, #login_right{
+	width:159px;
+	padding:0 15px 10px 15px;
+	margin:10px 0;
+	float:left;
 }
 
+#login_button, #register_button{
+	height:30px;
+	width:159px;
+	margin-top:12px;
+	background-image: url(/img/anmelden_button.png);
+	cursor: pointer;
+}
+
+#register_button{
+	background-image: url(/img/registrieren_button.png);
+}
+
+#login_register{
+	border-top: 1px solid #A2A896;
+	padding-top:5px;
+}
+	
+	
+#login_right{
+	float:right;
+	border-left: 1px solid #A2A896;
+}
+
+#login_footer{
+	width:100%;
+	clear:both;
+	height:3px;
+	background:#A4C259;
+}
+
+#login_form p{
+	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #5A5A5A;
+	margin: 0 0 3px;
+	line-height:16px;
+}
+
+#login_form p img{
+	height:12px;
+	width:12px;
+}
+
+
+
 #login_form input {
-	float: left;
-	width: 162px;
+	width: 136px;
 	height: 25px;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #b5b5b5;
 	padding: 0 0 0 5px;
-	margin: 5px 0 0 0;
+	margin: 0 0 5px 0;
 	border: 1pt solid #87a347;
 	border-right: 0pt;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
@@ -1877,8 +1923,8 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 }
 
 #username_end,#email_end,#password_end {
-	margin: 5px 0 0 0;
-	float: left;
+	margin: 0 0 5px 0;
+	float: right;
 	width: 16px;
 	height: 25px;
 	border: 1pt solid #87a347;
@@ -1897,10 +1943,9 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 }
 
 #stayloggedin {
-	margin-top: 10px;
-	float: left;
-	height: 21px;
+	margin-top: 5px;
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	line-height:15px;
 	color: #a2a896;
 	cursor: pointer;
 }
@@ -1909,21 +1954,40 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	color: #5a5a5a;
 }
 
-#forgotpassword {
-	float: right;
-	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color: #a2a896;
-	text-decoration: none;
-	height: 17px;
-}
-
-#forgotpassword:hover {
-	color: #5a5a5a;
-	text-decoration: underline;
+#stayloggedin input{
+	float:left;
 }
 
 /*-----------facebook-login ------------------------*/
-#fb_login {
+
+#social_login{
+	padding:15px 0 0 5px;
+	height:101px;
+}
+
+#facebook_login, #openid_login, #twitter_login{
+	width:150px;
+	height:22px;
+	margin-bottom:10px;
+	cursor: pointer;
+	
+}
+
+#facebook_login{
+	background-image: url(/img/facebook_login.png);
+}
+
+#openid_login{
+	background-image: url(/img/openid_login.png);
+}
+
+#twitter_login{
+	background-image: url(/img/twitter_login.png);
+}
+
+/*#fb_login {
+	background-image:url(/img/interface_button_off.png);
+	height:50%;
 	cursor: pointer;
 	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #a2a896;
@@ -1941,7 +2005,6 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 }
 
 .fb_logo {
-	margin-left: 178px;
 	background: url(/icons/facebook_off.png) no-repeat;
 	width: 20px;
 	height: 20px;
@@ -1949,7 +2012,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 
 #fb_login:hover .fb_logo {
 	background: url(/icons/facebook_on.png) no-repeat;
-}
+}*/
 
 /*------------end facebook-login------------------*/
 .btn_style {
@@ -1974,12 +2037,12 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	clear: left;
 	float: left;
 	width: 50px;
-}
+}*
 
-#login_btn {
+/*#login_btn {
 	float: right;
 	margin: 7px 0 0 0;
-}
+}*/
 
 #error_login {
 	float: left;
