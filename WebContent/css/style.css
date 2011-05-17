@@ -651,6 +651,7 @@ ul.kategorie_filter li:HOVER {
 	color: #878787;
 	padding-top: 6px;
 	text-align: center;
+	line-height: 17px;
 }
 
 .big_button.on {
@@ -1352,6 +1353,7 @@ ul.kategorie_filter li:HOVER {
 	margin-left: 10px;
 	text-align: center;
 	text-decoration: none;
+	line-height: 17px;
 }
 
 .bezeichner:hover {
@@ -1861,18 +1863,6 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	float:left;
 }
 
-#login_button, #register_button{
-	height:30px;
-	width:159px;
-	margin-top:12px;
-	background-image: url(/img/anmelden_button.png);
-	cursor: pointer;
-}
-
-#register_button{
-	background-image: url(/img/registrieren_button.png);
-}
-
 #login_register{
 	border-top: 1px solid #A2A896;
 	padding-top:5px;
@@ -1898,14 +1888,9 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	line-height:16px;
 }
 
-#login_form p img{
-	height:12px;
-	width:12px;
-}
 
 
-
-#login_form input {
+#login_form input[type="text"], #login_form input[type="password"], #login_form input[type="checkbox"]{
 	width: 136px;
 	height: 25px;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -1915,6 +1900,28 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	border: 1pt solid #87a347;
 	border-right: 0pt;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
+}
+
+#login_form input[type="submit"]{
+	height:30px;
+	width:159px;
+	margin:6px 0 0 0;
+	padding: 0;
+	border:0;
+	background-image: url(/img/anmelden_button.png);
+	cursor:pointer;
+}
+
+#register_button{
+	height:30px;
+	width:159px;
+	margin-top:12px;
+	background-image: url(/img/button_green.png);
+	cursor: pointer;
+}
+
+#register_button{
+	background-image: url(/img/registrieren_button.png);
 }
 
 #login_form input#check_stayloggedin {

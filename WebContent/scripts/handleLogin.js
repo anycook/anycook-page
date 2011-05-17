@@ -79,8 +79,8 @@ function makeLoginText(){
 							"<p>Passwort <a href=\"#!/resetpassword\"><img src=\"/icons/password_help.png\" /></a></p>" +
 							"<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>" +
 							"<div id=\"stayloggedin\"><input type='checkbox' id='check_stayloggedin' /><span>angemeldet bleiben</div>" +
+							"<input type=\"submit\" id=\"login_button\"  value=\"\"/>" +
 						"</form>" +
-						"<div id=\"login_button\"></div>" +
 					"</div>" +
 					"<div id=\"login_footer\"></div>";
 	$("#login_dropdown").append(htmlstring);
