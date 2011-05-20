@@ -51,7 +51,7 @@ User.login = function(mail, pwd, stayloggedin){
 				if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home"){
 					user = User.init();
 					makeUsermenuText();
-					$("#login_dropdown").hide();
+					$("#login_signin").hide();
 					$("#signin_btn").removeClass("on");
 				}
 				else
@@ -95,16 +95,15 @@ User.prototype.getSmallImage = function(){
 };
 
 User.register = function(mail, pwd, username){
-	/* commented out for tests
-	 * $.ajax({
+	
+	 $.ajax({
 		url:"/anycook/NewUser",
 		data:"mail="+mail+"&pwd="+pwd+"&username="+username,
 		success:function(response){
 			if(response=="true"){
 				showRegistrationStep2(username,mail);
 			}
-	}});*/
-	showRegistrationStep2(username,mail);
+	}});
 };
 
 

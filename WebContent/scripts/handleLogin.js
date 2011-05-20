@@ -9,7 +9,7 @@ function buildLogin(){
 function makeUsermenuText(){
 	$("#signin_btn span").text("Konto");
 	
-	$("#user img").attr("src", user.image);
+	$("#user img").attr("src", user.getSmallImage());
 	$("#user a+a").text(user.name);
 	
 	if(user.level == 2){
@@ -131,139 +131,9 @@ function focusoutInputs(event){
 	}
 }
 
-/*function keypressInputs(event){
-	var target = $(event.target);
-	if(target.hasClass("wrong")){ // von Max
-		$("#login_mail").removeClass("wrong").removeClass("right");
-		$("#login_pwd").removeClass("wrong").removeClass("right");
-	}
-	if(event.keyCode==13){
-		$("#login_form").submit();
-	}
-	else{
-		if($("#login_username").length > 0){
-			target.removeClass("wrong");
-			target.removeClass("right");
-			var val=target.val()+String.fromCharCode(event.keyCode);
-			if(target.attr("id")=="login_username"){				
-				if(val.length<3 || val.length>14){
-					if(val.length<3)
-						loginerrors["username"] = "zu kurz";
-					else
-						loginerrors["username"] = "zu lang";
-					target.addClass("wrong");
-				}
-				else{
-					$.ajax({
-						url:"/anycook/NewUser",
-						data:"username="+val,
-						success:function(response){
-							if(response == "false"){
-								target.addClass("wrong");
-								loginerrors["username"] = "schon vorhanden";
-							}
-							else
-								target.addClass("right");
-					}});
-				}					
-			}
-			else if(target.attr("id")=="login_pwd"){				
-				if(val.length<5 || val.length>16){
-					loginerrors["password"] = "zu kurz";
-					target.addClass("wrong");
-				}
-				else if(val.toLowerCase() == $("#login_username").val().toLowerCase()){
-					target.addClass("wrong");
-					loginerrors["password"] = "gleich Username";
-				}
-				else
-					target.addClass("right");
-			}
-			else if(target.attr("id")=="login_mail"){
-				var atposition = val.indexOf("@");
-				var dotposition = val.indexOf(".");
-				if(atposition<0 && dotposition<0){
-					target.addClass("wrong");
-					loginerrors["mail"] = "Keine Emailadresse";
-				}
-				else{
-					$.ajax({
-						url:"/anycook/NewUser",
-						data:"mail="+val,
-						success:function(response){
-							if(response == "false"){
-								target.addClass("wrong");
-								loginerrors["mail"] = "schon vorhanden";
-							}
-							else
-								target.addClass("right");
-					}});
-				}
-			}
-		}
-	}
-}
-
-function keydownInputs(event){
-	var target = $(event.target);
-	if(event.keyCode == 8){
-		if($("#login_username").length > 0){
-			target.removeClass("wrong");
-			target.removeClass("right");
-			var val=target.val();
-			if(val.lenght>1){
-				if(target.attr("id")=="login_username"){				
-					if(val.length<3 || val.lenght>14){
-						target.addClass("wrong");
-					}
-					else{
-						$.ajax({
-							url:"/anycook/NewUser",
-							data:"username="+val,
-							success:function(response){
-								if(response == "false")
-									target.addClass("wrong");
-								else
-									target.addClass("right");
-						}});
-					}					
-				}
-				else if(target.attr("id")=="login_pwd"){
-					if(val.length<5 || val.length>16){
-						target.addClass("wrong");
-					}
-					else if(val.toLowerCase() == $("#login_username").val().toLowerCase())
-						target.addClass("wrong");
-					else
-						target.addClass("right");
-				}
-				else if(target.attr("id")=="login_mail"){
-					var atposition = val.indexOf("@");
-					var dotposition = val.indexOf(".");
-					if(atposition<0 && dotposition<0){
-						target.addClass("wrong");
-					}
-					else{
-						$.ajax({
-							url:"/anycook/NewUser",
-							data:"mail="+val,
-							success:function(response){
-								if(response == "false")
-									target.addClass("wrong");
-								else
-									target.addClass("right");
-						}});
-					}
-				}
-			}
-		}
-	}
-	
-}*/
-
 
 function submitForm(event){
-	if(!$("#login_mail, #login_pwd, #login_username").hasClass("wrong")){
+	if(!$("#login_mail, #login_pwd").hasClass("wrong")){
 		var mail = $("#login_mail").val();
 		var pwd = $("#login_pwd").val();
 		var stayloggedin =$("#check_stayloggedin").is(":checked");
