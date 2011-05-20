@@ -424,7 +424,60 @@
 				</div>
 			</template>
 			<template id="registration">
-				
+				<div id="registration_container">
+					<div id="reg_step1" class="registration_step">
+						<h1>Herzlich Willkommen!</h1>
+						<div id="reg_left">
+							<p>Wir brauchen nur ein paar Daten von dir, dann bist du schon dabei.</p>
+							<p>Hast du vielleicht schon einen Facebookaccount? Dann melde dich doch damit an:</p>
+							<div id="facebook_login"></div>
+						</div>
+						<div id="reg_right">
+							<form id="reg_form">
+								<table>
+									<tr>
+										<td>
+											<p>Email</p>
+											<input type="text" id="reg_email" />
+										</td>
+										<td class="reg_error" id="reg_error_mail"></td>
+									</tr>
+									<tr>
+										<td>
+											<p>Passwort</p>
+											<input type="password" id="reg_pass" />
+										</td>
+										<td class="reg_error" id="reg_error_pass"></td>
+									</tr>
+									<tr>
+										<td>
+											<span id="showpassword">Passwort anzeigen</span>
+										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>
+											<p>Username</p>
+											<input type="text" id="reg_username" />
+										</td>
+										<td class="reg_error" id="reg_error_user"></td>
+									</tr>
+									<tr>
+										<td>
+										</td>
+										<td>
+											<input type="submit" id="reg_submit" class="next_step" value="registrieren" />											
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+					<div id="reg_step2" class="registration_step">
+						<h1></h1>
+						<p id="register_text">Vielen Dank für deine Anmeldung. Damit Du gleich loslegen kannst, müsstest Du noch deine E-Mail-Adresse bestätigen.</p>
+					</div>
+				</div>
 			</template>
 			
 </templates>

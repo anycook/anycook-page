@@ -95,16 +95,16 @@ User.prototype.getSmallImage = function(){
 };
 
 User.register = function(mail, pwd, username){
-	$.ajax({
+	/* commented out for tests
+	 * $.ajax({
 		url:"/anycook/NewUser",
 		data:"mail="+mail+"&pwd="+pwd+"&username="+username,
 		success:function(response){
 			if(response=="true"){
-				$("#login_dropdown").hide();
-				$("#signin_btn").removeClass("on");
-				makeRegisterPopup(username, mail);
+				showRegistrationStep2(username,mail);
 			}
-	}});
+	}});*/
+	showRegistrationStep2(username,mail);
 };
 
 

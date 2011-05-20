@@ -119,6 +119,9 @@ function handleChange(event){
 			case "resetpassword":
 				loadResetPasswordStep1();
 				break;
+			case "registration":
+				showRegistration();
+				break;
 			}
 			break;
 		case 2:

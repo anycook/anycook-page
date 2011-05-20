@@ -1946,7 +1946,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	background-image: url(/img/registrieren_button.png);
 }
 
-#login_form input#check_stayloggedin {
+#login_form input#check_stayloggedin{
 	width: 20px;
 	margin: -4px 0 0 0;
 }
@@ -1970,7 +1970,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	background: url(/img/login_form_fault.png);
 }
 
-#stayloggedin {
+#stayloggedin, #showpassword{
 	margin-top: 5px;
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	line-height:15px;
@@ -1978,7 +1978,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	cursor: pointer;
 }
 
-#stayloggedin:hover {
+#stayloggedin:hover, #showpassword:hover {
 	color: #5a5a5a;
 }
 
@@ -2752,12 +2752,12 @@ td.step_1_right {
 
 #register_text {
 	float: left;
-	margin: 20px 70px 0 50px;
+	margin: 20px 70px 0 0;
 }
 
 #register_forward {
 	float: left;
-	margin: 30px 70px 0 50px;
+	margin: 30px 70px 0 0;
 	width: 80%;
 }
 
@@ -2772,7 +2772,7 @@ td.step_1_right {
 
 #register_mailprovider img {
 	float: left;
-	margin: 10px 0 0 50px;
+	margin: 10px 0 0 0;
 	border: 0;
 }
 
@@ -2781,7 +2781,7 @@ td.step_1_right {
 	color: #404040;
 	float: left;
 	width: 90%;
-	margin: 0 0 0 50px;
+	margin: 0;
 }
 
 /*----- Content Message ------*/
@@ -2896,3 +2896,100 @@ td.step_1_right {
 .error {
 	color: #c05c54;
 }
+
+#admin_menu{
+	display:none;	
+}
+
+/*------ registration ------*/
+#registration_container{
+	overflow: hidden;
+	float:left;
+	height:447px;
+	width:655px;
+	position: relative;
+}
+
+.registration_step{
+	float:left;
+	position: absolute;
+	width:655px;
+}
+
+#reg_step2{
+	top:0;
+	left:655px;
+}
+
+.registration_step h1{
+	font:  23pt Georgia;
+	color: #404040;
+	margin:50px 0 20px 0;
+	padding: 0 10px 10px 0;
+	border-bottom: 1px solid #D7D3C7;
+}
+
+#reg_left{
+	font:  14pt Georgia;
+	color: #404040;
+	width: 200px;
+	border-right: 1px solid #D7D3C7;
+	padding: 5px 10px 20px 10px;
+	float:left;
+}
+
+#reg_right{
+	margin: 20px 0 0 230px;
+	padding: 5px 10px 20px 10px;
+}
+
+#reg_left p{
+	margin: 20px 0 20px 0;
+}
+
+#reg_form input[type="text"], #reg_form input[type="password"]{
+	background-color: #ece9e3;
+	border: 1px solid #979694; /*d1cec9*/
+	outline: none; /*Remove Chrome and Safari glows on focus*/
+	resize: none;
+	height:28px;
+	width:210px;
+	padding: 0 0 0 5px;
+}
+
+#reg_right p{
+	margin: 20px 2px 2px 2px;
+	font: 14pt Georgia;
+	font-style: italic;
+	color: #5A5A5A;
+}
+
+#reg_right td{
+	width:50%;
+	line-height: 30px;
+}
+
+#reg_submit{
+	padding:6px 10px;
+	height: 33px;
+	width:101px;
+	border:0;
+	float:right;
+	margin: 20px 0 0 0;
+	text-align: left;
+}
+
+.reg_error{
+	padding: 45px 0 0 20px;
+	font:8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#A2A896;
+}
+
+.reg_error.right{
+	color:#a4c259;
+}
+
+.reg_error.wrong{
+	color: #c05c54;
+}
+
