@@ -81,6 +81,44 @@
 					<div id="search_reset"></div>
 				</div>
 				<div id="login_container">
+					<div id='signin_btn'><span>Sign in</span><div id='login_arrow'></div></div>
+					<div id="login_user" class="login_dropdown">
+						<div id="user">
+							<a href="#!/profile/me"><img src=""/></a>
+							<a href="#!/profile/me"></a>
+						</div>
+						<p>
+							<a class="user_menu_btn" href="#!/newrecipe">Neues Rezept erstellen</a>
+							<a class="user_menu_btn" href="#!/profile/me">Meine Rezepte</a>
+						</p>
+						<p>
+							<a id='logout' class='user_menu_btn'>Abmelden</a>
+						</p>
+						<div id="login_footer"></div>
+					</div>
+					<div id="login_signin" class="login_dropdown">
+						<div id="login_left">
+							<div id='social_login'>
+								<div id="facebook_login"></div>
+								<!-- <div id="openid_login"></div>
+								<div id="twitter_login"></div> -->
+							</div>							
+							<div id="login_register">
+								<a id="register_button" href="#!/register"></a>
+							</div>
+						</div>
+						<div id="login_right">
+							<form id="login_form">
+								<p>Email/Username</p>
+								<input type='text' name='email' id='login_mail' autocomplete='on'/><div id='email_end'></div>
+								<p>Passwort <a href="#!/resetpassword"><img src="/icons/password_help.png" /></a></p>									
+								<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>
+								<div id="stayloggedin"><input type='checkbox' checked="true" id='check_stayloggedin' /><span>angemeldet bleiben</span></div>
+								<input type="submit" id="login_button"  value=""/>
+							</form>
+						</div>
+						<div id="login_footer"></div>
+					</div>
 				</div>
 				<div id="header_right"></div>
 			</div>

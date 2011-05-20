@@ -1842,11 +1842,10 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 
 
 
-#login_dropdown {
+.login_dropdown {
 	position: absolute;
-	visibility: hidden;
+	display:none;
 	margin-top: 25px;
-	margin-left: -175px;
 	width:auto;
 	z-index: 9;
 	background-color: #edf6dc;
@@ -1854,6 +1853,27 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	border-bottom: 6px solid #87a347;
 	border-right: 1px solid #87a347;
 	border-left: 1px solid #87a347;
+}
+
+#login_signin{
+	margin-left: -175px;
+}
+
+#login_user {
+	margin-left: -1px;
+	width: auto;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #5a5a5a;
+	padding: 5px 0 0 0;
+}
+
+#login_user p{	
+	margin: 0 10px;
+	padding: 5px 0;	
+}
+
+#login_user p+p{
+	border-top:1px solid #87A347;
 }
 
 #login_left, #login_right{
@@ -1895,6 +1915,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	height: 25px;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #b5b5b5;
+	float:left;
 	padding: 0 0 0 5px;
 	margin: 0 0 5px 0;
 	border: 1pt solid #87a347;
@@ -1913,6 +1934,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 }
 
 #register_button{
+	display:block;
 	height:30px;
 	width:159px;
 	margin-top:12px;
@@ -1930,8 +1952,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 }
 
 #username_end,#email_end,#password_end {
-	margin: 0 0 5px 0;
-	float: right;
+	margin: 0 0 5px 142px;
 	width: 16px;
 	height: 25px;
 	border: 1pt solid #87a347;
@@ -1968,7 +1989,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 /*-----------facebook-login ------------------------*/
 
 #social_login{
-	padding:15px 0 0 5px;
+	padding:10px 0 0 5px;
 	height:101px;
 }
 
@@ -2015,12 +2036,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 	clear: left;
 	float: left;
 	width: 50px;
-}*
-
-/*#login_btn {
-	float: right;
-	margin: 7px 0 0 0;
-}*/
+}
 
 #error_login {
 	float: left;
@@ -2030,7 +2046,7 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 
 #error_login_left {
 	float: left;
-	width: 150px;
+	width: 127px;
 	height: 100%;
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #c05c54;
@@ -2056,37 +2072,29 @@ input.wrong+#username_end,input.wrong+#email_end,input.wrong+#password_end
 </div>
 */
 /*-- nach der Anmeldung --*/
-#login_user {
-	width: 185px;
-	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color: #5a5a5a;
-	background-color: #edf6dc;
-	/*border-left: 1px solid #87a347;
-	border-right: 1px solid #87a347;*/
-	border-bottom: 3px solid #a4c259;
-	padding: 5px 10px 3px 10px;
-}
+
 
 #user {
-	float: left;
-	width: 100%;
+	width: 181px;
+	height:55px;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #87a347;
 	padding: 0 0 3px 4px;
-	margin-bottom: 5px;
+	margin: 0 10px;
 	border-bottom: 1px solid #87a347;
 }
 
 #user img {
-	float: left;
+	float:left;
 	margin: 3px 0 2px 0;
 	height: 50px;
 	width: 50px;
 }
 
 #user a+a {
-	float: left;
-	margin: 5px 0 0 10px;
+	display:block;
+	margin: 0 0 0 60px;
+	padding-top: 5px;
 	text-decoration: none;
 	color: #87a347;
 }

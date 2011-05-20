@@ -1,44 +1,27 @@
 
 function buildLogin(){
+	initMenus();
 	$(document).click(clickOthers);
-	$("#login_container > *").remove();
-	var htmlstring = "<div id='signin_btn'></div><div id='login_dropdown'></div>";
-	
-	$("#login_container").append(htmlstring);
-	$("#login_dropdown").hide();
-	$("#login_dropdown").css("visibility", "visible");
 	$("#signin_btn").click(clickSignin);
-	if(user.checkLogin())
-		makeUsermenuText();
-	else
-		makeLoginText();
 		
 };
 
 function makeUsermenuText(){
-	$("#login_top>*").remove();
-	$("#signin_btn").html("Konto<div id='login_arrow'></div>");
+	$("#signin_btn span").text("Konto");
 	
-	var htmlstring = "<div id='login_user'><div id='user'>" +
-			"<a href=\"#!/profile/me\"><img src='"+user.image+"'/></a>"+
-	"<a href=\"#!/profile/me\">"+user.name+"</a></div>" +
-			//"<a href='#' id='settings' class='user_menu_btn'>Einstellungen</a>"+
-		//"<a id='cookbook' class='user_menu_btn'>Mein Kochbuch</a>" +
-		"<a class='user_menu_btn' href='#!/newrecipe'>Neues Rezept erstellen</a>" +
-		"<a class=\"user_menu_btn\" href=\"#!/profile/me\">Meine Rezepte</a>";
+	$("#user img").attr("src", user.image);
+	$("#user a+a").text(user.name);
+	
 	if(user.level == 2){
+		var htmlstring = "<p>";
 		htmlstring+="<a href='/backend/admin.html' class='user_menu_btn'>Backend</a>";
 		htmlstring+="<a id=\"extend_permissions\" class=\"user_menu_btn\">Extend Permissions(test)</a>";
+		htmlstring+="</p>";
+		
+		$("#login_user p").first().after(htmlstring);
 		$("#extend_permissions").click(fbExtendPermissions);
 		
 	}
-	htmlstring+="<a id='logout' class='user_menu_btn'>Abmelden</a></div>";
-	$("#login_dropdown").html(htmlstring);	
-	$("#logout").click(function(){
-		user.logout();
-	});	
-	$("#login_user a").click(closeUserMenu);
-	$("#extend_permissions").click(fbExtendPermissions);
 	
 }
 
@@ -56,75 +39,24 @@ function schmecktChecker(gericht){
 	return schmecktcheck;
 }
 
-function makeLoginText(){
-	$("#login_top>*").remove();
-	$("#signin_btn").html("Sign in<div id='login_arrow'></div>");
-	
-	var htmlstring = 
-					"<div id=\"login_left\">" +
-						"<div id='social_login'>" +
-							"<div id=\"facebook_login\"></div>" +
-							"<div id=\"openid_login\"></div>" +
-							"<div id=\"twitter_login\"></div>" +
-						"</div>" +
-						
-						"<div id=\"login_register\">" +
-							"<div id=\"register_button\"></div>" +
-						"</div>" +
-					"</div>" +
-					"<div id=\"login_right\">" +
-						"<form id=\"login_form\">" +
-							"<p>Email/Username</p>" +
-							"<input type='text' name='email' id='login_mail' autocomplete='on'/><div id='email_end'></div>" +
-							"<p>Passwort <a href=\"#!/resetpassword\"><img src=\"/icons/password_help.png\" /></a></p>" +
-							"<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>" +
-							"<div id=\"stayloggedin\"><input type='checkbox' id='check_stayloggedin' /><span>angemeldet bleiben</div>" +
-							"<input type=\"submit\" id=\"login_button\"  value=\"\"/>" +
-						"</form>" +
-					"</div>" +
-					"<div id=\"login_footer\"></div>";
-	$("#login_dropdown").append(htmlstring);
-	
-	
-	//old
-	//new facebook plugin
-	/*var htmlstring = "<div id='fb_login'><span>einloggen mit </span><div class='fb_logo'></div></div><form id='login_form'><input type='text' name='email' id='login_mail' value='E-mail' autocomplete='on'/><div id='email_end'></div>"+
-	"<input type='password' name='password' id='login_pwd' value='Passwort' autocomplete='on'/><div id='password_end'></div>" +
-	"<a href=\"#!/resetpassword\" id=\"forgotpassword\">Passwort vergessen?</a>" +
-	"<div id=\"stayloggedin\"><input type='checkbox' id='check_stayloggedin' /><span>angemeldet bleiben</div></span>" +
-	"<div id='register_btn' class='btn_style'>registrieren</div><div id='login_btn' class='btn_style'>anmelden</div>"+
-	"</form>";*/
-	
-		
-	
-
-	/*$("#login_dropdown").append(htmlstring);
-	//FB.XFBML.parse(document.getElementById('login_top'));
-	$("#login_mail, #login_pwd").focus(focusInputs);		
-	$("#login_mail, #login_pwd").focusout(focusoutInputs);
-	$("#login_mail, #login_pwd").keypress(keypressInputs);
-	$("#login_mail, #login_pwd").keydown(keydownInputs);
-	
+function initMenus(){
+	//loginmenu
+	$("#login_form").submit(submitForm);	
+	$("#facebook_login").click(fbLogin);
+	$("#social_login *").click(closeUserMenu);
 	$("#stayloggedin span").click(function(){
-		if($("#check_stayloggedin").is(":checked"))
-			$("#check_stayloggedin").removeAttr("checked");
-		else
-			$("#check_stayloggedin").attr("checked", "checked");
+		var checkbox = $("#stayloggedin input");
+		checkbox.attr('checked', !checkbox.attr('checked'));
 	});
 	
-	$("#login_btn").click(clickLogin);
-	$("#login_form").submit(submitForm);
-	
-	$("#register_btn").click(clickRegister);
-	$("#fb_login").click(fbLogin);
-	
-	$("#forgotpassword").click(function(){
-		closeUserMenu(event);
-	});
-	//FB.XFBML.parse();
-	*/
+	//usermenu
+	if(user.checkLogin()){
+		makeUsermenuText();
+	}
+	$("#logout").click(function(){
+		user.logout();
+	});	
 }
-
 
 
 function showLoginErrorPopups(event){
@@ -142,10 +74,10 @@ function showLoginErrorPopups(event){
 			text = loginerrors["username"];
 		
 	}
-	var position = target.prev().position();
+	var position = target.prev().offset();
 	target.prev().before("<div id='error_login'><div id='error_login_left'>"+text+"</div><div id='error_login_right'></div></div>");
 	var errorcontainer = target.prev().prev();
-	errorcontainer.css("top", position.top+8);
+	errorcontainer.css("top", position.top);
 	errorcontainer.css("left", position.left);
 	errorcontainer.hide();
 	errorcontainer.fadeIn(500);
@@ -158,66 +90,27 @@ function hideLoginErrorPopups(event){
 }
 
 function closeUserMenu(event){
-	$("#login_dropdown").hide();
+	$(".login_dropdown").hide();
 	$("#signin_btn").removeClass("on");
 }
 
 //called if #signin_btn is clicked
 function clickSignin(event){
-	if($("#login_username").length > 0){
-		$("#login_username, #username_end").remove();
-		$("#register_btn, #login_btn").removeClass("on");
-	}
-	$("#login_dropdown").toggle();
-	//$("#stayloggedin").css({height:21, marginTop:10, opacity:1});
-	//$("#resetpassword").css({height:17, opacity:1});
-	//$("#login_form").css("height", 132);
+	if(user.checkLogin())
+		$("#login_user").toggle();
+	else
+		$("#login_signin").toggle();
 	$("#signin_btn").toggleClass("on");
-	$("#login_btn").addClass("on");
+	
+	$("#login_signin input").removeClass("wrong");
 	return false;
-}
-
-function clickLogin(event){
-	if($("#login_btn").hasClass("on"))
-		$("#login_form").submit();
-	else{
-		$("#register_btn, #login_btn").toggleClass("on");
-		$("#fb_login span").text("einloggen mit ");
-		$("#login_username").val("");
-		//$("#stayloggedin").fadeIn(500);
-		$("#stayloggedin").animate({height:21, marginTop:10, opacity:1},{duration:500});
-		$("#login_username, #username_end").animate({"height":0, "opacity":.0, "margin":0},{duration:500, complete:function(){$("#login_username, #username_end").remove();}});
-		$("#login_form").animate({"height":132},500);
-		$("#forgotpassword").animate({height:17, opacity:1}, {duration:500});
-	}
-}
-
-function clickRegister(event){
-	if($("#register_btn").hasClass("on")){
-		$("#login_form").submit();
-	}
-	else{
-		$("#login_mail, #login_pwd").removeClass("wrong");
-		$("#register_btn, #login_btn").toggleClass("on");
-		$("#fb_login span").text("registrieren mit ");
-		$("#password_end").after("<input type='text' name='username' id='login_username'/><div id='username_end'></div>");
-		$("#login_username, #username_end").css("height",0).css("opacity",.0);
-		$("#login_form").animate({"height":116},{duration:500, queue:false});
-		//$("#stayloggedin").fadeOut(500);
-		$("#forgotpassword, , #stayloggedin").animate({"height":0, "opacity":.0, marginTop:0},{duration:500});
-		$("#login_username, #username_end").animate({"height":25, "opacity":1},{duration:500, complete:function(){$("#login_username").val("Username");}});
-		//$("#fb_login").text("r")
-		
-		$("#login_username").focus(focusInputs);		
-		$("#login_username").focusout(focusoutInputs);
-		$("#login_username").keypress(keypressInputs);
-	}
 }
 
 function clickOthers(event){
 	var target = event.target;
-	if ($(target).parents("#login_container").length == 0 && $("#signin_btn").hasClass("on")){
-		$("#login_dropdown").hide();
+	var a = $(target).is("a") || $(target).parents("a").length > 0;
+	if ((a || $(target).parents("#login_container").length == 0) && $("#signin_btn").hasClass("on")){
+		$(".login_dropdown").hide();
 		$("#signin_btn").removeClass("on");
 	}
 }
@@ -382,13 +275,17 @@ function submitForm(event){
 		var stayloggedin =$("#check_stayloggedin").is(":checked");
 		if($("#login_username").length == 0)
 			User.login(mail, pwd, stayloggedin);
-		else{
-			var username = $("#login_username").val();
-			User.register(mail, pwd, username);
-		}
 	}
 	
 	return false;
 }
+
+function showRegistration(){
+	var html = "<div id='registerpopup' class='popup'><div class='closepopup'></div><div id='register_headline'>Hey "+username+"!</div><div id='register" +
+	"_text'>Vielen Dank für deine Anmeldung. Damit Du gleich loslegen kannst, müsstest Du noch deine E-Mail-Adresse bestätigen.</div></div><div class='background_popup'></div>";
+	
+	$("body").append();
+}
+
 var loginerrors = new Object();
 var user  = new User();
