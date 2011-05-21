@@ -120,6 +120,7 @@ function handleChange(event){
 				loadResetPasswordStep1();
 				break;
 			case "registration":
+				$.address.title("Registrierung | anycook");
 				showRegistration();
 				break;
 			}
