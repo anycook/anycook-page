@@ -5,6 +5,8 @@ function User(){
 	this.mail = null;
 	this.facebook_id = null;
 	this.image = null;
+	this.schmeckt = null;
+	this.recipes = null;
 }
 
 User.init = function(){
@@ -27,6 +29,33 @@ User.init = function(){
 	return user;
 };
 
+User.initProfileInfo = function(username){
+	var profileUser = new User();
+	$.ajax({
+		url:"/anycook/GetProfileInfo",
+		data:"username="+encodeURIComponent(username),
+		async:false,
+		dataType: "json",
+		success:function(json){
+			if(json!=null){
+				profileUser.name = json.name;
+				profileUser.image = json.image;
+				profileUser.facebook_id = json.facebookID;
+				profileUser.schmeckt = json.schmeckt;
+				profileUser.recipes = json.recipes;
+			}
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			alert(jqXHR+textStatus+errorThrown);
+		}
+	});
+	return profileUser;
+};
+
+User.getProfileURI = function(username){
+	var uri = "#!/profile/"+encodeURIComponent(username);
+	return uri;
+};
 
 
 User.prototype.checkLogin = function(){
@@ -92,6 +121,13 @@ User.prototype.getSmallImage = function(){
 		return "http://graph.facebook.com/"+this.facebook_id+"/picture";
 	
 	return "/userbilder/medium/"+this.image;
+};
+
+User.prototype.getLargeImage = function(){
+	if(this.facebook_id != "0")
+		return "http://graph.facebook.com/"+this.facebook_id+"/picture?type=large";
+	
+	return "/userbilder/big/"+this.image;
 };
 
 User.register = function(mail, pwd, username){

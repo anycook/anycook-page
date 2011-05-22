@@ -1,0 +1,109 @@
+#profile_container{
+	padding-top:10px;
+}
+
+#profile_image{
+	max-width:200px;
+	float:left;
+	margin: 0 10px 20px 10px;
+}
+#profile_info{
+	float:left;
+	margin: 0 0 20px 15px;
+}
+
+#profile_info h1{
+	font:  23pt Georgia;
+	color: #404040;
+	width:100%;
+	margin: 0 0 5px 0;
+	padding: 0 40px 10px 10px;
+	border-bottom: 1px solid #D7D3C7;
+}
+
+#profile_info p{
+	margin: 5px 0 0 15px;
+	font:  12pt Georgia;
+	color: #404040;
+}
+
+#profile_recipes, #profile_schmeckt{
+	display:none;
+	margin: 0 0 20px 0;
+	padding: 20px 10px 20px 10px;
+	clear:both;
+	border-top: 1px solid #D7D3C7;
+}
+
+#profile_recipes h2, #profile_schmeckt h2{
+	float:left;
+	font:  16pt Georgia;
+	color: #404040;
+	margin: 0 0 10px 0;
+	padding: 0 40px 5px 10px;
+	border-bottom: 1px solid #D7D3C7;
+}
+
+#profile_recipes p, #profile_schmeckt p{
+	clear:both;
+	position:relative;
+	width: 635px;
+	height:240px;
+	overflow:hidden;
+	margin: 0 10px;
+}
+
+.profile_rezept_bild{
+	float:left;
+	display:block;
+	position:relative;
+	margin: 0 10px 10px 0;
+	width:108px;
+	height:108px;
+	border: 1px solid #D7D3C7;
+	text-decoration: none;
+}
+
+.profile_rezept_bild img{
+	border:3pt solid #F9F8F6;
+	width:100px;
+	height:100px;
+	
+}
+
+.profile_rezept_bild div{
+	display:none;
+	bottom:0;
+	padding: 3px;
+	height:102px;
+	width:102px;
+	background-color:#F9F8F6;
+	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #5A5A5A;
+	position: absolute;
+	text-decoration: none;
+}
+
+
+
+.profile_rezept_bild:hover div{
+	display:block;
+}
+
+.profile_rezept_bild div span{
+	display:block;
+	margin: 3px;
+}
+
+.profile_more{
+	display:none;
+	text-align: right;
+	cursor: pointer;
+	color:#859F5E;
+	margin-right:40px;
+	font:8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.profile_more:hover{
+	text-decoration: underline;
+}

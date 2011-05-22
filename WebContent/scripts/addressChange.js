@@ -45,6 +45,7 @@ function handleChange(event){
 		$.address.title("anycook");
 		
 		resetSearchBar();
+		resetFilter();
 		
 		
 		
@@ -78,7 +79,6 @@ function handleChange(event){
 		
 		switch(path.length){
 		case 0:
-			resetFilter();	
 			$.ajax({
 	  		  url: "/anycook/LoadRecipeforSmallView",
 	  		  dataType: 'json',
@@ -152,10 +152,7 @@ function handleChange(event){
 				break;
 				
 			case "profile":
-				search = new Search();
-				search.setUsername(path[1]);
-				search.flush();
-				//userSearch(path[1]);
+				loadProfile(decodeURIComponent(path[1]));
 				break;
 				
 			case "resetpassword":
@@ -179,16 +176,16 @@ function handleChange(event){
 				break;
 				
 			case "search":
+				search = new Search();
 				switch(path[1]){
-				case "tagged":
-					//addTag(path[2]);
-					search = new Search();
-					search.addTag(decodeURIComponent(path[2]));
-					search.search();
-					//search.flush();
-					
+				case "tagged":				
+					search.addTag(decodeURIComponent(path[2]));					
 					break;
+					
+				case "user":
+					search.setUsername(decodeURIComponent(path[2]));
 				}
+				search.search();
 			};
 		}
 	}

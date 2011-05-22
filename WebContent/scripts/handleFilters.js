@@ -324,9 +324,10 @@ function setUserfilter(username){
 			  url: "/anycook/GetUserInformation",
 			  data:"username="+username,
 			  success: function(imagepath){
-				  $("#userfilter a").attr("href", "/#!/profile/"+username);
+				  var uri = User.getProfileURI(username);
+				  $("#userfilter a").attr("href", uri);
 				  $("#userfilter img").attr("src", imagepath);
-				  var text = "<span><a href=\"/#!/profile/"+username+"\">"+username+"</a>'s<br/>Rezepte</span>";
+				  var text = "<span><a href=\"/"+uri+"\">"+username+"</a>'s<br/>Rezepte</span>";
 				  $("#userfiltertext").html(text);
 				  
 				  if($("#userfilter").css("display")=="none"){

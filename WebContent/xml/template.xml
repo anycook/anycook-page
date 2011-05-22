@@ -390,11 +390,22 @@
 				</div>
 			</template>
 			<template id="profile">
-				<div id="profil_info">
-					<div id="profil_picture"></div><div id="profil_name"></div>
+				<div id="profile_container">
+					<img id="profile_image" src=""/>
+					<div id="profile_info">
+						<h1></h1>
+					</div>
+					<div id="profile_recipes">
+						<h2></h2>
+						<p></p>
+						<div class="profile_more">alle anzeigen</div>
+					</div>
+					<div id="profile_schmeckt">
+						<h2></h2>
+						<p></p>
+						<div class="profile_more">alle anzeigen</div>
+					</div>
 				</div>
-    			<div id="num_results"><span id="current_num"></span> von <span id="total_num"></span> Rezepten</div>
-       			<div id="result_container"></div>
 			</template>
 			<template id="fbregistration">
 					<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				

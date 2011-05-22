@@ -126,7 +126,7 @@ function loadRecipe(recipe){
     $("#rezept_headline").append(recipe.name);
     $("#beschreibung").append(recipe.beschreibung);
     
-    $("#rezept_bild").attr("src", "./gerichtebilder/big/"+recipe.imagename);
+    $("#rezept_bild").attr("src", "/gerichtebilder/big/"+recipe.imagename);
     	
 	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){
@@ -193,7 +193,7 @@ function loadRecipe(recipe){
 	
 	for(var autor in recipe.usernames){
 		var autorname = recipe.usernames[autor];
-		$("#autoren").append("<a href='http://anycook.de/#!/profile/"+encodeURI(autorname)+"'>"
+		$("#autoren").append("<a href='#!/profile/"+encodeURI(autorname)+"'>"
 				+autorname+"</a>");
 		if(num_autoren>1){
 			if(autor <= num_autoren-3)
