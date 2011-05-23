@@ -4,10 +4,15 @@ function loadProfile(username){
 	}	
 	var profileData = User.initProfileInfo(username);
 	var image = profileData.getLargeImage();
-	$("#profile_image").attr("src", image);
-	$("#profile_info h1").text(profileData.name);
-	$("#profile_info").append("<p>"+profileData.recipes.length+" Rezepte</p>");
-	$("#profile_info").append("<p>"+profileData.schmeckt.length+" Favoriten</p>");
+	$("#profile_image img").attr("src", image);
+	$("#profile_title h1").text(profileData.name);
+	$("#profile_recipe_info").text(profileData.recipes.length+" Rezepte");
+	$("#profile_schmeckt_info").append(profileData.schmeckt.length+" Favoriten");
+	if(profileData.facebook_id>0){		
+		var fblink = $("#profile_facebook");
+		fblink.attr("href", profileData.getFacebookProfileLink());
+		fblink.css("display", "block");		
+	}
 	
 	if(profileData.recipes.length>0){
 		$("#profile_recipes").show();
@@ -26,6 +31,8 @@ function loadProfile(username){
 		if(recipes.length>10)
 			$("#profile_recipes .profile_more").show();
 	}
+	
+	$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
 	
 	if(profileData.schmeckt.length>0){
 		$("#profile_schmeckt").show();
@@ -50,6 +57,10 @@ function loadProfile(username){
 	
 }
 
+function gotoProfile(username){
+	$.address.value("profile/"+encodeURIComponent(username));
+}
+
 /*function profileVerticalCenter(element){
 	var span = element.children("span").first();
 	var spanheight = span.css("height");
@@ -58,17 +69,25 @@ function loadProfile(username){
 	
 }*/
 
+
 function profileShowMore(event){
+	var newheight;
 	var p = $(this).siblings("p").first();
-	var numelements = p.children().length;
-	
-	
-	var rest = numelements % 5;
-	var newheight = ((numelements-rest)/5)*120;
-	if(rest>0) newheight+=120;
+	if($(this).text() == "mehr anzeigen"){
+		var numelements = p.children().length;	
+		
+		var rest = numelements % 5;
+		newheight = ((numelements-rest)/5)*120;
+		if(rest>0) newheight+=120;
+		
+		$(this).text("weniger anzeigen");
+		/*$(this).animate({height:0, opacity:0},{duration:1000, complete:function(){
+			$(this).remove();
+			}});*/
+	}else{
+		newheight = 240;
+		$(this).text("mehr anzeigen");
+	}
 	
 	p.animate({height:newheight}, 1000);
-	$(this).animate({height:0, opacity:0},{duration:1000, complete:function(){
-		$(this).remove();
-		}});
 }

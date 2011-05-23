@@ -107,8 +107,9 @@
 						search.flush();
 					}
 					else if(type == "user"){
-						search.setUsername(text);
-						search.flush();
+						/*search.setUsername(text);
+						search.flush();*/
+						gotoProfile(text);
 					}
 					
 					return false;

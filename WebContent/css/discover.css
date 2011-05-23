@@ -1,0 +1,93 @@
+#discover{
+	padding-top:10px;
+}
+
+.entdecken{
+	margin-top:10px;
+}
+
+.entdecken h2{
+	font:  16pt Georgia;
+	color: #404040;
+	width:605px;
+	margin: 0 0 10px 0;
+	padding: 0 40px 5px 10px;
+	border-bottom: 1px solid #D7D3C7;
+}
+
+.discover_container{
+	float:left;
+	height:120px;
+	width:600px;
+	overflow: hidden;
+	position: relative;
+	margin:0 0 0 10px;	
+}
+
+.entdecken_back, .entdecken_next{
+	width:20px;
+	height:108px;
+	opacity:0.3;
+	cursor: pointer;
+}
+.entdecken_back:hover, .entdecken_next:hover{
+	opacity:0.7;
+}
+
+.entdecken_back{
+	float:left;
+	background-image:url(/img/discover_arrow_left.png);
+	background-repeat: no-repeat;
+	background-position: 4px 22px;
+}
+
+.entdecken_next{
+	float:right;
+}
+
+.discover_rezept_bild{
+	top:0;
+	display:block;
+	position:absolute;
+	margin: 0;
+	width:108px;
+	height:108px;
+	border: 1px solid #D7D3C7;
+	text-decoration: none;
+}
+
+.discover_rezept_bild img{
+	border:3pt solid #F9F8F6;
+	width:100px;
+	height:100px;
+	
+}
+
+.discover_rezept_bild div{
+	display:none;
+	bottom:0;
+	padding: 3px;
+	margin:3px;
+	height:96px;
+	width:96px;
+	background-color:#000;
+	opacity: .7;
+	position: absolute;
+	text-decoration: none;
+}
+
+
+
+.discover_rezept_bild:hover div{
+	display:block;
+}
+
+.discover_rezept_bild div span{
+	display:block;
+	margin: 3px;
+	opacity:1;
+	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #ffffff;
+}
+
+

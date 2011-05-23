@@ -937,7 +937,7 @@ ul.kategorie_filter li:HOVER {
 }
 
 /*---------Entdecken----------*/
-.entdecken {
+/*.entdecken {
 	height: 202px;
 	margin-top: 8px;
 	-moz-user-select: none;
@@ -1002,7 +1002,7 @@ ul.kategorie_filter li:HOVER {
 
 #neuste,#leckerste,#beliebte {
 	
-}
+}*/
 
 /*--suchergebnisse--*/
 #first_search_layout {

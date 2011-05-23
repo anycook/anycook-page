@@ -26,22 +26,22 @@
     <template id="home_discover">
     	<div id="discover">
     			<div id="neuste" class="entdecken">
-					<div class="entdecken_headline_small">neuste Rezepte:</div>
-					<div id="neuste_container"></div>
-					<div class="entdecken_back">zurück</div>
-					<div class="entdecken_next">weiter</div>
+					<h2>neuste Rezepte</h2>
+					<div class="entdecken_back"></div>
+					<div class="discover_container"></div>					
+					<div class="entdecken_next"></div>
 				</div>
 				<div id="leckerste" class="entdecken">
-					<div class="entdecken_headline_small">leckerste Rezepte:</div>
-					<div id="leckerste_container"></div>
-					<div class="entdecken_back">zurück</div>
-					<div class="entdecken_next">weiter</div>
+					<h2>leckerste Rezepte</h2>
+					<div class="entdecken_back"></div>
+					<div class="discover_container"></div>					
+					<div class="entdecken_next"></div>
 				</div>
 				<div id="beliebte" class="entdecken">
-					<div class="entdecken_headline_small">beliebte Rezepte:</div>
-					<div id="beliebte_container"></div>
-					<div class="entdecken_back">zurück</div>
-					<div class="entdecken_next">weiter</div>
+					<h2>beliebte Rezepte</h2>
+					<div class="entdecken_back"></div>
+					<div class="discover_container"></div>					
+					<div class="entdecken_next"></div>
 				</div>
     	</div>
     </template>
@@ -391,19 +391,27 @@
 			</template>
 			<template id="profile">
 				<div id="profile_container">
-					<img id="profile_image" src=""/>
+					<div id="profile_image">
+						<img src=""/>
+					</div>
+					
 					<div id="profile_info">
-						<h1></h1>
+						<div id="profile_title">
+							<h1></h1>
+							<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>
+						</div>
+						<p id="profile_recipe_info"></p>
+						<p id="profile_schmeckt_info"></p>
 					</div>
 					<div id="profile_recipes">
 						<h2></h2>
 						<p></p>
-						<div class="profile_more">alle anzeigen</div>
+						<a class="profile_search">durchsuchen</a><div class="profile_more">mehr anzeigen</div>
 					</div>
 					<div id="profile_schmeckt">
 						<h2></h2>
 						<p></p>
-						<div class="profile_more">alle anzeigen</div>
+						<div class="profile_more">mehr anzeigen</div>
 					</div>
 				</div>
 			</template>

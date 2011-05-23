@@ -302,8 +302,8 @@ function changePage(event){
 			break;
 			
 		case "search":
-			search = Search.init();
-			search.search();
+			//search = Search.init();
+			//search.search();
 			break;
 			
 		default:

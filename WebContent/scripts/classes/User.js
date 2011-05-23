@@ -29,6 +29,8 @@ User.init = function(){
 	return user;
 };
 
+
+
 User.initProfileInfo = function(username){
 	var profileUser = new User();
 	$.ajax({
@@ -49,12 +51,17 @@ User.initProfileInfo = function(username){
 			alert(jqXHR+textStatus+errorThrown);
 		}
 	});
+	
 	return profileUser;
 };
 
 User.getProfileURI = function(username){
 	var uri = "#!/profile/"+encodeURIComponent(username);
 	return uri;
+};
+
+User.prototype.getFacebookProfileLink = function(){
+	return "http://www.facebook.com/people/@/"+this.facebook_id;
 };
 
 
