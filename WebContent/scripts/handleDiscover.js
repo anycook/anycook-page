@@ -8,8 +8,7 @@ function loadDiscover(){
 	/*$("#neuste_container > *, #leckerste_container > *, #beliebte_container > *").remove();*/
 	fillDiscover();
 	$(".entdecken_next").click(showNextDiscover);
-	//$(".entdecken_back").click(showBackDiscover);
-	checkButtons();
+	$(".entdecken_back").click(showBackDiscover).addClass("off");
 	/*$(".entdecken_back").click(function(event){
 		var target = event.target;
 		var type = $(target.parentNode).attr("id");
@@ -39,7 +38,7 @@ function fillDiscover(){
 									"<img src=\"/gerichtebilder/small/"+recipes[i].imagename+"\"/>" +
 									"<div><span>"+recipes[i].name+"</span></div></a>");
 							
-							$("#"+type+" .discover_container a").last().css("left", 120*counter++);
+							$("#"+type+" .discover_container a").last().css("margin-left", 120*counter++);
 							
 						}
 				  }
@@ -48,57 +47,56 @@ function fillDiscover(){
 }
 
 function showNextDiscover(event){
-	//if(!checkFirstPos($(this).prev())){
-		$(this).prev().children(".discover_rezept_bild").animate({left: "-=600"}, {duration: 700, complete:checkButtons});
-	//}
+	if(checkRightPos($(this).prev())){
+		$(this).prev().children(".discover_rezept_bild").first().animate({left: "-=600"}, 
+				{duration: 700, step:synchronizeDiscover, complete:checkButtons});
+	}
 	
 }
 
 function showBackDiscover(event){
-	$(this).unbind("click", showBackDiscover);
-	if(checkFirstPos($(this).next())){
-		$(this).next().children(".discover_rezept_bild").animate({left: "+=600"}, {duration: 700, complete:checkButtons});
+	if(checkLeftPos($(this).next())){
+		$(this).next().children(".discover_rezept_bild").first().animate({left: "+=600"}, 
+				{duration: 700,  step:synchronizeDiscover, complete:checkButtons});
 	}
 	
 }
 
-function checkFirstPos(container){
+function synchronizeDiscover(now){
+	$(this).siblings().css("left", now);
+}
+
+function checkLeftPos(container){
 	var firstpos = $(container).find(".discover_rezept_bild").first().position();
-	if(firstpos.left == 0)
+	if(firstpos.left >= 0)
 		return false;
 	return true;
 }
 
+function checkRightPos(container){
+	var elements = $(container).find(".discover_rezept_bild");
+	var firstpos = elements.first().position();
+	if(firstpos.left <= -(elements.length-5)*120)
+		return false;
+	return true;
+}
+
+
 function checkButtons(){
-	var back = $("#neuste .entdecken_back");
-	if(!checkFirstPos($("#neuste")) && !back.hasClass("off")){
+	var back = $(this).parent().prev();
+	if(!checkLeftPos(back.next()) && !back.hasClass("off")){
 		back.addClass("off");
-		back.unbind(showBackDiscover);
 	}
 	else if(back.hasClass("off")){
 		back.removeClass("off");
-		back.click(showBackDiscover);
 	}
 	
-	
-	back = $("#leckerste .entdecken_back");
-	if(!checkFirstPos($("#leckerste"))&& !back.hasClass("off")){
-		back.addClass("off");
-		back.unbind(showBackDiscover);
+	var next = $(this).parent().next();
+	if(!checkRightPos(next.prev()) && !next.hasClass("off")){
+		next.addClass("off");
 	}
-	else if(back.hasClass("off")){
-		back.removeClass("off");
-		back.click(showBackDiscover);
-	}
-	
-	back = $("#beliebte .entdecken_back");
-	if(!checkFirstPos($("#beliebte"))&& !back.hasClass("off")){
-		back.addClass("off");
-		back.unbind(showBackDiscover);
-	}
-	else if(back.hasClass("off")){
-		back.removeClass("off");
-		back.click(showBackDiscover);
+	else if(next.hasClass("off")){
+		next.removeClass("off");
 	}
 }
 

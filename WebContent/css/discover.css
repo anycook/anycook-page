@@ -63,7 +63,8 @@
 	top:0;
 	display:block;
 	position:absolute;
-	margin: 0;
+	margin-left:0;
+	float:left;
 	width:108px;
 	height:108px;
 	border: 1px solid #D7D3C7;
