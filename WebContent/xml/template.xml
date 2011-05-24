@@ -30,18 +30,21 @@
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
+					<div class="discover_footer"></div>
 				</div>
 				<div id="leckerste" class="entdecken">
 					<h2>leckerste Rezepte</h2>
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
+					<div class="discover_footer"></div>
 				</div>
 				<div id="beliebte" class="entdecken">
 					<h2>beliebte Rezepte</h2>
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
+					<div class="discover_footer"></div>
 				</div>
     	</div>
     </template>

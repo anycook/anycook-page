@@ -3,7 +3,8 @@
 }
 
 .entdecken{
-	margin-top:10px;
+	margin:10px 0 30px 0;
+	padding:0 5px 0 0;
 }
 
 .entdecken h2{
@@ -18,7 +19,7 @@
 .discover_container{
 	float:left;
 	height:120px;
-	width:600px;
+	width:590px;
 	overflow: hidden;
 	position: relative;
 	margin:0 0 0 10px;	
@@ -34,6 +35,11 @@
 	opacity:0.7;
 }
 
+.entdecken_back.off, .entdecken_next.off{
+	cursor: default;
+	background: none;
+}
+
 .entdecken_back{
 	float:left;
 	background-image:url(/img/discover_arrow_left.png);
@@ -43,6 +49,14 @@
 
 .entdecken_next{
 	float:right;
+	background-image:url(/img/discover_arrow_right.png);
+	background-repeat: no-repeat;
+	background-position: 0px 22px;
+}
+
+.discover_footer{
+	width:100%;
+	clear:both;
 }
 
 .discover_rezept_bild{

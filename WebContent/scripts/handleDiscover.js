@@ -7,6 +7,9 @@ var length = new Object();*/
 function loadDiscover(){
 	/*$("#neuste_container > *, #leckerste_container > *, #beliebte_container > *").remove();*/
 	fillDiscover();
+	$(".entdecken_next").click(showNextDiscover);
+	//$(".entdecken_back").click(showBackDiscover);
+	checkButtons();
 	/*$(".entdecken_back").click(function(event){
 		var target = event.target;
 		var type = $(target.parentNode).attr("id");
@@ -42,21 +45,61 @@ function fillDiscover(){
 				  }
 			  }
 			});
+}
+
+function showNextDiscover(event){
+	//if(!checkFirstPos($(this).prev())){
+		$(this).prev().children(".discover_rezept_bild").animate({left: "-=600"}, {duration: 700, complete:checkButtons});
+	//}
 	
-		/*length[type] = json.length;
-		for(var i=0; i<json.length;i++){
-			$.ajax({
-		  		  url: "/anycook/LoadRecipeforSmallView",
-		  		  dataType: 'json',
-		  		  data:"recipe="+json[i],
-		  		  async:false,
-		  		  success: function(response){loadDiscoverRecipe(response, type);}
-				});
-		}
-		
-		$("#"+type+"_container > .frame_small").first().css("marginRight", "8px");
-		$("#"+type+" .entdecken_back").hide();
-		$("#"+type+" .entdecken_next").show();*/
+}
+
+function showBackDiscover(event){
+	$(this).unbind("click", showBackDiscover);
+	if(checkFirstPos($(this).next())){
+		$(this).next().children(".discover_rezept_bild").animate({left: "+=600"}, {duration: 700, complete:checkButtons});
+	}
+	
+}
+
+function checkFirstPos(container){
+	var firstpos = $(container).find(".discover_rezept_bild").first().position();
+	if(firstpos.left == 0)
+		return false;
+	return true;
+}
+
+function checkButtons(){
+	var back = $("#neuste .entdecken_back");
+	if(!checkFirstPos($("#neuste")) && !back.hasClass("off")){
+		back.addClass("off");
+		back.unbind(showBackDiscover);
+	}
+	else if(back.hasClass("off")){
+		back.removeClass("off");
+		back.click(showBackDiscover);
+	}
+	
+	
+	back = $("#leckerste .entdecken_back");
+	if(!checkFirstPos($("#leckerste"))&& !back.hasClass("off")){
+		back.addClass("off");
+		back.unbind(showBackDiscover);
+	}
+	else if(back.hasClass("off")){
+		back.removeClass("off");
+		back.click(showBackDiscover);
+	}
+	
+	back = $("#beliebte .entdecken_back");
+	if(!checkFirstPos($("#beliebte"))&& !back.hasClass("off")){
+		back.addClass("off");
+		back.unbind(showBackDiscover);
+	}
+	else if(back.hasClass("off")){
+		back.removeClass("off");
+		back.click(showBackDiscover);
+	}
 }
 
 /*function loadDiscoverRecipe(response, type){
