@@ -8,7 +8,14 @@ function loadProfile(username){
 	$("#profile_title h1").text(profileData.name);
 	$("#profile_recipe_info").text(profileData.recipes.length+" Rezepte");
 	$("#profile_schmeckt_info").append(profileData.schmeckt.length+" Favoriten");
-	if(profileData.facebook_id>0){		
+	
+	if(profileData.text!=null){
+		$("#profile_text").show();
+		$("#profile_text h2").text("Über mich");
+		$("#profile_text_center").append(profileData.text);
+	}
+	
+	if(profileData.facebook_id>0){
 		var fblink = $("#profile_facebook");
 		fblink.attr("href", profileData.getFacebookProfileLink());
 		fblink.css("display", "block");		

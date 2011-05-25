@@ -406,6 +406,14 @@
 						<p id="profile_recipe_info"></p>
 						<p id="profile_schmeckt_info"></p>
 					</div>
+					<div id="profile_text">
+						<h2></h2>
+						<div id="profile_text_content">
+							<div id="profile_text_left"></div>
+							<div id="profile_text_center"></div>
+							<div id="profile_text_right"></div>
+						</div>
+					</div>
 					<div id="profile_recipes">
 						<h2></h2>
 						<p></p>

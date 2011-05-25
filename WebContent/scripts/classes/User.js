@@ -7,6 +7,7 @@ function User(){
 	this.image = null;
 	this.schmeckt = null;
 	this.recipes = null;
+	this.text = null;
 }
 
 User.init = function(){
@@ -45,6 +46,7 @@ User.initProfileInfo = function(username){
 				profileUser.facebook_id = json.facebookID;
 				profileUser.schmeckt = json.schmeckt;
 				profileUser.recipes = json.recipes;
+				profileUser.text = json.text;
 			}
 		},
 		error:function(jqXHR, textStatus, errorThrown){
