@@ -32,6 +32,8 @@
 	cursor: pointer;
 	-webkit-transition : opacity .2s ease-out;
 	-webkit-transition : opacity .4s ease-in;
+	-moz-transition : opacity .2s ease-out;
+	-moz-transition : opacity .4s ease-in;
 }
 .entdecken_back:hover, .entdecken_next:hover{
 	opacity:0.7;
@@ -42,6 +44,7 @@
 	cursor: default;
 	opacity:0;
 	-webkit-transition : opacity .4s ease-out;
+	-moz-transition : opacity .4s ease-out;
 }
 
 .entdecken_back{
@@ -93,6 +96,7 @@
 	position: absolute;
 	text-decoration: none;
 	-webkit-transition : opacity .4s ease-out;
+	-moz-transition : opacity .4s ease-out;
 }
 
 
@@ -100,6 +104,7 @@
 .discover_rezept_bild:hover div{
 	opacity:0.7;
 	-webkit-transition : opacity .4s ease-in;
+	-moz-transition : opacity .4s ease-in;
 }
 
 .discover_rezept_bild div span{
