@@ -30,14 +30,18 @@
 	height:108px;
 	opacity:0.3;
 	cursor: pointer;
+	-webkit-transition : opacity .2s ease-out;
+	-webkit-transition : opacity .4s ease-in;
 }
 .entdecken_back:hover, .entdecken_next:hover{
 	opacity:0.7;
+	-webkit-transition : opacity .2s ease-in;
 }
 
 .entdecken_back.off, .entdecken_next.off{
 	cursor: default;
-	background: none;
+	opacity:0;
+	-webkit-transition : opacity .4s ease-out;
 }
 
 .entdecken_back{
@@ -79,22 +83,23 @@
 }
 
 .discover_rezept_bild div{
-	display:none;
 	bottom:0;
 	padding: 3px;
 	margin:3px;
 	height:96px;
 	width:96px;
 	background-color:#000;
-	opacity: .7;
+	opacity: 0;
 	position: absolute;
 	text-decoration: none;
+	-webkit-transition : opacity .4s ease-out;
 }
 
 
 
 .discover_rezept_bild:hover div{
-	display:block;
+	opacity:0.7;
+	-webkit-transition : opacity .4s ease-in;
 }
 
 .discover_rezept_bild div span{

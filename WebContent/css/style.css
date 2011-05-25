@@ -29,7 +29,7 @@ a img {
 	position: fixed;
 	height: 100px;
 	width: 100%;
-	background: url("/img/headercontainer_bg.png") repeat-x;
+	background: url("/img/headercontainer2_bg.png") repeat-x;
 	z-index: 100;
 }
 
@@ -37,7 +37,7 @@ a img {
 	height: 100px;
 	width: 980px;
 	margin: 0 auto;
-	background: url("/img/headermain_bg.png") repeat-x;
+	/*background: url("/img/headermain_bg.png") repeat-x;*/
 }
 
 #header_main {
@@ -51,7 +51,7 @@ a img {
 	background: url("/img/headerpeak_bg.png");
 }
 
-#header_left {
+/*#header_left {
 	position: relative;
 	float: left;
 	width: 9px;
@@ -65,13 +65,13 @@ a img {
 	width: 9px;
 	height: 72px;
 	background: url("/img/headerright_bg.png");
-}
+}*/
 
 #logo {
 	float: left;
 	height: 50px;
 	width: 127px;
-	margin: 11px 0 0 48px;
+	margin: 11px 0 0 57px;
 	/*alte größe
 	height: 29px;
 	width: 233px;*/
@@ -1806,7 +1806,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 #signin_btn {
 	position: absolute;
 	float: right;
-	margin-left: 138px;
+	margin-left: 175px;
 	height: 24px;
 	width: 59px;
 	background: url(/img/signin_bg_off.png) repeat;
@@ -1856,11 +1856,11 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 }
 
 #login_signin{
-	margin-left: -175px;
+	margin-left: -138px;
 }
 
 #login_user {
-	margin-left: -1px;
+	margin-left: 36px;
 	width: auto;
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #5a5a5a;

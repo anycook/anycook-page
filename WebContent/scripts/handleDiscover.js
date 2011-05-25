@@ -47,7 +47,8 @@ function fillDiscover(){
 }
 
 function showNextDiscover(event){
-	if(checkRightPos($(this).prev())){
+	if(checkRightPos($(this).prev()) && !blockDiscover){
+		blockDiscover = true;
 		$(this).prev().children(".discover_rezept_bild").first().animate({left: "-=600"}, 
 				{duration: 700, step:synchronizeDiscover, complete:checkButtons});
 	}
@@ -55,7 +56,8 @@ function showNextDiscover(event){
 }
 
 function showBackDiscover(event){
-	if(checkLeftPos($(this).next())){
+	if(checkLeftPos($(this).next()) && !blockDiscover){
+		blockDiscover = true;
 		$(this).next().children(".discover_rezept_bild").first().animate({left: "+=600"}, 
 				{duration: 700,  step:synchronizeDiscover, complete:checkButtons});
 	}
@@ -83,6 +85,7 @@ function checkRightPos(container){
 
 
 function checkButtons(){
+	blockDiscover = false;
 	var back = $(this).parent().prev();
 	if(!checkLeftPos(back.next()) && !back.hasClass("off")){
 		back.addClass("off");
@@ -99,6 +102,8 @@ function checkButtons(){
 		next.removeClass("off");
 	}
 }
+
+var blockDiscover = false;
 
 /*function loadDiscoverRecipe(response, type){
 	// Methode lädt neue Elemente hinzu. Sind bereits welche vorhanden, werden sie erst einmal versteckt.
