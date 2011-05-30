@@ -41,6 +41,7 @@ function loadUsers(json){
 	$("#info ul").empty();
 	
 	$(".facebookid").click(checkFacebookPermissions);
+	$(".mail").click(showMailSettings);
 	
 	
 }
@@ -206,4 +207,21 @@ function confirmedClick(event){
 	
 	$("#info select option:selected").removeAttr("selected");
 	$("#info select option:first").attr("selected", "selected");
+}
+
+function showMailSettings(event){
+	var mail = $(this).text();
+	$.ajax({
+		url:"/anycook/GetMailSettings",
+				dataType:"json",
+				success:function(json){
+					var text = "";
+					for(var i in json){
+						if(json[i] == true)
+							text+=i+", ";
+					}
+					text = text.substring(0, text.length-2);
+					$("#info h3+p").text(text);
+				}
+	})
 }
