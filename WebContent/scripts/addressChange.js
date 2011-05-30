@@ -89,7 +89,6 @@ function handleChange(event){
 		case 1:
 			switch(path[0]){
 			case "search":
-				
 				//fullTextSearch();
 				search = Search.init();
 				search.search();
@@ -122,6 +121,9 @@ function handleChange(event){
 			case "registration":
 				$.address.title("Registrierung | anycook");
 				showRegistration();
+				break;
+			case "settings":
+				loadSettings();
 				break;
 			}
 			break;

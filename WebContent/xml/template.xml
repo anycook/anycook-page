@@ -426,6 +426,53 @@
 					</div>
 				</div>
 			</template>
+			<template id="settings">
+				<div id="settings_container">
+					<h1>Einstellungen</h1>
+					<div id="settings_account">
+						<h2>Konto</h2>
+						<div id="settings_account_content">
+						</div>
+					</div>
+					<div id="settings_facebook">
+						<h2>Facebook</h2>
+						<div id="settings_facebook_content">
+						</div>
+					</div>
+					<div id="settings_notification">
+						<h2>E-Mail-Benachrichtigungen</h2>
+						<div id="settings_notification_content">
+						<table>
+						<tr>
+							<td>Rezept aktiviert wurde </td>
+							<td><input type="checkbox" name="notification_settings" value="activation" /></td>
+						</tr>
+						<tr>
+							<td>Tag aktiviert wurde </td>
+							<td><input type="checkbox" name="notification_settings" value="tag" /></td>
+						</tr>
+						<tr>
+							<td>Diskussionsbeitrag zu deinem Rezept </td>
+							<td><input type="checkbox" name="notification_settings" value="discussion" /></td>
+						</tr>
+						<tr>
+							<td>Antwort auf Diskussionsbeitrag von dir</td>
+							<td><input type="checkbox" name="notification_settings" value="reply" /></td>
+						</tr>
+						<tr>
+							<td>Jemand dein Rezept schmeckt</td>
+							<td><input type="checkbox" name="notification_settings" value="schmeckt" /></td>
+						</tr>
+						<tr>
+							<td>Newsletter</td>
+							<td><input type="checkbox" name="notification_settings" value="newsletter" /></td>
+						</tr>
+						</table>						
+						</div>
+					</div>
+				</div>
+				
+			</template>
 			<template id="fbregistration">
 					<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
 			</template>
