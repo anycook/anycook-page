@@ -143,6 +143,8 @@
 	text-decoration: none;
 	-webkit-transition : opacity .4s ease-out;
 	-moz-transition : opacity .4s ease-out;
+	-o-transition : opacity .4s ease-out;
+	transition : opacity .4s ease-out;
 }
 
 
@@ -151,6 +153,8 @@
 	opacity:0.7;
 	-webkit-transition : opacity .4s ease-in;
 	-moz-transition : opacity .4s ease-in;
+	-o-transition : opacity .4s ease-in;
+	transition : opacity .4s ease-in;
 }
 
 .profile_rezept_bild div span{

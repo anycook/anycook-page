@@ -1,7 +1,14 @@
 @charset "UTF-8";
+@import "discover.css";
+@import "discussion.css";
+@import "fileuploader.css";
+@import "jquery.autocomplete.css";
+@import "profile.css";
+@import "recipeediting.css";
+@import "settings.css";
 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td
-	{
+{
 	margin: 0;
 	padding: 0;
 }
@@ -884,17 +891,15 @@ ul.kategorie_filter li:HOVER {
 
 /*-------NEWS-ENDE-------*/
 #famous_tags {
+	width:627px;
+	height:90px;
 	float: left;
 	margin-top: 15px;
 	padding: 3px 14px 11px 14px;
 	text-align: inherit;
 	color: #404040;
 	border-top: 1pt solid #B5B5B5;
-	-moz-border-radius-bottomright: 4px;
-	-webkit-bottom-right-radius: 4px;
 	border-bottom-right-radius: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	-webkit-bottom-left-radius: 4px;
 	border-bottom-left-radius: 4px;
 	font-style: italic;
 	background: #ece9e3 url("/img/dot.png") repeat-x 0 3px;
