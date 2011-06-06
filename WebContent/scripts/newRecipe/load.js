@@ -70,7 +70,7 @@ function loadNewRecipe(){
 		    onProgress:nrProgress,
 		    onComplete:completeUpload,
 		    // path to server-side upload script
-		    action: '/anycook/UploadImage'
+		    action: '/anycook/UploadRecipeImage'
 		});
 		
 		//step2
