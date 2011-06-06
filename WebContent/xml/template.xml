@@ -429,6 +429,7 @@
 			<template id="settings">
 				<div id="settings_container">
 					<h1>Einstellungen</h1>
+					<p id="settings_saved">gespeichert</p>
 					<div id="settings_account">
 						<h2>Konto</h2>
 						<div id="settings_account_content">
@@ -445,27 +446,27 @@
 						<table>
 						<tr>
 							<td>Rezept aktiviert wurde </td>
-							<td><input type="checkbox" name="notification_settings" value="activation" /></td>
+							<td><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></td>
 						</tr>
 						<tr>
 							<td>Tag aktiviert wurde </td>
-							<td><input type="checkbox" name="notification_settings" value="tag" /></td>
+							<td><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /></td>
 						</tr>
 						<tr>
 							<td>Diskussionsbeitrag zu deinem Rezept </td>
-							<td><input type="checkbox" name="notification_settings" value="discussion" /></td>
+							<td><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></td>
 						</tr>
 						<tr>
 							<td>Antwort auf Diskussionsbeitrag von dir</td>
-							<td><input type="checkbox" name="notification_settings" value="reply" /></td>
+							<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
 						</tr>
 						<tr>
 							<td>Jemand dein Rezept schmeckt</td>
-							<td><input type="checkbox" name="notification_settings" value="schmeckt" /></td>
+							<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
 						</tr>
 						<tr>
 							<td>Newsletter</td>
-							<td><input type="checkbox" name="notification_settings" value="newsletter" /></td>
+							<td><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /></td>
 						</tr>
 						</table>						
 						</div>

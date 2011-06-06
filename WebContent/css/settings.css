@@ -21,6 +21,13 @@
 	cursor: pointer;
 }
 
+#settings_saved{
+	display: none;
+	float: right;
+	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#859F5E;
+	}
+
 #settings_notification_content{
 	display: none;
 	clear: both;
