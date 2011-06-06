@@ -1,7 +1,9 @@
 function loadProfile(username){
 	if(username == "me" && user.checkLogin()){
 		username = user.name;
-	}	
+	}
+	
+	$.address.title(username+" | anycook");
 	var profileData = User.initProfileInfo(username);
 	var image = profileData.getLargeImage();
 	$("#profile_image img").attr("src", image);
