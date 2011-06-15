@@ -391,7 +391,9 @@ ul.kategorie_filter li:HOVER {
 .label_chefhats,.label_muffins {
 	display: table-cell;
 	cursor: pointer;
-	padding: 10px;
+	width:20px;
+	height:20px;
+	background: url(/img/labels.png) no-repeat;
 }
 
 .label_chefhats input,.label_muffins input {
@@ -400,19 +402,18 @@ ul.kategorie_filter li:HOVER {
 }
 
 .label_chefhats {
-	background: url(/icons/chefhat-off.png) no-repeat;
 }
 
 .label_chefhats.on {
-	background: url(/icons/chefhat-on.png) no-repeat;
+	background-position: 0 -21px;
 }
 
 .label_muffins {
-	background: url(/icons/muffin-off.png) no-repeat;
+	background-position: -21px 0;
 }
 
 .label_muffins.on {
-	background: url(/icons/muffin-on.png) no-repeat;
+	background-position: -21px -21px;
 }
 
 /*----------Filter Punkte Devider----------*/
@@ -652,8 +653,8 @@ ul.kategorie_filter li:HOVER {
 
 .big_button {
 	width: 114px;
-	height: 37px;
-	background: url(/img/big_button_off.png) no-repeat;
+	height: 31px;
+	background: url(/img/big_button.png) no-repeat;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #878787;
 	padding-top: 6px;
@@ -662,22 +663,23 @@ ul.kategorie_filter li:HOVER {
 }
 
 .big_button.on {
-	background: url(/img/big_button_on.png) no-repeat;
 	color: #859f5e;
+	background-position: 0 -38px;
+	
 }
 
 .big_button:hover {
-	background: url(/img/big_button_over.png) no-repeat;
+	background-position: 0 -75px;
 	color: #5a5a5a;
 }
 
 .big_button.on:hover {
-	background: url(/img/big_button_on.png) no-repeat;
+	background-position: 0 -38px;
 	color: #859f5e;
 }
 
 .big_button.inactive {
-	background: url(/img/big_button_inactive.png) no-repeat;
+	background-position: 0 -112px;
 	color: #d1cec9;
 	cursor: default;
 }
@@ -685,23 +687,23 @@ ul.kategorie_filter li:HOVER {
 .small_button {
 	width: 44px;
 	height: 37px;
-	background: url(/img/small_button_off.png) no-repeat;
+	background: url(/img/small_button.png) no-repeat;
 }
 
 .small_button.on {
-	background: url(/img/small_button_on.png) no-repeat;
+	background-position: 0 -37px;
 }
 
 .small_button:hover {
-	background: url(/img/small_button_over.png) no-repeat;
+	background-position: 0 -74px;
 }
 
 .small_button.on:hover {
-	background: url(/img/small_button_on.png) no-repeat;
+	background-position: 0 -37px;
 }
 
 .small_button.inactive {
-	background: url(/img/small_button_inactive.png) no-repeat;
+	background-position: 0 -111px;
 	color: #d1cec9;
 	cursor: wait;
 }
@@ -715,15 +717,15 @@ ul.kategorie_filter li:HOVER {
 	height: 15px;
 	margin-top: 8px;
 	margin-left: 14px;
-	background: url(/img/icon_home_off.png) no-repeat;
+	background: url(/img/icon_home.png) no-repeat;
 }
 
 #home_button.on div {
-	background: url(/img/icon_home_active.png) no-repeat;
+	background-position: 0 -15px;
 }
 
 #home_button:hover div {
-	background: url(/img/icon_home_over.png) no-repeat;
+	background-position: 0 -30px;
 }
 
 #home_button.on:hover div {
@@ -1350,8 +1352,8 @@ ul.kategorie_filter li:HOVER {
 .bezeichner {
 	float: left;
 	width: 114px;
-	height: 37px;
-	background: url(/img/bezeichner_off.png) no-repeat;
+	height: 28px;
+	background: url(/img/bezeichner.png) no-repeat;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #878787;
 	padding-top: 6px;
@@ -1362,12 +1364,12 @@ ul.kategorie_filter li:HOVER {
 }
 
 .bezeichner:hover {
-	background: url(/img/bezeichner_over.png) no-repeat;
+	background-position: 0 -34px;
 	color: #5A5A5A;
 }
 
 .bezeichner.on {
-	background: url(/img/bezeichner_on.png) no-repeat;
+	background-position: 0 -68px;
 	color: #859f5e;
 }
 
