@@ -1,5 +1,10 @@
  $(document).ready(function(){
 	 //setup
+	 if($.browser.msie){
+		 var version = Number($.browser.version);		
+		 if(version<9)
+			 document.location.href="http://news.anycook.de/tagged/internet_explorer";
+	 }
 	 //if(checkBrowser() == "Microsoft Internet Explorer")
 	//	 document.location.href="http://news.anycook.de/tagged/internet_explorer";
 	 
