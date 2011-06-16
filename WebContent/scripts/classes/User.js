@@ -129,7 +129,7 @@ User.prototype.getSmallImage = function(){
 	if(this.facebook_id != "0")
 		return "http://graph.facebook.com/"+this.facebook_id+"/picture";
 	
-	return "/userbilder/medium/"+this.image;
+	return "/userbilder/small/"+this.image;
 };
 
 User.prototype.getLargeImage = function(){

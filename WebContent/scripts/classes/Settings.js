@@ -9,7 +9,7 @@ Settings.init = function(){
 	
 	return settings;
 	
-}
+};
 
 function EMailSettings(){
 	this.RECIPEACTIVATION = null;
@@ -40,7 +40,7 @@ EMailSettings.init = function(){
 		}
 	});
 	return emailsettings;
-}
+};
 
 EMailSettings.prototype.setSetting = function(member, value){
 	this[member] = value;
@@ -49,4 +49,4 @@ EMailSettings.prototype.setSetting = function(member, value){
 		data:"type="+member+"&property="+value,
 		async: false
 	});
-}
+};

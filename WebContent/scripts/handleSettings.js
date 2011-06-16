@@ -1,19 +1,18 @@
 var settings = Settings.init();
 
 function loadSettings(){
-	$("#settings_notification_content").hide();
-	$("#settings_facebook_content").hide();
-	$("#settings_account_content").hide();
 	
 	$("#settings_notification h2").click(function(event){
 		$("#settings_notification_content").toggle();
 		showNotificationSettings();
 		});
+	
+	fillAccountSettings();
+	fillNotificationSettings();
 }
 
 
 function showNotificationSettings(){
-	fillNotificationSettings();
 	$("input").change(saveSettings);
 }
 
@@ -34,6 +33,14 @@ function fillNotificationSettings(){
 	$('input[name=notification_newsletter]').attr('checked', settings.emailSettings.NEWSLETTER);
 	
 }
+
+function fillAccountSettings(){
+	$("#profile_image img").attr("src", user.getLargeImage());
+	$("#account_name").val(user.name).attr("size", user.name.length+5);
+	$("#account_mail").val(user.mail).attr("size", user.mail.length+5);
+	if(user.facebook_id == 0)
+		$("#no_facebook").show();
+ }
 
 /*function settingsOpen(event){
 	var newheight;

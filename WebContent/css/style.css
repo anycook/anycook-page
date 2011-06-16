@@ -58,22 +58,6 @@ a img {
 	background: url("/img/headerpeak_bg.png");
 }
 
-/*#header_left {
-	position: relative;
-	float: left;
-	width: 9px;
-	height: 72px;
-	background: url("/img/headerleft_bg.png");
-}
-
-#header_right {
-	position: relative;
-	float: right;
-	width: 9px;
-	height: 72px;
-	background: url("/img/headerright_bg.png");
-}*/
-
 #logo {
 	float: left;
 	height: 50px;
@@ -82,10 +66,6 @@ a img {
 	/*alte größe
 	height: 29px;
 	width: 233px;*/
-}
-
-#logo img {
-	border: 0;
 }
 
 #searchbar {
@@ -729,7 +709,7 @@ ul.kategorie_filter li:HOVER {
 }
 
 #home_button.on:hover div {
-	background: url(/img/icon_home_active.png) no-repeat;
+	background-position: 0 -15px;
 }
 
 #discover_button {

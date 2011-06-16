@@ -429,31 +429,39 @@
 			<template id="settings">
 				<div id="settings_container">
 					<h1>Einstellungen</h1>
-					<p id="settings_saved">gespeichert</p>
-					<div id="settings_account">
+					<span id="settings_saved">gespeichert</span>
+					<div id="settings_account" class="settings">
 						<h2>Konto</h2>
-						<div id="settings_account_content">
+						<div class="settings_content">
+							<div id="profile_image">
+								<img src=""/>
+							</div>
+							<ul id="account_data">
+								<li><input type="text" id="account_name" maxlength="45"/></li>
+								<li><input type="text" id="account_mail" maxlength="45"/></li>
+								<li id="no_facebook"><p>Verbinde dich mit deinem Facebook-Account</p><p><div id="facebook_login"></div></p></li>
+							</ul>
 						</div>
 					</div>
-					<div id="settings_facebook">
+					<div id="settings_facebook" class="settings">
 						<h2>Facebook</h2>
-						<div id="settings_facebook_content">
+						<div id="settings_facebook_content" class="settings_content">
 						</div>
 					</div>
-					<div id="settings_notification">
+					<div id="settings_notification" class="settings">
 						<h2>E-Mail-Benachrichtigungen</h2>
-						<div id="settings_notification_content">
+						<div id="settings_notification_content" class="settings_content">
 						<table>
 						<tr>
-							<td>Rezept aktiviert wurde </td>
+							<td>Eigenes Rezept aktiviert</td>
 							<td><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></td>
 						</tr>
 						<tr>
-							<td>Tag aktiviert wurde </td>
+							<td>Tag aktiviert</td>
 							<td><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /></td>
 						</tr>
 						<tr>
-							<td>Diskussionsbeitrag zu deinem Rezept </td>
+							<td>Diskussionsbeitrag zu deinem Rezept</td>
 							<td><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></td>
 						</tr>
 						<tr>
@@ -461,7 +469,7 @@
 							<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
 						</tr>
 						<tr>
-							<td>Jemand dein Rezept schmeckt</td>
+							<td>Jemandem schmeckt dein Rezept</td>
 							<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
 						</tr>
 						<tr>
