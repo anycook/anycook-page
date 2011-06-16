@@ -1,6 +1,17 @@
 #profile_container{
 	padding-top:10px;
 }
+
+#profile_image{
+	float:left;
+	margin: 0 10px 20px 10px;
+	border: 1px solid #D7D3C7;
+}
+
+#profile_image img{
+	max-width:200px;
+	border:3pt solid #F9F8F6;
+}
 	
 #profile_info{
 	float:left;
