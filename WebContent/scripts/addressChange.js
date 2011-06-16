@@ -60,13 +60,8 @@ function handleChange(event){
 		clearContent();
 		
 		var path = event.pathNames;
-		$.ajax({
-			url: "/xml/template.xml",
-			dataType: $.browser.msie ? "text" : "xml",
-			//dataType: "xml",
-			async:false,
-			success: parseXML
-		});
+		//$.xml.append(path.length == 0 ? "home" : path[0]);
+		$("#content_main").xml("append", path[0]);
 		
 		blockFilter(false);
 		if(path.length > 0){
@@ -233,12 +228,7 @@ function changePage(event){
 		case "discover":
 			$("#home").hide();
 			if($("#discover").length==0){
-				$.ajax({
-					url: "/xml/template.xml",
-					dataType: $.browser.msie ? "text" : "xml",
-					async:false,
-					success: function(xml){parseXML(xml, "home_discover");}
-				});
+				$("#content_main").xml("append", "home_discover");
 				loadDiscover();
 			}
 			else
@@ -258,12 +248,7 @@ function changePage(event){
 			case "discussion":
 				$("#recipe_container").hide();
 				if($("#discussion_container").length == 0){
-					$.ajax({
-						url: "/xml/template.xml",
-						dataType: $.browser.msie ? "text" : "xml",
-						async:false,
-						success: function(xml){parseXML(xml, "recipe_discussion");}
-					});
+					$("#content_main").xml("append", "recipe_discussion");
 					loadDiscussion(event.pathNames[1]);
 				}
 				else

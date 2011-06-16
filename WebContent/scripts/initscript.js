@@ -8,6 +8,8 @@
 	 //if(checkBrowser() == "Microsoft Internet Explorer")
 	//	 document.location.href="http://news.anycook.de/tagged/internet_explorer";
 	 
+	 //xml
+	 $("#content_main").xml("init");
 	 
     	$.ajaxSetup({
         	type:"POST", 
