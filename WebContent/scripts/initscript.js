@@ -1,7 +1,7 @@
  $(document).ready(function(){
 	 //setup
-	 if(checkBrowser() == "Microsoft Internet Explorer")
-		 document.location.href="http://news.anycook.de/tagged/internet_explorer";
+	 //if(checkBrowser() == "Microsoft Internet Explorer")
+	//	 document.location.href="http://news.anycook.de/tagged/internet_explorer";
 	 
 	 
     	$.ajaxSetup({

@@ -62,7 +62,8 @@ function handleChange(event){
 		var path = event.pathNames;
 		$.ajax({
 			url: "/xml/template.xml",
-			dataType: "xml",
+			dataType: $.browser.msie ? "text" : "xml",
+			//dataType: "xml",
 			async:false,
 			success: parseXML
 		});
@@ -234,7 +235,7 @@ function changePage(event){
 			if($("#discover").length==0){
 				$.ajax({
 					url: "/xml/template.xml",
-					dataType: "xml",
+					dataType: $.browser.msie ? "text" : "xml",
 					async:false,
 					success: function(xml){parseXML(xml, "home_discover");}
 				});
@@ -259,7 +260,7 @@ function changePage(event){
 				if($("#discussion_container").length == 0){
 					$.ajax({
 						url: "/xml/template.xml",
-						dataType: "xml",
+						dataType: $.browser.msie ? "text" : "xml",
 						async:false,
 						success: function(xml){parseXML(xml, "recipe_discussion");}
 					});

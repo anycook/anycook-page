@@ -113,11 +113,13 @@
 	-webkit-transition : background-color .4s ease-out;
 	-moz-transition : background-color .4s ease-out;
 	-o-transition : background-color .4s ease-out;
+	-ms-transition : background-color .4s ease-out;
 	transition : background-color .4s ease-out;
 	
 	-webkit-transition : border-color .4s ease-out;
 	-moz-transition : border-color .4s ease-out;
 	-o-transition : border-color .4s ease-out;
+	-ms-transition : border-color .4s ease-out;
 	transition : border-color .4s ease-out;
 }
 

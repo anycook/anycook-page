@@ -220,7 +220,7 @@ a img {
 
 div.kategorie_filter {
 	background-color: #ece9e3;
-	border: 1pt solid #d5d6d2;
+	border: 1px solid #d5d6d2;
 	margin-top: 10px;
 	height: 28px;
 	cursor: pointer;
@@ -243,11 +243,11 @@ div.kategorie_filter {
 }
 
 #kategorie_filter_left {
-	border-right: 1pt solid #d5d6d2;
+	border-right: 1px solid #d5d6d2;
 }
 
 #kategorie_filter_right {
-	border-left: 1pt solid #d5d6d2;
+	border-left: 1px solid #d5d6d2;
 }
 
 #kategorie_filter_name {
@@ -308,6 +308,7 @@ ul.kategorie_filter li:HOVER {
 }
 
 #filter_table {
+	margin:10px 0 -10px 0;
 	float: left;
 	width: 100%;
 	border-collapse: collapse;
@@ -319,7 +320,8 @@ ul.kategorie_filter li:HOVER {
 
 #filter_table tr {
 	display: block;
-	margin-top: 10px;
+	/*padding-top: 10px;*/
+	height:30px;
 }
 
 .filter_table_left {
