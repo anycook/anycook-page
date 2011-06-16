@@ -34,6 +34,7 @@
 
 .settings_content p{
 	margin-bottom:5px;
+	width: 300px;
 }
 
 #settings_account .settings_content{
@@ -98,7 +99,7 @@
 }
 
 #no_facebook{
-	display:none;
+	/*display:none;*/
 	margin-top:15px;
 }
 
@@ -110,7 +111,7 @@
 	border: 1px solid #D7D3C7;
 	border-radius:4px;
 	
-	-webkit-transition : background-color .4s ease-out;
+	/*-webkit-transition : background-color .4s ease-out;
 	-moz-transition : background-color .4s ease-out;
 	-o-transition : background-color .4s ease-out;
 	-ms-transition : background-color .4s ease-out;
@@ -120,7 +121,7 @@
 	-moz-transition : border-color .4s ease-out;
 	-o-transition : border-color .4s ease-out;
 	-ms-transition : border-color .4s ease-out;
-	transition : border-color .4s ease-out;
+	transition : border-color .4s ease-out;*/
 }
 
 /*#settings_container input[type="text"]{

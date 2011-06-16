@@ -439,15 +439,16 @@
 							<ul id="account_data">
 								<li><input type="text" id="account_name" maxlength="45"/></li>
 								<li><input type="text" id="account_mail" maxlength="45"/></li>
-								<li id="no_facebook"><p>Verbinde dich mit deinem Facebook-Account</p><p><div id="facebook_login"></div></p></li>
+								<li id="no_facebook"><p>Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen</p><p><div id="facebook_login"></div></p></li>
 							</ul>
 						</div>
 					</div>
-					<div id="settings_facebook" class="settings">
-						<h2>Facebook</h2>
-						<div id="settings_facebook_content" class="settings_content">
+					<div id="settings_password" class="settings">
+						<h2>Passwort ändern</h2>
+						<div class="settings_content">
 						</div>
 					</div>
+					
 					<div id="settings_notification" class="settings">
 						<h2>E-Mail-Benachrichtigungen</h2>
 						<div id="settings_notification_content" class="settings_content">
@@ -479,6 +480,11 @@
 						</table>						
 						</div>
 					</div>
+					<div id="settings_facebook" class="settings">
+						<h2>Facebook</h2>
+						<div id="settings_facebook_content" class="settings_content">
+						</div>
+				</div>
 				</div>
 				
 			</template>

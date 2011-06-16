@@ -46,7 +46,6 @@ EMailSettings.prototype.setSetting = function(member, value){
 	this[member] = value;
 	$.ajax({
 		url: "/anycook/ChangeMailSettings",
-		data:"type="+member+"&property="+value,
-		async: false
+		data:"type="+member+"&property="+value
 	});
 };
