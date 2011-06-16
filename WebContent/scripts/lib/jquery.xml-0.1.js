@@ -10,7 +10,8 @@
              if ( ! data ) {
              
         	 var settings = {
-			      'xml'         : '/xml/template.xml'
+			      xml         : '/xml/template.xml',
+			      async: false
         	};
         	 
 		      // If options exist, lets merge them
@@ -19,27 +20,14 @@
 		        $.extend( settings, options );
 		      }
 		      
-		      var xml;
-		      $.ajax({
-					url: settings.xml,
-					dataType: $.browser.msie ? "text" : "xml",
-					async:false,
-					success: function(data){
-						if (typeof data == "string") {
-							var div = $("<div/>").html(data);
-						    xml =  div.html();
-						} else {
-							xml = data;
-						}
-					},
-					error: function(jqXHR, textStatus, errorThrown){
-						alert(jqXHR, textStatus, errorThrown);
-					}
-		      });
+		      var $xmlDoc = null;
+		      if(settings.async == false)
+		    	  $xmlDoc = $.fn.xml.loadXml(settings.xml);
 		      
                $(this).data("xml", {
                    target : $this,
-                   $xmlDoc : $(xml)
+                   $xmlDoc : $xmlDoc,
+                   settings : settings
                });
 
              }
@@ -53,8 +41,11 @@
              var $this = $(this),
              data = $this.data("xml"); 
              
-             //var $appendTo = data.$appendTo;             
+             //var $appendTo = data.$appendTo;
+             
              var $xmlDoc = data.$xmlDoc;
+             if(data.settings.async == true)
+            	 $xmlDoc = $.fn.xml.loadXml(settings.xml);
              
              $xmlDoc.find("template#"+contentName).each(function(){
              	var obj = $(this).clone().contents();
@@ -77,6 +68,28 @@
       $.error( 'Method ' +  method + ' does not exist on jQuery.xml' );
     }    
   
+  };
+  
+  $.fn.xml.loadXml = function(xml){
+	  var xmlDoc;
+	  
+	  $.ajax({
+			url: xml,
+			dataType: $.browser.msie ? "text" : "xml",
+			async:false,
+			success: function(data){
+				if (typeof data == "string") {
+					var div = $("<div/>").html(data);
+					xmlDoc =  div.html();
+				} else {
+					xmlDoc = data;
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				alert(jqXHR, textStatus, errorThrown);
+			}
+    });
+	  return $(xmlDoc);
   };
   
 })( jQuery );
