@@ -1,3 +1,12 @@
+/*
+ * jQuery XML Plugin v0.1
+ * http://anycook.de
+ *
+ * Copyright (c) 2011 Jan Grassegger
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ */
+
 (function( $ ){
 
   var methods = {
