@@ -48,54 +48,22 @@
 #profile_text{
 	display: none;
 	clear: both;
-	}
-
-#profile_text_content{
-	float: left;
-	height: 147px;
-	/*width: 656px;*/
-	background: url(/img/rezept_frame_bottom.png) repeat-x;
-	background-color: #ECE9E3;
-	background-position: 0 141px;
-	}
-
-#profile_text_left{
-	float: left;
-	width: 8px;
-	height: 147px;
-	background: url(/img/rezept_frame_left.png) no-repeat;
-	}
-
-#profile_text_right{
-	float: right;
-	height: 100%;
-	width: 8px;
-	height: 147px;
-	background: url(/img/rezept_frame_right.png) no-repeat;
 }
 
-
-#profile_text_center{
-	height: 120px;
-	width: 619px;
-	float: left;
-	background-color: #ECE9E3;
-	padding: 10px;
-	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color: #404040;
-	}
-
+#profile_text p{
+	padding: 0 10px;
+	font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	margin-bottom:20px;
+}
 
 
 #profile_recipes, #profile_schmeckt{
 	display:none;
 	margin: 0 0 20px 0;
 	padding: 20px 0;
-	clear:both;
 }
 
 #profile_recipes h2, #profile_schmeckt h2, #profile_text h2{
-	float:left;
 	font:  16pt Georgia;
 	color: #404040;
 	width:605px;

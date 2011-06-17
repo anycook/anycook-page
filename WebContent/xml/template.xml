@@ -409,9 +409,7 @@
 					<div id="profile_text">
 						<h2></h2>
 						<div id="profile_text_content">
-							<div id="profile_text_left"></div>
-							<div id="profile_text_center"></div>
-							<div id="profile_text_right"></div>
+							<p></p>
 						</div>
 					</div>
 					<div id="profile_recipes">
@@ -429,11 +427,10 @@
 			<template id="settings">
 				<div id="settings_container">
 					<h1>Einstellungen</h1>
-					<span id="settings_saved">gespeichert</span>
 					<div id="settings_account" class="settings">
-						<h2>Konto</h2>
+						<h2>Konto<div class="settings_saved">gespeichert</div></h2>
 						<div class="settings_content">
-							<div id="profile_image">
+							<div id="account_image">
 								<img src=""/>
 							</div>
 							<form id="account_form">
@@ -442,7 +439,7 @@
 								<li><input type="text" id="account_mail" maxlength="45"/></li>
 								<li>
 									<h3>Über mich</h3>
-									<textarea id="uebermich"></textarea>
+									<textarea id="account_aboutme"></textarea>
 								</li>
 								<li>
 									<input type="submit" value="speichern" />
@@ -452,13 +449,13 @@
 						</div>
 					</div>
 					<div id="settings_password" class="settings">
-						<h2>Passwort ändern</h2>
+						<h2>Passwort ändern<div class="settings_saved">gespeichert</div></h2>
 						<div class="settings_content">
 						</div>
 					</div>
 					
 					<div id="settings_notification" class="settings">
-						<h2>E-Mail-Benachrichtigungen</h2>
+						<h2>E-Mail-Benachrichtigungen<div class="settings_saved">gespeichert</div></h2>
 						<div id="settings_notification_content" class="settings_content">
 						<table>
 						<tr>
@@ -489,7 +486,7 @@
 						</div>
 					</div>
 					<div id="settings_facebook" class="settings">
-						<h2>Facebook</h2>
+						<h2>Facebook<div class="settings_saved">gespeichert</div></h2>
 						<div id="settings_facebook_content" class="settings_content">
 					</div>
 					<div id="no_facebook">Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen<div id="facebook_login"></div></div>
@@ -508,7 +505,7 @@
 						<p>Bitte gibt deine Emailadresse oder deinen Usernamen ein:</p>
 							<table>
 							<tr><td>Email/Username:</td><td><input id="resetpwmail" type="text"/></td><td class="error"></td></tr>
-							<tr><td></td><td><input type="submit" value="Abschicken"/></td><td class="error"></td></tr>
+							<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
 							</table>
 						</form>
 					</div>
@@ -518,7 +515,7 @@
 							<table>
 							<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
 							<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
-							<tr><td></td><td><input type="submit" value="Abschicken"/></td><td class="error"></td></tr>
+							<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
 							</table>
 						</form>
 					</div>				

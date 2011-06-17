@@ -23,6 +23,7 @@ User.init = function(){
 				user.mail = response.mail;
 				user.facebook_id = response.facebookID;
 				user.image = response.image;
+				user.text = response.text;
 			}
 				
 		}

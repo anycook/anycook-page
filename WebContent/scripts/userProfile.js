@@ -14,7 +14,7 @@ function loadProfile(username){
 	if(profileData.text!=null){
 		$("#profile_text").show();
 		$("#profile_text h2").text("Über mich");
-		$("#profile_text_center").append(profileData.text);
+		$("#profile_text p").text(profileData.text);
 	}
 	
 	if(profileData.facebook_id>0){

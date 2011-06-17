@@ -38,6 +38,29 @@ a img {
 	text-decoration: underline;
 }
 
+input[type="submit"]{
+	height: 30px;
+	text-align: center;
+	/*margin: 6px 0 0 0;*/
+	padding: 0 5px;
+	border: 1px solid #6e7e4c;
+	border-radius:4px;
+	background: url(/img/button_bg.png) repeat-x;
+	cursor: pointer;
+	font: 13pt Clarendon, sans-serif;
+	color: #fff;
+}
+
+input[type="text"]{
+	font:  12pt Georgia;
+	color: #404040;
+	padding:2px;
+	background-color:#F9F8F6;
+	border: 1px solid #D7D3C7;
+	border-radius:4px;
+	height:18px;
+}
+
 /*----------Header----------*/
 #header_container {
 	position: fixed;
@@ -1911,6 +1934,8 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	height: 25px;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #b5b5b5;
+	border-radius:0;
+	background: #fff;
 	float:left;
 	padding: 0 0 0 5px;
 	margin: 0 0 5px 0;
@@ -1920,26 +1945,25 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 }
 
 #login_form input[type="submit"]{
-	height:30px;
 	width:159px;
 	margin:6px 0 0 0;
-	padding: 0;
-	border:0;
-	background-image: url(/img/anmelden_button.png);
-	cursor:pointer;
 }
 
 #register_button{
 	display:block;
-	height:30px;
-	width:159px;
+	height:20px;
+	width:149px;
 	margin-top:12px;
-	background-image: url(/img/button_green.png);
+	text-align: center;
+	/*margin: 6px 0 0 0;*/
+	padding: 4px 5px;
+	border: 1px solid #6e7e4c;
+	border-radius:4px;
+	background: url(/img/button_bg.png) repeat-x;
 	cursor: pointer;
-}
-
-#register_button{
-	background-image: url(/img/registrieren_button.png);
+	font: 13pt Clarendon, sans-serif;
+	color: #fff;
+	text-decoration: none;
 }
 
 #login_form input#check_stayloggedin{
@@ -2203,6 +2227,7 @@ td.step_1_right {
 	border: 1px solid #979694; /*d1cec9*/
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;
+	border-radius:0;
 }
 
 #recipe_name {
@@ -2989,3 +3014,20 @@ td.step_1_right {
 	color: #c05c54;
 }
 
+
+/*------- resetpw -------*/
+
+#resetpwform1 td{
+	font:10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#resetpwform1 input[type="text"]{
+	width:260px;
+	
+}
+
+#resetpwform1 input[type="submit"]{
+	margin-top: 8px;
+	width:266px;
+	
+}

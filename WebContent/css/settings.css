@@ -29,7 +29,7 @@
 	display:none;
 	float:left;
 	width:100%;
-	margin-bottom: 20px;
+	margin: 0 10px 20px 10px;
 }
 
 .settings_content p{
@@ -41,8 +41,9 @@
 	display:block;
 }
 
-#settings_saved{
+.settings_saved{
 	display: none;
+	margin-top:5px;
 	float: right;
 	font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color:#859F5E;
@@ -51,7 +52,6 @@
 #settings_notification_content{
 	display: none;
 	clear: both;
-	padding:10px;
 	/*font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
 	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	
@@ -87,6 +87,17 @@
 
 /* account settings */
 
+#account_image{
+	float:left;
+	margin: 0 10px 20px 0;
+	border: 1px solid #D7D3C7;
+}
+
+#account_image img{
+	max-width:200px;
+	border:3pt solid #F9F8F6;
+}
+
 #account_data{
 	float:left;
 	font:  12pt Georgia;
@@ -99,6 +110,7 @@
 	color: #404040;
 	margin: 0 0 4px 2px;
 	padding-top:6px;
+	height:18px;
 }
 
 #account_data li{
@@ -112,14 +124,7 @@
 }
 
 #settings_container input[type="text"]{
-	font:  12pt Georgia;
-	color: #404040;
-	padding:2px;
-	background-color:#F9F8F6;
-	border: 1px solid #D7D3C7;
-	border-radius:4px;
-	width:250px;
-	height:18px;
+	width:260px;
 }
 
 #settings_container input[type="text"]#account_name{
@@ -136,19 +141,9 @@
 	border-radius:4px;
 	height:103px;
 	resize: none;
-	width:250px;
+	width:260px;
 }
 
 #settings_container input[type="submit"]{
-	height: 28px;
-	text-align: center;
-	/*margin: 6px 0 0 0;*/
-	padding: 0 7px;
-	border: 1px solid #6e7e4c;
-	border-radius:4px;
-	background: url(/img/button_bg.png) repeat-x;
-	cursor: pointer;
-	font: 14pt Clarendon, sans-serif;
-	color: #fff;
-	width:256px;
+	width:266px;
 }
