@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @import "discover.css";
 @import "discussion.css";
 @import "fileuploader.css";
@@ -7,6 +8,11 @@
 @import "recipeediting.css";
 @import "settings.css";
 @import "footerpages.css";
+
+@font-face{
+	font-family: Clarendon;
+	src: local("Clarendon"), url('/fonts/clarendon.ttf') format('Truetype');
+	}
 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td
 {
