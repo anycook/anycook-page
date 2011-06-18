@@ -6,6 +6,9 @@ $(document).ready(function(){
 	});
 	
 	
+	//xml
+	$("#content_main").xml("init", {xml : "/backend/xml/template.xml"});
+	
 	$.address.change(changePage);
 	
 	$("#home_button").click(function(){
@@ -33,12 +36,7 @@ function changePage(event){
 	
 	if(sitename != lastPage){
 		$("#content_main").empty();
-		$.ajax({
-			url: "/backend/xml/template.xml",
-			dataType: "xml",
-			async:false,
-			success: function(xml){parseXML(xml, sitename);}
-		});
+		$("#content_main").xml("append", sitename);
 	}
 	
 	if(sitename == "home"){
