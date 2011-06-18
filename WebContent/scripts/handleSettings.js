@@ -2,28 +2,49 @@ var settings = Settings.init();
 
 function loadSettings(){
 	
+	user.onlyUserAccess();
+	
 	fillAccountSettings();
+	$("#account_form").submit(saveAccountSettings);
+	if(user.facebook_id == 0)
+		$("#no_facebook").show();
+	var uploader = new qq.FileUploader({
+	    // pass the dom node (ex. $(selector)[0] for jQuery users)
+	    element: $('#account_upload div')[0],
+	    // path to server-side upload script
+	    action: '/anycook/UploadUserImage',
+	    onComplete:saveImage
+	});
+	
 	fillNotificationSettings();
 	$("#settings_notification input").change(saveSettings);
 	
+	if(user.facebook_id == 0){
+		$("#settings_password").show();
+		$("#showpassword").click(togglePasswordField);
+	}
+	
 	$(".settings h2").click(showSettings);
-	$("#account_form").submit(saveAccountSettings);
 }
 
 function showSettings(event){
 	var $this = $(this);	
-	var $content = $this.next();
-	var height = $content.css("height");
-	var marginBottom = $content.css("marginBottom");
+	var $content = $this.next();	
+	var data = $content.data("animation");
+	if(data == undefined){
+		var height = $content.css("height");
+		var marginBottom = $content.css("marginBottom");
+		$content.data("animation", {height : height, marginBottom : marginBottom});
+		data = $content.data("animation");
+	}	
 	
 	if($content.css("display")=="none"){		
 		$content.css({height: 0, marginBottom: 0});
 		$content.show();
-		$content.animate({height : height, marginBottom : marginBottom}, 1000);
+		$content.animate({height : data.height, marginBottom : data.marginBottom}, {duration: 1000});
 	}else{
 		$content.animate({height: 0, marginBottom: 0}, {duration: 1000, complete: function(){
-			$content.hide().css({height : height, marginBottom : marginBottom});
-			
+			$content.hide().css({height : data.height, marginBottom : data.marginBottom});		
 		}
 		});
 	}
@@ -58,8 +79,7 @@ function fillAccountSettings(){
 	$("#account_name").val(user.name);
 	$("#account_mail").val(user.mail);
 	$("#account_aboutme").val(user.text);
-	if(user.facebook_id == 0)
-		$("#no_facebook").show();
+	
  }
 
 function saveAccountSettings(event){
@@ -108,6 +128,17 @@ function showSaveNotification($container){
 
 function hideSaveNotification(containerid){
 	$(containerid).find(".settings_saved").fadeOut(1000);
+}
+
+function togglePasswordField(event){
+	var $pass = $("#password_new");
+	var pass = $pass.val();
+	if($pass.attr("type") == "password"){
+		$pass.after("<input type=\"text\" id=\"password_new\" value=\""+pass+"\" />");
+	}else{
+		$pass.after("<input type=\"password\" id=\"password_new\" value=\""+pass+"\" />");
+	}
+	$pass.first().remove();
 }
 
 /*function settingsOpen(event){

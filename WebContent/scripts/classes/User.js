@@ -72,6 +72,14 @@ User.prototype.checkLogin = function(){
 	return this.name != null;
 };
 
+User.prototype.onlyUserAccess = function(){
+	if(!this.checkLogin())
+		$.address.value("");
+	else
+		return true;
+	return false;
+};
+
 
 
 

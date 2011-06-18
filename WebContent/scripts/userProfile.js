@@ -1,5 +1,5 @@
 function loadProfile(username){
-	if(username == "me" && user.checkLogin()){
+	if(username == "me" && user.onlyUserAccess()){
 		username = user.name;
 	}
 	

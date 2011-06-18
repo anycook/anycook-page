@@ -26,7 +26,7 @@ function addEditingHandler(){
 	    // pass the dom node (ex. $(selector)[0] for jQuery users)
 	    element: document.getElementById('edit_rezept_bild'),
 	    // path to server-side upload script
-	    action: '/anycook/UploadImage',
+	    action: '/anycook/UploadRecipeImage',
 	    onComplete:saveImage
 	});
 	

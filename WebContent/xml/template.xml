@@ -431,7 +431,10 @@
 						<h2>Konto<div class="settings_saved">gespeichert</div></h2>
 						<div class="settings_content">
 							<div id="account_image">
-								<img src=""/>
+								<div id="account_upload">Neues Bild hochladen
+								<div></div>
+								</div>							
+								<img src=""/>								
 							</div>
 							<form id="account_form">
 							<ul id="account_data">
@@ -451,6 +454,14 @@
 					<div id="settings_password" class="settings">
 						<h2>Passwort ändern<div class="settings_saved">gespeichert</div></h2>
 						<div class="settings_content">
+							<form id="password_form">
+								<h3>Altes Passwort</h3>
+								<input type="password" id="password_old"/>
+								<h3>Neues Passwort</h3>
+								<input type="password" id="password_new"/>
+								<div id="showpassword">Passwort anzeigen</div>
+								<input type="submit" value="speichern"/>
+							</form>
 						</div>
 					</div>
 					
