@@ -51,7 +51,7 @@ input[type="submit"]{
 	color: #fff;
 }
 
-input[type="text"], input[type="password"]{
+input[type="text"], input[type="password"], input[type="email"]{
 	font:  12pt Georgia;
 	color: #404040;
 	padding:2px;
@@ -2968,7 +2968,7 @@ td.step_1_right {
 	margin: 20px 0 20px 0;
 }
 
-#reg_form input[type="text"], #reg_form input[type="password"]{
+#reg_form input[type="text"], #reg_form input[type="password"], #reg_form input[type="email"]{
 	background-color: #ece9e3;
 	border: 1px solid #979694; /*d1cec9*/
 	outline: none; /*Remove Chrome and Safari glows on focus*/

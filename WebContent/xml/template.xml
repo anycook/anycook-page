@@ -547,7 +547,7 @@
 									<tr>
 										<td>
 											<p>Email</p>
-											<input type="text" id="reg_email" />
+											<input type="email" id="reg_email" />
 										</td>
 										<td class="reg_error" id="reg_error_mail"></td>
 									</tr>

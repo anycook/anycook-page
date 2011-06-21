@@ -13,7 +13,7 @@ function loadSettings(){
 	    element: $('#account_upload div')[0],
 	    // path to server-side upload script
 	    action: '/anycook/UploadUserImage',
-	    onComplete:saveImage
+	    onComplete:saveUserImage
 	});
 	
 	fillNotificationSettings();
@@ -25,6 +25,12 @@ function loadSettings(){
 	}
 	
 	$(".settings h2").click(showSettings);
+}
+
+function saveUserImage(){
+	user = User.init();
+	$("#account_image img").attr("src", user.getLargeImage());
+	$("#user img").attr("src", user.getSmallImage());
 }
 
 function showSettings(event){

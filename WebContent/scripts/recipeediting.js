@@ -27,7 +27,7 @@ function addEditingHandler(){
 	    element: document.getElementById('edit_rezept_bild'),
 	    // path to server-side upload script
 	    action: '/anycook/UploadRecipeImage',
-	    onComplete:saveImage
+	    onComplete:saveRecipeImage
 	});
 	
 	var removezutathtml = "<div id=\"remove_zutat_request\"><p>\"<span></span>\"" +
@@ -96,7 +96,7 @@ function hideEditImage(){
 	$("#edit_rezept_bild").fadeOut(200);
 }
 
-function saveImage(){
+function saveRecipeImage(){
 	var pathNames = $.address.pathNames();
 	var recipe = pathNames[1];
 	var version = pathNames[2];
