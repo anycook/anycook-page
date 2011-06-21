@@ -87,7 +87,7 @@
     			<a class="bezeichner" id="zubereitung">Zubereitung</a><a class="bezeichner" id="addtags">+Tags</a>
     		</div>
     		<div id="bezeichner_container">
-    			<div id="step_container"></div>
+    			<ol id="step_container"></ol>
     			<div id="addtags_container">
     			<div class="new_recipe_headline">Hilf den anderen beim Finden!<br/>Füge doch noch ein paar Tags hinzu</div>
 						<table>
