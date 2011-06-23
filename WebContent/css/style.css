@@ -10,7 +10,10 @@
 
 @font-face{
 	font-family: Clarendon;
-	src: local("Clarendon"), url('/fonts/clarendon.ttf') format('Truetype');
+	src: local("Clarendon"), 
+	local("ClarendonRegular"), 
+	local("Clarendon-Regular"),
+	url("/fonts/clarendon.ttf") format("truetype");
 	}
 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td
@@ -48,6 +51,7 @@ input[type="submit"]{
 	cursor: pointer;
 	font: 13pt Clarendon, sans-serif;
 	color: #fff;
+	line-height: 20px;
 }
 
 input[type="text"], input[type="password"], input[type="email"]{
@@ -1928,7 +1932,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 
 
 
-#login_form input[type="text"], #login_form input[type="password"], #login_form input[type="checkbox"]{
+#login_form input[type="text"], #login_form input[type="password"]{
 	width: 136px;
 	height: 25px;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -1941,6 +1945,12 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	border: 1pt solid #87a347;
 	border-right: 0pt;
 	outline: none; /*Remove Chrome and Safari glows on focus*/
+}
+
+#login_form input[type="checkbox"]{
+	margin: 2px 4px 5px 0;
+	float:left;
+	
 }
 
 #login_form input[type="submit"]{
@@ -1963,11 +1973,7 @@ li.odd .comment_arrow,li li.odd .comment_arrow_small,#comment_discussion li.odd 
 	font: 13pt Clarendon, sans-serif;
 	color: #fff;
 	text-decoration: none;
-}
-
-#login_form input#check_stayloggedin{
-	width: 20px;
-	margin: -4px 0 0 0;
+	line-height: 20px;
 }
 
 #username_end,#email_end,#password_end {
