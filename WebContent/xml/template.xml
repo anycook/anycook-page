@@ -132,6 +132,7 @@
     	</div>
     </template>
     <template id="newrecipe">
+    <div id="new_recipe_container">
     	<div id="new_recipe_step1" class='new_recipe_steps'>
 					<div class="new_recipe_headline">Hallo!<br/>Schön, dass Du ein Rezept erstellen möchtest.</div>
 					<div id="step_1_form"  name="form" method="post">
@@ -288,6 +289,7 @@
 						<div class="last_step_btn" id="recipe_ready">Fertig</div>
 					</div>
 				  </div>
+			</div>
 			</template>
 			<template id="activate">
 				<div id='new_activation' class="content_message"><h5></h5><p></p></div>

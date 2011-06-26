@@ -15,8 +15,8 @@ function loadNewRecipe(){
 		
 		newrecipe = new Recipe();
 		
-		$(".new_recipe_steps").hide();
-		$("#new_recipe_step1").show();
+		//$(".new_recipe_steps").hide();
+		//$("#new_recipe_step1").show();
 		var headertext = "<div id='nr_general_btn' class='big_button'>Generelles</div>" +
 				"<div class='nr_dots'></div><div id='nr_schritte_btn' class='big_button inactive'>Schritte</div>" +
 				"<div class='nr_dots'></div><div id='nr_zutaten_btn' class='big_button inactive'>Zutaten</div>" +

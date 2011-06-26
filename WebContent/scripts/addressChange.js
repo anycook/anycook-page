@@ -200,8 +200,8 @@ function handleChange(event){
 		}
 		else if(event.pathNames[0] == "newrecipe"){
 			$("#nr_general_btn").addClass("on");
-			$(".new_recipe_steps").hide();
-			$("#new_recipe_step1").show();
+			//$(".new_recipe_steps").hide();
+			//$("#new_recipe_step1").show();
 		}
 		else if(event.pathNames[0] == "recipe"){
 			$("#recipe_general_btn").addClass("on");
@@ -266,7 +266,7 @@ function changePage(event){
 			break;
 			
 		case "newrecipe":
-			$(".new_recipe_steps").hide();
+			//$(".new_recipe_steps").hide();
 			switch(page){
 			case "schritte":
 				loadStep2();
