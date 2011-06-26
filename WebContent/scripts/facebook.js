@@ -24,6 +24,7 @@ function fbLogin(){
 }
 
 function fbSessionChange(event){
+	alert(event.status);
 	if(event.status == "connected" && !user.checkLogin()){
 		if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home"){
 			user = User.init();

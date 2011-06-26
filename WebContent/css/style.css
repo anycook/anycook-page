@@ -2812,7 +2812,6 @@ td.step_1_right {
 
 /*----- Content Message ------*/
 .content_message {
-	position: relative;
 	padding: 10px;
 	background-color: #e2eccc;
 	color: #899b61;
@@ -2822,8 +2821,6 @@ td.step_1_right {
 	-webkit-border-radius: 7px;
 	border-radius: 7px;
 	margin-top: 110px;
-	left: 50%;
-	margin-left: -201px;
 }
 
 .content_message h5,.content_message p {
