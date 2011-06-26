@@ -30,24 +30,6 @@ function newRecipeKeydown(event){
 	
 }
 
-function focusNewRecipe(event){
-	var target = $(event.target);
-	
-	if(target.val()=="kurz & knapp"){
-		//$("#nr_progress").append("<div id='nr_name'></div>");
-		target.val("");
-		$("#recipe_name").css("color", "#404040");
-	}
-}
-
-function focusoutNewRecipe(event){
-	var target = $(event.target);
-	if(target.val()==""){
-		target.val("kurz & knapp");
-		$("#recipe_name").css("color", "#9b9b9a");	
-	}
-}
-
 function focusNRBeschreibung(event){
 	var target = $(event.target);
 	var text = target.val();
@@ -230,5 +212,18 @@ function checkNewOnOff(event){
 	}
 		
 	
+}
+
+//animation
+function animateNewRecipe(newLeft){
+		$("#new_recipe_step1").animate({left: newLeft}, 
+				{duration: 700, step:synchronizeNewRecipe});	
+}
+
+function synchronizeNewRecipe(now){
+	var siblings = $(this).siblings();
+	$(siblings[0]).css("left", now+655);
+	$(siblings[1]).css("left", now+1310);
+	$(siblings[2]).css("left", now+1965);
 }
 

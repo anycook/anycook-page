@@ -24,7 +24,7 @@ function finishStep1(){
 		async:false,
 		success: function(response){
 			if(response != "true"){
-				
+				$("#recipe_name").addClass("wrong");
 				checker = false;
 			}
 	}

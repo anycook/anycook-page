@@ -15,8 +15,6 @@ function loadNewRecipe(){
 		
 		newrecipe = new Recipe();
 		
-		//$(".new_recipe_steps").hide();
-		//$("#new_recipe_step1").show();
 		var headertext = "<div id='nr_general_btn' class='big_button'>Generelles</div>" +
 				"<div class='nr_dots'></div><div id='nr_schritte_btn' class='big_button inactive'>Schritte</div>" +
 				"<div class='nr_dots'></div><div id='nr_zutaten_btn' class='big_button inactive'>Zutaten</div>" +
@@ -51,8 +49,6 @@ function loadNewRecipe(){
 		$(".next_step").click(nextStep);
 		
 		//step1
-		$("#recipe_name").focus(focusNewRecipe);
-		$("#recipe_name").focusout(focusoutNewRecipe);
 		$("#recipe_name").keypress(newRecipeKeypress).keydown(newRecipeKeydown);
 		
 		$("#recipe_beschreibung").focus(focusNRBeschreibung);
@@ -108,8 +104,10 @@ function loadNewRecipe(){
 }
 
 function loadStep2(){
-	if(newrecipe.name ==null || newrecipe.beschreibung == null || newrecipe.kategorie == null)
+	if(newrecipe.name ==null || newrecipe.beschreibung == null || newrecipe.kategorie == null){
 		$.address.parameter("page", "");
+		return;
+	}
 	
 	$("#nr_schritte_btn").addClass("on");			
 	$("#new_recipe_step2").show();
@@ -122,6 +120,9 @@ function loadStep2(){
 			}
 		});
 	}
+	
+	animateNewRecipe(-655);
+	
 }
 
 function loadStep3(){
@@ -173,6 +174,8 @@ function loadStep3(){
 				$("#nr_zutatennumber").text(reihen);
 			}});}});
 	}
+	
+	animateNewRecipe(-1310);
 }
 
 
@@ -190,6 +193,7 @@ function loadStep4(){
 			$("#progress_4 > *").animate({"opacity": 1.0}, {duration: 500});
 			}});
 	}
+	animateNewRecipe(-1965);
 }
 
 function loadPreview(){

@@ -134,12 +134,12 @@
     <template id="newrecipe">
     <div id="new_recipe_container">
     	<div id="new_recipe_step1" class='new_recipe_steps'>
-					<div class="new_recipe_headline">Hallo!<br/>Schön, dass Du ein Rezept erstellen möchtest.</div>
+					<h1>Hallo! Schön, dass Du ein Rezept erstellen möchtest.</h1>
 					<div id="step_1_form"  name="form" method="post">
 						<table>
 							<tr>
 								<td class="step_1_left">Rezeptname:</td>
-								<td class="step_1_right"><input type="text" id="recipe_name" maxlength="50" value="kurz &amp; knapp" /></td>
+								<td class="step_1_right"><input type="text" id="recipe_name" maxlength="50" placeholder="kurz &amp; knapp" /></td>
 							</tr>
 							<tr>
 								<td class="step_1_left">Kategorie:</td>
@@ -171,7 +171,7 @@
 					<div class="next_step" id="next_step1">weiter</div>
 				</div>
 				<div id="new_recipe_step2" class='new_recipe_steps'>
-					<div class="new_recipe_headline">Weiter gehts! Nicht vergessen, kurz und<br /> einfach erklärt, dann versteht es auch jeder.</div>
+					<h1>Weiter gehts! Nicht vergessen, kurz und einfach erklärt, dann versteht es auch jeder.</h1>
 					<div id="step_2_form"  name="form" method="post">
 					<table id="step_table">
 						<tr>
@@ -210,7 +210,7 @@
 					<div class="next_step" id="next_step2">weiter</div>
 				</div>
 				<div id="new_recipe_step3" class='new_recipe_steps'>
-					<div class="new_recipe_headline">Fast geschafft!<br />Kommen wir zu den Zutaten.</div>
+					<h1>Fast geschafft! Kommen wir zu den Zutaten.</h1>
 						<form id="step_3_form"  name="form" method="post">
 						<table id="new_zutat_table">
 
@@ -220,7 +220,7 @@
 						<div class="next_step" id="next_step3">weiter</div>
 				</div>
 				<div id="new_recipe_step4" class='new_recipe_steps'>
-					<div class="new_recipe_headline">Noch ein paar Details!<br />Dann ist das Rezept auch schon fertig.</div>
+					<h1>Noch ein paar Details! Dann ist das Rezept auch schon fertig.</h1>
 					<form id="step_4_form"  name="form" method="post">
 						<table>
 							<tr>

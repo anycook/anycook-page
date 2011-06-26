@@ -162,11 +162,6 @@
 				
 				$("#filter_reset").click(function(){history.back();});
 				
-				/*$("#search").val("Gerichte, Zutaten, Tags, ...");
-				$("#search").css("color","#b5b5b5");
-				$("#search").css("fontStyle","italic");*/
-				
-				//$("#search").focus(focusSearch);
 				
 				$("#search").focusout(focusoutSearch);
             	

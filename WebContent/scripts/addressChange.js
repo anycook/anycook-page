@@ -200,6 +200,7 @@ function handleChange(event){
 		}
 		else if(event.pathNames[0] == "newrecipe"){
 			$("#nr_general_btn").addClass("on");
+			animateNewRecipe(0);
 			//$(".new_recipe_steps").hide();
 			//$("#new_recipe_step1").show();
 		}

@@ -146,13 +146,6 @@ function addTerms(terms){
 function removeTerm(event){
 	var target = $(event.target);
 	var term = target.prev().text();
-	/*removefromSession("term="+term);
-	searchterms[term]=false;
-	target.parent().remove();
-	if($(".search_term").length == 0){ 
-		$("#terms_text").hide();
-		$(".close_term").die("click", removeTerm);
-	}*/
 	search.removeTerm(term);
 	search.flush();
 	
@@ -162,46 +155,7 @@ function gotoGericht(gericht){
 	$.address.path("recipe/"+gericht);
 }
 
-/*function addtoSession(data){
-	$.ajax({
-		url:"/anycook/AddtoSession",
-		async:false,
-		data:data, 
-		success:function(response){			
-			var array = $.address.pathNames();
-			if(array.length >0 && array[0]=="search")
-				fullTextSearch();
-			else
-				$.address.path("search");
-		}
-	});
-}
 
-function removefromSession(data){
-	$.ajax({
-		url:"/anycook/RemovefromSession",
-		data: data,
-		success:function(response){
-			if(response == "false")
-				$.address.path("");
-			else
-				fullTextSearch();
-			}
-	});
-}*/
-
-function focusSearch(){
-	var value = $("#search").val();
-	var pathName = $.address.pathNames()[0];
-	var recipeName = $.address.pathNames()[1];
-	if(pathName == null || pathName == undefined)
-		pathName = "";
-	if(pathName == "recipe" && value == recipeName || pathName != "recipe" && value=="Gerichte, Zutaten, Tags, ..."){
-		$("#search").css("color","#404040");
-		$("#search").css("fontStyle","normal");
-		$("#search").val("");
-	}
-}
 
 function focusoutSearch(){
 	$("#search").val("");	
