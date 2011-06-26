@@ -204,16 +204,7 @@ function focusSearch(){
 }
 
 function focusoutSearch(){
-	var value = $("#search").val();
-	if(value==""){
-		resetSearchBar();
-		var pathName = $.address.pathNames()[0];
-		var recipeName = $.address.pathNames()[1];
-		if(pathName == null || pathName == undefined)
-			pathName = "";
-		if(pathName == "recipe")
-			$("#search").val(recipeName);
-	}
+	$("#search").val("");	
 }
 
 //var searchterms = null;

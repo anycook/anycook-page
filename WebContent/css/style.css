@@ -127,6 +127,21 @@ input[type="text"], input[type="password"], input[type="email"]{
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 }
 
+#search::-webkit-input-placeholder, #search::placeholder{
+	color: #b5b5b5;
+	font-style: italic;
+}
+
+#search:-moz-placeholder{
+	color: #b5b5b5;
+	font-style: italic;
+}
+
+#search::placeholder{
+	color: #b5b5b5;
+	font-style: italic;
+}
+
 #search_reset {
 	float: left;
 	width: 28px;

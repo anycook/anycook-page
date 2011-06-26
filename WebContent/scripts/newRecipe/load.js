@@ -126,11 +126,11 @@ function loadStep2(){
 
 function loadStep3(){
 	if(newrecipe.schritte.length == 0)
-		$.address.parameter("page", "schritte");	
+		$.address.parameter("page", "schritte");
 	
+	var reihen = 0;	
 	if($("#new_zutat_table .new_zutat_name").length == 0 || $("#new_zutat_table .new_zutat_name").first().val() == ""){
 		newrecipe.sendSchritte();
-		var reihen = 0;
 		$("#new_zutat_table").empty();
 		getZutatenfromSchritte();
 	

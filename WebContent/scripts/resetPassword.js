@@ -18,7 +18,6 @@ function submitResetForm1(){
 			url: "/anycook/ResetPassword",
 			data:"mail="+mailorname,
 			success: function(response){
-				var errortext;
 				if(response == "true"){
 					$("#content_main>*").fadeOut(500, function(){
 						$("#content_main").append("<div id=\"new_activation\" class=\"content_message\">" +
@@ -29,6 +28,7 @@ function submitResetForm1(){
 					});
 					
 				}else{
+					var errortext = null;
 					if(response=="wrong")
 						errortext = "Falscher Username/Mail";
 					else if(response == "fbuser")

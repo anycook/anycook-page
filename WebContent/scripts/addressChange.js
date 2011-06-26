@@ -44,7 +44,7 @@ function handleChange(event){
 		$("#zutat_head").text("Zutaten:");
 		$.address.title("anycook");
 		
-		resetSearchBar();
+		//resetSearchBar();
 		resetFilter();
 		
 		

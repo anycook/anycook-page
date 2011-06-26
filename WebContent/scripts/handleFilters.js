@@ -352,7 +352,7 @@ function removeUserfilter(){
 	$("#userfilter").animate({opacity:0}, {duration:400, complete:function(){
 		$(this).animate({height:0}, {duration:300, complete:function(){
 			$(this).css({display:"none", opacity:1, height:50});
-			var username = $("#userfiltername").text();
+			//var username = $("#userfiltername").text();
 			$("#userfiltertext").html("");
 			search.setUsername(null);
 			search.flush();

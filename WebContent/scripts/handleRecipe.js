@@ -95,7 +95,7 @@ function loadRecipe(recipe){
 		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+recipe.personen+"' size='2' maxlength='2' /> Person:");
 	
 	$("#person_number").click(function(){$("#person_number").val('');});
-	var persCount;
+	var persCount = null;
 	$("#person_number").bind('keypress', function(e){
 		var inputString = String.fromCharCode(e.charCode);
 		var cleanString =inputString.match(/[0-9]+/); 
@@ -139,7 +139,7 @@ function loadRecipe(recipe){
 	
 	}
 	
-	$("#search").attr("value", recipe.name);
+	//$("#search").attr("value", recipe.name);
 	$("#time_std, #time_min").attr("readonly", "readonly");
 	$("#time_std").val(fillStd(recipe.std));
 	$("#time_min").val(fillMin(recipe.min));
@@ -294,7 +294,7 @@ function multiZutaten(perscount){
 		}
 		
 		var zutat = recipe.getZutatOnPosition(i);
-		var currentzutattext = $(this).prev().text();
+		//var currentzutattext = $(this).prev().text();
 		if(zutat.singular != null){
 			if(getValuefromString(newValue) == 1){
 				$(this).prev().text(zutat.singular);
@@ -313,13 +313,14 @@ function getNumbersFromString(inputstring, factor)
 	var restString = "";
 	
 	var postProc = false;
+	var i = null;
 	
 	for(var n=0; n<inputstring.length; n++){
-		var i = inputstring.substring(n,n+1);
+		i = inputstring.substring(n,n+1);
 		if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0"){
 			valueFromString += i;
 			for(var m=n+1; m<inputstring.length; m++){
-				var i = inputstring.substring(m,m+1);
+				i = inputstring.substring(m,m+1);
 				if(i=="1"||i=="2"||i=="3"||i=="4"||i=="5"||i=="6"||i=="7"||i=="8"||i=="9"||i=="0")
 					valueFromString += i;
 				else if(i==","||i=="."){
@@ -537,7 +538,7 @@ function answerBtnClick(event){
 function comment(event){
 	var target = event.target;
 	var text = $(target).prev().val();
-	var gericht = $.address.pathNames()[1];
+	//var gericht = $.address.pathNames()[1];
 	if(text!=""){
 		$.ajax({
 			url:"/anycook/Discuss",
@@ -647,7 +648,7 @@ function loadNewDiscussion(ul, pid, oldmaxID){
 				
 				var newcomment = $(ul).children("li").last();
 				var height = newcomment.height();
-				var newMarginTop = 0 - newcomment.outerHeight();
+				//var newMarginTop = 0 - newcomment.outerHeight();
 				newcomment.css({'height': 0, 'opacity': 0});
 				newcomment.animate({'height': height},{complete:function(){
 					newcomment.animate({opacity: 1});
