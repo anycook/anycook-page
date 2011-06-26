@@ -25,23 +25,21 @@ function loadDiscover(){
 
 function fillDiscover(){
 		$.ajax({
-			  url: "/anycook/GetDiscoverRecipes",
-			  dataType: 'json',
-			  success: function(json){
-				  for(var type in json){
-					  var recipes = json[type];
-					  var counter = 0;
-					  for(var i in recipes){
-							var uri = "#!/recipe/"+encodeURIComponent(recipes[i].name);
+			url: "/anycook/GetDiscoverRecipes",
+			dataType: 'json',
+			success: function(json){
+				for(var i = 0; i<json.leckerste.length; i++){
+					for(var type in json){
+						var recipe = json[type][i];
+							var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
 							$("#"+type+" .discover_container").append("<a href=\""+uri+"\" class=\"discover_rezept_bild\">" +
-									"<img src=\"/gerichtebilder/small/"+recipes[i].imagename+"\"/>" +
-									"<div><span>"+recipes[i].name+"</span></div></a>");
+									"<img src=\"/gerichtebilder/small/"+recipe.imagename+"\"/>" +
+									"<div><span>"+recipe.name+"</span></div></a>");
 							
-							$("#"+type+" .discover_container a").last().css("margin-left", 120*counter++);
-							
-						}
-				  }
-			  }
+							$("#"+type+" .discover_container a").last().css("margin-left", 120*i);							
+					}
+				}
+			}				  
 			});
 }
 
