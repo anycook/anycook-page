@@ -1,4 +1,4 @@
-@media screen{
+@media print{
 	/*@page land{
 		size:landscape;
 	}*/
@@ -10,10 +10,21 @@
      	filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);*/
 	}
 	
+	#filter_container{
+		float:right;
+		margin: 0;
+		height:inherit;
+	}
+	
+	#filter_box{
+		float:right;
+		width:inherit;
+	}
 	
 	#rezept_bild, #tags_table, #filter_table, #filter_head, #filter_head_top, #content_header #userfilter,
 	#buchmitte, #filter_bottom, #header_main, #recipe_general_btn, #recipe_discussion_btn, #rezept_begin, 
-	#rezept_footer, #kategorie_filter_name, #rezept_info, #header_container{
+	#rezept_footer, #kategorie_filter_name, #rezept_info, #header_container, #searchbar, #searchform, #header, #right,
+	.step_right, .kategorie_filter{
 		display: none;
 	}
 	
@@ -32,12 +43,7 @@
 		width:25cm;
 	}
 	
-	#filter_container{
-		display:none;
-		float:inherit;
-		margin: 0;
-		height:inherit;
-	}
+	
 	
 	#content{
 		float:inherit;
@@ -57,29 +63,62 @@
 	}
 	
 	#zutaten_table{
+		display:table;
 		min-height: inherit;
 		padding: 0;
 	}
 	
-	.step *{
+	#bezeichner_container{
+		float:inherit;
+		width:20cm;
+	}
+	
+	#step_container{
+		width:20cm;
+		float:inherit;
+	}
+	
+	/*.step *{
 		padding: inherit;
 		margin: 0;
 		height:inherit;
 		min-height:3cm;
+	} */
+	
+	.step_left{
+		width:20cm;
+		float:inherit;
+		padding:inherit;
+		margin:0;
+		height:inherit;
+		background: none;
 	}
 	
 	.step_number{
 		width:3cm;
 		line-height:3cm;
 		font: 25pt Gerogia;
+		float:inherit;
+		margin:0;
+		padding: inherit;
+		height:inherit;
+		border-right:none;
+	}
+	
+	.step_text{
+		width:17cm;
+		float:left;
+		padding: inherit;
+		margin: 0;
+		height:inherit;
 	}
 	
 	.step{
 		width:17cm;
 		height: inherit;
-		
 		/*display:list-item;*/
 	}
+	
 	
 	p.step_text {
 	color:#000000;
