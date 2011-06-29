@@ -1,4 +1,4 @@
-@media print{
+@media print, screen{
 	/*@page land{
 		size:landscape;
 	}*/
@@ -12,26 +12,49 @@
 	
 	#filter_container{
 		float:right;
-		margin: 0;
+		margin: 2.5cm 0 0 0;
 		height:inherit;
 	}
 	
 	#filter_box{
 		float:right;
-		width:inherit;
+		width:7cm;
+		margin:0;
+		padding:0;
 	}
 	
-	#rezept_bild, #tags_table, #filter_table, #filter_head, #filter_head_top, #content_header #userfilter,
+	#filter_main_box{
+		margin:0;
+	}
+	
+	#person_number{
+		border:none;
+	}
+	
+	#zutat_head{
+		float:left;
+		margin: 0.5cm 0 0.2cm 0 !important;
+	}
+	
+	#rezept_bild, #tags_table, #filter_head, #filter_head_top, #content_header #userfilter, #filter_devider,
 	#buchmitte, #filter_bottom, #header_main, #recipe_general_btn, #recipe_discussion_btn, #rezept_begin, 
 	#rezept_footer, #kategorie_filter_name, #rezept_info, #header_container, #searchbar, #searchform, #header, #right,
-	.step_right, .kategorie_filter{
-		display: none;
+	#content_header, #uhr, .step_right, .kategorie_filter,
+	#filter_table tr+tr{
+		display: none !important;
 	}
 	
+	#filter_table{
+		float:right;
+	}
+	
+	.filter_table_left{
+		width:3cm;
+	}
 	
 	#container{
 		position:inherit;
-		float: inherit;
+		float: left;
 		width:inherit;
 		left: inherit;
 		margin-top:0;
@@ -39,43 +62,56 @@
 	}
 	
 	#rezept_headline{
-		margin:0;
-		width:25cm;
+		margin:0 10cm 0 0;
+		width:10cm;
+		margin-bottom: 1cm;
 	}
 	
 	
 	
 	#content{
-		float:inherit;
+		float:left;
 		margin: 0;
 		position:inherit;
 		left:inherit;
-		width:20cm;
+		width:10cm;
 		float:inherit;
 
 	}
 	
 	#content_main{
-		width:20cm;
+		width:10cm;
 		margin:0;
 		padding:0;
-		float:inherit;
+		float:left;
 	}
 	
 	#zutaten_table{
 		display:table;
 		min-height: inherit;
 		padding: 0;
+		margin:0;
+		float:left;
+	}
+	
+	.zutaten_table_left{
+		padding:0;
+		margin:0;
+	}
+	
+	.zutaten_table_right{
+		padding:0 6px 0 3px;
+		margin:0;
 	}
 	
 	#bezeichner_container{
-		float:inherit;
-		width:20cm;
+		float:left;
+		width:10cm;
 	}
 	
 	#step_container{
-		width:20cm;
-		float:inherit;
+		width:10cm;
+		float:left;
 	}
 	
 	/*.step *{
@@ -86,8 +122,8 @@
 	} */
 	
 	.step_left{
-		width:20cm;
-		float:inherit;
+		width:10cm;
+		float:left;
 		padding:inherit;
 		margin:0;
 		height:inherit;
@@ -95,33 +131,32 @@
 	}
 	
 	.step_number{
-		width:3cm;
-		line-height:3cm;
-		font: 25pt Gerogia;
-		float:inherit;
+		width:1cm;
+		line-height:inherit;
+		font: 18pt Gerogia;
+		float:left;
 		margin:0;
 		padding: inherit;
 		height:inherit;
 		border-right:none;
+		text-align: left;
 	}
 	
 	.step_text{
-		width:17cm;
-		float:left;
+		width:8cm;
+		float:none;
 		padding: inherit;
-		margin: 0;
+		margin: 0 0 0 1.5cm;
+		margin-top:0 !important;
 		height:inherit;
+		text-align: justify;
+		font: 10pt Helvetica, sans-serif;
 	}
 	
 	.step{
-		width:17cm;
+		width:10cm;
 		height: inherit;
 		/*display:list-item;*/
-	}
-	
-	
-	p.step_text {
-	color:#000000;
 	}
 	
 }
