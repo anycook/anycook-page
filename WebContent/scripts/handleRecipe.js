@@ -130,7 +130,7 @@ function loadRecipe(recipe){
     	
 	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){
-		$("#step_container").append('<div class="step"><div class="step_left"><p class="step_number">'+(j+1)+'.</p><p class="step_text">'+steps[j]+'</p></div><div class="step_right"></div></div>');
+		$("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
 		var step = $(".step_left:last");
 		var stepheight = step.css("height");
 		var heighttext = step.children(".step_text").css("height");
