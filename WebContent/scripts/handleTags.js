@@ -142,15 +142,22 @@ function loadFamousTags(tags){
 function clickFamousTag(event){
 	var text = $(event.target).text();
 	saveTag(text);
+		
 }
 
 function makeTagCloud(recipe){
-	
+	$("#tagcloud").empty();
 	var data = "num=14";
 	if(recipe != undefined)
 		data+="&recipe="+recipe;
 	
 	var json = null;
+	
+	var selected = new Array();
+	$(".tag_text").each(function(index){
+		selected[index] = $(this).text();
+	});
+	data+= "&selected="+selected.toString();
 	
 	$.ajax({
 		  url: "/anycook/GetPopularTags",
@@ -177,6 +184,13 @@ function addNewTag(event){
 	var target = $(event.target);
 	var text = target.text();
 	saveNewTag(text);	
+	
+	/*var parameterNames = $.address.parameterNames();
+	if( parameterNames.length == 2){
+		var recipe = decodeURIComponent(parameterNames[1]);
+		makeTagCloud(recipe);
+	}
+	else makeTagCloud();*/
 }
 
 function handleNewTagClick(event){
