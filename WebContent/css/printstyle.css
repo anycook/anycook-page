@@ -1,4 +1,4 @@
-@media print, screen{
+@media print{
 	/*@page land{
 		size:landscape;
 	}*/
@@ -9,6 +9,23 @@
 		/*-webkit-transform: rotate(-90deg); -moz-transform:rotate(-90deg);
      	filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);*/
 	}
+	
+	input{
+		border: 0 !important;
+		background: none !important;
+		font: 13pt "Times New Roman" !important;
+		border: 0 !important;
+		height:100%;
+	}
+	
+	#tags_table, #filter_head, #filter_head_top, #content_header #userfilter, #filter_devider,
+	#buchmitte, #filter_bottom, #header_main, #recipe_general_btn, #recipe_discussion_btn, #rezept_begin, 
+	#rezept_footer, #kategorie_filter_name, #rezept_info, #header_container, #searchbar, #searchform, #header, #right,
+	#content_header, #uhr, .step_right, .kategorie_filter, #rezept_bild,
+	#filter_table tr+tr{
+		display: none !important;
+	}
+	
 	
 	#filter_container{
 		float:right;
@@ -36,20 +53,16 @@
 		margin: 0.5cm 0 0.2cm 0 !important;
 	}
 	
-	#rezept_bild, #tags_table, #filter_head, #filter_head_top, #content_header #userfilter, #filter_devider,
-	#buchmitte, #filter_bottom, #header_main, #recipe_general_btn, #recipe_discussion_btn, #rezept_begin, 
-	#rezept_footer, #kategorie_filter_name, #rezept_info, #header_container, #searchbar, #searchform, #header, #right,
-	#content_header, #uhr, .step_right, .kategorie_filter,
-	#filter_table tr+tr{
-		display: none !important;
-	}
-	
 	#filter_table{
 		float:right;
 	}
 	
 	.filter_table_left{
 		width:3cm;
+	}
+	
+	.filter_table_right{
+		font: 13pt "Times New Roman";
 	}
 	
 	#container{
@@ -112,6 +125,8 @@
 	#step_container{
 		width:10cm;
 		float:left;
+		position:absolute;
+		overflow:visible;
 	}
 	
 	/*.step *{
@@ -133,7 +148,7 @@
 	.step_number{
 		width:1cm;
 		line-height:inherit;
-		font: 18pt Gerogia;
+		font: 16pt Georgia;
 		float:left;
 		margin:0;
 		padding: inherit;
@@ -143,10 +158,10 @@
 	}
 	
 	.step_text{
-		width:8cm;
+		width:8.3cm;
 		float:none;
 		padding: inherit;
-		margin: 0 0 0 1.5cm;
+		margin: 0 0 0 1.2cm;
 		margin-top:0 !important;
 		height:inherit;
 		text-align: justify;
