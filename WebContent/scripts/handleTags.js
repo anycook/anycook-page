@@ -142,7 +142,6 @@ function loadFamousTags(tags){
 function clickFamousTag(event){
 	var text = $(event.target).text();
 	saveTag(text);
-		
 }
 
 function makeTagCloud(recipe){
