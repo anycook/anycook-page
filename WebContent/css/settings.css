@@ -76,39 +76,32 @@
 	color:#859F5E;
 }
 
-#settings_notification_content{
-	display: none;
-	clear: both;
-	/*font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
-	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	
-	color: #404040;
-}
-
-#settings_notification_content table{
+.settings_content table{
 	width:400px;
 	border: 0;
 	border-spacing:0;
+	font: 8pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #404040;
 }
 
-#settings_notification_content table tr{
+.settings_content table tr{
 	height:30px;
 	background-color: #ECE9E3;
 }
 
-#settings_notification_content table tr:nth-child(odd){
+.settings_content table tr:nth-child(odd){
 	background-color: #ECE9E3;
 }
 
-#settings_notification_content table tr:nth-child(even){
+.settings_content table tr:nth-child(even){
 	background-color: #F9F8F6;
 }
 
-#settings_notification_content table td:nth-child(even){
+.settings_content table td:nth-child(even){
 	width:30px;
 }
 
-#settings_notification_content table td:nth-child(odd){
+.settings_content table td:nth-child(odd){
 	padding-left:10px;
 }
 

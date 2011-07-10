@@ -59,7 +59,8 @@ function loadNewRecipe(){
 		$(".step_1_right ul.kategorie_filter").hide();
 		$(".step_1_right .recipe_kategorie").click(handleNRKategories);
 		
-		var uploader = new qq.FileUploader({
+		//var uploader = 
+			new qq.FileUploader({
 		    // pass the dom node (ex. $(selector)[0] for jQuery users)
 		    element: document.getElementById('file_uploader'),
 		    onSubmit:addProgressBar,

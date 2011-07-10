@@ -8,7 +8,8 @@ function loadSettings(){
 	$("#account_form").submit(saveAccountSettings);
 	if(user.facebook_id == 0)
 		$("#no_facebook").show();
-	var uploader = new qq.FileUploader({
+	//var uploader = 
+		new qq.FileUploader({
 	    // pass the dom node (ex. $(selector)[0] for jQuery users)
 	    element: $('#account_upload div')[0],
 	    // path to server-side upload script

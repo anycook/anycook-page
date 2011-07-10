@@ -8,6 +8,7 @@
 @import "recipeediting.css";
 @import "settings.css";
 @import "newrecipe.css";
+@import "printstyle.css";
 
 @font-face{
 	font-family: Clarendon;

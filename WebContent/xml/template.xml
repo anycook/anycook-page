@@ -501,9 +501,15 @@
 					<div id="settings_facebook" class="settings">
 						<h2>Facebook<div class="settings_saved">gespeichert</div></h2>
 						<div id="settings_facebook_content" class="settings_content">
+							<table>
+								<tr>
+									<td>"Schmeckt mir" an meine Pinnwand posten</td>
+									<td><input type="checkbox" name="facebook_schmeckt" value="schmeckt" /></td>
+								</tr>
+							</table>
+						</div>
+						<div id="no_facebook">Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen<div id="facebook_login"></div></div>
 					</div>
-					<div id="no_facebook">Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen<div id="facebook_login"></div></div>
-				</div>
 				</div>
 				
 			</template>

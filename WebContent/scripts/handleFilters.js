@@ -248,7 +248,7 @@ function zutatentableclick(){
 	    	});*/
 	    	$("#zutat_input").autocomplete({
 	    		source:function(req,resp){
-        			var array = [];
+        			//var array = [];
         		var term = req.term;
         		$.ajax({
         			url:"/anycook/AutocompleteZutat",
