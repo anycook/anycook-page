@@ -214,6 +214,11 @@ function loadRecipe(recipe){
 	$("#addtags").attr("href", "#!/recipe/"+encodeURI(recipe.name)+"?page=addtags");
 	//$("#zubereitung").click(showZubereitung);
 	//$("#addtags").click(showaddTags);
+	
+	//icons
+	$("#print").click(function(){
+		window.print();
+	});
 }
 
 function showZubereitung(){

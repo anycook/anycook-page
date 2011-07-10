@@ -1373,6 +1373,15 @@ ul.kategorie_filter li:HOVER {
 	float: left;
 }
 
+#recipe_icons{
+	margin-top:10px;
+	margin-right:4px;
+}
+
+#recipe_icons a{
+	cursor: pointer;
+}
+
 #rezept_begin {
 	float: left;
 	width: 100%;
