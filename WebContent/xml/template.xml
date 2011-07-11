@@ -82,7 +82,7 @@
     		<div id="rezept_info">
     			<div id="beschreibung"></div>
     			<div id="autoren"></div>
-    			<div id="recipe_icons"><a id="print"><img src="\icons\printer_icon.jpg"/></a></div>
+    			<div id="recipe_icons"><a id="print"><img src="\icons\printer_icon.jpg"/></a> <g:plusone></g:plusone></div>
     		</div>
     		<div id="rezept_begin">
     			<a class="bezeichner" id="zubereitung">Zubereitung</a><a class="bezeichner" id="addtags">+Tags</a>
