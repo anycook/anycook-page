@@ -19,17 +19,17 @@ function Recipe(){
 
 Recipe.prototype.loadJSON = function(json){
 	this.name = json.name;
-	this.beschreibung = json.beschreibung;
-	this.kategorie = json.kategorie;
-	this.imagename = json.imagename;
-	this.personen = json.personen;
+	this.beschreibung = json.description;
+	this.kategorie = json.categorie;
+	this.imagename = json.image;
+	this.personen = json.person;
 	this.schritte = json.schritte;
 	this.skill = json.skill;
-	this.kalorien = json.kalorien;
-	this.std = json.std;
-	this.min = json.min;
+	this.kalorien = json.calorie;
+	this.std = json.timestd;
+	this.min = json.timemin;
 	this.tags = json.tags;
-	this.zutaten = json.zutaten;
+	this.zutaten = json.ingredients;
 	this.usernames = json.authors;
 };
 

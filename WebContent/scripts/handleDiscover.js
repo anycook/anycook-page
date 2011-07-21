@@ -33,7 +33,7 @@ function fillDiscover(){
 						var recipe = json[type][i];
 							var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
 							$("#"+type+" .discover_container").append("<a href=\""+uri+"\" class=\"discover_rezept_bild\">" +
-									"<img src=\"/gerichtebilder/small/"+recipe.imagename+"\"/>" +
+									"<img src=\"/gerichtebilder/small/"+recipe.image+"\"/>" +
 									"<div><span>"+recipe.name+"</span></div></a>");
 							
 							$("#"+type+" .discover_container a").last().css("margin-left", 120*i);							
