@@ -80,6 +80,7 @@ function loadRecipewJSON(json){
 
 function loadRecipe(recipe){
 	resetFilter();
+	gapi.plusone.go();
 	
 	var rezepturi = recipe.getURI();
 	var headertext = "<div class='float_right_header'>" +
