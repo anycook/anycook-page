@@ -80,7 +80,7 @@
   };
   
   $.fn.xml.loadXml = function(xml){
-	  var xmlDoc;
+	  var xmlDoc =null;
 	  
 	  $.ajax({
 			url: xml,

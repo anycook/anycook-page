@@ -597,5 +597,15 @@
 					</div>
 				</div>
 			</template>
+			<template id="developer">
+				<div class="footerpages">
+					<h1>Entwickler</h1>
+					<h2>Blog</h2>
+					<p>Unseren Blog mit aktuellen News und Links zu Technologien, mit denen wir uns zur Zeit beschäftigen, findest du unter <a href="http://developers.anycook.de">developers.anycook.de</a>.</p>
+					<h2>Graph-API</h2>
+					<p>
+					</p>
+				</div>
+			</template>
 			
 </templates>
