@@ -602,9 +602,64 @@
 					<h1>Entwickler</h1>
 					<h2>Blog</h2>
 					<p>Unseren Blog mit aktuellen News und Links zu Technologien, mit denen wir uns zur Zeit beschäftigen, findest du unter <a href="http://developers.anycook.de">developers.anycook.de</a>.</p>
+					
+					<h2>Screen</h2>
+					<p>Wir entwickeln gerade ein Display zum schnellen Aufruf von Rezepten in der Küche, das berührungslos steuerbar ist. Mehr Informationen unter <a href="http://screen.anycook.de">screen.anycook.de</a>.</p>
+					
 					<h2>Graph-API</h2>
-					<p>
-					</p>
+					<p>Über unsere Graph-API lassen sich Informationen zu Rezepten, Zutaten, Tags und Usern über JSONP abrufen.</p>					
+					<h4>Beispiel für eine Anfrage mit jQuery</h4>
+					<textarea readonly="readonly" class="code">$.getJSON("http://graph.anycook.de/recipe?callback=?", function(json)	{dosomething});</textarea>
+					<p>Alle Daten sind derzeit frei verfügbar. Jedoch ist dies bisher nur eine erste Testversion und wir behalten uns weitere Änderungen oder Zugangsbeschränkungen vor!</p>
+					
+					<h3>Syntax</h3>
+					<p>Die API bietet verschiedene Abfrageebenen. Je tiefer die Abfrage, desto detailierter die Antworten.</p>
+					<h4>Syntax(Pseudocode)</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/type/element/detail?options</textarea>
+					
+					<h3>Rezepte</h3>
+					<p>Alle Rezeptename lassen sich über "/recipe" anzeigen. Details zu einem bestimmten Rezept erhält man über "/recipe/rezeptname"</p>
+					<h4>Alle Rezeptenamen</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/recipe</textarea>
+					<h4>Ausgabe(gekürzt)</h4>
+					<textarea readonly="readonly" class="code">{"total":2,"names":[" Umgedrehter Apfelkuchen","Apfelmuffins"]}</textarea>
+					<h4>Details für "Zucchini-Champignon-Lasagne"</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/recipe/Zucchini-Champignon-Lasagne</textarea>
+					<h4>Ausgabe</h4>
+					<textarea readonly="readonly" class="code">{"tags":["hauptspeise","studentenküche","vegetarisch","wg-tauglich"],"timestd":"1","name":"Zucchini-Champignon-Lasagne","timemin":"0","description":"Die Zucchini [tsu?ki?ni] sind eine Unterart des Gartenkürbisses. Sie sind einhäusig, das heißt, männliche und weibliche Geschlechtsorgane befinden sich in getrennten Blüten, aber an einer Pflanze. Zucchini enthalten, wie andere Kürbissorten, viel Wasser, sind kalorienarm, vitaminreich und leicht verdaulich. So, jetzt wisst ihr Bescheid.","categorie":"Überbackenes","schmeckt":1,"ingredients":{"Tomaten":{"name":"Tomaten","menge":"250 g","singular":"Tomate"},"Zucchini":{"name":"Zucchini","menge":"250 g","singular":null},"Zwiebeln":{"name":"Zwiebeln","menge":"1 mittlere","singular":"Zwiebel"},"Lasagneplatten":{"name":"Lasagneplatten","menge":"","singular":"Lasagneplatte"},"Streukäse":{"name":"Streukäse","menge":"200 g","singular":null},"Champignons":{"name":"Champignons","menge":"150 g","singular":"Champignon"},"Öl":{"name":"Öl","menge":"","singular":null},"Sahne":{"name":"Sahne","menge":"200 g","singular":null},"Knoblauch":{"name":"Knoblauch","menge":"1 Zehe","singular":null},"Mehl":{"name":"Mehl","menge":"1\/2 El","singular":null}},"schritte":["Zuerst die Zucchini raspeln, die Tomaten würfeln und die Champignons schneiden.","Dann Zwiebeln schneiden und anbraten, dazu das Knoblauch geben. Sabald die Zwiebeln und das Knoblauch fertig sind Mehl darüber streuen.","Nun das zuvor vorbereitete Gemüse und die Sahne in die Pfanne geben und alles ca. 10 Minuten köcheln lassen. Dann alles noch abschmecken.","In einer gefetteten Auflaufform erst Soße dann Streukäse dann Lasagneplatte nacheinander schichten bis die Soße alle ist. Mit einer Soßen-Schicht enden und oben drauf noch viel Käse geben.","Im vorgeheizten Backofen bei 200° C auf mittlerer Schiene ca. 30 Minuten backen lassen."],"calorie":"3","authors":["Mara Krug"],"skill":"3","person":"4","image":"poZ3dZuU4x52XGq6RKL0.png"}</textarea>
+					
+					<h3>Zutaten</h3>
+					<p>Alle Rezeptename lassen sich über "/ingredient" anzeigen. Details zu einem bestimmten Rezept erhält man über "/ingredient/zutatenname"</p>
+					<h4>Alle Zutatennamen</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/ingredient</textarea>
+					<h4>Ausgabe(gekürzt)</h4>
+					<textarea readonly="readonly" class="code">{"total":4,"ingredients":["Amaretto","Äpfel","Apfelmus","Apfelsaft"]}</textarea>
+					<h4>Details für "Amaretto"</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/ingredient/Amaretto</textarea>
+					<h4>Ausgabe</h4>
+					<textarea readonly="readonly" class="code">{"recipes":["Tiramisu ohne Ei"],"name":"Amaretto","singular":null,"recipenum":1}</textarea>
+					
+					<h3>Tags</h3>
+					<p>Alle Tags lassen sich über "/tag" anzeigen. Details gibt`s unter "/tag/tagname".</p>
+					<h4>Alle Tags</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/tag</textarea>
+					<h4>Ausgabe(gekürzt)</h4>
+					<textarea readonly="readonly" class="code">{"total":3,"tags":["abendessen","amerikanisch","asiatisch"]}</textarea>
+					<h4>Details für "abendessen"</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/tag/abendessen</textarea>
+					<h4>Ausgabe</h4>
+					<textarea readonly="readonly" class="code">{"recipes":["Bruschetta mit Tomaten","Spinat-Pilz-Pasta","Tomatendip mit Frischkäse"],"name":"abendessen","recipenum":3}</textarea>
+					
+					<h3>User</h3>
+					<p>Alle User lassen sich über "/user" anzeigen. Informationen zu den einzelnen User über "/user/username"</p>
+					<h4>Alle User</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/user</textarea>
+					<h4>Ausgabe(gekürzt)</h4>
+					<textarea readonly="readonly" class="code">{"total":60,"users":["Daniel Plath","gaias","Kathi"]}</textarea>
+					<h4>Details für "Daniel Plath"</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/tag/abendessen</textarea>
+					<h4>Ausgabe</h4>
+					<textarea readonly="readonly" class="code">{"mail":"frq@gmx.de","text":null,"level":2,"facebookID":"1490228763","name":"Daniel Plath","image":"http:\/\/graph.facebook.com\/1490228763\/picture"}</textarea>
 				</div>
 			</template>
 			

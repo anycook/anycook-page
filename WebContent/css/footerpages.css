@@ -17,6 +17,19 @@
 	margin: 10px 0 5px 0;
 }
 
+.footerpages h3{
+	font:  12pt Georgia;
+	color: #404040;
+	margin: 20px 0 5px 0;
+}
+
+.footerpages h4{
+	font:  8pt Georgia;
+	color: #404040;
+	margin: 5px 0 0 0;
+}
+
+
 .footerpages p{
 	padding:5px 0 15px 0;
 	text-align: justify;
@@ -38,6 +51,18 @@
 
 .footerpages li{
 	margin-bottom: 2px;
+}
+
+textarea.code{
+	outline:none;
+	width:545px;
+	height:auto;
+	resize:none;
+	padding:5px;
+	margin: 10px 0 5px;
+	font:  8pt Courier, sans-serif;
+	background-color: #ece9e3;
+	color:#606060;
 }
 
 #kontakt input{
