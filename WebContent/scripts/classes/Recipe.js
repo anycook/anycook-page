@@ -136,6 +136,7 @@ Recipe.prototype.sendRecipe = function(){
 Recipe.prototype.sendRecipeData = function(){
 	$.ajax({
 		url:"/anycook/AddtoNewRecipe",
+		async:false,
 		data:"recipe_name="+this.name+"&beschreibung="+this.beschreibung+
 			"&kategorie="+this.kategorie+"&std="+this.std+"&min="+this.min+
 			"&skill="+this.skill+"&kalorien="+this.kalorien+"&personen="+this.personen
@@ -164,6 +165,7 @@ Recipe.prototype.sendZutaten = function(){
 	for(var zutat in this.zutaten){
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
+			async:false,
 			data:"zutat="+zutat+"&menge="+this.zutaten[zutat].menge
 		});
 	}
@@ -178,6 +180,7 @@ Recipe.prototype.sendTags = function(){
 	for(var i = 0; i<this.tags.length; i++){
 		$.ajax({
 			url:"/anycook/AddtoNewRecipe",
+			async:false,
 			data:"tag="+this.tags[i]
 		});
 	}
