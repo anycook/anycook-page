@@ -226,9 +226,12 @@
             	    appId  : '143100952399957',
             	    status : true, // check login status
             	    cookie : true, // enable cookies to allow the server to access the session
-            	    xfbml  : true  // parse XFBML
+            	    xfbml  : true //, // parse XFBML
+            	    //oauth  : true // enable OAuth 2.0
         	  });
             	FB.Event.subscribe("auth.sessionChange", fbSessionChange);
+            	//FB.Event.subscribe("auth.authResponseChange", fbSessionChange);
+            	//FB.getLoginStatus(fbSessionChange);
             	
             	
  });

@@ -121,6 +121,9 @@ function handleChange(event){
 			case "settings":
 				loadSettings();
 				break;
+			case "developer":
+				$.address.title("Entwickler | anycook");
+				break;
 			}
 			break;
 		case 2:
