@@ -16,7 +16,7 @@ function getSmallFrameText(json){
 	var min = json.timemin;
 	if(min.length==1)
 		min="0"+min;
-	var appendtext = "<div class='rezept_bild'><img src='/gerichtebilder/small/"+json.image+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><p>"+beschreibung+"</p>";
+	var appendtext = "<div class='rezept_bild'><img src='http://graph.anycook.de/recipe/"+json.name+"/image?type=small'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><p>"+beschreibung+"</p>";
 	return appendtext;
 }
 
@@ -64,7 +64,7 @@ function getBigFrameText(json){
 		min="0"+min;
 	
 	var uri = encodeURI("/#!/recipe/"+json.name);
-	var htmlstring = "<a href='"+uri+"' class='frame_big'><div class='frame_main_big big_rezept'><div class='rezept_bild'><img src='/gerichtebilder/small/"+json.image+"'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><div class='result_schmeckt'><div class='heart_img'></div><div class='heart_number'>"+json.schmeckt+"</div></div><p>"+beschreibung+"</p>";
+	var htmlstring = "<a href='"+uri+"' class='frame_big'><div class='frame_main_big big_rezept'><div class='rezept_bild'><img src='http://graph.anycook.de/recipe/"+json.name+"/image?type=small'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><div class='result_schmeckt'><div class='heart_img'></div><div class='heart_number'>"+json.schmeckt+"</div></div><p>"+beschreibung+"</p>";
 	
 	htmlstring+="</div><div class='frame_right_big'></div></a>";
 	return htmlstring;
@@ -127,7 +127,7 @@ function loadRecipe(recipe){
     $("#rezept_headline").append(recipe.name);
     $("#beschreibung").append(recipe.beschreibung);
     
-    $("#rezept_bild").attr("src", "/gerichtebilder/big/"+recipe.imagename);
+    $("#rezept_bild").attr("src", "http://graph.anycook.de/recipe/"+recipe.name+"/image?type=large");
     	
 	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){

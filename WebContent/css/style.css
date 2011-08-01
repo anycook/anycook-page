@@ -1346,9 +1346,11 @@ ul.kategorie_filter li:HOVER {
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #919191;
 	margin-right: 4px;
+	text-align: justify;
 }
 
 #autoren {
+	text-align:justify;
 	font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #919191;
 	margin-right: 4px;
@@ -1375,8 +1377,9 @@ ul.kategorie_filter li:HOVER {
 }
 
 #recipe_icons{
+	float:right;
 	margin-top:10px;
-	margin-right:4px;
+	margin-right:6px;
 }
 
 #recipe_icons a{
