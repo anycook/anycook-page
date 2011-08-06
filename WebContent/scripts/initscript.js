@@ -220,6 +220,9 @@
             	$(document).scroll(scrollListener);
             	
             	
+            	//ellipsis for .big_rezept p
+            	$(".big_rezept p").ellipsis({live:true});
+            	
             	
             	//Facebook
             	FB.init({

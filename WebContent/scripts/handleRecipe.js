@@ -1,13 +1,13 @@
 function getSmallFrameText(json){
-	var maxlength = 120;
+	//var maxlength = 120;
 	var beschreibung = json.description;
-	if(beschreibung.length > maxlength){
+	/*if(beschreibung.length > maxlength){
 		for(var i = maxlength-1; i>=0; i--)
 			if(beschreibung[i] == " "){
 				beschreibung = beschreibung.substring(0, i+1)+"...";
 				break;
-			}
-	}
+		}
+	}*/
 	
 	var std = json.timestd;
 	if(std.length==1)
@@ -16,43 +16,34 @@ function getSmallFrameText(json){
 	var min = json.timemin;
 	if(min.length==1)
 		min="0"+min;
-	var appendtext = "<div class='rezept_bild'><img src='http://graph.anycook.de/recipe/"+json.name+"/image?type=small'/><div class='time_gericht'><div class='time_corner_left'></div><div class='time_gericht_mid'>"+std+":"+min+" h</div><div class='time_corner_right'></div></div></div><h5>"+json.name+"</h5><p>"+beschreibung+"</p>";
+	var appendtext = "<div class='rezept_bild'>" +
+			"<img src='http://graph.anycook.de/recipe/"+json.name+"/image?type=small'/>" +
+			"<div class='time_gericht'>" +
+				"<div class='time_corner_left'></div>" +
+				"<div class='time_gericht_mid'>"+std+":"+min+" h</div>" +
+				"<div class='time_corner_right'></div></div></div>" +
+			"<h5>"+json.name+"</h5><p>"+beschreibung+"</p>";
 	return appendtext;
 }
 
-function cutSmallFrameText(container){
-	var h5height;
-	var pheight;
+function setSmallFrameText(container){
+	var p = container.find("p");
+	var h5 = container.find("h5");
 	
-	do{
-		h5height = container.find("h5").css("height");
-		h5height = Number(h5height.substring(0, h5height.length-2));
-		pheight = container.find("p").css("height");
-		pheight = Number(pheight.substring(0, pheight.length-2));
-		
-		var p = container.find("p");
-		var h5 = container.find("h5");
-		if(h5height>110){
-			var h5text = h5.text();
-			h5.text(h5text.substring(0,h5text.lastIndexOf(" "))+"...");
-		}else if(pheight+h5height>110){
-			var ptext = p.text();
-			p.text(ptext.substring(0,ptext.lastIndexOf(" "))+"...");
-		}
-	}while(pheight+h5height>110);
+	var h5height = h5.css("height");
+	h5height = Number(h5height.substring(0, h5height.length-2));
+	var pheight = p.css("height");
+	pheight = Number(pheight.substring(0, pheight.length-2));
+	
+	var heightsum = h5height+pheight+3;
+	if(heightsum>110){
+		p.css("height", pheight-(heightsum-110));
+	}	
 }
 
 
 function getBigFrameText(json){
-	var maxlength = 200;
 	var beschreibung = json.description;
-	if(beschreibung.length > maxlength){
-		for(var i = maxlength-1; i>=0; i--)
-			if(beschreibung[i] == " "){
-				beschreibung = beschreibung.substring(0, i+1)+"...";
-				break;
-			}
-	}
 	
 	
 	var std = json.timestd;

@@ -666,9 +666,20 @@
 					<h4>Ausgabe(gekürzt)</h4>
 					<textarea readonly="readonly" class="code">{"total":60,"users":["Daniel Plath","gaias","Kathi"]}</textarea>
 					<h4>Details für "Daniel Plath"</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/tag/abendessen</textarea>
+					<textarea readonly="readonly" class="code">graph.anycook.de/user/Daniel+Plath</textarea>
 					<h4>Ausgabe</h4>
 					<textarea readonly="readonly" class="code">{"mail":"frq@gmx.de","text":null,"level":2,"facebookID":"1490228763","name":"Daniel Plath","image":"http:\/\/graph.facebook.com\/1490228763\/picture"}</textarea>
+					
+					<h3>Kategorien</h3>
+					<p>Alle Kategorien lassen sich über "/category" anzeigen. Informationen zu den einzelnen User über "/category/categoryname"</p>
+					<h4>Alle Kategorien</h4>
+					<textarea readonly="readonly" class="code">graph.anycook.de/category</textarea>
+					<h4>Ausgabe(gekürzt)</h4>
+					<textarea readonly="readonly" class="code">{"total":7,"categories":["Eierspeisen","Fleisch und Fisch","Gebackenes und Süßes","Nudeln","Salate","Suppen und Eintöpfe","Überbackenes"]}</textarea>
+					<h4>Details für "Eierspeisen"</h4>
+					<textarea readonly="readonly" class="code">http://graph.anycook.de/category/Eierspeisen</textarea>
+					<h4>Ausgabe</h4>
+					<textarea readonly="readonly" class="code">{"recipes":["Spinat-Quiche","Kartoffelpuffer","Pfannkuchen mit Äpfeln","Quarkbuletten","Semmelknödel","Eierstich","Rührei mit Speck","Korsische Paprikaschoten"],"name":"Eierspeisen","recipenum":8}</textarea>
 				</div>
 			</template>
 			

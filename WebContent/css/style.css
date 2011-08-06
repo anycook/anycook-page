@@ -865,11 +865,15 @@ ul.kategorie_filter li:HOVER {
 	font: 14pt Georgia;
 	color: #404040;
 	margin: 2px 0 1px 0;
+	overflow:hidden;
+	word-wrap:break-word;
+	
 }
 
 .small_rezept p,.big_rezept p {
 	color: #404040;
 	line-height: 15px;
+	white-space: pre-wrap;
 }
 
 .big_rezept p {

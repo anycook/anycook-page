@@ -9,7 +9,8 @@ function loadHome(json)
 	
 	//new stuff
 	$("#tagesrezept_inhalt").append(getSmallFrameText(json));
-	cutSmallFrameText($("#tagesrezept_inhalt"));
+	setSmallFrameText($("#tagesrezept_inhalt"));
+	$(".small_rezept p").ellipsis();
 	var uri = encodeURI("/#!/recipe/"+json.name);
 	$("#tagesrezept_inhalt").attr("href", uri);
 	

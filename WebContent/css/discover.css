@@ -127,6 +127,8 @@
 	opacity:1;
 	font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	color: #ffffff;
+	overflow: hidden;
+	word-wrap:break-word;
 }
 
 
