@@ -1,5 +1,5 @@
 /*
- * jQuery XML Plugin v0.1
+ * jQuery XML Plugin v0.2
  * http://anycook.de
  *
  * Copyright (c) 2011 Jan Grassegger
@@ -58,8 +58,11 @@
              
              $xmlDoc.find("template#"+contentName).each(function(){
              	var obj = $(this).clone().contents();
-                 var div = $("<div/>").append(obj);
-                 $this.append(div.html());
+                 var $div = $("<div/>").append(obj);
+                 
+                 //fixes bug with double br's
+                 $div.find("br").replaceWith("<br/>");
+                 $this.append($div.html());
              });
     	});
     }
@@ -98,7 +101,8 @@
 				alert(jqXHR, textStatus, errorThrown);
 			}
     });
-	  return $(xmlDoc);
+	  $xmlDoc = $(xmlDoc);
+	  return $xmlDoc;
   };
   
 })( jQuery );

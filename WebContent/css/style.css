@@ -1,16 +1,5 @@
 @charset "UTF-8";
 
-@import "discover.css";
-@import "discussion.css";
-@import "fileuploader.css";
-@import "jquery.autocomplete.css";
-@import "profile.css";
-@import "recipeediting.css";
-@import "settings.css";
-@import "newrecipe.css";
-@import "printstyle.css";
-@import "footerpages.css";
-
 @font-face{
 	font-family: Clarendon;
 	src: local("Clarendon"), 
@@ -870,6 +859,14 @@ ul.kategorie_filter li:HOVER {
 	
 }
 
+
+
+.big_rezept .text_frame {
+	float:left;
+	width:310px;
+	height:110px;
+}
+
 .small_rezept p,.big_rezept p {
 	color: #404040;
 	line-height: 15px;
@@ -979,74 +976,6 @@ ul.kategorie_filter li:HOVER {
 	color: #404040;
 	text-decoration: none;
 }
-
-/*---------Entdecken----------*/
-/*.entdecken {
-	height: 202px;
-	margin-top: 8px;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	user-select: none;
-}
-
-.entdecken_headline_small {
-	font: 14pt Georgia;
-	color: #404040;
-	text-align: left;
-	margin-bottom: 10px;
-	padding-left: 17px;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	user-select: none;
-}
-
-.frame_right+.frame_main_small {
-	margin-left: 11px;
-}
-
-.entdecken_back,.entdecken_next {
-	height: 17px;
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 9pt;
-	color: #919191;
-	margin-top: 7px;
-	background-color: #f7f4f1;
-	cursor: pointer;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	user-select: none;
-}
-
-.entdecken_back {
-	float: left;
-	margin-left: 3px;
-	padding-left: 13px;
-	background: url("/img/back_btn_small.png") no-repeat;
-	background-position: 0 5px;
-}
-
-.entdecken_back:hover {
-	color: #585858;
-	background: url("/img/back_btn_small_over.png") no-repeat;
-	background-position: 0 5px;
-}
-
-.entdecken_next {
-	float: right;
-	padding-right: 13px;
-	background: url("/img/next_btn_small.png") no-repeat;
-	background-position: 40px 5px;
-}
-
-.entdecken_next:hover {
-	color: #585858;
-	background: url("/img/next_btn_small_over.png") no-repeat;
-	background-position: 40px 5px;
-}
-
-#neuste,#leckerste,#beliebte {
-	
-}*/
 
 /*--suchergebnisse--*/
 #first_search_layout {
@@ -1215,7 +1144,7 @@ ul.kategorie_filter li:HOVER {
 
 .result_schmeckt {
 	float: right;
-	margin: -16px 5px 0 5px;
+	margin: 0 5px 0 5px;
 }
 
 .heart_img {

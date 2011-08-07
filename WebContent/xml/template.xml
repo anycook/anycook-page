@@ -135,7 +135,7 @@
     <template id="newrecipe">
     <div id="new_recipe_container">
     	<div id="new_recipe_step1" class='new_recipe_steps'>
-					<h1>Hallo! Schön, dass Du ein Rezept erstellen möchtest.</h1>
+					<h1>Hallo!<br/> Schön, dass Du ein Rezept erstellen möchtest.</h1>
 					<div id="step_1_form"  name="form" method="post">
 						<table>
 							<tr>
