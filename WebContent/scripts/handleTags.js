@@ -74,7 +74,7 @@ function makeNewInput(){
 			
 			$(".tags_table_right input").autocomplete({
 	    		source:function(req,resp){
-        			var array = [];
+        			//var array = [];
         		var term = req.term;
         		$.ajax({
         			url:"/anycook/AutocompleteTags",
@@ -239,14 +239,14 @@ function keyNewTag(event) {
 
 function makeNewRInput(){
 		if($("#recipe_tags input").length==0){
-			var divlength = getDivLength();
+			//var divlength = getDivLength();
 			//make new input field
 			$("#recipe_tags").append("<input type='text'/>");
 			$("#recipe_tags input").keydown(keyNewTag);
 			$("#recipe_tags input").focus();
 			$("#recipe_tags input").autocomplete({
 	    		source:function(req,resp){
-        			var array = [];
+        			//var array = [];
         		var term = req.term;
         		$.ajax({
         			url:"/anycook/AutocompleteTags",
