@@ -20,10 +20,11 @@
 }
 
 .new_recipe_steps {
-	min-height: 550px;
+	height: 550px;
 	width:655px;	
 	position: absolute;
 	top:0px;
+	overflow: auto;
 }
 
 #new_recipe_step1,#new_recipe_step2,#new_recipe_step3,#new_recipe_step4
@@ -116,7 +117,6 @@ td.step_1_right {
 	border: 1px solid #979694; /*d1cec9*/
 	outline: none; /*Remove Chrome and Safari glows on focus*/
 	resize: none;
-	border-radius:0;
 }
 
 input#recipe_name {

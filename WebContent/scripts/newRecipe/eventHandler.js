@@ -114,8 +114,14 @@ function addNewSchritt(event){
 	$("#step_table").append("<tr><td><div class='new_step'><div class='step_left'><p class='step_number'>"+(count+1)+".</p><textarea class='step_textarea'></textarea>"+
 					"</div><div class='step_right'></div></div></td><td><div class='step_character'>260</div><div class='minus_btn remove_schritt'></div></td></tr>");
 	
-	var newTop = $(".new_step").last().offset().top;
-	$("html:not(:animated),body:not(:animated)").scrollTop(newTop);
+	$newRecipeStep2 = $("#new_recipe_step2");
+	var outerHeight = $newRecipeStep2.height();
+	var innerHeight = 0;
+	$newRecipeStep2.children().each(function(){
+		innerHeight+=$(this).outerHeight(true);
+	});
+	var newTop = innerHeight - outerHeight;
+	$newRecipeStep2.animate({scrollTop: newTop},1000);
 	$(".new_step textarea").last().focus();
 }
 
@@ -170,10 +176,16 @@ function deleteNewZutat(event){
 }
 
 function addNewZutat(event){
-	$("#new_zutat_table").append('<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="" /></td><td class="step_3_right"><input type="text" class="new_zutat_menge" value="" /></td>'+
+	$("#new_zutat_table").append('<tr><td class="step_3_left"><input type="text" class="new_zutat_name" value="" maxlength="45" /></td><td class="step_3_right"><input type="text" class="new_zutat_menge" value="" maxlength="45" /></td>'+
 								'<td class="step_3_delete"><div class="step_3_deletebtn"></div></td></tr>');
-	var newTop = $("#new_zutat_table tr").last().offset().top;
-	$("html:not(:animated),body:not(:animated)").scrollTop(newTop);
+	$newRecipeStep3 = $("#new_recipe_step3");
+	var outerHeight = $newRecipeStep3.height();
+	var innerHeight = 0;
+	$newRecipeStep3.children().each(function(){
+		innerHeight+=$(this).outerHeight(true);
+	});
+	var newTop = innerHeight - outerHeight;
+	$newRecipeStep3.animate({scrollTop: newTop},500);
 	$(".new_zutat_name").last().focus();
 }
 

@@ -90,7 +90,7 @@
     		<div id="bezeichner_container">
     			<div id="step_container"></div>
     			<div id="addtags_container">
-    			<div class="new_recipe_headline">Hilf den anderen beim Finden!<br/>Füge doch noch ein paar Tags hinzu</div>
+    			<h2>Hilf den anderen beim Finden!<br/>Füge doch noch ein paar Tags hinzu</h2>
 						<table>
 							<tr>
 								<td id="step_4_tags">Tags: <div name="tags" id="recipe_tags" ></div></td>
