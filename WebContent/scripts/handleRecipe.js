@@ -133,7 +133,7 @@ function loadRecipe(recipe){
     $("#rezept_headline").append(recipe.name);
     $("#beschreibung").append(recipe.beschreibung);
     
-    $("#rezept_bild").attr("src", "http://graph.anycook.de/recipe/"+recipe.name+"/image?type=large");
+    $("#rezept_bild").attr("src", "/gerichtebilder/big/"+recipe.imagename);
     	
 	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){
