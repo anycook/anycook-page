@@ -62,7 +62,29 @@ function loadProfile(username){
 	
 	$(".profile_more").click(profileShowMore);
 	
-	
+	if(username == user.name){
+		$.ajax({
+			url:"/anycook/GetRecommendation",
+	        dataType: "json",
+	        success:function(json){
+	        	if(json.length>0){
+	        		$("#profile_recommendation").show();
+	        		$("#profile_recommendation h2").text("Diese Rezepte könnten dir auch schmecken");
+		        	for(var i = 0; i<json.length && i<20; i++){
+		        		var uri = "#!/recipe/"+encodeURIComponent(json[i]);
+		    			$("#profile_recommendation p").append("<a href=\""+uri+"\" class=\"profile_rezept_bild\">" +
+		    					"<img src=\"http://graph.anycook.de/recipe/"+json[i]+"/image?type=small\"/>"+
+		    					"<div><span>"+json[i]+"</span></div></a>");
+		        	}
+		        	if($("#profile_recommendation p a").length<=5)
+		    			$("#profile_recommendation p").css("height", 120);
+		    		
+		    		if($("#profile_recommendation p a").length>10)
+		    			$("#profile_recommendation .profile_more").show();
+	        	}
+	        }
+		});
+	}
 	
 }
 

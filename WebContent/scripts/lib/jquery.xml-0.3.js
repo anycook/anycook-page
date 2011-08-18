@@ -7,6 +7,8 @@
  * http://jquery.org/license
  * 
  * Changes:
+ * 
+ * 
  * --------- v0.2 -----------------
  * - fixed error with double <br>'s
  * 
@@ -96,8 +98,14 @@
 			async:false,
 			success: function(data){
 				if (typeof data == "string") {
-					var div = $("<div/>").html(data);
-					xmlDoc =  div.html();
+					if(Number($.browser.version)>=9){
+						var div = $("<div/>").html(data);
+						xmlDoc =  div.html();
+					}else{
+						xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+						xmlDoc.async = false;
+						xmlDoc.loadXML(data);
+					}
 				} else {
 					xmlDoc = data;
 				}

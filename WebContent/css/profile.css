@@ -57,13 +57,13 @@
 }
 
 
-#profile_recipes, #profile_schmeckt{
+#profile_recipes, #profile_schmeckt, #profile_recommendation{
 	display:none;
 	margin: 0 0 20px 0;
 	padding: 20px 0;
 }
 
-#profile_recipes h2, #profile_schmeckt h2, #profile_text h2{
+#profile_recipes h2, #profile_schmeckt h2, #profile_text h2, #profile_recommendation h2{
 	font:  16pt Georgia;
 	color: #404040;
 	width:605px;
@@ -73,7 +73,7 @@
 	border-bottom: 1px solid #D7D3C7;
 }
 
-#profile_recipes p, #profile_schmeckt p{
+#profile_recipes p, #profile_schmeckt p, #profile_recommendation p{
 	clear:both;
 	position:relative;
 	width: 635px;

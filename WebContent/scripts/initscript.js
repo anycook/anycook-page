@@ -2,8 +2,8 @@
 	 //setup
 	 if($.browser.msie){
 		 var version = Number($.browser.version);		
-		 if(version<9)
-			 document.location.href="http://news.anycook.de/tagged/internet_explorer";
+		 //if(version<9)
+		//	 document.location.href="http://news.anycook.de/tagged/internet_explorer";
 	 }
 	 
 	 //xml

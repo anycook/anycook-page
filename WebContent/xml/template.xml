@@ -425,6 +425,11 @@
 						<p></p>
 						<div class="profile_more">mehr anzeigen</div>
 					</div>
+					<div id="profile_recommendation">
+						<h2></h2>
+						<p></p>
+						<div class="profile_more">mehr anzeigen</div>
+					</div>
 				</div>
 			</template>
 			<template id="settings">
