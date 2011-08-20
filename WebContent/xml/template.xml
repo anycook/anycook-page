@@ -40,7 +40,7 @@
 					<div class="discover_footer"></div>
 				</div>
 				<div id="beliebte" class="entdecken">
-					<h2>beliebte Rezepte</h2>
+					<h2>empfohlene Rezepte</h2>
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
