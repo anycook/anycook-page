@@ -1,4 +1,10 @@
 function addEditingHandler(){
+	
+	//kategorien
+	blockFilter(false);
+	$("div.kategorie_filter").unbind("click", handleKategories);
+	$("div.kategorie_filter").click(handleEditKategories);
+	
 	$("#zutaten_table td").dblclick(zutatTableEditClick);
 	$("#beschreibung").dblclick(beschreibungEditClick);
 	$("#rezept_headline").dblclick(nameEditClick);
@@ -264,6 +270,17 @@ function editMenge(zutat, newMenge){
 	
 }
 
+function changeKategorie(){
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	var version = pathNames[2];
+	var kategorie = $(this).text();
+	if(kategorie != "Keine Kategorie"){
+		kategorie = encodeURIComponent(kategorie);
+		editRecipe("todo=changekategorie&newkategorie="+kategorie+"&recipe="+recipe+"&version="+version);
+	}
+}
+
 function editRecipe(data){
 	$.ajax({
 		url:"/anycook/EditRecipe",
@@ -272,4 +289,21 @@ function editRecipe(data){
 			 window.location.reload();
 		}
 	});
+}
+
+function handleEditKategories(obj){
+	if(blocked==false){
+		$("ul.kategorie_filter").toggle();
+		$("div.kategorie_filter").toggleClass("on");
+		if($("div.kategorie_filter").hasClass("on")){
+			$("ul.kategorie_filter li").mouseenter(kategorieOver).mouseout(kategorieOut).click(changeKategorie);
+	    	$(document).click(closeKategorien);
+	    	
+		}
+		else{
+			$("ul.kategorie_filter li").unbind("mouseenter", kategorieOver).unbind("mouseout", kategorieOut).unbind("click", changeKategorie);
+	    	$(document).unbind("click", closeKategorien);
+		}
+		return false;
+	}
 }
