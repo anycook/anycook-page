@@ -1,27 +1,46 @@
 
 // colors
-@greentexture: #95b64f;
+@headergreen: #95b64f;
+@headergreenbright: #accc5a;
 @darkgrey: #5A5A5A;
+@darkgreencontour: #5F7624;
 
 // fonts
 @searchbarfont: 13pt Georgia, serif;
+@standardfont: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
+//lengths
+@headercontentheight: 80px;
+
+//functions 
+.transition(@type, @duration, @ease){
+	transition: @type  @duration @ease;
+	-webkit-transition: @type  @duration @ease;
+	-moz-transition: @type  @duration @ease;
+	-o-transition: @type  @duration @ease;
+}
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
 	padding:0;
+	font: @standardfont;
+	
 }
 
 
 // HEADER
 #header_container{
+	position: fixed;
+	//z-index: 0;
 	width:100%;
 	height:80px;
-	background-color: @greentexture;
+	background-color: @headergreen;
 	
 	
 	#header{
 		margin: 0 auto;
 		width:980px;
+		height:100%;
 		
 		#logo{
 			float:left;
@@ -69,8 +88,41 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 		}
 		
 		#login_container{
+			float: right;
+			margin: 25px 0 0 0;
+			cursor:pointer;
+		
 			#signin_btn{
-			
+				background: @headergreen;
+				.transition(background, 0.1s, ease-out);
+				width:97px;
+				height: 26px;
+				
+				border: 1px solid @darkgreencontour;
+				border-radius: 4px;
+				box-shadow:0px 1px 0px #b2c77d;
+				
+				&:hover{
+					background: @headergreenbright;
+					.transition(background, 0.1s, ease-in);
+					
+				}
+				
+				
+				#login_pin{
+					float:left;
+					background:url("/icons/anmelden_off.png") no-repeat;
+					height:19px;
+					width:19px;
+					margin: 4px 0 0 6px;			
+				}
+				
+				#login_text{
+					margin: 5px 0 0 31px;
+					font-size: 8pt;
+					color: @darkgreencontour;
+					text-shadow: 1px 1px 0px #b2c77d;
+				}
 			}
 			
 			.login_dropdown{
@@ -86,4 +138,12 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 			}
 		}
 	}
+}
+
+#container{
+	top:@headercontentheight;
+	position:relative;
+	z-index:10;
+	
+	background:white;
 }
