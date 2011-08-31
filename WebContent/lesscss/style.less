@@ -1,0 +1,89 @@
+
+// colors
+@greentexture: #95b64f;
+@darkgrey: #5A5A5A;
+
+// fonts
+@searchbarfont: 13pt Georgia, serif;
+
+body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
+	margin:0;
+	padding:0;
+}
+
+
+// HEADER
+#header_container{
+	width:100%;
+	height:80px;
+	background-color: @greentexture;
+	
+	
+	#header{
+		margin: 0 auto;
+		width:980px;
+		
+		#logo{
+			float:left;
+			margin:11px 0 0 57px;		
+		}
+		
+		#searchbar{
+			float:left;
+			margin: 22px 0 0 128px;
+			width: 400px;
+			height: 36px;
+			
+			#loupe{
+				float:left;
+				width:37px;
+				height: 100%;
+				background: url("/img/loupe.png") no-repeat;			
+			}
+			
+			form{
+				height:100%;
+				float:left;
+				#search{
+					font: @searchbarfont;
+					color: @darkgrey;
+					float:left;
+					height:	100%;
+					width:310px;
+					border:0;
+					background: url("/img/searchbar_bg.png");		
+				}
+			}
+			
+			#search_reset{
+				width:28px;
+				height:100%;
+				float:left;
+				background:url("/img/searchreset_off.png") no-repeat;
+				
+				&.on{
+					background:url("/img/searchreset_on.png") no-repeat;
+					cursor:pointer;
+				}
+			}
+		}
+		
+		#login_container{
+			#signin_btn{
+			
+			}
+			
+			.login_dropdown{
+				display:none;
+			}
+			
+			
+			#login_user{
+			}
+			
+			#login_signin{
+			
+			}
+		}
+	}
+}

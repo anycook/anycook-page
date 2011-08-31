@@ -28,7 +28,7 @@
   })();
 </script>
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/css/discover.css"/>
 <link rel="stylesheet" type="text/css" href="/css/discussion.css"/>
 <link rel="stylesheet" type="text/css" href="/css/fileuploader.css"/>
@@ -38,7 +38,8 @@
 <link rel="stylesheet" type="text/css" href="/css/settings.css"/>
 <link rel="stylesheet" type="text/css" href="/css/newrecipe.css"/>
 <link rel="stylesheet" type="text/css" href="/css/footerpages.css"/>
-<link rel="stylesheet" type="text/css" href="/css/printstyle.css"/>
+<link rel="stylesheet" type="text/css" href="/css/printstyle.css"/>-->
+<link rel="stylesheet" type="text/css" href="/lesscss/style.css"/>
 <!-- external scripts -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
@@ -85,60 +86,57 @@
 <div id="fb-root"></div>
 	<div id="header_container">
 		<div id="header">
-			<div id="header_main">
-				<a href="/#!" id="logo"><img src="/img/logo.png" alt="anycook.de" /></a>
-				<div id="searchbar">
-					<div id="loupe"></div>
-					<form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
-					<div id="search_reset"></div>
+			<a href="/#!" id="logo"><img src="/img/logo.png" alt="anycook.de" /></a>
+			<div id="searchbar">
+				<div id="loupe"></div>
+				<form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
+				<div id="search_reset"></div>
+			</div>
+			<div id="login_container">
+				<div id='signin_btn'><span>anmelden</span><div id='login_arrow'></div></div>
+				<div id="login_user" class="login_dropdown">
+					<div id="user">
+						<a href="#!/profile/me"><img src=""/></a>
+						<a href="#!/profile/me"></a>
+					</div>
+					<p>
+						<a class="user_menu_btn" href="#!/newrecipe">Neues Rezept erstellen</a>
+						<a class="user_menu_btn" href="#!/search/user/me">Meine Rezepte</a>
+						<a class="user_menu_btn" href="#!/settings">Einstellungen bearbeiten</a>
+					</p>
+					<p id="admin_menu">
+						<a href="https://backend.anycook.de" class="user_menu_btn">Backend</a>
+						<a id="extend_permissions" class="user_menu_btn">Extend Permissions(test)</a>
+					</p>
+					<p>
+						<a id='logout' class='user_menu_btn'>Abmelden</a>
+					</p>
+					<div id="login_footer"></div>
 				</div>
-				<div id="login_container">
-					<div id='signin_btn'><span>Sign in</span><div id='login_arrow'></div></div>
-					<div id="login_user" class="login_dropdown">
-						<div id="user">
-							<a href="#!/profile/me"><img src=""/></a>
-							<a href="#!/profile/me"></a>
+				<div id="login_signin" class="login_dropdown">
+					<div id="login_left">
+						<div id='social_login'>
+							<div id="facebook_login"></div>
+							<!-- <div id="openid_login"></div>
+							<div id="twitter_login"></div> -->
+						</div>							
+						<div id="login_register">
+							<a id="register_button" href="#!/registration">registrieren</a>
 						</div>
-						<p>
-							<a class="user_menu_btn" href="#!/newrecipe">Neues Rezept erstellen</a>
-							<a class="user_menu_btn" href="#!/search/user/me">Meine Rezepte</a>
-							<a class="user_menu_btn" href="#!/settings">Einstellungen bearbeiten</a>
-						</p>
-						<p id="admin_menu">
-							<a href="https://backend.anycook.de" class="user_menu_btn">Backend</a>
-							<a id="extend_permissions" class="user_menu_btn">Extend Permissions(test)</a>
-						</p>
-						<p>
-							<a id='logout' class='user_menu_btn'>Abmelden</a>
-						</p>
-						<div id="login_footer"></div>
 					</div>
-					<div id="login_signin" class="login_dropdown">
-						<div id="login_left">
-							<div id='social_login'>
-								<div id="facebook_login"></div>
-								<!-- <div id="openid_login"></div>
-								<div id="twitter_login"></div> -->
-							</div>							
-							<div id="login_register">
-								<a id="register_button" href="#!/registration">registrieren</a>
-							</div>
-						</div>
-						<div id="login_right">
-							<form id="login_form">
-								<p>Email/Username</p>
-								<input type='text' name='email' id='login_mail' autocomplete='on'/><div id='email_end'></div>
-								<p>Passwort <a href="#!/resetpassword"><img src="/icons/password_help.png" /></a></p>									
-								<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>
-								<div id="stayloggedin"><input type='checkbox' checked="checked" id='check_stayloggedin' /><span>angemeldet bleiben</span></div>
-								<input type="submit" id="login_button"  value="anmelden"/>
-							</form>
-						</div>
-						<div id="login_footer"></div>
+					<div id="login_right">
+						<form id="login_form">
+							<p>Email/Username</p>
+							<input type='text' name='email' id='login_mail' autocomplete='on'/><div id='email_end'></div>
+							<p>Passwort <a href="#!/resetpassword"><img src="/icons/password_help.png" /></a></p>									
+							<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>
+							<div id="stayloggedin"><input type='checkbox' checked="checked" id='check_stayloggedin' /><span>angemeldet bleiben</span></div>
+							<input type="submit" id="login_button"  value="anmelden"/>
+						</form>
 					</div>
+					<div id="login_footer"></div>
 				</div>
 			</div>
-			<div id="header_peak"></div>
 		</div>
 	</div>
 	<div id="right"><div id="right_inside"></div></div>
