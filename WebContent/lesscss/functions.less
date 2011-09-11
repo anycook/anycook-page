@@ -1,0 +1,21 @@
+//common functions 
+.transition(@type, @duration, @ease){
+	transition: @type  @duration @ease;
+	-webkit-transition: @type  @duration @ease;
+	-moz-transition: @type  @duration @ease;
+	-o-transition: @type  @duration @ease;
+}
+
+.box-shadow(@right, @bottom, @blur, @color){
+	box-shadow: @right @bottom @blur @color;
+	-moz-box-shadow: @right @bottom @blur @color;
+	-webkit-box-shadow: @right @bottom @blur @color;
+	-o-box-shadow: @right @bottom @blur @color;	
+}
+
+.box-shadow-inset(@right, @bottom, @blur, @color){
+	box-shadow: inset @right @bottom @blur @color;
+	-moz-box-shadow: inset @right @bottom @blur @color;
+	-webkit-box-shadow:inset @right @bottom @blur @color;
+	-o-box-shadow: inset @right @bottom @blur @color;	
+}

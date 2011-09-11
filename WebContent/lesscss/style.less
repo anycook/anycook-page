@@ -1,24 +1,9 @@
-
-// colors
-@headergreen: #95b64f;
-@headergreenbright: #accc5a;
-@darkgrey: #5A5A5A;
-@darkgreencontour: #5F7624;
-
-// fonts
-@searchbarfont: 13pt Georgia, serif;
-@standardfont: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+@import "functions";
+@import "colors";
+@import "fonts";
 
 //lengths
 @headercontentheight: 80px;
-
-//functions 
-.transition(@type, @duration, @ease){
-	transition: @type  @duration @ease;
-	-webkit-transition: @type  @duration @ease;
-	-moz-transition: @type  @duration @ease;
-	-o-transition: @type  @duration @ease;
-}
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
