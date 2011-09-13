@@ -9,12 +9,12 @@
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
 	padding:0;
-	font: @standardfont;
 	
 }
 
 body{
 	overflow-x:hidden;
+	font: @standardfont;
 }
 
 
@@ -135,7 +135,7 @@ header{
 #main{
 	width:100%;
 	float:left;
-	top:@headercontentheight + 30;
+	top:@headercontentheight + 20;
 	position:relative;
 	background-color:@background;
 	min-height: 600px;
@@ -186,7 +186,7 @@ header{
 				height:@height;
 				background:url("/img/header_shadow.png") repeat-x;
 				float:left;
-				width:100%;
+				width:2000px;
 			}
 			
 			#container_head_left{
@@ -250,6 +250,7 @@ header{
 				
 				#filter_main{
 					background-color: #F9F8F6;
+					margin: 0 5px;
 					
 					#userfilter{
 						background-color: #ECE9E3;
@@ -367,6 +368,57 @@ header{
 							tr{
 								display: block;
 								height: 30px;
+								
+								td{
+									/**{
+										float:left;
+									}*/
+								
+									&.filter_table_left{
+										width: 130px;
+									}
+									
+									&.filter_table_right{
+										width: 100px;
+									}
+									
+									#uhr {
+										margin: -3px 3px 0 -3px;
+									}
+									
+									input{
+										//float: none !important;
+										font: 14pt Times New Roman;
+										font-weight: 500;
+										height: 20px;
+										width: 24px;
+										color: #5A5A5A;
+										text-align: right;
+										border: 1pt solid #F9F8F6;
+										margin: 0;
+										margin-left: -4px;
+										padding: 0 0 0 3px;
+										background: none;
+										outline: none;
+									}
+									
+									.label_chefhats, .label_muffins {
+										display: table-cell;
+										cursor: pointer;
+										width: 20px;
+										height: 20px;
+										background: url(/img/labels.png) no-repeat;
+										
+										input{
+											position: absolute;
+											left: -9999px;
+										}
+									}
+									
+									.label_muffins {
+										background-position: -21px 0;
+									}
+								}
 							}
 						}
 						
