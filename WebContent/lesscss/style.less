@@ -89,8 +89,7 @@ header{
 				
 				&:hover{
 					background: @headergreenbright;
-					.transition(background, 0.1s, ease-in);
-					
+					.transition(background, 0.1s, ease-in);					
 				}
 				
 				
@@ -125,10 +124,34 @@ header{
 	}
 }
 
-#container{
+//CONTENT
+
+#container{	
 	top:@headercontentheight;
+	left:50%;
 	position:relative;
-	z-index:10;
+	z-index:10
+	float: left;
+	width: 1016px;
+	margin-left: -508px;
 	
-	background:white;
+	
+	#container_head{
+		@height:36px;
+		width:100%;
+		height:@height;
+		
+		#container_head_peak{
+					
+		}
+		
+		#container_head_left, #container_head_right{
+			height:@height - 10;
+			background-color:@background;
+			.box-shadow(0, -1px, 10px, rgba(0, 0, 0, 0.5));
+			float:left;
+			width:50%;
+		}
+		
+	}
 }
