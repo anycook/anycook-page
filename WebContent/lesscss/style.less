@@ -4,6 +4,7 @@
 
 //lengths
 @headercontentheight: 80px;
+@containerwidth: 1016px;
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
@@ -12,13 +13,17 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	
 }
 
+body{
+	overflow-x:hidden;
+}
+
 
 // HEADER
 header{
 	position: fixed;
 	//z-index: 0;
 	width:100%;
-	height:80px;
+	height:100%;
 	background-color: @headergreen;
 	
 	
@@ -115,6 +120,7 @@ header{
 			
 			
 			#login_user{
+			
 			}
 			
 			#login_signin{
@@ -124,33 +130,279 @@ header{
 	}
 }
 
-//CONTENT
 
-#container{	
-	top:@headercontentheight;
-	left:50%;
+//CONTENT
+#main{
+	width:100%;
+	float:left;
+	top:@headercontentheight + 30;
 	position:relative;
-	z-index:10
-	float: left;
-	width: 1016px;
-	margin-left: -508px;
+	background-color:@background;
+	min-height: 600px;
 	
-	
-	#container_head{
-		@height:36px;
-		width:100%;
-		height:@height;
+	#right{
+		position: absolute;
+		margin-top:-27px;
+		margin-left: @containerwidth / 2;
+		background:url("/img/right_stripes.png") repeat-y @background-right;
+		height:100%;
+		left:50%;
+		width:50%;
+		z-index:15;
+		padding-bottom:27px;
+		.box-shadow-inset(0, 3px, 3px, rgba(0,0,0,0.1));
 		
-		#container_head_peak{
-					
+	}
+	
+	#container{		
+		left:50%;
+		z-index:10;
+		position:relative;
+		float: left;
+		width: @containerwidth;
+		margin-left: -508px;
+		overflow-x:visible;
+		background: @background;
+		
+		
+		#container_head{
+			@height:36px;
+			width:100%;
+			position:relative;
+			height:@height;
+			top:-36px;
+			
+			#container_head_peak{
+					float:left;
+					position:relative;				
+					background:url("/img/peak.png") no-repeat;
+					height:@height;
+					width:94px;
+					left:215px;
+			}
+			
+			#container_head_left, #container_head_right{
+				position:absolute;
+				height:@height;
+				background:url("/img/header_shadow.png") repeat-x;
+				float:left;
+				width:100%;
+			}
+			
+			#container_head_left{
+				right:801px;
+			}
+			
+			#container_head_right{
+				left:309px;
+				
+			}
 		}
 		
-		#container_head_left, #container_head_right{
-			height:@height - 10;
-			background-color:@background;
-			.box-shadow(0, -1px, 10px, rgba(0, 0, 0, 0.5));
-			float:left;
-			width:50%;
+		#filter_container{
+			float: left;
+			height: 600px;
+			background: url("/img/nr_statusbg.png") no-repeat;
+			background-position: 125px 122px;
+			
+			#filter_box{
+				float: left;
+				background: url("/img/filter_bg.png") repeat-y;
+				margin: 6px 0 0 15px;
+				width: 268px;
+				
+				
+				#filter_head{
+					background: url("/img/filter_head_main.png");
+					#filter_head_top {
+						height: 26px;
+						background: url("/img/filter_head_top.png") no-repeat;
+					}
+					#filter_head_main {
+						height: 25px;
+						margin-top: -4px;
+						padding-left: 45px;
+						
+						
+						h3 {
+							font: 15pt Georgia;
+							font-style: italic;
+							color: #9FBD70;
+							float: left;
+						}
+						#filter_reset {
+							float: right;
+							height: 9px;
+							width: 8px;
+							padding: 5px;
+							margin-right: 12px;
+							margin-top: 3px;
+						}
+					}
+					
+					#filter_head_bottom {
+						height: 13px;
+						background: url("/img/filter_head_bottom.png") no-repeat;
+					}
+					
+									
+				}
+				
+				#filter_main{
+					background-color: #F9F8F6;
+					
+					#userfilter{
+						background-color: #ECE9E3;
+						border: 1pt solid #D5D6D2;
+						padding: 5px;
+						display: none;
+						margin-top: 10px;
+						height: 50px;
+						
+						#userfilterremove {
+							margin: 2px 6px 0;
+							background-image: url(/img/delete_off.png);
+							height: 9px;
+							width: 8px;
+							cursor: pointer;
+							float: right;
+							display: none;
+						}
+						
+						div{
+							a{
+								float: left;
+								text-decoration: none;
+								color: #859F5E;
+							}
+						}
+						
+						img{
+							height: 50px;
+							width: 50px;
+						}
+						
+						#userfiltertext {
+							padding: 0 2px;
+							margin: 0 24px 0 55px;
+							font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+							line-height: 16px;
+							height: 50px;
+						}
+					}
+					
+					div.kategorie_filter{
+						background-color: #ECE9E3;
+						border: 1px solid #D5D6D2;
+						margin-top: 10px;
+						height: 28px;
+						cursor: pointer;
+						-moz-user-select: none;
+						-khtml-user-select: none;
+						-webkit-user-select: none;
+						
+						#kategorie_filter_left, #kategorie_filter_right {
+							float: left;
+							width: 28px;
+							height: 100%;
+							background: url("/img/arrow_down.png") no-repeat;
+						}
+						
+						#kategorie_filter_left {
+							border-right: 1px solid #D5D6D2;
+						}
+						
+						#kategorie_filter_name {
+							float: left;
+							width: 198px;
+							height: 100%;
+							font: 13pt Georgia;
+							color: #5A5A5A;
+							text-align: center;
+							padding-top: 4px;
+						}
+						
+						#kategorie_filter_right{
+							border-left: 1px solid #D5D6D2;
+						}	
+					}
+					
+					ul.kategorie_filter {
+						position: absolute;
+						width: 198px;
+						margin-left: 29px;
+						background-color: #ECE9E3;
+						border: 1pt solid #93948D;
+						border-top: none;
+						text-align: left;
+						color: #5A5A5A;
+						list-style: none;
+						letter-spacing: 0.8pt;
+						line-height: 17.5pt;
+						cursor: pointer;
+						-moz-user-select: none;
+						-khtml-user-select: none;
+						overflow: hidden;
+						z-index: 99999;
+						-webkit-user-select: none;
+						
+						li{
+							border-bottom: 1pt solid #D1CFCA;
+							padding-left: 7px;
+							font: 11pt Georgia serif;
+						}
+					}
+					
+					#filter_main_box {
+						margin: 0 14px;
+						font: 13pt Georgia;
+						color: #5A5A5A;
+						
+						#filter_table {
+							margin: 10px 0 -10px 0;
+							float: left;
+							width: 100%;
+							border-collapse: collapse;
+							
+							tr{
+								display: block;
+								height: 30px;
+							}
+						}
+						
+						#filter_devider {
+							float: left;
+							margin: 14px 0 10px 0;
+							width: 100%;
+							height: 4px;
+							background: url("/img/dot.png") repeat-x;
+						}
+						
+						#zutaten_table {
+							padding-top: 4px;
+							min-height: 176px;
+							width: 100%;
+							margin: 0 0 10px 0;
+							background: url(/img/zutaten_tags_bg.png) repeat;
+							display: block;
+							border-spacing: 0;
+						}
+						
+						#tags_table {
+							margin: 10px 0 10px 0;
+							border-spacing: 0;
+						}
+					}
+					
+					
+					
+				}
+				
+				#filter_bottom{
+					height: 18px;
+					background: url("/img/filter_bottom.png");
+				}
+			}
 		}
 		
 	}
