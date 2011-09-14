@@ -28,7 +28,7 @@
   })();
 </script>
 <!-- CSS -->
-<link rel="stylesheet/less" type="text/css" href="/lesscss/style.less"/>
+<link rel="stylesheet" type="text/css" href="/lesscss/style.css"/>
 <!-- external scripts -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
@@ -36,10 +36,10 @@
   {lang: 'de', parsetags: 'explicit'}
 </script>
 <script type="text/javascript" src="https://connect.facebook.net/de_DE/all.js"></script>
-<script type="text/javascript" src="/scripts/lib/less-1.1.3.min.js"></script>
+<!-- <script type="text/javascript" src="/scripts/lib/less-1.1.3.min.js"></script>-->
 <script type="text/javascript" src="/scripts/lib/jquery.address-1.4.min.js"></script>
 <script type="text/javascript" src="/scripts/lib/jquery.autoellipsis-1.0.2.min.js"></script>
-<script type="text/javascript" src="/scripts/lib/jquery.xml-0.3.js"></script>
+<script type="text/javascript" src="/scripts/lib/jquery.xml-0.2.min.js"></script>
 <script type="text/javascript" src="/scripts/classes/Recipe.js"></script>
 <script type="text/javascript" src="/scripts/classes/User.js"></script>
 <script type="text/javascript" src="/scripts/classes/Search.js"></script>
@@ -130,8 +130,11 @@
 		</div>
 	</header>
 	<div id="main">
-		<div id="right"></div>
+		<div id="right">
+			<div id="right_edge"></div>
+		</div>
 		<div id="container">
+			<div id="buchmitte_top"></div>
 			<div id="container_head"><div id="container_head_left"></div><div id="container_head_peak"></div><div id="container_head_right"></div></div>
 			<div id="filter_container">
 				<div id="filter_box">
@@ -156,9 +159,9 @@
 					<ul class="kategorie_filter"></ul>
 					<div id="filter_main_box">
 							<table id="filter_table">
-								<tr>
-									<td class="filter_table_left"><img id="uhr" alt="uhr" src="/icons/uhr.png" />Dauer: </td>
-									<td class="filter_table_right"><form id="time_form" action=""><input type="text" id="time_std" value="00" size="2" maxlength="2" /><input id="hidden_std" type="hidden" value="00"/>: <input type="text" id="time_min" value="00" size="2" maxlength="2" /><input id="hidden_min" type="hidden" value="00"/>h</form></td>
+								<tr id="time_filter">
+									<td class="filter_table_left">Dauer: </td>
+									<td class="filter_table_right"><form id="time_form" action=""><input type="text" id="time_std" placeholder="00" size="2" maxlength="2" /><input id="hidden_std" type="hidden" value="00"/>: <input type="text" id="time_min" placeholder="00" size="2" maxlength="2" /><input id="hidden_min" type="hidden" value="00"/>h</form></td>
 								</tr>
 	
 								<tr>
@@ -216,17 +219,25 @@
 					</div>
 					<div id="filter_bottom"></div>
 				</div>
-				<div id="buchmitte"></div>
 			</div>
+			
 			<section id="content">
 				<div id="content_header">
 				</div>
 				<div id="content_main">
 	
 				</div>
-				<footer><span>©2010 Anycook</span><div id="footer_links"><a href="/#!">Startseite</a> · <a href="http://news.anycook.de" target="_blank">News</a> · <a href="http://news.anycook.de/tagged/tutorial" target="_blank">Hilfe</a> · <a href="/#!/about_us">Über uns</a> · <a href="/#!/feedback">Feedback</a> · <a href="/#!/developer">Entwickler</a> · <a href="/#!/impressum">Impressum</a></div></footer>
 			</section>
+
+			<div id="peak_bottom">
+			</div>
+			<footer>
+				<div id="copyright">© 2010-2011 Anycook</div><div id="footer_links"><a href="/#!">Startseite</a> · <a href="http://news.anycook.de" target="_blank">News</a> · <a href="http://news.anycook.de/tagged/tutorial" target="_blank">Hilfe</a> · <a href="/#!/about_us">Über uns</a> · <a href="/#!/feedback">Feedback</a> · <a href="/#!/developer">Entwickler</a> · <a href="/#!/impressum">Impressum</a></div>
+			</footer>
+		</div>
+		<div id="container_bottom">			
 		</div>
 	</div>
+	<div id="bookskin"></div>
 </body>
 </html>

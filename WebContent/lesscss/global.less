@@ -1,12 +1,38 @@
+
+a img{
+	border:0;
+}
+
 input{
+	outline:none;
+	
 	&[type="text"], &[type="password"], &[type="email"]{
 		font:  12pt Georgia;
 		color: #404040;
-		padding:2px;
-		background-color:#F9F8F6;
+		padding:5px 6px;
+		background-color:@input-background;
+		.transition(background-color, 0.1s, ease-out);
 		border: 1px solid @innerborder;
-		border-radius:2px;
-		.box-shadow(0, 2px, 0, @background-right);	
+		border-radius:3px;
+		.box-shadow2(0, 2px, 1px, @darkergrey, 0, 3px, 0, @innerborder);	
 		height:18px;
+		
+		&:focus{
+			.transition(background-color, 0.1s, ease-in);
+			background-color:@input-background-active;
+		
+		}
+		
 	}
+}
+
+input::-webkit-input-placeholder{
+			font:@standardfont;
+			text-align:right;
+			
+}
+
+input:-moz-placeholder{
+			font:@standardfont;
+			text-align:right;
 }

@@ -16,6 +16,7 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 body{
 	overflow-x:hidden;
 	font: @standardfont;
+	background-color: @headergreen;
 }
 
 
@@ -24,8 +25,7 @@ header{
 	position: fixed;
 	//z-index: 0;
 	width:100%;
-	height:100%;
-	background-color: @headergreen;
+	height:500px;
 	
 	
 	#header{
@@ -39,16 +39,22 @@ header{
 		}
 		
 		#searchbar{
+			@height: 28px;
+			@width: 368px;
 			float:left;
 			margin: 22px 0 0 128px;
-			width: 400px;
-			height: 36px;
+			width: @width;
+			height: @height;
+			background-color:white;
+			border: 1px solid @searchbarborder;
+			.box-shadow(1px, 2px, 3px, rgba(0,0,0,0.15));
 			
 			#loupe{
 				float:left;
-				width:37px;
-				height: 100%;
-				background: url("/img/loupe.png") no-repeat;			
+				margin: ( @height - 14px ) / 2 8px;
+				width:14px;
+				height: 14px;
+				background: url("/img/loupe.png") no-repeat;		
 			}
 			
 			form{
@@ -61,18 +67,33 @@ header{
 					height:	100%;
 					width:310px;
 					border:0;
-					background: url("/img/searchbar_bg.png");		
+					border-radius:0;
+					padding:0;
+					.box-shadow(0, 0, 0, 0);
+					background-color:white;
+					
+				}
+				#search::-webkit-input-placeholder{
+					font:inherit;
+					font-style: italic;
+					text-align: inherit;
+				}
+
+				#search:-moz-placeholder{
+					font:inherit;
+					font-style: italic;
+					text-align: inherit;
 				}
 			}
 			
 			#search_reset{
-				width:28px;
-				height:100%;
+				width:9px;
+				height:9px;
+				margin: ( @height - 9px ) / 2 8px;
 				float:left;
-				background:url("/img/searchreset_off.png") no-repeat;
 				
 				&.on{
-					background:url("/img/searchreset_on.png") no-repeat;
+					background:url("/img/searchreset.png") no-repeat;
 					cursor:pointer;
 				}
 			}
@@ -140,6 +161,7 @@ header{
 	position:relative;
 	background-color:@background;
 	min-height: 600px;
+	margin-bottom:30px;
 	
 	#right{
 		position: absolute;
@@ -153,6 +175,23 @@ header{
 		padding-bottom:27px;
 		.box-shadow-inset(0, 3px, 3px, rgba(0,0,0,0.1));
 		
+		#right_edge{
+			position:absolute;
+			top:100%;
+			background:url("/img/pages_edge.png") no-repeat;
+			width:21px;
+			height:27px;
+			margin-top:-27px;
+		}
+		
+	}
+	
+	#container_bottom{
+			width:100%;
+			//overflow: visible;
+			background:url("/img/pages_bottom.png") repeat-x;
+			float:left;
+			height:27px;
 	}
 	
 	#container{		
@@ -163,7 +202,58 @@ header{
 		width: @containerwidth;
 		margin-left: -508px;
 		overflow-x:visible;
-		background: @background;
+		background: url("/img/buchmitte.png") repeat-y @background;
+		background-position: 285px 0;
+		
+		#buchmitte_top{
+			width:11px;
+			height:40px;
+			position: absolute;
+			left:285px;
+			background: url("/img/buchmitte_top.png") no-repeat @background;
+		}
+		
+		#peak_bottom{
+			background:url("/img/peak_bottom.png") no-repeat @background;
+			width: 108px;
+			height: 46px;
+			position:absolute;
+			top:100%;
+			margin-top:-12px;
+			left:234px;
+		}
+		
+		footer{
+			position:absolute;
+			top:100%;
+			height:40px;
+			padding-top:15px;
+			width:100%;
+			color:white;
+			font:@standardfont;
+			float:left;
+			margin: 20px 0 0 0;
+			font-size: 9pt;
+			
+			#copyright{
+				float:left;
+				margin-left:27px;
+			}
+			
+			#footer_links{
+				float:right;
+				
+				a{
+					color:white;
+					text-decoration: none;
+					&:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+			
+			
+		}
 		
 		
 		#container_head{
@@ -179,7 +269,7 @@ header{
 					background:url("/img/peak.png") no-repeat;
 					height:@height;
 					width:94px;
-					left:215px;
+					left:241px;
 			}
 			
 			#container_head_left, #container_head_right{
@@ -191,11 +281,11 @@ header{
 			}
 			
 			#container_head_left{
-				right:801px;
+				right:775px;
 			}
 			
 			#container_head_right{
-				left:309px;
+				left:335px;
 				
 			}
 		}
@@ -203,6 +293,8 @@ header{
 		#filter_container{
 			float: left;
 			height: 600px;
+			top:-36px;
+			position:relative;
 			background: url("/img/nr_statusbg.png") no-repeat;
 			background-position: 125px 122px;
 			
@@ -370,55 +462,48 @@ header{
 								display: block;
 								height: 30px;
 								
-								td{
-									/**{
-										float:left;
-									}*/
+								&#time_filter{
+									margin-bottom:5px;
 								
-									&.filter_table_left{
-										width: 130px;
+									.filter_table_left{
+										background: url("/icons/uhr.png") no-repeat;
+										width:100px;
+										padding-left:30px;
 									}
-									
-									&.filter_table_right{
-										width: 100px;
-									}
-									
-									#uhr {
-										margin: -3px 3px 0 -3px;
-									}
+								}
+								
+								
+								.filter_table_left{
+									width: 130px;
+								}
+								
+								.filter_table_right{
+									width: 100px;
+								}
+								
+								#uhr {
+									margin: 0 3px 0 -3px;
+								}
+								
+								input{
+									padding: 2px 0 2px 3px;
+								}
+								
+								.label_chefhats, .label_muffins {
+									display: table-cell;
+									cursor: pointer;
+									width: 20px;
+									height: 20px;
+									background: url(/img/labels.png) no-repeat;
 									
 									input{
-										//float: none !important;
-										font: 14pt Times New Roman;
-										font-weight: 500;
-										height: 20px;
-										width: 24px;
-										color: #5A5A5A;
-										text-align: right;
-										border: 1pt solid #F9F8F6;
-										margin: 0;
-										margin-left: -4px;
-										padding: 0 0 0 3px;
-										background: none;
-										outline: none;
+										position: absolute;
+										left: -9999px;
 									}
-									
-									.label_chefhats, .label_muffins {
-										display: table-cell;
-										cursor: pointer;
-										width: 20px;
-										height: 20px;
-										background: url(/img/labels.png) no-repeat;
-										
-										input{
-											position: absolute;
-											left: -9999px;
-										}
-									}
-									
-									.label_muffins {
-										background-position: -21px 0;
-									}
+								}
+								
+								.label_muffins {
+									background-position: -21px 0;
 								}
 							}
 						}
@@ -456,7 +541,23 @@ header{
 					background: url("/img/filter_bottom.png");
 				}
 			}
+			
+		}
+		
+		#content{
+			width:655px;
+			float:left;
+			margin-left: 50px;
 		}
 		
 	}
+}
+
+#bookskin{
+	float:left;
+	margin-top:70px;
+	width:100%;
+	height:4px;
+	background:url("/img/bookskin.png") repeat-x;
+	padding:8px;
 }
