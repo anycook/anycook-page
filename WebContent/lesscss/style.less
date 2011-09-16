@@ -2,6 +2,7 @@
 @import "colors";
 @import "fonts";
 @import "global";
+@import "search";
 
 //lengths
 @headercontentheight: 80px;
@@ -16,7 +17,14 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 body{
 	overflow-x:hidden;
 	font: @standardfont;
-	background-color: @headergreen;
+}
+
+#background{
+	background: url("/img/bg_texture.png");
+	position:fixed;
+	height:100%;
+	width:100%;
+	
 }
 
 
@@ -91,10 +99,13 @@ header{
 				height:9px;
 				margin: ( @height - 9px ) / 2 8px;
 				float:left;
-				
+				background:url("/img/searchreset.png") no-repeat;
+				opacity:.0;
+				.transition(opacity, 0.3s, ease-out);
 				&.on{
-					background:url("/img/searchreset.png") no-repeat;
+					opacity:1.0;
 					cursor:pointer;
+					.transition(opacity, 0.3s, ease-in);
 				}
 			}
 		}
@@ -245,10 +256,6 @@ header{
 				
 				a{
 					color:white;
-					text-decoration: none;
-					&:hover{
-						text-decoration: underline;
-					}
 				}
 			}
 			
@@ -560,4 +567,5 @@ header{
 	height:4px;
 	background:url("/img/bookskin.png") repeat-x;
 	padding:8px;
+	position:relative;
 }

@@ -13,10 +13,11 @@ function searchResult(json){
 			$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
 		
 		var currentResultNum = $(".frame_big").length;
-		$("#current_num").text(currentResultNum);
 		if(currentResultNum < json.size){
 			addMoreResultsButton();
 		}
+		
+		$(".frame_big").first().focus();
 	}
 	
 }
@@ -31,9 +32,8 @@ function addResults(json){
 				$("#result_container").append(getBigFrameText(gerichte[i]));
 			}
 			$("#more_results, #more_results_right").remove();
-			var currentResultsNum = $(".frame_big").length;
-			$("#current_num").text(currentResultsNum);
 			
+			var currentResultsNum = $(".frame_big").length;			
 			if(currentResultsNum < json.size){
 				addMoreResultsButton();
 			}

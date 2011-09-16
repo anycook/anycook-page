@@ -13,6 +13,13 @@
 	-o-box-shadow: @right @bottom @blur @color;	
 }
 
+.box-shadow(@right, @bottom, @blur, @spread, @color){
+	box-shadow: @right @bottom @blur @spread @color;
+	-moz-box-shadow: @right @bottom @blur @spread @color;
+	-webkit-box-shadow: @right @bottom @blur @spread @color;
+	-o-box-shadow: @right @bottom @blur @color;	
+}
+
 .box-shadow2(@right, @bottom, @blur, @color, @right2, @bottom2, @blur2, @color2){
 	box-shadow: @right @bottom @blur @color, @right2 @bottom2 @blur2 @color2;
 	-moz-box-shadow: @right @bottom @blur @color, @right2 @bottom2 @blur2 @color2;

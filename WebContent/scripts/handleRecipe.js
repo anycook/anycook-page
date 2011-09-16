@@ -45,7 +45,29 @@ function setSmallFrameText(container){
 function getBigFrameText(json){
 	var beschreibung = json.description;
 	
+	var uri = encodeURI("/#!/recipe/"+json.name);
+	var frame_big = $("<a></a>")
+		.addClass("frame_big")
+		.attr("href", uri)
+		.append("<div></div>");
+		
+	frame_big.append("<div></div>").children("div").last()
+		.addClass("frame_big_left");
+		
 	
+		
+	
+	var frame_big_main = frame_big.append("<div></div>").children("div").last()
+		.addClass("frame_big_main");
+		
+	var recipe_img = frame_big_main.append("<div></div>").children("div").last()
+		.addClass("recipe_img")
+		.append("<img/>")
+		.append("<div></div>");
+		
+	recipe_img.children("img")
+		.attr("src", "http://graph.anycook.de/recipe/"+json.name+"/image?type=small");
+		
 	var std = json.timestd;
 	if(std.length==1)
 		std="0"+std;
@@ -54,26 +76,31 @@ function getBigFrameText(json){
 	if(min.length==1)
 		min="0"+min;
 	
-	var uri = encodeURI("/#!/recipe/"+json.name);
-	var htmlstring = "<a href='"+uri+"' class='frame_big'>" +
-			"<div class='frame_main_big big_rezept'>" +
-			"<div class='rezept_bild'>" +
-				"<img src='http://graph.anycook.de/recipe/"+json.name+"/image?type=small'/>" +
-				"<div class='time_gericht'>" +
-				"<div class='time_corner_left'></div>" +
-				"<div class='time_gericht_mid'>"+std+":"+min+" h</div>" +
-				"<div class='time_corner_right'></div></div>" +
-			"</div>" +
-			"<div class=\"text_frame\">" +
-			"<h5>"+json.name+"</h5>" +
-			"<p>"+beschreibung+"</p>" +
-			"</div>" +
-			"<div class='result_schmeckt'>" +
-			"<div class='heart_img'></div>" +
-			"<div class='heart_number'>"+json.schmeckt+"</div></div>";
+	recipe_img.children("div")
+		.addClass("recipe_time")
+		.text(std+":"+min+" h");
+		
+		
+	var recipe_text = frame_big_main.append("<div></div>").children("div").last()
+		.addClass("recipe_text");
 	
-	htmlstring+="</div><div class='frame_right_big'></div></a>";
-	return htmlstring;
+	recipe_text.append("<h3></h3>").children("h3").text(json.name);
+	recipe_text.append("<p></p>").children("p").text(beschreibung);
+	
+	var heart = frame_big_main.append("<div></div>").children("div").last()
+		.addClass("heart");
+		
+	if(json.schmeckt)
+		heart.addClass("schmeckt");
+		
+	frame_big_main.append("<div></div>").children("div").last()
+		.addClass("schmeckt_num").text(json.schmecktNum);
+	
+	frame_big.append("<div></div>").children("div").last()
+		.addClass("frame_big_right");
+		
+	
+	return frame_big;
 }
 
 var personen;
