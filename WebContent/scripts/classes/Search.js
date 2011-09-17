@@ -163,23 +163,10 @@ Search.prototype.search = function(){
 		  url: "/anycook/FullTextSearch",
 		  data:"resultanz=10&startnum=0"+data,
 		  dataType: 'json',
-		  async:false,
 		  success: searchResult
 		});
 };
 
-Search.prototype.searchMore = function(startnum){
-	$("#more_results").append("<img src=\"/icons/ajax-loader.gif\"/>");
-	var currentResultsNum = $(".frame_big").length;
-	var data = this.getData();
-	$.ajax({
-		  url: "/anycook/FullTextSearch",
-		  data:"resultanz=10&startnum="+currentResultsNum+data,
-		  dataType: 'json',
-		  async:false,
-		  success:addResults
-	});
-};
 
 Search.prototype.setTime = function(time){
 	this.time = time;

@@ -1,6 +1,0 @@
-Sitemap: http://anycook.de/sitemap1.xml
-Sitemap: http://anycook.de/sitemap2.xml
-Sitemap: http://anycook.de/sitemap3.xml
-Sitemap: http://anycook.de/sitemap4.xml
-User-agent: *
-Disallow: /backend/
