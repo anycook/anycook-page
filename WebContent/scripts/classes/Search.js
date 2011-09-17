@@ -157,13 +157,28 @@ Search.prototype.getData = function(){
 Search.prototype.search = function(){
 	setFiltersfromSession();
 	var data = this.getData();
+	$("#content").block({message:"lade..."});
 	
 	$("#result_container").empty();
 	$.ajax({
 		  url: "/anycook/FullTextSearch",
 		  data:"resultanz=10&startnum=0"+data,
 		  dataType: 'json',
-		  success: searchResult
+		  success: function(json){
+		  	if(json.size > 0){
+				$("#result_container").data("results", json);
+				addResults();
+				$(".frame_big:focus").live("keydown", searchKeyDown);
+				$(".frame_big").live("mouseenter", function(){
+					$(".frame_big:focus").blur();
+				});
+			}else
+		  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
+
+		  },
+		  complete: function(){
+		  	$("#content").unblock();
+		  }
 		});
 };
 

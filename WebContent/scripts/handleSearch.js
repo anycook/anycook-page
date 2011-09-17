@@ -1,34 +1,3 @@
-function searchResult(json){
-	if(json==null)
-		$.address.path("");
-	else{
-		
-		$("#result_container").data("results", json);
-		var gerichte = json.gerichte;
-		if(gerichte.length>0){					
-			for(var i = 0; i<10; i++){
-				$("#result_container").append(getBigFrameText(gerichte[i]));
-			}
-		}
-		else
-			$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
-		
-		var currentResultNum = $(".frame_big").length;
-		if(currentResultNum < json.size){
-			addMoreResultsButton();
-		}
-		
-		$(".frame_big").first().focus();
-		
-		
-		$(".frame_big:focus").live("keydown", searchKeyDown);
-		$(".frame_big").live("mouseenter", function(){
-			$(".frame_big:focus").blur();
-		});
-	}
-	
-}
-
 function addResults(){
 	$("#more_results").remove();
 	var gerichte = $("#result_container").data("results").gerichte;
@@ -41,13 +10,21 @@ function addResults(){
 }
 
 function searchKeyDown(event){
-	if(event.keyCode == 40 && $(this).next() != undefined) // down
-		$(this).next().focus();
+	var newFocus = undefined;
+	switch(event.keyCode){
+		case 40: // down
+			newFocus = $(this).next();
+			break;
+		case 38:
+			newFocus = $(this).prev();
+			break;
+				
+	}
+	if(newFocus !== undefined){
+		newFocus.focus();
+		return false;
+	}
 	
-	if(event.keyCode == 38 && $(this).prev() != undefined) // up
-		$(this).prev().focus();
-		
-	return false;
 }
 
 function addMoreResultsButton(){
@@ -168,7 +145,5 @@ function gotoGericht(gericht){
 function focusoutSearch(){
 	$("#search").val("");	
 }
-
-//var searchterms = null;
 
 var search = null;
