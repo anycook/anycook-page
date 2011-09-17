@@ -157,7 +157,7 @@ Search.prototype.getData = function(){
 Search.prototype.search = function(){
 	setFiltersfromSession();
 	var data = this.getData();
-	$("#content").block({message:"lade..."});
+	// $.blockUI({message:null});
 	
 	$("#result_container").empty();
 	$.ajax({
@@ -175,9 +175,6 @@ Search.prototype.search = function(){
 			}else
 		  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
 
-		  },
-		  complete: function(){
-		  	$("#content").unblock();
 		  }
 		});
 };
