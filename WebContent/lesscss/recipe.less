@@ -1,0 +1,155 @@
+#recipe_container{
+	@contentwidth:655px;
+	@stepwidth:510px;
+	
+	float:left;
+	
+	#recipe_main{
+		width:@stepwidth;
+		float:left;
+		
+		#recipe_image_container{
+		float:left;
+		border: 8px solid @stepcolor;
+		outline: 1px solid @lightgrey;
+		margin: 1px;
+		width: @stepwidth - 18;
+			
+			#recipe_image{
+				float:left;
+				width: @stepwidth - 20;
+				border: 1px solid @darkgrey;
+			}
+		}
+		
+		h1{
+			float:left;
+			width:@stepwidth - 10;
+			text-align:center;
+			font:@headlinefont;
+			font-size:18pt;
+			margin: 10px 5px 0;	
+			color:@darkfontcolor;	
+		}
+		#autoren{
+			float:left;
+			width:@stepwidth - 10;
+			margin: 0 5px;
+			font-style:italic;
+			text-align:center;
+			font-size:10pt;
+			color: @smalllightfontcolor;
+		}
+		#introduction{
+			float:left;
+			width:@stepwidth - 30;
+			margin: 5px 15px 25px;
+			color: @smalllightfontcolor;
+		}
+	}
+	
+	#recipe_options{
+		@optionswidth: @contentwidth - @stepwidth;
+		float:left;
+		width: @optionswidth;
+		padding-top:160px;
+		
+		.option{
+			cursor:pointer;
+			float:left;
+			height:29px;
+			font-size:9pt;
+			background:@stepcolor;
+			margin-bottom: 5px;
+			border-top:1px solid @lightgrey;
+			border-bottom:1px solid @lightgrey;
+			color: @darkfontcolor;
+			
+			.img{
+				margin:5px 6px 0;
+				float:left;
+				background:url("/img/icons20x20.png") no-repeat;
+				width:20px;
+				height:20px;
+			}
+			
+			&#share{
+				.img{
+					background-position: -80px 0;
+				}
+			}
+			
+			&#tags{
+				.img{
+					background-position: -100px 0;
+				}
+			}
+			
+			&#print{
+				.img{
+					background-position: -120px 0;
+				}
+			}
+			
+			
+			
+			.left{
+				float:left;
+				padding-top:6px;
+			}
+			
+			.right{
+				float:right;
+				height:100%;
+				width:6px;
+				margin-left:15px;
+				background:url("/img/option_btn_right.png") no-repeat @background;
+			}
+		}
+	}
+		
+	#step_container{
+		float:left;
+		width:100%;
+		.step{
+			float:left;
+			width:@stepwidth - 10;
+			background:url("/img/rezept_frame_left.png") no-repeat @stepcolor;
+			height:142px;
+			padding-left:10px;
+			margin-bottom:15px;
+			border-top:1px solid @lightgrey;
+			border-bottom:1px solid @lightgrey;
+			.box-shadow(0, 3px, 2px, -2px, @shadowbeige);
+			
+			.step_left{
+				float:left;
+				width:@stepwidth - 16;
+				color: @darkfontcolor;
+				
+				.step_number{
+					margin:8px 0;
+					float: left;
+					height: 123px;
+					width: 110px;
+					font: 45pt Georgia;
+					line-height: 110px;						
+					text-align: center;
+					border-right: 1pt solid @lightgrey;
+					margin-right: 15px;
+				}
+				
+				.step_text{
+					padding: 0 15px 0 0;
+				}
+			}
+			
+			.step_right{
+				float:right;
+				background: url("/img/rezept_frame_right.png") no-repeat;
+				height:100%;
+				width:6px;
+			}
+		}
+	}	
+}

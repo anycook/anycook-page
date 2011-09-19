@@ -76,37 +76,19 @@
     </template>
     <template id="recipe">
     	<div id="recipe_container">
-    		<h1 id="rezept_headline"></h1>
-    		<div id="rezept_bild_container"><img id="rezept_bild"/></div>
-    		<div id="rezept_info">
-    			<div id="beschreibung"></div>
-    			<div id="autoren"></div>
-    			<div id="recipe_icons"><a id="print"><img src="/icons/printer_icon.png"/></a> <g:plusone size="small" count="false"></g:plusone></div>
-    		</div>
-    		<div id="rezept_begin">
-    			<a class="bezeichner" id="zubereitung">Zubereitung</a><a class="bezeichner" id="addtags">+Tags</a>
-    		</div>
-    		<div id="bezeichner_container">
-    			<div id="step_container"></div>
-    			<div id="addtags_container">
-    			<h2>Hilf den anderen beim Finden!<br/>Füge doch noch ein paar Tags hinzu</h2>
-						<table>
-							<tr>
-								<td id="step_4_tags">Tags: <div name="tags" id="recipe_tags" ></div></td>
-								<td class="step_4_right">
-									<div id="tagcloud"></div>
-								</td>
-							</tr>
-						</table>
-						<div id="end_newrecipe">
-						<div class="last_step_btn" id="suggest_tags_btn">Fertig</div>
-					</div>
-    			</div>
-    		</div>
-    		<div id="rezept_footer">
-    			<div id="social">
-    			</div>
-    		</div>
+    		<div id="recipe_main">
+	    		<div id="recipe_image_container"><img id="recipe_image"/></div>
+	    		<h1 id="rezept_headline"></h1>
+	    		<p id="autoren">von <span></span></p>
+	    		<div id="introduction"></div>
+	    			<!--<div id="recipe_icons"><a id="print"><img src="/icons/printer_icon.png"/></a> <g:plusone size="small" count="false"></g:plusone></div>-->
+	    	</div>
+	    	<div id="recipe_options">
+	    		<div id="share" class="option"><div class="img"></div><div class="left">teilen</div><div class="right"></div></div>
+	    		<div id="tags" class="option"><div class="img"></div><div class="left">tags hinzufügen</div><div class="right"></div></div>
+	    		<div id="print" class="option"><div class="img"></div><div class="left">drucken</div><div class="right"></div></div>
+	    	</div>
+			<div id="step_container"></div>
     	</div>
     </template>
     <template id="recipe_discussion">

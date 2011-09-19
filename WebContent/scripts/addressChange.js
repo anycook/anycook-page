@@ -48,7 +48,7 @@ function handleChange(event){
 		//resetSearchBar();
 		resetFilter();
 		
-		
+		$(document).scrollTop(0);
 		
 		if($("#filter_main").css("opacity")==0){
 			$("#filter_main").animate({"opacity":1, "paddingBottom":20}, 0);

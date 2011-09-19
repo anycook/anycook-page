@@ -3,10 +3,12 @@
 @import "fonts";
 @import "global";
 @import "search";
+@import "recipe";
 
 //lengths
 @headercontentheight: 80px;
 @containerwidth: 1016px;
+
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
@@ -554,7 +556,15 @@ header{
 			width:655px;
 			min-height:300px;
 			float:left;
-			margin-left: 50px;
+			margin: 0 0 60px 50px;
+			
+			#content_header{
+				display:none;
+			}
+			
+			#content_main{
+				float:left;
+			}
 		}
 		
 	}

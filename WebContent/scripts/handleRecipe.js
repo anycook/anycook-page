@@ -158,9 +158,19 @@ function loadRecipe(recipe){
 	
     $("#kategorie_filter_name").text(recipe.kategorie);
     $("#rezept_headline").append(recipe.name);
-    $("#beschreibung").append(recipe.beschreibung);
+    $("#introduction").append(recipe.beschreibung);
     
-    $("#rezept_bild").attr("src", "/gerichtebilder/big/"+recipe.imagename);
+    
+    //recipe_image
+    var $recipeimage = 
+    	$("#recipe_image").attr("src", "/gerichtebilder/big/"+recipe.imagename);
+    //TODO resize (don't forget doing it in java!!)
+    var width = $recipeimage.width();
+    var height = $recipeimage.height();
+    var newheight = (490 / width * height);
+    
+    
+    
     	
 	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){
@@ -224,23 +234,17 @@ function loadRecipe(recipe){
 	
 	//Autoren
 	var num_autoren = recipe.usernames.length;
+	var $autoren = $("#autoren span");
 	
 	for(var autor in recipe.usernames){
 		var autorname = recipe.usernames[autor];
-		$("#autoren").append("<a href='#!/profile/"+encodeURI(autorname)+"'>"
+		$autoren.append("<a href='#!/profile/"+encodeURI(autorname)+"'>"
 				+autorname+"</a>");
-		if(num_autoren>1){
-			if(autor <= num_autoren-3)
-				$("#autoren").append(", ");
-			if(autor == num_autoren-2)
-				$("#autoren").append(" und ");
-			if(autor == num_autoren-1)
-				$("#autoren").append(" haben ");
-		}		
-		if(num_autoren == 1)
-			$("#autoren").append(" hat ");
+		if(autor <= num_autoren-3)
+			$autoren.append(", ");
+		if(autor == num_autoren-2)
+			$autoren.append(" und ");	
 	}
-	$("#autoren").append("dieses Rezept erstellt.");
 	
 	//bezeichner
 	$("#zubereitung").addClass("on");
