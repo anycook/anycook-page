@@ -113,7 +113,6 @@ function loadRecipewJSON(json){
 
 function loadRecipe(recipe){
 	resetFilter();
-	gapi.plusone.go();
 	
 	var rezepturi = recipe.getURI();
 	var headertext = "<div class='float_right_header'>" +
@@ -212,11 +211,10 @@ function loadRecipe(recipe){
 	//schmeckt-button
 	if(user.checkLogin()){
 		if(schmecktChecker(recipe.name)){
-			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir!</div>");
-			$("#rezept_schmeckt").click(schmecktmir);	
+			$("#schmecktmir").click(schmecktmir);	
 		}else{
-			$("#rezept_footer").prepend("<div id='rezept_schmeckt'>Das schmeckt mir nicht mehr!</div>");
-			$("#rezept_schmeckt").click(schmecktmirnicht);
+			$("#schmecktmir").addClass("on");
+			$("#schmecktmir").click(schmecktmirnicht);
 		}
 	}
 	
@@ -254,9 +252,48 @@ function loadRecipe(recipe){
 	//$("#addtags").click(showaddTags);
 	
 	//icons
+	$("#share").click(showShare);
+	
 	$("#print").click(function(){
 		window.print();
 	});
+}
+
+function showShare(){
+	var recipeURI = recipe.getURI()
+	var $this = $(this).unbind("click", showShare);
+	$this.children(".img").remove();
+	var $left = $this.children(".left").empty();
+	$left.append("<fb:like colorscheme=\"dark\" width=\"80\" font=\"lucida grande\" action=\"like\" layout=\"button_count\"></fb:like>");
+	$left.append("<div id=\"gplus\"></div>").children("div").last().addClass("share_container")
+		.append("<g:plusone size=\"small\" count=\"false\" href=\"http://anycook.de/"+recipeURI+"\"></g:plusone>");
+	
+	var anycookuricomponent = encodeURIComponent("http://anycook.de/"+recipeURI);
+	var twittertarget = "https://twitter.com/share?url="+anycookuricomponent+"";
+	$left.append("<div id=\"twitter\"></div>").children("div").last().addClass("share_container")
+		.append("<a href=\""+twittertarget+"\" target=\"_blank\"><span></span></a>");
+		
+	$("#twitter").click(function(){
+		window.open(twittertarget, 'child', 'height=420,width=550');
+		return false;
+	});
+		
+	FB.XFBML.parse(document.getElementById('share'));
+	gapi.plusone.go();
+	
+	$this.animate({
+		width:150,
+		backgroundColor:"#fdfaf3",
+		paddingLeft:5
+	}, {
+		duration:200,
+		complete:function(){
+			$(this).addClass("on");
+		}
+	});
+	
+	
+	// $(".connect_widget_summary").remove();
 }
 
 function showZubereitung(){

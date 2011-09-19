@@ -24,8 +24,6 @@
     	});
     	
     	
-    	// blockUI
-    	$(document).ajaxStop($.unblockUI); 
 
             //Login
     	user = User.init();

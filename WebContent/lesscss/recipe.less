@@ -52,18 +52,80 @@
 		@optionswidth: @contentwidth - @stepwidth;
 		float:left;
 		width: @optionswidth;
-		padding-top:160px;
+		padding-top:200px;
+		
+		#schmecktmir{
+			cursor:pointer;
+			height:95px;
+			width:95px;
+			position:absolute;
+			background:url("/img/schmecktmir95x95.png") no-repeat;
+			background-position:0 -95px;
+			margin:-170px 0 0 -30px;
+			
+			&.on{
+				background-position:0 0;
+				
+				span{
+					background-position: 0 -285px;
+				}
+				
+				
+			}
+			
+			span {
+		        position: absolute;
+		        top: 0; left: 0; bottom: 0; right: 0;
+		        background: url("/img/schmecktmir95x95.png") no-repeat;
+		        background-position: 0 -190px;
+		        opacity: 0;
+		        .transition(opacity, .1s, ease-in);
+			}
+			
+			&:hover span{
+				opacity:1;
+				.transition(opacity, .1s, ease-out);
+			}
+			
+		}
 		
 		.option{
 			cursor:pointer;
 			float:left;
 			height:29px;
 			font-size:9pt;
-			background:@stepcolor;
+			position:relative;
+			background-color:@stepcolor;
 			margin-bottom: 5px;
 			border-top:1px solid @lightgrey;
 			border-bottom:1px solid @lightgrey;
 			color: @darkfontcolor;
+			.transition(padding-left, .1s, ease-out);
+			
+			&.on{
+				cursor:auto;
+				padding-left:5px;
+				width:150px;
+				background-color:@activeoptions;
+				//.transition(background-color, 1s, ease-in);
+				
+				.left{
+					padding-top:5px;
+				}
+				
+				.right{
+					span{
+						 opacity: 1;
+			        	.transition(opacity, 1s, ease-out);
+					}
+				}
+			}
+			
+			
+			&:hover{
+				padding-left:5px;
+				.transition(padding-left, .2s, ease-in);
+			}
 			
 			.img{
 				margin:5px 6px 0;
@@ -96,14 +158,73 @@
 			.left{
 				float:left;
 				padding-top:6px;
+				
+				.share_container{
+					float:left;
+					padding:2px;
+					background-color:@facebookbg;
+					position:absolute;
+					border-radius:2px;
+					
+					&#gplus{
+						top:5px;
+						width:24px;
+						height:15px;
+						margin-left:105px;
+					}
+					
+					&#twitter{
+						top:5px;
+						width:24px;
+						height:15px;
+						margin-left:80px;
+						
+						width:15px;
+						height:15px;
+						
+						a{
+							display:block;
+							background-image:url("/img/twitter15x15.png");
+							width:100%;
+							height:100%;
+							position:relative;
+							
+							&:hover{
+								span{
+									opacity: 1;
+			        				.transition(opacity, .1s, ease-out);
+								}
+							}
+							
+							span{
+								position: absolute;
+						        top: 0; left: 0; bottom: 0; right: 0;
+						        background: url("/img/twitter15x15.png") no-repeat;
+						        background-position: 0 -15px;
+						        opacity: 0;
+						        .transition(opacity, .1s, ease-out);
+							}
+						}
+					}
+				}
 			}
 			
 			.right{
+				position:relative;
 				float:right;
 				height:100%;
 				width:6px;
-				margin-left:15px;
-				background:url("/img/option_btn_right.png") no-repeat @background;
+				margin-left:7px;
+				background:url("/img/option_btn_right6x29.png") no-repeat @background;
+				
+				span{
+					position: absolute;
+			        top: 0; left: 0; bottom: 0; right: 0;
+			        background: url("/img/option_btn_right6x29.png") no-repeat;
+			        background-position: 0 -29px;
+			        opacity: 0;
+			        .transition(opacity, .1s, ease-out);
+				}
 			}
 		}
 	}

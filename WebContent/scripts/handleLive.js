@@ -72,9 +72,9 @@ function schmecktmir(){
 			data:"g="+gericht,
 			success:function(response){
 				if(response != "false"){
-					$("#rezept_schmeckt").unbind("click", schmecktmir);
-					$("#rezept_schmeckt").text("Das schmeckt mir nicht mehr!");
-					$("#rezept_schmeckt").click(schmecktmirnicht);
+					$("#schmecktmir").unbind("click", schmecktmir);
+					$("#schmecktmir").addClass("on");
+					$("#schmecktmir").click(schmecktmirnicht);
 				}				
 			}
 		});
@@ -87,9 +87,9 @@ function schmecktmirnicht(){
 		data:"g="+gericht+"&schmecktnicht",
 		success:function(response){
 			if(response != "false"){
-				$("#rezept_schmeckt").unbind("click", schmecktmirnicht);
-				$("#rezept_schmeckt").text("Das schmeckt mir!");
-				$("#rezept_schmeckt").click(schmecktmir);
+				$("#schmecktmir").unbind("click", schmecktmirnicht);
+				$("#schmecktmir").removeClass("on");
+				$("#schmecktmir").click(schmecktmir);
 			}				
 		}
 	});

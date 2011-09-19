@@ -84,9 +84,10 @@
 	    			<!--<div id="recipe_icons"><a id="print"><img src="/icons/printer_icon.png"/></a> <g:plusone size="small" count="false"></g:plusone></div>-->
 	    	</div>
 	    	<div id="recipe_options">
-	    		<div id="share" class="option"><div class="img"></div><div class="left">teilen</div><div class="right"></div></div>
-	    		<div id="tags" class="option"><div class="img"></div><div class="left">tags hinzufügen</div><div class="right"></div></div>
-	    		<div id="print" class="option"><div class="img"></div><div class="left">drucken</div><div class="right"></div></div>
+	    		<div id="schmecktmir"><span></span></div>
+	    		<div id="share" class="option"><div class="img"></div><div class="left">teilen</div><div class="right"><span></span></div></div>
+	    		<div id="tags" class="option"><div class="img"></div><div class="left">tags hinzufügen</div><div class="right"><span></span></div></div>
+	    		<div id="print" class="option"><div class="img"></div><div class="left">drucken</div><div class="right"><span></span></div></div>
 	    	</div>
 			<div id="step_container"></div>
     	</div>
