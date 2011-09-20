@@ -45,3 +45,54 @@ input:-moz-placeholder{
 			font:@standardfont;
 			text-align:right;
 }
+
+
+.tag{
+	
+	background:url("/img/tagspeak13x21.png") no-repeat;
+	height:21px;
+	float:left;
+	padding-left:13px;
+	margin: 0 2px 2px 0;
+	
+	
+	
+	&:hover{
+		text-decoration:none;		
+	}
+	
+	.right{
+		float:left;
+		background-color:@tags;
+		height:19px;
+		border: 1px solid @tagborder;
+		border-top-right-radius:2px;
+		border-bottom-right-radius:2px;
+		
+		border-left:0;
+		.box-shadow-inset(0, 1px, 1px, #e6e3dd);
+		font-size:8pt;
+		color:@darkgrey;
+		
+		.tag_text{
+			float:left;
+			padding:1px 4px 0 3px;
+			
+			
+		}
+		
+		.tag_num{
+			float:left;
+			height: 17px;
+			color:@tagnumber;
+			border-left: 1px solid @tagborder;
+			padding: 1px 2px;
+		}
+		
+		
+		
+		.tag_remove{
+			width:10px;	
+		}
+	}
+}

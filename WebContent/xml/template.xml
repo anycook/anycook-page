@@ -75,22 +75,19 @@
        	<div id="result_container"></div>
     </template>
     <template id="recipe">
-    	<div id="recipe_container">
-    		<div id="recipe_main">
-	    		<div id="recipe_image_container"><img id="recipe_image"/></div>
-	    		<h1 id="rezept_headline"></h1>
-	    		<p id="autoren">von <span></span></p>
-	    		<div id="introduction"></div>
-	    			<!--<div id="recipe_icons"><a id="print"><img src="/icons/printer_icon.png"/></a> <g:plusone size="small" count="false"></g:plusone></div>-->
-	    	</div>
-	    	<div id="recipe_options">
-	    		<div id="schmecktmir"><span></span></div>
+		<div id="recipe_main">
+    		<div id="recipe_image_container"><img id="recipe_image"/></div>
+    		<div id="schmecktmir"><span></span></div>
+    		<div id="recipe_options">
 	    		<div id="share" class="option"><div class="img"></div><div class="left">teilen</div><div class="right"><span></span></div></div>
 	    		<div id="tags" class="option"><div class="img"></div><div class="left">tags hinzufügen</div><div class="right"><span></span></div></div>
 	    		<div id="print" class="option"><div class="img"></div><div class="left">drucken</div><div class="right"><span></span></div></div>
-	    	</div>
-			<div id="step_container"></div>
+    		</div>
     	</div>
+		<h1 id="recipe_headline"></h1>
+		<p id="autoren">von <span></span></p>
+		<div id="introduction"></div>
+		<div id="step_container"></div>    	
     </template>
     <template id="recipe_discussion">
     	<div id="discussion_container">

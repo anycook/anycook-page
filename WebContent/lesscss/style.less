@@ -1,13 +1,10 @@
 @import "functions";
 @import "colors";
 @import "fonts";
+@import "lengths";
 @import "global";
 @import "search";
 @import "recipe";
-
-//lengths
-@headercontentheight: 80px;
-@containerwidth: 1016px;
 
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
@@ -267,7 +264,7 @@ header{
 		#container_head{
 			@height:36px;
 			width:100%;
-			position:relative;
+			position:absolute;
 			height:@height;
 			top:-36px;
 			
@@ -301,8 +298,6 @@ header{
 		#filter_container{
 			float: left;
 			height: 600px;
-			top:-36px;
-			position:relative;
 			background: url("/img/nr_statusbg.png") no-repeat;
 			background-position: 125px 122px;
 			
@@ -537,6 +532,24 @@ header{
 						#tags_table {
 							margin: 10px 0 10px 0;
 							border-spacing: 0;
+							
+							.tags_table_left {
+								vertical-align: top;
+								width: 25%;
+								padding-top: 4px;
+							}
+							
+							.tags_table_right {
+								float: left;
+								display: block;
+								padding: 4px 0 1px 1px;
+								background: url("/img/zutaten_tags_bg.png") repeat;
+								font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+								font-weight: 500;
+								color: #5A5A5A;
+								min-height: 69px;
+								width: 169px;
+							}
 						}
 					}
 					
@@ -556,7 +569,7 @@ header{
 			width:655px;
 			min-height:300px;
 			float:left;
-			margin: 0 0 60px 50px;
+			margin: 20px 0 60px 50px;
 			
 			#content_header{
 				display:none;

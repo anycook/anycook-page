@@ -156,7 +156,7 @@ function loadRecipe(recipe){
 	$("#filter_headline").text("Status");
 	
     $("#kategorie_filter_name").text(recipe.kategorie);
-    $("#rezept_headline").append(recipe.name);
+    $("#recipe_headline").append(recipe.name);
     $("#introduction").append(recipe.beschreibung);
     
     
@@ -200,7 +200,7 @@ function loadRecipe(recipe){
 	$(".tags_table_right > *").remove();
 	var tags = recipe.tags;
 	for(var i = 0; i<tags.length; i++)
-		$(".tags_table_right").append("<a class='tag' href=\"#!/search/tagged/"+tags[i]+"\"><div class='tag_text'>"+tags[i]+"</div></a>");
+		$(".tags_table_right").append("<a class='tag' href=\"#!/search/tagged/"+tags[i]+"\"><div class=\"right\"><div class='tag_text'>"+tags[i]+"</div><div class=\"tag_num\">10</div></div></a>");
 
 	
 	checkOn("#chef_"+recipe.skill);
@@ -245,14 +245,15 @@ function loadRecipe(recipe){
 	}
 	
 	//bezeichner
-	$("#zubereitung").addClass("on");
-	$("#zubereitung").attr("href", "#!/recipe/"+encodeURI(recipe.name));
-	$("#addtags").attr("href", "#!/recipe/"+encodeURI(recipe.name)+"?page=addtags");
+	//$("#zubereitung").addClass("on");
+	//$("#zubereitung").attr("href", "#!/recipe/"+encodeURI(recipe.name));
+	//$("#addtags").attr("href", "#!/recipe/"+encodeURI(recipe.name)+"?page=addtags");
 	//$("#zubereitung").click(showZubereitung);
 	//$("#addtags").click(showaddTags);
 	
 	//icons
 	$("#share").click(showShare);
+	$("#tags").click(showaddTags);
 	
 	$("#print").click(function(){
 		window.print();
@@ -262,16 +263,21 @@ function loadRecipe(recipe){
 function showShare(){
 	var recipeURI = recipe.getURI()
 	var $this = $(this).unbind("click", showShare);
-	$this.children(".img").remove();
+	$this.children(".img").hide();
 	var $left = $this.children(".left").empty();
-	$left.append("<fb:like colorscheme=\"dark\" width=\"80\" font=\"lucida grande\" action=\"like\" layout=\"button_count\"></fb:like>");
-	$left.append("<div id=\"gplus\"></div>").children("div").last().addClass("share_container")
-		.append("<g:plusone size=\"small\" count=\"false\" href=\"http://anycook.de/"+recipeURI+"\"></g:plusone>");
+	
+	$left.append("<div id=\"fb\"><fb:like colorscheme=\"dark\" width=\"80\" font=\"verdana\" action=\"like\" layout=\"button_count\"></fb:like></div>");
 	
 	var anycookuricomponent = encodeURIComponent("http://anycook.de/"+recipeURI);
 	var twittertarget = "https://twitter.com/share?url="+anycookuricomponent+"";
-	$left.append("<div id=\"twitter\"></div>").children("div").last().addClass("share_container")
+	$left.append("<div id=\"twitter\"></div>").children("div").last()
 		.append("<a href=\""+twittertarget+"\" target=\"_blank\"><span></span></a>");
+		
+	$left.append("<div id=\"gplus\"></div>").children("div").last()
+		.append("<g:plusone size=\"small\" count=\"false\" href=\"http://anycook.de/"+recipeURI+"\"></g:plusone>");
+		
+		
+	$left.children("div").addClass("share_container");
 		
 	$("#twitter").click(function(){
 		window.open(twittertarget, 'child', 'height=420,width=550');
@@ -281,55 +287,81 @@ function showShare(){
 	FB.XFBML.parse(document.getElementById('share'));
 	gapi.plusone.go();
 	
-	$this.animate({
-		width:150,
-		backgroundColor:"#fdfaf3",
-		paddingLeft:5
-	}, {
-		duration:200,
-		complete:function(){
-			$(this).addClass("on");
-		}
+	
+	
+	$this.addClass("on");
+	
+	$("body").click(function(event){
+		
+		if($(event.target).parents().andSelf().is("#share"))
+			return;
+			
+		
+		$this.removeClass("on").children(".img").show();
+		
+		$left.empty()
+			.text("teilen");
+			
+		$(this).unbind("click");
+		$this.click(showShare);
 	});
-	
-	
 	// $(".connect_widget_summary").remove();
 }
 
-function showZubereitung(){
-	
-	if(!$("#zubereitung").hasClass("on")){
-		$(".bezeichner").removeClass("on");
-		$("#zubereitung").addClass("on");
-		$("#step_container").show();
-		$("#addtags_container").hide();
-	}
-}
-
 function showaddTags(){
-	$("#recipe_general_btn").addClass("on");
 	
-	if(!$("#addtags").hasClass("on")){
-		$(".bezeichner").removeClass("on");
-		$("#addtags").addClass("on");
+	//TODO show signin
+	if(!user.checkLogin())
+		return;
 		
-		$("#step_container").hide();
-		$("#addtags_container").show();
-		if(user.checkLogin()){
-			var pathNames = $.address.pathNames();
-			var recipe = pathNames[1];
-			if($("#tagcloud").children().length == 0){
-				makeTagCloud(recipe);
-				$("#tagcloud span span").click(addNewTag);
-				$("#recipe_tags").click(handleNewTagClick);
-				$("#suggest_tags_btn").click(submitSuggestTags);
-			}
-		}else{
-			$("#addtags_container table, #suggest_tags_btn").remove();
-			$("#addtags_container").append("<h6 id=\"no_tags\">Log dich ein und schlage auch Tags vor!</h6>");
-			$("#no_tags").click(clickSignin);
+	
+	var $main = $("#main").append("<div id=\"recipetags\"></div>");
+	
+	var tagsPosition = $("#tags").offset();
+	
+	
+	var $tagcontainer = $main.children("div").last()
+		.append("<div id=\"dogear\"></div>")
+		.append("<div id=\"taglayer\"></div>")
+		.append("<div id=\"lightbox\"></div>");
+		
+	var $container = $("#container");
+	var containerposition = $container.offset();
+	var left = containerposition.left + $container.innerWidth() + 9 - $tagcontainer.innerWidth();
+	
+	$tagcontainer.css({top:tagsPosition.top-108, left:left});
+		
+	var $dogear = $("#dogear").append("<div id=\"top\"></div>")
+		.append("<div id=\"bottom\"></div>")
+		.append("<div id=\"middle\"></div>");
+		
+	$dogear.animate({
+		right:0,
+		top:0
+	},
+	{
+		duration:150,
+		easing: "swing",
+		complete:function(){
+			$("#lightbox").animate({
+				left: 3
+			}, {duration: 500});
 		}
-	}
+	});
+		
+	$("body").click(function(event){
+		
+		if($(event.target).parents().andSelf().is("#recipetags"))
+			return;
+			
+		$tagcontainer.fadeOut(200, function(){
+			$tagcontainer.remove();
+		});
+		
+		$(this).unbind("click");
+	});
+	
+	return false;
 }
 
 function submitSuggestTags(){

@@ -208,12 +208,6 @@ function handleChange(event){
 			//$(".new_recipe_steps").hide();
 			//$("#new_recipe_step1").show();
 		}
-		else if(event.pathNames[0] == "recipe"){
-			$("#recipe_general_btn").addClass("on");
-			$("#discussion_container").hide();
-			$("#recipe_container").show();
-			showZubereitung();
-		}
 		else if(event.pathNames[0] == "search"){
 			makeSearchHeader();
 			$("#first_search_layout").addClass("on");
