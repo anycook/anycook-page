@@ -1,3 +1,144 @@
+//NEW
+function makeNewTagInput(event){
+	var $this = $(this);
+	if($this.children("input").length==0){
+		
+			//var divlength = getDivLength();
+			//make new input field
+			$this.append("<input type='text'/>")
+				.addClass("active")
+				.children("input")
+				.keydown(keyNewTag)
+				.focus()
+				.autocomplete({
+	    		source:function(req,resp){
+        			//var array = [];
+        		var term = req.term;
+        		$.ajax({
+        			url:"/anycook/AutocompleteTags",
+        			dataType: "json",
+        			async:false,
+        			data:"q="+term,
+        			success:function(data){
+        				resp($.map(data, function(item){
+        					return{
+        						label:item
+        						};
+        					}));        			
+        					}
+        				});
+        			},
+        			minlength:1,
+        			position:{
+        				offset:"-1 1"
+        			}, 
+        			select:function(event, ui){
+        				var text = ui.item.label;
+        				$(this).autocomplete("destroy");
+        				saveNewTag(text);
+        				makeNewInput();
+        				return false;
+        			}
+	    	});
+	    	
+	    	
+			$(".ui-autocomplete").last().addClass("newtag-autocomplete");
+			//$(".tags_table_right form").submit(submitTag);
+			
+			$("body").click(function(event){
+				if($(event.target).parents().andSelf().is($($this)))
+					return;
+				
+				$this
+				.removeClass("active")
+				.children("input").remove();
+				
+			});
+		}
+		else 
+			$this.children("input").focus();
+}
+
+function keyNewTag(event) {
+	var $this = $(this);
+	var text = $this.val();
+
+	if((event.keyCode == 13 || event.keyCode == 188 || event.keyCode == 32) && text!="" ){
+		saveNewTag(text);
+		makeNewRInput();		
+	}
+	else if(event.keyCode == 8 && text ==""){
+		$this.children(".tag").last().remove();
+		removeNewInput();
+		makeNewTagInput();
+		
+		var count = $("#recipe_tags .tag").length;
+		
+		if(count<10)
+			count = "0"+count;
+		
+		$("#nr_tagnumber").text(count);
+		
+		return false;
+	}
+	
+}
+
+function removeNewInput(){
+	var $this = $(this);
+	$this.children("input").remove();
+}
+
+
+function makeTagCloud(){
+	$("#tagcloud").empty();
+	var data ="";
+	
+	var recipe = Recipe.getRecipeName();
+	if(recipe != null)
+		data+="recipe="+recipe;
+	
+	$.ajax({
+		  url: "/anycook/GetPopularTags",
+		  dataType: 'json',
+		  data: data,
+		  success: function(response){
+				if(response != "false"){
+					for(tag in response){
+						$("#tagcloud").append(getTag(tag, "number", response[tag]));
+					}
+					
+					$("#tagcloud .tag").click(addNewTag);
+				}
+			}
+		});
+	
+	
+}
+
+function getTag(name, type, number){
+	
+	var $tag;
+	
+	if(type == "link")
+		$tag = $("<a href=\"#!/search/tagged/"+name+"\"></a>");
+	else
+		$tag = $("<div></div>");
+		
+	var $right = $tag.addClass("tag").append("<div class=\"right\"></div>").children()
+		.append("<div class='tag_text'>"+name+"</div>");
+	
+	if(type == "remove")
+		$right.append("<div class=\"tag_remove\">x</div>");
+	else if(type == "number")
+		$right.append("<div class=\"tag_num\">"+number+"</div>");
+		
+	return $tag;
+}
+
+
+
+//OLD!!!
 function keyTag(event) {
 	var text = $(event.target).val();
 
@@ -144,45 +285,35 @@ function clickFamousTag(event){
 	saveTag(text);
 }
 
-function makeTagCloud(recipe){
-	$("#tagcloud").empty();
-	var data = "num=14";
-	if(recipe != undefined)
-		data+="&recipe="+recipe;
-	
-	var json = null;
-	
-	var selected = new Array();
-	$(".tag_text").each(function(index){
-		selected[index] = $(this).text();
-	});
-	data+= "&selected="+selected.toString();
-	
-	$.ajax({
-		  url: "/anycook/GetPopularTags",
-		  dataType: 'json',
-		  data: data,
-		  async:false,
-		  success: function(response){
-				if(response != "false")
-					json=response;
-	}
-		});
-	
-	for(tag in json){
-		$("#tagcloud").append("<span><span>"+tag+"</span></span> ");
-		$("#tagcloud span span").last().css({"font-size":json[tag]*8,
-				"opacity": json[tag]/3
-		});
-	}
-}
-
 //tags
 function addNewTag(event){
 	
-	var target = $(event.target);
-	var text = target.text();
-	saveNewTag(text);	
+	
+	var $this = $(this);
+	var text = $this.find(".tag_text").text();
+	$(".tagsbox").append(getTag(text, "remove"))
+		.children(".tag").last()
+		.hide().fadeIn(100);
+	$this.animate({
+		opacity:0
+	}, {
+		duration:150,
+		complete:function(){
+			$this.animate({
+				width:0,
+				margin: 0,
+				padding:0
+			}, {
+				duration:300,
+				easing: "swing",
+				complete:function(){
+					$this.remove();
+				}
+			});
+		}
+	});
+	
+	//saveNewTag(text);	
 	
 	/*var parameterNames = $.address.parameterNames();
 	if( parameterNames.length == 2){
@@ -207,34 +338,6 @@ function removeNewTag(event){
 		count = "0"+count;
 	
 	$("#nr_tagnumber").text(count);
-}
-
-function removeNewInput(){
-	$("#recipe_tags input").remove();
-}
-
-function keyNewTag(event) {
-	var text = $(event.target).val();
-
-	if((event.keyCode == 13 || event.keyCode == 188 || event.keyCode == 32) && text!="" ){
-		saveNewTag(text);
-		makeNewRInput();		
-	}
-	else if(event.keyCode == 8 && text ==""){
-		$("#recipe_tags .tag").last().remove();
-		removeNewInput();
-		makeNewRInput();
-		
-		var count = $("#recipe_tags .tag").length;
-		
-		if(count<10)
-			count = "0"+count;
-		
-		$("#nr_tagnumber").text(count);
-		
-		return false;
-	}
-	
 }
 
 function makeNewRInput(){

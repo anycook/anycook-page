@@ -6,6 +6,13 @@
 	-o-transition: @type  @duration @ease;
 }
 
+.no-box-shadow(){
+	box-shadow: none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow: none;
+	-o-box-shadow:none;
+}
+
 .box-shadow(@right, @bottom, @blur, @color){
 	box-shadow: @right @bottom @blur @color;
 	-moz-box-shadow: @right @bottom @blur @color;
@@ -25,6 +32,20 @@
 	-moz-box-shadow: @right @bottom @blur @color, @right2 @bottom2 @blur2 @color2;
 	-webkit-box-shadow: @right @bottom @blur @color, @right2 @bottom2 @blur2 @color2;
 	-o-box-shadow: @right @bottom @blur @color, @right2 @bottom2 @blur2 @color2;
+}
+
+.box-shadow2(@right, @bottom, @blur, @spread, @color, @right2, @bottom2, @blur2, @spread2, @color2){
+	box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2;
+	-moz-box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2;
+	-webkit-box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2;
+	-o-box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2;
+}
+
+.box-shadow2withinset(@right, @bottom, @blur, @spread, @color, @right2, @bottom2, @blur2, @spread2, @color2, @right3, @bottom3, @blur3, @color3){
+	box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2,inset @right3 @bottom3 @blur3 @color3;
+	-moz-box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2,inset @right3 @bottom3 @blur3 @color3;
+	-webkit-box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2,inset @right3 @bottom3 @blur3 @color3;
+	-o-box-shadow: @right @bottom @blur @spread @color, @right2 @bottom2 @blur2 @spread2 @color2,inset @right3 @bottom3 @blur3 @color3;
 }
 
 .box-shadow3(@right, @bottom, @blur, @color, @right2, @bottom2, @blur2, @color2, @right3, @bottom3, @blur3, @color3){

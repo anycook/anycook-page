@@ -163,10 +163,6 @@ function loadRecipe(recipe){
     //recipe_image
     var $recipeimage = 
     	$("#recipe_image").attr("src", "/gerichtebilder/big/"+recipe.imagename);
-    //TODO resize (don't forget doing it in java!!)
-    var width = $recipeimage.width();
-    var height = $recipeimage.height();
-    var newheight = (490 / width * height);
     
     
     
@@ -200,7 +196,7 @@ function loadRecipe(recipe){
 	$(".tags_table_right > *").remove();
 	var tags = recipe.tags;
 	for(var i = 0; i<tags.length; i++)
-		$(".tags_table_right").append("<a class='tag' href=\"#!/search/tagged/"+tags[i]+"\"><div class=\"right\"><div class='tag_text'>"+tags[i]+"</div><div class=\"tag_num\">10</div></div></a>");
+		$(".tags_table_right").append(getTag(tags[i], "link"));
 
 	
 	checkOn("#chef_"+recipe.skill);
@@ -325,11 +321,25 @@ function showaddTags(){
 		.append("<div id=\"taglayer\"></div>")
 		.append("<div id=\"lightbox\"></div>");
 		
+		
+	var $lightboxform = $tagcontainer.children("#lightbox")
+		.append("<form id=\"recipe_tag_form\"></form>").children("form")
+		.append("<h2>Tags hinzufügen:</h2>")
+		.append("<p>Hilf den anderen beim finden, in dem du neue Tags vorschlägst.</p>")
+		.append("<div class=\"tagsbox\"></div>")
+		.append("<p>Die bekanntesten Tags:</p>")
+		.append("<div id=\"tagcloud\"></div>")
+		.append("<input type=\"submit\" value=\"einreichen\"/>");
+	
+	makeTagCloud();
+	
+	$lightboxform.children(".tagsbox").click(makeNewTagInput);
+		
 	var $container = $("#container");
 	var containerposition = $container.offset();
 	var left = containerposition.left + $container.innerWidth() + 9 - $tagcontainer.innerWidth();
 	
-	$tagcontainer.css({top:tagsPosition.top-108, left:left});
+	$tagcontainer.css({top:tagsPosition.top-113, left:left});
 		
 	var $dogear = $("#dogear").append("<div id=\"top\"></div>")
 		.append("<div id=\"bottom\"></div>")

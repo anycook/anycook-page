@@ -17,6 +17,15 @@ function Recipe(){
 	this.usernames = new Array();
 }
 
+Recipe.getRecipeName = function(){
+	var pathNames = $.address.pathNames();
+	
+	if(pathNames.length < 2 || pathNames[0] != "recipe")
+		return null;
+		
+	return pathNames[1];
+}
+
 Recipe.prototype.loadJSON = function(json){
 	this.name = json.name;
 	this.beschreibung = json.description;
