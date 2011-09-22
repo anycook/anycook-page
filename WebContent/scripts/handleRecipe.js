@@ -214,12 +214,7 @@ function loadRecipe(recipe){
 	
 	$.address.title(recipe.name+" | anycook");
 	
-	//FB.XFBML.parse(document.getElementById('social'));
-	
 	if($.address.pathNames().length == 3 && user.level > 0){
-		/*$.ajaxSetup({async:false});
-		$.getScript("/backend/scripts/recipeediting.js");
-		$.ajaxSetup({async:true});*/
 		addEditingHandler();
 	}
 	
@@ -369,34 +364,15 @@ function showaddTags(){
 		$(this).unbind("click");
 	});
 	
+	$("#recipe_tag_form").submit(submitSuggestTags);
+	
 	return false;
 }
 
-function submitSuggestTags(){
-	var pathNames = $.address.pathNames();
-	var recipe = pathNames[1];
-	$("#recipe_tags .tag_text").each(function(index){
-		var tag = $(this).text();
-		$.ajax({
-			url:"/anycook/SuggestTags",
-			data:"recipe="+recipe+"&tag="+tag,
-			async:false
+function hideaddTags(){
+	$("#recipetags").fadeOut(200, function(){
+			$tagcontainer.remove();
 		});
-	});
-	$("#recipe_tags").empty();
-	$("#addtags_container").fadeOut(200, function(){
-		$("#bezeichner_container").append("<div id='suggestedtags_message' class='content_message'>" +
-				"<h5>Danke!</h5><p>Wir schauen uns deine Vorschläge gleich einmal an.<br /> " +
-				"Wir benachrichtigen dich!</p></div>");
-		$("#content").click(addTagreadyClick);
-		window.setTimeout(addTagreadyClick, 3000);
-	});
-}
-
-function addTagreadyClick(){
-	$("#suggestedtags_message").fadeOut(500, function(){
-		$.address.parameter("page", null);
-	});
 }
 
 zutatValues = new Array();

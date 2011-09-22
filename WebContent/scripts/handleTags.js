@@ -1,11 +1,18 @@
 //NEW
 function makeNewTagInput(event){
-	var $this = $(this);
-	if($this.children("input").length==0){
+	var $tagsbox = $(".tagsbox");
+	
+	
+	if(event !== undefined){
+		var $target = $(event.target);
+		if($target.parents().andSelf().is(".tag"))
+			return;
+	}
 		
+	if($tagsbox.children("input").length==0){
 			//var divlength = getDivLength();
 			//make new input field
-			$this.append("<input type='text'/>")
+			$tagsbox.append("<input type='text'/>")
 				.addClass("active")
 				.children("input")
 				.keydown(keyNewTag)
@@ -46,17 +53,18 @@ function makeNewTagInput(event){
 			//$(".tags_table_right form").submit(submitTag);
 			
 			$("body").click(function(event){
-				if($(event.target).parents().andSelf().is($($this)))
+				if($(event.target).parents().andSelf().is($($tagsbox)))
 					return;
 				
-				$this
+				$tagsbox
 				.removeClass("active")
 				.children("input").remove();
 				
 			});
 		}
-		else 
-			$this.children("input").focus();
+		
+		$tagsbox.children("input").focus();
+			
 }
 
 function keyNewTag(event) {
@@ -65,28 +73,47 @@ function keyNewTag(event) {
 
 	if((event.keyCode == 13 || event.keyCode == 188 || event.keyCode == 32) && text!="" ){
 		saveNewTag(text);
-		makeNewTagInput();		
+		removeNewInput();
+		makeNewTagInput();	
+		
+		return false;
 	}
 	else if(event.keyCode == 8 && text ==""){
-		$this.children(".tag").last().remove();
+		$(".tagsbox").children(".tag").last().remove();
 		removeNewInput();
 		makeNewTagInput();
 		
-		var count = $("#recipe_tags .tag").length;
-		
-		if(count<10)
-			count = "0"+count;
-		
-		$("#nr_tagnumber").text(count);
-		
-		return false;
+		return false;	
 	}
 	
 }
 
 function removeNewInput(){
+	var $tagsbox = $(".tagsbox");
+	$tagsbox.children("input").remove();
+}
+
+function removeNewTag(event){
 	var $this = $(this);
-	$this.children("input").remove();
+	$this.parents(".tag").animate({
+		opacity:0
+	}, {
+		duration:150,
+		complete:function(){
+			$(this).animate({
+				width:0,
+				margin: 0,
+				padding:0
+			}, {
+				duration:300,
+				easing: "swing",
+				complete:function(){
+					$(this).remove();
+				}
+			});
+		}
+	});
+	removeNewInput();
 }
 
 
@@ -116,6 +143,29 @@ function makeTagCloud(){
 	
 }
 
+function submitSuggestTags(){
+	var pathNames = $.address.pathNames();
+	var recipe = pathNames[1];
+	$(".tagsbox .tag_text").each(function(index){
+		var tag = $(this).text();
+		$.ajax({
+			url:"/anycook/SuggestTags",
+			data:"recipe="+recipe+"&tag="+tag,
+		});
+	});
+	hideAddTags();
+	
+	return false;
+	/*$("#recipe_tags").empty();
+	$("#addtags_container").fadeOut(200, function(){
+		$("#bezeichner_container").append("<div id='suggestedtags_message' class='content_message'>" +
+				"<h5>Danke!</h5><p>Wir schauen uns deine Vorschläge gleich einmal an.<br /> " +
+				"Wir benachrichtigen dich!</p></div>");
+		$("#content").click(addTagreadyClick);
+		window.setTimeout(addTagreadyClick, 3000);
+	});*/
+}
+
 function getTag(name, type, number){
 	
 	var $tag;
@@ -141,10 +191,39 @@ function saveNewTag(text){
 		text = text.substring(1,text.length);
 	
 	removeNewInput();	
-	if($(".tag_text:contains("+text+")").length == 0){		
-		$(".tagsbox").append(getTag(text, "remove"));
-		$("#recipe_tags .tag_remove").last().click(removeNewTag);
+	if($(".tag_text:contains("+text+")").not("#tagcloud .tag_text:contains("+text+")").length == 0){		
+		$(".tagsbox").append(getTag(text, "remove"))
+			.children(".tag").last()
+			.hide().fadeIn(100);
+		$(".tag_remove").last().click(removeNewTag);
 	}
+}
+
+function addNewTag(event){
+	
+	
+	var $this = $(this);
+	var text = $this.find(".tag_text").text();
+	$this.animate({
+		opacity:0
+	}, {
+		duration:150,
+		complete:function(){
+			$this.animate({
+				width:0,
+				margin: 0,
+				padding:0
+			}, {
+				duration:300,
+				easing: "swing",
+				complete:function(){
+					$this.remove();
+				}
+			});
+		}
+	});
+	
+	saveNewTag(text);	
 }
 
 
@@ -174,11 +253,11 @@ function submitTag(event){
 	return false;
 }
 
-function submitNewTag(event){
+/*function submitNewTag(event){
 	var text = $(this).children().first().val();
 	saveNewTag(text);
 	return false;
-}
+}*/
 /*function saveTag(text){
 	
 	
@@ -199,24 +278,7 @@ function submitNewTag(event){
 	addTag(text);
 }*/
 
-function getDivLength(){
-	var divs = $("#recipe_tags .tag");
-	var divlength=0;
-	for(var i=0;i<divs.length;i++){
-		var width = $(divs[i]).css("width");
-		width = width.substring(0, width.search("px"));
-		
-		var right = $(divs[i]).css("margin-right");
-		right = right.substring(0, right.search("px"));
-		
-		var left = $(divs[i]).css("margin-left");
-		left = left.substring(0, left.search("px"));
-		divlength = divlength+parseInt(width)+parseInt(right)+parseInt(left);
-	}
-	return divlength;
-}
-
-function makeNewInput(){
+/*function makeNewInput(){
 	if(blocked==false){
 		if($(".tags_table_right input").length==0){
 			//make new input field
@@ -263,7 +325,7 @@ function makeNewInput(){
 		else 
 			$(".tags_table_right input").focus();
 	}
-}
+}*/
 
 function removeInput(){
 	$(".tags_table_right input").remove();
@@ -281,15 +343,6 @@ function removeTagfromSession(tag){
 	search.flush();
 }
 
-function loadFamousTags(tags){
-	for(tag in tags){
-		$("#famous_tags_cloud").append("<span><a href=\"#!/search/tagged/"+tag+"\">"+tag+"</span></a> ");
-		$("#famous_tags_cloud span a").last().css({"font-size":Math.round(tags[tag]*9.3),
-				"opacity": tags[tag]/3
-		});
-	}
-	//$("#famous_tags a span").click(clickFamousTag);
-}
 
 function clickFamousTag(event){
 	var text = $(event.target).text();
@@ -297,100 +350,8 @@ function clickFamousTag(event){
 }
 
 //tags
-function addNewTag(event){
-	
-	
-	var $this = $(this);
-	var text = $this.find(".tag_text").text();
-	$(".tagsbox").append(getTag(text, "remove"))
-		.children(".tag").last()
-		.hide().fadeIn(100);
-	$this.animate({
-		opacity:0
-	}, {
-		duration:150,
-		complete:function(){
-			$this.animate({
-				width:0,
-				margin: 0,
-				padding:0
-			}, {
-				duration:300,
-				easing: "swing",
-				complete:function(){
-					$this.remove();
-				}
-			});
-		}
-	});
-	
-	//saveNewTag(text);	
-	
-	/*var parameterNames = $.address.parameterNames();
-	if( parameterNames.length == 2){
-		var recipe = decodeURIComponent(parameterNames[1]);
-		makeTagCloud(recipe);
-	}
-	else makeTagCloud();*/
-}
+
 
 function handleNewTagClick(event){
 		makeNewRInput();
-}
-
-function removeNewTag(event){
-	var target = $(event.target);
-	target.parent().remove();
-	removeNewInput();
-	
-	var count = $("#recipe_tags .tag").length;
-	
-	if(count<10)
-		count = "0"+count;
-	
-	$("#nr_tagnumber").text(count);
-}
-
-function makeNewRInput(){
-		if($("#recipe_tags input").length==0){
-			//var divlength = getDivLength();
-			//make new input field
-			$("#recipe_tags").append("<input type='text'/>");
-			$("#recipe_tags input").keydown(keyNewTag);
-			$("#recipe_tags input").focus();
-			$("#recipe_tags input").autocomplete({
-	    		source:function(req,resp){
-        			//var array = [];
-        		var term = req.term;
-        		$.ajax({
-        			url:"/anycook/AutocompleteTags",
-        			dataType: "json",
-        			async:false,
-        			data:"q="+term,
-        			success:function(data){
-        				resp($.map(data, function(item){
-        					return{
-        						label:item
-        						};
-        					}));        			
-        					}
-        				});
-        			},
-        			minlength:1,
-        			position:{
-        				offset:"-1 1"
-        			}, 
-        			select:function(event, ui){
-        				var text = ui.item.label;
-        				$("#recipe_tags input").autocomplete("destroy");
-        				saveNewTag(text);
-        				makeNewInput();
-        				return false;
-        			}
-	    	});
-			$(".ui-autocomplete").last().addClass("newtag-autocomplete");
-			$(".tags_table_right form").submit(submitTag);
-		}
-		else 
-			$("#recipe_tags input").focus();
 }
