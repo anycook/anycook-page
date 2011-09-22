@@ -35,6 +35,13 @@ function clearContent(){
 	$("#content_header > *").remove();
 }
 
+function getHeaderLink(value, href, id){
+	 var $a = $("<a></a>").addClass("header_link").attr("href", href).attr("id", id)
+		.append("<div class=\"background\"></div>").append("<div class=\"button\"></div>");
+	$a.children(".button").text(value);
+	return $a;
+}
+
 
 // behandelt change bei $.address.path
 function handleChange(event){
@@ -174,7 +181,6 @@ function handleChange(event){
 						loadRecipewJSON(json);
 					}
 			  	});
-				$("#content_footer").hide();
 				break;
 				
 			case "search":
@@ -191,7 +197,7 @@ function handleChange(event){
 			};
 		}
 	}
-	$("#content_header *").removeClass("on");
+	$("#content_header *").removeClass("active");
 	if(event.parameterNames.length >0){
 		changePage(event);
 	}
@@ -201,18 +207,19 @@ function handleChange(event){
 			$("#content_main > div").hide();
 			$("#home").show();
 			$("#home_button").addClass("on");
-		}
-		else if(event.pathNames[0] == "newrecipe"){
-			$("#nr_general_btn").addClass("on");
-			animateNewRecipe(0);
-			//$(".new_recipe_steps").hide();
-			//$("#new_recipe_step1").show();
-		}
-		else if(event.pathNames[0] == "search"){
-			makeSearchHeader();
-			$("#first_search_layout").addClass("on");
-			$("#second_search_layout").addClass("inactive");
-			$("#third_search_layout").addClass("inactive");
+		}else{
+			switch(event.pathNames[0]){
+				case "newrecipe":
+					$("#nr_general_btn").addClass("active");
+					animateNewRecipe(0);
+					break;
+					
+				case "recipe":
+					$("#recipe_btn").addClass("active");
+					$("#discussion_container").hide();
+					$("#recipe_container").show();
+					break;
+			}
 		}
 	}
 }
@@ -252,11 +259,7 @@ function changePage(event){
 				}
 				else
 					$("#discussion_container").show();
-				$("#recipe_discussion_btn").addClass("on");
-				break;
-				
-			case "addtags":
-				showaddTags();
+				$("#discussion_btn").addClass("active");
 				break;
 				
 			default:

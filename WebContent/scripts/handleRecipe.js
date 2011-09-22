@@ -115,11 +115,10 @@ function loadRecipe(recipe){
 	resetFilter();
 	
 	var rezepturi = recipe.getURI();
-	var headertext = "<div class='float_right_header'>" +
-			"<a id=\"recipe_general_btn\" class=\"big_button\" href=\""+rezepturi+"\">Rezept</a>" +
-			"<a id=\"recipe_discussion_btn\" class=\"big_button\" href=\""+rezepturi+"?page=discussion\">Diskussion</a>" +
-			"</div>";
-	$("#content_header").html(headertext);
+	$("#content_header").empty()
+		.append(getHeaderLink("Rezept", rezepturi, "recipe_btn"))
+		.append(getHeaderLink("Diskussion", rezepturi+"?page=discussion", "discussion_btn"));
+	
 	
 	personen = Number(recipe.personen);
 	if(personen>1)
@@ -161,8 +160,7 @@ function loadRecipe(recipe){
     
     
     //recipe_image
-    var $recipeimage = 
-    	$("#recipe_image").attr("src", "/gerichtebilder/big/"+recipe.imagename);
+    $("#recipe_image").attr("src", "/gerichtebilder/big/"+recipe.imagename);
     
     
     

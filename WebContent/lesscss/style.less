@@ -297,7 +297,8 @@ header{
 		
 		#filter_container{
 			float: left;
-			height: 600px;
+			min-height: 600px;
+			margin-bottom:30px;
 			background: url("/img/nr_statusbg.png") no-repeat;
 			background-position: 125px 122px;
 			
@@ -566,13 +567,84 @@ header{
 		}
 		
 		#content{
-			width:655px;
+			@contentWidth: 655px;
+			width:@contentWidth;
 			min-height:300px;
 			float:left;
 			margin: 20px 0 60px 50px;
 			
 			#content_header{
-				display:none;
+				position:absolute;
+				top:-35px;
+				right:10px;
+				
+				a{
+					float:left;
+					display:block;
+					@width:108px;
+					width:@width;
+					position:relative;
+					margin:0 5px;
+					
+					.background{
+						position:absolute;
+						right:0;
+						background:url("/img/dogearTop9x7.png") no-repeat;
+						background-position:0 -7px;
+						height:7px;
+						width:9px;
+					}
+					
+					
+					.button{
+						text-align:center;
+						position:relative;
+						background-color:@stepcolor;
+						border-bottom-right-radius:4px;
+						border-bottom-left-radius:4px;
+						border: 1px solid @inactivebuttonoutline;
+						color:@buttonfontcolor;
+						width:@width - 8px;
+						height:22px;
+						padding-top:6px;
+						font:@standardfont;
+						font-size:9pt;
+						.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+						
+					}
+					
+					&:hover, &:focus{
+							.button{
+								color:@smalllightfontcolor;
+							}
+							text-decoration:none;
+					}
+					&:active{
+							top:1px;
+							
+							.button{
+								.box-shadow2withinset(0, 1px, 0px, -1px, @inactivebuttondepth, 0, 1px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+							}
+					}
+					
+					&.active{
+						&:active{
+							top:0;
+						}
+						
+						.background{
+							background-position:0 0;
+						}
+						
+						.button{
+							background-color:@activebuttonbackground;
+							border: 1px solid @activebuttonoutline;
+							.box-shadow2withinset(0, 2px, 0px, -1px, @activebuttondepth, 0, 2px, 0, 0, @activebuttonoutline, 0, 2px, 2px, rgba(243,255,218, 0.6));
+							color:@activebuttonfontcolor;
+						}
+					}
+					
+				}
 			}
 			
 			#content_main{
