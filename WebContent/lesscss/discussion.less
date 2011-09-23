@@ -11,24 +11,173 @@
 		padding-top: 13px;
 		margin: 0 0 10px 0;
 	}
-	
+
+		
+		//Variabelen:
+		//MUSS BEARBEITET WERDEN! Momentan comment_discussion 655px breit
+		@bigpicturewidth:50px+18px;
+		@bigcommentwidth: 655-2*(@bigpicturewidth)-26px;
+		@smallcommentwidth: @bigcommentwidth - 32px - 18px;
+
+
 	#comment_discussion{
 		width: 100%;
 		float: left;
 		
+		//Kommentare
 		li{
 			list-style-type: none;
-			.comment_arrow{
+			float: left;
+			width: 100%;
+			
+			a{
 				float:left;
 			}
-			.recipe_comment{
+			
+			.comment_arrow, .comment_arrow_small, .comment_arrow_answer{
+				position:relative;
 				float: left;
-				width: 482px;
+				width: 16px;
+				height: 21px;
+				background: url("/img/comment_arrow16x21.png") no-repeat;
+				margin: 13px -1px 0 3px;	
+			}
+			
+			.comment_arrow_small, .comment_arrow_answer{
+				margin-top:7px;
+			}
+			
+			.recipe_comment, .recipe_comment_small, .recipe_comment_answer{
+				float: left;
+				width: @bigcommentwidth;
 				border:1px solid @lightgrey;
 				background-color: @stepcolor;
+				padding: 7px 12px 5px 12px;
+				margin: 0 0 15px 0;
+				color: @darkfontcolor;
+				
+				.comment_headline{
+					height: 17px;	
+					width:100%;
+				}
+				
+				.comment_text{
+					margin: 2px 0;
+					
+				}
+				
+				.comment_footer{
+					height: 17px;
+					
+					.answer_btn, .comment_like{
+						height: 100%;
+						width: auto;
+						float: right;
+					}
+					
+					.comment_like{
+						float: left;
+					}
+						
+				}
+			}
+			
+			li{
+				margin-left: @bigpicturewidth;
+				width: auto;
+				
+				img{
+					float: left;
+					width: 32px;
+					height: 32px;
+					
+				}
+				.recipe_comment_small, .recipe_comment_answer{
+					float: left;
+					width: @smallcommentwidth;
+				}
+				
+				textarea{
+					width:99%;
+					height:56px;
+				}
 				
 			}
+			
 		}
+		
+		//Kommentare rechtsbündig
+		li.odd{
+			.comment_arrow, .comment_arrow_small, .comment_arrow_answer, .recipe_comment, a{
+				float:right;
+			}
+			
+			.comment_arrow, .comment_arrow_small, .comment_arrow_answer{
+				background-position: 0 -21px;	
+				margin: 13px 3px 0 -1px;	
+			}
+			
+			.comment_arrow_small, .comment_arrow_answer{
+				margin-top:7px;
+			}
+			
+			.recipe_comment a, .recipe_comment_small a{
+				float: left;
+				text-align: left;
+			}
+			
+			li{
+				img{
+						float: right;
+					}
+				
+				
+			}
+
+		}
+	}
+	
+	
+	//Footer
+	#discussion_footer{
+		width: 100%;
+		float: left;
+		border-top: 1px solid @lightgrey;
+		
+		h6{
+			margin: 10px 0;
+		}
+		
+		img{
+			float:left;
+		}
+		
+		.comment_arrow{
+				position:relative;
+				float: left;
+				width: 16px;
+				height: 21px;
+				background: url("/img/comment_arrow16x21.png") no-repeat;
+				margin: 13px -1px 0 3px;	
+		}
+		
+		.recipe_comment{
+				float: left;
+				width: @bigcommentwidth;
+				height: 103px;
+				border:1px solid @lightgrey;
+				background-color: @stepcolor;
+				padding: 7px 12px 5px 12px;
+				margin: 0 0 15px 0;
+				color: @darkfontcolor;
+				
+				textarea{
+					width:99%;
+					height: 90px;
+				}
+		}
+		
+		
 	}
 
 

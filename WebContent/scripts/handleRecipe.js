@@ -541,8 +541,7 @@ function loadDiscussion(){
 					var linktext = encodeURI("/#!/profile/"+json[i].nickname);
 					var litext = "<li><a href=\""+linktext+"\"><img src='"+json[i].image+
 						"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><div class='comment_headline'>" +
-						"<a href=\""+linktext+"\">"+json[i].nickname+"</a> schrieb "+datetime+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
-						"</div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
+						"<a href=\""+linktext+"\">"+json[i].nickname+"</a></div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
 					
 					if(login)
 						litext+= "<a class='answer_btn'>antworten</a>";
@@ -594,8 +593,7 @@ function loadChildren(i, id, login){
 					var linktext = encodeURI("/#!/profile/"+childjson[j].nickname);
 					var childlitext = "<li><a href=\""+linktext+"\"><img src='"+childjson[j].image+"'/></a>" +
 							"<div class='comment_arrow_small'></div><div class='recipe_comment_small'><div class='comment_headline'>" +
-							"<a href=\""+linktext+"\">"+childjson[j].nickname+"</a> schrieb "+childdatetime+"</div><div class='comment_number'>#"+(Number(childjson[j].id)+1)+
-					"</div><div class='comment_text'>"+childjson[j].text+"</div><div class='comment_footer'>";
+							"<a href=\""+linktext+"\">"+childjson[j].nickname+"</a></div><div class='comment_text'>"+childjson[j].text+"</div><div class='comment_footer'>";
 					if(login)
 						childlitext += "<a class='answer_btn'>antworten</a>";
 					

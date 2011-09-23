@@ -10,6 +10,13 @@ h2{
 	color:@darkfontcolor;
 }
 
+h6{
+	font:@headlinefont;
+	font-size:14pt;
+	color:@darkfontcolor;
+	font-style: italic;
+}
+
 
 a{ 
 	color:@linkcolor;
@@ -23,6 +30,7 @@ a{
 		border:0;
 	}
 }
+
 
 input{
 	outline:none;
@@ -70,6 +78,23 @@ input{
 		}
 	}
 }
+
+textarea{
+	outline:none;
+	resize: none;
+	color: @darkfontcolor;
+	overflow:auto;
+	
+	margin: 0 0 10px 0;
+	
+	background-color:@imginnerbordercolor;
+	.transition(background-color, 0.1s, ease-out);
+	border: 1px solid @tagborder;
+	border-radius:3px;
+	.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);
+
+}
+
 
 input::-webkit-input-placeholder{
 			font:@standardfont;
