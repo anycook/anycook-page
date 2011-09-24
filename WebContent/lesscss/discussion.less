@@ -20,6 +20,11 @@
 		@smallcommentwidth: @bigcommentwidth - 32px - 18px;
 
 
+	.no_discussion{
+		color: @smalllightfontcolor;
+		margin: 0 0 10px 0;
+	}
+
 	#comment_discussion{
 		width: 100%;
 		float: left;
@@ -32,6 +37,12 @@
 			
 			a{
 				float:left;
+				
+				//Verhindert verrücken des CSS wenn FB mal länger braucht
+				img{
+					width: 50px;
+					height: 50px;					
+				}
 			}
 			
 			.comment_arrow, .comment_arrow_small, .comment_arrow_answer{
@@ -73,10 +84,32 @@
 						width: auto;
 						float: right;
 						color: @smalllightfontcolor;
+						cursor: pointer;
 					}
 					
 					.comment_like{
 						float: left;
+						
+						.like{
+							float: left;
+							width: 20px;
+							height: 20px;
+							background: url("/img/icons20x20.png") no-repeat;
+							background-position: -60px 0;
+						}
+						
+						.like_nr{
+							float: left;
+							min-width: 10px;
+							margin-top: 2px;
+							text-align: center;
+						}
+						
+						
+					}
+					
+					.answer_btn{
+						margin-top: 2px;
 					}
 						
 				}
