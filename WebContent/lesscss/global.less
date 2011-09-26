@@ -85,6 +85,7 @@ textarea{
 	width: 99%;
 	color: @darkfontcolor;
 	overflow:auto;
+	font: @standardfont;
 	
 	margin: 0 0 10px 0;
 	
@@ -93,6 +94,12 @@ textarea{
 	border: 1px solid @tagborder;
 	border-radius:3px;
 	.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);
+	
+	&:focus{
+		border: 1px solid @innerborder;
+		border-radius:3px;
+		.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);
+	}
 
 }
 

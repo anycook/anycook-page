@@ -70,6 +70,13 @@
 				.comment_headline{
 					height: 17px;	
 					width:100%;
+					
+					.comment_date{
+						margin-left:4px;
+						.transition(opacity, .4s, ease-out);
+						opacity:0;
+						color: @smalllightfontcolor;
+					}
 				}
 				
 				.comment_text{
@@ -103,6 +110,7 @@
 							min-width: 10px;
 							margin-top: 2px;
 							text-align: center;
+							cursor:auto;
 						}
 						
 						
@@ -110,8 +118,22 @@
 					
 					.answer_btn{
 						margin-top: 2px;
+						.transition(opacity, .4s, ease-out);
+						opacity:0;
 					}
 						
+				}
+				
+				&:hover{
+					.answer_btn{
+						.transition(opacity, .2s, ease-in);
+						opacity:1;
+					}
+					
+					.comment_date{
+						.transition(opacity, .2s, ease-in);
+						opacity:1;
+					}
 				}
 			}
 			
@@ -125,13 +147,27 @@
 					height: 32px;
 					
 				}
-				.recipe_comment_small, .recipe_comment_answer{
+				.recipe_comment{
 					float: left;
 					width: @smallcommentwidth;
 				}
 				
+				.recipe_comment_answer{
+					float: left;
+					width: @smallcommentwidth + 12px;
+					padding: 4px 6px 4px 6px;
+				}
+				
 				textarea{
-					height:56px;
+					resize:none;
+					height:17px;
+					margin:0;
+				}
+				
+				.answer_info{
+					float:right;
+					font-size:7pt;
+					color: @smalllightfontcolor;
 				}
 				
 			}

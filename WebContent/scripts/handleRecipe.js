@@ -526,29 +526,12 @@ function loadDiscussion(){
 			if(json.length == 0){
 				$("#comment_discussion").html("<div class='no_discussion'>Zu diesem Rezept existiert noch keine Diskussion.<br/>Mach doch den Anfang!</div>");
 			}else{
-				$("#comment_discussion").append("<ul></ul>");			
+				var $ul = $("#comment_discussion").append("<ul></ul>").children("ul");			
 				for(var i in json){
 					maxID = Math.max(maxID, Number(json[i].id));
-					var likes = json[i].likes;
-					var likeclass = "";
-					if(Number(likes)>0){
-						likes = "+"+likes;
-						likeclass = "plus";
-					}
-					else if(Number(likes)<0)
-						likeclass = "minus";
-					var datetime = getDateString(json[i].eingefuegt);
-					var linktext = encodeURI("/#!/profile/"+json[i].nickname);
-					var litext = "<li><a href=\""+linktext+"\"><img src='"+json[i].image+
-						"'/></a><div class='comment_arrow'></div><div class='recipe_comment'><div class='comment_headline'>" +
-						"<a href=\""+linktext+"\">"+json[i].nickname+"</a></div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
-					
-					if(login)
-						litext+= "<a class='answer_btn'>antworten</a>";
-					
-					litext+="<div class='comment_like'><div class='like'></div><div class='like_nr "+likeclass+"'>"+likes+"</div><div class='dislike'></div></div></div></div><ul></ul></li>";
-					$("#comment_discussion > ul").append(litext);
-					loadChildren(i, json[i].id, login);					
+					var $li = getDiscussionElement(false, json[i].text, json[i].nickname, json[i].image, json[i].likes, login, json[i].eingefuegt, json[i].id);
+					$ul.append($li);
+					loadChildren(i, json[i].id, login);
 				}
 				$("#comment_discussion > ul > li:odd").addClass("odd");
 				
@@ -578,27 +561,11 @@ function loadChildren(i, id, login){
 		dataType:"json",
 		success:function(childjson){
 			if(childjson.length>0){
-				var ul = $("#comment_discussion > ul > li > ul")[i];
+				var $ul = $($("#comment_discussion > ul > li > ul")[i]);
 				for(var j in childjson){
 					maxID = Math.max(maxID, Number(childjson[j].id));
-					var childdatetime = getDateString(childjson[j].eingefuegt);
-					var likes = childjson[j].likes;
-					var likeclass = "";
-					if(Number(likes)>0){
-						likes = "+"+likes;
-						likeclass = "plus";
-					}
-					else if(Number(likes)<0)
-					likeclass = "minus";
-					var linktext = encodeURI("/#!/profile/"+childjson[j].nickname);
-					var childlitext = "<li><a href=\""+linktext+"\"><img src='"+childjson[j].image+"'/></a>" +
-							"<div class='comment_arrow_small'></div><div class='recipe_comment_small'><div class='comment_headline'>" +
-							"<a href=\""+linktext+"\">"+childjson[j].nickname+"</a></div><div class='comment_text'>"+childjson[j].text+"</div><div class='comment_footer'>";
-					if(login)
-						childlitext += "<a class='answer_btn'>antworten</a>";
-					
-					childlitext+= "<div class='comment_like'><div class='like'></div><div class='like_nr "+likeclass+"'>"+likes+"</div><div class='dislike'></div></div></div></div></li>";
-					$(ul).append(childlitext);
+					var $li = getDiscussionElement(true, childjson[j].text, childjson[j].nickname, childjson[j].image, childjson[j].likes, login, childjson[j].eingefuegt, id);
+					$ul.append($li);
 				}
 				
 				//$(ul).children(":odd").addClass("odd");
@@ -607,38 +574,90 @@ function loadChildren(i, id, login){
 	});
 }
 
+function getDiscussionElement(children, text, nickname, image, likes, login, eingefuegt, id){	
+	var datetime = getDateString(eingefuegt);
+	var linktext = encodeURI("/#!/profile/"+nickname);
+	var $li = $("<li></li>").append("<a></a>");
+	$li.children("a").attr("href", linktext).append("<img src=\""+image+"\"/>");
+	
+	if(Number(likes)>0){
+		likes = "+"+likes;
+	}
+	var $arrow = $("<div</div>");	
+	var $comment = $("<div></div>").addClass("recipe_comment");
+	
+	if(!children){
+		$arrow.addClass("comment_arrow");
+	}else{
+		$arrow.addClass("comment_arrow_small");
+	}
+	var $comment_headline = $("<div></div>").addClass("comment_headline").append("<a></a>");
+	$comment_headline.children("a").attr("href", linktext).text(nickname);
+	
+	var $date = $("<span></span>").addClass("comment_date").text(datetime);
+	$comment_headline.append($date);
+	var $text = $("<div></div>").addClass("comment_text").text(text);
+	var $footer = $("<div></div>").addClass("comment_footer");
+	
+	if(login)
+		$footer.append("<a class='answer_btn'>antworten</a>");
+	
+	var $like = $("<div></div>").addClass("comment_like").append("<div class=\"like\"></div>").append("<div class=\"like_nr\">"+likes+"</div>");
+	
+	var $hiddeninput = $("<input />").attr({type : "hidden", value:id}).addClass("comment_id");
+	
+	$footer.append($like);
+	$comment.append($comment_headline).append($text).append($footer).append($hiddeninput);
+	$li.append($arrow).append($comment);
+	
+	if(!children)
+		$li.append("<ul></ul>");
+	
+	return $li;
+	
+	
+}
+
 function answerBtnClick(event){
-	var target = $(event.target);
-	var container = target.parents(".recipe_comment");
-	var ul = $(container).siblings("ul");
-	if(ul.length == 0)
-		ul = target.closest("ul");
-	if($(ul).children(".child_comment").length == 0){
-		$(ul).append("<li class='child_comment'><a href='#'><img src='"+user.image+"'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><textarea></textarea><div class='comment_btn'>Abschicken</div><div></li>");
-		var comment = $(ul).children(".child_comment");
-		comment.find(".comment_btn").click(childComment);
-		var commentoffset = comment.offset();
-		var commentheight = comment.height();
+	var $this = $(this);
+	var $container = $this.parents(".recipe_comment");
+	var id = $container.find(".comment_id").val();
+	var $ul = $container.siblings("ul");
+	if($ul.length == 0)
+		$ul = $this.closest("ul");
+	if($ul.children(".child_comment").length == 0){
+		
+		$ul.append("<li class='child_comment'><a href='#'><img src='"+user.image+"'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><input type=\"hidden\" value=\""+id+"\"/><textarea></textarea><div class='answer_info'>mit Enter abschicken</div><div></li>");
+		$ul.find("textarea").last().autogrow().keydown(childComment).focus();
+		
+		var $comment = $ul.children(".child_comment");
+		
+		$comment.find(".comment_btn").click(childComment);
+		var commentoffset = $comment.offset();
+		var commentheight = $comment.height();
 		var windowheight = $(window).height();
 		var scrollTop = $(document).scrollTop();
 		if(scrollTop+windowheight < commentoffset.top){
 			$("body").animate({scrollTop : commentoffset.top+commentheight-windowheight+5}, {duration:700, easing:"easeInOutQuart"});
 		}
-	}else{
-		$(ul).children(".child_comment").remove();
+		
+		$("body").click(function(event){
+			var $target = $(event.target);
+			
+			if($(".child_comment").length > 0 && !$target.parents().andSelf().is(".child_comment")){
+				$(".child_comment").remove();
+			}
+		});
 	}
 }
 
-function comment(event){
-	var target = event.target;
-	var text = $(target).prev().val();
+function comment(text){
 	//var gericht = $.address.pathNames()[1];
 	if(text!=""){
 		$.ajax({
 			url:"/anycook/Discuss",
 			data: "comment="+text+"&gericht="+encodeURIComponent(recipe.name)
 		});
-		$(target).prev().val("");
 		//window.clearTimeout(commenttimeout);
 		//checkNewDiscussion();
 		
@@ -646,20 +665,22 @@ function comment(event){
 }
 
 function childComment(event){
-	var target = $(event.target);
-	var ul = target.parents("ul").first();
-	var tempid =$(ul).siblings(".recipe_comment").find(".comment_number").text();
-	var pid = Number(tempid.substring(1, tempid.length))-1;
-	var text = target.prev().val();
-	if(text!=""){
-		$.ajax({
-			url:"/anycook/Discuss",
-			data: "comment="+text+"&gericht="+encodeURIComponent(recipe.name)+"&pid="+pid
-		});
-		target.parents(".child_comment").remove();
-		
-		//window.clearTimeout(commenttimeout);
-		//checkNewDiscussion();
+	
+	if(event.which == 13){
+		var $this = $(this);
+		var pid = $this.siblings("input").val();
+		var text = $this.val();
+		if(text!=""){
+			$.ajax({
+				url:"/anycook/Discuss",
+				data: "comment="+text+"&gericht="+encodeURIComponent(recipe.name)+"&pid="+pid
+			});
+			$this.parents(".child_comment").remove();
+			
+			//window.clearTimeout(commenttimeout);
+			//checkNewDiscussion();
+		}
+		return false;
 	}
 	
 	

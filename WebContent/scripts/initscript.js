@@ -198,8 +198,8 @@
             	$(".remove_zutat").live('click', removeZutatField);
             	
             	
-            	//tagsfilter
-            	$(".tags_table_right").click(makeNewInput);
+            	//TODO tagsfilter
+            	//$(".tags_table_right").click(makeNewInput);
             	
             	$(".tags_table_right .tag_remove").live('click', function(event){removeTag(event.target.parentNode);});
             	

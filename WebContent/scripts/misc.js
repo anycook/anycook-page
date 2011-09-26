@@ -40,13 +40,15 @@ function getDateString(fromdatetime){
 	var year = discdate.getFullYear();
 	var daystring = getDayString(discdate.getDay());
 	if(yeardifference > 0)
-		return "am "+date+"."+month+"."+year+timestring;
+		return "am "+date+"."+month+"."+year;
 	if(monthdifference > 0)
-		return "am "+date+"."+month+"."+timestring;
+		return "am "+date+"."+month+".";
 	if(daydifference == 0){
 		if(hourdifference == 0)
 			return "vor "+minutedifference+" Minuten";
-		return "heute"+timestring;
+		if(hourdifference == 1)
+			return "vor einer Stunde";
+		return "vor "+hourdifference+" Stunden";
 	}	
 		
 	if(daydifference == 1)
