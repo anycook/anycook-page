@@ -123,7 +123,7 @@
 					
 				},
 				position:{
-					offset:"-33 -4"
+					offset:"-31 0"
 				}
 				}).data( "autocomplete" )._renderItem = function( ul, item ) {
 					return $( "<li></li>" )
