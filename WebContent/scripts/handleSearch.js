@@ -81,6 +81,9 @@ function handleSearchResults(result, terms){
 	
 	if(result.zutaten!=null)
 		length += result.zutaten.length;
+		
+	if(result.user!=null)
+		length += result.user.length;
 	
 	if(length >= 1){
 		$("#search").val("");
@@ -99,7 +102,8 @@ function handleSearchResults(result, terms){
 			search.addTag(result.tags[0]);			
 		
 		if(result.user!=null){
-			search.setUsername(result.user[0]);
+			gotoProfile(result.user[0]);
+			return false;
 		}
 		search.flush();
 		
