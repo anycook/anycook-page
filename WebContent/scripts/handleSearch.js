@@ -64,50 +64,29 @@ function makeSearchHeader(){
 
 
 function handleSearchResults(result, terms){
-	
+	$("#search").val("");
 	if(terms == "Gerichte, Zutaten, Tags, ...")
 		return;
 	
-	var length =0;
-	if(result.gerichte!=null)
-		length = result.gerichte.length;
-	
-	if(result.kategorien!=null)
-		length += result.kategorien.length;
-	
-	if(result.tags!= null){
-		length += result.tags.length;
-	}
-	
-	if(result.zutaten!=null)
-		length += result.zutaten.length;
-		
-	if(result.user!=null)
-		length += result.user.length;
-	
-	if(length >= 1){
-		$("#search").val("");
-		if(result.gerichte!=null){
-			gotoGericht(result.gerichte);
-			return false;
-		}
-		
-		if(result.kategorien!=null)
-			search.setKategorie(result.kategorien[0]);
-		
-		if(result.zutaten!=null)
-			search.addZutat(result.zutaten[0]);
-		
-		if(result.tags!=null)
-			search.addTag(result.tags[0]);			
-		
-		if(result.user!=null){
-			gotoProfile(result.user[0]);
-			return false;
-		}
+	if(result.gerichte!=null){
+		gotoGericht(result.gerichte);
+	}	
+	else if(result.kategorien!=null){
+		search.setKategorie(result.kategorien[0]);
 		search.flush();
-		
-	}else if(terms!= ""){
+	}	
+	else if(result.tags!= null){
+		search.addTag(result.tags[0]);
+		search.flush();
+	}	
+	else if(result.zutaten!=null){
+		search.addZutat(result.zutaten[0]);
+		search.flush();
+	}		
+	else if(result.user!=null){
+		gotoProfile(result.user[0]);
+	}
+	else if(terms!= ""){
 		var split = terms.split(" ");
 		for(var i in split){
 			search.addTerm(split[i]);
