@@ -214,9 +214,9 @@ function loadRecipe(recipe){
 	
 	$.address.title(recipe.name+" | anycook");
 	
-	if($.address.pathNames().length == 3 && user.level > 0){
-		addEditingHandler();
-	}
+	// if($.address.pathNames().length == 3 && user.level > 0){
+		// addEditingHandler();
+	// }
 	
 	
 	//Autoren
@@ -247,10 +247,27 @@ function loadRecipe(recipe){
 	$("#print").click(function(){
 		window.print();
 	});
+	
+	//version
+	if($.address.pathNames().length == 3){
+		showVersionInfo(recipe);
+	}
+}
+
+function showVersionInfo(recipe){
+	if($.address.parameter("page") =="edit"){
+		$("#version_info").hide();
+	}else{	
+		var $versionInfo = $("#version_info").show();
+		$versionInfo.find(".headline").text("Diese Version wurde "+getDateString(recipe.created)+" von "+recipe.usernames[0]+" erstellt.");
+		$versionInfo.find(".button").attr("href", recipe.getURI()+"/"+recipe.id+"?page=edit");
+		if(recipe.active)
+			$versionInfo.addClass("active");
+	}
 }
 
 function showShare(){
-	var recipeURI = recipe.getURI()
+	var recipeURI = recipe.getURI();
 	var $this = $(this).unbind("click", showShare);
 	$this.children(".img").hide();
 	var $left = $this.children(".left").empty();

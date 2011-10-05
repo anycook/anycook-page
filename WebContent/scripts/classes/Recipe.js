@@ -16,6 +16,8 @@ function Recipe(){
 	this.tags = new Array();
 	this.usernames = new Array();
 	this.id = -1;
+	this.created = null;
+	this.active = false;
 }
 
 Recipe.getRecipeName = function(){
@@ -42,6 +44,8 @@ Recipe.prototype.loadJSON = function(json){
 	this.zutaten = json.ingredients;
 	this.usernames = json.authors;
 	this.id = json.id;
+	this.created = json.created;
+	this.active = json.active;
 };
 
 Recipe.prototype.checkRecipe = function(){

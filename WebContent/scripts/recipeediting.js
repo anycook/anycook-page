@@ -1,3 +1,10 @@
+function loadRecipeEditing(){
+	$("#version_info, #schmecktmir, #recipe_options").fadeOut(500, function(){
+		$("#editing_info").fadeIn(500);
+	});
+	
+}
+
 function addEditingHandler(){
 	
 	//kategorien

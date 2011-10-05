@@ -140,13 +140,11 @@ function handleChange(event){
 				$.ajax({
 		  		  url: "/anycook/LoadRecipe",
 		  		  dataType: 'json',
-		  		  async:false,
 		  		  data: {recipe:path[1]},
 		  		  success: function(json){
 					loadRecipewJSON(json);
 				}
 		  		});
-				$("#content_footer").hide();
 				break;
 				
 			/*case "search":				
@@ -175,7 +173,6 @@ function handleChange(event){
 				$.ajax({
 			  		  url: "/anycook/LoadRecipe",
 			  		  dataType: 'json',
-			  		  async:false,
 			  		  data: {recipe:path[1], version:path[2]},
 			  		  success: function(json){
 						loadRecipewJSON(json);
@@ -261,7 +258,11 @@ function changePage(event){
 					$("#discussion_container").show();
 				$("#discussion_btn").addClass("active");
 				break;
-				
+			
+			case "edit":
+				loadRecipeEditing();
+				break;
+			
 			default:
 				$.address.queryString("");
 			}
