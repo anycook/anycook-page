@@ -537,7 +537,7 @@ function loadDiscussion(){
 					$ul.append($li);
 					loadChildren(i, json[i].id, login);
 				}
-				$("#comment_discussion > ul > li:odd").addClass("odd");
+				$("#comment_discussion > ul > li.comment:odd").addClass("odd");
 				centercommenteventlikes();
 				
 			}
@@ -581,7 +581,7 @@ function loadChildren(i, id, login){
 function getDiscussionElement(children, text, nickname, image, likes, login, eingefuegt, id){	
 	var datetime = getDateString(eingefuegt);
 	var linktext = encodeURI("/#!/profile/"+nickname);
-	var $li = $("<li></li>").append("<a></a>");
+	var $li = $("<li></li>").addClass("comment").append("<a></a>");
 	$li.children("a").attr("href", linktext).append("<img src=\""+image+"\"/>");
 	
 	if(Number(likes)>0){
@@ -624,7 +624,7 @@ function getDiscussionElement(children, text, nickname, image, likes, login, ein
 
 function getDiscussionEvent(syntax, versions_id, text, nickname, likes, login, eingefuegt, id){
 	//var datetime = getDateString(eingefuegt);
-	var $li = $("<li></li>");
+	var $li = $("<li></li>").addClass("event");
 	
 	if(Number(likes)>0){
 		likes = "+"+likes;

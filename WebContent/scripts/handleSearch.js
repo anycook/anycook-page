@@ -2,7 +2,7 @@ function addResults(){
 	$("#more_results").remove();
 	var gerichte = $("#result_container").data("results").gerichte;
 	var start = $(".frame_big").length;					
-	for(var i= start; i<start+10; i++){
+	for(var i= start; i<gerichte.length && i<start+10; i++){
 		$("#result_container").append(getBigFrameText(gerichte[i]));
 	}
 	if(gerichte.length > $(".frame_big").length)
