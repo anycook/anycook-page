@@ -1,58 +1,89 @@
 function loadRecipeEditing(){
-	$("#version_info, #schmecktmir, #recipe_options").fadeOut(500, function(){
-		$("#editing_info").fadeIn(500);
-	});
+	var $versioninfo = $("#version_info");
+	$versioninfo.css({height : $versioninfo.height()});
+	var $headline = $("#version_info .headline");
+	var oldHeight = $headline.height();
+	$("#version_info .right, #schmecktmir, #recipe_options").fadeOut(200);
+	
+	$headline.animate({opacity: 0},{duration: 200, complete: function(){
+		
+		$versioninfo.removeClass("active").find(".left").width(543);
+		var newHeight = $headline.html("Danke, dass du dieses Rezept verbessern möchtest.<br/>"+
+			"Klicke auf die Bereiche, die du bearbeiten willst. Anschließend musste noch auf nen Button drücken.").height();
+		$headline.css({height: oldHeight});
+		$versioninfo.css({height:"auto"});
+		$headline.animate({height: newHeight}, {duration: 200, complete: function(){
+			$headline.animate({opacity:1}, {duration: 150});
+		}});
+	}});
+	
+	addEditingHandler();
 	
 }
 
 function addEditingHandler(){
 	
-	//kategorien
-	blockFilter(false);
-	$("div.kategorie_filter").unbind("click", handleKategories);
-	$("div.kategorie_filter").click(handleEditKategories);
+	var $recipeImageContainer = $("#recipe_image_container");
+	var $layer = $("<div></div>").addClass("image_layer");
+	var $uploader = $("<div></div>").addClass("image_upload").append("<div><div id=\"cam\"></div><p>Bild hochladen:<p></div>").append("<div id=\"upload_button\" class=\"button\">durchsuchen<div>");
 	
-	$("#zutaten_table td").dblclick(zutatTableEditClick);
-	$("#beschreibung").dblclick(beschreibungEditClick);
-	$("#rezept_headline").dblclick(nameEditClick);
-	$(".step").dblclick(schrittEditClick);
+	$recipeImageContainer.append($layer).append($uploader).mouseover(setUploaderPosition);
 	
 	
-	$("#zutaten_table tr").each(function(i){
-		$(this).append("<td class=\"edit_removeZutat\"><div></div></td>");
-	});	
-	$(".edit_removeZutat div").click(editRemoveZutatClick);	
-	$("#zutaten_table").css({width: function(index, value) {
-        return parseFloat(value) +15;
-        }
-	});
-	
-	$("#zutaten_table").append("<tr><td id=\"edit_addZutatRow\"><div></div></td>");
-	$("#edit_addZutatRow").click(editaddZutatRow);
-	$("#newZutatForm").live("submit", submitNewZutat);
-	
-	
-	$("#rezept_bild").after("<div id=\"edit_rezept_bild\">Neues Bild hochladen</div>");
-	$("#rezept_bild_container").mouseenter(showEditImage);
-	$("#rezept_bild_container").mouseleave(hideEditImage);
 	var uploader = new qq.FileUploader({
 	    // pass the dom node (ex. $(selector)[0] for jQuery users)
-	    element: document.getElementById('edit_rezept_bild'),
+	    element: document.getElementById('upload_button'),
 	    // path to server-side upload script
 	    action: '/anycook/UploadRecipeImage',
 	    onComplete:saveRecipeImage
 	});
 	
-	var removezutathtml = "<div id=\"remove_zutat_request\"><p>\"<span></span>\"" +
-	" wirklich enfernen?</p>" +
-	"<div><div id=\"submit_remove_zutat\">submit</div>" +
-	"<div id=\"undo_remove_zutat\">undo</div></div>" +
-	"</div>";
-	$("#zutaten_table").after(removezutathtml);
-	$("#undo_remove_zutat").click(undoRemoveZutat);
-	$("#submit_remove_zutat").click(submitRemoveZutat);
+	 //$("#recipe_image_container").mouseenter(showEditImage);
+	 //$("#recipe_image_container").mouseleave(hideEditImage);
+	
+	//kategorien
+	// blockFilter(false);
+	// $("div.kategorie_filter").unbind("click", handleKategories);
+	// $("div.kategorie_filter").click(handleEditKategories);
+// 	
+	// $("#zutaten_table td").dblclick(zutatTableEditClick);
+	// $("#beschreibung").dblclick(beschreibungEditClick);
+	// $("#rezept_headline").dblclick(nameEditClick);
+	// $(".step").dblclick(schrittEditClick);
+// 	
+// 	
+	// $("#zutaten_table tr").each(function(i){
+		// $(this).append("<td class=\"edit_removeZutat\"><div></div></td>");
+	// });	
+	// $(".edit_removeZutat div").click(editRemoveZutatClick);	
+	// $("#zutaten_table").css({width: function(index, value) {
+        // return parseFloat(value) +15;
+        // }
+	// });
+// 	
+	// $("#zutaten_table").append("<tr><td id=\"edit_addZutatRow\"><div></div></td>");
+	// $("#edit_addZutatRow").click(editaddZutatRow);
+	// $("#newZutatForm").live("submit", submitNewZutat);
+// 	
+// 
+	
+	// var removezutathtml = "<div id=\"remove_zutat_request\"><p>\"<span></span>\"" +
+	// " wirklich enfernen?</p>" +
+	// "<div><div id=\"submit_remove_zutat\">submit</div>" +
+	// "<div id=\"undo_remove_zutat\">undo</div></div>" +
+	// "</div>";
+	// $("#zutaten_table").after(removezutathtml);
+	// $("#undo_remove_zutat").click(undoRemoveZutat);
+	// $("#submit_remove_zutat").click(submitRemoveZutat);
 	
 	
+}
+
+function setUploaderPosition(){
+	var $uploader = $(".image_upload");
+	var uploaderHeight = $uploader.outerHeight();
+    var containerHeight = $("#recipe_image_container").height();
+    $uploader.css("marginTop", (containerHeight -uploaderHeight)/2);
 }
 //schritte
 function schrittEditClick(event){
@@ -102,11 +133,27 @@ function submitStepEdit(){
 
 //rezept bild
 function showEditImage(){
-	$("#edit_rezept_bild").fadeIn(200);
+	var $layer = $("<div></div>").addClass("image_layer");
+	var $uploader = $("<div></div>").addClass("image_upload").append("<h3></h3>").append("<div id=\"upload_button\">durchsuchen<div>");
+	
+	
+	var recipeImageContainer = $("#recipe_image_container").append($layer).append($uploader);
+	
+	var uploader = new qq.FileUploader({
+	    // pass the dom node (ex. $(selector)[0] for jQuery users)
+	    element: document.getElementById('upload_button'),
+	    // path to server-side upload script
+	    action: '/anycook/UploadRecipeImage',
+	    onComplete:saveRecipeImage
+	});
+	
+	$(".image_layer, .image_upload").fadeIn(200);
 }
 
 function hideEditImage(){
-	$("#edit_rezept_bild").fadeOut(200);
+	$(".image_layer, .image_upload").fadeOut(200, function(){
+		$(this).remove();
+	});
 }
 
 function saveRecipeImage(){

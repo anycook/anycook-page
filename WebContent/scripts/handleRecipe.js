@@ -167,12 +167,12 @@ function loadRecipe(recipe){
     	
 	var steps = recipe.schritte;
 	for(var j = 0; j<steps.length; j++){
-		$("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
-		var step = $(".step_left:last");
-		var stepheight = step.css("height");
-		var heighttext = step.children(".step_text").css("height");
-		var newMargin = (parseInt(stepheight.substring(0, stepheight.length-2))-parseInt(heighttext.substring(0, heighttext.length-2)))/2;
-		step.children(".step_text").css("margin-top", newMargin);
+		var $step = getStep(j+1, steps[j])
+		$("#step_container").append($step);
+		var stepheight = $step.innerHeight();
+		var $text = $step.find(".text");
+		var newMargin = (stepheight-$text.height())/2;
+		$text.css("marginTop", newMargin);
 	
 	}
 	
@@ -254,16 +254,41 @@ function loadRecipe(recipe){
 	}
 }
 
+function getStep(num, text){
+	var $step = $("<div></div>").addClass("step");
+	
+	
+	var $left = $("<div></div>").addClass("left");
+	var $stepmid = $("<div></div>").addClass("mid");
+	var $right = $("<div></div>").addClass("right");
+	var $number = $("<div></div>").addClass("number").text(num);
+	var $text = $("<div></div>").addClass("text").text(text);
+	$stepmid.append($number).append($text);
+	$step.append($left).append($stepmid).append($right);
+	
+	// $("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
+	return $step;
+}
+
 function showVersionInfo(recipe){
-	if($.address.parameter("page") =="edit"){
-		$("#version_info").hide();
-	}else{	
-		var $versionInfo = $("#version_info").show();
-		$versionInfo.find(".headline").text("Diese Version wurde "+getDateString(recipe.created)+" von "+recipe.usernames[0]+" erstellt.");
-		$versionInfo.find(".button").attr("href", recipe.getURI()+"/"+recipe.id+"?page=edit");
-		if(recipe.active)
-			$versionInfo.addClass("active");
+	if($("#version_info").length == 0){
+		var $versionInfo = $("<div></div>").attr("id", "version_info").addClass("info");
+		$versionInfo.append("<div class=\"left\"><div class=\"headline\"></div></div>")
+			.append("<div class=\"text\"></div>")
+			.append("<div class=\"right\"><a class=\"button\">Version bearbeiten</a></div>")
+			.append("<div class=\"rightbackground\"></div>");
+		$("#recipe_container").prepend($versionInfo);
 	}
+	var $versionInfo = $("#version_info");
+	$versionInfo.find(".right").show();
+	$versionInfo.children(".left").width("auto");
+	$versionInfo.find(".headline").text("Diese Version wurde "+getDateString(recipe.created)+" von "+recipe.usernames[0]+" erstellt.");
+	$versionInfo.find(".button").attr("href", recipe.getURI()+"/"+recipe.id+"?page=edit");
+	
+	if(recipe.active)
+		$versionInfo.addClass("active");
+		
+	$versionInfo.fadeIn(500);
 }
 
 function showShare(){

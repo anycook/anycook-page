@@ -5,6 +5,7 @@
 	
 	#recipe_image_container{
 		float:left;
+		position:relative;
 		border: 8px solid @stepcolor;
 		outline: 1px solid @lightgrey;
 		margin: 1px;
@@ -239,23 +240,29 @@
 #step_container{
 	float:left;
 	width:100%;
-	.step{
+	.step{		
 		float:left;
-		width:@stepwidth - 10;
-		background:url("/img/rezept_frame_left.png") no-repeat @stepcolor;
+		width:@stepwidth;
 		height:142px;
-		padding-left:10px;
 		margin-bottom:15px;
 		border-top:1px solid @lightgrey;
 		border-bottom:1px solid @lightgrey;
-		.box-shadow(0, 3px, 2px, -2px, @shadowbeige);
+		.box-shadow(0, 3px, 2px, -2px, @shadowbeige);		
 		
-		.step_left{
+		.left{
 			float:left;
-			width:@stepwidth - 16;
+			width:6px;
+			height:100%;
+			background:url("/img/rezept_frame_left.png") no-repeat;
+		}
+		
+		.mid{
+			width:@stepwidth - 12;
+			height:100%;
+			float:left;
+			background-color: @stepcolor;
 			color: @darkfontcolor;
-			
-			.step_number{
+			.number{
 				margin:8px 0;
 				float: left;
 				height: 123px;
@@ -266,13 +273,13 @@
 				border-right: 1pt solid @lightgrey;
 				margin-right: 15px;
 			}
-			
-			.step_text{
+		
+			.text{
 				padding: 0 15px 0 0;
 			}
 		}
 		
-		.step_right{
+		.right{
 			float:right;
 			background: url("/img/rezept_frame_right.png") no-repeat;
 			height:100%;
@@ -375,6 +382,7 @@
 		background:url("/img/recipe_event_green_left.png") repeat-y @activebuttonbackground;
 		border-top:1px solid @activebuttonoutline;
 		border-bottom:1px solid @activebuttonoutline;
+		
 		
 		.left{
 			.headline{

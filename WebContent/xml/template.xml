@@ -76,23 +76,6 @@
     </template>
     <template id="recipe">
     	<div id="recipe_container">
-    		<div class="info" id="version_info">
-    			<div class="left">
-    				<div class="headline"></div>
-    			</div>
-    			<div class="text"></div>
-    			<div class="right">
-	    			<a class="button">Version bearbeiten</a>
-    			</div>
-    			<div class="rightbackground"></div>
-    		</div>
-    		<div class="info" id="editing_info">
-    			<div class="left">
-    				<div class="headline">Danke, dass du dieses Rezept verbessern möchtest.<br/>Klicke auf die Bereiche, die du bearbeiten willst. Anschließend musste noch auf nen Button drücken.</div>
-    			</div>
-    			<div class="text"></div>
-    			<div class="rightbackground"></div>
-    		</div>
 			<div id="recipe_main">
 	    		<div id="recipe_image_container"><img id="recipe_image"/></div>
 	    		<div id="schmecktmir"><span></span></div>
