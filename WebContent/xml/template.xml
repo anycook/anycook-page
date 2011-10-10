@@ -85,9 +85,11 @@
 		    		<div id="print" class="option"><div class="img"></div><div class="left">drucken</div><div class="right"><span></span></div></div>
 	    		</div>
 	    	</div>
-			<h1 id="recipe_headline"></h1>
-			<p id="autoren">von <span></span></p>
-			<div id="introduction"></div>
+	    	<div id="recipe_info">
+				<h1 id="recipe_headline"></h1>
+				<p id="autoren">von <span></span></p>
+				<div id="introduction"></div>
+			</div>
 			<div id="step_container"></div>
 		</div>
     </template>

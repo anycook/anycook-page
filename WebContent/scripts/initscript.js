@@ -169,9 +169,8 @@
             	
             	
             	//Kategoriefilter
-            	$("ul.kategorie_filter").hide();
-            	$("div.kategorie_filter").click(handleKategories);
-            	loadAllKategories($("ul.kategorie_filter"));
+            	$("#kategorie_head").click(handleKategories);
+            	loadAllKategories($("#kategorie_filter ul"));
             	
             	removeChecked();
             	$(".label_stars, .label_chefhats, .label_muffins").click(function(){

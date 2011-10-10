@@ -80,7 +80,6 @@ function loadAllKategories(target){
 			target.append("<li>Keine Kategorie</li>");
 		$.ajax({
 			url:"/anycook/GetAllKategories",
-			async:false,
 			dataType: 'json',
 			success:function(json){
 				for(var i=0; i<json.length; i++){
@@ -93,8 +92,19 @@ function loadAllKategories(target){
 
 function handleKategories(obj){
 	if(blocked==false){
-		$("ul.kategorie_filter").toggle();
-		$("div.kategorie_filter").toggleClass("on");
+		
+		$kategorieList = $("#kategorie_list");
+		var newHeight = 0;
+		if($kategorieList.height()==0)
+			newHeight = $kategorieList.children("ul").height();
+		
+		$kategorieList.animate({
+			height:newHeight
+		}, {
+			duration: 600,
+			easing: "swing"
+		});
+		/*$("div.kategorie_filter").toggleClass("on");
 		if($("div.kategorie_filter").hasClass("on")){
 			$("ul.kategorie_filter li").mouseenter(kategorieOver).mouseout(kategorieOut).click(kategorieClick);
 	    	$(document).click(closeKategorien);
@@ -103,7 +113,7 @@ function handleKategories(obj){
 		else{
 			$("ul.kategorie_filter li").unbind("mouseenter", kategorieOver).unbind("mouseout", kategorieOut).unbind("click", kategorieClick);
 	    	$(document).unbind("click", closeKategorien);
-		}
+		}*/
 		return false;
 	}
 }

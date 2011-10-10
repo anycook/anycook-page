@@ -391,66 +391,47 @@ header{
 						}
 					}
 					
-					div.kategorie_filter{
-						background-color: #ECE9E3;
-						border: 1px solid #D5D6D2;
-						margin-top: 10px;
-						height: 28px;
-						cursor: pointer;
-						-moz-user-select: none;
-						-khtml-user-select: none;
-						-webkit-user-select: none;
+					#kategorie_filter{
+						margin-top:10px;
+						background-color: @kategoriehead;
+						border: 1px solid @lightgrey;
 						
-						#kategorie_filter_left, #kategorie_filter_right {
-							float: left;
-							width: 28px;
-							height: 100%;
-							background: url("/img/arrow_down.png") no-repeat;
-						}
 						
-						#kategorie_filter_left {
-							border-right: 1px solid #D5D6D2;
-						}
-						
-						#kategorie_filter_name {
-							float: left;
-							width: 198px;
-							height: 100%;
-							font: 13pt Georgia;
-							color: #5A5A5A;
+						#kategorie_head{
+							background: @stepcolor;
+							background-position:0 30px;
 							text-align: center;
-							padding-top: 4px;
+							font:@headlinefont;
+							color: @darkfontcolor;
+							font-style: italic;
+							padding:5px;
+							cursor: pointer;
+							
 						}
 						
-						#kategorie_filter_right{
-							border-left: 1px solid #D5D6D2;
-						}	
-					}
-					
-					ul.kategorie_filter {
-						position: absolute;
-						width: 198px;
-						margin-left: 29px;
-						background-color: #ECE9E3;
-						border: 1pt solid #93948D;
-						border-top: none;
-						text-align: left;
-						color: #5A5A5A;
-						list-style: none;
-						letter-spacing: 0.8pt;
-						line-height: 17.5pt;
-						cursor: pointer;
-						-moz-user-select: none;
-						-khtml-user-select: none;
-						overflow: hidden;
-						z-index: 99999;
-						-webkit-user-select: none;
-						
-						li{
-							border-bottom: 1pt solid #D1CFCA;
-							padding-left: 7px;
-							font: 11pt Georgia serif;
+						#kategorie_peak{
+							background: url("/img/categories_top.png") no-repeat;
+							background-position:0 0;
+							height:10px;
 						}
+						
+						#kategorie_list{
+							min-height:0;
+							position:relative;
+							overflow: hidden;
+							ul{
+								position: absolute;
+							
+							}
+							#kategorie_bottom{
+								background: url("/img/categories_bottom.png") no-repeat;
+								height:10px;
+								width:100%;
+								position:absolute;
+								bottom:0;
+							}
+						}
+						
 					}
 					
 					#filter_main_box {

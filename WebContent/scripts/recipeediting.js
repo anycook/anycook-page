@@ -17,6 +17,8 @@ function loadRecipeEditing(){
 		}});
 	}});
 	
+	
+	$("#recipe_container").addClass("edit");
 	addEditingHandler();
 	
 }
