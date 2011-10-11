@@ -394,6 +394,7 @@ header{
 					
 					#kategorie_filter{
 						margin-top:10px;
+						@bordercolor: @kategorieborder;
 						
 						
 						#kategorie_head{
@@ -405,7 +406,9 @@ header{
 							font-style: italic;
 							padding:5px;
 							cursor: pointer;
-							border: 1px solid @lightgrey;
+							border: 1px solid @bordercolor;
+							border-right: 0;
+							border-left: 0;
 							
 						}
 						
@@ -428,17 +431,35 @@ header{
 							overflow: hidden;
 							background-color: @kategoriehead;
 							ul{
+								cursor: default;
+								color:@darkfontcolor;
+								font-size: 10pt;
 								width:100%;
 								position: absolute;
 								//padding-top: 5px;
+								list-style: none;
 								li{
-									width:100%;
-									padding: 2px;
-									cursor: pointer;
+									cursor:pointer;
+									margin: 0 15px;
+									padding: 4px 0;
+									.left{
+										
+									}
+									
+									.right{
+										float:right;
+										color:@smalllightfontcolor;
+									}
+									
+									&:hover{
+										.left{
+											color:@smalllightfontcolor;
+										}
+									}
 								}
 								
 								li+li{
-									border-top: 1px solid @lightgrey;
+									border-top: 1px solid @bordercolor;
 								}
 							
 							}

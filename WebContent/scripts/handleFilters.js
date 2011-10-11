@@ -82,8 +82,8 @@ function loadAllKategories(target){
 			url:"/anycook/GetAllKategories",
 			dataType: 'json',
 			success:function(json){
-				for(var i=0; i<json.length; i++){
-					target.append("<li>"+json[i]+"</li>");
+				for(var k in json){
+					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
 				}
 		}
 		});
@@ -96,7 +96,7 @@ function handleKategories(obj){
 		$kategorieList = $("#kategorie_list");
 		var newHeight = 9;
 		if($kategorieList.height()==newHeight)
-			newHeight += $kategorieList.children("ul").height();
+			newHeight += $kategorieList.children("ul").height()+6;
 		
 		$kategorieList.animate({
 			height:newHeight
