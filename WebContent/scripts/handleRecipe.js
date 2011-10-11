@@ -154,7 +154,7 @@ function loadRecipe(recipe){
 	
 	$("#filter_headline").text("Status");
 	
-    $("#kategorie_filter_name").text(recipe.kategorie);
+    $("#kategorie_head").text(recipe.kategorie);
     $("#recipe_headline").append(recipe.name);
     $("#introduction").append(recipe.beschreibung);
     

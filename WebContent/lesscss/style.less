@@ -17,6 +17,7 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 
 body{
 	overflow-x:hidden;
+	overflow-y: scroll;
 	font: @standardfont;
 }
 
@@ -393,8 +394,6 @@ header{
 					
 					#kategorie_filter{
 						margin-top:10px;
-						background-color: @kategoriehead;
-						border: 1px solid @lightgrey;
 						
 						
 						#kategorie_head{
@@ -406,21 +405,41 @@ header{
 							font-style: italic;
 							padding:5px;
 							cursor: pointer;
+							border: 1px solid @lightgrey;
 							
 						}
 						
 						#kategorie_peak{
 							background: url("/img/categories_top.png") no-repeat;
 							background-position:0 0;
+							top:-1px;
 							height:10px;
+							left:50%;
+							margin-left:-8px;
+							z-index: 10;
+							position: relative;
 						}
 						
 						#kategorie_list{
-							min-height:0;
+							z-index:9;
+							height:9px;
+							top:-10px;
 							position:relative;
 							overflow: hidden;
+							background-color: @kategoriehead;
 							ul{
+								width:100%;
 								position: absolute;
+								//padding-top: 5px;
+								li{
+									width:100%;
+									padding: 2px;
+									cursor: pointer;
+								}
+								
+								li+li{
+									border-top: 1px solid @lightgrey;
+								}
 							
 							}
 							#kategorie_bottom{

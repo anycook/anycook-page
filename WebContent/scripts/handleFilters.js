@@ -4,7 +4,7 @@ function setFiltersfromSession(){
 	
 	if(search != null){
 		if(search.kategorie!=null){
-			$("#kategorie_filter_name").text(search.kategorie);
+			$("#kategorie_head").text(search.kategorie);
 			$("#kategorie_filter_hidden").val(search.kategorie);
 		}
 		if(search.skill!=null){
@@ -60,8 +60,8 @@ function resetFilter(){
 	
 	$(".tags_table_right > *").remove();
 	
-	$("#kategorie_filter_name").text("Keine Kategorie");
-	$("#kategorie_filter_hidden").val("Keine Kategorie");
+	$("#kategorie_head").text("alle Kategorien");
+	$("#kategorie_filter_hidden").val("alle Kategorien");
 	
 	$("#userfilter").hide();
 	
@@ -77,7 +77,7 @@ function resetFilter(){
 function loadAllKategories(target){
 	if(!target.children().size() > 0){
 		if(target.parents(".step_1_right").length == 0)
-			target.append("<li>Keine Kategorie</li>");
+			target.append("<li>alle Kategorien</li>");
 		$.ajax({
 			url:"/anycook/GetAllKategories",
 			dataType: 'json',
@@ -94,9 +94,9 @@ function handleKategories(obj){
 	if(blocked==false){
 		
 		$kategorieList = $("#kategorie_list");
-		var newHeight = 0;
-		if($kategorieList.height()==0)
-			newHeight = $kategorieList.children("ul").height();
+		var newHeight = 9;
+		if($kategorieList.height()==newHeight)
+			newHeight += $kategorieList.children("ul").height();
 		
 		$kategorieList.animate({
 			height:newHeight
@@ -104,30 +104,29 @@ function handleKategories(obj){
 			duration: 600,
 			easing: "swing"
 		});
-		/*$("div.kategorie_filter").toggleClass("on");
-		if($("div.kategorie_filter").hasClass("on")){
-			$("ul.kategorie_filter li").mouseenter(kategorieOver).mouseout(kategorieOut).click(kategorieClick);
+		$("#kategorie_filter").toggleClass("on");
+		if($("#kategorie_filter").hasClass("on")){
+			$("#kategorie_list ul li").mouseenter(kategorieOver).mouseout(kategorieOut).click(kategorieClick);
 	    	$(document).click(closeKategorien);
 	    	
 		}
 		else{
-			$("ul.kategorie_filter li").unbind("mouseenter", kategorieOver).unbind("mouseout", kategorieOut).unbind("click", kategorieClick);
+			$("#kategorie_list ul li").unbind("mouseenter", kategorieOver).unbind("mouseout", kategorieOut).unbind("click", kategorieClick);
 	    	$(document).unbind("click", closeKategorien);
-		}*/
+		}
 		return false;
 	}
 }
 
 function kategorieOver(event){
-	var target = $(event.target);	
-	var text = target.text();
-	target.parent().prev().children("#kategorie_filter_name").html(text);
+	var $this = $(this);	
+	var text = $this.text();
+	$("#kategorie_head").text(text);
 }
 
 function kategorieOut(event){
-	var target = $(event.target);
-	var oldtext = target.parent().prev().children("#kategorie_filter_hidden").val();
-	target.parent().prev().children("#kategorie_filter_name").html(oldtext);
+	var oldtext = $("#kategorie_filter_hidden").val();
+	$("#kategorie_head").text(oldtext);
 }
 
 function kategorieClick(obj){
@@ -142,7 +141,7 @@ function kategorieClick(obj){
 function setKategorie(text){
 	var hiddenval = $("#kategorie_filter_hidden").val();
 	if(hiddenval != text){
-		if(text == "Keine Kategorie")
+		if(text == "alle Kategorien")
 			text = null;
 
 		search.setKategorie(text);
