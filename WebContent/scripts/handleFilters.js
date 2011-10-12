@@ -77,7 +77,7 @@ function resetFilter(){
 function loadAllKategories(target){
 	if(!target.children().size() > 0){
 		if(target.parents(".step_1_right").length == 0)
-			target.append("<li>alle Kategorien</li>");
+			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 		$.ajax({
 			url:"/anycook/GetAllKategories",
 			dataType: 'json',
@@ -120,7 +120,7 @@ function handleKategories(obj){
 
 function kategorieOver(event){
 	var $this = $(this);	
-	var text = $this.text();
+	var text = $this.children(".left").text();
 	$("#kategorie_head").text(text);
 }
 
