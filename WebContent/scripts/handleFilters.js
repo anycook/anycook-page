@@ -106,7 +106,11 @@ function handleKategories(obj){
 		});
 		$("#kategorie_filter").toggleClass("on");
 		if($("#kategorie_filter").hasClass("on")){
-			$("#kategorie_list ul li").mouseenter(kategorieOver).mouseout(kategorieOut).click(kategorieClick);
+			var $ul = $("#kategorie_list ul");
+			$ul.mouseout(kategorieOut).children("li").mouseenter(kategorieOver);
+			//$("#kategorie_list ul li").mouseenter(kategorieOver);
+			
+			//.mouseout(kategorieOut).click(kategorieClick);
 	    	$(document).click(closeKategorien);
 	    	
 		}
