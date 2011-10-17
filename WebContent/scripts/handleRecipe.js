@@ -116,7 +116,7 @@ function loadRecipe(recipe){
 	
 	var rezepturi = recipe.getURI();
 	$("#content_header").empty()
-		.append(getHeaderLink("Rezept", rezepturi, "recipe_btn"))
+		.append(getHeaderLink("Rezept", rezepturi, "recipe_btn").addClass("active"))
 		.append(getHeaderLink("Diskussion", rezepturi+"?page=discussion", "discussion_btn"));
 	
 	

@@ -82,9 +82,12 @@ function loadAllKategories(target){
 			url:"/anycook/GetAllKategories",
 			dataType: 'json',
 			success:function(json){
+				var totalrecipes = 0;
 				for(var k in json){
 					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
+					totalrecipes+=Number(json[k])
 				}
+				target.find(".right").first().text(totalrecipes);
 		}
 		});
 	}
@@ -94,6 +97,23 @@ function handleKategories(obj){
 	if(blocked==false){
 		
 		$kategorieList = $("#kategorie_list");
+		animateCategory($kategorieList);
+		$("#kategorie_filter").toggleClass("on");
+		if($("#kategorie_filter").hasClass("on")){
+			var $ul = $("#kategorie_list ul");
+			$ul.children("li").mouseenter(kategorieOver).mouseleave(kategorieOut).click(kategorieClick);
+	    	$(document).click(closeKategorien);
+	    	
+		}
+		else{
+			$("#kategorie_list ul li").unbind("mouseenter", kategorieOver).unbind("mouseleave", kategorieOut).unbind("click", kategorieClick);
+	    	$(document).unbind("click", closeKategorien);
+		}
+		return false;
+	}
+}
+
+function animateCategory($kategorieList){
 		var newHeight = 9;
 		if($kategorieList.height()==newHeight)
 			newHeight += $kategorieList.children("ul").height()+6;
@@ -104,22 +124,6 @@ function handleKategories(obj){
 			duration: 600,
 			easing: "swing"
 		});
-		$("#kategorie_filter").toggleClass("on");
-		if($("#kategorie_filter").hasClass("on")){
-			var $ul = $("#kategorie_list ul");
-			$ul.mouseout(kategorieOut).children("li").mouseenter(kategorieOver);
-			//$("#kategorie_list ul li").mouseenter(kategorieOver);
-			
-			//.mouseout(kategorieOut).click(kategorieClick);
-	    	$(document).click(closeKategorien);
-	    	
-		}
-		else{
-			$("#kategorie_list ul li").unbind("mouseenter", kategorieOver).unbind("mouseout", kategorieOut).unbind("click", kategorieClick);
-	    	$(document).unbind("click", closeKategorien);
-		}
-		return false;
-	}
 }
 
 function kategorieOver(event){
@@ -134,7 +138,7 @@ function kategorieOut(event){
 }
 
 function kategorieClick(obj){
-	var text = $(obj.target).text();
+	var text = $(this).children(".left").text();
 	
 	setKategorie(text);
 	
@@ -155,11 +159,14 @@ function setKategorie(text){
 }
 
 
-function closeKategorien(obj){
-	var menu = $('.kategorie_filter');
-	var target = $(obj.target);
-	if (target.parents().andSelf().not(menu) && $("div.kategorie_filter").hasClass("on"))
-		handleKategories(obj);
+function closeKategorien(event){
+	var $target = $(event.target);
+	var $kategorieList = $("#kategorie_list");
+	
+	if($target.parents().andSelf().not($kategorieList) && $("#kategorie_filter").hasClass("on")){
+		$("#kategorie_filter").removeClass("on");
+		animateCategory($kategorieList);
+	}
 }
 
 
