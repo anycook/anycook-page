@@ -206,7 +206,7 @@
             	//timefilter
             	$("#time_form").submit(timeFormSubmit);
             	$("#time_std,#time_min").keydown(keyTime);
-            	$("#time_std, #time_min").focusin(focusinTime).focusout(focusoutTime);
+            	$(".time .up, .time .down").click(timeUpDownListener);
             	
             	//loginform
             	$("#login_mail.wrong + #email_end, #login_pwd.wrong + #password_end, #login_username.wrong + #username_end").live("mouseenter", showLoginErrorPopups);

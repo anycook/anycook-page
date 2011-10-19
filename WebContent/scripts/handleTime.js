@@ -2,21 +2,12 @@ function timeFormSubmit(event){
 	var std = Number($("#time_std").val());
 	var min = Number($("#time_min").val());
 	
-	
-	if($("#time_std").is(":focus")){
-		$("#hidden_std").val(std);
-		$("#time_min").focus();
-	}
-	else{
-		$("#hidden_min").val(min);
-		$("#time_min").blur();
-		if(std == 0 && min ==0)
-			search.setTime(null);
-		else 
-			search.setTime(fillStd(std)+":"+fillMin(min));
+	if(std == 0 && min ==0)
+		search.setTime(null);
+	else
+		search.setTime(fillStd(std)+":"+fillMin(min));
 		
-		search.flush();
-	}
+	search.flush();
 	return false;
 }
 
@@ -25,58 +16,67 @@ function keyTime(event){
 	var std = $("#time_std").val();
 	var min = $("#time_min").val();
 	
-	if(event.which != 13){
-	
+	if(event.which == 13){
+		$("#time_form").submit();
+		
+	}else if(event.which == 38){
+		timeUp(target);
+		return false;
+	}else if(event.which == 40){
+		timeDown(target);
+		return false;	
+	}else{
 		if((target.attr("id")=="#time_std" && std.length==2) || target.attr("id")=="#time_min" && min.length==2)
 			return false;
 		if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
 			return false;
 	
-	}else{
-		$("#time_form").submit();
-		
 	}
 	
 }
 
-function focusinTime(event){
-	var target = $(event.target);
-	var value = target.val();
-	target.val("");
-	if(target.is("#time_std")){
-		$("#hidden_std").val(value);
-	}else
-		$("#hidden_min").val(value);
-	
-		
+function timeUpDownListener(event){
+	var $this = $(this);
+	var $input = $this.siblings("input").first();
+	if($this.hasClass("up"))
+		timeUp($input);
+	else
+		timeDown($input);
 }
 
-function focusoutTime(event){
-	var target =$(event.target);
-	if(target.is("#time_std")){
-		var value = $("#hidden_std").val();
-		target.val(value);
+function timeUp($input){
+	var value = Number($input.val());
+	if($input.attr("id") == "time_std"){
+		value = (value +1)%100;
 	}else{
-		var value = $("#hidden_min").val();
-		target.val(value);
+		value = (value +5)%60;
 	}
-	
+	$input.val(value);
+	timeFormSubmit();
+}
+
+function timeDown($input){
+	var value = Number($input.val());
+	if($input.attr("id") == "time_std"){
+		
+		value = (100+(value -1))%100;
+	}else{
+		value = (60+(value - 5))%60;
+	}
+	$input.val(value);
+	timeFormSubmit();
 }
 
 function fillStd(std){
-	if(std==0 || std>23)
-		std = "00";
-	else if(std<10)
-		std="0"+std;
+	if(std==0 || std>99)
+		std = 0;
 	
 	return std;
 }
 
 function fillMin(min){
 	if(min==0 || min>59)
-		min = "00";
-	else if(min < 10)
-		min="0"+min;
+		min = 0;
 	
 	return min;
 }

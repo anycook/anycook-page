@@ -50,7 +50,7 @@ function resetFilter(){
 	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
 	$("#filter_main *").not("ul.kategorie_filter, #userfilter, #userfilter *").show().css("opacity", 1);
 	$("#filter_headline").text("Filter");
-	$("#time_std, #time_min").val("00");
+	$("#time_std, #time_min").val("0");
 	$("#time_std, #time_min").removeAttr("readonly");
 	removeChecked();
 	blockFilter(false);
@@ -60,8 +60,8 @@ function resetFilter(){
 	
 	$(".tags_table_right > *").remove();
 	
-	$("#kategorie_head").text("alle Kategorien");
-	$("#kategorie_filter_hidden").val("alle Kategorien");
+	$("#kategorie_head").text("keine Kategorie");
+	$("#kategorie_filter_hidden").val("keine Kategorie");
 	
 	$("#userfilter").hide();
 	
@@ -76,8 +76,10 @@ function resetFilter(){
 
 function loadAllKategories(target){
 	if(!target.children().size() > 0){
-		if(target.parents(".step_1_right").length == 0)
+		if(target.parents(".step_1_right").length == 0){
+			target.append("<li><span class=\"left\">keine Kategorie</span><span class=\"right\"></span></li>");
 			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
+		}
 		$.ajax({
 			url:"/anycook/GetAllKategories",
 			dataType: 'json',
@@ -87,7 +89,7 @@ function loadAllKategories(target){
 					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
 					totalrecipes+=Number(json[k])
 				}
-				target.find(".right").first().text(totalrecipes);
+				$(target.find(".right")[1]).text(totalrecipes);
 		}
 		});
 	}
@@ -149,7 +151,7 @@ function kategorieClick(obj){
 function setKategorie(text){
 	var hiddenval = $("#kategorie_filter_hidden").val();
 	if(hiddenval != text){
-		if(text == "alle Kategorien")
+		if(text == "keine Kategorie")
 			text = null;
 
 		search.setKategorie(text);

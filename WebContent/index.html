@@ -152,7 +152,7 @@
     				</div>      		
        			</div>
 				<div id="kategorie_filter">
-					<div id="kategorie_head">alle Kategorien</div>
+					<div id="kategorie_head">keine Kategorie</div>
 					<div id="kategorie_peak"></div>
 					<div id="kategorie_list">
 						<ul></ul>
@@ -166,7 +166,21 @@
 						<table id="filter_table">
 							<tr id="time_filter">
 								<td class="filter_table_left">Dauer: </td>
-								<td class="filter_table_right"><form id="time_form" action=""><input type="text" id="time_std" placeholder="00" size="2" maxlength="2" /><input id="hidden_std" type="hidden" value="00"/>: <input type="text" id="time_min" placeholder="00" size="2" maxlength="2" /><input id="hidden_min" type="hidden" value="00"/>h</form></td>
+								<td class="filter_table_right"><form id="time_form" action="">
+									<div class="time">
+										<input type="text" id="time_std" placeholder="00" size="2" maxlength="2" />
+										<div class="up"></div>
+										<div class="down"></div>
+									</div>
+									<div class="text">:</div>
+									<div class="time">
+										<input type="text" id="time_min" placeholder="00" size="2" maxlength="2" />
+										<div class="up"></div>
+										<div class="down"></div>
+									</div>
+									<div class="text">h</div></form>
+								</td>
+									
 							</tr>
 
 							<tr>
