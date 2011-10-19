@@ -6,15 +6,20 @@ function loadProfile(username){
 	$.address.title(username+" | anycook");
 	var profileData = User.initProfileInfo(username);
 	var image = profileData.getLargeImage();
-	$("#profile_image img").attr("src", image);
+	$("#profile_image").attr("src", image);
 	$("#profile_title h1").text(profileData.name);
-	$("#profile_recipe_info").text(profileData.recipes.length+" Rezepte");
-	$("#profile_schmeckt_info").append(profileData.schmeckt.length+" Favoriten");
+	$("#profile_date span").text(profileData.date);
+	$("#profile_place span").text(profileData.place);
+	$("#profile_achievements #recipes .count").text(profileData.recipes.length);
+	$("#profile_achievements #likes .count").append(profileData.schmeckt.length);
+	$("#profile_achievements #discussions .count").append(profileData.discussionnum);
+	
+	
+	//TODO get real data	
+	$("#profile_achievements #follower .count").append(10);
 	
 	if(profileData.text!=null){
-		$("#profile_text").show();
-		$("#profile_text h2").text("Über mich");
-		$("#profile_text p").text(profileData.text);
+		$("#profile_text").show().text(profileData.text);
 	}
 	
 	if(profileData.facebook_id>0){

@@ -384,39 +384,49 @@
 			</template>
 			<template id="profile">
 				<div id="profile_container">
-					<div id="profile_image">
-						<img src=""/>
-					</div>
-					
+					<img id="profile_image" src=""/>					
 					<div id="profile_info">
 						<div id="profile_title">
 							<h1></h1>
-							<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>
+							<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
 						</div>
-						<p id="profile_recipe_info"></p>
-						<p id="profile_schmeckt_info"></p>
+						<div id="profile_date"><div></div>seit <span></span> dabei</div>
+						<div id="profile_place"><div></div>aus <span></span></div>
+						<div id="profile_text"></div>
 					</div>
-					<div id="profile_text">
-						<h2></h2>
-						<div id="profile_text_content">
-							<p></p>
+					<div id="profile_achievements">
+						<div id="recipes" class="achievement">
+							<div class="count"></div>
+							<div class="title">Rezepte</div>
+						</div>
+						<div id="likes" class="achievement">
+							<div class="count"></div>
+							<div class="title">Lieblingsrezepte</div>
+						</div>
+						<div id="discussions" class="achievement">
+							<div class="count"></div>
+							<div class="title">Diskussionen</div>
+						</div>
+						<div id="follower" class="achievement">
+							<div class="count"></div>
+							<div class="title">Follower</div>
 						</div>
 					</div>
-					<div id="profile_recipes">
-						<h2></h2>
-						<p></p>
-						<a class="profile_search">durchsuchen</a><div class="profile_more">mehr anzeigen</div>
-					</div>
-					<div id="profile_schmeckt">
-						<h2></h2>
-						<p></p>
-						<div class="profile_more">mehr anzeigen</div>
-					</div>
-					<div id="profile_recommendation">
-						<h2></h2>
-						<p></p>
-						<div class="profile_more">mehr anzeigen</div>
-					</div>
+				</div>
+				<div id="profile_recipes" class="profile_recipes">
+					<h2></h2>
+					<p></p>
+					<a class="profile_search">durchsuchen</a><div class="profile_more">mehr anzeigen</div>
+				</div>
+				<div id="profile_schmeckt" class="profile_recipes">
+					<h2></h2>
+					<p></p>
+					<div class="profile_more">mehr anzeigen</div>
+				</div>
+				<div id="profile_recommendation" class="profile_recipes">
+					<h2></h2>
+					<p></p>
+					<div class="profile_more">mehr anzeigen</div>
 				</div>
 			</template>
 			<template id="settings">

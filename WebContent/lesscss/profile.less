@@ -1,0 +1,161 @@
+#profile_container{
+	@width: @contentwidth - 40px;
+	width: @width;
+	float:left;
+	border: 1px solid @lightgrey;
+	background-color: @imginnerbordercolor;
+	padding: 20px;
+	position: relative;
+	min-height: 280px;
+	
+	#profile_image{
+		float:left;
+		border: 8px solid @stepcolor;
+		outline: 1px solid @lightgrey;
+		width:200px;
+	}
+	
+	#profile_info{
+		float:left;
+		width: @width - 245px;
+		margin: 8px 0 0 25px;
+		color: @smalllightfontcolor;
+		
+		#profile_date, #profile_place{
+			div{
+				float: left;
+				background-image: url("/img/icons20x20.png");
+				background-repeat: no-repeat;
+				width: 20px;
+				height: 20px;
+				background-position: -100px -20px;
+			}
+		}
+		
+		#profile_place{
+			div{
+				background-position: -120px -20px;
+			}
+		}
+		
+		#profile_date, #profile_text{
+			margin-top: 8px;
+		}
+		
+		#profile_place{
+			margin-top:4px;
+		}
+	}
+	
+	#profile_achievements{
+		float:right;
+		position: absolute;
+		bottom: 28px;
+		left: 250px;
+		
+		
+		.achievement{
+			float:left;
+			margin:0 10px;
+			
+			.count{
+				font: @headlinefont;
+				font-size: 13pt;
+				text-align: center;
+			}
+			.title{
+				color: @smalllightfontcolor;
+				text-align: center;
+				font-size: 9pt;
+			}
+		}
+	}
+	
+}
+
+.profile_recipes{
+	display: none;
+	
+	@width: @contentwidth;
+	width: @width;
+	margin: 0 0 20px 0;
+	padding: 20px 0;
+	float:left;
+	
+	h2{
+		border-bottom: 1px solid #D7D3C7;
+		width: @width - 50px;
+		margin: 0 0 10px 0;
+		padding: 0 40px 5px 10px;
+		border-bottom: 1px solid #D7D3C7;
+	}
+	
+	p{
+		position: relative;
+		width: @width - 20px;
+		height: 240px;
+		overflow: hidden;
+		margin: 0 10px;
+		
+		a{
+			float: left;
+			display: block;
+			position: relative;
+			margin: 0 10px 10px 0;
+			width: 108px;
+			height: 108px;
+			border: 1px solid #D7D3C7;
+			text-decoration: none;
+			
+			img{
+				border: 3pt solid #F9F8F6;
+				width: 100px;
+				height: 100px;
+				
+			}
+			
+			div{
+				bottom: 0;
+				padding: 3px;
+				margin: 3px;
+				height: 96px;
+				width: 96px;
+				background-color: black;
+				opacity: 0;
+				position: absolute;
+				text-decoration: none;
+				.transition(opacity, .4s, ease-out);
+				
+				span{
+					display: block;
+					margin: 3px;
+					opacity: 1;
+					font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+					color: white;
+				}
+			}
+			
+			&:hover div{
+				opacity:0.7;
+				.transition(opacity, .4s, ease-in);
+			}
+		}
+	}
+	
+	.profile_search {
+		float: left;
+		color: @activebuttonoutline;
+		font-size: 8pt;
+		text-decoration: none;
+		margin-left: 12px;
+	}
+	
+	.profile_more {
+		display: none;
+		float: right;
+		cursor: pointer;
+		color: @activebuttonoutline;
+		margin-right: 56px;
+		font-size: 8pt;
+	}
+}

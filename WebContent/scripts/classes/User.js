@@ -26,6 +26,9 @@ User.init = function(){
 				user.text = response.text;
 			}
 				
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			console.error(jqXHR);
 		}
 	});
 	return user;
@@ -48,10 +51,14 @@ User.initProfileInfo = function(username){
 				profileUser.schmeckt = json.schmeckt;
 				profileUser.recipes = json.recipes;
 				profileUser.text = json.text;
+				profileUser.date = json.createdate;
+				profileUser.place = json.place;
+				profileUser.discussionnum = json.discussionnum;
+				
 			}
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-			alert(jqXHR+textStatus+errorThrown);
+			console.error(textStatus, jqXHR.responseText);
 		}
 	});
 	
