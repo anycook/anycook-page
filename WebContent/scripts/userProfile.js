@@ -33,10 +33,10 @@ function loadProfile(username){
 		var recipes = profileData.recipes;
 		$("#profile_recipes h2").text("Rezepte von "+profileData.name+" ("+recipes.length+")");
 		for(var i in recipes){
-			var uri = "#!/recipe/"+encodeURIComponent(recipes[i].name);
+			var uri = "#!/recipe/"+recipes[i];
 			$("#profile_recipes p").append("<a href=\""+uri+"\" class=\"profile_rezept_bild\">" +
-					"<img src=\"/gerichtebilder/small/"+recipes[i].image+"\"/>" +
-					"<div><span>"+recipes[i].name+"</span></div></a>");
+					"<img src=\"http://graph.anycook.de/recipe/"+recipes[i]+"/image?type=small\"/>" +
+					"<div><span>"+recipes[i]+"</span></div></a>");
 			
 		}
 		if(recipes.length<=5)
@@ -53,10 +53,10 @@ function loadProfile(username){
 		var schmeckt = profileData.schmeckt;
 		$("#profile_schmeckt h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
 		for(var i in schmeckt){
-			var uri = "#!/recipe/"+encodeURIComponent(schmeckt[i].name);
+			var uri = "#!/recipe/"+schmeckt[i];
 			$("#profile_schmeckt p").append("<a href=\""+uri+"\" class=\"profile_rezept_bild\">" +
-					"<img src=\"/gerichtebilder/small/"+schmeckt[i].image+"\"/>"+
-					"<div><span>"+schmeckt[i].name+"</span></div></a>");
+					"<img src=\"http://graph.anycook.de/recipe/"+schmeckt[i]+"/image?type=small\"/>" +
+					"<div><span>"+schmeckt[i]+"</span></div></a>");
 		}
 		if(schmeckt.length<=5)
 			$("#profile_schmeckt p").css("height", 120);

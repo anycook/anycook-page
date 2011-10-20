@@ -7,15 +7,17 @@ function buildLogin(){
 };
 
 function makeUsermenuText(){
-	$("#signin_btn span").text("Konto");
-	
-	$("#user img").attr("src", user.getSmallImage());
-	$("#user a+a").text(user.name);
-	
-	if(user.level == 2){
-		$("#admin_menu").show();		
-		$("#extend_permissions").click(fbExtendPermissions);		
-	}
+	$("#signin_btn").hide();
+	$(".user_btn").show();
+	// $("#signin_btn span").text("Konto");
+// 	
+	// $("#user img").attr("src", user.getSmallImage());
+	// $("#user a+a").text(user.name);
+// 	
+	// if(user.level == 2){
+		// $("#admin_menu").show();		
+		// $("#extend_permissions").click(fbExtendPermissions);		
+	// }
 	
 }
 
@@ -35,21 +37,21 @@ function schmecktChecker(gericht){
 
 function initMenus(){
 	//loginmenu
-	$("#login_form").submit(submitForm);	
-	$("#facebook_login").click(fbLogin);
-	$("#social_login *").click(closeUserMenu);
-	$("#stayloggedin span").click(function(){
-		var checkbox = $("#stayloggedin input");
-		checkbox.attr('checked', !checkbox.attr('checked'));
-	});
+	// $("#login_form").submit(submitForm);	
+	// $("#facebook_login").click(fbLogin);
+	// $("#social_login *").click(closeUserMenu);
+	// $("#stayloggedin span").click(function(){
+		// var checkbox = $("#stayloggedin input");
+		// checkbox.attr('checked', !checkbox.attr('checked'));
+	// });
 	
 	//usermenu
 	if(user.checkLogin()){
 		makeUsermenuText();
 	}
-	$("#logout").click(function(){
-		user.logout();
-	});	
+	// $("#logout").click(function(){
+		// user.logout();
+	// });
 }
 
 
@@ -90,14 +92,12 @@ function closeUserMenu(event){
 
 //called if #signin_btn is clicked
 function clickSignin(event){
-	if(user.checkLogin())
-		$("#login_user").toggle();
-	else
-		$("#login_signin").toggle();
-	$("#signin_btn").toggleClass("on");
-	
-	$("#login_signin input").removeClass("wrong");
-	return false;
+	var $main = $("#main");
+	var oldTop = 105;
+	var newTop = oldTop+285;
+	if($main.offset().top == newTop)
+		newTop = oldTop;
+	$main.animate({top:newTop}, {duration:1000});
 }
 
 function clickOthers(event){

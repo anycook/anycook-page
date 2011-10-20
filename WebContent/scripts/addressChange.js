@@ -137,6 +137,7 @@ function handleChange(event){
 		case 2:
 			switch(path[0]){
 			case "recipe":
+			
 				$.ajax({
 		  		  url: "/anycook/LoadRecipe",
 		  		  dataType: 'json',

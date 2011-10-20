@@ -83,49 +83,42 @@
 			<form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
 			<div id="search_reset"></div>
 		</div>
-		<div id="login_container">
-			<div id='signin_btn'><div id='login_pin'></div><div id="login_text">anmelden</div></div>
-			<div id="login_user" class="login_dropdown">
-				<div id="user">
-					<a href="#!/profile/me"><img src=""/></a>
-					<a href="#!/profile/me"></a>
-				</div>
-				<p>
-					<a class="user_menu_btn" href="#!/newrecipe">Neues Rezept erstellen</a>
-					<a class="user_menu_btn" href="#!/search/user/me">Meine Rezepte</a>
-					<a class="user_menu_btn" href="#!/settings">Einstellungen bearbeiten</a>
-				</p>
-				<p id="admin_menu">
-					<a href="https://backend.anycook.de" class="user_menu_btn">Backend</a>
-					<a id="extend_permissions" class="user_menu_btn">Extend Permissions(test)</a>
-				</p>
-				<p>
-					<a id='logout' class='user_menu_btn'>Abmelden</a>
-				</p>
-				<div id="login_footer"></div>
+		<div id="btn_container">
+			<div id='signin_btn'>
+				<div id='login_pin'></div><div id="login_text">anmelden</div>
 			</div>
-			<div id="login_signin" class="login_dropdown">
-				<div id="login_left">
-					<div id='social_login'>
-						<div id="facebook_login"></div>
-						<!-- <div id="openid_login"></div>
-						<div id="twitter_login"></div> -->
-					</div>							
-					<div id="login_register">
-						<a id="register_button" href="#!/registration">registrieren</a>
+			<a id="user_home" class="user_btn" href="/#/"><span></span></a>
+			<a id="user_profile" class="user_btn" href="/#/profile/me"><span></span></a>
+			<!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
+			<a id="user_messages" class="user_btn" href="/#/messages"><span></span></a>
+			<a id="user_settings" class="user_btn" href="/#/"><span></span></a>			
+		</div>
+		<div id="login_container">
+			<div class="head">
+				<h1>Login</h1><div>oder <a href="/#/register">registrieren</a></div>
+			</div>
+			<div class="content">
+				<div class="left">
+					<p>Mach es dir einfach und log dich über deinen Netzwerk-Account ein.</p>
+					<div class="social" id="facebook_login"></div>
+					<div class="social" id="twitter_login"></div>
+					<div class="social" id="openid_login"></div>
+				</div>
+				<div class="mid">
+					<div class="line"></div>
+					<div class="oder">oder</div>
+				</div>
+				<form>
+					<h6>E-Mail/Username:</h6>
+					<input id="mail" type="text"/>
+					<h6>Passwort:</h6>
+					<input type="password" id="password" />
+					<div id="stayloggedin">
+						<input type="checkbox" checked="checked" /> 
+						<div>angemeldet bleiben</div>
 					</div>
-				</div>
-				<div id="login_right">
-					<form id="login_form">
-						<p>Email/Username</p>
-						<input type='text' name='email' id='login_mail' autocomplete='on'/><div id='email_end'></div>
-						<p>Passwort <a href="#!/resetpassword"><img src="/icons/password_help.png" /></a></p>									
-						<input type='password' name='password' id='login_pwd' autocomplete='on'/><div id='password_end'></div>
-						<div id="stayloggedin"><input type='checkbox' checked="checked" id='check_stayloggedin' /><span>angemeldet bleiben</span></div>
-						<input type="submit" id="login_button"  value="anmelden"/>
-					</form>
-				</div>
-				<div id="login_footer"></div>
+					<input type="submit" value="anmelden" />
+				</form>
 			</div>
 		</div>
 	</div>

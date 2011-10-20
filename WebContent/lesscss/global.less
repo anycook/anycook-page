@@ -15,6 +15,7 @@ h6{
 	font-size:14pt;
 	color:@darkfontcolor;
 	font-style: italic;
+	margin:0;
 }
 
 
@@ -100,18 +101,19 @@ input{
 	&[type="text"], &[type="password"], &[type="email"]{
 		font:  12pt Georgia;
 		color: #404040;
-		padding:5px 6px;
+		padding:4px 5px;
 		background-color:@input-background;
 		.transition(background-color, 0.1s, ease-out);
-		border: 1px solid @innerborder;
+		border: 1px solid @tagborder;
 		border-radius:3px;
-		.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);	
+		.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);	
 		height:18px;
 		
 		&:focus{
 			.transition(background-color, 0.1s, ease-in);
 			background-color:@input-background-active;
-		
+			border: 1px solid @innerborder;
+			.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);
 		}
 		
 	}
@@ -243,14 +245,14 @@ input:-moz-placeholder{
 	
 	margin: 0 0 10px 0;
 	
-	background-color:@background-right;
+	background-color:@input-background;
 	.transition(background-color, 0.1s, ease-out);
 	border: 1px solid @tagborder;
 	border-radius:3px;
 	.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);
 	
 	&.active{
-		background-color:@input-background;
+		background-color:@input-background-active;
 		.transition(background-color, 0.1s, ease-in);
 		border: 1px solid @innerborder;
 		border-radius:3px;
