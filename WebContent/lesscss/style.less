@@ -249,6 +249,7 @@ header{
 						width:150px;
 						height:24px;
 						margin-bottom:7px;
+						cursor:pointer;
 						
 						background-repeat: no-repeat;
 						&:hover{
@@ -305,7 +306,7 @@ header{
 						margin: 0 0 3px 2px;
 					}
 					
-					#mail{
+					input[type="text"]{
 						margin-bottom: 15px;
 					}
 					
@@ -318,6 +319,7 @@ header{
 						
 						div{
 							color:@smalllightfontcolor;
+							cursor: pointer;
 						}
 					}
 					
@@ -339,11 +341,18 @@ header{
 #main{
 	width:100%;
 	float:left;
-	top:@headercontentheight + 25;
+	@top:@headercontentheight + 25;
+	top:@top;
+	.transition(top, .7s, ease-out);
 	position:relative;
 	background-color:@background;
 	min-height: 600px;
 	margin-bottom:30px;
+	
+	&.down{
+		top:@top + 285;
+		.transition(top, .7s, ease-in);
+	}
 	
 	#right{
 		position: absolute;

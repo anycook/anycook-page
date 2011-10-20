@@ -1,7 +1,6 @@
 
 function buildLogin(){
 	initMenus();
-	$(document).click(clickOthers);
 	$("#signin_btn").click(clickSignin);
 		
 };
@@ -37,13 +36,13 @@ function schmecktChecker(gericht){
 
 function initMenus(){
 	//loginmenu
-	// $("#login_form").submit(submitForm);	
-	// $("#facebook_login").click(fbLogin);
-	// $("#social_login *").click(closeUserMenu);
-	// $("#stayloggedin span").click(function(){
-		// var checkbox = $("#stayloggedin input");
-		// checkbox.attr('checked', !checkbox.attr('checked'));
-	// });
+	$("#login_container form").submit(submitForm);	
+	$("#facebook_login").click(fbLogin);
+	$(".social").click(clickSignin);
+	$("#stayloggedin div").click(function(){
+		var checkbox = $("#stayloggedin input");
+		checkbox.attr('checked', !checkbox.attr('checked'));
+	});
 	
 	//usermenu
 	if(user.checkLogin()){
@@ -85,27 +84,23 @@ function hideLoginErrorPopups(event){
 	errorcontainer.fadeOut(500, function(){errorcontainer.remove();});
 }
 
-function closeUserMenu(event){
-	$(".login_dropdown").hide();
-	$("#signin_btn").removeClass("on");
-}
-
 //called if #signin_btn is clicked
 function clickSignin(event){
 	var $main = $("#main");
-	var oldTop = 105;
-	var newTop = oldTop+285;
-	if($main.offset().top == newTop)
-		newTop = oldTop;
-	$main.animate({top:newTop}, {duration:1000});
+	if($main.hasClass("down")){
+		$(document).unbind("click",clickOthers).unbind("scroll", clickOthers);
+	}else{
+		$(document).click(clickOthers).scroll(clickOthers);
+	}
+	
+	$main.toggleClass("down");
+	
 }
 
 function clickOthers(event){
-	var target = event.target;
-	var a = $(target).is("a") || $(target).parents("a").length > 0;
-	if ((a || $(target).parents("#login_container").length == 0) && $("#signin_btn").hasClass("on")){
-		$(".login_dropdown").hide();
-		$("#signin_btn").removeClass("on");
+	var $target = $(event.target);
+	if (!$target.parents().andSelf().is("#login_container, #signin_btn")|| $target.is("a")){
+		clickSignin();
 	}
 }
 
@@ -133,12 +128,17 @@ function focusoutInputs(event){
 
 
 function submitForm(event){
-	if(!$("#login_mail, #login_pwd").hasClass("wrong")){
-		var mail = $("#login_mail").val();
-		var pwd = $("#login_pwd").val();
-		var stayloggedin =$("#check_stayloggedin").is(":checked");
-		if($("#login_username").length == 0)
-			User.login(mail, pwd, stayloggedin);
+	var $this = $(this);
+	var $mail = $this.childen("input[type=\"text\"]");
+	var $pw = $this.childen("input[type=\"password\"]");
+	
+	var mail = $mail.val();
+	var pwd = $pwd.val();
+	var stayloggedin =$("#stayloggedin input").is(":checked");
+	if(User.login(mail, pwd, stayloggedin)){
+		user = User.init();
+		//TODO code Login behavior
+		location.reload();
 	}
 	
 	return false;

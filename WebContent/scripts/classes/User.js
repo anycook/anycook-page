@@ -91,28 +91,20 @@ User.prototype.onlyUserAccess = function(){
 
 
 User.login = function(mail, pwd, stayloggedin){
+	var callback = false;
 	var data = "mail="+mail+"&pwd="+pwd;
 	if(stayloggedin)
 		data+="&stayloggedin";
 	$.ajax({
 		url:"/anycook/Login",
 		data:data,
+		async: false,
 		success:function(response){
-			if(response=="false"){
-				$("#login_mail, #login_pwd").addClass("wrong");
-			}
-			else{
-				if($.address.pathNames().length == 0 || $.address.pathNames()[0] == "home"){
-					user = User.init();
-					makeUsermenuText();
-					$("#login_signin").hide();
-					$("#signin_btn").removeClass("on");
-				}
-				else
-					window.location.reload();
-			}
+			callback = response!="false";
 	}
 	});
+	
+	return callback;
 };
 
 User.prototype.logout = function(){
