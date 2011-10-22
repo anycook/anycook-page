@@ -740,16 +740,21 @@ header{
 									cursor: pointer;
 									width: 20px;
 									height: 20px;
-									background: url(/img/labels.png) no-repeat;
+									background-image: url(/img/labels.png);
+									background-repeat: no-repeat;
 									
 									input{
 										position: absolute;
 										left: -9999px;
 									}
+									
+									&.on{
+										background-position-y: -21px;
+									}
 								}
 								
 								.label_muffins {
-									background-position: -21px 0;
+									background-position-x: -21px;
 								}
 							}
 						}
