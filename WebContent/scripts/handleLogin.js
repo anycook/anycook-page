@@ -129,8 +129,8 @@ function focusoutInputs(event){
 
 function submitForm(event){
 	var $this = $(this);
-	var $mail = $this.childen("input[type=\"text\"]");
-	var $pw = $this.childen("input[type=\"password\"]");
+	var $mail = $this.children("input[type=\"text\"]");
+	var $pw = $this.children("input[type=\"password\"]");
 	
 	var mail = $mail.val();
 	var pwd = $pwd.val();
