@@ -59,7 +59,7 @@ function handleChange(event){
 		
 		if($("#filter_main").css("opacity")==0){
 			$("#filter_main").animate({"opacity":1, "paddingBottom":20}, 0);
-			$("#filter_main > *").not($("ul.kategorie_filter")).show();
+			$("#filter_main > *").not($("ul.kategorie_filter, label .active")).show();
 			$("#filter_main").css("height", "auto");
 		}
 		

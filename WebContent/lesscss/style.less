@@ -343,7 +343,7 @@ header{
 	float:left;
 	@top:@headercontentheight + 25;
 	top:@top;
-	.transition(top, .7s, ease-out);
+	.transition(top, .7s, ease-in-out);
 	position:relative;
 	background-color:@background;
 	min-height: 600px;
@@ -351,7 +351,7 @@ header{
 	
 	&.down{
 		top:@top + 285;
-		.transition(top, .7s, ease-in);
+		.transition(top, .7s, ease-in-out);
 	}
 	
 	#right{
@@ -707,10 +707,15 @@ header{
 										float:left;
 										font: 10pt Helvetica, Arial, sans-serif;
 										border:none;
-										padding: 2px 0 2px 2px;
+										padding: 2px 2px 2px 2px;
 										.no-box-shadow();
-										background: none;
+										background: @filterinputbackground;
+										border-radius:0;
+										border-bottom-left-radius:2px;
+										border-top-left-radius:2px;
+										border:0;
 										width:17px;
+										height:17px;
 										text-align: right;
 										
 									}
@@ -738,22 +743,45 @@ header{
 								.label_chefhats, .label_muffins {
 									display: table-cell;
 									cursor: pointer;
+									position:relative;
 									width: 20px;
 									height: 20px;
-									background-image: url(/img/labels.png);
+									background-position-x:0;
+									background-image: url("/img/icons20x20.png");
 									background-repeat: no-repeat;
+									
+									&.on{
+										.active{
+											opacity:1;
+											.transition(opacity, .1s, ease-in);
+										}
+									}
 									
 									input{
 										position: absolute;
 										left: -9999px;
 									}
 									
-									&.on{
-										background-position-y: -21px;
+									.active{
+										border-spacing:0;
+										position: absolute;
+										top:0;										
+										right:0;
+										bottom:0;
+										left:0;
+										opacity: 0;
+										background: url("/img/icons20x20.png") no-repeat;
+										.transition(opacity, .1s, ease-out);
+										background-position-y:-20px;
 									}
 								}
 								
 								.label_muffins {
+									background-position-x:-20px;
+									
+									.active{
+										background-position-x:-20px;
+									}
 									background-position-x: -21px;
 								}
 							}
@@ -767,14 +795,20 @@ header{
 							background: url("/img/dot.png") repeat-x;
 						}
 						
-						#zutaten_table {
-							padding-top: 4px;
-							min-height: 176px;
-							width: 100%;
-							margin: 0 0 10px 0;
-							background: url(/img/zutaten_tags_bg.png) repeat;
-							display: block;
-							border-spacing: 0;
+						#ingredient_list {
+							background-color: @filterinputbackground;
+							list-style: none;
+							border:1px solid @lightgrey;
+							border-radius: 5px;
+							margin-top:7px;
+							padding-bottom:25px;
+							.box-shadow-inset(-2px, 2px, 4px, -2px, #cccccc);
+							
+							li{
+								min-height:25px;
+								width:100%;
+								border-bottom: 1px solid @lightgrey;
+							}
 						}
 						
 						#tags_table {

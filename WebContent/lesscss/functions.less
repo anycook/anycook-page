@@ -62,6 +62,13 @@
 	-o-box-shadow: inset @right @bottom @blur @color;	
 }
 
+.box-shadow-inset(@right, @bottom, @blur, @spread, @color){
+	box-shadow: inset @right @bottom @blur @spread @color;
+	-moz-box-shadow: inset @right @bottom @blur @spread @color;
+	-webkit-box-shadow:inset @right @bottom @blur @spread @color;
+	-o-box-shadow: inset @right @bottom @blur @spread @color;	
+}
+
 .border-bottom-image(@url, @top, @right, @vert){
 	border-bottom-image: @url @top @right @vert;
 	-moz-border-bottom-image: @url @top @right @vert;

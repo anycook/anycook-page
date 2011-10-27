@@ -48,7 +48,7 @@ function resetFilter(){
 	$("#progress_1, #progress_2, #progress_3, #progress_4").remove();
 	$("#userfilter").hide();
 	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
-	$("#filter_main *").not("ul.kategorie_filter, #userfilter, #userfilter *").show().css("opacity", 1);
+	$("#filter_main *").not("ul.kategorie_filter, #userfilter, #userfilter *, label .active").show().css("opacity", 1);
 	$("#filter_headline").text("Filter");
 	$("#time_std, #time_min").val("0");
 	$("#time_std, #time_min").removeAttr("readonly");
@@ -211,11 +211,11 @@ function removeChecked(){
 }
 
 function checkOnOff(obj){
-	obj=$(obj).children().first();
+	$obj=$(obj).children("input").first();
 	if($.address.pathNames()[0]!="newrecipe"){
-		var value = $(obj).val();
+		var value = $obj.val();
 			
-		switch($(obj).attr("class")){
+		switch($obj.attr("class")){
 		case "chefhats":
 			search.setSkill(value);
 			break;
@@ -226,11 +226,11 @@ function checkOnOff(obj){
 		search.flush();
 	}
 	else{
-		if($(obj).attr("checked")){
-			obj.removeAttr("checked");
+		if($obj.attr("checked")){
+			$obj.removeAttr("checked");
 		}
 		else{
-			$(obj).attr("checked", "checked");
+			$obj.attr("checked", "checked");
 		}
 	}
 }
