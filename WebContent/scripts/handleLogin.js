@@ -15,6 +15,8 @@ function makeUsermenuText(){
 	$userMenu.find("img").attr("src", user.getSmallImage());
 	$userMenu.find(".username").html("<a href=\"#!/profile/"+user.name+"\">"+user.name+"</a>");
 	
+	$(document).click(hideUserMenu).scroll(hideUserMenu);
+	
 	// $("#signin_btn span").text("Konto");
 // 	
 	// $("#user img").attr("src", user.getSmallImage());
@@ -32,11 +34,23 @@ function toggleUserMenu(){
 		var $this = $(this);
 		if($userMenu.hasClass("visible")){
 			$userMenu.removeClass("visible");
+			$this.removeClass("active");
 		}else{
 			var buttonOffset = $this.offset();
-			$userMenu.css({top:buttonOffset.top+30,left:buttonOffset.left-100});
+			$userMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
 			$userMenu.addClass("visible");
+			$this.addClass("active");
 		}
+}
+
+function hideUserMenu(event){
+	var $userMenu = $("#user_menu");
+	var $target = $(event.target);
+	if (!$target.parents().andSelf().is("#user_menu, #user_settings")|| $target.is("a")){
+		$userMenu.removeClass("visible");
+		$("#user_settings").removeClass("active");
+	}
+	
 }
 
 function schmecktChecker(gericht){

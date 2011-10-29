@@ -40,12 +40,12 @@ header{
 	
 	#header{
 		margin: 0 auto;
-		width:980px;
+		width:1014px;
 		height:100%;
 		
 		#logo{
 			float:left;
-			margin:11px 0 0 57px;		
+			margin:11px 0 0 74px;		
 		}
 		
 		#searchbar{
@@ -203,6 +203,10 @@ header{
 						opacity:1;
 						.transition(opacity, 0.1s, ease-in);
 					}
+				}
+				
+				&.active{
+					background-position-y:-50px;
 				}
 			}
 		}
@@ -960,17 +964,23 @@ header{
 	}
 	
 	.peak{
-		
+		height:11px;
+		width: 18px;
+		position: absolute;
+		left: 153px;
+		background-image: url("/img/bubble_peak_top.png");
 	}
 	
 	.menu{
 		@width: @width - 20;
 		width:@width;
-		padding: 5px 10px;
+		margin-top:10px;
+		padding: 5px 10px 0;
 		float:left;
 		border: 1px solid @lightgrey;
 		background-color: @stepcolor;
 		border-radius: 5px;
+		.box-shadow(1px, 1px, 1px, rgba(150,139,131,0.68));
 		
 		.top{
 			float:left;
@@ -1005,10 +1015,12 @@ header{
 			cursor: pointer;
 			
 			.img{
-				width:20px;
-				height:20px;
+				float:left;
+				width:18px;
+				height:19px;
+				margin-right:2px;
 				background-image: url("/img/icons20x20.png");
-				background-position: -100px -40px;
+				background-position: -82px -41px;
 			}
 		}
 	}
