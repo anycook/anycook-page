@@ -270,6 +270,57 @@ input:-moz-placeholder{
 	}
 }
 
+.numberinput{
+	float:left;
+	border-radius:3px;
+	border: 1px solid @lightgrey;
+	width:32px;
+	height:21px;
+	
+	input{
+		float:left;
+		font: 10pt Helvetica, Arial, sans-serif;
+		padding: 2px 2px 2px 2px;
+		.no-box-shadow();
+		background-color: @filterinputbackground;
+		border-radius:0;
+		border-bottom-left-radius:2px;
+		border-top-left-radius:2px;
+		border:0;
+		width:17px;
+		height:17px;
+		text-align: right;
+		
+		&:focus{
+			background-color: @filterinputbackground;
+			border-radius:0;
+			border-bottom-left-radius:2px;
+			border-top-left-radius:2px;
+			border:0;
+			padding: 2px 2px 2px 2px;
+			.no-box-shadow();
+		}
+	}
+	
+	.up, .down{
+		width:10px;
+		height:10px;
+		float:right;
+		border-left: 1px solid @lightgrey;
+		background-image:url("/img/time_arrow_up6x10.png");
+		background-repeat:no-repeat;
+		background-position-x: 2px;
+		
+		&:active{
+			background-position-y: -10px;
+		}
+	}
+	.down{
+		background-image:url("/img/time_arrow_down6x10.png");
+		border-top: 1px solid @lightgrey;
+	}
+}
+
 #tagcloud{
 	height:75px;
 	overflow:hidden;

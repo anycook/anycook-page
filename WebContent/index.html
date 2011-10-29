@@ -91,7 +91,7 @@
 			<a id="user_profile" class="user_btn" href="/#/profile/me" title="Mein Profil"><span></span></a>
 			<!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
 			<a id="user_messages" class="user_btn" href="/#/messages" title="Benachrichtigungen"><span></span></a>
-			<a id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></a>			
+			<div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>			
 		</div>
 		<div id="login_container">
 			<div class="head">
@@ -160,13 +160,13 @@
 							<tr id="time_filter">
 								<td class="filter_table_left">Dauer: </td>
 								<td class="filter_table_right"><form id="time_form" action="">
-									<div class="time">
+									<div class="time numberinput">
 										<input type="text" id="time_std" placeholder="00" size="2" maxlength="2" />
 										<div class="up"></div>
 										<div class="down"></div>
 									</div>
 									<div class="text">:</div>
-									<div class="time">
+									<div class="time numberinput">
 										<input type="text" id="time_min" placeholder="00" size="2" maxlength="2" />
 										<div class="up"></div>
 										<div class="down"></div>
@@ -235,6 +235,7 @@
 							<li></li>
 							<li></li>
 							<li></li>
+							<li></li>
 						</ul>
 						<table id="tags_table">
 							<tr>
@@ -267,5 +268,16 @@
 	</div>
 </div>
 <div id="bookskin"></div>
+<div id="user_menu">
+	<div class="peak"></div>
+	<div class="menu">
+		<div class="top">
+			<div>eingeloggt als <span class="username"></span></div>
+			<img />
+		</div>
+		<a class="menulink" href="/#!/settings">Einstellungen</a>
+		<a id="logout" class="menulink"><div class="img"></div> abmelden</a>
+	</div>
+</div>
 </body>
 </html>

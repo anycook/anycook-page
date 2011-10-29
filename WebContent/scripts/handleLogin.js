@@ -8,6 +8,13 @@ function buildLogin(){
 function makeUsermenuText(){
 	$("#signin_btn").hide();
 	$(".user_btn").show();
+	
+	var $userSettings = $("#user_settings").click(toggleUserMenu);
+	
+	var $userMenu = $("#user_menu");
+	$userMenu.find("img").attr("src", user.getSmallImage());
+	$userMenu.find(".username").html("<a href=\"#!/profile/"+user.name+"\">"+user.name+"</a>");
+	
 	// $("#signin_btn span").text("Konto");
 // 	
 	// $("#user img").attr("src", user.getSmallImage());
@@ -18,6 +25,18 @@ function makeUsermenuText(){
 		// $("#extend_permissions").click(fbExtendPermissions);		
 	// }
 	
+}
+
+function toggleUserMenu(){
+		var $userMenu = $("#user_menu");
+		var $this = $(this);
+		if($userMenu.hasClass("visible")){
+			$userMenu.removeClass("visible");
+		}else{
+			var buttonOffset = $this.offset();
+			$userMenu.css({top:buttonOffset.top+30,left:buttonOffset.left-100});
+			$userMenu.addClass("visible");
+		}
 }
 
 function schmecktChecker(gericht){

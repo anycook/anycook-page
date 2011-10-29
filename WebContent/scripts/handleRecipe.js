@@ -121,36 +121,8 @@ function loadRecipe(recipe){
 	
 	
 	personen = Number(recipe.personen);
-	if(personen>1)
-		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+recipe.personen+"' size='2' maxlength='2' /> Personen:");
-	else
-		$("#zutat_head").html("Zutaten für <input type='text' id='person_number' value='"+recipe.personen+"' size='2' maxlength='2' /> Person:");
 	
-	$("#person_number").click(function(){$("#person_number").val('');});
-	var persCount = null;
-	$("#person_number").bind('keypress', function(e){
-		var inputString = String.fromCharCode(e.charCode);
-		var cleanString =inputString.match(/[0-9]+/); 
-		if(e.keyCode==13){
-			persCount = $("#person_number").val();
-			multiZutaten(persCount);
-			$("#person_number").blur();
-		}
-		else if(cleanString == null) return false;
-		
-	});
-	
-	$("#person_number").focusout(function(){
-		if($("#person_number").val()==''){
-			if(persCount == null) $("#person_number").val(personen);
-			else $("#person_number").val(persCount);
-		}
-		else{
-			persCount = $("#person_number").val();
-			multiZutaten(persCount);
-		}
-			
-	});
+	makeIngredientHeaderForRecipe(personen);
 	
 	$("#filter_headline").text("Status");
 	
@@ -181,14 +153,17 @@ function loadRecipe(recipe){
 	$("#time_std").val(fillStd(recipe.std));
 	$("#time_min").val(fillMin(recipe.min));
 	
-	$("#zutaten_table > *").remove();
+	var $ingredientList = $("#ingredient_list").empty();
 	for(var zutat in recipe.zutaten){
 		var menge = recipe.zutaten[zutat].menge;
 		var singular = recipe.zutaten[zutat].singular;
 		if(singular != null &&getValuefromString(menge) == 1)
 			zutat = singular;
 		
-		$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'>"+menge+"</td></tr>");
+		var $li = $("<li></li>").append("<div></div>").append("<div></div>");
+		$li.children().first().addClass("ingredient").text(zutat);
+		$li.children().last().addClass("amount").text(menge);
+		$ingredientList.append($li);
 	}
 	
 	$(".tags_table_right > *").remove();
@@ -268,6 +243,55 @@ function getStep(num, text){
 	
 	// $("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
 	return $step;
+}
+
+function makeIngredientHeaderForRecipe(personNum){
+	var $zutatHead = $("#zutat_head").empty().append("<span>Zutaten für </span>");
+	
+	var $personsForm = $("<div></div>").addClass("numberinput persons").append("<input type=\"text\"></input><div class=\"up\"></div><div class=\"down\"></div>");
+	var $input = $personsForm.children("input").first().attr({id:"persons_num", value:personNum, size:2, maxlength:2});
+	
+	var person = "<span>"+personNum == 1 ? "Person:" : "Personen:"+"</span>";
+	$zutatHead.append($personsForm).append(person);
+	
+	var persCount = null;
+	$input.keydown(function(e){
+		var $this = $(this);
+		if(e.which==13){
+			persCount = $this.val();
+			multiZutaten(persCount);
+			$this.blur();
+		}else if(e.which == 38){ //up{
+			personsUp();
+			return false;
+		}else if(e.which == 40){ //down
+			personsDown();
+			return false;
+		}else if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
+			return false;
+		
+	});
+	
+	$personsForm.children(".up").click(personsUp);
+	
+	$personsForm.children(".down").click(personsDown);
+	
+}
+
+function personsUp(){
+	var $input = $("#persons_num");
+	var currentNum = Number($input.val());
+	var newNum = ((currentNum)%99)+1;
+	$input.val(newNum);
+	multiZutaten(newNum);
+}
+
+function personsDown(){
+	var $input = $("#persons_num");
+	var currentNum = Number($input.val());
+	var newNum = ((99 - 2 + currentNum)%99)+1;
+	$input.val(newNum);
+	multiZutaten(newNum);
 }
 
 function showVersionInfo(recipe){
@@ -421,7 +445,7 @@ zutatValues = new Array();
 
 function multiZutaten(perscount){
 	
-	$("td.zutaten_table_right").each(function(i){
+	$("#ingredient_list .amount").each(function(i){
 		var newValue = '';
 		if(zutatValues[i] == null){
 			zutatValues[i] = $(this).text();

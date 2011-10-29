@@ -696,49 +696,6 @@ header{
 									margin: 0 2px;
 								}
 								
-								.time{
-									float:left;
-									border-radius:3px;
-									border: 1px solid @lightgrey;
-									width:32px;
-									height:21px;
-									
-									input{
-										float:left;
-										font: 10pt Helvetica, Arial, sans-serif;
-										border:none;
-										padding: 2px 2px 2px 2px;
-										.no-box-shadow();
-										background: @filterinputbackground;
-										border-radius:0;
-										border-bottom-left-radius:2px;
-										border-top-left-radius:2px;
-										border:0;
-										width:17px;
-										height:17px;
-										text-align: right;
-										
-									}
-									
-									.up, .down{
-										width:10px;
-										height:10px;
-										float:right;
-										border-left: 1px solid @lightgrey;
-										background-image:url("/img/time_arrow_up6x10.png");
-										background-repeat:no-repeat;
-										background-position-x: 2px;
-										
-										&:active{
-											background-position-y: -10px;
-										}
-									}
-									.down{
-										background-image:url("/img/time_arrow_down6x10.png");
-										border-top: 1px solid @lightgrey;
-									}
-								}
-								
 								
 								.label_chefhats, .label_muffins {
 									display: table-cell;
@@ -795,19 +752,57 @@ header{
 							background: url("/img/dot.png") repeat-x;
 						}
 						
+						#zutat_head{
+							float:left;
+							
+							
+							span{
+								float:left;
+								
+							}
+							
+							.persons{
+								margin: 0 5px;
+							}
+						}
+						
 						#ingredient_list {
+							@width: 230px;
+							width:@width;
+							float:left;
 							background-color: @filterinputbackground;
 							list-style: none;
 							border:1px solid @lightgrey;
 							border-radius: 5px;
 							margin-top:7px;
-							padding-bottom:25px;
-							.box-shadow-inset(-2px, 2px, 4px, -2px, #cccccc);
+							padding-bottom:20px;
+							.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
+							font-size: 11pt;
+							font-style: italic;
+							color: @smalllightfontcolor;
+							
+							&.blocked{
+								border:0;
+								background:none;
+								.no-box-shadow();
+							}
 							
 							li{
-								min-height:25px;
-								width:100%;
+								min-height:18px;
+								float:left;
+								width:@width - 10px;
 								border-bottom: 1px solid @lightgrey;
+								padding: 3px 4px 0;
+								
+								.ingredient{
+									float:left;
+									margin: 2px 0 -2px 0;
+								}
+								
+								.amount{
+									float:right;
+									margin: 2px 0 -2px 5px;
+								}
 							}
 						}
 						
@@ -947,4 +942,74 @@ header{
 	background:url("/img/bookskin.png") repeat-x;
 	padding:8px;
 	position:relative;
+}
+
+#user_menu{
+	opacity:0;
+	position: fixed;
+	z-index:20;
+	float:left;
+	@width:190px;
+	width:@width;
+	visibility: hidden;
+	
+	&.visible{
+		visibility: visible;
+		opacity: 1;
+		.transition(opacity, .3s, ease-in-out);
+	}
+	
+	.peak{
+		
+	}
+	
+	.menu{
+		@width: @width - 20;
+		width:@width;
+		padding: 5px 10px;
+		float:left;
+		border: 1px solid @lightgrey;
+		background-color: @stepcolor;
+		border-radius: 5px;
+		
+		.top{
+			float:left;
+			width:@width;
+			padding: 5px 0 8px 0;
+			
+			div{
+				float:left;
+				width: @width - 70px;
+				color: @smalllightfontcolor;
+				font-style:italic;
+				
+				a{
+					font-style: normal;
+				}
+			}
+			
+			img{
+				float:right;
+				width:50px;
+				height:50px;
+				margin-left: 10px ;
+			}
+		}
+		
+		.menulink{
+			display:block;
+			width:@width;
+			float:left;
+			border-top: 1px solid @lightgrey;
+			padding: 5px 0;
+			cursor: pointer;
+			
+			.img{
+				width:20px;
+				height:20px;
+				background-image: url("/img/icons20x20.png");
+				background-position: -100px -40px;
+			}
+		}
+	}
 }

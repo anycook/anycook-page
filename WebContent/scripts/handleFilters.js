@@ -56,7 +56,9 @@ function resetFilter(){
 	blockFilter(false);
 	handleRadios(".label_stars, .label_chefhats, .label_muffins");
 	
-	$("#zutaten_table > *").remove();
+	var $ingredientList = $("#ingredient_list").empty();
+	for(var i= 0; i<6; i++)
+		$ingredientList.append("<li></li>");
 	
 	$(".tags_table_right > *").remove();
 	
@@ -190,14 +192,15 @@ function blockFilter(onoff){
 	var objs = $(".label_stars, .label_chefhats, .label_muffins, div.kategorie_filter");
 	blocked = onoff;
 	if(onoff){
-		objs.css("cursor", "default");
 		$("#time_std, #time_min").attr("disabled", "disabled");
 		$("div.kategorie_filter > div").addClass("off");
+		$("#ingredient_list").addClass("blocked");
 	}
 	else{
 		objs.css("cursor", "pointer");
 		$("#time_std, #time_min").removeAttr("disabled");
 		$("div.kategorie_filter > div").removeClass("off");
+		$("#ingredient_list").removeClass("blocked");
 	}
 }
 
