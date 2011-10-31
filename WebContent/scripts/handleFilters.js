@@ -29,7 +29,7 @@ function setFiltersfromSession(){
 		}
 		
 		for(num in search.zutaten)
-			addZutatRow(search.zutaten[num]);
+			addIngredientRow(search.zutaten[num]);
 		
 		for(num in search.tags)
 			$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+search.tags[num]+"</div><div class='tag_remove'>x</div></div>");
@@ -257,21 +257,34 @@ function textReplacement(input){
 
 
 //zutaten
-function zutatentableclick(){
+function ingredientListClick(){	
 	if(blocked == false){
-		if($("#zutat_input").val()=="")
-			$("#zutat_input").focus();
+		var $this = $(this);
+		var $input = $this.find("input");
+		
+		if($input.length > 0)
+			$input.focus();
 		else{
-			$("#zutaten_table").append("<tr><td class='zutaten_table_left'><form id='zutat_form'><input type='text' id='zutat_input'/></form></td><td class='zutaten_table_right'></td></tr>");
-			$("#zutat_input").focus();
-			$("#zutat_input").keyup(function(event){
-				if(event.keyCode>40)
-					addRemoveZutat();
-	    	});
-	    	/*$("#zutat_input").focusout(function(obj){
-	    			saveZutat();	    		
-	    	});*/
-	    	$("#zutat_input").autocomplete({
+			var $li = null;
+			$this.children("li").each(function(i){
+				if($li!=null) return;
+				if($(this).children().length == 0)
+					$li = $(this);
+			});
+			
+			if($li == null){
+				$li = $("<li></li>");
+				$this.append($li);
+			}
+			
+			$li.append("<input type=\"text\" /><div class=\"close\">x</div>");			
+			
+			$input = $li.children("input");
+			$li.children(".close").hide();
+			$input
+				.focus()
+				.keypress(addRemoveZutat)
+				.autocomplete({
 	    		source:function(req,resp){
         			//var array = [];
         		var term = req.term;
@@ -304,7 +317,7 @@ function zutatentableclick(){
 	    	});
 	    	$(".ui-autocomplete").last().addClass("zutat-autocomplete");
 	    	
-	    	$("#zutat_form").submit(function(event){
+	    	/*$("#zutat_form").submit(function(event){
 	    		var zutat = $("#zutat_input").val();
 	    		$("#zutat_input").autocomplete("destroy");
 				$("#zutat_input").parents("tr").remove();
@@ -312,27 +325,26 @@ function zutatentableclick(){
 	    		search.flush();
 	    		//zutatentableclick();
 	    		return false;
-	    	});
+	    	});*/
 	    	
 	    	
 		}
 	}
 }
 
-function addRemoveZutat(){
-	var obj = $("#zutat_input")[0];
-	var tdright = obj.parentNode.parentNode.parentNode.children[1];
-	if($(obj).val()!="" && $(tdright).children().size()==0){
-		$(tdright).append("<div class='remove_zutat'></div>");
-	}
-	else if($(obj).val()==""){
-		$(tdright).children().remove();
-	}
+function addRemoveZutat(e){
+	var $this = $(this);
+	
+	var val = $this.val()+String.fromCharCode(e.which);
+	if(val.length>0)
+		$this.siblings().first().fadeIn(500);
+	else
+		$this.siblings().first().fadeOut(500);
 }
 
 function removeZutatField(event){
-	var obj = event.target.parentNode.parentNode;
-	var zutat = $(obj.children[0]).text();
+	var $this = $(this);
+	var zutat = $this.siblings().text();
 	search.removeZutat(zutat);
 	search.flush();
 }
@@ -386,6 +398,20 @@ function removeUserfilter(){
 	
 }
 
-function addZutatRow(zutat){
-	$("#zutaten_table").append("<tr><td class='zutaten_table_left'>"+zutat+"</td><td class='zutaten_table_right'><div class='remove_zutat'></div></td></tr>");
+function addIngredientRow(ingredient){	
+	var $ingredientList = $("#ingredient_list");
+	var $li = null;
+	$ingredientList.children("li").each(function(i){
+		var $this = $(this);
+		if($li!=null) return;
+		if($this.children().length == 0)
+			$li = $this;
+	});
+	
+	if($li == null){
+		$li = $("<li></li>");
+		$ingredientList.append($li);
+	}
+	
+	$li.append("<div class=\"ingredient\">"+ingredient+"</div><div class=\"close\">x</div>");
 }

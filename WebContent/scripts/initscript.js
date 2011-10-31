@@ -193,8 +193,8 @@
 
             	//zutatentabelle
             	
-            	$("#zutaten_table").click(zutatentableclick);
-            	$(".remove_zutat").live('click', removeZutatField);
+            	$("#ingredient_list").click(ingredientListClick);
+            		$("#ingredient_list .close").live('click', removeZutatField);
             	
             	
             	//TODO tagsfilter

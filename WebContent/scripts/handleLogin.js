@@ -15,6 +15,9 @@ function makeUsermenuText(){
 	$userMenu.find("img").attr("src", user.getSmallImage());
 	$userMenu.find(".username").html("<a href=\"#!/profile/"+user.name+"\">"+user.name+"</a>");
 	
+	if(user.level == 2)
+		$userMenu.find(".admin").show();
+	
 	$(document).click(hideUserMenu).scroll(hideUserMenu);
 	
 	// $("#signin_btn span").text("Konto");

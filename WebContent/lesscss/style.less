@@ -492,7 +492,8 @@ header{
 				float: left;
 				background: url("/img/filter_bg.png") repeat-y;
 				margin: 6px 0 0 15px;
-				width: 268px;
+				@width: 268px;
+				width:@width;
 				
 				
 				#filter_head{
@@ -532,8 +533,11 @@ header{
 				}
 				
 				#filter_main{
+					float:left;
 					background-color: #F9F8F6;
 					margin: 0 5px;
+					@width:@width - 10;
+					width:@width;
 					
 					#userfilter{
 						background-color: #ECE9E3;
@@ -658,6 +662,7 @@ header{
 					}
 					
 					#filter_main_box {
+						float:left;
 						margin: 0 14px;
 						font: 13pt Georgia;
 						color: #5A5A5A;
@@ -784,6 +789,7 @@ header{
 							font-size: 11pt;
 							font-style: italic;
 							color: @smalllightfontcolor;
+							cursor: text;
 							
 							&.blocked{
 								border:0;
@@ -807,10 +813,32 @@ header{
 									float:right;
 									margin: 2px 0 -2px 5px;
 								}
+								
+								input{
+									float:left;
+									background:none;
+									.no-box-shadow();
+									border:0;
+									border-radius: 0;
+									padding:0;
+									margin:0;
+									font-size: 11pt;
+									font-style: italic;
+									color: #878787;
+									margin: 0px 0 -2px 0;
+									display: block;
+								}
+								
+								.close{
+									margin: 2px 0 -2px 5px;
+									float:right;
+									cursor:pointer;
+								}
 							}
 						}
 						
 						#tags_table {
+							float:left;
 							margin: 10px 0 10px 0;
 							border-spacing: 0;
 							
@@ -824,12 +852,16 @@ header{
 								float: left;
 								display: block;
 								padding: 2px 0 1px 1px;
-								background: url("/img/zutaten_tags_bg.png") repeat;
+								background-image: url("/img/zutaten_tags_bg.png");
+								background-color: @filterinputbackground;
 								font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 								font-weight: 500;
 								color: #5A5A5A;
 								min-height: 69px;
 								width: 169px;
+								.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
+								border:1px solid @lightgrey;
+								border-radius: 5px;
 							}
 						}
 					}
@@ -841,6 +873,8 @@ header{
 				#filter_bottom{
 					height: 18px;
 					background: url("/img/filter_bottom.png");
+					float:left;
+					width:100%;
 				}
 			}
 			
@@ -1013,6 +1047,10 @@ header{
 			border-top: 1px solid @lightgrey;
 			padding: 5px 0;
 			cursor: pointer;
+			
+			&.admin{
+				display:none;
+			}
 			
 			.img{
 				float:left;
