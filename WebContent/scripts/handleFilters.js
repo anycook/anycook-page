@@ -283,7 +283,7 @@ function ingredientListClick(){
 			$li.children(".close").hide();
 			$input
 				.focus()
-				.keypress(addRemoveZutat)
+				.keypress(addCloseBtn)
 				.autocomplete({
 	    		source:function(req,resp){
         			//var array = [];
@@ -308,8 +308,7 @@ function ingredientListClick(){
         			}, 
         			select:function(event, ui){
         				var text = ui.item.label;
-        				$("#zutat_input").autocomplete("destroy");
-        				$("#zutat_input").parents("tr").remove();
+        				$("#ingredient_list input").autocomplete("destroy");
         				search.addZutat(text);
         				search.flush();
         				return false;
@@ -332,15 +331,22 @@ function ingredientListClick(){
 	}
 }
 
-function addRemoveZutat(e){
+function addCloseBtn(e){
 	var $this = $(this);
 	
-	var val = $this.val()+String.fromCharCode(e.which);
-	if(val.length>0)
+	var val = $this.val();
+	if(e.which == 13){
+		$this.autocomplete("destroy");
+		search.addZutat(val);
+		search.flush();
+	}else if((val+String.fromCharCode(e.which)).length>0)
 		$this.siblings().first().fadeIn(500);
-	else
-		$this.siblings().first().fadeOut(500);
+		
+	
+		
 }
+
+
 
 function removeZutatField(event){
 	var $this = $(this);
