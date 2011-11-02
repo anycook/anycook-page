@@ -14,10 +14,11 @@ function updateLiveAtHome(){
 }
 
 function parseAndAddLiveAtHome(json){
+	var $ul = $("#news ul");
 	if(json.length>0)
 	{
 		var empty = false;
-		if($("#news_inhalt").children().length == 0)
+		if($ul.children().length == 0)
 			empty = true;
 		
 		for(var i =json.length-1; i>=0; --i){
@@ -50,15 +51,15 @@ function parseAndAddLiveAtHome(json){
 				pos = text.search(regex);
 			}
 			
-			if($("#news_inhalt").children().length>=6)
-				$("#news_inhalt").children().last().remove();
+			if($ul.children().length>=6)
+				$ul.children().last().remove();
 			
-			$("#news_inhalt").prepend("<div>"+text+"</div>");
+			$ul.prepend("<div>"+text+"</div>");
 			if(!empty){
 				var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
 				var newMarginTop = 0 - $('#news_inhalt div:first').outerHeight();
-				$('#news_inhalt div:first').css({'margin-top': newMarginTop, 'opacity': 0});
-				$('#news_inhalt div:first').animate({marginTop: oldMarginTop, opacity: 1});
+				$ul.children().first.css({'margin-top': newMarginTop, 'opacity': 0})
+					.animate({marginTop: oldMarginTop, opacity: 1});
 			}
 		}
 		newestid = Number(json[0]["id"]);
