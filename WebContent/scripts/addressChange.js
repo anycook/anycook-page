@@ -8,18 +8,22 @@ function loadHome(json)
 	
 	
 	//new stuff
-	$("#tagesrezept_inhalt").append(getSmallFrameText(json));
-	setSmallFrameText($("#tagesrezept_inhalt"));
-	$(".small_rezept p").ellipsis();
-	var uri = encodeURI("/#!/recipe/"+json.name);
-	$("#tagesrezept_inhalt").attr("href", uri);
-	
 	$.ajax({
+	  url: "/anycook/LoadDailyRecipe",
+	  dataType: 'json',
+	  success: function(json){
+	  	var $dailyrecipe = getBigFrameText(json);
+		$("#dailyrecipe").append($dailyrecipe);
+	  }
+	});
+	
+	
+	/*$.ajax({
 		  url: "/anycook/GetPopularTags",
 		  dataType: 'json',
 		  data: "num=15",
 		  success: loadFamousTags
-		});
+		});*/
 	
 	
 	
@@ -83,12 +87,7 @@ function handleChange(event){
 		
 		switch(path.length){
 		case 0:
-			$.ajax({
-	  		  url: "/anycook/LoadRecipeforSmallView",
-	  		  dataType: 'json',
-	  		  async:false,
-	  		  success: loadHome
-			});
+			loadHome();
 			break;
 		case 1:
 			switch(path[0]){

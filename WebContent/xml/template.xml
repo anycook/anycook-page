@@ -2,25 +2,31 @@
 <templates>
     <template id="home">
     <div id="home">
-        <div id="display">
-					
+        <div id="display">					
+		</div>
+		<div id="informationbox">
+			<div id="famous_tags">
+				<h2>Beliebte Tags:</h2>
+				<div class="content">
+					<div class="top"></div>
+					<div id="famous_tags_cloud"></div>
+					<div class="bottom"></div>
 				</div>
-				<div id="informationbox">
-					<div id="rezept_des_tages">
-						<div class="startpage_headline_small">Rezept des Tages:</div>
-						<a id="tagesrezept_inhalt" class="frame_main_small small_rezept" href=""></a>
-						<div class="frame_right"></div>
-					</div>
-					<div id="news">
-						<div class="startpage_headline_small">kürzlich gekocht:</div>
-							<div class="frame_main_small">
-							<ul id="news_inhalt"></ul>
-							<div id="news_fade"></div>
-						</div>
-						<div class="frame_right"></div>
-					</div>
-					<div id="famous_tags"><div id="tags_label"></div><div id="famous_tags_cloud"></div></div>
+				
+			</div>
+			<div id="news">
+				<h2>Küchengeklapper:</h2>
+				<div class="content">
+					<div class="top"></div>
+					<ul></ul>
+					<div class="bottom"></div>
 				</div>
+			</div>
+			
+		</div>
+		<div id="dailyrecipe">
+				<h2>Rezept des Tages:</h2>				
+		</div>
 	</div>
     </template>
     <template id="home_discover">
