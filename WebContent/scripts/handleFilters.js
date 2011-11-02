@@ -38,7 +38,7 @@ function setFiltersfromSession(){
 			$("#search_terms").show();
 			for(i in search.terms){
 				addTerms(search.terms[i], false);
-				}
+			}
 		}
 	}
 
@@ -277,7 +277,7 @@ function ingredientListClick(){
 				$this.append($li);
 			}
 			
-			$li.append("<input type=\"text\" /><div class=\"close\">x</div>");			
+			$li.append("<input type=\"text\" /><div class=\"close\"></div>");			
 			
 			$input = $li.children("input");
 			$li.children(".close").hide();
@@ -304,7 +304,7 @@ function ingredientListClick(){
         			},
         			minlength:1,
         			position:{
-        				offset:"-5 2"
+        				offset:"-5 1"
         			}, 
         			select:function(event, ui){
         				var text = ui.item.label;
@@ -314,7 +314,7 @@ function ingredientListClick(){
         				return false;
         			}
 	    	});
-	    	$(".ui-autocomplete").last().addClass("zutat-autocomplete");
+	    	$(".ui-autocomplete").last().addClass("ingredient-autocomplete");
 	    	
 	    	/*$("#zutat_form").submit(function(event){
 	    		var zutat = $("#zutat_input").val();
@@ -350,9 +350,15 @@ function addCloseBtn(e){
 
 function removeZutatField(event){
 	var $this = $(this);
-	var zutat = $this.siblings().text();
-	search.removeZutat(zutat);
-	search.flush();
+	var  $input = $this.siblings("input");
+	if($input.length == 1){
+		$input.remove();
+		$this.remove();
+	}else{	
+		var zutat = $this.siblings().text();
+		search.removeZutat(zutat);
+		search.flush();
+	}
 }
 
 
@@ -419,5 +425,5 @@ function addIngredientRow(ingredient){
 		$ingredientList.append($li);
 	}
 	
-	$li.append("<div class=\"ingredient\">"+ingredient+"</div><div class=\"close\">x</div>");
+	$li.append("<div class=\"ingredient\">"+ingredient+"</div><div class=\"close\"></div>");
 }
