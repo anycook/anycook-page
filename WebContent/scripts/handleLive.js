@@ -51,10 +51,13 @@ function parseAndAddLiveAtHome(json){
 				pos = text.search(regex);
 			}
 			
-			if($ul.children().length>=6)
+			if($ul.children().length>=10)
 				$ul.children().last().remove();
 			
-			$ul.prepend("<div>"+text+"</div>");
+			var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>");
+			$li.children(".right").html(text);
+			
+			$ul.prepend($li);
 			if(!empty){
 				var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
 				var newMarginTop = 0 - $('#news_inhalt div:first').outerHeight();

@@ -9,13 +9,18 @@
 				<h2>Beliebte Tags:</h2>
 				<div class="content">
 					<div class="top"></div>
-					<div id="famous_tags_cloud"></div>
+					<div class="mid">
+						<div class="left_seam"></div>
+						<div id="famous_tags_cloud"></div>
+						<div class="right_seam"></div>
+					</div>
+					
 					<div class="bottom"></div>
 				</div>
 				
 			</div>
 			<div id="news">
-				<h2>Küchengeklapper:</h2>
+				<h2>Küchengeplapper:</h2>
 				<div class="content">
 					<div class="top"></div>
 					<ul></ul>

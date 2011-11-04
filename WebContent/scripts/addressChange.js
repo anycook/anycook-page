@@ -18,12 +18,12 @@ function loadHome(json)
 	});
 	
 	
-	/*$.ajax({
+	$.ajax({
 		  url: "/anycook/GetPopularTags",
 		  dataType: 'json',
 		  data: "num=15",
 		  success: loadFamousTags
-		});*/
+		});
 	
 	
 	

@@ -170,7 +170,7 @@ function getTag(name, type, number){
 	
 	var $tag;
 	
-	if(type == "link")
+	if(type == "link" || type == "linknumber")
 		$tag = $("<a href=\"#!/search/tagged/"+name+"\"></a>");
 	else
 		$tag = $("<div></div>");
@@ -180,7 +180,7 @@ function getTag(name, type, number){
 	
 	if(type == "remove")
 		$right.append("<div class=\"tag_remove\">x</div>");
-	else if(type == "number")
+	else if(type == "number" || type == "linknumber")
 		$right.append("<div class=\"tag_num\">"+number+"</div>");
 		
 	return $tag;
@@ -253,79 +253,7 @@ function submitTag(event){
 	return false;
 }
 
-/*function submitNewTag(event){
-	var text = $(this).children().first().val();
-	saveNewTag(text);
-	return false;
-}*/
-/*function saveTag(text){
-	
-	
-	if(text[0]=="," || text[0]==" ")
-		text = text.substring(1,text.length);
-	
-	var tags = $(".tag_text");
-	for(var i = 0; i<tags.length; i++){
-		if($(tags[i]).text() == text){
-			$(".tags_table_right input").val("");
-			return ;
-		}
-	}
-			
-	removeInput();
-	$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+text+"</div><div class='tag_remove'>x</div></div>");
-	//$(".tags_table_right .tag_remove").last().click(function(event){removeTag(event.target.parentNode);});
-	addTag(text);
-}*/
 
-/*function makeNewInput(){
-	if(blocked==false){
-		if($(".tags_table_right input").length==0){
-			//make new input field
-			$(".tags_table_right").append("<form><input type='text'/></form>");
-			$(".tags_table_right input").keydown(keyTag);
-			$(".tags_table_right input").focus();
-			
-			$(".tags_table_right input").autocomplete({
-	    		source:function(req,resp){
-        			//var array = [];
-        		var term = req.term;
-        		$.ajax({
-        			url:"/anycook/AutocompleteTags",
-        			dataType: "json",
-        			async:false,
-        			data:"q="+term,
-        			success:function(data){
-        				resp($.map(data, function(item){
-        					return{
-        						label:item
-        						};
-        					}));        			
-        					}
-        				});
-        			},
-        			minlength:1,
-        			position:{
-        				offset:"-3 1"
-        			}, 
-        			select:function(event, ui){        				
-        				if(ui.item != undefined){
-        					var text = ui.item.label;
-	        				$(".tags_table_right input").autocomplete("destroy");
-	        				search.addTag(text);
-	        				search.flush();
-	        				makeNewInput();
-	        				return false;
-        				}
-        			}
-	    	});
-			$(".ui-autocomplete").last().addClass("tag-autocomplete");
-			$(".tags_table_right form").submit(submitTag);
-		}
-		else 
-			$(".tags_table_right input").focus();
-	}
-}*/
 
 function removeInput(){
 	$(".tags_table_right input").remove();
@@ -351,7 +279,15 @@ function clickFamousTag(event){
 
 //tags
 
+function loadFamousTags(tags){
+	var $tagsCloud = $("#famous_tags_cloud");
+	for(tag in tags){
+		$tagsCloud.append(getTag(tag, "linknumber", tags[tag]));
+	}
+}
 
 function handleNewTagClick(event){
 		makeNewRInput();
 }
+
+
