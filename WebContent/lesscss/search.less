@@ -8,8 +8,12 @@
 	height:@height;
 	display:block;
 	border-top:1px solid @shadowbeige;
-	border-bottom: 1px solid @lightgrey;
+	//border-bottom: 1px solid @lightgrey;
 	.transition(border-top-color, .1s, ease-out);
+	
+	&:last-child{
+		border-bottom:1px solid @shadowbeige;
+	}
 	
 	&:hover, &:focus{
 		outline:none;
