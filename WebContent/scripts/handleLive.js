@@ -66,6 +66,7 @@ function parseAndAddLiveAtHome(json){
 			}
 		}
 		newestid = Number(json[0]["id"]);
+		$ul.jScrollPane();
 	}
 }
 
