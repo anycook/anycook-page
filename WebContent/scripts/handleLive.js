@@ -1,28 +1,41 @@
 function updateLiveAtHome(){
 	var path = $.address.path();
+	var newestid = getNewestNewsId();
+	
 	if(path == "/"){
 		$.ajax({
-			url:"/anycook/GetLastLifes",
+			url:"/anycook/GetLifes",
 			dataType:"json",
-			data:"id="+newestid,
+			data:"newestid="+newestid,
 			success:function(response){
 				parseAndAddLiveAtHome(response);
+				window.setTimeout(updateLiveAtHome, 5000);
 			}
 		});
-		window.setTimeout(updateLiveAtHome, 5000);
 	}
+}
+
+function getNewestNewsId(){
+	var newestid = $("#news li").first().data("id");
+	if(newestid == undefined) newestid = 0;
+	return Number(newestid);
 }
 
 function parseAndAddLiveAtHome(json){
 	var $ul = $("#news ul");
 	if(json.length>0)
 	{
+		var newestid = getNewestNewsId();
+		var $container = $ul.find(".jspPane");
+		if($container.length == 0)
+			$container = $ul;
+		
 		var empty = false;
 		if($ul.children().length == 0)
 			empty = true;
 		
-		for(var i =json.length-1; i>=0; --i){
-			var text = json[i]["syntax"];
+		for(var i in json){
+			var text = json[i].syntax;
 			var regex = /#[ug]/;
 			var pos = text.search(regex);
 			
@@ -51,23 +64,46 @@ function parseAndAddLiveAtHome(json){
 				pos = text.search(regex);
 			}
 			
-			if($ul.children().length>=10)
-				$ul.children().last().remove();
-			
-			var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>");
+			var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>").data("id", json[i].id);
 			$li.children(".right").html(text);
 			
-			$ul.prepend($li);
-			if(!empty){
+			if(Number(json[i].id) > newestid)				
+				$container.prepend($li);
+			else
+				$container.append($li);
+				
+			/*if(!empty){
 				var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
 				var newMarginTop = 0 - $('#news_inhalt div:first').outerHeight();
-				$ul.children().first.css({'margin-top': newMarginTop, 'opacity': 0})
+				$ul.find("li").first().css({'margin-top': newMarginTop, 'opacity': 0})
 					.animate({marginTop: oldMarginTop, opacity: 1});
-			}
+			}*/
 		}
-		newestid = Number(json[0]["id"]);
+		var active = $("#news .jspDrag").hasClass("jspActive");
 		$ul.jScrollPane();
+		if(active)
+			$("#news .jspDrag").addClass("jspActive");
 	}
+}
+
+function newsScrollListener(e){
+	var $this = $(this);
+	var $last = $this.find("li").last();
+	var delta = $last.offset().top-($this.offset().top+ $this.height());
+	if(delta < 40){
+		$this.unbind("scroll", newsScrollListener);
+		var oldestid = $last.data("id");
+		$.ajax({
+			url:"/anycook/GetLifes",
+			dataType:"json",
+			data:"oldestid="+oldestid,
+			success:function(response){
+				parseAndAddLiveAtHome(response);
+				$this.scroll(newsScrollListener);
+			}
+		});
+	}
+	return false;
 }
 
 function schmecktmir(){
@@ -99,5 +135,3 @@ function schmecktmirnicht(){
 		}
 	});
 }
-
-var newestid;

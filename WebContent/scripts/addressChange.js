@@ -31,6 +31,7 @@ function loadHome(json)
 	
 	//liveupdatestuff
 	newestid = 0;
+	$("#news ul").jScrollPane().scroll(newsScrollListener);
 	updateLiveAtHome();
 }
 

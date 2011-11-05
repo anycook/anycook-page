@@ -9,7 +9,9 @@ function loadProfile(username){
 	$("#profile_image").attr("src", image);
 	$("#profile_title h1").text(profileData.name);
 	$("#profile_date span").text(profileData.date);
-	$("#profile_place span").text(profileData.place);
+	
+	if(profileData.place != null)
+		$("#profile_place").show().children("span").text(profileData.place);
 	$("#profile_achievements #recipes .count").text(profileData.recipes.length);
 	$("#profile_achievements #likes .count").append(profileData.schmeckt.length);
 	$("#profile_achievements #discussions .count").append(profileData.discussionnum);
