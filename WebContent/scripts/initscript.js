@@ -6,6 +6,15 @@
 			 document.location.href="http://news.anycook.de/tagged/internet_explorer";
 	 }
 	 
+	 
+	 //makeWidth
+	 var $headerRight = $("#container_head_right");
+	 var left = $headerRight.offset().left;
+	 $headerRight.width($("body").width()-left);
+	 var $right  = $("#right");
+	 left = $right.offset().left;
+	 $right.width($("body").width()-left);
+	 
 	 //xml
 	 $("#content_main").xml("init");
 	 

@@ -20,9 +20,8 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 }
 
 body{
-	overflow-x:hidden;
-	overflow-y: scroll;
 	font: @standardfont;
+	overflow-y: scroll;
 }
 
 #background{
@@ -167,37 +166,36 @@ header{
 					height:100%;
 					background-image: url("/img/topbuttons40x25.png");
 					background-repeat: no-repeat;
-					background-position-y: -25px;
 					opacity: 0;
 					.transition(opacity, 0.1s, ease-out);
 					display: block;
 				}
 				
 				&#user_profile{
-					background-position-x: -40px;
+					background-position: -40px 0;
 					span{
-						background-position-x: -40px;
+						background-position: -40px -25px;
 					}
 				}
 				
 				&#user_cooktogether{
-					background-position-x: -160px;
+					background-position: -160px 0;
 					span{
-						background-position-x: -160px;
+						background-position: -160px -25px;
 					}
 				}
 				
 				&#user_messages{
-					background-position-x: -80px;
+					background-position: -80px 0;
 					span{
-						background-position-x: -80px;
+						background-position: -80px -25px;
 					}
 				}
 				
 				&#user_settings{
-					background-position-x: -120px;
+					background-position: -120px 0;
 					span{
-						background-position-x: -120px;
+						background-position: -120px -25px;
 					}
 				}
 				
@@ -209,7 +207,9 @@ header{
 				}
 				
 				&.active{
-					background-position-y:-50px;
+					&#user_settings{
+						background-position:-120px -50px;
+					}
 				}
 			}
 		}
@@ -368,7 +368,6 @@ header{
 		background:url("/img/right_stripes.png") repeat-y @background-right;
 		height:100%;
 		left:50%;
-		width:50%;
 		z-index:15;
 		padding-bottom:27px;
 		.box-shadow-inset(0, 3px, 3px, rgba(0,0,0,0.1));
@@ -480,6 +479,7 @@ header{
 			
 			#container_head_right{
 				left:335px;
+				width:50%;
 				
 			}
 		}
@@ -710,12 +710,13 @@ header{
 								
 								
 								.label_chefhats, .label_muffins {
-									display: table-cell;
+									display: block;
+									float:left;
 									cursor: pointer;
 									position:relative;
 									width: 20px;
 									height: 20px;
-									background-position-x:0;
+									background-position:0 0;
 									background-image: url("/img/icons20x20.png");
 									background-repeat: no-repeat;
 									
@@ -741,17 +742,16 @@ header{
 										opacity: 0;
 										background: url("/img/icons20x20.png") no-repeat;
 										.transition(opacity, .1s, ease-out);
-										background-position-y:-20px;
+										background-position:0 -20px;
 									}
 								}
 								
 								.label_muffins {
-									background-position-x:-20px;
+									background-position:-20px 0;
 									
 									.active{
-										background-position-x:-20px;
+										background-position:-20px -20px;
 									}
-									background-position-x: -21px;
 								}
 							}
 						}
@@ -991,7 +991,7 @@ header{
 	width:100%;
 	height:4px;
 	background:url("/img/bookskin.png") repeat-x;
-	padding:8px;
+	padding:8px 0;
 	position:relative;
 }
 
@@ -1052,26 +1052,29 @@ header{
 				margin-left: 10px ;
 			}
 		}
-		
-		.menulink{
-			display:block;
-			width:@width;
-			float:left;
+		p{
 			border-top: 1px solid @lightgrey;
-			padding: 5px 0;
-			cursor: pointer;
-			
+			float:left;
+			display:block;
 			&.admin{
 				display:none;
 			}
 			
-			.img{
+			.menulink{
+				display:block;
+				width:@width;
 				float:left;
-				width:18px;
-				height:19px;
-				margin-right:2px;
-				background-image: url("/img/icons20x20.png");
-				background-position: -82px -41px;
+				padding: 5px 0;
+				cursor: pointer;
+				
+				.img{
+					float:left;
+					width:18px;
+					height:19px;
+					margin-right:2px;
+					background-image: url("/img/icons20x20.png");
+					background-position: -82px -41px;
+				}
 			}
 		}
 	}
