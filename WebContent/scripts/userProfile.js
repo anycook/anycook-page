@@ -10,15 +10,27 @@ function loadProfile(username){
 	$("#profile_title h1").text(profileData.name);
 	$("#profile_date span").text(profileData.date);
 	
+	//TODO do right!!
+	if(username ==user.name)
+		$("#follow").hide();
+	else{
+		var $follow = $("#follow");
+		if(!user.isFollowing(username)){
+			$follow.text("folgen").click(follow);
+		}
+		else
+			$follow.text("entfolgen").click(follow);
+			
+		
+
+	}
+	
 	if(profileData.place != null)
 		$("#profile_place").show().children("span").text(profileData.place);
 	$("#profile_achievements #recipes .count").text(profileData.recipes.length);
-	$("#profile_achievements #likes .count").append(profileData.schmeckt.length);
-	$("#profile_achievements #discussions .count").append(profileData.discussionnum);
-	
-	
-	//TODO get real data	
-	$("#profile_achievements #follower .count").append(10);
+	$("#profile_achievements #likes .count").text(profileData.schmeckt.length);
+	$("#profile_achievements #discussions .count").text(profileData.discussionnum);
+	$("#profile_achievements #follower .count").text(profileData.numfollower);
 	
 	if(profileData.text!=null){
 		$("#profile_text").show().text(profileData.text);
@@ -106,6 +118,25 @@ function gotoProfile(username){
 	span.css("marginTop", margintop);
 	
 }*/
+
+function follow(){
+	var $this = $(this);
+	var username = $.address.pathNames()[1];
+	var data;
+	if($this.text() == "folgen")
+		data = "follow="+username;
+	else
+		data = "unfollow="+username;
+		
+	$.ajax({
+		url:"/anycook/Follow",
+        dataType: "json",
+        data: data,
+        success:function(json){
+        	loadProfile(username);
+        }
+	});
+}
 
 
 function profileShowMore(event){

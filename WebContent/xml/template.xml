@@ -399,6 +399,7 @@
 					<div id="profile_info">
 						<div id="profile_title">
 							<h1></h1>
+							<div id="follow"></div>
 							<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
 						</div>
 						<div id="profile_date"><div></div>seit <span></span> dabei</div>

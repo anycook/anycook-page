@@ -8,6 +8,8 @@ function User(){
 	this.schmeckt = null;
 	this.recipes = null;
 	this.text = null;
+	this.following = null;
+	this.follower = null;
 }
 
 User.init = function(){
@@ -24,6 +26,8 @@ User.init = function(){
 				user.facebook_id = response.facebookID;
 				user.image = response.image;
 				user.text = response.text;
+				user.following = response.following;
+				
 			}
 				
 		},
@@ -54,6 +58,7 @@ User.initProfileInfo = function(username){
 				profileUser.date = json.createdate;
 				profileUser.place = json.place;
 				profileUser.discussionnum = json.discussionnum;
+				profileUser.numfollower = json.numfollower;
 				
 			}
 		},
@@ -88,7 +93,9 @@ User.prototype.onlyUserAccess = function(){
 };
 
 
-
+User.prototype.isFollowing = function(username){
+	return $.inArray(username, this.following) > -1;
+}
 
 User.login = function(mail, pwd, stayloggedin){
 	var callback = false;
