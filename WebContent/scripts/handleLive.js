@@ -35,38 +35,8 @@ function parseAndAddLiveAtHome(json){
 			empty = true;
 		
 		for(var i in json){
-			var text = json[i].syntax;
-			var regex = /#[ug]/;
-			var pos = text.search(regex);
 			
-			while(pos>=0){
-				if(text[pos+1]=="u"){
-					var array = text.split("#u");
-					text = "";
-					for(var j = 0; j<array.length-1;++j){
-						var uri = User.getProfileURI(json[i].user);
-						var link = "<a href=\""+uri+"\">"+json[i].user+"</a>";
-						text+=array[j]+link;
-					}
-					text+=array[array.length-1];
-				}
-				else if(text[pos+1]=="g"){
-					var array = text.split("#g");
-					text = "";
-					for(var j = 0; j<array.length-1;++j){
-						var uri = encodeURI("/#!/recipe/"+json[i].gericht);
-						var link = "<a href=\""+uri+"\">"+json[i].gericht+"</a>";
-						text+=array[j]+link;
-					}
-					text+=array[array.length-1];
-				}
-					
-				pos = text.search(regex);
-			}
-			
-			var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>").data("id", json[i].id);
-			$li.children(".right").html(text);
-			
+			var $li = parseLife(json[i]);
 			if(Number(json[i].id) > newestid)				
 				$container.prepend($li);
 			else
@@ -84,6 +54,41 @@ function parseAndAddLiveAtHome(json){
 		if(active)
 			$("#news .jspDrag").addClass("jspActive");
 	}
+}
+
+function parseLife(life){
+	var text = life.syntax;
+	var regex = /#[ug]/;
+	var pos = text.search(regex);
+	
+	while(pos>=0){
+		if(text[pos+1]=="u"){
+			var array = text.split("#u");
+			text = "";
+			for(var j = 0; j<array.length-1;++j){
+				var uri = User.getProfileURI(life.user);
+				var link = "<a href=\""+uri+"\">"+life.user+"</a>";
+				text+=array[j]+link;
+			}
+			text+=array[array.length-1];
+		}
+		else if(text[pos+1]=="g"){
+			var array = text.split("#g");
+			text = "";
+			for(var j = 0; j<array.length-1;++j){
+				var uri = encodeURI("/#!/recipe/"+life.recipe);
+				var link = "<a href=\""+uri+"\">"+life.recipe+"</a>";
+				text+=array[j]+link;
+			}
+			text+=array[array.length-1];
+		}
+			
+		pos = text.search(regex);
+	}
+	
+	var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>").data("id", life.id);
+	$li.children(".right").html(text);
+	return $li;
 }
 
 function newsScrollListener(e){

@@ -21,7 +21,7 @@
 			</div>
 			<div id="news">
 				<h2>Küchengeplapper:</h2>
-				<div class="content">
+				<div class="content news">
 					<div class="top"></div>
 					<ul></ul>
 					<div class="bottom"></div>
@@ -440,6 +440,10 @@
 					<p></p>
 					<div class="profile_more">mehr anzeigen</div>
 				</div>
+			</template>
+			<template id="newsstream">
+				<h2>Neuigkeiten</h2>
+				<ul id="newsstream"></ul>
 			</template>
 			<template id="settings">
 				<div id="settings_container">

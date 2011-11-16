@@ -132,6 +132,9 @@ function handleChange(event){
 			case "developer":
 				$.address.title("Entwickler | anycook");
 				break;
+			case "newsstream":
+				loadNewsstream();
+				break;
 			}
 			break;
 		case 2:
