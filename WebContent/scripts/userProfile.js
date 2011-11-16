@@ -4,7 +4,7 @@ function loadProfile(userid){
 	}
 	var profileData = User.initProfileInfo(userid);
 	$.address.title(profileData.name+" | anycook");
-	var image = profileData.getLargeImage();
+	var image = User.getUserImagePath(profileData.id, "large");
 	$("#profile_image").attr("src", image);
 	$("#profile_title h1").text(profileData.name);
 	$("#profile_date span").text(profileData.date);

@@ -1,47 +1,3 @@
-function getSmallFrameText(json){
-	//var maxlength = 120;
-	var beschreibung = json.description;
-	/*if(beschreibung.length > maxlength){
-		for(var i = maxlength-1; i>=0; i--)
-			if(beschreibung[i] == " "){
-				beschreibung = beschreibung.substring(0, i+1)+"...";
-				break;
-		}
-	}*/
-	
-	var std = json.timestd;
-	if(std.length==1)
-		std="0"+std;
-	
-	var min = json.timemin;
-	if(min.length==1)
-		min="0"+min;
-	var appendtext = "<div class='rezept_bild'>" +
-			"<img src='http://graph.anycook.de/recipe/"+json.name+"/image?type=small'/>" +
-			"<div class='time_gericht'>" +
-				"<div class='time_corner_left'></div>" +
-				"<div class='time_gericht_mid'>"+std+":"+min+" h</div>" +
-				"<div class='time_corner_right'></div></div></div>" +
-			"<h5>"+json.name+"</h5><p>"+beschreibung+"</p>";
-	return appendtext;
-}
-
-function setSmallFrameText(container){
-	var p = container.find("p");
-	var h5 = container.find("h5");
-	
-	var h5height = h5.css("height");
-	h5height = Number(h5height.substring(0, h5height.length-2));
-	var pheight = p.css("height");
-	pheight = Number(pheight.substring(0, pheight.length-2));
-	
-	var heightsum = h5height+pheight+3;
-	if(heightsum>110){
-		p.css("height", pheight-(heightsum-110));
-	}	
-}
-
-
 function getBigFrameText(json){
 	var beschreibung = json.description;
 	
@@ -66,7 +22,7 @@ function getBigFrameText(json){
 		.append("<div></div>");
 		
 	recipe_img.children("img")
-		.attr("src", "http://graph.anycook.de/recipe/"+json.name+"/image?type=small");
+		.attr("src", Recipe.getImageURL(json.name));
 		
 	var std = json.timestd;
 	if(std.length==1)
@@ -132,7 +88,7 @@ function loadRecipe(recipe){
     
     
     //recipe_image
-    $("#recipe_image").attr("src", "/gerichtebilder/big/"+recipe.imagename);
+    $("#recipe_image").attr("src", recipe.getImageURL("large"));
     
     
     

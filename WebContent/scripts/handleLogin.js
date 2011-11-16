@@ -12,7 +12,7 @@ function makeUsermenuText(){
 	var $userSettings = $("#user_settings").click(toggleUserMenu);
 	
 	var $userMenu = $("#user_menu");
-	$userMenu.find("img").attr("src", user.getSmallImage());
+	$userMenu.find("img").attr("src", User.getUserImagePath(user.id));
 	$userMenu.find(".username").html("<a href=\"#!/profile/"+user.name+"\">"+user.name+"</a>");
 	$userMenu.find("#logout").click(function(){user.logout();});
 	

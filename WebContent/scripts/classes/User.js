@@ -4,7 +4,6 @@ function User(){
 	this.name = null;
 	this.mail = null;
 	this.facebook_id = null;
-	this.image = null;
 	this.schmeckt = null;
 	this.recipes = null;
 	this.text = null;
@@ -26,7 +25,6 @@ User.init = function(){
 				user.level = Number(response.level);
 				user.mail = response.mail;
 				user.facebook_id = response.facebookID;
-				user.image = response.image;
 				user.text = response.text;
 				user.following = response.following;
 				
@@ -53,7 +51,6 @@ User.initProfileInfo = function(id){
 			if(json!=null){
 				profileUser.id = json.id;
 				profileUser.name = json.name;
-				profileUser.image = json.image;
 				profileUser.facebook_id = json.facebookID;
 				profileUser.schmeckt = json.schmeckt;
 				profileUser.recipes = json.recipes;
@@ -105,6 +102,8 @@ User.prototype.isFollowing = function(userid){
 User.getUserImagePath = function(userid, type){
 	if(type == undefined)
 		type = "small";
+		
+	//TODO change to real graph-api path
 	return "http://testgraph.anycook.de/user/"+userid+"/image?type="+type;
 }
 
@@ -149,20 +148,6 @@ User.prototype.logout = function(){
 			}
 		});
 	}
-};
-
-User.prototype.getSmallImage = function(){
-	if(this.facebook_id != "0")
-		return "http://graph.facebook.com/"+this.facebook_id+"/picture";
-	
-	return "/userbilder/small/"+this.image;
-};
-
-User.prototype.getLargeImage = function(){
-	if(this.facebook_id != "0")
-		return "http://graph.facebook.com/"+this.facebook_id+"/picture?type=large";
-	
-	return "/userbilder/big/"+this.image;
 };
 
 User.register = function(mail, pwd, username){

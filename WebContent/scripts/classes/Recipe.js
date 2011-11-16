@@ -5,7 +5,6 @@ function Recipe(){
 	this.name =null;
 	this.kategorie = null;
 	this.beschreibung = null;
-	this.imagename = null;
 	this.skill = null;
 	this.kalorien = null;
 	this.std = null;
@@ -33,7 +32,6 @@ Recipe.prototype.loadJSON = function(json){
 	this.name = json.name;
 	this.beschreibung = json.description;
 	this.kategorie = json.categorie;
-	this.imagename = json.image;
 	this.personen = json.person;
 	this.schritte = json.schritte;
 	this.skill = json.skill;
@@ -74,6 +72,21 @@ Recipe.prototype.resetTags = function(){
 	tags = new Array();
 };
 
+Recipe.prototype.getImageURL = function(type){
+	if(type === undefined)
+		type = "small";
+	
+	
+	return "http://graph.anycook.de/recipe/"+this.name+"/image?type="+type;
+};
+
+Recipe.getImageURL = function(recipename, type){
+	if(type === undefined)
+		type = "small";
+	
+	
+	return "http://graph.anycook.de/recipe/"+recipename+"/image?type="+type;
+};
 
 
 //setter
@@ -98,9 +111,9 @@ Recipe.prototype.setSkill = function(skill) {
 	this.skill = skill;
 };
 
-Recipe.prototype.setImagename = function(imagename) {
-	this.imagename = imagename;
-};
+// Recipe.prototype.setImagename = function(imagename) {
+	// this.imagename = imagename;
+// };
 
 Recipe.prototype.setKalorien = function(kalorien){
 	this.kalorien = kalorien;
