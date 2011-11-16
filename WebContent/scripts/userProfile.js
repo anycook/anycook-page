@@ -1,21 +1,20 @@
-function loadProfile(username){
-	if(username == "me" && user.onlyUserAccess()){
-		username = user.name;
+function loadProfile(userid){
+	if(userid == "me" && user.onlyUserAccess()){
+		userid = user.id;
 	}
-	
-	$.address.title(username+" | anycook");
-	var profileData = User.initProfileInfo(username);
+	var profileData = User.initProfileInfo(userid);
+	$.address.title(profileData.name+" | anycook");
 	var image = profileData.getLargeImage();
 	$("#profile_image").attr("src", image);
 	$("#profile_title h1").text(profileData.name);
 	$("#profile_date span").text(profileData.date);
 	
 	//TODO do right!!
-	if(username ==user.name)
+	if(userid ==user.id)
 		$("#follow").hide();
 	else{
 		var $follow = $("#follow");
-		if(!user.isFollowing(username)){
+		if(!user.isFollowing(userid)){
 			$follow.text("folgen").click(follow);
 		}
 		else
@@ -81,7 +80,7 @@ function loadProfile(username){
 	
 	$(".profile_more").click(profileShowMore);
 	
-	if(username == user.name){
+	if(userid == user.id){
 		$.ajax({
 			url:"/anycook/GetRecommendation",
 	        dataType: "json",

@@ -10,6 +10,7 @@ function User(){
 	this.text = null;
 	this.following = null;
 	this.follower = null;
+	this.id = null;
 }
 
 User.init = function(){
@@ -20,6 +21,7 @@ User.init = function(){
 		dataType: "json",
 		success: function(response){
 			if(response != false){
+				user.id = response.id;
 				user.name = response.name;
 				user.level = Number(response.level);
 				user.mail = response.mail;
@@ -40,15 +42,16 @@ User.init = function(){
 
 
 
-User.initProfileInfo = function(username){
+User.initProfileInfo = function(id){
 	var profileUser = new User();
 	$.ajax({
 		url:"/anycook/GetProfileInfo",
-		data:"username="+encodeURIComponent(username),
+		data:"userid="+id,
 		async:false,
 		dataType: "json",
 		success:function(json){
 			if(json!=null){
+				profileUser.id = json.id;
 				profileUser.name = json.name;
 				profileUser.image = json.image;
 				profileUser.facebook_id = json.facebookID;
@@ -70,8 +73,8 @@ User.initProfileInfo = function(username){
 	return profileUser;
 };
 
-User.getProfileURI = function(username){
-	var uri = "#!/profile/"+encodeURIComponent(username);
+User.getProfileURI = function(id){
+	var uri = "#!/profile/"+id;
 	return uri;
 };
 
@@ -81,7 +84,7 @@ User.prototype.getFacebookProfileLink = function(){
 
 
 User.prototype.checkLogin = function(){
-	return this.name != null;
+	return this.id != null;
 };
 
 User.prototype.onlyUserAccess = function(){
@@ -93,8 +96,14 @@ User.prototype.onlyUserAccess = function(){
 };
 
 
-User.prototype.isFollowing = function(username){
-	return $.inArray(username, this.following) > -1;
+User.prototype.isFollowing = function(userid){
+	for(var i in this.following)
+		if(this.following[i].id == userid) return true;
+	return false;
+}
+
+User.getUserImagePath = function(userid, type){
+	return "http://graph.test.anycook.de/users/"+userid+"/image?type="+type;
 }
 
 User.login = function(mail, pwd, stayloggedin){

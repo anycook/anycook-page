@@ -163,7 +163,7 @@ function handleChange(event){
 				break;
 				
 			case "profile":
-				loadProfile(decodeURIComponent(path[1]));
+				loadProfile(path[1]);
 				break;
 				
 			case "resetpassword":

@@ -14,7 +14,7 @@ function Recipe(){
 	this.schritte = new Array();
 	this.zutaten = null;
 	this.tags = new Array();
-	this.usernames = new Array();
+	this.authors = new Array();
 	this.id = -1;
 	this.created = null;
 	this.active = false;
@@ -42,7 +42,7 @@ Recipe.prototype.loadJSON = function(json){
 	this.min = json.timemin;
 	this.tags = json.tags;
 	this.zutaten = json.ingredients;
-	this.usernames = json.authors;
+	this.authors = json.authors;
 	this.id = json.id;
 	this.created = json.created;
 	this.active = json.active;

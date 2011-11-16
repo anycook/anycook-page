@@ -195,16 +195,16 @@ function loadRecipe(recipe){
 	
 	
 	//Autoren
-	var num_autoren = recipe.usernames.length;
+	var num_autoren = recipe.authors.length;
 	var $autoren = $("#autoren span");
 	
-	for(var autor in recipe.usernames){
-		var autorname = recipe.usernames[autor];
-		$autoren.append("<a href='#!/profile/"+encodeURI(autorname)+"'>"
-				+autorname+"</a>");
-		if(autor <= num_autoren-3)
+	for(var i in recipe.authors){
+		var author = recipe.authors[i];
+		$autoren.append("<a href='#!/profile/"+author.id+"'>"
+				+author.name+"</a>");
+		if(i <= num_autoren-3)
 			$autoren.append(", ");
-		if(autor == num_autoren-2)
+		if(i == num_autoren-2)
 			$autoren.append(" und ");	
 	}
 	
@@ -597,9 +597,9 @@ function loadDiscussion(){
 					maxID = Math.max(maxID, Number(json[i].id));
 					var $li;
 					if(json[i].eventsyntax==null)
-						$li = getDiscussionElement(false, json[i].text, json[i].nickname, json[i].image, json[i].likes, login, json[i].eingefuegt, json[i].id);
+						$li = getDiscussionElement(false, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
 					else
-						$li = getDiscussionEvent(json[i].eventsyntax, json[i].versions_id, json[i].text, json[i].nickname, json[i].likes, login, json[i].eingefuegt, json[i].id);
+						$li = getDiscussionEvent(json[i].syntax, json[i].versions_id, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
 					$ul.append($li);
 					loadChildren(i, json[i].id, login);
 				}
@@ -634,7 +634,7 @@ function loadChildren(i, id, login){
 				var $ul = $($("#comment_discussion > ul > li > ul")[i]);
 				for(var j in childjson){
 					maxID = Math.max(maxID, Number(childjson[j].id));
-					var $li = getDiscussionElement(true, childjson[j].text, childjson[j].nickname, childjson[j].image, childjson[j].likes, login, childjson[j].eingefuegt, id);
+					var $li = getDiscussionElement(true, childjson[j].text, childjson[j].user, childjson[j].likes, login, childjson[j].datetime, id);
 					$ul.append($li);
 				}
 				
@@ -644,9 +644,10 @@ function loadChildren(i, id, login){
 	});
 }
 
-function getDiscussionElement(children, text, nickname, image, likes, login, eingefuegt, id){	
-	var datetime = getDateString(eingefuegt);
-	var linktext = encodeURI("/#!/profile/"+nickname);
+function getDiscussionElement(children, text, user, likes, login, datetime, id){	
+	var datetime = getDateString(datetime);
+	var linktext = "/#!/profile/"+user.id;
+	var image = User.getImagePath(user.id);
 	var $li = $("<li></li>").addClass("comment").append("<a></a>");
 	$li.children("a").attr("href", linktext).append("<img src=\""+image+"\"/>");
 	
@@ -662,7 +663,7 @@ function getDiscussionElement(children, text, nickname, image, likes, login, ein
 		$arrow.addClass("comment_arrow_small");
 	}
 	var $comment_headline = $("<div></div>").addClass("comment_headline").append("<a></a>");
-	$comment_headline.children("a").attr("href", linktext).text(nickname);
+	$comment_headline.children("a").attr("href", linktext).text(user.name);
 	
 	var $date = $("<span></span>").addClass("comment_date").text(datetime);
 	$comment_headline.append($date);
