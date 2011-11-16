@@ -647,7 +647,7 @@ function loadChildren(i, id, login){
 function getDiscussionElement(children, text, user, likes, login, datetime, id){	
 	var datetime = getDateString(datetime);
 	var linktext = "/#!/profile/"+user.id;
-	var image = User.getImagePath(user.id);
+	var image = User.getUserImagePath(user.id);
 	var $li = $("<li></li>").addClass("comment").append("<a></a>");
 	$li.children("a").attr("href", linktext).append("<img src=\""+image+"\"/>");
 	

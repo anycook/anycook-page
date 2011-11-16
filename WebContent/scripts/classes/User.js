@@ -103,7 +103,9 @@ User.prototype.isFollowing = function(userid){
 }
 
 User.getUserImagePath = function(userid, type){
-	return "http://graph.test.anycook.de/users/"+userid+"/image?type="+type;
+	if(type == undefined)
+		type = "small";
+	return "http://testgraph.anycook.de/user/"+userid+"/image?type="+type;
 }
 
 User.login = function(mail, pwd, stayloggedin){
