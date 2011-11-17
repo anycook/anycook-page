@@ -324,69 +324,25 @@ function showaddTags(){
 	//TODO show signin
 	if(!user.checkLogin())
 		return;
-		
 	
-	var $main = $("#main").append("<div id=\"recipetags\"></div>");
+	var $content = $(
+		"<div class=\"tagsbox\"></div>"+
+		"<p>Die bekanntesten Tags:</p>"+
+		"<div id=\"tagcloud\"></div>")
 	
-	var tagsPosition = $("#tags").offset();
-	
-	
-	var $tagcontainer = $main.children("div").last()
-		.append("<div id=\"dogear\"></div>")
-		.append("<div id=\"taglayer\"></div>")
-		.append("<div id=\"lightbox\"></div>");
-		
-		
-	var $lightboxform = $tagcontainer.children("#lightbox")
-		.append("<form id=\"recipe_tag_form\"></form>").children("form")
-		.append("<h2>Tags hinzufügen:</h2>")
-		.append("<p>Hilf den anderen beim finden, in dem du neue Tags vorschlägst.</p>")
-		.append("<div class=\"tagsbox\"></div>")
-		.append("<p>Die bekanntesten Tags:</p>")
-		.append("<div id=\"tagcloud\"></div>")
-		.append("<input type=\"submit\" value=\"einreichen\"/>");
-	
+	var $lightbox = getLightbox("Tags hinzufügen:", 
+		"Hilf den anderen beim finden, in dem du neue Tags vorschlägst.",
+		$content,
+		"einreichen");
 	makeTagCloud();
 	
-	$lightboxform.children(".tagsbox").click(makeNewTagInput);
-		
-	var $container = $("#container");
-	var containerposition = $container.offset();
-	var left = containerposition.left + $container.innerWidth() + 9 - $tagcontainer.innerWidth();
+	var top = $("#tags").offset().top-113;
+	showLightbox($lightbox, top);
 	
-	$tagcontainer.css({top:tagsPosition.top-113, left:left});
-		
-	var $dogear = $("#dogear").append("<div id=\"top\"></div>")
-		.append("<div id=\"bottom\"></div>")
-		.append("<div id=\"middle\"></div>");
-		
-	$dogear.animate({
-		right:0,
-		top:0
-	},
-	{
-		duration:150,
-		easing: "swing",
-		complete:function(){
-			$("#lightbox").animate({
-				left: 3
-			}, {duration: 500});
-		}
-	});
-		
-	$("body").click(function(event){
-		
-		if($(event.target).parents().andSelf().is("#recipetags"))
-			return;
-			
-		$tagcontainer.fadeOut(200, function(){
-			$tagcontainer.remove();
-		});
-		
-		$(this).unbind("click");
-	});
 	
-	$("#recipe_tag_form").submit(submitSuggestTags);
+	$lightbox.find(".tagsbox").click(makeNewTagInput);
+	
+	$lightbox.find("form").submit(submitSuggestTags);
 	
 	return false;
 }
@@ -538,7 +494,7 @@ function postProcessString(string, factor){
 
 function loadDiscussion(){
 	var login = user.checkLogin();
-	$("#discussion_headline").html("Diskussion zum Rezept<br/>"+recipe.name);
+	$(".center_headline").html("Diskussion zum Rezept<br/>"+recipe.name);
 	
 	$.ajax({
 		url:"/anycook/GetDiscussion",

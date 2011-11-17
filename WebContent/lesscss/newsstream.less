@@ -1,10 +1,111 @@
+h1.newsstream{
+	width:100%;
+	border:1px solid @lightgrey;
+	border-left:0;
+	border-right:0;
+	text-align: center;
+}
+
+#newMessageBtn{
+	float: right;
+	margin: 0 0 15px 0;
+}
+
 #newsstream{
+	clear:right;
 	list-style: none;
 	width: 510px;
+	margin: 0 auto;
 	
 	.news{
 		.top{
 			background-image: url("/img/news_top_wide.png");
+		}
+	}
+}
+
+.lightbox{
+	.new_message{
+		float:left;
+		border-radius:5px;
+		background-color: @stepcolor;
+		border:1px solid @lightbrown;
+		padding:12px;
+	}
+	
+	.imageborder{
+		float:left;
+		background-image: url("/img/stampborder.png");
+		background-repeat:no-repeat;
+		width: 50px;
+		height:50px;
+		padding: 5px;
+	}
+	
+	.right{
+		margin-left:12px;
+		float:right;		
+		@width:348px;
+		width:@width;
+		
+		p{
+			font-size: 10pt;
+			margin-top:2px;
+			
+		}
+		
+		.recipients{
+			cursor: text;
+			width:@width - 12;
+			height:18px;
+			padding:5px;
+			margin: 0;
+			font: 10pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
+			margin: 0 0 10px 0;
+			background-color: #F9F8F6;
+			.transition(background-color, 0.1s, ease-out);
+			border: 1px solid #C2C0BE;
+			border-radius: 3px;
+			.box-shadow2(0, 2px, 0px, -1px, #ddd9d2,0, 2px, 0, 0, #c2c0be);
+			
+			input{
+				float: left;
+				font: 10pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
+				margin:0;
+				background:0;
+				padding:0;
+				border:0;
+				.no-box-shadow();
+			}
+			
+			.recipient{
+				float:left;
+				background-color: @tags;
+				border: 1px solid @tagborder;
+				border-radius: 2px;
+				.box-shadow-inset(0, 1px,1px, @tagshadow);
+				font-size: 8pt;
+				padding: 1px 1px;
+				margin-right: 5px;
+				
+				.name{
+					float:left;
+					padding:0 2px;
+					color: @darkgrey;
+				}
+				.close{
+					cursor:pointer;
+					color: @tagnumber;
+					float:right;
+					padding: 0 2px;
+				}
+			}
+		}
+		textarea{
+			width:@width - 12;
+			padding:5px;
+			height:95px;
+			margin-bottom:5px;
 		}
 	}
 }

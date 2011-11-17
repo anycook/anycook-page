@@ -107,6 +107,14 @@ User.getUserImagePath = function(userid, type){
 	return "http://testgraph.anycook.de/user/"+userid+"/image?type="+type;
 }
 
+User.prototype.getUserImagePath = function(type){
+	if(type == undefined)
+		type = "small";
+		
+	//TODO change to real graph-api path
+	return "http://testgraph.anycook.de/user/"+this.id+"/image?type="+type;
+};
+
 User.login = function(mail, pwd, stayloggedin){
 	var callback = false;
 	var data = "mail="+mail+"&pwd="+pwd;

@@ -106,7 +106,7 @@
     </template>
     <template id="recipe_discussion">
     	<div id="discussion_container">
-    		<h1 id="discussion_headline"></h1>
+    		<h1 class="center_headline"></h1>
     		<div id="comment_container">
     			<div id="comment_discussion"></div>
     			<div id="discussion_buttons">
@@ -442,7 +442,8 @@
 				</div>
 			</template>
 			<template id="newsstream">
-				<h2>Neuigkeiten</h2>
+				<h1 class="center_headline">Neuigkeiten</h1>
+				<div id="newMessageBtn" class="button">+ neue Nachricht</div>
 				<ul id="newsstream"></ul>
 			</template>
 			<template id="settings">
