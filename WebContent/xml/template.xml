@@ -36,22 +36,22 @@
     </template>
     <template id="home_discover">
     	<div id="discover">
+    			<h2>neuste Rezepte</h2>
     			<div id="neuste" class="entdecken">
-					<h2>neuste Rezepte</h2>
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
 					<div class="discover_footer"></div>
 				</div>
+				<h2>leckerste Rezepte</h2>
 				<div id="leckerste" class="entdecken">
-					<h2>leckerste Rezepte</h2>
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
 					<div class="discover_footer"></div>
 				</div>
+				<h2>empfohlene Rezepte</h2>
 				<div id="beliebte" class="entdecken">
-					<h2>empfohlene Rezepte</h2>
 					<div class="entdecken_back"></div>
 					<div class="discover_container"></div>					
 					<div class="entdecken_next"></div>
