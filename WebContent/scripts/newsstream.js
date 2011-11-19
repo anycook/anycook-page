@@ -239,6 +239,8 @@ function getMessageContainer(message){
 			$imageborder.append($image);
 	}
 	
+	$headline.append("<span> und </span><a href=\""+user.getProfileURI()+"\">Ich</a>");
+	
 	var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
 	
 	var $messageright = $("<div></div>").addClass("message_right")
@@ -246,7 +248,7 @@ function getMessageContainer(message){
 		.append($p)
 		.append($datetime);
 	
-	var $a = $("<a></a>").addClass("message").attr("href", "#!/newsstream/"+message.id)
+	var $a = $("<a></a>").addClass("message").attr("href", "#!/messagesession/"+message.id)
 		.append($imageborder)
 		.append($messageright); 
 		

@@ -75,6 +75,11 @@ User.getProfileURI = function(id){
 	return uri;
 };
 
+User.prototype.getProfileURI = function(){
+	var uri = "#!/profile/"+this.id;
+	return uri;
+};
+
 User.prototype.getFacebookProfileLink = function(){
 	return "http://www.facebook.com/people/@/"+this.facebook_id;
 };

@@ -169,6 +169,10 @@ function handleChange(event){
 			case "resetpassword":
 				loadResetPasswordStep2();
 				break;
+			
+			case "messagesession":
+				loadMessagesession(path[1]);
+				break;
 			}
 			break;
 		case 3:

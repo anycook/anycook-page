@@ -446,6 +446,20 @@
 				<div id="newMessageBtn" class="button">+ neue Nachricht</div>
 				<ul id="newsstream"></ul>
 			</template>
+			<template id="messagesession">
+				<h1 class="center_headline"><span>Meine Nachrichten mit</span><br/><span></span></h1>
+				<ul id="messagestream"></ul>
+				<form id="message_answer">
+					<div class="new_message">
+						<div class="messageimageborder"></div>
+						<div class="right">
+							<p>Nachricht</p>
+							<textarea></textarea>
+						</div>
+					</div>
+					<input type="submit" value="abschicken"/>
+				</form>
+			</template>
 			<template id="settings">
 				<div id="settings_container">
 					<h1>Einstellungen</h1>

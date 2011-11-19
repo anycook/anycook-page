@@ -11,7 +11,7 @@ h1.newsstream{
 	margin: 0 0 15px 0;
 }
 
-ul#newsstream{
+ul#newsstream, ul#messagestream{
 	clear:right;
 	list-style: none;
 	width: 510px;
@@ -90,15 +90,14 @@ ul#newsstream{
 	}
 }
 
-.lightbox{
-	.new_message{
-		float:left;
-		border-radius:5px;
-		background-color: @stepcolor;
-		border:1px solid @lightbrown;
-		padding:12px;
-	}
-	
+
+.new_message{
+	float:left;
+	border-radius:5px;
+	background-color: @stepcolor;
+	border:1px solid @lightbrown;
+	padding:12px;
+
 	.right{
 		margin-left:12px;
 		float:right;		
@@ -108,6 +107,7 @@ ul#newsstream{
 		p{
 			font-size: 10pt;
 			margin-top:2px;
+			color:@smalllightfontcolor;
 			
 		}
 		
@@ -167,3 +167,32 @@ ul#newsstream{
 		}
 	}
 }
+
+#message_answer{
+	padding:12px 0;
+	border-top:1px solid @lightgrey;
+	
+	.new_message{
+		background-color:#e6e2d7;
+		float:none;
+		width: 510px - 26px;
+		margin: 0 auto;
+		
+		.right{
+			float:none;
+			margin-left:72px;
+			@width:412px;
+			width:@width;
+			
+			textarea{
+				width:@width - 12px;
+			}
+		}
+	}
+	
+	input[type="submit"]{
+		float:right;
+		margin: 12px 72px 0 0;
+	}
+}
+
