@@ -33,7 +33,7 @@ function getDateString(fromdatetime){
 	var minutedifference = today.getMinutes() - discdate.getMinutes();
 	var hours = formatNumberLength(discdate.getHours(), 2);
 	var minutes = formatNumberLength(discdate.getMinutes(), 2);
-	var timestring = " um "+hours+":"+minutes;
+	var timestring = " um "+hours+":"+minutes+" Uhr";
 	
 	var date = discdate.getDate();
 	var month = formatNumberLength(discdate.getMonth()+1, 2);

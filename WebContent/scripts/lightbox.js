@@ -56,8 +56,9 @@ function showLightbox($lightbox, top){
 		});
 		
 	$("body").click(function(event){
-		
-		if($(event.target).parents().andSelf().is(".lightbox"))
+		var $target = $(event.target);
+		if($target.parents().andSelf().is(".lightbox")||
+			$target.parents().andSelf().is(".lightbox-autocomplete"))
 			return;
 			
 		hideLightbox($lightbox);

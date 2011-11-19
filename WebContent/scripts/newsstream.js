@@ -19,6 +19,11 @@ function loadNewsstream(){
 						$temp.find("ul").append($li);
 						$li = $temp;
 					}
+					break;
+				case "messagesession":
+					$li = $("<li></li>").append(getMessageContainer(json[i]));
+					break;
+				
 				}
 				$appendTo.append($li);
 				
@@ -29,6 +34,7 @@ function loadNewsstream(){
 	
 	var $lightbox = getLightbox("Neue Nachricht", 
 		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
+	$lightbox.find("form").submit(submitNewMessage);
 	
 	$("#newMessageBtn").click(function(){
 		var top = $(this).offset().top-113;
@@ -55,7 +61,7 @@ function clickRecipients(){
 		$input.focus();
 	else{
 		$this.append("<input type=\"text\"/>")
-			.children("input").focus()
+			.children("input").focus().focusout(focusoutRecipientInput)
 			.autocomplete({
 			source:function(req,resp){
 	    		var array = [];
@@ -83,6 +89,10 @@ function clickRecipients(){
 					return false;
 				}		
 			});
+			
+			$(".ui-autocomplete").last().addClass("recipient-autocomplete")
+			.addClass("lightbox-autocomplete");
+			resizeMessageTextarea();
 			
 	}
 	
@@ -128,6 +138,16 @@ function addRecipient(name, id){
 	
 }
 
+function focusoutRecipientInput(event){
+	var $this = $(this);
+	
+	if($this.val().length == 0){
+		$this.parent().removeClass("focus");
+		$this.remove();
+		resizeMessageTextarea();
+	}
+}
+
 function closeRecipient(){
 	var $this = $(this);
 	var id = $this.data("id");
@@ -154,16 +174,9 @@ function resizeMessageTextarea(){
 	$recipients.data("height", heightRecipients);
 }
 
-function getNews(news){
-	var $li = $("<li></li>");
-	if(news.type=="life"){
-		return parseLife(news);
-	}
-}
-
 function getNewMessageContent(){
 	
-	var $image = $("<div></div>").addClass("imageborder")
+	var $image = $("<div></div>").addClass("messageimageborder")
 		.append("<img title=\"Das bist du!\" src=\""+user.getUserImagePath()+"\"/>");
 		
 	var $right = $("<div></div>").addClass("right")
@@ -177,4 +190,65 @@ function getNewMessageContent(){
 		
 	return $container;
 		
+}
+
+function submitNewMessage(){
+	var $this = $(this);
+	var $recipients = $(".recipients");
+	var recipientIds = $recipients.data("ids");
+	var $textarea = $this.find("textarea")
+	var message = $textarea.val();
+	
+	if(recipientIds.length == 0 || message.length == 0)
+		return false;
+	
+	$.post("/anycook/NewMessage?recipients="+recipientIds+"&text="+encodeURIComponent(message));
+	
+	//console.log(encodeURIComponent(message));
+	$recipients.empty().data("ids", []);
+	$textarea.val("");
+	
+	hideLightbox($this.parents(".lightbox"));
+	
+	return false;
+}
+
+function getMessageContainer(message){
+	var recipients = message.recipients;
+	
+	var $imageborder = $("<div></div>").addClass("messageimageborder");
+	var $headline = $("<div></div>").addClass("message_headline");
+	var $datetime = $("<div></div>").addClass("datetime").text(getDateString(message.datetime));
+	for(var i = 0; i<recipients.length; i++){
+		var recipient = recipients[i];
+		if(recipient.id == user.id)
+			continue;
+		
+		
+		var $recipientlink = $("<a></a>")
+			.attr("href", User.getProfileURI(recipient.id))
+			.text(recipient.name);
+		if($imageborder.children().length > 0)
+			$headline.append("<span>, </span>");
+		$headline.append($recipientlink);
+		
+		var $image = $("<img />").attr("src", User.getUserImagePath(recipient.id));
+		if(recipient.id == message.sender)
+			$imageborder.prepend($image);
+		else
+			$imageborder.append($image);
+	}
+	
+	var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
+	
+	var $messageright = $("<div></div>").addClass("message_right")
+		.append($headline)
+		.append($p)
+		.append($datetime);
+	
+	var $a = $("<a></a>").addClass("message").attr("href", "#!/newsstream/"+message.id)
+		.append($imageborder)
+		.append($messageright); 
+		
+	return $a;
 }
