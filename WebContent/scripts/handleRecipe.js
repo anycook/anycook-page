@@ -684,7 +684,7 @@ function answerBtnClick(event){
 	if($ul.children(".child_comment").length == 0){
 		
 		$ul.append("<li class='child_comment'><a href='#'><img src='"+user.image+"'/></a><div class='comment_arrow_answer'></div><div class='recipe_comment_answer'><input type=\"hidden\" value=\""+id+"\"/><textarea></textarea><div class='answer_info'>mit Enter abschicken</div><div></li>");
-		$ul.find("textarea").last().autogrow().keydown(childComment).focus();
+		$ul.find("textarea").last().autoGrow().keydown(childComment).focus();
 		
 		var $comment = $ul.children(".child_comment");
 		

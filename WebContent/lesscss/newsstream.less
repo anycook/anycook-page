@@ -174,19 +174,17 @@ ul#newsstream, ul#messagestream{
 	
 	.new_message{
 		background-color:#e6e2d7;
-		float:none;
 		width: 510px - 26px;
-		margin: 0 auto;
+		margin: 0 72px;
 		
-		.right{
-			float:none;
-			margin-left:72px;
-			@width:412px;
-			width:@width;
 			
-			textarea{
-				width:@width - 12px;
-			}
+		textarea{
+			float:left;
+			//min-height:95px;
+			padding:5px;
+			margin:0 0 0 12px;
+			//width:400px;
+			overflow: hidden;
 		}
 	}
 	

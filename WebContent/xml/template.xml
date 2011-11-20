@@ -452,12 +452,9 @@
 				<form id="message_answer">
 					<div class="new_message">
 						<div class="messageimageborder"></div>
-						<div class="right">
-							<p>Nachricht</p>
-							<textarea></textarea>
-						</div>
+						<textarea cols="65" rows="6"></textarea>
 					</div>
-					<input type="submit" value="abschicken"/>
+					<input type="submit" value="antworten"/>
 				</form>
 			</template>
 			<template id="settings">

@@ -35,7 +35,28 @@ function loadMessagesession(sessionid){
 		}
 	});
 	
+	var $messageAnswer = $("#message_answer").submit(submitAnswerMessage);
+	$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
+	$messageAnswer.find("textarea").autoGrow();
 	
+	
+}
+
+function submitAnswerMessage(){
+	var $this = $(this);
+	var $textarea = $this.find("textarea")
+	var message = $textarea.val();
+	var sessionid = $.address.pathNames()[1];
+	
+	if(message.length == 0)
+		return false;
+	
+	$.post("/anycook/NewMessage?streamid="+sessionid+"&text="+encodeURIComponent(message));
+	
+	//console.log(encodeURIComponent(message));
+	$textarea.val("");
+	
+	return false;
 }
 
 function getMessageContainerforSession(message, recipientsMap){
