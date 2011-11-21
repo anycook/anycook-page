@@ -38,6 +38,7 @@ function loadHome(json)
 function clearContent(){
 	$("#content_main > *").remove();
 	$("#content_header > *").remove();
+	$("#btn_container").children(".user_btn").removeClass("active");
 }
 
 function getHeaderLink(value, href, id){
@@ -88,6 +89,7 @@ function handleChange(event){
 		
 		switch(path.length){
 		case 0:
+			$("#user_home").addClass("active");
 			loadHome();
 			break;
 		case 1:
@@ -133,6 +135,7 @@ function handleChange(event){
 				$.address.title("Entwickler | anycook");
 				break;
 			case "newsstream":
+				$("#user_messages").addClass("active");
 				loadNewsstream();
 				break;
 			}
@@ -163,6 +166,7 @@ function handleChange(event){
 				break;
 				
 			case "profile":
+				$("#user_profile").addClass("active");
 				loadProfile(path[1]);
 				break;
 				

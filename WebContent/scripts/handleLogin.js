@@ -38,12 +38,12 @@ function toggleUserMenu(){
 		var $this = $(this);
 		if($userMenu.hasClass("visible")){
 			$userMenu.removeClass("visible");
-			$this.removeClass("active");
+			$this.removeClass("focus");
 		}else{
 			var buttonOffset = $this.offset();
 			$userMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
 			$userMenu.addClass("visible");
-			$this.addClass("active");
+			$this.addClass("focus");
 		}
 }
 

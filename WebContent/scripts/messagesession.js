@@ -1,16 +1,20 @@
 function loadMessagesession(sessionid){
+	
+	
+	var $messageAnswer = $("#message_answer").submit(submitAnswerMessage);
+	$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
+	$messageAnswer.find("textarea").autoGrow();
+	
 	$.ajax({
-		url:"/anycook/GetMessageStream",
+		url:"/anycook/GetMessageSession",
 		data:{sessionid:sessionid},
 		dataType:"json",
 		success: function(json){
 			var recipients = json.recipients;
 			var $recipientSpan = $("h1 span").last();
-			var recipientsMap = {};
 			for(var i = 0; i<recipients.length; i++){
 				var recipient = recipients[i];
 				
-				recipientsMap[recipient.id] = recipient.name;
 				if(recipient.id == user.id)
 					continue;
 				
@@ -26,20 +30,43 @@ function loadMessagesession(sessionid){
 				$recipientSpan.append($a);
 			}
 			
-			var $messagestream = $("#messagestream");
-			for(var i in json.messages){
-				$messagestream.append(getMessageContainerforSession(json.messages[i], recipientsMap));
-			}
+			//var $messagestream = $("#messagestream");
+			//for(var i in json.messages){
+			//	$messagestream.append(getMessageContainerforSession(json.messages[i], recipientsMap));
+			//}
 			
-			
+			// var path = $.address.pathNames();
+			// if(path[0] == "messagesession" && path[1] == sessionid)
+				// getMessageSession(sessionid);
 		}
 	});
 	
-	var $messageAnswer = $("#message_answer").submit(submitAnswerMessage);
-	$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
-	$messageAnswer.find("textarea").autoGrow();
+	getMessages(sessionid);
 	
+}
+
+function getMessages(sessionid, lastid){
+	if(lastid === undefined)
+		lastid = 0;
 	
+	$.ajax({
+		url:"/anycook/PushMessages",
+		data:{sessionid:sessionid, lastid:lastid},
+		dataType:"json",
+		success: function(messages){
+			//if(json === undefined) return;			
+			var $messagestream = $("#messagestream");
+			for(var i in messages){
+				$messagestream.append(getMessageContainerforSession(messages[i]));
+				lastid = messages[i].id;
+			}
+			
+			
+			var path = $.address.pathNames();
+			if(path[0] == "messagesession" && path[1] == sessionid)
+				getMessages(sessionid, lastid);
+		}
+	});
 }
 
 function submitAnswerMessage(){
@@ -60,10 +87,10 @@ function submitAnswerMessage(){
 }
 
 function getMessageContainerforSession(message, recipientsMap){
-	var sender = message.sender_id;
-	var $sender = $("<a></a>").attr("href", User.getProfileURI(sender))
-		.text(recipientsMap[sender]);
-	var $image = $("<img />").attr("src", User.getUserImagePath(sender));
+	var sender = message.sender;
+	var $sender = $("<a></a>").attr("href", User.getProfileURI(sender.id))
+		.text(sender.name);
+	var $image = $("<img />").attr("src", User.getUserImagePath(sender.id));
 	
 	var $imageborder = $("<div></div>").addClass("messageimageborder")
 		.append($image);
