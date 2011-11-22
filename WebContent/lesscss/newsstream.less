@@ -11,7 +11,7 @@ h1.newsstream{
 	margin: 0 0 15px 0;
 }
 
-ul#newsstream, ul#messagestream{
+ul#newsstream{
 	clear:right;
 	list-style: none;
 	width: 510px;
@@ -25,9 +25,20 @@ ul#newsstream, ul#messagestream{
 				background-image: url("/img/news_top_wide.png");
 			}
 		}
+	}	
+}
+
+ul#messagestream{
+	position: relative;
+	overflow:auto;
+	height:500px;
+	
+	li{
+		width:510px  - 26px;
+		margin: 0 72px;
+		position: relative;
+		margin-bottom: 10px;
 	}
-	
-	
 }
 
 .messageimageborder{

@@ -29,7 +29,6 @@ function loadMessagesession(sessionid){
 					
 				$recipientSpan.append($a);
 			}
-			
 			//var $messagestream = $("#messagestream");
 			//for(var i in json.messages){
 			//	$messagestream.append(getMessageContainerforSession(json.messages[i], recipientsMap));
@@ -41,30 +40,49 @@ function loadMessagesession(sessionid){
 		}
 	});
 	
+	$("#messagestream").jScrollPane();
 	getMessages(sessionid);
 	
 }
 
-function getMessages(sessionid, lastid){
-	if(lastid === undefined)
-		lastid = 0;
+function getMessages(sessionid, startid){
+	if(startid === undefined)
+		startid = 0;
 	
 	$.ajax({
 		url:"/anycook/PushMessages",
-		data:{sessionid:sessionid, lastid:lastid},
+		data:{sessionid:sessionid, lastid:startid},
 		dataType:"json",
 		success: function(messages){
-			//if(json === undefined) return;			
-			var $messagestream = $("#messagestream");
-			for(var i in messages){
-				$messagestream.append(getMessageContainerforSession(messages[i]));
-				lastid = messages[i].id;
-			}
-			
-			
 			var path = $.address.pathNames();
-			if(path[0] == "messagesession" && path[1] == sessionid)
+			var $lastli;
+			var lastid;
+			if(path[0] == "messagesession" && path[1] == sessionid){
+				//if(json === undefined) return;			
+				var $messagestream = $("#messagestream");
+				var $jspPane = $messagestream.find(".jspPane");
+				for(var i in messages){
+					$lastli = getMessageContainerforSession(messages[i]);
+					$jspPane.append($lastli);
+					lastid = messages[i].id;
+				}
+				if(messages!= null && messages.length>0){
+					
+					var lasttop = $lastli.position().top;
+					var lastheight = $lastli.outerHeight(true);
+					var newtop = $messagestream.innerHeight() -(lasttop+lastheight);					
+					var $jspContainer = $messagestream.children(".jspContainer");
+					$messagestream.jScrollPane();	
+					if(startid == 0)
+						$jspPane.css({top:newtop});
+					else
+						$jspPane.animate({top:newtop}, "slow");
+					
+					$messagestream.jScrollPane();
+				
+				}
 				getMessages(sessionid, lastid);
+			}
 		}
 	});
 }
