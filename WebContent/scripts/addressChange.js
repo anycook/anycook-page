@@ -38,7 +38,7 @@ function loadHome(json)
 function clearContent(){
 	$("#content_main > *").remove();
 	$("#content_header > *").remove();
-	$("#btn_container").children(".user_btn").removeClass("active");
+	$("#btn_container").find(".user_btn").removeClass("active");
 }
 
 function getHeaderLink(value, href, id){

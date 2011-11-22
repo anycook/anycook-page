@@ -21,6 +21,8 @@ function makeUsermenuText(){
 	
 	$(document).click(hideUserMenu).scroll(hideUserMenu);
 	
+	checkNewMessageNum();
+	
 	// $("#signin_btn span").text("Konto");
 // 	
 	// $("#user img").attr("src", user.getSmallImage());

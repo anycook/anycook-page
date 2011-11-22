@@ -49,6 +49,23 @@ function loadNewsstream(){
 	
 }
 
+function checkNewMessageNum(lastnum){
+	if(lastnum === undefined)
+		lastnum = 0;
+	$.post("/anycook/GetMessageNum?lastnum="+lastnum, function(newNum){
+		if(newNum != null && user.checkLogin()){
+			var $newMessageBubble = $("#new_messages_bubble");
+			newNum = Number(newNum);
+			if(lastnum == 0)
+				$newMessageBubble.fadeIn();
+			else if(newNum == 0)
+				$newMessageBubble.fadeOut();
+			$("#new_messages_bubble span").text(newNum);
+			checkNewMessageNum(newNum);
+		}
+	});
+}
+
 function clickRecipients(){
 	var $this = $(this);
 	
