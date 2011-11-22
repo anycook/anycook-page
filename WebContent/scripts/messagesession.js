@@ -47,7 +47,7 @@ function loadMessagesession(sessionid){
 
 function getMessages(sessionid, startid){
 	if(startid === undefined)
-		startid = 0;
+		startid = -1;
 	
 	$.ajax({
 		url:"/anycook/PushMessages",
@@ -56,7 +56,7 @@ function getMessages(sessionid, startid){
 		success: function(messages){
 			var path = $.address.pathNames();
 			var $lastli;
-			var lastid;
+			var lastid = startid;
 			if(path[0] == "messagesession" && path[1] == sessionid){
 				//if(json === undefined) return;			
 				var $messagestream = $("#messagestream");
@@ -65,18 +65,35 @@ function getMessages(sessionid, startid){
 					$lastli = getMessageContainerforSession(messages[i]);
 					$jspPane.append($lastli);
 					lastid = messages[i].id;
+					if(messages[i].unread)
+						readMessage(messages[i], sessionid);
 				}
 				if(messages!= null && messages.length>0){
 					
 					var lasttop = $lastli.position().top;
 					var lastheight = $lastli.outerHeight(true);
+					var oldtop = $messagestream.innerHeight() -(lasttop);
 					var newtop = $messagestream.innerHeight() -(lasttop+lastheight);					
 					var $jspContainer = $messagestream.children(".jspContainer");
-					$messagestream.jScrollPane();	
-					if(startid == 0)
-						$jspPane.css({top:newtop});
-					else
-						$jspPane.animate({top:newtop}, "slow");
+					$messagestream.jScrollPane();
+					
+					
+					if(startid == -1){
+						if(newtop<0)
+							$jspPane.css({top:newtop});
+					}else{
+						
+						$lastli.css({backgroundColor:"#D7E8B5", borderColor:"#859F5E"});
+						if(newtop<0){								
+							$jspPane.css({top:oldtop}).animate({top:newtop}, {duration:"slow", complete:function(){
+									$lastli.animate({backgroundColor:"#E6E2D7", borderColor:"#C2C0BE"},
+										{duration:2000});											
+							}});
+						}else{
+							$lastli.hide().fadeIn(1000).animate({backgroundColor:"#E6E2D7", borderColor:"#C2C0BE"},
+								{duration:2000});
+						}
+					}
 					
 					$messagestream.jScrollPane();
 				
@@ -104,7 +121,7 @@ function submitAnswerMessage(){
 	return false;
 }
 
-function getMessageContainerforSession(message, recipientsMap){
+function getMessageContainerforSession(message){
 	var sender = message.sender;
 	var $sender = $("<a></a>").attr("href", User.getProfileURI(sender.id))
 		.text(sender.name);
@@ -126,10 +143,14 @@ function getMessageContainerforSession(message, recipientsMap){
 	
 	var $li = $("<li></li>").addClass("message")
 		.append($imageborder)
-		.append($messageright); 
-		
+		.append($messageright);
+	
 	return $li;
 
+}
+
+function readMessage(message, sessionid){
+	$.post("/anycook/ReadMessages?sessionid="+sessionid+"&messageid="+message.id);
 }
 
 

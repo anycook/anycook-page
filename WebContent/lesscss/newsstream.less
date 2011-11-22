@@ -15,6 +15,7 @@ ul#newsstream{
 	clear:right;
 	list-style: none;
 	width: 510px;
+	height:700px;
 	margin: 0 auto;
 	
 	li{
@@ -39,6 +40,13 @@ ul#messagestream{
 		position: relative;
 		margin-bottom: 10px;
 	}
+	
+	.message{
+		
+		&:hover{
+			.no-box-shadow();
+		}
+	}
 }
 
 .messageimageborder{
@@ -55,6 +63,7 @@ ul#messagestream{
 		margin:5px;
 	}
 }
+
 
 .message{
 	display: block;
@@ -85,17 +94,23 @@ ul#messagestream{
 		}
 	}
 	
-	&:hover{
-		text-decoration: none;
+	&.unread{
 		background-color: @activebuttonbackground;
 		border-color: @activebuttonoutline;
 		.transition(background-color, .2s, ease-in-out);
 		.transition(border-color, .2s, ease-in-out);
 		
+	}
+	
+	&:hover{
+		text-decoration: none;
+		.box-shadow(0, 3px, 2px, -2px, @shadowbeige);
+		.transition(box-shadow, .15s, ease-in);
+		
 		.message_right{
 			.datetime{
 				opacity:1;
-				.transition(opacity, .2s, ease-in-out);
+				.transition(opacity, .15s, ease-in-out);
 			}
 		}
 	}
@@ -194,7 +209,7 @@ ul#messagestream{
 			//min-height:95px;
 			padding:5px;
 			margin:0 0 0 12px;
-			//width:400px;
+			width:396px !important;
 			overflow: hidden;
 		}
 	}

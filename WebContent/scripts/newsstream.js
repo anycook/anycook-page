@@ -250,7 +250,10 @@ function getMessageContainer(message){
 	
 	var $a = $("<a></a>").addClass("message").attr("href", "#!/messagesession/"+message.id)
 		.append($imageborder)
-		.append($messageright); 
+		.append($messageright);
+		
+		if(message.unread)
+			$a.addClass("unread");
 		
 	return $a;
 }
