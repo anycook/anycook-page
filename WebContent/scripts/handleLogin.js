@@ -54,7 +54,7 @@ function hideUserMenu(event){
 	var $target = $(event.target);
 	if (!$target.parents().andSelf().is("#user_menu, #user_settings")|| $target.is("a")){
 		$userMenu.removeClass("visible");
-		$("#user_settings").removeClass("active");
+		$("#user_settings").removeClass("focus");
 	}
 	
 }
