@@ -45,15 +45,21 @@ function loadMessagesession(sessionid){
 	
 }
 
+var gettingMessages = [];
+
 function getMessages(sessionid, startid){
 	if(startid === undefined)
 		startid = -1;
 	
+	if(gettingMessages[sessionid])
+		return;
+	gettingMessages[sessionid] = true;
 	$.ajax({
 		url:"/anycook/PushMessages",
 		data:{sessionid:sessionid, lastid:startid},
 		dataType:"json",
 		success: function(messages){
+			gettingMessages[sessionid] = false;
 			var path = $.address.pathNames();
 			var $lastli;
 			var lastid = startid;
