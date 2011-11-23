@@ -247,6 +247,11 @@ Recipe.prototype.getURI = function(){
 	return uri;
 };
 
+Recipe.getURI = function(name){
+	var uri = "#!/recipe/"+encodeURIComponent(name);
+	return uri;
+};
+
 /*Recipe.prototype.getName = function(){
 	return this.name;
 };

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <template id="home">
-    <div id="home">
+    <!--<div id="home">
         <div id="display">					
 		</div>
 		<div id="informationbox">
@@ -57,7 +57,31 @@
 					<div class="entdecken_next"></div>
 					<div class="discover_footer"></div>
 				</div>
-    	</div>
+    	</div>-->
+    	<div id="site1">
+	    	<div class="top">
+	    		<div>Rezept des Tages:</div>
+	    		<a id="recipe_of_the_day"></a>
+	    	</div>
+	    	<div class="mid">
+	    		<a id="doodle"><img/></a>
+	    		<hgroup>
+		    		<h1>anycook<span></span></h1>
+		    		<h3>Die übersichtliche Suche nach Rezepten</h3>
+	    		</hgroup>
+	    	</div>
+	    	<div class="authors">
+	    		<div>von</div>
+	    		<div><span id="num_authors"></span> Autoren</div>
+	    	</div>
+	    	<div class="bottom">
+	    		<div>
+	    			<span id="num_recipes"></span> Rezepte, <span id="num_ingredients"></span> Zutaten, <span id="num_tags"></span> Tags
+	    		</div>
+	    		<div>köstlich seit 2010</div>
+	    		<div class="logo_black"></div>
+	    	</div>
+	    </div>
     </template>
     <template id="impressum">
     	<div id="impressum" class="footerpages">
@@ -88,7 +112,7 @@
     <template id="recipe">
     	<div id="recipe_container">
 			<div id="recipe_main">
-	    		<div id="recipe_image_container"><img id="recipe_image"/></div>
+	    		<div class="recipe_image_container"><img class="recipe_image"/></div>
 	    		<div id="schmecktmir"><span></span></div>
 	    		<div id="recipe_options">
 		    		<div id="share" class="option"><div class="img"></div><div class="left">teilen</div><div class="right"><span></span></div></div>
@@ -117,17 +141,40 @@
     		</div>
     	</div>
     </template>
-    <template id="newrecipe">
-    	<div id="recipe_main">
-	    		<div id="recipe_image_container"><img id="recipe_image"/></div>
-	    	</div>
-	    	<div id="recipe_info">
-				<h1 id="recipe_headline"></h1>
-				<p id="autoren">von <span></span></p>
-				<div id="introduction"></div>
-			</div>
-			<div id="step_container"></div>
-		</div>
+    <template id="recipeediting">
+    	<h1 class="center_headline">Rezept erstellen</h1>
+    	<h2 class="toggle_headline">Aller Anfang ist schwer</h2>
+    	<div class="toggle">
+    			<div class="recipe_image_container visible">
+    				<img class="recipe_image" src="/gerichtebilder/big/nopicture.png"/>
+    				<div class="image_layer"></div>
+    				<div class="image_upload">
+    					<div>
+    						<div id="cam"></div>
+    						<p>Bild hochladen:</p>
+    					</div>
+    					<div id="upload_button" class="button">durchsuchen</div>
+    				</div>
+    			</div>
+    			<form class="recipeediting">
+    				<h3>Rezeptname:</h3>
+    				<p>Dein Rezept gibt es noch nich..... bla!!!</p>
+    				<input type="text"/>
+    				<h3>Einleitung:</h3>
+    				<p>Kurz und knackig. Vielleicht sogar was interessantes.</p>
+    				<textarea></textarea>
+    			</form>
+    	</div>
+    	<div class="preview"></div>
+    	<h2 class="toggle_headline">Schritte</h2>
+    	<div class="toggle"></div>
+    	<div class="preview"></div>
+    	<h2 class="toggle_headline">Zutaten</h2>
+    	<div class="toggle"></div>
+    	<div class="preview"></div>
+    	<h2 class="toggle_headline">Zu guter letzt</h2>
+    	<div class="toggle"></div>
+    	<div class="preview"></div>
 	</template>
 	<template id="activate">
 		<div id='new_activation' class="content_message"><h5></h5><p></p></div>

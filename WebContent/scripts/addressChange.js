@@ -1,38 +1,42 @@
 
 
-function loadHome(json)
+function loadHome()
 {
-	var headertext = "<a href=\"/#!\" id='home_button' class='small_button'><div></div></a>" +
-			"<a href=\"/#!/?page=discover\" id='discover_button' class='big_button'>Entdecken</a>";
-	$("#content_header").html(headertext);
-	
-	
-	//new stuff
+	// var headertext = "<a href=\"/#!\" id='home_button' class='small_button'><div></div></a>" +
+			// "<a href=\"/#!/?page=discover\" id='discover_button' class='big_button'>Entdecken</a>";
+	// $("#content_header").html(headertext);
+// 	
+// 	
+	// //new stuff
 	$.ajax({
-	  url: "/anycook/LoadDailyRecipe",
-	  dataType: 'json',
+	  url: "/anycook/LoadSide1Data",
+	  dataType: "json",
 	  success: function(json){
-	  	var $dailyrecipe = getBigFrameText(json);
-		$("#dailyrecipe").append($dailyrecipe);
+	  	$("#recipe_of_the_day").attr("href", Recipe.getURI(json.dailyrecipe))
+	  		.text(json.dailyrecipe);
+	  	$("#num_authors").text(json.users);
+	  	$("#num_tags").text(json.tags);
+	  	$("#num_ingredients").text(json.ingredients);
+	  	$("#num_recipes").text(json.recipes);
 	  }
 	});
-	
-	
-	$.ajax({
-		  url: "/anycook/GetPopularTags",
-		  dataType: 'json',
-		  data: "num=15",
-		  success: loadFamousTags
-		});
-	
-	
-	
-	
-	
-	//liveupdatestuff
-	newestid = 0;
-	$("#news ul").jScrollPane().scroll(newsScrollListener);
-	updateLiveAtHome();
+// 	
+// 	
+	// $.ajax({
+		  // url: "/anycook/GetPopularTags",
+		  // dataType: 'json',
+		  // data: "num=15",
+		  // success: loadFamousTags
+		// });
+// 	
+// 	
+// 	
+// 	
+// 	
+	// //liveupdatestuff
+	// newestid = 0;
+	// $("#news ul").jScrollPane().scroll(newsScrollListener);
+	// updateLiveAtHome();
 }
 
 function clearContent(){
@@ -99,7 +103,7 @@ function handleChange(event){
 				search = Search.init();
 				search.search();
 				break;
-			case "newrecipe":
+			case "recipeediting":
 				loadNewRecipe();
 				break;
 			case "feedback":
@@ -211,7 +215,7 @@ function handleChange(event){
 		//wird aufgerufen wenn page=""
 		if(event.pathNames.length == 0){
 			$("#content_main > div").hide();
-			$("#home").show();
+			$("#site1").show();
 			$("#home_button").addClass("on");
 		}else{
 			switch(event.pathNames[0]){

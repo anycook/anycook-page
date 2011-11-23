@@ -1,4 +1,4 @@
-#recipe_image_container{
+.recipe_image_container{
 	.image_layer{
 		position:absolute;
 		opacity: 0;
@@ -9,6 +9,8 @@
 	}
 	
 	.image_upload{
+		top: 50%;
+		margin-top: -61px;
 		padding: 7px 17px 10px 17px; 
 		position:absolute;
 		width:116px;
@@ -34,7 +36,7 @@
 		}
 	}
 	
-	&:hover{
+	&:hover, &.visible{
 		.image_layer{
 			opacity: .5;
 			.transition(opacity, .3s, ease-in);

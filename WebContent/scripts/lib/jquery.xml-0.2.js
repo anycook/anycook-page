@@ -103,7 +103,7 @@
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
-				alert(jqXHR, textStatus, errorThrown);
+				console.error(jqXHR.responseText);
 			}
     });
 	  $xmlDoc = $(xmlDoc);

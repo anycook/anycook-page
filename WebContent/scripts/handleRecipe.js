@@ -88,7 +88,7 @@ function loadRecipe(recipe){
     
     
     //recipe_image
-    $("#recipe_image").attr("src", recipe.getImageURL("large"));
+    $(".recipe_image").attr("src", recipe.getImageURL("large"));
     
     
     

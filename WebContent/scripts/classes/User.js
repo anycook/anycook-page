@@ -155,9 +155,6 @@ User.prototype.logout = function(){
 					}else
 						window.location.reload();
 				});
-			},
-			error:function(jqXHR, textStatus, errorThrown){
-				alert(textStatus+": "+errorThrown);
 			}
 		});
 	}

@@ -1,23 +1,24 @@
+.recipe_image_container{
+	float:left;
+	position:relative;
+	border: 8px solid @stepcolor;
+	outline: 1px solid @lightgrey;
+	margin: 1px;
+	width: @stepwidth - 18;
+	min-height: 300px;
+	
+	.recipe_image{
+		float:left;
+		width: @stepwidth - 20;
+		border: 1px solid @darkgrey;
+	}
+}
+
+
 #recipe_main{
 	width:100%;
 	float:left;
 	position:relative;
-	
-	#recipe_image_container{
-		float:left;
-		position:relative;
-		border: 8px solid @stepcolor;
-		outline: 1px solid @lightgrey;
-		margin: 1px;
-		width: @stepwidth - 18;
-		min-height: 300px;
-		
-		#recipe_image{
-			float:left;
-			width: @stepwidth - 20;
-			border: 1px solid @darkgrey;
-		}
-	}
 	
 	#schmecktmir{
 			cursor:pointer;
