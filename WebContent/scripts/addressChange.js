@@ -102,9 +102,6 @@ function handleChange(event){
 			case "newrecipe":
 				loadNewRecipe();
 				break;
-			/*case "profile":
-				loadUserProfile();
-				break;*/
 			case "feedback":
 				$.address.title("Feedback | anycook");
 				loadContact();

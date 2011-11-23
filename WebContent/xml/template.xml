@@ -117,600 +117,438 @@
     		</div>
     	</div>
     </template>
-    <template id="preview">
-    	<div id="recipe_container">
-    		<h1 id="rezept_headline"></h1>
-    		<img id="rezept_bild"/>
-    		<div id="beschreibung"></div>
-    		<div id="rezept_begin">
-    			<div class="bezeichner" id="zubereitung">Zubereitung</div>
-    		</div>
-    		<div id="bezeichner_container">
-    			<div id="step_container"></div>
-    		</div>
-    	</div>
-    </template>
     <template id="newrecipe">
-    <div id="new_recipe_container">
-    	<div id="new_recipe_step1" class='new_recipe_steps'>
-					<h1>Hallo!<br/> Schön, dass Du ein Rezept erstellen möchtest.</h1>
-					<div id="step_1_form"  name="form" method="post">
-						<table>
-							<tr>
-								<td class="step_1_left">Rezeptname:</td>
-								<td class="step_1_right"><input type="text" id="recipe_name" maxlength="50" placeholder="kurz &amp; knapp" /></td>
-							</tr>
-							<tr>
-								<td class="step_1_left">Kategorie:</td>
-								<td class="step_1_right">
-									<div class="recipe_kategorie">
-										<div id="recipe_kategorie_name">
-											<div class="kategorie_filter">
-											<div id="kategorie_filter_name">Keine Kategorie</div>
-											<div id="kategorie_filter_right"></div>
-											<input type="hidden" class="kategorie_filter_hidden" value="Keine Kategorie"/>
-											</div>
-											<ul class="kategorie_filter"></ul>
-										</div>
-										<div id="kategorie_filter_right"></div>
-										<input type="hidden" id="kategorie_filter_hidden" value="Keine Kategorie"/>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="step_1_left" id="einleitung_label">Einleitung:</td>
-								<td class="step_1_right"><textarea name="beschreibung" id="recipe_beschreibung" class="required">Aller Anfang ist schwer</textarea><div class="beschreibung_character">250</div></td>
-							</tr>
-							<tr>
-								<td class="step_1_left" id="bild_label">Bild:</td>
-								<td class="step_1_right"><div id="file_uploader"></div></td>
-							</tr>
-						</table>
-					</div>
-					<div class="next_step" id="next_step1">weiter</div>
+    	<div id="recipe_main">
+	    		<div id="recipe_image_container"><img id="recipe_image"/></div>
+	    	</div>
+	    	<div id="recipe_info">
+				<h1 id="recipe_headline"></h1>
+				<p id="autoren">von <span></span></p>
+				<div id="introduction"></div>
+			</div>
+			<div id="step_container"></div>
+		</div>
+	</template>
+	<template id="activate">
+		<div id='new_activation' class="content_message"><h5></h5><p></p></div>
+	</template>
+	<template id="feedback">
+		<div id='kontakt' class="footerpages">
+			<h1>Feedback</h1>
+				<form id='contactform'>
+				
+				<table>
+				<tr>
+					<td class="formdescription">
+						<div id="formDescriptionName">Name:</div>
+						<div id="formDescriptionSender">Absender:</div>
+					</td>
+					<td class="forminput">
+						<div id="conname_login"></div>
+						<input type="text" id="conname" />
+					</td>
+				</tr>
+				<tr id="formDescriptionEmail">
+					<td class="formdescription">
+						<div >E-Mail:</div>
+					</td>
+					<td class="forminput">
+						<input type="text" id="conemail" />
+					</td>
+				</tr>
+				<tr>
+					<td class="formdescription">
+						Betreff:
+					</td>
+					<td class="forminput">
+						<div id="formSubjectField">
+						<div id="formSubjectFieldFilter">
+							<div id="formSubjectFieldName">Thema wählen</div>
+							<div id="formSubjectFieldMore"></div>
+						</div>
+						<ul id="formSubjectChoice">
+							<li>Ich will meine Meinung loswerden</li>
+							<li>Ich habe einen Fehler gefunden!</li>									
+							<li>Ich habe ein Problem mit der Anmeldung</li>
+							<li>Ich habe ein Problem mit einem Rezept</li>
+							<li>Ich habe ein Problem mit einem User</li>
+							<li>Ich wollt euch einfach mal schreiben</li>
+						</ul>
+						<input type="hidden" id="conbetreff" value="Kein Betreff" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="formdescription">
+						Nachricht:
+					</td>
+					<td class="forminput">
+						<textarea id="conmessage"></textarea>
+					</td>
+				</tr>
+				<tr>
+				<td class="formdescription"></td>
+				<td class="forminput">
+					<div id="recaptcha_div"></div>
+					<div id='fromResponseField'></div>
+				</td>
+				</tr>
+				<tr>
+				<td class="formdescription"></td>
+				<td class="forminput" id="fromSendCell">
+					<div id="SendButton">Senden</div>
+				</td>
+				</tr>
+				
+				</table>
+				
+				</form>
+			</div>
+		
+	</template>
+	<template id="about_us">
+		<div class="footerpages">
+			<h1>Über uns</h1>
+			<h2>Die Idee</h2>
+			<p>Als ambitionierte Gelegenheitsköche ist uns aufgefallen wie umständlich die Recherche nach Rezepten im Internet, ganz im Gegensatz zu der in Kochbüchern, ist. Deshalb haben wir uns ein Konzept überlegt, wie man solch eine Suche erleichtert.<br/>
+			Rezepte bringen viele Daten und Eigenschaften mit, die gesucht und ausgewertet werden können. In Kochbüchern gibt es ein starres Inhaltsverzeichnis, das auf eine begrenzte Anzahl von Rezepten übersichtlich verweist. Dabei ist jedes Rezept nur einmal vorhanden, sodass man nicht zwischen scheinbar gleichem unterscheiden muss. Zusätzlich sind diese Rezepte auch in Kategorien eingeteilt.<br/>
+			Unser Konzept basiert auf den Eigenschaften eines Kochbuches erweitert um die Möglichkeiten des Internets. Wir haben uns eine Suchmaschine ausgedacht, die schnell konkrete Ergebnisse liefert. Die Suche reagiert dynamisch auf die Eingabe des Nutzers und schlägt verschiedene Suchfilter und Rezepte vor. Unter Suchfiltern verstehen wir Kategorien, Kochzeiten, Zutaten, Bewertungen, den Schwierigkeitsgrad, Kalorien und Tags. Mit all diesen Werkzeugen kann sich der Nutzer effektiv an seine Vorstellung annähern.<br/>
+			Ebenfalls ist es Nutzern möglich eigene Rezepte zu erstellen, die vor der Veröffentlichung von Moderatoren auf Übersichtlichkeit und Überschneidungen mit bestehenden Rezepten, geprüft werden. Dabei ist uns bewusst, dass es sehr schwierig werden kann gegen die großen Rezepteseiten eine eigenständige Community aufzubauen. Dies wollen wir vermeiden, indem wir jegliche sozialen Features mit der Facebook-Community verbinden. So können Nutzer innerhalb ihres bestehenden sozialen Umfelds Freunde zum Kochen einladen, über das Abendessen abstimmen lassen oder ihre Lieblingsrezepte veröffentlichen.
+			</p>
+			<h2>Was unterscheidet uns von den Anderen?</h2>
+			<p>Unsere Webseite soll, im Gegensatz zur Konkurrenz, den Nutzer bei der Suche nach Rezepten nicht verhungern lassen, sondern ihn auch zu Neuem anregen und inspirieren.<br/>
+				So kann der hungrige Hans mit seinem halb gefülltem Kühlschrank, der in einer Stunde wieder an der Arbeit sein muss, bei uns die Zutaten und die Zeit, die er hat, angeben und findet sofort die passenden Rezepte. Durch unsere auf AJaX basierende Suche, deren Ergebnisse sich Live mit der Eingabe aktualisieren, findet Hans vielleicht schon vor Eingabe seines ganzen Kühlschrankinhalts etwas Leckeres. Und hat Hans Lust auf Lasagne, findet er ein Standardgericht und kann sich zwischen verschiedenen Variationen entscheiden.<br/>
+				Bei chefkoch.de findet Hans unter "Lasagne" 8392 Treffer, wovon aber nur 3492 wirklich Rezepte sind, zwischen denen er dann wählen darf. Unter Marions Kochbuch findet er zwar auch nur eine Lasagne, seinen Kühlschrankinhalt interessiert Marion aber leider nicht. Rezeptewiki.org spricht Hans vom Konzept vielleicht noch an, aber leider kann das Wiki-Interface ihn nicht überzeugen.<br/>
+				Durch dieses Fallbeispiel wird deutlich, dass die großen Rezeptseiten zwar einen großen Corpus an Inhalten besitzen, aber die verwendeten Konzepte, Interfaces und Technologien zu statisch und umständlich sind.<br/>
+				Wir sehen deshalb ein großes Potenzial für eine junge und dynamische Rezeptesuche, die Spaß macht und die bestehenden Communities des Web2.0 nutzt.
+			</p>
+			<h2>Das Team</h2>
+			<p>Wir sind drei Studenten der Bauhaus Universität Weimar:
+				<ul>
+					<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;ebojfmAbozdppl/ef');">Daniel Plath</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>
+					<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;kboAbozdppl/ef');">Jan Grassegger</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
+					<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;nbyAbozdppl/ef');">Maximilian Michel</a> studiert ebenfalls Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
+				</ul>
+			</p>					
+		</div>
+	</template>
+	<template id="profile">
+		<div id="profile_container">
+			<img id="profile_image" src=""/>					
+			<div id="profile_info">
+				<div id="profile_title">
+					<h1></h1>
+					<div id="follow"></div>
+					<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
 				</div>
-				<div id="new_recipe_step2" class='new_recipe_steps'>
-					<h1>Weiter gehts! Nicht vergessen, kurz und einfach erklärt, dann versteht es auch jeder.</h1>
-					<div id="step_2_form"  name="form" method="post">
-					<table id="step_table">
+				<div id="profile_date"><div></div>seit <span></span> dabei</div>
+				<div id="profile_place"><div></div>aus <span></span></div>
+				<div id="profile_text"></div>
+			</div>
+			<div id="profile_achievements">
+				<div id="recipes" class="achievement">
+					<div class="count"></div>
+					<div class="title">Rezepte</div>
+				</div>
+				<div id="likes" class="achievement">
+					<div class="count"></div>
+					<div class="title">Lieblingsrezepte</div>
+				</div>
+				<div id="discussions" class="achievement">
+					<div class="count"></div>
+					<div class="title">Diskussionen</div>
+				</div>
+				<div id="follower" class="achievement">
+					<div class="count"></div>
+					<div class="title">Follower</div>
+				</div>
+			</div>
+		</div>
+		<div id="profile_recipes" class="profile_recipes">
+			<h2></h2>
+			<p></p>
+			<a class="profile_search">durchsuchen</a><div class="profile_more">mehr anzeigen</div>
+		</div>
+		<div id="profile_schmeckt" class="profile_recipes">
+			<h2></h2>
+			<p></p>
+			<div class="profile_more">mehr anzeigen</div>
+		</div>
+		<div id="profile_recommendation" class="profile_recipes">
+			<h2></h2>
+			<p></p>
+			<div class="profile_more">mehr anzeigen</div>
+		</div>
+	</template>
+	<template id="newsstream">
+		<h1 class="center_headline">Neuigkeiten</h1>
+		<div id="newMessageBtn" class="button">+ neue Nachricht</div>
+		<ul id="newsstream"></ul>
+	</template>
+	<template id="messagesession">
+		<h1 class="center_headline"><span>Meine Nachrichten mit</span><br/><span></span></h1>
+		<ul id="messagestream"></ul>
+		<form id="message_answer">
+			<div class="new_message">
+				<div class="messageimageborder"></div>
+				<textarea cols="65" rows="6"></textarea>
+			</div>
+			<input type="submit" value="antworten"/>
+		</form>
+	</template>
+	<template id="settings">
+		<div id="settings_container">
+			<h1>Einstellungen</h1>
+			<div id="settings_account" class="settings">
+				<h2>Konto<div class="settings_saved">gespeichert</div></h2>
+				<div class="settings_content">
+					<div id="account_image">
+						<div id="account_upload">Neues Bild hochladen
+						<div></div>
+						</div>							
+						<img src=""/>								
+					</div>
+					<form id="account_form">
+					<ul id="account_data">
+						<li><input type="text" id="account_name" maxlength="45"/></li>
+						<li><input type="text" id="account_mail" maxlength="45"/></li>
+						<li>
+							<h3>Über mich</h3>
+							<textarea id="account_aboutme"></textarea>
+						</li>
+						<li>
+							<input type="submit" value="speichern" />
+						</li>
+					</ul>
+					</form>
+				</div>
+			</div>
+			<div id="settings_password" class="settings">
+				<h2>Passwort ändern<div class="settings_saved">gespeichert</div></h2>
+				<div class="settings_content">
+					<form id="password_form">
+						<h3>Altes Passwort</h3>
+						<input type="password" id="password_old"/>
+						<h3>Neues Passwort</h3>
+						<input type="password" id="password_new"/>
+						<div id="showpassword">Passwort anzeigen</div>
+						<input type="submit" value="speichern"/>
+					</form>
+				</div>
+			</div>
+			
+			<div id="settings_notification" class="settings">
+				<h2>E-Mail-Benachrichtigungen<div class="settings_saved">gespeichert</div></h2>
+				<div id="settings_notification_content" class="settings_content">
+				<table>
+				<tr>
+					<td>Eigenes Rezept aktiviert</td>
+					<td><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></td>
+				</tr>
+				<tr>
+					<td>Tag aktiviert</td>
+					<td><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /></td>
+				</tr>
+				<tr>
+					<td>Diskussionsbeitrag zu deinem Rezept</td>
+					<td><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></td>
+				</tr>
+				<tr>
+					<td>Antwort auf Diskussionsbeitrag von dir</td>
+					<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
+				</tr>
+				<tr>
+					<td>Jemandem schmeckt dein Rezept</td>
+					<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
+				</tr>
+				<tr>
+					<td>Newsletter</td>
+					<td><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /></td>
+				</tr>
+				</table>						
+				</div>
+			</div>
+			<div id="settings_facebook" class="settings">
+				<h2>Facebook<div class="settings_saved">gespeichert</div></h2>
+				<div id="settings_facebook_content" class="settings_content">
+					<table>
 						<tr>
-							<td>
-									<div class="new_step">
-										<div class="step_left">
-											<p class="step_number">1.</p>
-											<textarea class="step_textarea"></textarea>
-										</div>
-										<div class="step_right"></div>
-									</div>					
-							</td>
-							<td>
-								<div class="step_character">260</div>
-								<div class="minus_btn remove_schritt"></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-									<div class="new_step">
-										<div class="step_left">
-											<p class="step_number">2.</p>
-											<textarea class="step_textarea"></textarea>
-										</div>
-										<div class="step_right"></div>
-									</div>					
-							</td>
-							<td>
-								<div class="step_character">260</div>
-								<div class="minus_btn remove_schritt"></div>
-							</td>	
+							<td>"Schmeckt mir" an meine Pinnwand posten</td>
+							<td><input type="checkbox" name="facebook_schmeckt" value="schmeckt" /></td>
 						</tr>
 					</table>
-					</div>
-					<div class="plus_btn" id="neuer_schritt"></div>
-					<div class="next_step" id="next_step2">weiter</div>
 				</div>
-				<div id="new_recipe_step3" class='new_recipe_steps'>
-					<h1>Fast geschafft! Kommen wir zu den Zutaten.</h1>
-						<form id="step_3_form"  name="form" method="post">
-						<table id="new_zutat_table">
-
-						</table>
-						</form>
-						<div class="plus_btn" id="new_zutat"></div>
-						<div class="next_step" id="next_step3">weiter</div>
+				<div id="no_facebook">Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen<div id="facebook_login"></div></div>
+			</div>
+		</div>
+		
+	</template>
+	<template id="fbregistration">
+			<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
+	</template>
+	<template id="resetpassword">
+		<div class="footerpages">
+			<h1>Passwort zurücksetzen</h1>
+			<div id="resetpwstep1">
+				<form id="resetpwform1">
+				<p>Bitte gibt deine Emailadresse oder deinen Usernamen ein:</p>
+					<table>
+					<tr><td>Email/Username:</td><td><input id="resetpwmail" type="text"/></td><td class="error"></td></tr>
+					<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
+					</table>
+				</form>
+			</div>
+			<div id="resetpwstep2">
+				<form id="resetpwform2">
+				<p>Bitte gib dein neues Passwort ein:</p>
+					<table>
+					<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
+					<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
+					<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
+					</table>
+				</form>
+			</div>				
+		</div>
+	</template>
+	<template id="registration">
+		<div id="registration_container">
+			<div id="reg_step1" class="registration_step">
+				<h1>Herzlich Willkommen!</h1>
+				<div id="reg_left">
+					<p>Wir brauchen nur ein paar Daten von dir, dann bist du schon dabei.</p>
+					<p>Hast du vielleicht schon einen Facebookaccount? Dann melde dich doch damit an:</p>
+					<div id="facebook_login"></div>
 				</div>
-				<div id="new_recipe_step4" class='new_recipe_steps'>
-					<h1>Noch ein paar Details! Dann ist das Rezept auch schon fertig.</h1>
-					<form id="step_4_form"  name="form" method="post">
+				<div id="reg_right">
+					<form id="reg_form">
 						<table>
 							<tr>
-								<td id="step_4_tags">Tags: <div name="tags" id="recipe_tags" ></div></td>
-								<td class="step_4_right">
-									<div id="tagcloud">
-									</div>
+								<td>
+									<p>Email</p>
+									<input type="email" id="reg_email" />
 								</td>
+								<td class="reg_error" id="reg_error_mail"></td>
 							</tr>
 							<tr>
-								<td id="step_4_duration"><img id="new_durationclock" alt="uhr" src="./icons/uhr.png" /><span id="new_durationtext">Dauer:</span><div id="time_block"><input type="text" class="new_time" id="nr_time_std" value="00" size="2" maxlength="2" />: <input type="text" class="new_time" id="nr_time_min" value="00" size="2" maxlength="2" /> h</div></td>
-								<td class="step_4_right"></td>
-							</tr>
-							<tr>
-								<td id="step_4_person">Personen:<span><input type="text" id="nr_person" value="00" size="2" maxlength="2" /></span></td>
-								<td class="step_4_right"></td>
-							</tr>
-							<tr>
-								<td class="step_4_left">Schwierigkeit: 
-										<div id="table_skill">
-											<label class="label_chefhats" for="chef_1">
-			                            		<input type="radio" class="chefhats" id="chef_1" value="1" name="chefhats" />
-			                            	</label>
-			                            	<label class="label_chefhats" for="chef_2">
-			                            		<input type="radio" class="chefhats" id="chef_2" value="2" name="chefhats" />
-			                           		</label>
-			                            	<label class="label_chefhats" for="chef_3">
-			                            		<input type="radio" class="chefhats" id="chef_3" value="3" name="chefhats" />
-			                            	</label>
-			                            	<label class="label_chefhats" for="chef_4">
-			                            		<input type="radio" class="chefhats" id="chef_4" value="4" name="chefhats" />
-			                            	</label>
-			                            	<label class="label_chefhats" for="chef_5">
-			                            		<input type="radio" class="chefhats" id="chef_5" value="5" name="chefhats" />
-			                            	</label>
-			                            </div>
+								<td>
+									<p>Passwort</p>
+									<input type="password" id="reg_pass" />
 								</td>
-								<td class="step_4_right"></td>
+								<td class="reg_error" id="reg_error_pass"></td>
 							</tr>
 							<tr>
-								<td class="step_4_left">Kalorien:
-									<div id="table_kalorien">
-										<label class="label_muffins" for="muffin_1">
-		                            		<input type="radio" class="muffins" id="muffin_1" value="1" name="muffins" />
-		                           		</label>
-		                           		<label class="label_muffins" for="muffin_2">
-		                            		<input type="radio" class="muffins" id="muffin_2" value="2" name="muffins" />
-		                           		</label>
-		                            	<label class="label_muffins" for="muffin_3">
-		                            		<input type="radio" class="muffins" id="muffin_3" value="3" name="muffins" />
-		                            	</label>
-		                            	<label class="label_muffins" for="muffin_4">
-		                           			<input type="radio" class="muffins" id="muffin_4" value="4" name="muffins" />
-		                            	</label>
-		                            	<label class="label_muffins" for="muffin_5">
-		                            		<input type="radio" class="muffins" id="muffin_5" value="5" name="muffins" />
-		                           		</label>
-		                            </div>
+								<td>
+									<span id="showpassword">Passwort anzeigen</span>
 								</td>
-								<td class="step_4_right"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
+									<p>Username</p>
+									<input type="text" id="reg_username" />
+								</td>
+								<td class="reg_error" id="reg_error_user"></td>
+							</tr>
+							<tr>
+								<td>
+								</td>
+								<td>
+									<input type="submit" id="reg_submit" class="next_step" value="registrieren" />											
+								</td>
 							</tr>
 						</table>
 					</form>
-					<div id="end_newrecipe">
-						<!-- <div class="last_step_btn" id="recipe_preview">Vorschau</div> -->
-						<div class="last_step_btn" id="recipe_ready">Fertig</div>
-					</div>
-				  </div>
+				</div>
 			</div>
-			</template>
-			<template id="activate">
-				<div id='new_activation' class="content_message"><h5></h5><p></p></div>
-			</template>
-			<template id="feedback">
-				<div id='kontakt' class="footerpages">
-					<h1>Feedback</h1>
-						<form id='contactform'>
-						
-						<table>
-						<tr>
-							<td class="formdescription">
-								<div id="formDescriptionName">Name:</div>
-								<div id="formDescriptionSender">Absender:</div>
-							</td>
-							<td class="forminput">
-								<div id="conname_login"></div>
-								<input type="text" id="conname" />
-							</td>
-						</tr>
-						<tr id="formDescriptionEmail">
-							<td class="formdescription">
-								<div >E-Mail:</div>
-							</td>
-							<td class="forminput">
-								<input type="text" id="conemail" />
-							</td>
-						</tr>
-						<tr>
-							<td class="formdescription">
-								Betreff:
-							</td>
-							<td class="forminput">
-								<div id="formSubjectField">
-								<div id="formSubjectFieldFilter">
-									<div id="formSubjectFieldName">Thema wählen</div>
-									<div id="formSubjectFieldMore"></div>
-								</div>
-								<ul id="formSubjectChoice">
-									<li>Ich will meine Meinung loswerden</li>
-									<li>Ich habe einen Fehler gefunden!</li>									
-									<li>Ich habe ein Problem mit der Anmeldung</li>
-									<li>Ich habe ein Problem mit einem Rezept</li>
-									<li>Ich habe ein Problem mit einem User</li>
-									<li>Ich wollt euch einfach mal schreiben</li>
-								</ul>
-								<input type="hidden" id="conbetreff" value="Kein Betreff" />
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="formdescription">
-								Nachricht:
-							</td>
-							<td class="forminput">
-								<textarea id="conmessage"></textarea>
-							</td>
-						</tr>
-						<tr>
-						<td class="formdescription"></td>
-						<td class="forminput">
-							<div id="recaptcha_div"></div>
-							<div id='fromResponseField'></div>
-						</td>
-						</tr>
-						<tr>
-						<td class="formdescription"></td>
-						<td class="forminput" id="fromSendCell">
-							<div id="SendButton">Senden</div>
-						</td>
-						</tr>
-						
-						</table>
-						
-						</form>
-					</div>
-				
-			</template>
-			<template id="about_us">
-				<div class="footerpages">
-					<h1>Über uns</h1>
-					<h2>Die Idee</h2>
-					<p>Als ambitionierte Gelegenheitsköche ist uns aufgefallen wie umständlich die Recherche nach Rezepten im Internet, ganz im Gegensatz zu der in Kochbüchern, ist. Deshalb haben wir uns ein Konzept überlegt, wie man solch eine Suche erleichtert.<br/>
-					Rezepte bringen viele Daten und Eigenschaften mit, die gesucht und ausgewertet werden können. In Kochbüchern gibt es ein starres Inhaltsverzeichnis, das auf eine begrenzte Anzahl von Rezepten übersichtlich verweist. Dabei ist jedes Rezept nur einmal vorhanden, sodass man nicht zwischen scheinbar gleichem unterscheiden muss. Zusätzlich sind diese Rezepte auch in Kategorien eingeteilt.<br/>
-					Unser Konzept basiert auf den Eigenschaften eines Kochbuches erweitert um die Möglichkeiten des Internets. Wir haben uns eine Suchmaschine ausgedacht, die schnell konkrete Ergebnisse liefert. Die Suche reagiert dynamisch auf die Eingabe des Nutzers und schlägt verschiedene Suchfilter und Rezepte vor. Unter Suchfiltern verstehen wir Kategorien, Kochzeiten, Zutaten, Bewertungen, den Schwierigkeitsgrad, Kalorien und Tags. Mit all diesen Werkzeugen kann sich der Nutzer effektiv an seine Vorstellung annähern.<br/>
-					Ebenfalls ist es Nutzern möglich eigene Rezepte zu erstellen, die vor der Veröffentlichung von Moderatoren auf Übersichtlichkeit und Überschneidungen mit bestehenden Rezepten, geprüft werden. Dabei ist uns bewusst, dass es sehr schwierig werden kann gegen die großen Rezepteseiten eine eigenständige Community aufzubauen. Dies wollen wir vermeiden, indem wir jegliche sozialen Features mit der Facebook-Community verbinden. So können Nutzer innerhalb ihres bestehenden sozialen Umfelds Freunde zum Kochen einladen, über das Abendessen abstimmen lassen oder ihre Lieblingsrezepte veröffentlichen.
-					</p>
-					<h2>Was unterscheidet uns von den Anderen?</h2>
-					<p>Unsere Webseite soll, im Gegensatz zur Konkurrenz, den Nutzer bei der Suche nach Rezepten nicht verhungern lassen, sondern ihn auch zu Neuem anregen und inspirieren.<br/>
-						So kann der hungrige Hans mit seinem halb gefülltem Kühlschrank, der in einer Stunde wieder an der Arbeit sein muss, bei uns die Zutaten und die Zeit, die er hat, angeben und findet sofort die passenden Rezepte. Durch unsere auf AJaX basierende Suche, deren Ergebnisse sich Live mit der Eingabe aktualisieren, findet Hans vielleicht schon vor Eingabe seines ganzen Kühlschrankinhalts etwas Leckeres. Und hat Hans Lust auf Lasagne, findet er ein Standardgericht und kann sich zwischen verschiedenen Variationen entscheiden.<br/>
-						Bei chefkoch.de findet Hans unter "Lasagne" 8392 Treffer, wovon aber nur 3492 wirklich Rezepte sind, zwischen denen er dann wählen darf. Unter Marions Kochbuch findet er zwar auch nur eine Lasagne, seinen Kühlschrankinhalt interessiert Marion aber leider nicht. Rezeptewiki.org spricht Hans vom Konzept vielleicht noch an, aber leider kann das Wiki-Interface ihn nicht überzeugen.<br/>
-						Durch dieses Fallbeispiel wird deutlich, dass die großen Rezeptseiten zwar einen großen Corpus an Inhalten besitzen, aber die verwendeten Konzepte, Interfaces und Technologien zu statisch und umständlich sind.<br/>
-						Wir sehen deshalb ein großes Potenzial für eine junge und dynamische Rezeptesuche, die Spaß macht und die bestehenden Communities des Web2.0 nutzt.
-					</p>
-					<h2>Das Team</h2>
-					<p>Wir sind drei Studenten der Bauhaus Universität Weimar:
-						<ul>
-							<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;ebojfmAbozdppl/ef');">Daniel Plath</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>
-							<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;kboAbozdppl/ef');">Jan Grassegger</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
-							<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;nbyAbozdppl/ef');">Maximilian Michel</a> studiert ebenfalls Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
-						</ul>
-					</p>					
-				</div>
-			</template>
-			<template id="profile">
-				<div id="profile_container">
-					<img id="profile_image" src=""/>					
-					<div id="profile_info">
-						<div id="profile_title">
-							<h1></h1>
-							<div id="follow"></div>
-							<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
-						</div>
-						<div id="profile_date"><div></div>seit <span></span> dabei</div>
-						<div id="profile_place"><div></div>aus <span></span></div>
-						<div id="profile_text"></div>
-					</div>
-					<div id="profile_achievements">
-						<div id="recipes" class="achievement">
-							<div class="count"></div>
-							<div class="title">Rezepte</div>
-						</div>
-						<div id="likes" class="achievement">
-							<div class="count"></div>
-							<div class="title">Lieblingsrezepte</div>
-						</div>
-						<div id="discussions" class="achievement">
-							<div class="count"></div>
-							<div class="title">Diskussionen</div>
-						</div>
-						<div id="follower" class="achievement">
-							<div class="count"></div>
-							<div class="title">Follower</div>
-						</div>
-					</div>
-				</div>
-				<div id="profile_recipes" class="profile_recipes">
-					<h2></h2>
-					<p></p>
-					<a class="profile_search">durchsuchen</a><div class="profile_more">mehr anzeigen</div>
-				</div>
-				<div id="profile_schmeckt" class="profile_recipes">
-					<h2></h2>
-					<p></p>
-					<div class="profile_more">mehr anzeigen</div>
-				</div>
-				<div id="profile_recommendation" class="profile_recipes">
-					<h2></h2>
-					<p></p>
-					<div class="profile_more">mehr anzeigen</div>
-				</div>
-			</template>
-			<template id="newsstream">
-				<h1 class="center_headline">Neuigkeiten</h1>
-				<div id="newMessageBtn" class="button">+ neue Nachricht</div>
-				<ul id="newsstream"></ul>
-			</template>
-			<template id="messagesession">
-				<h1 class="center_headline"><span>Meine Nachrichten mit</span><br/><span></span></h1>
-				<ul id="messagestream"></ul>
-				<form id="message_answer">
-					<div class="new_message">
-						<div class="messageimageborder"></div>
-						<textarea cols="65" rows="6"></textarea>
-					</div>
-					<input type="submit" value="antworten"/>
-				</form>
-			</template>
-			<template id="settings">
-				<div id="settings_container">
-					<h1>Einstellungen</h1>
-					<div id="settings_account" class="settings">
-						<h2>Konto<div class="settings_saved">gespeichert</div></h2>
-						<div class="settings_content">
-							<div id="account_image">
-								<div id="account_upload">Neues Bild hochladen
-								<div></div>
-								</div>							
-								<img src=""/>								
-							</div>
-							<form id="account_form">
-							<ul id="account_data">
-								<li><input type="text" id="account_name" maxlength="45"/></li>
-								<li><input type="text" id="account_mail" maxlength="45"/></li>
-								<li>
-									<h3>Über mich</h3>
-									<textarea id="account_aboutme"></textarea>
-								</li>
-								<li>
-									<input type="submit" value="speichern" />
-								</li>
-							</ul>
-							</form>
-						</div>
-					</div>
-					<div id="settings_password" class="settings">
-						<h2>Passwort ändern<div class="settings_saved">gespeichert</div></h2>
-						<div class="settings_content">
-							<form id="password_form">
-								<h3>Altes Passwort</h3>
-								<input type="password" id="password_old"/>
-								<h3>Neues Passwort</h3>
-								<input type="password" id="password_new"/>
-								<div id="showpassword">Passwort anzeigen</div>
-								<input type="submit" value="speichern"/>
-							</form>
-						</div>
-					</div>
-					
-					<div id="settings_notification" class="settings">
-						<h2>E-Mail-Benachrichtigungen<div class="settings_saved">gespeichert</div></h2>
-						<div id="settings_notification_content" class="settings_content">
-						<table>
-						<tr>
-							<td>Eigenes Rezept aktiviert</td>
-							<td><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></td>
-						</tr>
-						<tr>
-							<td>Tag aktiviert</td>
-							<td><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /></td>
-						</tr>
-						<tr>
-							<td>Diskussionsbeitrag zu deinem Rezept</td>
-							<td><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></td>
-						</tr>
-						<tr>
-							<td>Antwort auf Diskussionsbeitrag von dir</td>
-							<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
-						</tr>
-						<tr>
-							<td>Jemandem schmeckt dein Rezept</td>
-							<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
-						</tr>
-						<tr>
-							<td>Newsletter</td>
-							<td><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /></td>
-						</tr>
-						</table>						
-						</div>
-					</div>
-					<div id="settings_facebook" class="settings">
-						<h2>Facebook<div class="settings_saved">gespeichert</div></h2>
-						<div id="settings_facebook_content" class="settings_content">
-							<table>
-								<tr>
-									<td>"Schmeckt mir" an meine Pinnwand posten</td>
-									<td><input type="checkbox" name="facebook_schmeckt" value="schmeckt" /></td>
-								</tr>
-							</table>
-						</div>
-						<div id="no_facebook">Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen<div id="facebook_login"></div></div>
-					</div>
-				</div>
-				
-			</template>
-			<template id="fbregistration">
-					<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
-			</template>
-			<template id="resetpassword">
-				<div class="footerpages">
-					<h1>Passwort zurücksetzen</h1>
-					<div id="resetpwstep1">
-						<form id="resetpwform1">
-						<p>Bitte gibt deine Emailadresse oder deinen Usernamen ein:</p>
-							<table>
-							<tr><td>Email/Username:</td><td><input id="resetpwmail" type="text"/></td><td class="error"></td></tr>
-							<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
-							</table>
-						</form>
-					</div>
-					<div id="resetpwstep2">
-						<form id="resetpwform2">
-						<p>Bitte gib dein neues Passwort ein:</p>
-							<table>
-							<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
-							<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
-							<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
-							</table>
-						</form>
-					</div>				
-				</div>
-			</template>
-			<template id="registration">
-				<div id="registration_container">
-					<div id="reg_step1" class="registration_step">
-						<h1>Herzlich Willkommen!</h1>
-						<div id="reg_left">
-							<p>Wir brauchen nur ein paar Daten von dir, dann bist du schon dabei.</p>
-							<p>Hast du vielleicht schon einen Facebookaccount? Dann melde dich doch damit an:</p>
-							<div id="facebook_login"></div>
-						</div>
-						<div id="reg_right">
-							<form id="reg_form">
-								<table>
-									<tr>
-										<td>
-											<p>Email</p>
-											<input type="email" id="reg_email" />
-										</td>
-										<td class="reg_error" id="reg_error_mail"></td>
-									</tr>
-									<tr>
-										<td>
-											<p>Passwort</p>
-											<input type="password" id="reg_pass" />
-										</td>
-										<td class="reg_error" id="reg_error_pass"></td>
-									</tr>
-									<tr>
-										<td>
-											<span id="showpassword">Passwort anzeigen</span>
-										</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>
-											<p>Username</p>
-											<input type="text" id="reg_username" />
-										</td>
-										<td class="reg_error" id="reg_error_user"></td>
-									</tr>
-									<tr>
-										<td>
-										</td>
-										<td>
-											<input type="submit" id="reg_submit" class="next_step" value="registrieren" />											
-										</td>
-									</tr>
-								</table>
-							</form>
-						</div>
-					</div>
-					<div id="reg_step2" class="registration_step">
-						<h1></h1>
-						<p id="register_text">Vielen Dank für deine Anmeldung. Damit Du gleich loslegen kannst, müsstest Du noch deine E-Mail-Adresse bestätigen.</p>
-					</div>
-				</div>
-			</template>
-			<template id="developer">
-				<div class="footerpages">
-					<h1>Entwickler</h1>
-					<h2>Blog</h2>
-					<p>Unseren Blog mit aktuellen News und Links zu Technologien, mit denen wir uns zur Zeit beschäftigen, findest du unter <a href="http://developers.anycook.de">developers.anycook.de</a>.</p>
-					
-					<h2>Screen</h2>
-					<p>Wir entwickeln gerade ein Display zum schnellen Aufruf von Rezepten in der Küche, das berührungslos steuerbar ist. Mehr Informationen unter <a href="http://screen.anycook.de">screen.anycook.de</a>.</p>
-					
-					<h2>Logo</h2>
-					<p>Um auf unsere Inhalte zu verweisen kann gerne unser Logo verwendet werden. Wird unsere Graph API verwendet sollte das Logo möglichst auf jeder Site, die unsere Daten verwendet, mit einem Link auf anycook.de erscheinen. Die Größe kann dabei auch deutlich kleiner als das Original sein (aber erkennbar).</p>
-					<p><img src="/icons/anycook_logo.png"/></p>
-					
-					<h2>Graph-API</h2>
-					<p>Über unsere Graph-API lassen sich Informationen zu Rezepten, Zutaten, Tags und Usern über JSONP abrufen.</p>					
-					<h4>Beispiel für eine Anfrage mit jQuery</h4>
-					<textarea readonly="readonly" class="code">$.getJSON("http://graph.anycook.de/recipe?callback=?", function(json)	{dosomething});</textarea>
-					<p>Alle Daten sind derzeit frei verfügbar. Jedoch ist dies bisher nur eine erste Testversion und wir behalten uns weitere Änderungen oder Zugangsbeschränkungen vor!</p>
-					
-					<h3>Syntax</h3>
-					<p>Die API bietet verschiedene Abfrageebenen. Je tiefer die Abfrage, desto detailierter die Antworten.</p>
-					<h4>Syntax(Pseudocode)</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/type/element/detail?options</textarea>
-					
-					<h3>Rezepte</h3>
-					<p>Alle Rezeptename lassen sich über "/recipe" anzeigen. Details zu einem bestimmten Rezept erhält man über "/recipe/rezeptname"</p>
-					<h4>Alle Rezeptenamen</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/recipe</textarea>
-					<h4>Ausgabe(gekürzt)</h4>
-					<textarea readonly="readonly" class="code">{"total":2,"names":[" Umgedrehter Apfelkuchen","Apfelmuffins"]}</textarea>
-					<h4>Details für "Zucchini-Champignon-Lasagne"</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/recipe/Zucchini-Champignon-Lasagne</textarea>
-					<h4>Ausgabe</h4>
-					<textarea readonly="readonly" class="code">{"tags":["hauptspeise","studentenküche","vegetarisch","wg-tauglich"],"timestd":"1","name":"Zucchini-Champignon-Lasagne","timemin":"0","description":"Die Zucchini [tsu?ki?ni] sind eine Unterart des Gartenkürbisses. Sie sind einhäusig, das heißt, männliche und weibliche Geschlechtsorgane befinden sich in getrennten Blüten, aber an einer Pflanze. Zucchini enthalten, wie andere Kürbissorten, viel Wasser, sind kalorienarm, vitaminreich und leicht verdaulich. So, jetzt wisst ihr Bescheid.","categorie":"Überbackenes","schmeckt":1,"ingredients":{"Tomaten":{"name":"Tomaten","menge":"250 g","singular":"Tomate"},"Zucchini":{"name":"Zucchini","menge":"250 g","singular":null},"Zwiebeln":{"name":"Zwiebeln","menge":"1 mittlere","singular":"Zwiebel"},"Lasagneplatten":{"name":"Lasagneplatten","menge":"","singular":"Lasagneplatte"},"Streukäse":{"name":"Streukäse","menge":"200 g","singular":null},"Champignons":{"name":"Champignons","menge":"150 g","singular":"Champignon"},"Öl":{"name":"Öl","menge":"","singular":null},"Sahne":{"name":"Sahne","menge":"200 g","singular":null},"Knoblauch":{"name":"Knoblauch","menge":"1 Zehe","singular":null},"Mehl":{"name":"Mehl","menge":"1\/2 El","singular":null}},"schritte":["Zuerst die Zucchini raspeln, die Tomaten würfeln und die Champignons schneiden.","Dann Zwiebeln schneiden und anbraten, dazu das Knoblauch geben. Sabald die Zwiebeln und das Knoblauch fertig sind Mehl darüber streuen.","Nun das zuvor vorbereitete Gemüse und die Sahne in die Pfanne geben und alles ca. 10 Minuten köcheln lassen. Dann alles noch abschmecken.","In einer gefetteten Auflaufform erst Soße dann Streukäse dann Lasagneplatte nacheinander schichten bis die Soße alle ist. Mit einer Soßen-Schicht enden und oben drauf noch viel Käse geben.","Im vorgeheizten Backofen bei 200° C auf mittlerer Schiene ca. 30 Minuten backen lassen."],"calorie":"3","authors":["Mara Krug"],"skill":"3","person":"4","image":"poZ3dZuU4x52XGq6RKL0.png"}</textarea>
-					<h4>Rezeptbild</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/recipe/Zucchini-Champignon-Lasagne/image?type=large</textarea>
-					<p>Das Bild zu einem Rezept erhält man mit "image". Die zur Auswahl stehen mithilfe der Option "type" die Größen "small"(100x100) und "large"(450x?).</p>
-					
-					<h3>Zutaten</h3>
-					<p>Alle Rezeptename lassen sich über "/ingredient" anzeigen. Details zu einem bestimmten Rezept erhält man über "/ingredient/zutatenname"</p>
-					<h4>Alle Zutatennamen</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/ingredient</textarea>
-					<h4>Ausgabe(gekürzt)</h4>
-					<textarea readonly="readonly" class="code">{"total":4,"ingredients":["Amaretto","Äpfel","Apfelmus","Apfelsaft"]}</textarea>
-					<p>Möchte nur die übergeordneten Zutaten erhalten, kann man die Option "parent" verwenden.</p>
-					<h4>Details für "Amaretto"</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/ingredient/Amaretto</textarea>
-					<h4>Ausgabe</h4>
-					<textarea readonly="readonly" class="code">{"recipes":["Tiramisu ohne Ei"],"name":"Amaretto","singular":null,"recipenum":1}</textarea>
-					<p>Sollen die Angaben zu den Rezepten auch die Rezepte der untergeordneten Zutaten enthalten, kann man die Option "children" setzen.</p>
-					
-					<h3>Tags</h3>
-					<p>Alle Tags lassen sich über "/tag" anzeigen. Details gibt`s unter "/tag/tagname".</p>
-					<h4>Alle Tags</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/tag</textarea>
-					<h4>Ausgabe(gekürzt)</h4>
-					<textarea readonly="readonly" class="code">{"total":3,"tags":["abendessen","amerikanisch","asiatisch"]}</textarea>
-					<h4>Details für "abendessen"</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/tag/abendessen</textarea>
-					<h4>Ausgabe</h4>
-					<textarea readonly="readonly" class="code">{"recipes":["Bruschetta mit Tomaten","Spinat-Pilz-Pasta","Tomatendip mit Frischkäse"],"name":"abendessen","recipenum":3}</textarea>
-					
-					<h3>User</h3>
-					<p>Alle User lassen sich über "/user" anzeigen. Informationen zu den einzelnen User über "/user/username"</p>
-					<h4>Alle User</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/user</textarea>
-					<h4>Ausgabe(gekürzt)</h4>
-					<textarea readonly="readonly" class="code">{"total":60,"users":["Daniel Plath","gaias","Kathi"]}</textarea>
-					<h4>Details für "Daniel Plath"</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/user/Daniel+Plath</textarea>
-					<h4>Ausgabe</h4>
-					<textarea readonly="readonly" class="code">{"mail":"frq@gmx.de","text":null,"level":2,"facebookID":"1490228763","name":"Daniel Plath","image":"http:\/\/graph.facebook.com\/1490228763\/picture"}</textarea>
-					
-					<h3>Kategorien</h3>
-					<p>Alle Kategorien lassen sich über "/category" anzeigen. Informationen zu den einzelnen User über "/category/categoryname"</p>
-					<h4>Alle Kategorien</h4>
-					<textarea readonly="readonly" class="code">graph.anycook.de/category</textarea>
-					<h4>Ausgabe(gekürzt)</h4>
-					<textarea readonly="readonly" class="code">{"total":7,"categories":["Eierspeisen","Fleisch und Fisch","Gebackenes und Süßes","Nudeln","Salate","Suppen und Eintöpfe","Überbackenes"]}</textarea>
-					<h4>Details für "Eierspeisen"</h4>
-					<textarea readonly="readonly" class="code">http://graph.anycook.de/category/Eierspeisen</textarea>
-					<h4>Ausgabe</h4>
-					<textarea readonly="readonly" class="code">{"recipes":["Spinat-Quiche","Kartoffelpuffer","Pfannkuchen mit Äpfeln","Quarkbuletten","Semmelknödel","Eierstich","Rührei mit Speck","Korsische Paprikaschoten"],"name":"Eierspeisen","recipenum":8}</textarea>
-				</div>
-			</template>
+			<div id="reg_step2" class="registration_step">
+				<h1></h1>
+				<p id="register_text">Vielen Dank für deine Anmeldung. Damit Du gleich loslegen kannst, müsstest Du noch deine E-Mail-Adresse bestätigen.</p>
+			</div>
+		</div>
+	</template>
+	<template id="developer">
+		<div class="footerpages">
+			<h1>Entwickler</h1>
+			<h2>Blog</h2>
+			<p>Unseren Blog mit aktuellen News und Links zu Technologien, mit denen wir uns zur Zeit beschäftigen, findest du unter <a href="http://developers.anycook.de">developers.anycook.de</a>.</p>
 			
+			<h2>Screen</h2>
+			<p>Wir entwickeln gerade ein Display zum schnellen Aufruf von Rezepten in der Küche, das berührungslos steuerbar ist. Mehr Informationen unter <a href="http://screen.anycook.de">screen.anycook.de</a>.</p>
+			
+			<h2>Logo</h2>
+			<p>Um auf unsere Inhalte zu verweisen kann gerne unser Logo verwendet werden. Wird unsere Graph API verwendet sollte das Logo möglichst auf jeder Site, die unsere Daten verwendet, mit einem Link auf anycook.de erscheinen. Die Größe kann dabei auch deutlich kleiner als das Original sein (aber erkennbar).</p>
+			<p><img src="/icons/anycook_logo.png"/></p>
+			
+			<h2>Graph-API</h2>
+			<p>Über unsere Graph-API lassen sich Informationen zu Rezepten, Zutaten, Tags und Usern über JSONP abrufen.</p>					
+			<h4>Beispiel für eine Anfrage mit jQuery</h4>
+			<textarea readonly="readonly" class="code">$.getJSON("http://graph.anycook.de/recipe?callback=?", function(json)	{dosomething});</textarea>
+			<p>Alle Daten sind derzeit frei verfügbar. Jedoch ist dies bisher nur eine erste Testversion und wir behalten uns weitere Änderungen oder Zugangsbeschränkungen vor!</p>
+			
+			<h3>Syntax</h3>
+			<p>Die API bietet verschiedene Abfrageebenen. Je tiefer die Abfrage, desto detailierter die Antworten.</p>
+			<h4>Syntax(Pseudocode)</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/type/element/detail?options</textarea>
+			
+			<h3>Rezepte</h3>
+			<p>Alle Rezeptename lassen sich über "/recipe" anzeigen. Details zu einem bestimmten Rezept erhält man über "/recipe/rezeptname"</p>
+			<h4>Alle Rezeptenamen</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/recipe</textarea>
+			<h4>Ausgabe(gekürzt)</h4>
+			<textarea readonly="readonly" class="code">{"total":2,"names":[" Umgedrehter Apfelkuchen","Apfelmuffins"]}</textarea>
+			<h4>Details für "Zucchini-Champignon-Lasagne"</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/recipe/Zucchini-Champignon-Lasagne</textarea>
+			<h4>Ausgabe</h4>
+			<textarea readonly="readonly" class="code">{"tags":["hauptspeise","studentenküche","vegetarisch","wg-tauglich"],"timestd":"1","name":"Zucchini-Champignon-Lasagne","timemin":"0","description":"Die Zucchini [tsu?ki?ni] sind eine Unterart des Gartenkürbisses. Sie sind einhäusig, das heißt, männliche und weibliche Geschlechtsorgane befinden sich in getrennten Blüten, aber an einer Pflanze. Zucchini enthalten, wie andere Kürbissorten, viel Wasser, sind kalorienarm, vitaminreich und leicht verdaulich. So, jetzt wisst ihr Bescheid.","categorie":"Überbackenes","schmeckt":1,"ingredients":{"Tomaten":{"name":"Tomaten","menge":"250 g","singular":"Tomate"},"Zucchini":{"name":"Zucchini","menge":"250 g","singular":null},"Zwiebeln":{"name":"Zwiebeln","menge":"1 mittlere","singular":"Zwiebel"},"Lasagneplatten":{"name":"Lasagneplatten","menge":"","singular":"Lasagneplatte"},"Streukäse":{"name":"Streukäse","menge":"200 g","singular":null},"Champignons":{"name":"Champignons","menge":"150 g","singular":"Champignon"},"Öl":{"name":"Öl","menge":"","singular":null},"Sahne":{"name":"Sahne","menge":"200 g","singular":null},"Knoblauch":{"name":"Knoblauch","menge":"1 Zehe","singular":null},"Mehl":{"name":"Mehl","menge":"1\/2 El","singular":null}},"schritte":["Zuerst die Zucchini raspeln, die Tomaten würfeln und die Champignons schneiden.","Dann Zwiebeln schneiden und anbraten, dazu das Knoblauch geben. Sabald die Zwiebeln und das Knoblauch fertig sind Mehl darüber streuen.","Nun das zuvor vorbereitete Gemüse und die Sahne in die Pfanne geben und alles ca. 10 Minuten köcheln lassen. Dann alles noch abschmecken.","In einer gefetteten Auflaufform erst Soße dann Streukäse dann Lasagneplatte nacheinander schichten bis die Soße alle ist. Mit einer Soßen-Schicht enden und oben drauf noch viel Käse geben.","Im vorgeheizten Backofen bei 200° C auf mittlerer Schiene ca. 30 Minuten backen lassen."],"calorie":"3","authors":["Mara Krug"],"skill":"3","person":"4","image":"poZ3dZuU4x52XGq6RKL0.png"}</textarea>
+			<h4>Rezeptbild</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/recipe/Zucchini-Champignon-Lasagne/image?type=large</textarea>
+			<p>Das Bild zu einem Rezept erhält man mit "image". Die zur Auswahl stehen mithilfe der Option "type" die Größen "small"(100x100) und "large"(450x?).</p>
+			
+			<h3>Zutaten</h3>
+			<p>Alle Rezeptename lassen sich über "/ingredient" anzeigen. Details zu einem bestimmten Rezept erhält man über "/ingredient/zutatenname"</p>
+			<h4>Alle Zutatennamen</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/ingredient</textarea>
+			<h4>Ausgabe(gekürzt)</h4>
+			<textarea readonly="readonly" class="code">{"total":4,"ingredients":["Amaretto","Äpfel","Apfelmus","Apfelsaft"]}</textarea>
+			<p>Möchte nur die übergeordneten Zutaten erhalten, kann man die Option "parent" verwenden.</p>
+			<h4>Details für "Amaretto"</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/ingredient/Amaretto</textarea>
+			<h4>Ausgabe</h4>
+			<textarea readonly="readonly" class="code">{"recipes":["Tiramisu ohne Ei"],"name":"Amaretto","singular":null,"recipenum":1}</textarea>
+			<p>Sollen die Angaben zu den Rezepten auch die Rezepte der untergeordneten Zutaten enthalten, kann man die Option "children" setzen.</p>
+			
+			<h3>Tags</h3>
+			<p>Alle Tags lassen sich über "/tag" anzeigen. Details gibt`s unter "/tag/tagname".</p>
+			<h4>Alle Tags</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/tag</textarea>
+			<h4>Ausgabe(gekürzt)</h4>
+			<textarea readonly="readonly" class="code">{"total":3,"tags":["abendessen","amerikanisch","asiatisch"]}</textarea>
+			<h4>Details für "abendessen"</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/tag/abendessen</textarea>
+			<h4>Ausgabe</h4>
+			<textarea readonly="readonly" class="code">{"recipes":["Bruschetta mit Tomaten","Spinat-Pilz-Pasta","Tomatendip mit Frischkäse"],"name":"abendessen","recipenum":3}</textarea>
+			
+			<h3>User</h3>
+			<p>Alle User lassen sich über "/user" anzeigen. Informationen zu den einzelnen User über "/user/username"</p>
+			<h4>Alle User</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/user</textarea>
+			<h4>Ausgabe(gekürzt)</h4>
+			<textarea readonly="readonly" class="code">{"total":60,"users":["Daniel Plath","gaias","Kathi"]}</textarea>
+			<h4>Details für "Daniel Plath"</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/user/Daniel+Plath</textarea>
+			<h4>Ausgabe</h4>
+			<textarea readonly="readonly" class="code">{"mail":"frq@gmx.de","text":null,"level":2,"facebookID":"1490228763","name":"Daniel Plath","image":"http:\/\/graph.facebook.com\/1490228763\/picture"}</textarea>
+			
+			<h3>Kategorien</h3>
+			<p>Alle Kategorien lassen sich über "/category" anzeigen. Informationen zu den einzelnen User über "/category/categoryname"</p>
+			<h4>Alle Kategorien</h4>
+			<textarea readonly="readonly" class="code">graph.anycook.de/category</textarea>
+			<h4>Ausgabe(gekürzt)</h4>
+			<textarea readonly="readonly" class="code">{"total":7,"categories":["Eierspeisen","Fleisch und Fisch","Gebackenes und Süßes","Nudeln","Salate","Suppen und Eintöpfe","Überbackenes"]}</textarea>
+			<h4>Details für "Eierspeisen"</h4>
+			<textarea readonly="readonly" class="code">http://graph.anycook.de/category/Eierspeisen</textarea>
+			<h4>Ausgabe</h4>
+			<textarea readonly="readonly" class="code">{"recipes":["Spinat-Quiche","Kartoffelpuffer","Pfannkuchen mit Äpfeln","Quarkbuletten","Semmelknödel","Eierstich","Rührei mit Speck","Korsische Paprikaschoten"],"name":"Eierspeisen","recipenum":8}</textarea>
+		</div>
+	</template>			
 </templates>
