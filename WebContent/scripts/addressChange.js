@@ -8,6 +8,11 @@ function loadHome()
 // 	
 // 	
 	// //new stuff
+	
+	$("#content_header").empty()
+		.append(getHeaderLink("Entdecken", "/#!/?page=discover", "recipe_btn").addClass("active"))
+		.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
+	
 	$.ajax({
 	  url: "/anycook/LoadSide1Data",
 	  dataType: "json",

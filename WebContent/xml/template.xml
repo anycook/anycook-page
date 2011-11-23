@@ -64,7 +64,7 @@
 	    		<a id="recipe_of_the_day"></a>
 	    	</div>
 	    	<div class="mid">
-	    		<a id="doodle"><img/></a>
+	    		<a id="doodle" href="/#!/search/tagged/herbst"><img src="/img/doodle.png"/></a>
 	    		<hgroup>
 		    		<h1>anycook<span></span></h1>
 		    		<h3>Die übersichtliche Suche nach Rezepten</h3>

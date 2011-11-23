@@ -29,6 +29,11 @@
     	
     	$.address.crawlable(true);
     	
+    	
+    	//startfadeIn
+    	if($.address.pathNames().length == 0)
+    		$("#filter_container").css("opacity", 0).delay(1000).animate({opacity:1},1500);
+    	
     	jQuery.extend(jQuery.expr[':'], {
     	    focus: function(element) { 
     	        return element == document.activeElement; 

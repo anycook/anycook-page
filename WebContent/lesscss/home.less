@@ -1,25 +1,29 @@
 #site1{
-	@topfontsize:14pt;
+	@topfontsize:12pt;
 	@bottomfontsize: @topfontsize - 2pt;
 	font: @headlinefont;
 	color:@darkfontcolor;
+	@borderpadding:80px;
+	margin-left:18px;
 	text-align: center;
 	.top{
 		//font:@headlinefont;
 		font-size:@topfontsize;
-		margin: 0 auto;
-		padding: 0 70px 10px;
+		margin: 6px auto 0;
+		padding: 0 @borderpadding 10px;
 		text-align: center;
 		a{
 			display:block;
-			//margin-top:-5px;
-			font:@standardfont;
+			font-style: italic;
+			margin-top:1px;
+			font-size:10pt;
+			height:16px;
 		}
 		border-bottom: 1px solid @lightgrey;
 		width:200px;
 	}
 	.mid{
-		margin: 120px auto 200px;
+		margin: 80px auto 240px;
 		#doodle{
 			
 			width: 100%;
@@ -29,7 +33,7 @@
 				padding-right: 3px;
 				width: 62px;
 				height: 55px;
-				background: url("/img/doodle.png") no-repeat;
+				//background: url("/img/doodle.png") no-repeat;
 			}
 		}
 		hgroup{
@@ -62,8 +66,8 @@
 	
 	.bottom{
 		border-top: 1px solid @lightgrey;
-		margin:150px auto;
-		padding:22px 50px;
+		margin:60px auto 0px;
+		padding:12px @borderpadding 0;
 		width:260px;
 		font-style:italic;
 		font-size: @bottomfontsize;
