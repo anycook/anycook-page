@@ -68,6 +68,7 @@ function checkNewMessageNum(lastnum){
 			}
 		},
 		error: function(error){
+			console.log("error loading messageNum. trying again");
 			checkNewMessageNum(0);
 		}
 	});
