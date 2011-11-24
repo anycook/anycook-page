@@ -32,7 +32,9 @@
     	
     	//startfadeIn
     	if($.address.pathNames().length == 0)
-    		$("#filter_container").css("opacity", 0).delay(1000).animate({opacity:1},1500);
+    		$("#filter_container").delay(1000).animate({opacity:1},1500);
+    	else
+    		$("#filter_container").css("opacity", 1);
     	
     	jQuery.extend(jQuery.expr[':'], {
     	    focus: function(element) { 

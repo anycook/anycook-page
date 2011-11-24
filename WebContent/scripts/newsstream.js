@@ -52,16 +52,23 @@ function loadNewsstream(){
 function checkNewMessageNum(lastnum){
 	if(lastnum === undefined)
 		lastnum = 0;
-	$.post("/anycook/GetMessageNum?lastnum="+lastnum, function(newNum){
-		if(newNum != null && user.checkLogin()){
-			var $newMessageBubble = $("#new_messages_bubble");
-			newNum = Number(newNum);
-			if(lastnum == 0)
-				$newMessageBubble.fadeIn();
-			else if(newNum == 0)
-				$newMessageBubble.fadeOut();
-			$("#new_messages_bubble span").text(newNum);
-			checkNewMessageNum(newNum);
+	$.ajax({
+		url:"/anycook/GetMessageNum",
+		data:{lastnum:lastnum},
+		success:function(newNum){
+			if(newNum != null && user.checkLogin()){
+				var $newMessageBubble = $("#new_messages_bubble");
+				newNum = Number(newNum);
+				if(lastnum == 0)
+					$newMessageBubble.fadeIn();
+				else if(newNum == 0)
+					$newMessageBubble.fadeOut();
+				$("#new_messages_bubble span").text(newNum);
+				checkNewMessageNum(newNum);
+			}
+		},
+		error: function(error){
+			checkNewMessageNum(0);
 		}
 	});
 }
