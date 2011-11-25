@@ -60,8 +60,22 @@ function getHeaderLink(value, href, id){
 
 // behandelt change bei $.address.path
 function handleChange(event){
-	if(lastPath != event.path){
-		lastPath = event.path;
+	var lastAddress = $(document).data("lastAddress");
+	if(lastAddress == undefined || lastAddress.path != event.path){
+		
+		if(lastAddress != undefined && lastAddress.pathNames[0] == "recipeediting"){
+			var check = confirm("Willst du wirklich aufhören, an diesem Rezept zu arbeiten?");
+			if(!check) {
+				$.address.autoUpdate(false);
+				window.location.hash = lastAddress.value;
+				$.address.autoUpdate(true);
+				
+				return false;
+			}
+		}
+		$(document).data("lastAddress", event);
+		
+		
 		search= new Search();
 		
 		$("#zutat_head").text("Zutaten:");
@@ -285,26 +299,6 @@ function changePage(event){
 				$.address.queryString("");
 			}
 			break;
-			
-		case "newrecipe":
-			//$(".new_recipe_steps").hide();
-			switch(page){
-			case "schritte":
-				loadStep2();
-				break;
-				
-			case "zutaten":
-				loadStep3();
-				break;
-				
-			case "abschluss":
-				loadStep4();
-				break;
-				
-			default:
-				$.address.queryString("");
-			}
-			break;
 				
 		case "fbregistration":
 			//nothing
@@ -331,6 +325,3 @@ function resetSearchBar(){
 function checkBrowser(){
 	return navigator.appName;
 }
-
-var lastPath="";
-$.address.change(handleChange);

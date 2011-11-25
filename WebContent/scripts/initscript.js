@@ -26,6 +26,7 @@
             	console.error(error.responseText);
             }
         }); 
+    	$.address.bind("change",handleChange);
     	
     	$.address.crawlable(true);
     	
