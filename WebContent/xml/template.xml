@@ -353,8 +353,8 @@
 	<template id="settings">
 		<div id="settings_container">
 			<h2 class="border_headline">Profileinstellungen</h2>
+			<div class="settings_saved">gespeichert</div>
 			<div id="settings_account" class="settings profile_container">
-				<h2>Konto<div class="settings_saved">gespeichert</div></h2>
 				<div class="settings_content">
 					<div id="account_image">
 						<div id="account_upload">Neues Bild hochladen
@@ -384,22 +384,33 @@
 				</div>
 			</div>
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
+			<div class="settings_saved">gespeichert</div>
 			<div id="settings_password" class="settings">
-				<h2>Passwort ändern</h2><div class="settings_saved">gespeichert</div>
 				<div class="settings_content">
 					<form id="password_form">
-						<h3>Altes Passwort</h3>
+						<h2>Email-Adresse ändern:</h2>
+						<p>Deine E-Mail Adresse, auf der wir dich erreichen können.</p>
+						<input type="Mail" id="mailadress"/>
+						<h2>Passwort ändern:</h2>
+						<p id="new_password_label">Gib dein altes Passwort ein.</p>
 						<input type="password" id="password_old"/>
-						<h3>Neues Passwort</h3>
+						<p id="new_password_label">Gib dein altes Passwort ein.</p>
 						<input type="password" id="password_new"/>
 						<div id="showpassword">Passwort anzeigen</div>
+						<h2>Feste Tags hinzufügen:</h2>
+						<p>Bist du vegetarier oder nutzt andere Tags immer? Dann trag sie hier ein.</p>
+						<div class="tagsbox"></div>
+						<p>Die bekanntesten Tags als Inspiration:</p>
+						<div id="tagcloud"></div>
 						<input type="submit" value="speichern"/>
 					</form>
 				</div>
 			</div>
 			
+			<h2 class="border_headline">Allgemeine Einstellungen</h2>
+			<div class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
-				<h2>E-Mail-Benachrichtigungen<div class="settings_saved">gespeichert</div></h2>
+				<h2>E-Mail-Benachrichtigungen</h2>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
 				<tr>
