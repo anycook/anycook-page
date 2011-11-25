@@ -14,6 +14,7 @@ function loadNewRecipe(){
 
 function submitStep1(){
 	$.address.parameter("step", "2");
+	return false;
 	//return false;
 }
 
@@ -27,7 +28,7 @@ function newRecipeAdressChange(event){
 		break;
 		
 	case 3:
-		
+		$editingContainer.addClass("step3");
 		break;
 	}
 	

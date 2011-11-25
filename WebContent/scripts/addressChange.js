@@ -228,7 +228,7 @@ function handleChange(event){
 	}
 	$("#content_header *").removeClass("active");
 	
-	if(event.pathNames[0]=="recipeediting" && event.parameters["step"] != undefined){
+	if(event.pathNames[0]=="recipeediting"){
 		newRecipeAdressChange(event);
 	}
 	else if(event.parameters["page"]!=undefined){
