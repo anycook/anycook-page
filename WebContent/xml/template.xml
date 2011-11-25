@@ -160,7 +160,6 @@
     					</div>
     					<div id="upload_button" class="button">durchsuchen</div>
     				</div>
-    				<p class="text">Mit hochladen eines Bildes versicherst Du uns, dass dieses Bild von dir ist und von uns frei veröffentlicht werden darfst.</p>
     			</div>
     			<form class="recipeediting">
     				<h2>Rezeptname:</h2>
