@@ -355,7 +355,6 @@
 			<h2 class="border_headline">Profileinstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_account" class="settings profile_container">
-				<div class="settings_content">
 					<div id="account_image">
 						<div id="account_upload">Neues Bild hochladen
 						<div></div>
@@ -373,7 +372,7 @@
 							<input type="text" id="account_mail" maxlength="45"/>
 						</li>
 						<li>
-							<h2>Über mich:</h2>
+							<h2 id="about_me">Über mich:</h2>
 							<textarea id="account_aboutme"></textarea>
 						</li>
 						<li>
@@ -381,7 +380,6 @@
 						</li>
 					</ul>
 					</form>
-				</div>
 			</div>
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
