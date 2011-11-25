@@ -384,16 +384,20 @@
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_password" class="settings">
 				<div class="settings_content">
-					<form id="password_form">
+					<form id="account_data">
 						<h2>Email-Adresse ändern:</h2>
 						<p>Deine E-Mail Adresse, auf der wir dich erreichen können.</p>
-						<input type="Mail" id="mailadress"/>
+						<input type="email" id="mailadress"/>
 						<h2>Passwort ändern:</h2>
-						<p id="new_password_label">Gib dein altes Passwort ein.</p>
-						<input type="password" id="password_old"/>
-						<p id="new_password_label">Gib dein altes Passwort ein.</p>
-						<input type="password" id="password_new"/>
-						<div id="showpassword">Passwort anzeigen</div>
+						<div id="old_password_container">
+							<p class="password_label">Gib dein altes Passwort ein.</p>
+							<input type="password" id="password_old"/>
+						</div>
+						<div id="new_password_container">
+							<p class="password_label">Gib dein neues Passwort ein.</p>
+							<input type="password" id="password_new"/>
+							<div id="showpassword">Passwort anzeigen</div>
+						</div>
 						<h2>Feste Tags hinzufügen:</h2>
 						<p>Bist du vegetarier oder nutzt andere Tags immer? Dann trag sie hier ein.</p>
 						<div class="tagsbox"></div>
