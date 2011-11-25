@@ -227,7 +227,11 @@ function handleChange(event){
 		}
 	}
 	$("#content_header *").removeClass("active");
-	if(event.parameterNames.length >0){
+	
+	if(event.pathNames[0]=="recipeediting" && event.parameters["step"] != undefined){
+		newRecipeAdressChange(event);
+	}
+	else if(event.parameters["page"]!=undefined){
 		changePage(event);
 	}
 	else{
@@ -313,7 +317,6 @@ function changePage(event){
 			$.address.queryString("");
 		}
 	}
-	return false;
 }
 
 

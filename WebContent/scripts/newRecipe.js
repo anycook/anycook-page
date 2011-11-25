@@ -13,35 +13,23 @@ function loadNewRecipe(){
 }
 
 function submitStep1(){
-	$.address.parameter("page", "step2");
+	$.address.parameter("step", "2");
 	//return false;
 }
 
 function newRecipeAdressChange(event){
-	var $editingContainer = $("#recipe_editing_container");
-	if($editingContainer.length == 0)
-		return;
+	var $editingContainer = $("#recipe_editing_container");	
+	$editingContainer.removeClass("step2 step3");
 	
-	var oldAddress = $editingContainer.data("address");
-	if(oldAddress.path == event.path){
-		$editingContainer.removeClass("step2 step3");
+	switch(Number(event.parameters["step"])){			
+	case 2:
+		$editingContainer.addClass("step2");
+		break;
 		
-		switch(event.parameters["step"]){			
-		case 2:
-			$editingContainer.addClass("step2");
-			break;
-			
-		case 3:
-			
-			break;
-		}
+	case 3:
 		
-		return false;
+		break;
 	}
 	
-	var check = confirm("Willst du wirklich aufhören, ein Rezept zu erstellen?");
-	if(!check){
-		$.address.value(oldAddress.value);
-		return false;
-	}
+	return false;
 }
