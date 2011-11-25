@@ -1,0 +1,17 @@
+
+
+.inputdecorator-container{
+	background-color: #ece9e3;
+	transition: background-color  0.1s ease-out;
+	-webkit-transition: background-color  0.1s ease-out;
+	-moz-transition: background-color  0.1s ease-out;
+	-o-transition: background-color  0.1s ease-out;
+}
+
+.inputdecorator-container.focus{
+	background-color: #f0ede6;
+	transition: background-color 0.s ease-in;
+	-webkit-transition: background-color 0.1s ease-in;
+	-moz-transition: background-color 0.1s ease-in;
+	-o-transition: background-color 0.1s ease-in;	
+}
