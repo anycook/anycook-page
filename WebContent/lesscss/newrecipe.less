@@ -1,17 +1,41 @@
-#step1{
-	.recipe_image_container{
-		margin: 10px 0;
-	
+#recipe_editing_container{
+	position:relative;
+	min-height: 740px;
+	width:655px;
+	overflow: hidden;
+	.sliding_container{
+		position:absolute;
+		top:0;
+		left:0;		
+		.transition(all, .7s, ease-in-out);
+		
+		&#step1{
+			.recipe_image_container{
+				margin: 10px 0;
+			
+			}		
+		}
+		
+		&#step2{
+			left:655px;
+		}
+		
+		&#step3{
+			left:1310px;
+		}	
 	}
-	
-}
-
-#step2{
-
-}
-
-#step3{
-
+		
+	&.step2{
+		.sliding_container{
+			.translate(-655px, 0);
+		}
+	}
+		
+	&.step3{
+		.sliding_container{
+			.translate(-655px, 0);
+		}
+	}
 }
 
 
