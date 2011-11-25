@@ -319,6 +319,7 @@ function changePage(event){
 			$.address.queryString("");
 		}
 	}
+	return false;
 }
 
 
