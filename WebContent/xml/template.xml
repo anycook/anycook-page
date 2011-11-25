@@ -145,7 +145,7 @@
     	<h1 class="center_headline">Rezept erstellen</h1>
     	<div id="recipe_editing_container">
     		<div id="step1" class="sliding_container">
-    			<h2 class="border_headline">Aller Anfang ist schwer</h2>
+    			<h2 class="stepinfo">Schön, dass Du ein Rezept erstellen möchtest. Legen wir los!</h2>
     			<div class="recipe_image_container visible">
     				<img class="recipe_image" src="/gerichtebilder/big/nopicture.png"/>
     				<div class="image_layer"></div>
@@ -345,7 +345,7 @@
 	</template>
 	<template id="settings">
 		<div id="settings_container">
-			<h1>Einstellungen</h1>
+			<h2 class="border_headline">Profileinstellungen</h2>
 			<div id="settings_account" class="settings">
 				<h2>Konto<div class="settings_saved">gespeichert</div></h2>
 				<div class="settings_content">
