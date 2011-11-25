@@ -49,13 +49,21 @@ function loadNewsstream(){
 	
 }
 
+var isCheckingMessageNum = false;
+
 function checkNewMessageNum(lastnum){
+	if(isCheckingMessageNum)
+		return;
+	
+	isCheckingMessageNum = true;
+	
 	if(lastnum === undefined)
 		lastnum = 0;
 	$.ajax({
 		url:"/anycook/GetMessageNum",
 		data:{lastnum:lastnum},
 		success:function(newNum){
+			isCheckingMessageNum = false;
 			if(newNum != null && user.checkLogin()){
 				var $newMessageBubble = $("#new_messages_bubble");
 				newNum = Number(newNum);
@@ -64,12 +72,13 @@ function checkNewMessageNum(lastnum){
 				else if(newNum == 0)
 					$newMessageBubble.fadeOut();
 				$("#new_messages_bubble span").text(newNum);
-				checkNewMessageNum(newNum);
+				setTimeout("checkNewMessageNum("+newNum+")", 1000);
+								//checkNewMessageNum(newNum);
 			}
 		},
 		error: function(error){
-			console.log("error loading messageNum. trying again");
-			checkNewMessageNum(0);
+			console.log("error loading messageNum. trying again in 10 sec");
+			setTimeout("checkNewMessageNum(0)", 10000);
 		}
 	});
 }
@@ -208,7 +217,7 @@ function getNewMessageContent(){
 		.append("<p>Empfänger:</p>")
 		.append("<div class=\"recipients\"/>")
 		.append("<p>Nachricht:</p>")
-		.append("<textarea></textarea>");
+		.append("<textarea class=\"light\"></textarea>");
 	var $container = $("<div></div>").addClass("new_message")
 		.append($image)
 		.append($right);
