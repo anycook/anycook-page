@@ -145,7 +145,8 @@
     	<h1 class="center_headline">Rezept erstellen</h1>
     	<div id="recipe_editing_container">
     		<div id="step1" class="sliding_container">
-    			<h2 class="stepinfo">Schön, dass Du ein Rezept erstellen möchtest. Legen wir los!</h2>
+    			<h2>Schön, dass Du ein Rezept erstellen möchtest.</h2>
+    			<p>In nur drei Schritten ist dein Rezept fertig. Fangen wir an!</p>
     			<div class="recipe_image_container visible">
     				<img class="recipe_image" src="/gerichtebilder/big/nopicture.png"/>
     				<div class="image_layer"></div>
@@ -169,10 +170,12 @@
     			</form>
     		</div>
     		<div id="step2" class="sliding_container">
-    			<h2 class="border_headline">Schritte &amp; Zutaten</h2>
+    			<h2>Schritte &amp; Zutaten</h2>
+    			<p>Gib jetzt deine Schritte und die dazu gehörigen Zutaten ein.</p>
     		</div>
     		<div id="step3" class="sliding_container">
-    			<h2 class="border_headline">Zu guter letzt</h2>
+    			<h2>Zu guter letzt</h2>
+    			<p>Abschließend noch ein paar wichtige Eckdaten</p>
     		</div>
     	</div>
 	</template>
@@ -280,7 +283,7 @@
 		</div>
 	</template>
 	<template id="profile">
-		<div id="profile_container">
+		<div class="profile_container">
 			<img id="profile_image" src=""/>					
 			<div id="profile_info">
 				<div id="profile_title">
@@ -346,7 +349,7 @@
 	<template id="settings">
 		<div id="settings_container">
 			<h2 class="border_headline">Profileinstellungen</h2>
-			<div id="settings_account" class="settings">
+			<div id="settings_account" class="settings profile_container">
 				<h2>Konto<div class="settings_saved">gespeichert</div></h2>
 				<div class="settings_content">
 					<div id="account_image">
@@ -357,10 +360,16 @@
 					</div>
 					<form id="account_form">
 					<ul id="account_data">
-						<li><input type="text" id="account_name" maxlength="45"/></li>
-						<li><input type="text" id="account_mail" maxlength="45"/></li>
 						<li>
-							<h3>Über mich</h3>
+							<h2>Name:</h2>
+							<input type="text" id="account_name" maxlength="45"/>
+						</li>
+						<li>
+							<h2>Ort:</h2>
+							<input type="text" id="account_mail" maxlength="45"/>
+						</li>
+						<li>
+							<h2>Über mich</h2>
 							<textarea id="account_aboutme"></textarea>
 						</li>
 						<li>
@@ -370,8 +379,9 @@
 					</form>
 				</div>
 			</div>
+			<h2 class="border_headline">Allgemeine Einstellungen</h2>
 			<div id="settings_password" class="settings">
-				<h2>Passwort ändern<div class="settings_saved">gespeichert</div></h2>
+				<h2>Passwort ändern</h2><div class="settings_saved">gespeichert</div>
 				<div class="settings_content">
 					<form id="password_form">
 						<h3>Altes Passwort</h3>
