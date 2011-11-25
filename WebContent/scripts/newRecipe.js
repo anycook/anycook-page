@@ -10,6 +10,6 @@ function loadNewRecipe(){
 }
 
 function submitStep1(){
-	$("#recipe_editing_container").removeClass("step3").addClass("step2");
-	return false;
+	$.address.parameter("page", "step2");
+	//return false;
 }

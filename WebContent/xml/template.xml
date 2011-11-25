@@ -143,6 +143,9 @@
     </template>
     <template id="recipeediting">
     	<h1 class="center_headline">Rezept erstellen</h1>
+    	<div id="new_recipe_navigation">
+    		
+    	</div>
     	<div id="recipe_editing_container">
     		<div id="step1" class="sliding_container">
     			<h2>Schön, dass Du ein Rezept erstellen möchtest.</h2>
