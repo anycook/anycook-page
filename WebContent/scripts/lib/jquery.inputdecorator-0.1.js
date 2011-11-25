@@ -36,7 +36,7 @@
 				        $.extend( settings, options );
 		        	
 		        	data = {
-	                   target : $this,
+	                   target : this,
 	                   settings : settings
                		};
 		        	$(this).data("inputdecorator-required", data);
@@ -65,7 +65,7 @@
 	
 	
 	inputdecorator.decorate = function(type, data){
-		var $this = data.target;
+		var $this = $(data.target);
 		var settings = data.settings;
 		
 		var $decorator = $("<div></div>").css({
@@ -111,15 +111,22 @@
 	}
 	
 	inputdecorator.addChecker = function(type,data){
+		var $this = $(data.target);
 		switch(type){
 		case "required":
 			data.intervalId = window.setInterval(function(){inputdecorator.checkRequired(data);}, 200);
-			data.target.data("inputdecorator-required", data);
+			$this.data("inputdecorator-required", data);
 		}
 	}
 	
 	inputdecorator.checkRequired = function(data){
-		var $this = data.target;
+		var $this = $(data.target);
+		if($("body").find(data.target).length == 0){
+			window.clearInterval(data.intervalId);
+			$this.data("inputdecorator-required", undefined);
+			return;
+		}
+		
 		var settings = data.settings;
 		var $parent = $this.parent();
 		if($this.val().length == 0)
@@ -127,5 +134,7 @@
 		else
 			$parent.children().first().fadeOut(settings.transitiontime);
 	}
+	
+	
 
 })( jQuery );
