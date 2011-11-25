@@ -356,7 +356,7 @@
 		<div id="settings_container">
 			<h2 class="border_headline">Profileinstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
-			<div id="settings_account" class="settings profile_container">
+			<div id="settings_content" class="settings profile_container">
 					<div id="account_image">
 						<div id="account_upload">Neues Bild hochladen
 						<div></div>
@@ -386,7 +386,7 @@
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_password" class="settings">
-				<div class="settings_content">
+				<div class="settings_account">
 					<form id="account_data">
 						<h2>Email-Adresse ändern:</h2>
 						<p>Deine E-Mail Adresse, auf der wir dich erreichen können.</p>
