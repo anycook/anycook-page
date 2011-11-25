@@ -143,7 +143,7 @@
     </template>
     <template id="recipeediting">
     	<h1 class="center_headline">Rezept erstellen</h1>
-    	<div id="new_recipe_navigation">
+    	<div class="navigation">
     		<div id="nav_step1" class="nav_button">Einleitung</div>
     		<div id="nav_step2" class="nav_button">Schritte &amp; Zutaten</div>
     		<div id="nav_step3" class="nav_button">Abschluss</div>
