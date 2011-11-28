@@ -89,22 +89,24 @@
 					.new_ingredients{
 						position: relative;
 						z-index: 1;
-						width:464px;
+						width:462px;
 						/*float:left;*/
 						background-color: @imginnerbordercolor;
 						border: 1px solid @lightgrey;
 						border-top: 0;
 						margin: 0 12px;
-						padding: 8px 10px 5px;
+						padding: 7px 10px 5px;
 						
 						h4{
+							margin-bottom: 2px;
+							
 							&.zutaten_headline{
 								float:left;
-								margin-left:100px
+								margin-left:150px
 							}
 							
 							&.menge_headline{
-								margin-left:340px;
+								margin-left:371px;
 							}
 						}
 						
@@ -116,7 +118,7 @@
 								.dragdrop{
 									float:left;
 									cursor: move;
-									margin: 6px 1px;
+									margin: 6px 8px 6px 1px;
 									width: 12px;
 									height: 18px;
 									background-image: url("/img/dragdrop.png");
@@ -126,13 +128,14 @@
 								
 								.new_ingredient{
 									float:left;
-									width: 310px;
-									margin-right: 5px;
+									width: 300px;
+									margin-right: 8px;
 								}
 								
 								.new_ingredient_menge{
 									float:left;
 									width: 80px;
+									margin-right: 4px;
 								}
 								
 								.remove_new_ingredient_line{
@@ -175,6 +178,7 @@
 						width:27px;
 						background-image: url("/img/stepbtn27x27.png");
 						background-position: 0 0;
+						cursor: pointer;
 						//position: relative;
 						span{
 							background-image: url("/img/stepbtn27x27.png");
@@ -194,6 +198,7 @@
 								.transition(opacity, .1s, ease-out);
 							}
 						}
+						
 					}
 					
 				}
