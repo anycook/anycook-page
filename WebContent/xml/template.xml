@@ -142,12 +142,12 @@
     	</div>
     </template>
     <template id="recipeediting">
-    	<h1 class="center_headline">Rezept erstellen</h1>
+    	<h1 class="center_headline nav_headline">Rezept erstellen</h1>
     	<div class="navigation">
-    		<div id="nav_step1" class="nav_button">Einleitung</div>
-    		<div id="nav_step2" class="nav_button">Schritte &amp; Zutaten</div>
-    		<div id="nav_step3" class="nav_button">Abschluss</div>
-    		<div id="nav_step4" class="nav_button">Vorschau</div>
+    		<a id="nav_step1" class="nav_button active">Einleitung</a>
+    		<a id="nav_step2" class="nav_button inactive">Schritte &amp; Zutaten</a>
+    		<a id="nav_step3" class="nav_button inactive">Abschluss</a>
+    		<a id="nav_step4" class="nav_button inactive">Vorschau</a>
     	</div>
     	<div id="recipe_editing_container">
     		<div id="step1" class="sliding_container">
@@ -178,6 +178,7 @@
     		<div id="step2" class="sliding_container">
     			<h2>Schritte &amp; Zutaten</h2>
     			<p>Gib jetzt deine Schritte und die dazu gehörigen Zutaten ein.</p>
+    			<ul id="new_step_container"></ul>
     		</div>
     		<div id="step3" class="sliding_container">
     			<h2>Zu guter letzt</h2>

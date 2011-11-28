@@ -1,15 +1,42 @@
 .navigation{
 	float:left;
+	/*width:655px;*/
+	margin-left: (655px - 572px) / 2;
+	margin-bottom: 15px;
 	
 	.nav_button{
-		background-color: @background;
-		border-bottom: 1px solid @lightgrey;
-		border-radius: 8px;
-		width: 115px;
-		height: 35px;
+		float:left;
+		background-color: @stepcolor;
+		border: 1px solid @inactivebuttonoutline;
+		border-radius: 10px;
+		width: 125px;
+		height: 18px;
+		margin: -16px 8px 0;
+		padding: 6px 0;
+		.transition(all, 200ms, ease-in-out);
+		
 		font-size: 10pt;
-		color: @smalllightfontcolor;
+		color: @buttonfontcolor;
 		text-align: center;
+		
+		&:hover{
+			text-decoration: none;
+		}
+		
+		&.inactive{
+			background-color: @background;
+			border-color:@lightgrey;
+			color: @smalllightfontcolor;
+			cursor: default;
+			.transition(all, 200ms, ease-out);
+		}
+		
+		&.active{
+			background-color: @activebuttonbackground;
+			border-color:@linkcolor;
+			color: @activebuttonfontcolor;
+			.transition(all, 200ms, ease-in);
+		}
 	}
 	
 }
@@ -36,6 +63,67 @@
 		
 		&#step2{
 			left:655px;
+			
+			ul#new_step_container{
+				list-style: none;
+				float:left;
+				.new_ingredient_step{
+					.new_step{
+						position:relative;
+						z-index: 2;
+						float:none;
+						margin-bottom: 0;
+						.mid{
+							textarea{
+								float:left;
+								width: 350px;
+								height:113px;
+								margin: 8px 0;
+								
+							}
+						}
+					}
+					.new_ingredients{
+						position: relative;
+						z-index: 1;
+						/*float:left;*/
+						background-color: @imginnerbordercolor;
+						border: 1px solid @lightgrey;
+						border-top: 0;
+						margin: 0px 12px 0 12px;
+						padding: 8px 0 5px 0;
+						
+						h4{
+							&.zutaten_headline{
+								float:left;
+								margin-left:100px
+							}
+							
+							&.menge_headline{
+								margin-left:340px;
+							}
+						}
+						
+						ul{
+							list-style: none;
+							
+							li{
+								height:30px;
+								
+								.new_ingredient{
+									float:left;
+									width: 310px;
+								}
+								
+								.new_ingredient_menge{
+									float:left;
+									width: 80px;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		
 		&#step3{
@@ -86,3 +174,5 @@ form.recipeediting{
 		
 	}
 }
+
+

@@ -3,13 +3,24 @@
  */
 
 function loadNewRecipe(){
-	$("#recipe_editing_container").data("address", {path:$.address.path(),value:$.address.value()});
+	//navigation
+	var path = $.address.path();
+	for(var i = 1; i<=4; i++)
+		$("#nav_step"+i).attr("href", "#!"+path+"?step="+i);
+	$(".nav_button").click(function(){
+		if($(this).hasClass("inactive"))
+			return false;
+	});
 	
+	
+	//step1	
 	var decoratorSettings = {color:"#878787"};
 	$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings);
 	$("#step1 textarea").inputdecorator("required", decoratorSettings);
 	$("#step1 form").submit(submitStep1);
-	//$.address.unbind("change", handleChange);
+	
+	//step2
+	$("#new_step_container").append(getNewIngredientStep(1));
 }
 
 function submitStep1(){
@@ -21,16 +32,73 @@ function submitStep1(){
 function newRecipeAdressChange(event){
 	var $editingContainer = $("#recipe_editing_container");	
 	$editingContainer.removeClass("step2 step3");
+	var $navigation = $(".navigation");
+	$navigation.children().removeClass("active");
 	
-	switch(Number(event.parameters["step"])){			
-	case 2:
-		$editingContainer.addClass("step2");
-		break;
+	var stepNum = Number(event.parameters["step"]);
+	if(stepNum == undefined)
+		stepNum = 1;
+	
+	switch(stepNum){
+	case 4:
+		$navigation.children("#nav_step3").removeClass("inactive");
 		
 	case 3:
-		$editingContainer.addClass("step3");
-		break;
+		$navigation.children("#nav_step2").removeClass("inactive");
+					
+	case 2:
+		$navigation.children("#nav_step2").removeClass("inactive");
+		
+	default:
+		$navigation.children("#nav_step"+stepNum).addClass("active");
+		$editingContainer.addClass("step"+stepNum);
 	}
 	
 	return false;
+}
+
+function getNewIngredientStep(number){
+	//step-part
+	var $left = $("<div></div>").addClass("left");
+	
+	var $number = $("<div></div>").addClass("number").text(number);
+	var $textarea = $("<textarea></textarea>").addClass("light");
+	var $mid = $("<div></div>").addClass("mid")
+		.append($number)
+		.append($textarea);
+	
+	var $right = $("<div></div>").addClass("right");
+	var $newStep = $("<div></div>").addClass("new_step step")
+		.append($left)
+		.append($mid)
+		.append($right);
+	
+	//ingredient part
+	var $zutaten = $("<h4></h4>").addClass("zutaten_headline").text("Zutatenname");
+	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
+	var $newIngredientList = $("<ul></ul>")
+		.append(getNewIngredientLine);
+	var $newIngredients  = $("<div></div>").addClass("new_ingredients")
+		.append($zutaten)
+		.append($menge)
+		.append($newIngredientList);
+	
+	
+	//all
+	var $newIngredientStep = $("<li></li>").addClass("new_ingredient_step")
+		.append($newStep)
+		.append($newIngredients);
+		
+	return $newIngredientStep;	
+}
+
+function getNewIngredientLine(){	
+	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
+	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge");
+	
+	var $newIngredientLine = $("<li></li>").addClass("new_ingredient_line")
+		.append($ingredient)
+		.append($menge);
+		
+	return $newIngredientLine;
 }

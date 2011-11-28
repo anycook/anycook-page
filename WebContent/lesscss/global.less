@@ -1,7 +1,21 @@
 h1{
 	font:@headlinefont;
 	font-size:18pt;
-	color:@darkfontcolor;	
+	color:@darkfontcolor;
+	
+	&.center_headline{
+		width: 100%;
+		border-top:1px solid @lightgrey;
+		border-bottom: 1px solid @lightgrey;
+		text-align: center;
+		padding: 13px 0 17px;
+		margin: 0 0 15px 0;
+	}
+	
+	&.nav_headline{
+		padding: 13px 0 27px;
+		margin: 0;
+	}
 }
 
 h2{
@@ -24,21 +38,18 @@ h3{
 	color:@darkfontcolor;
 }
 
+h4{
+	color:@smalllightfontcolor;
+	font-size: 8pt;
+	font-weight: normal;
+}
+
 h6{
 	font:@headlinefont;
 	font-size:14pt;
 	color:@darkfontcolor;
 	font-style: italic;
 	margin:0;
-}
-
-h1.center_headline{
-	width: 100%;
-	border-top:1px solid @lightgrey;
-	border-bottom: 1px solid @lightgrey;
-	text-align: center;
-	padding: 13px 0 17px;
-	margin: 0 0 15px 0;
 }
 
 p{
