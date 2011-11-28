@@ -390,8 +390,7 @@
 			</div>
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
-			<div id="settings_password" class="settings">
-				<div class="settings_account">
+			<div id="settings_account" class="settings">
 					<form id="account_data">
 						<h2>Email-Adresse ändern:</h2>
 						<p>Deine E-Mail Adresse, auf der wir dich erreichen können.</p>
@@ -413,7 +412,6 @@
 						<div id="tagcloud"></div>
 						<input type="submit" value="speichern"/>
 					</form>
-				</div>
 			</div>
 			
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
