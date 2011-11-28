@@ -179,6 +179,10 @@
     			<h2>Schritte &amp; Zutaten</h2>
     			<p>Gib jetzt deine Schritte und die dazu gehörigen Zutaten ein.</p>
     			<ul id="new_step_container"></ul>
+    			<div id="add_new_step">
+    				<div class="img"><span></span></div>
+    				<div class="text">Schritt hinzufügen</div>
+    			</div>
     		</div>
     		<div id="step3" class="sliding_container">
     			<h2>Zu guter letzt</h2>

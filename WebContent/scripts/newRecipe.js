@@ -73,6 +73,9 @@ function getNewIngredientStep(number){
 		.append($mid)
 		.append($right);
 	
+	//remove step
+	var $remove = $("<div></div>").addClass("remove_new_step").append("<span></span>");
+	
 	//ingredient part
 	var $zutaten = $("<h4></h4>").addClass("zutaten_headline").text("Zutatenname");
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
@@ -87,7 +90,8 @@ function getNewIngredientStep(number){
 	//all
 	var $newIngredientStep = $("<li></li>").addClass("new_ingredient_step")
 		.append($newStep)
-		.append($newIngredients);
+		.append($newIngredients)
+		.append($remove);
 		
 	return $newIngredientStep;	
 }

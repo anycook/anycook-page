@@ -52,7 +52,7 @@
 		top:0;
 		left:0;
 		.translate(0, 0);
-		.transition(all, .7s, ease-in-out);
+		.transition(all, .7s, linear);
 		
 		&#step1{
 			.recipe_image_container{
@@ -66,8 +66,11 @@
 			
 			ul#new_step_container{
 				list-style: none;
-				float:left;
+				margin: 0 0 10px;
+				
 				.new_ingredient_step{
+					position: relative;
+					
 					.new_step{
 						position:relative;
 						z-index: 2;
@@ -86,6 +89,7 @@
 					.new_ingredients{
 						position: relative;
 						z-index: 1;
+						width:484px;
 						/*float:left;*/
 						background-color: @imginnerbordercolor;
 						border: 1px solid @lightgrey;
@@ -122,6 +126,77 @@
 							}
 						}
 					}
+					
+					.remove_new_step{
+						position:absolute;
+						//margin: 20px 0 0 500px;
+						top:60px;
+						right: 100px;
+						height:27px;
+						width:27px;
+						background-image: url("/img/stepbtn27x27.png");
+						background-position: 0 0;
+						//position: relative;
+						span{
+							background-image: url("/img/stepbtn27x27.png");
+							position: absolute;
+							top:0;
+							left:0;
+							bottom:0;
+							right:0;
+							opacity: 0;
+							background-position: 0 -27px;
+							.transition(opacity, .1s, ease-out);
+						}
+						
+						&:hover{
+							span{
+								opacity: 1;
+								.transition(opacity, .1s, ease-out);
+							}
+						}
+					}
+					
+				}
+				
+			}
+			#add_new_step{				
+				cursor:pointer;
+				height:27px;
+				
+				.img{
+					float:left;
+					width:27px;
+					height:27px;
+					background-image: url("/img/stepbtn27x27.png");
+					background-position: -27px 0;
+					position: relative;
+					
+					span{
+						background-image: url("/img/stepbtn27x27.png");
+						position: absolute;
+						top:0;
+						left:0;
+						bottom:0;
+						right:0;
+						opacity: 0;
+						background-position: -27px -27px;
+						.transition(opacity, .1s, ease-out);
+						
+					}
+				}
+				&:hover{
+					.img{
+						span{
+							opacity: 1;
+							.transition(opacity, .1s, ease-in);
+						}
+					}
+				}
+				
+				.text{
+					color:@smalllightfontcolor;
+					padding: 4px 0 0 30px;
 				}
 			}
 		}
