@@ -23,7 +23,8 @@ function loadNewRecipe(){
 	$("#new_step_container").append(getNewIngredientStep(1));
 	$("#add_new_step").click(function(){
 		$("#new_step_container")
-		.append(getNewIngredientStep($(".new_ingredient_step").length+1);
+		.append(getNewIngredientStep($(".new_ingredient_step").length+1));
+		resetNewRecipeHeight();
 	});
 }
 
@@ -124,4 +125,8 @@ function getNewIngredientLine(){
 		.append($remove);
 		
 	return $newIngredientLine;
+}
+
+function resetNewRecipeHeight(){
+	
 }
