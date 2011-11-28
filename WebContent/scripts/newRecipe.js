@@ -21,6 +21,10 @@ function loadNewRecipe(){
 	
 	//step2
 	$("#new_step_container").append(getNewIngredientStep(1));
+	$("#add_new_step").click(function(){
+		$("#new_step_container")
+		.append(getNewIngredientStep($(".new_ingredient_step").length+1);
+	});
 }
 
 function submitStep1(){
@@ -60,12 +64,19 @@ function newRecipeAdressChange(event){
 function getNewIngredientStep(number){
 	//step-part
 	var $left = $("<div></div>").addClass("left");
-	
+	var $dragdrop = $("<div></div>").addClass("step_dragdrop");
 	var $number = $("<div></div>").addClass("number").text(number);
+	var $numberContainer = $("<div></div>").addClass("number_container")
+		.append($dragdrop)
+		.append($number)
+		.append($dragdrop.clone());
+		
+	
 	var $textarea = $("<textarea></textarea>").addClass("light");
 	var $mid = $("<div></div>").addClass("mid")
-		.append($number)
+		.append($numberContainer)
 		.append($textarea);
+		
 	
 	var $right = $("<div></div>").addClass("right");
 	var $newStep = $("<div></div>").addClass("new_step step")
@@ -100,7 +111,7 @@ function getNewIngredientStep(number){
 }
 
 function getNewIngredientLine(){
-	var $dragdrop = $("<div></div>").addClass("dragdrop");	
+	var $dragdrop = $("<div></div>").addClass("ingredient_dragdrop");	
 	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
 	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge");
 	var $remove = $("<div></div>").addClass("remove_new_ingredient_line")

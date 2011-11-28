@@ -77,6 +77,30 @@
 						float:none;
 						margin-bottom: 0;
 						.mid{
+							.number_container{
+								margin: 8px 15px 8px 0;
+								border-right:1pt solid @lightgrey;
+								width: 110px;
+								height: 123px;
+								cursor: move;
+								
+								float:left;
+								.step_dragdrop{
+									height: 12px;
+									width: 54px;
+									margin: 0 28px;
+									float:left;
+									background: url("/img/dragdrop.png") repeat;
+								}
+								
+								.number{
+									height: 99px;
+									margin:0;
+									line-height:90px;
+									border: 0;
+								}
+							}
+							
 							textarea{
 								float:left;
 								width: 350px;
@@ -115,7 +139,7 @@
 							
 							li{
 								height:30px;
-								.dragdrop{
+								.ingredient_dragdrop{
 									float:left;
 									cursor: move;
 									margin: 6px 8px 6px 1px;
