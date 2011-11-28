@@ -81,6 +81,8 @@ function getNewIngredientStep(number){
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
 	var $newIngredientList = $("<ul></ul>")
 		.append(getNewIngredientLine);
+	var $addingredientLine = $("<div></div>").addClass("add_new_ingredient_line")
+		.append("<span></span>");
 	var $newIngredients  = $("<div></div>").addClass("new_ingredients")
 		.append($zutaten)
 		.append($menge)
@@ -96,13 +98,18 @@ function getNewIngredientStep(number){
 	return $newIngredientStep;	
 }
 
-function getNewIngredientLine(){	
+function getNewIngredientLine(){
+	var $dragdrop = $("<div></div>").addClass("dragdrop");	
 	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
 	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge");
+	var $remove = $("<div></div>").addClass("remove_new_ingredient_line")
+		.append("<span></span>");
 	
 	var $newIngredientLine = $("<li></li>").addClass("new_ingredient_line")
+		.append($dragdrop)
 		.append($ingredient)
-		.append($menge);
+		.append($menge)
+		.append($remove);
 		
 	return $newIngredientLine;
 }

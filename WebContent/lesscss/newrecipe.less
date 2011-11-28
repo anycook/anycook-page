@@ -89,13 +89,13 @@
 					.new_ingredients{
 						position: relative;
 						z-index: 1;
-						width:484px;
+						width:464px;
 						/*float:left;*/
 						background-color: @imginnerbordercolor;
 						border: 1px solid @lightgrey;
 						border-top: 0;
-						margin: 0px 12px 0 12px;
-						padding: 8px 0 5px 0;
+						margin: 0 12px;
+						padding: 8px 10px 5px;
 						
 						h4{
 							&.zutaten_headline{
@@ -113,15 +113,54 @@
 							
 							li{
 								height:30px;
+								.dragdrop{
+									float:left;
+									cursor: move;
+									margin: 6px 1px;
+									width: 12px;
+									height: 18px;
+									background-image: url("/img/dragdrop.png");
+									background-repeat: repeat;
+								}
+								
 								
 								.new_ingredient{
 									float:left;
 									width: 310px;
+									margin-right: 5px;
 								}
 								
 								.new_ingredient_menge{
 									float:left;
 									width: 80px;
+								}
+								
+								.remove_new_ingredient_line{
+									width: 20px;
+									height: 20px;
+									margin: 5px 2px;
+									float:left;
+									background-image: url("/img/icons20x20.png");
+									background-position: 0 -80px;
+									position: relative;
+									span{
+										background-image: url("/img/icons20x20.png");
+										position: absolute;
+										top:0;
+										left:0;
+										bottom:0;
+										right:0;
+										opacity: 0;
+										background-position: 0 -100px;
+										.transition(opacity, .1s, ease-out);
+									}
+									
+									&:hover{
+										span{
+											opacity: 1;
+											.transition(opacity, .1s, ease-out);
+										}
+									}
 								}
 							}
 						}
