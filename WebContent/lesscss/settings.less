@@ -84,7 +84,7 @@
 }
 
 
-.bigcheckbox{
+.headbox{
 		height: 25px;
 		width: 400px;
 		padding: 12px 20px 10px;
@@ -96,9 +96,42 @@
 			float: left;
 		}
 		
+				
+		
 		input{
-			float: right;
+				float: right;
+				opacity: .1;
+				width: 22px;
+				height: 22px;
+				display: block;
+			}
+		
+		input + .bigcheckbox{
+			clear: none;
+			width: 22px;
+			height: 22px;
+			background-image: url("/img/bigcheckbox22x22.png");
+			background-position: 0px 0px;
+			background-repeat: no-repeat;
+			display: table-cell;
+			cursor: pointer;
+			
+			/*&:hover, &:focus{
+			background-position: 0px -22px;	
+			}*/
+			
+			
+			
+			
 		}
+		
+		
+
+		input:checked + .bigcheckbox {
+				background-position: 0px -44px;	
+		}
+		
+
 }
 	
 #mail_notification{
@@ -131,14 +164,16 @@
 				
 				tr{
 					border-bottom:1px solid @lightbrown;
-					line-height: 30px;
-					
+					line-height: 37px;
+										
 					td{
 						padding-left: 10px;
 					}
 					td+td{
-						padding: 0 7px 0 0;
+						padding: 0 10px 0 0;
 					}
+					
+					
 					
 				}
 				tr:last-child{

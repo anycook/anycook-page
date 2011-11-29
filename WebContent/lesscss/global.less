@@ -250,6 +250,29 @@ textarea{
 
 }
 
+.checkbox{
+		width: 13px;
+		height: 13px;
+		background-image: url("/img/icons20x20.png");
+		background-position: -40px -40px;
+		background-repeat: no-repeat;
+		display: table-cell;
+		cursor: pointer;
+			
+		input{
+			position: absolute;
+			left: -9999px;
+		}
+		
+		&:hover, &:focus{
+			background-position: -40px -60px;	
+		}
+		
+		.active{
+			background-position: -40px -80px;	
+		}
+	
+}
 
 input::-webkit-input-placeholder{
 			font:@standardfont;
