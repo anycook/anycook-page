@@ -91,21 +91,29 @@ function makeIngredientLightBox(){
 		.append($numberinput)
 		.append("<span> Personen</span>");
 		
-	var $ul =$("<ul></ul>");
-	for(var i = 0; i<4; i++)
-		$ul.append(getNewIngredientLine());
+	var $ul =$("<ul></ul>").addClass("new_ingredient_list");
 		
 	var $content = $("<div></div>")
-		.append($ul);		
+		.append($ul);	
 
-	var $lightbox = getLightbox($headline.children(), "", $content, "Rezept abschließen");
+	var $lightbox = getLightbox($headline.children(), 
+	"Dies sind alle Zutaten, die du in den Schritten angegeben hast. "+ 
+	"Falls Zutaten fehlen, füge diese bitte noch zu den entsprechenden Schritten hinzu.", $content, "Rezept abschließen")
+		.addClass("ingredient_overview");
 	$("#main").append($lightbox);
 	$("#ingredient_overview").click(showIngredientLightbox);
 }
 
 function showIngredientLightbox(){
-	showLightbox($(".lightbox"), $("#ingredient_overview").offset().top);
+	var $lightbox = $(".lightbox");
+	var top = $("#ingredient_overview").offset().top;
+	getIngrededientsForOverview();
+	showLightbox($lightbox, top);
 	return false;
+}
+
+function getIngrededientsForOverview(){
+	
 }
 
 
