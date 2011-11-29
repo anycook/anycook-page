@@ -418,7 +418,7 @@
 			<h2 class="border_headline">Erweiterte Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
-				<div class="bigcheckbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2></div>
+				<div class="bigcheckbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
 				<tr>
