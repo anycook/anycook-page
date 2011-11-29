@@ -108,9 +108,10 @@ function showIngredientLightbox(){
 	var $this = $(this);
 	var $lightbox = $(".lightbox");
 	var top = $("#ingredient_overview").offset().top;
-	if(getIngrededientsForOverview())
+	if(getIngrededientsForOverview()){
+		var top = $("#ingredient_overview").offset().top - $lightbox.outerHeight();
 		showLightbox($lightbox, top);
-	else{
+	}else{
 		$("#no_ingredients_error").fadeIn(300);
 		$this.effect("shake", {distance:5, times:2}, 50);
 		watchForIngredients();

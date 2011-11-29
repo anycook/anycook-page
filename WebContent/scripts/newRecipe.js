@@ -277,8 +277,9 @@ function watchSteps(){
 					}
 					
 					if($ingredientLine == null){
-						$ingredientLine = getNewIngredientLine();
-						$this.find(".new_ingredient_list").append($ingredientLine);
+						$ingredientLine = getNewIngredientLine().hide();
+						$this.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
+						resetNewRecipeHeight();
 					}
 					
 					$ingredientLine.children(".new_ingredient").val(json[i]);
@@ -297,7 +298,7 @@ function formatMenge(){
 	var textArr = $this.val().split("");
 	var newText = textArr[0];
 	for(var i = 0; i<textArr.length -1; i++){
-		if(textArr[i].search(/\d/) > -1 && textArr[i+1].search(/\w/) > -1)
+		if(textArr[i].match(/\d/) && textArr[i+1].match(/[a-z]/i))
 			newText+= " ";
 		newText+=textArr[i+1];
 	}
