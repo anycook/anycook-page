@@ -177,7 +177,7 @@
     		</div>
     		<div id="step2" class="sliding_container">
     			<h2>Schritte &amp; Zutaten</h2>
-    			<p>Gib jetzt deine Schritte und die dazu gehörigen Zutaten ein.</p>
+    			<p>Gib jetzt deine Schritte und die dazu gehörigen Zutaten und Mengen ein. Wir rechnen die Mengen dann für dich zusammen und du kannst sie anschließend in der Zutatenübersicht kontrollieren.</p>
     			<ul id="new_step_container"></ul>
     			<div id="add_new_step">
     				<div class="img"><span></span></div>
@@ -419,38 +419,39 @@
 			<h2 class="border_headline">Erweiterte Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
-				<div class="bigcheckbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /></div>
+				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><label class="bigcheckbox"><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /></label></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
 				<tr>
 					<td>..wenn mein Rezept aktiviert wird.</td>
-					<td><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></td>
+					<td><label class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></label></td>
 				</tr>
 				<tr>
 					<td>..wenn meine Stichwörter aktiviert werden.</td>
-					<td><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /></td>
+					<td><label class="checkbox"><input type="checkbox" name="notification_tag" value="T
+						AGACTIVATION" /></label></td>
 				</tr>
 				<tr>
 					<td>..bei Diskussionsbeiträgen zu meinem Rezept.</td>
-					<td><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></td>
+					<td><label class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></label></td>
 				</tr>
 				<tr>
 					<td>..bei Antworten auf meine Diskussionsbeiträge.</td>
-					<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
+					<td><label class="checkbox"><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></label></td>
 				</tr>
 				<tr>
 					<td>..wenn jemandem dein Rezept schmeckt.</td>
-					<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
+					<td><label class="checkbox"><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></label></td>
 				</tr>
 				<tr>
 					<td>Newsletter</td>
-					<td><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /></td>
+					<td><label class="checkbox"><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /></label></td>
 				</tr>
 				</table>						
 				</div>
 			</div>
 			<div id="settings_facebook" class="settings">
-				<div class="bigcheckbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /></div>
+				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /></div>
 				<div id="settings_facebook_content" class="settings_content">
 					<table>
 						<tr>
