@@ -193,3 +193,27 @@ function removeNewIngredientLine(){
 		resetNewRecipeHeight();
 	}
 }
+
+function watchForIngredients(){
+	var id = $(document).data("watchForIngredients");
+	var $newIngredients = $(".new_ingredient");
+	if($newIngredients.length == 0){
+		$(document).removeData("watchForIngredients");
+		window.clearInterval(id);
+		return;
+	}
+	if(id == undefined){
+		id = window.setInterval("watchForIngredients()", 1000);
+		$(document).data("watchForIngredients", id);
+	}
+	
+	for(var i = 0; i < $newIngredients.length; i++){
+		if($($newIngredients[i]).val().length>0){
+			$(document).removeData("watchForIngredients");
+			window.clearInterval(id);
+			$("#no_ingredients_error").fadeOut(300);
+			break;
+		}
+	}
+	
+}
