@@ -20,10 +20,17 @@ function loadNewRecipe(){
 	$("#step1 form").submit(submitStep1);
 	
 	//step2
-	$("#new_step_container").append(getNewIngredientStep(1));
+	var $firstStep = getNewIngredientStep(1);
+	$("#new_step_container").append($firstStep)
+		.sortable()
+		.disableSelection();
+	$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt"});
 	$("#add_new_step").click(function(){
+		var $newStep = getNewIngredientStep($(".new_ingredient_step").length+1);
+		
 		$("#new_step_container")
-		.append(getNewIngredientStep($(".new_ingredient_step").length+1));
+		.append($newStep);
+		$newStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt"});
 		resetNewRecipeHeight();
 	});
 }
@@ -39,6 +46,7 @@ function newRecipeAdressChange(event){
 	$editingContainer.removeClass("step2 step3");
 	var $navigation = $(".navigation");
 	$navigation.children().removeClass("active");
+	$("#recipe_editing_container").css("height", "");
 	
 	var stepNum = Number(event.parameters["step"]);
 	if(stepNum == undefined)
@@ -53,6 +61,7 @@ function newRecipeAdressChange(event){
 					
 	case 2:
 		$navigation.children("#nav_step2").removeClass("inactive");
+		resetNewRecipeHeight();
 		
 	default:
 		$navigation.children("#nav_step"+stepNum).addClass("active");
@@ -72,8 +81,9 @@ function getNewIngredientStep(number){
 		.append($number)
 		.append($dragdrop.clone());
 		
-	
-	var $textarea = $("<textarea></textarea>").addClass("light");
+	var decoratorSettings = {color:"#878787"};
+	var $textarea = $("<textarea></textarea>").addClass("light")
+		.attr("maxlength", 260);
 	var $mid = $("<div></div>").addClass("mid")
 		.append($numberContainer)
 		.append($textarea);
@@ -86,15 +96,25 @@ function getNewIngredientStep(number){
 		.append($right);
 	
 	//remove step
-	var $remove = $("<div></div>").addClass("remove_new_step").append("<span></span>");
+	var $remove = $("<div></div>").addClass("remove_new_step")
+		.append("<span></span>")
+		.click(removeNewStep);
 	
 	//ingredient part
 	var $zutaten = $("<h4></h4>").addClass("zutaten_headline").text("Zutatenname");
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
 	var $newIngredientList = $("<ul></ul>")
-		.append(getNewIngredientLine);
+		.append(getNewIngredientLine)
+		.sortable({
+			// placeholder: "ui-state-highlight",
+			// cursorAt:"top",
+			// distance: 30,
+			axis: "y"
+		})
+		.disableSelection();
 	var $addingredientLine = $("<div></div>").addClass("add_new_ingredient_line")
-		.append("<span></span>");
+		.append("<span></span>")
+		.click(addNewIngredientLine);
 	var $newIngredients  = $("<div></div>").addClass("new_ingredients")
 		.append($zutaten)
 		.append($menge)
@@ -116,7 +136,8 @@ function getNewIngredientLine(){
 	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
 	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge");
 	var $remove = $("<div></div>").addClass("remove_new_ingredient_line")
-		.append("<span></span>");
+		.append("<span></span>")
+		.click(removeNewIngredientLine);
 	
 	var $newIngredientLine = $("<li></li>").addClass("new_ingredient_line")
 		.append($dragdrop)
@@ -128,5 +149,39 @@ function getNewIngredientLine(){
 }
 
 function resetNewRecipeHeight(){
+	$("#recipe_editing_container").animate({height:$("#step2").height()}, {duration:500});
+}
+
+function removeNewStep(){
+	var $this = $(this);
+	var $step = $this.parent();
 	
+	if($step.siblings().length > 0){
+		$step.remove();
+		makeStepNumbers();
+		resetNewRecipeHeight();
+	}
+	
+}
+
+function makeStepNumbers(){
+	$(".new_ingredient_step .number").each(function(i){
+		$(this).text(i+1);
+	});
+}
+
+function addNewIngredientLine(){
+	var $this = $(this);
+	var $list = $this.prev();
+	$list.append(getNewIngredientLine());
+	resetNewRecipeHeight();
+}
+
+function removeNewIngredientLine(){
+	var $this = $(this);
+	var $li = $this.parent();
+	if($li.siblings().length > 0){
+		$li.remove();
+		resetNewRecipeHeight();
+	}
 }

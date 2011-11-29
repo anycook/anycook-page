@@ -19,7 +19,7 @@
 		required:function(options){
 			return this.each(function(){
 				var $this = $(this);
-				var data = $this.data("inputdecorator");
+				var data = $this.data("inputdecorator-required");
 				if(!data){
 					var settings = {
 						color: "grey",
@@ -29,8 +29,13 @@
 						fontSize:$this.css("fontSize"),
 						paddingRight:$this.css("paddingRight"),
 						paddingTop: $this.css("paddingTop"),
-						intervalId: -1
-						
+						intervalId: -1,
+						float: $this.css("float"),
+						marginTop: $this.css("marginTop"),
+						marginRight: $this.css("marginRight"),						
+						marginBottom: $this.css("marginBottom"),
+						marginLeft: $this.css("marginLeft"),
+						decoratorFontSize: $this.css("fontSize")
 					};
 					if ( options ) 
 				        $.extend( settings, options );
@@ -45,8 +50,40 @@
 				}
 			});
 		},
-		maxLength:function(options){
-			
+		maxlength:function(options){
+			return this.each(function(){
+				var $this = $(this);
+				var data = $this.data("inputdecorator-maxlength");
+				if(!data){
+					var settings = {
+						color: "grey",
+						transitiontime: 500,
+						backgroundColor: $this.css("backgroundColor"),
+						maxlength: $this.attr("maxlength"),
+						fontSize:$this.css("fontSize"),
+						paddingRight:$this.css("paddingRight"),
+						paddingBottom: $this.css("paddingTop"),
+						intervalId: -1,
+						float:$this.css("float"),
+						marginTop: $this.css("marginTop"),
+						marginRight: $this.css("marginRight"),						
+						marginBottom: $this.css("marginBottom"),
+						marginLeft: $this.css("marginLeft"),
+						decoratorFontSize: $this.css("fontSize")
+						
+					};
+					if ( options ) 
+				        $.extend( settings, options );
+		        	
+		        	data = {
+	                   target : this,
+	                   settings : settings
+               		};
+		        	$(this).data("inputdecorator-maxlength", data);
+               		
+               		inputdecorator.decorate("maxlength", data);
+				}
+			});
 		}
 	};
 	
@@ -68,36 +105,58 @@
 		var $this = $(data.target);
 		var settings = data.settings;
 		
-		var $decorator = $("<div></div>").css({
-			position: "absolute",
-			color:settings.color,
-			paddingRight: settings.paddingRight,
-			paddingTop:settings.paddingTop
-		});
+		var $decorator = $("<div></div>")
+			.addClass("decorator")
+			.css({
+				position: "absolute",
+				color:settings.color,
+				paddingRight: settings.paddingRight,
+				fontSize: settings.decoratorFontSize
+			});
 		$this.css({
 			background:"none",
-			position:"absolute"})
+			position:"absolute",
+			marginTop: 0,
+			marginRight:0,
+			marginBottom: 0,
+			marginLeft:0})
 			.focus(inputdecorator.focus)
 			.focusout(inputdecorator.focusout);
 		
-		var $container = $("<div></div>").addClass("inputdecorator-container")
-			.css({
-				height: $this.outerHeight(),
-				width: $this.outerWidth(),
-				borderRadius: $this.css("borderRadius"),
-				position: "relative"})
+		var $container = $this.parent(".inputdecorator-container");
+		if( $container.length == 0){	
+			$container = $("<div></div>").addClass("inputdecorator-container")
+				.css({
+					height: $this.outerHeight(),
+					width: $this.outerWidth(),
+					borderRadius: $this.css("borderRadius"),
+					position: "relative",
+					float:settings.float,
+					marginTop: settings.marginTop,
+					marginRight: settings.marginRight,
+					marginBottom:settings.marginBottom,
+					marginLeft:settings.marginLeft})
 			.append($decorator)
 			.insertBefore($this)
 			.append($this);
+			if($this.hasClass("light"))
+				$container.addClass("light");
+			
+		}else{
+			$container.prepend($decorator);
+		}
 		
 		switch(type){
 		case "required":
 			$decorator.text(settings.symbol)
-				.css({top:0,right:0});
-			inputdecorator.addChecker(type, data);
+				.css({top:0,right:0, paddingTop:settings.paddingTop});
 			break;
-				
+		
+		case "maxlength":
+			$decorator.html("noch <span>"+settings.maxlength+"</span> Zeichen")
+				.css({bottom:0, right:0, paddingBottom:settings.paddingBottom});
 		}
+		inputdecorator.addChecker(type, data);
 	};
 	
 	inputdecorator.focus = function(event){
@@ -116,6 +175,11 @@
 		case "required":
 			data.intervalId = window.setInterval(function(){inputdecorator.checkRequired(data);}, 200);
 			$this.data("inputdecorator-required", data);
+			break;
+			
+		case "maxlength":
+			data.intervalId = window.setInterval(function(){inputdecorator.checkMaxlength(data);}, 200);
+			$this.data("inputdecorator-maxlength", data);
 		}
 	}
 	
@@ -133,6 +197,23 @@
 			$parent.children().first().fadeIn(settings.transitiontime);
 		else
 			$parent.children().first().fadeOut(settings.transitiontime);
+	}
+	
+	inputdecorator.checkMaxlength = function(data){
+		var $this = $(data.target);
+		if($("body").find(data.target).length == 0){
+			window.clearInterval(data.intervalId);
+			$this.data("inputdecorator-maxlength", undefined);
+			return;
+		}
+		
+		var settings = data.settings;
+		var $parent = $this.parent();
+		var $decoratorSpan = $parent.find(".decorator span");
+		var currentVal = Number($decoratorSpan.text());
+		var newVal = Number($this.attr("maxlength")) - $this.val().length;
+		if(newVal != currentVal)
+			$decoratorSpan.text(newVal);
 	}
 	
 	
