@@ -130,7 +130,21 @@ function getIngrededientsForOverview(){
 			return;
 		noingredients = false;
 		var menge = $this.children(".new_ingredient_menge").val();
+		if(ingredients[ingredient] != undefined)
+			ingredients[ingredient] = mergeMenge(ingredients[ingredient], menge);
+		else
+			ingredients[ingredient] = menge;
+		
 	});
+	
+	
+	var $ul = $(".lightbox ul").empty();
+	for(var ingredient in ingredients){
+		var $ingredientLine = getNewIngredientLine();
+		$ingredientLine.children(".new_ingredient").val(ingredient);
+		$ingredientLine.children(".new_ingredient_menge").val(ingredients[ingredient]);
+		$ul.append($ingredientLine);
+	}
 	
 	return !noingredients;
 }

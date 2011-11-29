@@ -22,8 +22,13 @@ function loadNewRecipe(){
 	//step2
 	var $firstStep = getNewIngredientStep(1);
 	$("#new_step_container").append($firstStep)
-		.sortable()
-		.disableSelection();
+		.sortable({
+			//placeholder: "ui-state-highlight",
+			//cursorAt:"top",
+			distance: 15,
+			axis: "y"
+		});
+		//.disableSelection();
 	$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt"});
 	$("#add_new_step").click(function(){
 		var $newStep = getNewIngredientStep($(".new_ingredient_step").length+1);
@@ -34,6 +39,7 @@ function loadNewRecipe(){
 		resetNewRecipeHeight();
 	});
 	makeIngredientLightBox();
+	watchSteps();
 	
 	
 	
@@ -114,12 +120,12 @@ function getNewIngredientStep(number){
 	var $newIngredientList = $("<ul></ul>").addClass("new_ingredient_list")
 		.append(getNewIngredientLine)
 		.sortable({
-			// placeholder: "ui-state-highlight",
-			// cursorAt:"top",
-			// distance: 30,
+			placeholder: "ui-state-highlight",
+			cursorAt:"top",
+			distance: 15,
 			axis: "y"
-		})
-		.disableSelection();
+		});
+		//.disableSelection();
 	var $addingredientLine = $("<div></div>").addClass("add_new_ingredient_line")
 		.append("<span></span>")
 		.click(addNewIngredientLine);
@@ -142,7 +148,8 @@ function getNewIngredientStep(number){
 function getNewIngredientLine(){
 	var $dragdrop = $("<div></div>").addClass("ingredient_dragdrop");	
 	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
-	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge");
+	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge")
+		.focusout(formatMenge);
 	var $remove = $("<div></div>").addClass("remove_new_ingredient_line")
 		.append("<span></span>")
 		.click(removeNewIngredientLine);
@@ -228,17 +235,77 @@ function watchSteps(){
 	}
 	
 	if(id == undefined){
-		id = window.setInterval("watchForIngredients()", 1000);
-		$(document).data("watchForIngredients", id);
+		id = window.setInterval("watchSteps()", 3000);
+		$(document).data("watchSteps", id);
 	}
 	
 	$(".new_ingredient_step").each(function(){
 		var $this = $(this);
 		var text = $this.find("textarea").val();
-		if(text.length > )
+		
+		var $stepIngredients = $this.find(".new_ingredient");
+		var ingredients = [];
+		for(var i = 0; i < $stepIngredients.length; i++){
+			ingredients[i] = $($stepIngredients[i]).val();
+		}
+		
+		if(text.length == 0)
+			return;
 		var lastSentences = $this.data("sentences");
 		if(lastSentences == undefined)
 			lastSentences = [];
 		
-	})
+		var currentSentences = text.split(/[!.?:;]+/g);
+		$this.data("sentences", currentSentences);
+		//console.log(currentSentences);
+		for(var i = 0; i < currentSentences.length; i++){
+			if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
+				continue;
+				
+				
+			$.getJSON("/anycook/GetZutatenfromSchritte?q="+encodeURIComponent(currentSentences[i]), function(json){
+				for(var i in json){
+					if($.inArray(json[i], ingredients) > -1)
+						continue;
+					
+					var $stepIngredients = $this.find(".new_ingredient");
+					var $ingredientLine = null;
+					for(var j = 0; j < $stepIngredients.length; j++){
+						var $stepIngredient = $($stepIngredients[j]);
+						if($stepIngredient.val().length == 0)
+							$ingredientLine = $stepIngredient.parent();
+					}
+					
+					if($ingredientLine == null){
+						$ingredientLine = getNewIngredientLine();
+						$this.find(".new_ingredient_list").append($ingredientLine);
+					}
+					
+					$ingredientLine.children(".new_ingredient").val(json[i]);
+				}
+				
+			});
+		}
+		
+	});
+}
+
+function formatMenge(){
+	var $this = $(this);
+	var text = $this.val();
+	if(text.length == 0) return;
+	var textArr = $this.val().split("");
+	var newText = textArr[0];
+	for(var i = 0; i<textArr.length -1; i++){
+		if(textArr[i].search(/\d/) > -1 && textArr[i+1].search(/\w/) > -1)
+			newText+= " ";
+		newText+=textArr[i+1];
+	}
+	$this.val(newText);
+}
+
+function mergeMenge(menge1, menge2){
+	if(menge2.length == 0)
+		return menge1;
+	return menge1+" + "+menge2;
 }
