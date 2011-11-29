@@ -417,7 +417,7 @@
 					</form>
 			</div>
 			
-			<h2 class="border_headline">Erweiterte Einstellungen</h2>
+			<h2 class="border_headline">Erweiterte en</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
 				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><label class="bigcheckbox"><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /></label></div>
@@ -452,12 +452,12 @@
 				</div>
 			</div>
 			<div id="settings_facebook" class="settings">
-				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /></div>
+				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><label class="bigcheckbox"><input type="checkbox" name="fbnotification" value="FBACTIVATION" /></label></div>
 				<div id="settings_facebook_content" class="settings_content">
 					<table>
 						<tr>
 							<td>An Pinnwand posten, wenn mir etwas schmeckt</td>
-							<td><input type="checkbox" name="facebook_schmeckt" value="FBSCHMECKT" /></td>
+							<td><label class="checkbox"><input type="checkbox" name="facebook_schmeckt" value="FBSCHMECKT" /></label></td>
 						</tr>
 					</table>
 				</div>
