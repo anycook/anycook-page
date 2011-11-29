@@ -184,6 +184,7 @@
     				<div class="text">Schritt hinzufügen</div>
     			</div>
     			<div id="ingredient_overview" class="button">zur Zutatenübersicht</div>
+    			<div id="no_ingredients_error" class="error">Bitte gib erst deine Zutaten bei den Schritten ein</div>
     		</div>
     		<div id="step3" class="sliding_container">
     			<h2>Zu guter letzt</h2>

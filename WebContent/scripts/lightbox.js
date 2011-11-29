@@ -107,13 +107,29 @@ function makeIngredientLightBox(){
 function showIngredientLightbox(){
 	var $lightbox = $(".lightbox");
 	var top = $("#ingredient_overview").offset().top;
-	getIngrededientsForOverview();
-	showLightbox($lightbox, top);
+	if(getIngrededientsForOverview())
+		showLightbox($lightbox, top);
+	else{
+		$("#no_ingredients_error").fadeIn(300);
+	}
 	return false;
 }
 
 function getIngrededientsForOverview(){
+	var ingredients = {};
+	var noingredients = true;
 	
+	
+	$("#step2 .new_ingredient_line").each(function(){
+		var $this = $(this);
+		var ingredient = $this.children(".new_ingredient").val();
+		if(ingredient.length == 0)
+			return;
+		noingredients = false;
+		var menge = $this.children(".new_ingredient_menge").val();
+	});
+	
+	return !noingredients;
 }
 
 
