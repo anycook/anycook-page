@@ -452,7 +452,7 @@
 				</div>
 			</div>
 			<div id="settings_facebook" class="settings">
-				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><label class="bigcheckbox"><input type="checkbox" name="fbnotification" value="FBACTIVATION" /></label></div>
+				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_facebook_content" class="settings_content">
 					<table>
 						<tr>
