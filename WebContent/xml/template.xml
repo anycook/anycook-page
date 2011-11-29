@@ -405,8 +405,9 @@
 							<input type="password" id="password_new"/>
 							<div id="showpassword">Passwort anzeigen</div>
 						</div>
-						<h2>Feste Tags hinzufügen:</h2>
-						<p>Bist du vegetarier oder nutzt andere Tags immer? Dann trag sie hier ein.</p>
+						<div id="password_secure"></div>
+						<h2>Standart Stichwörter hinzufügen:</h2>
+						<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
 						<div class="tagsbox"></div>
 						<p>Die bekanntesten Tags als Inspiration:</p>
 						<div id="tagcloud"></div>
@@ -414,30 +415,30 @@
 					</form>
 			</div>
 			
-			<h2 class="border_headline">Allgemeine Einstellungen</h2>
+			<h2 class="border_headline">Erweiterte Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
-				<h2>E-Mail-Benachrichtigungen</h2>
+				<div class="bigcheckbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
 				<tr>
-					<td>Eigenes Rezept aktiviert</td>
+					<td>..wenn mein Rezept aktiviert wird.</td>
 					<td><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></td>
 				</tr>
 				<tr>
-					<td>Tag aktiviert</td>
+					<td>..wenn meine Stichwörter aktiviert werden.</td>
 					<td><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /></td>
 				</tr>
 				<tr>
-					<td>Diskussionsbeitrag zu deinem Rezept</td>
+					<td>..bei Diskussionsbeiträgen zu meinem Rezept.</td>
 					<td><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></td>
 				</tr>
 				<tr>
-					<td>Antwort auf Diskussionsbeitrag von dir</td>
+					<td>..bei Antworten auf meine Diskussionsbeiträge.</td>
 					<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
 				</tr>
 				<tr>
-					<td>Jemandem schmeckt dein Rezept</td>
+					<td>.. wenn jemandem dein Rezept schmeckt.</td>
 					<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
 				</tr>
 				<tr>
