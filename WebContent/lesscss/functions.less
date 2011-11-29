@@ -6,6 +6,13 @@
 	-o-transition: @type  @duration @ease;
 }
 
+.border-radius(@topLeft, @topRight, @bottomRight, @bottomLeft){
+	border-top-left-radius: @topLeft;
+	border-top-right-radius: @topRight;
+	border-bottom-right-radius: @bottomRight;
+	border-bottom-left-radius: @bottomLeft;
+}
+
 .no-box-shadow(){
 	box-shadow: none;
 	-moz-box-shadow:none;
