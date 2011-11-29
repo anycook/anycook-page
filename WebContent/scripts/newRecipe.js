@@ -217,3 +217,28 @@ function watchForIngredients(){
 	}
 	
 }
+
+function watchSteps(){
+	var id = $(document).data("watchSteps");
+	var $newIngredientSteps = $(".new_ingredient_step");
+	if($newIngredientSteps.length == 0){
+		$(document).removeData("watchSteps");
+		window.clearInterval(id);
+		return;
+	}
+	
+	if(id == undefined){
+		id = window.setInterval("watchForIngredients()", 1000);
+		$(document).data("watchForIngredients", id);
+	}
+	
+	$(".new_ingredient_step").each(function(){
+		var $this = $(this);
+		var text = $this.find("textarea").val();
+		if(text.length > )
+		var lastSentences = $this.data("sentences");
+		if(lastSentences == undefined)
+			lastSentences = [];
+		
+	})
+}
