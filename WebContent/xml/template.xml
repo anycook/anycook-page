@@ -439,7 +439,7 @@
 					<td><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></td>
 				</tr>
 				<tr>
-					<td>.. wenn jemandem dein Rezept schmeckt.</td>
+					<td>..wenn jemandem dein Rezept schmeckt.</td>
 					<td><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></td>
 				</tr>
 				<tr>
@@ -450,12 +450,12 @@
 				</div>
 			</div>
 			<div id="settings_facebook" class="settings">
-				<h2>Facebook<div class="settings_saved">gespeichert</div></h2>
+				<div class="bigcheckbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /></div>
 				<div id="settings_facebook_content" class="settings_content">
 					<table>
 						<tr>
-							<td>"Schmeckt mir" an meine Pinnwand posten</td>
-							<td><input type="checkbox" name="facebook_schmeckt" value="schmeckt" /></td>
+							<td>An Pinnwand posten, wenn mir etwas schmeckt</td>
+							<td><input type="checkbox" name="facebook_schmeckt" value="FBSCHMECKT" /></td>
 						</tr>
 					</table>
 				</div>
