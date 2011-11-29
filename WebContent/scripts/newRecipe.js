@@ -33,12 +33,20 @@ function loadNewRecipe(){
 		$newStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt"});
 		resetNewRecipeHeight();
 	});
+	makeIngredientLightBox();
+	
+	
+	
 }
 
 function submitStep1(){
 	$.address.parameter("step", "2");
 	return false;
 	//return false;
+}
+
+function submitStep2(){
+	
 }
 
 function newRecipeAdressChange(event){

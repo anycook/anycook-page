@@ -1,6 +1,6 @@
 function getLightbox(headline, subhead, $content, inputvalue){
-	var $h2 = $("<h2></h2>").text(headline);
-	var $subhead = $("<p></p>").text(subhead);
+	var $h2 = $("<h2></h2>").html(headline);
+	var $subhead = $("<p></p>").html(subhead);
 	var $lightboxcontent = $("<div></div>").addClass("ligthbox_content")
 		.append($content);
 		
@@ -73,5 +73,40 @@ function hideLightbox($lightbox){
 			
 	});
 }
+
+//ingredientLightBox
+function makeIngredientLightBox(){
+	//ingredientOverview
+	var $input = $("<input/>").attr({id:"new_num_persons", type:"text", placeholder:"0", size:"2", maxlength:"2"});
+	var $up = $("<div></div>").addClass("up");
+	var $down = $("<div></div>").addClass("down");
+	var $numberinput = $("<div></div>")
+		.addClass("numberinput")
+		.attr("id", "new_person_num")
+		.append($input)
+		.append($up)
+		.append($down);
+	var $headline = $("<div></div>")
+		.append("<span>Zutaten für </span>")
+		.append($numberinput)
+		.append("<span> Personen</span>");
+		
+	var $ul =$("<ul></ul>");
+	for(var i = 0; i<4; i++)
+		$ul.append(getNewIngredientLine());
+		
+	var $content = $("<div></div>")
+		.append($ul);		
+
+	var $lightbox = getLightbox($headline.children(), "", $content, "Rezept abschließen");
+	$("#main").append($lightbox);
+	$("#ingredient_overview").click(showIngredientLightbox);
+}
+
+function showIngredientLightbox(){
+	showLightbox($(".lightbox"), $("#ingredient_overview").offset().top);
+	return false;
+}
+
 
 

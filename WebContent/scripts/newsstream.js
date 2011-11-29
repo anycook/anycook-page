@@ -30,8 +30,6 @@ function loadNewsstream(){
 			}
 		}
 	});
-	
-	
 	var $lightbox = getLightbox("Neue Nachricht", 
 		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
 	$lightbox.find("form").submit(submitNewMessage);

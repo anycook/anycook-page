@@ -48,6 +48,7 @@ function clearContent(){
 	$("#content_main > *").remove();
 	$("#content_header > *").remove();
 	$("#btn_container").find(".user_btn").removeClass("active");
+	$("#main").find(".lightbox").remove();
 }
 
 function getHeaderLink(value, href, id){
