@@ -81,19 +81,55 @@
 		width:390px;
 	}
 	
-	.bigcheckbox{
-		border-radius: 5px;
-		height: 60px;
-		width: 400px;
-		padding: 10px 20px;
-		font-size: 15px;
-	}
-	
-	#mail_notification{
-		background-color:@stepcolor;
-		border: 1px solid @lightbrown;
-		color: @darkfontcolor;
-	}
 }
 
 
+.bigcheckbox{
+		height: 25px;
+		width: 400px;
+		padding: 10px 20px;
+		margin-top: 10px;
+		border-radius: 5px;
+		
+		h2{
+			font: 12pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
+			float: left;
+		}
+		
+		input{
+			float: right;
+		}
+}
+	
+#mail_notification{
+		background-color:@stepcolor;
+		border: 1px solid @lightbrown;
+		color: @darkfontcolor;
+}
+
+#mail_notification{
+		background-color:@stepcolor;
+		border: 1px solid @lightbrown;
+		color: @darkfontcolor;
+}
+
+.settings_content{
+		table{
+			position: relative;
+			z-index: 1;
+			width: 430px;
+			background-color:@imginnerbordercolor;
+			border:1px solid @lightbrown;
+			border-top: 0;
+			border-radius: 5px;
+			padding: 7px 7px;
+			margin-left: 5px;
+			color: @darkfontcolor;
+			
+			tr{
+				border-top:1px solid @lightbrown;
+				line-height: 20px;
+			}
+		}
+		
+	}
