@@ -111,7 +111,7 @@ function getNewIngredientStep(number){
 	//ingredient part
 	var $zutaten = $("<h4></h4>").addClass("zutaten_headline").text("Zutatenname");
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
-	var $newIngredientList = $("<ul></ul>")
+	var $newIngredientList = $("<ul></ul>").addClass("new_ingredient_list")
 		.append(getNewIngredientLine)
 		.sortable({
 			// placeholder: "ui-state-highlight",
