@@ -30,17 +30,17 @@ function getLightbox(headline, subhead, $content, inputvalue){
 	
 	$("#main").append($lightbox);
 	
-	var $container = $("#container");
-	var containerposition = $container.offset();
-	var left = containerposition.left + $container.innerWidth() + 9 - $lightbox.innerWidth();
-	$lightbox.data("left", left).css({left:left}).hide();
+	$lightbox.css({left:getLightBoxLeft()}).hide();
 	return $lightbox;
 }
 
 function showLightbox($lightbox, top){
 	
-	var left = $lightbox.show();
-	$lightbox.css({top:top})	
+	$lightbox.show();
+	resizeLightbox();
+	
+	
+	$lightbox.css({top:top, left:getLightBoxLeft()})	
 		.find(".dogear").animate({
 			right:0,
 			top:0
@@ -67,9 +67,41 @@ function showLightbox($lightbox, top){
 	});
 }
 
-function hideLightbox($lightbox){
-	$lightbox.fadeOut(200, function(){
-			$(this).css({left:$lightbox.data("left")});
+function showLightboxfromBottom($lightbox, bottom){
+	
+	$lightbox.show();
+	resizeLightbox();
+	var top = bottom - $lightbox.outerHeight();
+	$lightbox.css({top:top, left:getLightBoxLeft()})	
+		.find(".dogear").animate({
+			right:0,
+			top:0
+		},
+		{
+			duration:150,
+			easing: "swing",
+			complete:function(){
+				$(".contentbox").animate({
+					left: 3
+				}, {duration: 500});
+			}
+		});
+		
+	$("body").click(function(event){
+		var $target = $(event.target);
+		if($target.parents().andSelf().is(".lightbox")||
+			$target.parents().andSelf().is(".lightbox-autocomplete"))
+			return;
+			
+		hideLightbox($lightbox);
+		
+		$(this).unbind("click");
+	});
+}
+
+function hideLightbox(){
+	$(".lightbox").fadeOut(200, function(){
+			$(this).css({left:getLightBoxLeft()});
 			
 	});
 }
@@ -77,7 +109,7 @@ function hideLightbox($lightbox){
 //ingredientLightBox
 function makeIngredientLightBox(){
 	//ingredientOverview
-	var $input = $("<input/>").attr({id:"new_num_persons", type:"text", placeholder:"0", size:"2", maxlength:"2"});
+	var $input = $("<input/>").attr({id:"new_num_persons", type:"text", placeholder:"0", size:"2", maxlength:"2", value:"2"});
 	var $up = $("<div></div>").addClass("up");
 	var $down = $("<div></div>").addClass("down");
 	var $numberinput = $("<div></div>")
@@ -101,16 +133,18 @@ function makeIngredientLightBox(){
 	"Falls Zutaten fehlen, füge diese bitte noch zu den entsprechenden Schritten hinzu.", $content, "Rezept abschließen")
 		.addClass("ingredient_overview");
 	$("#main").append($lightbox);
+	
+	$lightbox.find("form").submit(submitStep2);
 	$("#ingredient_overview").click(showIngredientLightbox);
 }
 
 function showIngredientLightbox(){
 	var $this = $(this);
 	var $lightbox = $(".lightbox");
-	var top = $("#ingredient_overview").offset().top;
 	if(getIngrededientsForOverview()){
-		var top = $("#ingredient_overview").offset().top - $lightbox.outerHeight();
-		showLightbox($lightbox, top);
+		var $ingredientOverview = $("#ingredient_overview");
+		var bottom = $ingredientOverview.offset().top - 60;
+		showLightboxfromBottom($lightbox, bottom);
 	}else{
 		$("#no_ingredients_error").fadeIn(300);
 		$this.effect("shake", {distance:5, times:2}, 50);
@@ -148,6 +182,22 @@ function getIngrededientsForOverview(){
 	}
 	
 	return !noingredients;
+}
+
+function resizeLightbox(){
+	var $lightbox = $(".lightbox");
+	var $contentBox = $lightbox.children(".contentbox");
+	var contentHeight = $contentBox.outerHeight();
+	$lightbox.height(contentHeight + $contentBox.position().top);
+}
+
+function getLightBoxLeft(){
+	var $container = $("#container");
+	var $lightbox = $(".lightbox");
+	var containerposition = $container.offset();
+	// var left = containerposition.left + $container.innerWidth() + 9 - $lightbox.innerWidth();
+	var left = containerposition.left + $container.innerWidth() + 9 - $lightbox.innerWidth();
+	return left;
 }
 
 

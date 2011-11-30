@@ -52,7 +52,9 @@ function submitStep1(){
 }
 
 function submitStep2(){
-	
+	hideLightbox();
+	$.address.parameter("step", "3");
+	return false;
 }
 
 function newRecipeAdressChange(event){
@@ -279,11 +281,11 @@ function watchSteps(){
 					if($ingredientLine == null){
 						$ingredientLine = getNewIngredientLine().hide();
 						$this.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
-						resetNewRecipeHeight();
 					}
 					
 					$ingredientLine.children(".new_ingredient").val(json[i]);
 				}
+				resetNewRecipeHeight();
 				
 			});
 		}
@@ -300,13 +302,40 @@ function formatMenge(){
 	for(var i = 0; i<textArr.length -1; i++){
 		if(textArr[i].match(/\d/) && textArr[i+1].match(/[a-z]/i))
 			newText+= " ";
-		newText+=textArr[i+1];
+		if(textArr[i+1].match(/\./))
+			newText+=",";
+		else
+			newText+=textArr[i+1];
 	}
 	$this.val(newText);
 }
 
 function mergeMenge(menge1, menge2){
+	//TODO falls z.B. kg und g zusammen auftreten etc...
+	
 	if(menge2.length == 0)
 		return menge1;
-	return menge1+" + "+menge2;
+	var newMenge;
+	menge1 = menge1.replace(/,/, ".");
+	menge2 = menge2.replace(/,/, ".");
+	var confirmRegex1 = /(\d+|\d+.\d+) [a-z]+/i;
+	var confirmRegex2 = /(\d+|\d+.\d+)/i;
+	if(menge1.match(confirmRegex1) && menge2.match(confirmRegex1)){
+		var menge1EinheitPos = menge1.search(/[a-z]+/i);
+		var menge2EinheitPos = menge2.search(/[a-z]+/i);
+		var menge1Einheit = menge1.substring(menge1EinheitPos);
+		var menge2Einheit = menge2.substring(menge2EinheitPos);
+		
+		if(menge1Einheit == menge2Einheit){
+			newMenge =  (Number(menge1.substring(0, menge1EinheitPos-1)) + 
+				Number(menge2.substring(0, menge1EinheitPos-1)))+" "+menge1Einheit;			
+		}
+			
+	}else if(menge1.match(confirmRegex2) && menge2.match(confirmRegex2)){
+		newMenge = Number(menge1) + Number(menge2);
+	}
+	if(newMenge === undefined)
+		newMenge = menge1+" + "+menge2;
+	newMenge = newMenge.replace(".", ",");
+	return newMenge;
 }
