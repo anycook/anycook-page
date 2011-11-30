@@ -417,36 +417,35 @@
 					</form>
 			</div>
 			
-			<h2 class="border_headline">Erweiterte en</h2>
+			<h2 class="border_headline">Erweiterte Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
-				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><label class="bigcheckbox"><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /></label></div>
+				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
 				<tr>
 					<td>..wenn mein Rezept aktiviert wird.</td>
-					<td><label class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /></label></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /><label></label></div></td>
 				</tr>
 				<tr>
 					<td>..wenn meine Stichwörter aktiviert werden.</td>
-					<td><label class="checkbox"><input type="checkbox" name="notification_tag" value="T
-						AGACTIVATION" /></label></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
 				</tr>
 				<tr>
 					<td>..bei Diskussionsbeiträgen zu meinem Rezept.</td>
-					<td><label class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /></label></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /><label></label></div></td>
 				</tr>
 				<tr>
 					<td>..bei Antworten auf meine Diskussionsbeiträge.</td>
-					<td><label class="checkbox"><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /></label></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /><label></label></div></td>
 				</tr>
 				<tr>
 					<td>..wenn jemandem dein Rezept schmeckt.</td>
-					<td><label class="checkbox"><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /></label></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /><label></label></div></td>
 				</tr>
 				<tr>
 					<td>Newsletter</td>
-					<td><label class="checkbox"><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /></label></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /><label></label></div></td>
 				</tr>
 				</table>						
 				</div>
@@ -457,7 +456,7 @@
 					<table>
 						<tr>
 							<td>An Pinnwand posten, wenn mir etwas schmeckt</td>
-							<td><label class="checkbox"><input type="checkbox" name="facebook_schmeckt" value="FBSCHMECKT" /></label></td>
+							<td><div class="checkbox"><input type="checkbox" name="facebook_schmeckt" value="FBSCHMECKT" /><label></label></div></td>
 						</tr>
 					</table>
 				</div>
