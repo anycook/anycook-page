@@ -2,6 +2,7 @@
 function buildLogin(){
 	initMenus();
 	$("#signin_btn").click(clickSignin);
+	$("#login_container form").submit(submitForm);
 		
 };
 
@@ -13,7 +14,8 @@ function makeUsermenuText(){
 	
 	var $userMenu = $("#user_menu");
 	$userMenu.find("img").attr("src", User.getUserImagePath(user.id));
-	$userMenu.find(".username").html("<a href=\"#!/profile/"+user.name+"\">"+user.name+"</a>");
+	var $profileLink = $("<a></a>").text(user.name).attr("href", user.getProfileURI());
+	$userMenu.find(".username").append($profileLink);
 	$userMenu.find("#logout").click(function(){user.logout();});
 	
 	if(user.level == 2)
@@ -168,8 +170,8 @@ function focusoutInputs(event){
 
 function submitForm(event){
 	var $this = $(this);
-	var $mail = $this.children("input[type=\"text\"]");
-	var $pw = $this.children("input[type=\"password\"]");
+	var $mail = $this.find("input[type=\"text\"]");
+	var $pwd = $this.find("input[type=\"password\"]");
 	
 	var mail = $mail.val();
 	var pwd = $pwd.val();

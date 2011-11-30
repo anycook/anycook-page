@@ -136,6 +136,40 @@ function makeIngredientLightBox(){
 	
 	$lightbox.find("form").submit(submitStep2);
 	$("#ingredient_overview").click(showIngredientLightbox);
+	
+	$input.keydown(function(e){
+		var $this = $(this);
+		if(e.which==13){
+			persCount = $this.val();
+			$this.blur();
+		}else if(e.which == 38){ //up{
+			newPersonsUp();
+			return false;
+		}else if(e.which == 40){ //down
+			newPersonsDown();
+			return false;
+		}else if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
+			return false;
+		
+	});
+	
+	$up.click(newPersonsUp);
+	
+	$down.click(newPersonsDown);
+}
+
+function newPersonsUp(){
+	var $input = $("#new_num_persons");
+	var currentNum = Number($input.val());
+	var newNum = ((currentNum)%99)+1;
+	$input.val(newNum);
+}
+
+function newPersonsDown(){
+	var $input = $("#new_num_persons");
+	var currentNum = Number($input.val());
+	var newNum = ((99 - 2 + currentNum)%99)+1;
+	$input.val(newNum);
 }
 
 function showIngredientLightbox(){

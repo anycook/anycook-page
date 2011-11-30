@@ -157,6 +157,7 @@ Search.prototype.getData = function(){
 Search.prototype.search = function(){
 	setFiltersfromSession();
 	var data = this.getData();
+	if(data=="" ) return;
 	// $.blockUI({message:null});
 	
 	$("#result_container").empty();
@@ -165,7 +166,7 @@ Search.prototype.search = function(){
 		  data:"resultanz=10&startnum=0"+data,
 		  dataType: 'json',
 		  success: function(json){
-		  	if(json.size > 0){
+		  	if(json!=null && json.size > 0){
 				$("#result_container").data("results", json);
 				addResults();
 				$(".frame_big:focus").live("keydown", searchKeyDown);
@@ -174,12 +175,8 @@ Search.prototype.search = function(){
 				});
 			}else
 		  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
-
-		  },
-		  error: function(error){
-		  	console.error(error.responseText);
-		  }
-		});
+			}
+		  });
 };
 
 

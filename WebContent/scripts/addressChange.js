@@ -164,7 +164,9 @@ function handleChange(event){
 		case 2:
 			switch(path[0]){
 			case "recipe":
-			
+				$("#content_header")
+					.append(getHeaderLink("Rezept", "", "recipe_btn"))
+					.append(getHeaderLink("Diskussion", "", "discussion_btn"));
 				$.ajax({
 		  		  url: "/anycook/LoadRecipe",
 		  		  dataType: 'json',
@@ -203,6 +205,9 @@ function handleChange(event){
 		case 3:
 			switch(path[0]){
 			case "recipe":
+				$("#content_header")
+						.append(getHeaderLink("Rezept", "", "recipe_btn"))
+						.append(getHeaderLink("Diskussion", "", "discussion_btn"));
 				$.ajax({
 			  		  url: "/anycook/LoadRecipe",
 			  		  dataType: 'json',
@@ -253,6 +258,10 @@ function handleChange(event){
 					$("#discussion_container").hide();
 					$("#recipe_container").show();
 					break;
+				case "search":
+					search = Search.init();
+					search.search();
+					break;
 			}
 		}
 	}
@@ -287,12 +296,8 @@ function changePage(event){
 			switch(page){
 			case "discussion":
 				$("#recipe_container").hide();
-				if($("#discussion_container").length == 0){
-					$("#content_main").xml("append", "recipe_discussion");
-					loadDiscussion(event.pathNames[1]);
-				}
-				else
-					$("#discussion_container").show();
+				$("#discussion_container").show();
+				loadDiscussion(event.pathNames[1]);
 				$("#discussion_btn").addClass("active");
 				break;
 			

@@ -41,12 +41,35 @@ function loadNewRecipe(){
 	makeIngredientLightBox();
 	watchSteps();
 	
-	
+	$.getJSON("/anycook/GetAllKategories", function(json){
+		var $category_select = $("#category_select");
+		for(var category in json)
+			$category_select.append("<option>"+category+"</option>");
+	});
 	
 }
 
 function submitStep1(){
-	$.address.parameter("step", "2");
+	var $this = $(this);
+	var check = true;
+	var $name = $this.find("#new_recipe_name");
+	if($name.val().length == 0){
+		$this.find("#new_recipe_name_error").fadeIn(300);
+		check=false;
+	}
+	
+	var $introduction = $this.find("#new_recipe_introduction");
+	if($introduction.val().length == 0){
+		$this.find("#new_recipe_introduction_error").fadeIn(300);
+		check=false;
+	}
+	
+	if(check)
+		$.address.parameter("step", "2");
+	else{
+		$this.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
+		watchIntroduction();
+	}
 	return false;
 	//return false;
 }
@@ -65,23 +88,41 @@ function newRecipeAdressChange(event){
 	$("#recipe_editing_container").css("height", "");
 	
 	var stepNum = Number(event.parameters["step"]);
-	if(stepNum == undefined)
+	if(!stepNum)
 		stepNum = 1;
 	
+	
+	var step1Left = 0;
 	switch(stepNum){
 	case 4:
-		$navigation.children("#nav_step3").removeClass("inactive");
+		$navigation.children("#nav_step4").removeClass("inactive");
+		step1Left -= 655;
 		
 	case 3:
-		$navigation.children("#nav_step2").removeClass("inactive");
+		$navigation.children("#nav_step3").removeClass("inactive");
+		step1Left -= 655;
 					
 	case 2:
 		$navigation.children("#nav_step2").removeClass("inactive");
 		resetNewRecipeHeight();
+		step1Left -= 655;
 		
 	default:
 		$navigation.children("#nav_step"+stepNum).addClass("active");
-		$editingContainer.addClass("step"+stepNum);
+		var $step1 = $("#step1");
+		var $step2 = $("#step2");
+		var $step3 = $("#step3");
+		var $step4 = $("#step4");
+		$step1.animate({left:step1Left}, 
+			{
+				duration: 100,
+				easing: "easeInOutCirc",
+				step:function(now, fx){
+					$step2.css("left",now+655);
+					$step3.css("left",now+2*655);
+					$step4.css("left",now+3*655);
+				}
+			});
 	}
 	
 	return false;
@@ -201,6 +242,36 @@ function removeNewIngredientLine(){
 		$li.remove();
 		resetNewRecipeHeight();
 	}
+}
+
+function watchIntroduction(){
+	var id = $(document).data("watchIntroduction");
+	var $name = $("#new_recipe_name");
+	var $introduction = $("#new_recipe_introduction");
+	if($name.length == 0){
+		$(document).removeData("watchIntroduction");
+		window.clearInterval(id);
+		return;
+	}
+	if(id == undefined){
+		id = window.setInterval("watchIntroduction()", 1000);
+		$(document).data("watchIntroduction", id);
+	}
+	
+	var nameLength = $name.val().length;
+	var introductionLength = $introduction.val().length
+	if(nameLength > 0)
+		$("#new_recipe_name_error").fadeOut(300);
+	if(introductionLength > 0)
+		$("#new_recipe_introduction_error").fadeOut(300);
+		
+	if(nameLength>0 && introductionLength>0){
+		$(document).removeData("watchIntroduction");
+		window.clearInterval(id);
+	}
+		
+	
+	
 }
 
 function watchForIngredients(){

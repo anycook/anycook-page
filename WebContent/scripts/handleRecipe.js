@@ -71,9 +71,8 @@ function loadRecipe(recipe){
 	resetFilter();
 	
 	var rezepturi = recipe.getURI();
-	$("#content_header").empty()
-		.append(getHeaderLink("Rezept", rezepturi, "recipe_btn").addClass("active"))
-		.append(getHeaderLink("Diskussion", rezepturi+"?page=discussion", "discussion_btn"));
+	$("#content_header #recipe_btn").attr("href", rezepturi);
+	$("#content_header #discussion_btn").attr("href", rezepturi+"?page=discussion");
 	
 	
 	personen = Number(recipe.personen);
@@ -179,9 +178,53 @@ function loadRecipe(recipe){
 		window.print();
 	});
 	
+	//addtagsbox
+	makeAddTags();
+	
 	//version
 	if($.address.pathNames().length == 3){
 		showVersionInfo(recipe);
+	}
+	
+	
+	//discussion
+	$(".center_headline").html("Diskussion zum Rezept<br/>"+recipe.name);
+	
+	$.ajax({
+		url:"/anycook/GetDiscussion",
+		data:"gericht="+encodeURIComponent(recipe.name),
+		dataType:"json",
+		success:function(json){
+			if(json.length == 0){
+				$("#comment_discussion").html("<div class='no_discussion'>Zu diesem Rezept existiert noch keine Diskussion.<br/>Mach doch den Anfang!</div>");
+			}else{
+				var $ul = $("#comment_discussion").append("<ul></ul>").children("ul");			
+				for(var i in json){
+					maxID = Math.max(maxID, Number(json[i].id));
+					var $li;
+					if(json[i].syntax==null)
+						$li = getDiscussionElement(false, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
+					else
+						$li = getDiscussionEvent(json[i].syntax, json[i].versions_id, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
+					$ul.append($li);
+					loadChildren(i, json[i].id, login);
+				}
+				$("#comment_discussion > ul > li.comment:odd").addClass("odd");
+				centercommenteventlikes();
+				
+			}
+		}
+	});
+	var login = user.checkLogin();
+	if(login){
+		$("#discussion_footer .nologin").hide();
+		$("#discussion_footer img").attr("src", user.getUserImagePath());
+		$(".comment_btn").click(comment);
+		$(".answer_btn").live("click", answerBtnClick);
+		$(".like").live("click", discussionLike);
+	}else{
+		$("#discussion_footer .login").hide();
+		$("#no_comment").click(clickSignin);
 	}
 }
 
@@ -325,16 +368,7 @@ function showaddTags(){
 	if(!user.checkLogin())
 		return;
 	
-	var $content = $(
-		"<div class=\"tagsbox\"></div>"+
-		"<p>Die bekanntesten Tags:</p>"+
-		"<div id=\"tagcloud\"></div>")
-	
-	var $lightbox = getLightbox("Tags hinzufügen:", 
-		"Hilf den anderen beim finden, in dem du neue Tags vorschlägst.",
-		$content,
-		"einreichen");
-	makeTagCloud();
+	var $lightbox = $(".lightbox");
 	
 	var top = $("#tags").offset().top-113;
 	showLightbox($lightbox, top);
@@ -347,10 +381,24 @@ function showaddTags(){
 	return false;
 }
 
+function makeAddTags(){
+	var $content = $(
+		"<div class=\"tagsbox\"></div>"+
+		"<p>Die bekanntesten Tags:</p>"+
+		"<div id=\"tagcloud\"></div>")
+	
+	var $lightbox = getLightbox("Tags hinzufügen:", 
+		"Hilf den anderen beim finden, in dem du neue Tags vorschlägst.",
+		$content,
+		"einreichen");
+	makeTagCloud();
+	$("#main").append($lightbox);
+}
+
 function hideaddTags(){
-	$("#recipetags").fadeOut(200, function(){
-			$tagcontainer.remove();
-		});
+	// $("#recipetags").fadeOut(200, function(){
+			// $tagcontainer.remove();
+		// });
 }
 
 zutatValues = new Array();
@@ -493,47 +541,7 @@ function postProcessString(string, factor){
 }
 
 function loadDiscussion(){
-	var login = user.checkLogin();
-	$(".center_headline").html("Diskussion zum Rezept<br/>"+recipe.name);
-	
-	$.ajax({
-		url:"/anycook/GetDiscussion",
-		data:"gericht="+encodeURIComponent(recipe.name),
-		dataType:"json",
-		success:function(json){
-			if(json.length == 0){
-				$("#comment_discussion").html("<div class='no_discussion'>Zu diesem Rezept existiert noch keine Diskussion.<br/>Mach doch den Anfang!</div>");
-			}else{
-				var $ul = $("#comment_discussion").append("<ul></ul>").children("ul");			
-				for(var i in json){
-					maxID = Math.max(maxID, Number(json[i].id));
-					var $li;
-					if(json[i].eventsyntax==null)
-						$li = getDiscussionElement(false, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
-					else
-						$li = getDiscussionEvent(json[i].syntax, json[i].versions_id, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
-					$ul.append($li);
-					loadChildren(i, json[i].id, login);
-				}
-				$("#comment_discussion > ul > li.comment:odd").addClass("odd");
-				centercommenteventlikes();
-				
-			}
-		}
-	});
-	
-	if(login){
-		$("#discussion_footer").html("<h6 id='yes_comment'>Was meinst du dazu?</h6>" +
-				"<img src='"+user.image+"'/><div class='comment_arrow'></div><div class='recipe_comment'><textarea></textarea></div><input type=\"submit\" class='comment_btn' value=\"abschicken\" />");
-		$(".comment_btn").click(comment);
-		$(".answer_btn").live("click", answerBtnClick);
-		$(".like").live("click", discussionLike);
-	}else{
-		$("#discussion_footer").html("<h6 id='no_comment'>Log dich ein und diskutiere mit!</h6>");
-		$("#no_comment").click(clickSignin);
-	}
 	window.setTimeout(checkNewDiscussion, 5000);
-	//commenttimeout = window.setTimeout(checkNewDiscussion, 5000);	
 }
 
 function loadChildren(i, id, login){
@@ -601,7 +609,7 @@ function getDiscussionElement(children, text, user, likes, login, datetime, id){
 	
 }
 
-function getDiscussionEvent(syntax, versions_id, text, nickname, likes, login, eingefuegt, id){
+function getDiscussionEvent(syntax, versions_id, text, user, likes, login, eingefuegt, id){
 	//var datetime = getDateString(eingefuegt);
 	var $li = $("<li></li>").addClass("event");
 	
@@ -614,7 +622,7 @@ function getDiscussionEvent(syntax, versions_id, text, nickname, likes, login, e
 		$comment.addClass("active");
 		
 	var altText = "Hier klicken um diese Version zu öffnen";
-	var $comment_headline = $("<div></div>").addClass("comment_headline").append(parseDiscussionEvent(syntax, eingefuegt, versions_id, nickname));
+	var $comment_headline = $("<div></div>").addClass("comment_headline").append(parseDiscussionEvent(syntax, eingefuegt, versions_id, user.name));
 	var $left = $("<a></a>").addClass("left").attr({href:recipe.getURI()+"/"+versions_id, title:altText}).append($comment_headline);
 	
 	var $text = $("<div></div>").addClass("comment_text").text(text);
@@ -802,10 +810,10 @@ function loadNewDiscussion(ul, pid, oldmaxID){
 					likeclass = "minus";
 				
 				var datetime = getDateString(json[i].eingefuegt);
-				var linktext = encodeURI("/#!/profile/"+json[i].nickname);
+				var linktext = encodeURI("/#!/profile/"+json[i].user.id);
 				var litext = "<li><a href=\""+linktext+"\"><img src='"+image+
 					"'/></a><div class='"+arrow+"'></div><div class='"+comment+"'><div class='comment_headline'>" +
-							"<a href=\""+linktext+"\">"+json[i].nickname+"</a> schrieb "+datetime+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
+							"<a href=\""+linktext+"\">"+json[i].user.name+"</a> schrieb "+datetime+"</div><div class='comment_number'>#"+(Number(json[i].id)+1)+
 					"</div><div class='comment_text'>"+json[i].text+"</div><div class='comment_footer'>";
 				if(login)
 					litext+="<a class='answer_btn'>antworten</a>";

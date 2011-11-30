@@ -127,9 +127,7 @@
 			</div>
 			<div id="step_container"></div>
 		</div>
-    </template>
-    <template id="recipe_discussion">
-    	<div id="discussion_container">
+		<div id="discussion_container">
     		<h1 class="center_headline"></h1>
     		<div id="comment_container">
     			<div id="comment_discussion"></div>
@@ -137,7 +135,17 @@
     				<input type="submit" value="Diskussion ausblenden" id="hide_discussion"/>
     				<a class="button" id="edit_recipe">Rezept bearbeiten</a>
     			</div>
-    			<div id="discussion_footer"></div>
+    			<div id="discussion_footer">
+    				<div class="login">
+						<h6 id="yes_comment">Was meinst du dazu?</h6>
+						<img/><div class="comment_arrow"></div>
+						<div class="recipe_comment">
+							<textarea class="light"></textarea>
+						</div>
+						<input type="submit" class="comment_btn" value="abschicken"/>
+					</div>
+					<h6 id='no_comment' class="nologin">Log dich ein und diskutiere mit!</h6>
+				</div>
     		</div>
     	</div>
     </template>
@@ -167,10 +175,12 @@
     			<form class="recipeediting">
     				<h2>Rezeptname:</h2>
     				<p>Wie soll dein Rezept heißen?</p>
-    				<input type="text"/>
+    				<input id="new_recipe_name" type="text"/>
+    				<div id="new_recipe_name_error" class="error">Ohne Name geht es nicht</div>
     				<h2>Einleitung:</h2>
     				<p>Kurz und knackig. Vielleicht sogar was interessantes.</p>
-    				<textarea></textarea>
+    				<textarea id="new_recipe_introduction"></textarea>
+    				<div id="new_recipe_introduction_error" class="error">Wenn dir nichts einfällt guck doch mal bei Wikipedia</div>
     				<p>* Pflichtfelder</p>
     				<input type="submit" value="weiter zu den Schritten"/>
     			</form>
@@ -187,11 +197,23 @@
     			<div id="no_ingredients_error" class="error">Bitte gib erst deine Zutaten bei den Schritten ein</div>
     		</div>
     		<div id="step3" class="sliding_container">
-    			<h2>Zu guter Letzt</h2>
-    			<p>Abschließend noch ein paar wichtige Eckdaten</p>
-    			<select id="category_select">
-    				<option>Kategorie auswählen</option>
-    			</select>
+    			<!-- <h2>Zu guter Letzt</h2>
+    			<p>Abschließend noch ein paar wichtige Eckdaten</p> -->
+    			
+    			<form class="recipeediting">
+    				<h2>Kategorie</h2>
+    				<p>In welche Kategorie passt dein Rezept am besten?</p>
+	    			<div id="select_container">
+		    			<select id="category_select">
+		    				<option>Kategorie auswählen</option>
+		    			</select>
+		    		</div>
+		    		<div id="new_time">
+		    			<img src="/icons/uhr.png"/>
+		    			<h2>Dauer:</h2>
+		    			
+		    		</div>
+		    	</form>
     		</div>
     	</div>
 	</template>

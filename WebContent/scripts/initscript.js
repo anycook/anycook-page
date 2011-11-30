@@ -104,9 +104,9 @@
 	        	            for(var i=0; i<data.user.length; i++)
 	        	            {
 	        	            	if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i]+"</div>", value: data.user[i], data:"user"};
+	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].id, data:"user"};
 	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i]+"</div>", value: data.user[i], data:"user"};
+	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].id, data:"user"};
 	        	            }
         			 	}
         			}
@@ -155,8 +155,7 @@
 					  if (event.keyCode == 13){
 						  $("ul.ui-autocomplete").hide();
 						  $("#search_form").submit();
-					  }
-						  
+					  }						  
 				});
 				
 				
@@ -218,7 +217,7 @@
             	
             	
             	//TODO tagsfilter
-            	//$(".tags_table_right").click(makeNewInput);
+            	// $(".tags_table_right").click(makeNewTagInput);
             	
             	$(".tags_table_right .tag_remove").live('click', function(event){removeTag(event.target.parentNode);});
             	
