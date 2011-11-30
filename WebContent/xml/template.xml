@@ -187,8 +187,11 @@
     			<div id="no_ingredients_error" class="error">Bitte gib erst deine Zutaten bei den Schritten ein</div>
     		</div>
     		<div id="step3" class="sliding_container">
-    			<h2>Zu guter letzt</h2>
+    			<h2>Zu guter Letzt</h2>
     			<p>Abschließend noch ein paar wichtige Eckdaten</p>
+    			<select id="category_select">
+    				<option>Kategorie auswählen</option>
+    			</select>
     		</div>
     	</div>
 	</template>
