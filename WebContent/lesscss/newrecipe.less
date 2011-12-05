@@ -51,8 +51,6 @@
 		width:655px;
 		top:0;
 		left:0;
-		.translate(0, 0);
-		.transition(all, .7s, linear);
 		
 		h2+p{
 			width:510px;
@@ -60,7 +58,7 @@
 		
 		&#step1{
 			.recipe_image_container{
-				margin: 10px 1px;			
+				margin: 10px 1px;		
 			}		
 		}
 		
@@ -256,49 +254,93 @@
 		&#step3{
 			left:1310px;
 			#select_container{
-				height:25px;
-				width: 200px;
+				height:22px;
+				width: 188px;
 				border-radius:4px;
 				.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+				border: 1px solid @inactivebuttonoutline;
+				background-color:@stepcolor;
+				color:@buttonfontcolor;
+				border-radius:4px;
+				font:@standardfont;
+				padding: 4px 6px 1px;
+				position: relative;
+				text-align: center;	
+				
+				span{
+						
+				}
+				
+				div{
+					float:right;
+					background: url("/img/small_arrow8x8.png") no-repeat;
+					background-position: 0 -8px;
+					width:8px;
+					margin: 5px 3px;
+					height:8px;
+				}
+				
+				&.open{
+					div{
+						background-position: 0 0;
+					}
+				}
+				
 				
 				#category_select{
-					border: 1px solid @inactivebuttonoutline;
-					background-color:@stepcolor;
-					color:@buttonfontcolor;
-					border-radius:4px;
 					width:200px;
-					height:25px;
-					padding: 0px 6px 0px 6px;
-					font:@standardfont;
+					height:22px;					
+					opacity:0;
+					position: absolute;
+					left:0;
 					
 					&:focus{
 						outline:none;
-					}	
+					}
+					
+					option{
+						opacity:1;
+					}
 				}
 				
 			}
 			
-			#new_time{
+			#new_muffins, #new_skill, #new_time{
+				font: 13pt Georgia;
+				color: #5A5A5A;
+				margin-top:20px;
+				width:240px;
+				clear:both;
+				float:left;
 				img{
 					float:left;
 				}
 				h2{
 					float:left;
 				}
+				.time_container{
+					float:right;
+					margin-right: 9px;
+				}				
+				.label_container{
+					float:right;
+				}
+			}
+			
+			#new_muffins, #new_skill{
+				margin-top: 10px;
+			}
+			
+			#new_tags_container{
+				clear:both;
+				margin-top:20px;
+				width:400px;
+				float:left;
+				h2, p{
+					float:left;
+				}
 			}
 		}	
-	}
-		
-	&.step2{
-		.sliding_container{
-			.translate(-655px, 0);
-		}
-	}
-		
-	&.step3{
-		.sliding_container{
-			.translate(-1310px, 0);
-		}
 	}
 }
 

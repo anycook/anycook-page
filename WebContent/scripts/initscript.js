@@ -192,7 +192,7 @@
             	loadAllKategories($("#kategorie_filter ul"));
             	
             	removeChecked();
-            	$(".label_stars, .label_chefhats, .label_muffins").click(function(){
+            	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){
                 	if(blocked == false){
 	                	checkOnOff(this);
 	                	handleRadios(this);
@@ -200,12 +200,10 @@
                 	
                 	// must return false or function is sometimes called twice
                 	return false;
-                	});
-            	$(".label_stars, .label_chefhats, .label_muffins").mouseover(function(){
+                }).mouseover(function(){
                 	if(blocked == false)
                 		mouseoverRadio(this);
-            	});
-            	$(".label_stars, .label_chefhats, .label_muffins").mouseleave(function(){
+            	}).mouseleave(function(){
             		if(blocked == false)
             			handleRadios(this);
             	});

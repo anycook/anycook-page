@@ -47,6 +47,13 @@ function loadNewRecipe(){
 			$category_select.append("<option>"+category+"</option>");
 	});
 	
+	
+	//step3
+	$("#category_select").click(function(event){
+		var $this = $(this);
+		var text = $this.val();
+		var span = $("#select_container span").text(text);
+	});
 }
 
 function submitStep1(){
@@ -115,7 +122,7 @@ function newRecipeAdressChange(event){
 		var $step4 = $("#step4");
 		$step1.animate({left:step1Left}, 
 			{
-				duration: 100,
+				duration: 800,
 				easing: "easeInOutCirc",
 				step:function(now, fx){
 					$step2.css("left",now+655);

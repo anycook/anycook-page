@@ -54,7 +54,7 @@ function resetFilter(){
 	$("#time_std, #time_min").removeAttr("readonly");
 	removeChecked();
 	blockFilter(false);
-	handleRadios(".label_stars, .label_chefhats, .label_muffins");
+	handleRadios("#filter_container .label_chefhats, #filter_container .label_muffins");
 	
 	var $ingredientList = $("#ingredient_list").empty();
 	for(var i= 0; i<6; i++)
@@ -189,7 +189,7 @@ function handleRadios(obj){
 }
 
 function blockFilter(onoff){
-	var objs = $(".label_stars, .label_chefhats, .label_muffins, div.kategorie_filter");
+	var objs = $("#filter_container .label_chefhats, #filter_container .label_muffins, div.kategorie_filter");
 	blocked = onoff;
 	if(onoff){
 		$("#time_std, #time_min").attr("disabled", "disabled");

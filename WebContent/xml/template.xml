@@ -199,21 +199,90 @@
     		<div id="step3" class="sliding_container">
     			<!-- <h2>Zu guter Letzt</h2>
     			<p>Abschließend noch ein paar wichtige Eckdaten</p> -->
-    			
-    			<form class="recipeediting">
-    				<h2>Kategorie</h2>
-    				<p>In welche Kategorie passt dein Rezept am besten?</p>
-	    			<div id="select_container">
-		    			<select id="category_select">
-		    				<option>Kategorie auswählen</option>
-		    			</select>
-		    		</div>
-		    		<div id="new_time">
-		    			<img src="/icons/uhr.png"/>
-		    			<h2>Dauer:</h2>
-		    			
-		    		</div>
-		    	</form>
+				<h2>Kategorie:</h2>
+				<p>In welche Kategorie passt dein Rezept am besten?</p>
+    			<div id="select_container">
+    				<span>Kategorie auswählen</span>
+    				<div></div>
+	    			<select id="category_select">
+	    				<option>Kategorie auswählen</option>
+	    			</select>
+	    		</div>
+	    		<div id="new_time">
+	    			<img src="/icons/uhr.png"/>
+	    			<h2>Dauer:</h2>
+	    			<div class="time_container">
+						<div class="time numberinput">
+							<input type="text" id="time_std" placeholder="00" size="2" maxlength="2" />
+							<div class="up"></div>
+							<div class="down"></div>
+						</div>
+						<div class="time_text">:</div>
+						<div class="time numberinput">
+							<input type="text" id="time_min" placeholder="00" size="2" maxlength="2" />
+							<div class="up"></div>
+							<div class="down"></div>
+						</div>
+						<div class="time_text">h</div>
+					</div>			
+	    		</div>
+	    		<div id="new_skill">
+	    			<h2>Schwierigkeit:</h2>
+	    			<div class="label_container">
+		    			<label class="label_chefhats" for="new_chef_1">
+							<div class="active"></div>
+		                	<input type="radio" class="chefhats" id="new_chef_1" value="1" name="chefhats" />
+		                </label>
+		                <label class="label_chefhats" for="new_chef_2">
+		                	<div class="active"></div>
+		                	<input type="radio" class="chefhats" id="new_chef_2" value="2" name="chefhats" />
+		                </label>
+		                <label class="label_chefhats" for="new_chef_3">
+		                	<div class="active"></div>
+		                	<input type="radio" class="chefhats" id="new_chef_3" value="3" name="chefhats" />
+		                </label>
+		                <label class="label_chefhats" for="new_chef_4">
+		                	<div class="active"></div>
+		                	<input type="radio" class="chefhats" id="new_chef_4" value="4" name="chefhats" />
+		                </label>
+		                <label class="label_chefhats" for="new_chef_5">
+		                	<div class="active"></div>
+		                	<input type="radio" class="chefhats" id="new_chef_5" value="5" name="chefhats" />
+		                </label>
+					</div>
+	    		</div>
+	    		<div id="new_muffins">
+	    			<h2>Kalorien:</h2>
+	    			<div class="label_container">
+	    				<label class="label_muffins" for="new_muffin_1">
+							<div class="active"></div>
+	                    	<input type="radio" class="muffins" id="new_muffin_1" value="1" name="muffins" />
+	                   	</label>
+	                   	<label class="label_muffins" for="new_muffin_2">
+	                   		<div class="active"></div>
+	                    	<input type="radio" class="muffins" id="new_muffin_2" value="2" name="muffins" />
+	                    </label>
+	                    <label class="label_muffins" for="new_muffin_3">
+	                    	<div class="active"></div>
+	                    	<input type="radio" class="muffins" id="new_muffin_3" value="3" name="muffins" />
+	                    </label>
+	                    <label class="label_muffins" for="new_muffin_4">
+	                    	<div class="active"></div>
+	                   		<input type="radio" class="muffins" id="new_muffin_4" value="4" name="muffins" />
+	                    </label>
+	                    <label class="label_muffins" for="new_muffin_5">
+	                    	<div class="active"></div>
+	                    	<input type="radio" class="muffins" id="new_muffin_5" value="5" name="muffins" />
+	                    </label>
+	                </div>
+	    		</div>
+	    		<div id="new_tags_container">
+		    		<h2>Stichwörter:</h2>
+		    		<p>Hilf den anderen beim finden indem du viele Stichwörter hinzufügst</p>
+		    		<div class="tagsbox"></div>
+		    		<p>Die bekanntesten Tags:</p>
+		    		<div id="tagcloud"></div>
+	    		</div>
     		</div>
     	</div>
 	</template>
