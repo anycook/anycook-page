@@ -280,7 +280,7 @@
 		    		<h2>Stichwörter:</h2>
 		    		<p>Hilf den anderen beim finden indem du viele Stichwörter hinzufügst</p>
 		    		<div class="tagsbox"></div>
-		    		<p>Die bekanntesten Tags:</p>
+		    		<p>Die bekanntesten Stichwörter:</p>
 		    		<div id="tagcloud"></div>
 	    		</div>
     		</div>
