@@ -193,7 +193,7 @@ function getNewIngredientStep(number){
 	var $addingredientLine = $("<div></div>").addClass("add_new_ingredient_line")
 		.append("<span></span>")
 		.click(addNewIngredientLine);
-	var $newIngredients  = $("<div></div>").addClass("new_ingredients")
+	var $newIngredients  = $("<div></div>").addClass("ingredients new_ingredients")
 		.append($zutaten)
 		.append($menge)
 		.append($newIngredientList)

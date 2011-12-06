@@ -249,52 +249,73 @@
 	padding-top:15px;
 	float:left;
 	width:100%;
+	list-style: none;
 }
-
-.step{		
-	float:left;
-	width:@stepwidth;
-	height:142px;
-	margin-bottom:15px;
-	border-top:1px solid @lightgrey;
-	border-bottom:1px solid @lightgrey;
-	.box-shadow(0, 3px, 2px, -2px, @shadowbeige);		
+.ingredient_step{
+	position: relative;
+	padding:10px 0;
 	
-	.left{
-		float:left;
-		width:6px;
-		height:100%;
-		background:url("/img/rezept_frame_left.png") no-repeat;
+	.step{
+		position:relative;
+		z-index: 2;	
+		width:@stepwidth;
+		height:142px;
+		//margin-bottom:15px;
+		border-top:1px solid @lightgrey;
+		border-bottom:1px solid @lightgrey;
+		.box-shadow(0, 3px, 2px, -2px, @shadowbeige);		
+		
+		.left{
+			float:left;
+			width:6px;
+			height:100%;
+			background:url("/img/rezept_frame_left.png") no-repeat;
+		}
+		
+		.mid{
+			width:@stepwidth - 12;
+			height:100%;
+			float:left;
+			background-color: @stepcolor;
+			color: @darkfontcolor;
+			.number{
+				margin:8px 0;
+				float: left;
+				height: 123px;
+				width: 110px;
+				font: 45pt Georgia;
+				line-height: 110px;						
+				text-align: center;
+				border-right: 1pt solid @lightgrey;
+				margin-right: 15px;
+			}
+		
+			.text{
+				padding: 0 15px 0 0;
+			}
+		}
+		
+		.right{
+			float:right;
+			background: url("/img/rezept_frame_right.png") no-repeat;
+			height:100%;
+			width:6px;
+		}
 	}
 	
-	.mid{
-		width:@stepwidth - 12;
-		height:100%;
-		float:left;
-		background-color: @stepcolor;
-		color: @darkfontcolor;
-		.number{
-			margin:8px 0;
-			float: left;
-			height: 123px;
-			width: 110px;
-			font: 45pt Georgia;
-			line-height: 110px;						
-			text-align: center;
-			border-right: 1pt solid @lightgrey;
-			margin-right: 15px;
-		}
-	
-		.text{
-			padding: 0 15px 0 0;
-		}
-	}
-	
-	.right{
-		float:right;
-		background: url("/img/rezept_frame_right.png") no-repeat;
-		height:100%;
-		width:6px;
+	.ingredients{
+		position: relative;
+		z-index: 1;
+		width:462px;
+		/*float:left;*/
+		background-color: @imginnerbordercolor;
+		border: 1px solid @lightgrey;
+		border-top: 0;
+		margin: -1px 12px 0;
+		padding: 7px 10px 6px;
+		color: @smalllightfontcolor;
+		font-size: 9pt;
+		.box-shadow-inset(0, 5px, 12px, -4px, @shadowbeige);
 	}
 }
 

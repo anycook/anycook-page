@@ -92,11 +92,11 @@ function loadRecipe(recipe){
     
     
     	
-	var steps = recipe.schritte;
+	var steps = recipe.steps;
 	for(var j = 0; j<steps.length; j++){
-		var $step = getStep(j+1, steps[j])
+		var $step = getIngredientStep(steps[j]);
 		$("#step_container").append($step);
-		var stepheight = $step.innerHeight();
+		var stepheight = $step.children(".step").innerHeight();
 		var $text = $step.find(".text");
 		var newMargin = (stepheight-$text.height())/2;
 		$text.css("marginTop", newMargin);
@@ -109,9 +109,9 @@ function loadRecipe(recipe){
 	$("#time_min").val(fillMin(recipe.min));
 	
 	var $ingredientList = $("#ingredient_list").empty();
-	for(var zutat in recipe.zutaten){
-		var menge = recipe.zutaten[zutat].menge;
-		var singular = recipe.zutaten[zutat].singular;
+	for(var zutat in recipe.ingredients){
+		var menge = recipe.ingredients[zutat].menge;
+		var singular = recipe.ingredients[zutat].singular;
 		if(singular != null &&getValuefromString(menge) == 1)
 			zutat = singular;
 		
@@ -228,20 +228,72 @@ function loadRecipe(recipe){
 	}
 }
 
-function getStep(num, text){
-	var $step = $("<div></div>").addClass("step");
-	
-	
+
+// function getStep(num, text){
+	// var $step = $("<div></div>").addClass("step");
+// 	
+// 	
+	// var $left = $("<div></div>").addClass("left");
+	// var $stepmid = $("<div></div>").addClass("mid");
+	// var $right = $("<div></div>").addClass("right");
+	// var $number = $("<div></div>").addClass("number").text(num);
+	// var $text = $("<div></div>").addClass("text").text(text);
+	// $stepmid.append($number).append($text);
+	// $step.append($left).append($stepmid).append($right);
+// 	
+	// // $("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
+	// return $step;
+// }
+
+function getIngredientStep(step){
+	//step-part
 	var $left = $("<div></div>").addClass("left");
-	var $stepmid = $("<div></div>").addClass("mid");
-	var $right = $("<div></div>").addClass("right");
-	var $number = $("<div></div>").addClass("number").text(num);
-	var $text = $("<div></div>").addClass("text").text(text);
-	$stepmid.append($number).append($text);
-	$step.append($left).append($stepmid).append($right);
+	var $number = $("<div></div>").addClass("number").text(step.id);
+	var $numberContainer = $("<div></div>").addClass("number_container")
+		.append($number);
+		
+	var $text = $("<div></div>").addClass("text").text(step.text);
+	var $mid = $("<div></div>").addClass("mid")
+		.append($numberContainer)
+		.append($text);
+		
 	
-	// $("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
-	return $step;
+	var $right = $("<div></div>").addClass("right");
+	var $step = $("<div></div>").addClass("step")
+		.append($left)
+		.append($mid)
+		.append($right);
+	
+	
+	var $ingredientStep = $("<li></li>").addClass("ingredient_step")
+		.append($step);
+	var ingredients = step.ingredients;
+	
+	//TODO testdaten
+	ingredients["Tomaten"] = "300g";
+	ingredients["Mehl"] = "500g";
+	ingredients["Knoblauch"] = "2 Zehen";
+	ingredients["Salz"] = "";
+	
+	
+	var text = "";
+	for(var ingredient in ingredients){
+		text += ingredients[ingredient]+" "+ingredient+", ";
+	}
+	
+	text = text.substring(0, text.length-2);
+	
+	if(text.length > 0){
+		var $ingredients  = $("<div></div>").addClass("ingredients").text(text);
+		$ingredientStep.append($ingredients);
+	}
+	
+	
+	
+	//all
+	
+		
+	return $ingredientStep;	
 }
 
 function makeIngredientHeaderForRecipe(personNum){

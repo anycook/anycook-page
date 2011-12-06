@@ -125,7 +125,7 @@
 				<p id="autoren">von <span></span></p>
 				<div id="introduction"></div>
 			</div>
-			<div id="step_container"></div>
+			<ul id="step_container"></ul>
 		</div>
 		<div id="discussion_container">
     		<h1 class="center_headline"></h1>
