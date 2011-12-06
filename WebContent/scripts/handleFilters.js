@@ -179,13 +179,10 @@ function closeKategorien(event){
 var blocked = false;
 
 function handleRadios(obj){
-		$(obj).removeClass('on');
-		$(obj).siblings().removeClass('on');
-		
-	    $('label input:checked').each(function(){ 
-	        $(this).parent('label').addClass('on');
-	        $(this).parent('label').prevAll().addClass('on');
-	    });	
+		var $obj = $(obj).removeClass('on')
+			.siblings().andSelf().removeClass('on');	
+	   		$obj.children("input:checked").parent('label').addClass('on').prevAll().addClass('on');
+	   		return;
 }
 
 function blockFilter(onoff){
@@ -215,27 +212,17 @@ function removeChecked(){
 
 function checkOnOff(obj){
 	$obj=$(obj).children("input").first();
-	if($.address.pathNames()[0]!="newrecipe"){
-		var value = $obj.val();
-			
-		switch($obj.attr("class")){
-		case "chefhats":
-			search.setSkill(value);
-			break;
-		case "muffins":
-			search.setKalorien(value);
-			break;
-		}
-		search.flush();
+	var value = $obj.val();
+		
+	switch($obj.attr("class")){
+	case "chefhats":
+		search.setSkill(value);
+		break;
+	case "muffins":
+		search.setKalorien(value);
+		break;
 	}
-	else{
-		if($obj.attr("checked")){
-			$obj.removeAttr("checked");
-		}
-		else{
-			$obj.attr("checked", "checked");
-		}
-	}
+	search.flush();
 }
 
 function checkOn(obj){

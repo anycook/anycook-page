@@ -54,6 +54,20 @@ function loadNewRecipe(){
 		var text = $this.val();
 		var span = $("#select_container span").text(text);
 	});
+	
+	$("#step3 .label_chefhats, #step3 .label_muffins").click(function(){
+		var $inputs = $(this).children("input");
+		$inputs.attr("checked") ? $inputs.removeAttr("checked") : $inputs.attr("checked", "checked");
+        handleRadios(this);    	
+    	// must return false or function is sometimes called twice
+    	return false;
+    }).mouseover(function(){
+    		mouseoverRadio(this);
+	}).mouseleave(function(){
+			handleRadios(this);
+	});
+	$("#step3 .std,#step3 .min").keydown(keyTime).siblings(".up, .down").click(timeUpDownListener);
+	makeTagCloud();
 }
 
 function submitStep1(){

@@ -121,6 +121,7 @@ function makeTagCloud(){
 	$("#tagcloud").empty();
 	var data ="";
 	
+	
 	var recipe = Recipe.getRecipeName();
 	if(recipe != null)
 		data+="recipe="+recipe;
