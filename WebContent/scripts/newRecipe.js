@@ -47,24 +47,32 @@ function loadNewRecipe(){
 	makeIngredientLightBox();
 	watchSteps();
 	
+	$("#step2").on("focusout", "input, textarea", draftSteps);
+	
+	//step3
+	
 	$.getJSON("/anycook/GetAllKategories", function(json){
 		var $category_select = $("#category_select");
 		for(var category in json)
 			$category_select.append("<option>"+category+"</option>");
 	});
-	
-	
-	//step3
-	$("#category_select").click(function(event){
+	$("#category_select").change(function(event){
 		var $this = $(this);
 		var text = $this.val();
 		var span = $("#select_container span").text(text);
+		saveDraft("category", text);
 	});
 	
 	$("#step3 .label_chefhats, #step3 .label_muffins").click(function(){
 		var $inputs = $(this).children("input");
 		$inputs.attr("checked") ? $inputs.removeAttr("checked") : $inputs.attr("checked", "checked");
-        handleRadios(this);    	
+        handleRadios(this);
+        
+        var $this = $(this);
+        if($inputs.attr("checked"))
+        	saveDraft($inputs.attr("name"), $inputs.val());
+        else
+        	saveDraft($inputs.attr("name"), "0");
     	// must return false or function is sometimes called twice
     	return false;
     }).mouseover(function(){
@@ -72,7 +80,13 @@ function loadNewRecipe(){
 	}).mouseleave(function(){
 			handleRadios(this);
 	});
-	$("#step3 .std,#step3 .min").keydown(keyTime).siblings(".up, .down").click(timeUpDownListener);
+	$("#step3 .std,#step3 .min")
+		.keydown(keyTime)
+		.change(draftTime)
+		.keyup(draftTime)
+		.siblings(".up, .down")
+		.click(timeUpDownListener)
+		.click(draftTime);
 	makeTagCloud();
 }
 
@@ -171,14 +185,89 @@ function newRecipeAdressChange(event){
 	return false;
 }
 
+
+//drafts
 function fillNewRecipe(json){
 	if(json.name)
 		$("#new_recipe_name").val(json.name);
 	if(json.description)
 		$("#new_recipe_introduction").val(json.description);
+	if(json.steps)
+		fillSteps(json.steps);
+	if(json.category){
+		var $container = $("#select_container");
+		$container.find("span").text(json.category);
+		$container.find("option").attr("selected", "").each(function(){
+			var $this = $(this);
+			if($this.val() == json.category)
+				$this.attr("selected", "selected");
+		});
+	}
+	if(json.time){
+		$("#step3 .std").val(json.time.std);
+		$("#step3 .min").val(json.time.min);
+	}
+	
+	if(json.chefhats){
+		$("#step3 .label_chefhats input[value=\""+json.chefhats+"\"]").attr("checked", "checked");
+		handleRadios($("#step3 .label_chefhats"));
+	}
+	
+	if(json.muffins){
+		$("#step3 .label_muffins input[value=\""+json.muffins+"\"]").attr("checked", "checked");
+		handleRadios($("#step3 .label_muffins"));
+	}
+		
 }
 
-function getNewIngredientStep(number){
+function fillSteps(steps){
+	var $newStepContainer = $("#new_step_container").empty();
+	for(var i in steps){
+		var step = steps[i];
+		var $step = getNewIngredientStep(step.num, step.text, step.ingredients);
+		$newStepContainer.append($step);
+	}
+}
+
+function draftSteps(){
+	var $newIngredientSteps = $(".new_ingredient_step");
+	var steps = [];
+	for(var i = 0; i < $newIngredientSteps.length; i++){
+		var $ingredientStep = $($newIngredientSteps[i]);
+		var stepText = $ingredientStep.find("textarea").val();
+		var num = i+1;
+		var $ingredients = $ingredientStep.find("li");
+		var ingredients = [];
+		for(var j = 0; j< $ingredients.length;  j++){
+			var $ingredient = $($ingredients[j]);
+			var ingredient = $ingredient.children(".new_ingredient").val();
+			var menge = $ingredient.children(".new_ingredient_menge").val();
+			var ingredientMap = {name:ingredient, menge:menge};
+			ingredients[ingredients.length] = ingredientMap;
+		}
+		var step = {num:num, text:stepText, ingredients:ingredients};
+		steps[steps.length] = step;
+	}
+	
+	saveDraft("steps", JSON.stringify(steps));
+}
+
+function draftTime(){
+	var std = $("#step3 .std").val();
+	var min = $("#step3 .min").val();
+	var time = {std:std, min:min};
+	saveDraft("time", JSON.stringify(time));
+}
+
+function saveDraft(type, data){
+	var id = $.address.parameter("id");
+	$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
+}
+
+
+
+
+function getNewIngredientStep(number, text, ingredients){
 	//step-part
 	var $left = $("<div></div>").addClass("left");
 	var $dragdrop = $("<div></div>").addClass("step_dragdrop");
@@ -191,6 +280,9 @@ function getNewIngredientStep(number){
 	var decoratorSettings = {color:"#878787"};
 	var $textarea = $("<textarea></textarea>").addClass("light")
 		.attr("maxlength", 260);
+		
+	if(text != undefined)
+		$textarea.val(text);
 	var $mid = $("<div></div>").addClass("mid")
 		.append($numberContainer)
 		.append($textarea);
@@ -211,13 +303,19 @@ function getNewIngredientStep(number){
 	var $zutaten = $("<h4></h4>").addClass("zutaten_headline").text("Zutatenname");
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
 	var $newIngredientList = $("<ul></ul>").addClass("new_ingredient_list")
-		.append(getNewIngredientLine)
 		.sortable({
 			placeholder: "ui-state-highlight",
 			cursorAt:"top",
 			distance: 15,
 			axis: "y"
 		});
+		
+	if(ingredients === undefined || ingredients.length == 0)
+		$newIngredientList.append(getNewIngredientLine());
+	else{
+		for(var i in ingredients)
+			$newIngredientList.append(getNewIngredientLine(ingredients[i].name, ingredients[i].menge));
+	}
 		//.disableSelection();
 	var $addingredientLine = $("<div></div>").addClass("add_new_ingredient_line")
 		.append("<span></span>")
@@ -230,7 +328,7 @@ function getNewIngredientStep(number){
 	
 	
 	//all
-	var $newIngredientStep = $("<li></li>").addClass("new_ingredient_step")
+	var $newIngredientStep = $("<li></li>").addClass("new_ingredient_step ingredient_step")
 		.append($newStep)
 		.append($newIngredients)
 		.append($remove);
@@ -238,11 +336,15 @@ function getNewIngredientStep(number){
 	return $newIngredientStep;	
 }
 
-function getNewIngredientLine(){
+function getNewIngredientLine(name, menge){
 	var $dragdrop = $("<div></div>").addClass("ingredient_dragdrop");	
 	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
+	if(name !== undefined)
+		$ingredient.val(name);
 	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge")
 		.focusout(formatMenge);
+	if(menge !== undefined)
+		$menge.val(menge);
 	var $remove = $("<div></div>").addClass("remove_new_ingredient_line")
 		.append("<span></span>")
 		.click(removeNewIngredientLine);
@@ -258,12 +360,6 @@ function getNewIngredientLine(){
 
 function resetNewRecipeHeight(){
 	$("#recipe_editing_container").animate({height:$("#step2").height()}, {duration:500});
-}
-
-function saveDraft(type, data){
-	if(data.length == 0) return;
-	var id = $.address.parameter("id");
-	$.get("/anycook/SaveDraft?id="+id+"&type="+type+"&data="+data);
 }
 
 function removeNewStep(){
