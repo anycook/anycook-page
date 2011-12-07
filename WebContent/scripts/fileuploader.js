@@ -479,7 +479,7 @@ qq.FileUploader = function(o){
     qq.extend(this._options, {
         element: null,
         // if set, will be used instead of qq-upload-list in template
-        listElement: null,
+        listElement: "<ul style=\"display:none\"></ul>",
                 
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>Bilddatei hier fallen lassen</span></div>' +
@@ -572,7 +572,7 @@ qq.extend(qq.FileUploader.prototype, {
         qq.attach(document, 'dragenter', function(e){     
             if (!dz._isValidFileDrag(e)) return; 
             
-            dropArea.style.display = 'block';            
+            //dropArea.style.display = 'block';            
         });                 
         qq.attach(document, 'dragleave', function(e){
             if (!dz._isValidFileDrag(e)) return;            

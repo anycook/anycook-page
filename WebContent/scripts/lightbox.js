@@ -176,9 +176,11 @@ function showIngredientLightbox(){
 	var $this = $(this);
 	var $lightbox = $(".lightbox");
 	if(getIngrededientsForOverview()){
+		draftIngredients();
 		var $ingredientOverview = $("#ingredient_overview");
 		var bottom = $ingredientOverview.offset().top - 60;
 		showLightboxfromBottom($lightbox, bottom);
+		$lightbox.on("focusout", "input", draftIngredients);
 	}else{
 		$("#no_ingredients_error").fadeIn(300);
 		$this.effect("shake", {distance:5, times:2}, 50);
@@ -207,13 +209,16 @@ function getIngrededientsForOverview(){
 	});
 	
 	
-	var $ul = $(".lightbox ul").empty();
+	var $ul = $(".lightbox ul");
+	
 	for(var ingredient in ingredients){
 		var $ingredientLine = getNewIngredientLine();
 		$ingredientLine.children(".new_ingredient").val(ingredient);
 		$ingredientLine.children(".new_ingredient_menge").val(ingredients[ingredient]);
 		$ul.append($ingredientLine);
 	}
+	
+	
 	
 	return !noingredients;
 }

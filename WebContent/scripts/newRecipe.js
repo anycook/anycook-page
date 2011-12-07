@@ -116,10 +116,7 @@ function loadNewRecipe(){
 			}});
 			return;
 		}else{
-			$.getJSON("/anycook/SaveDraft?id="+id,function(json){
-				console.log(json);
-				fillNewRecipe(json);
-			});
+			$.getJSON("/anycook/SaveDraft?id="+id, fillNewRecipe);
 			//link
 			$(".nav_button").attr("href", function(i, attr){
 					return attr+"&id="+id;
@@ -216,6 +213,8 @@ function fillNewRecipe(json){
 		$("#new_recipe_introduction").val(json.description);
 	if(json.steps)
 		fillSteps(json.steps);
+	if(json.ingredients)
+		fillIngredients(json.ingredients);
 	if(json.category){
 		var $container = $("#select_container");
 		$container.find("span").text(json.category);
@@ -255,6 +254,16 @@ function fillSteps(steps){
 	}
 }
 
+function fillIngredients(ingredients){
+	var $ul = $(".lightbox ul");
+	for(var i in ingredients){
+		var $ingredientLine = getNewIngredientLine();
+		$ingredientLine.children(".new_ingredient").val(ingredients[i].name);
+		$ingredientLine.children(".new_ingredient_menge").val(ingredients[i].menge);
+		$ul.append($ingredientLine);
+	}
+}
+
 function draftSteps(){
 	var $newIngredientSteps = $(".new_ingredient_step");
 	var steps = [];
@@ -283,6 +292,19 @@ function draftTime(){
 	var min = $("#step3 .min").val();
 	var time = {std:std, min:min};
 	saveDraft("time", JSON.stringify(time));
+}
+
+function draftIngredients(){
+	var $lis = $("lightbox").find("li");
+	var ingredients = [];
+	for(var i = 0; i<$lis.length; i++){
+		var $li = $lis.eq(i);
+		var name = $li.children(".new_ingredient").val();
+		var menge = $li.children(".new_ingredient_menge").val();
+		var ingredient =  {name:name, menge:menge};
+		ingredients[ingredients.length] = ingredient;		
+	}	
+	saveDraft("ingredients", JSON.stringify(ingredients));
 }
 
 function saveDraft(type, data){
@@ -611,6 +633,7 @@ function showNRImage(filename){
 	var $recipeImageContainer = $(".recipe_image_container");
 	$recipeImageContainer.children("img").remove();
 	$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
+	$recipeImageContainer.children(".image_upload").show();
 	
 	var $img = $("<img/>").addClass("recipe_image").attr("src", "/gerichtebilder/big/"+filename);
 	$recipeImageContainer.append($img);
