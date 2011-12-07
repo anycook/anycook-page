@@ -28,20 +28,49 @@
 				width: 325px;
 			}
 			
-			#follow{
-				position: absolute;
+			.stampposition{
+				position:absolute;
+				cursor: pointer;
 				width: 80px;
 				height: 80px;
-				background-image: url("/img/followerBtn80x80.png");
-				background-position: 0px 0px;
 				right: -41px;
 				top: 0;
-				
-				&.on{
-					background-position: -80px 0px;
-					
-				}
 			}
+			
+			#follow{
+				background: url("/img/followerBtn80x80.png") no-repeat;
+				background-position: 0px 0px;
+				z-index: 20;
+				opacity:1;
+				.transition(opacity, .1s, ease-in);
+
+				&.on{
+					background-position:-80px 0;					
+				}		
+				
+				&:hover{
+					opacity:0;
+					.transition(opacity, .1s, ease-out);
+				}			
+			}
+			
+			#follow+#followhover {
+				z-index: 19;
+		        background: url("/img/followerBtn80x80.png") no-repeat;
+		        background-position: 0 -80px;
+		        opacity: 0;
+		        .transition(opacity, .1s, ease-in);
+			}
+			
+			#follow:hover + #followhover{
+				opacity:1;
+				.transition(opacity, .1s, ease-out);
+			}
+			
+			#follow.on + #followhover {
+				background-position: -80px -80px;
+			}
+
 			
 		}
 		
