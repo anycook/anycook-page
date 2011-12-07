@@ -5,7 +5,7 @@ function scrollListener(){
 	if(scrollTop > filterheight && $("#backtothetop").length == 0){
 		$("body").append("<div id='backtothetop'><div></div><label>zurück nach oben</label></div>");
 		var containerleft = $("#container").offset().left;
-		$("#backtothetop").css("left", containerleft+20).fadeIn(500).click(backtothetop);
+		$("#backtothetop").css("left", containerleft+20).fadeIn(1000).click(backtothetop);
 	}
 	else if(scrollTop < filterheight && $("#backtothetop").length > 0){
 		$("#backtothetop").fadeOut(700,function(){$("#backtothetop").remove();});
