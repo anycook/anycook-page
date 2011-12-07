@@ -124,6 +124,7 @@ function handleChange(event){
 				search.search();
 				break;
 			case "recipeediting":
+				$.address.title("Neues Rezept erstellen | anycook");
 				loadNewRecipe();
 				break;
 			case "feedback":

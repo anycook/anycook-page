@@ -3,6 +3,7 @@
  */
 
 function loadNewRecipe(){
+	
 	//navigation
 	var path = $.address.path();
 	for(var i = 1; i<=4; i++)
@@ -15,9 +16,14 @@ function loadNewRecipe(){
 	
 	//step1	
 	var decoratorSettings = {color:"#878787"};
-	$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings);
-	$("#step1 textarea").inputdecorator("required", decoratorSettings);
+	$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
+		saveDraft("name", $(this).val());
+	});
+	$("#step1 textarea").inputdecorator("required", decoratorSettings).focusout(function(){
+		saveDraft("description", $(this).val());
+	});
 	$("#step1 form").submit(submitStep1);
+	
 	
 	//step2
 	var $firstStep = getNewIngredientStep(1);
@@ -102,6 +108,22 @@ function submitStep2(){
 }
 
 function newRecipeAdressChange(event){
+	if(event.parameters["id"] == undefined){
+		$.ajax({
+			url:"/anycook/SaveDraft", 
+			async:false,
+			success:function(newid){
+				$.address.parameter("id", newid);
+		}});
+		return;
+	}else{
+		var id = event.parameters["id"];
+		$.getJSON("/anycook/SaveDraft?id="+id,function(json){
+			console.log(json);
+			fillNewRecipe(json);
+		});
+		
+	}
 	var $editingContainer = $("#recipe_editing_container");	
 	$editingContainer.removeClass("step2 step3");
 	var $navigation = $(".navigation");
@@ -147,6 +169,13 @@ function newRecipeAdressChange(event){
 	}
 	
 	return false;
+}
+
+function fillNewRecipe(json){
+	if(json.name)
+		$("#new_recipe_name").val(json.name);
+	if(json.description)
+		$("#new_recipe_introduction").val(json.description);
 }
 
 function getNewIngredientStep(number){
@@ -229,6 +258,12 @@ function getNewIngredientLine(){
 
 function resetNewRecipeHeight(){
 	$("#recipe_editing_container").animate({height:$("#step2").height()}, {duration:500});
+}
+
+function saveDraft(type, data){
+	if(data.length == 0) return;
+	var id = $.address.parameter("id");
+	$.get("/anycook/SaveDraft?id="+id+"&type="+type+"&data="+data);
 }
 
 function removeNewStep(){
