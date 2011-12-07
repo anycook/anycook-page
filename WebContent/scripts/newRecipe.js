@@ -24,6 +24,17 @@ function loadNewRecipe(){
 	});
 	$("#step1 form").submit(submitStep1);
 	
+	new qq.FileUploader({
+	    // pass the dom node (ex. $(selector)[0] for jQuery users)
+	    element: $("#upload_button")[0],
+	    multiple:false,
+	    onSubmit:addProgressBar,
+	    onProgress:nrProgress,
+	    onComplete:completeUpload,
+	    // path to server-side upload script
+	    action: '/anycook/UploadRecipeImage'
+	});
+	
 	
 	//step2
 	var $firstStep = getNewIngredientStep(1);
@@ -88,6 +99,33 @@ function loadNewRecipe(){
 		.click(timeUpDownListener)
 		.click(draftTime);
 	makeTagCloud();
+	
+	
+	//draft
+	if(user.checkLogin()){
+		var id = $.address.parameter("id");
+		if(id == undefined){
+			$.ajax({
+				url:"/anycook/SaveDraft", 
+				async:false,
+				success:function(newid){
+					$.address.parameter("id", newid);
+					$(".nav_button").attr("href", function(i, attr){
+						return attr+"&id="+newid;
+					});
+			}});
+			return;
+		}else{
+			$.getJSON("/anycook/SaveDraft?id="+id,function(json){
+				console.log(json);
+				fillNewRecipe(json);
+			});
+			//link
+			$(".nav_button").attr("href", function(i, attr){
+					return attr+"&id="+id;
+			});	
+		}
+	}
 }
 
 function submitStep1(){
@@ -122,22 +160,6 @@ function submitStep2(){
 }
 
 function newRecipeAdressChange(event){
-	if(event.parameters["id"] == undefined){
-		$.ajax({
-			url:"/anycook/SaveDraft", 
-			async:false,
-			success:function(newid){
-				$.address.parameter("id", newid);
-		}});
-		return;
-	}else{
-		var id = event.parameters["id"];
-		$.getJSON("/anycook/SaveDraft?id="+id,function(json){
-			console.log(json);
-			fillNewRecipe(json);
-		});
-		
-	}
 	var $editingContainer = $("#recipe_editing_container");	
 	$editingContainer.removeClass("step2 step3");
 	var $navigation = $(".navigation");
@@ -217,6 +239,10 @@ function fillNewRecipe(json){
 		$("#step3 .label_muffins input[value=\""+json.muffins+"\"]").attr("checked", "checked");
 		handleRadios($("#step3 .label_muffins"));
 	}
+	
+	if(json.image){
+		showNRImage(json.image);
+	}
 		
 }
 
@@ -260,6 +286,7 @@ function draftTime(){
 }
 
 function saveDraft(type, data){
+	if(!user.checkLogin) return;
 	var id = $.address.parameter("id");
 	$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
 }
@@ -561,4 +588,30 @@ function mergeMenge(menge1, menge2){
 		newMenge = menge1+" + "+menge2;
 	newMenge = newMenge.replace(".", ",");
 	return newMenge;
+}
+
+function addProgressBar(){
+	$(".image_upload").hide();
+	$("#progressbar").fadeIn(200).progressbar();
+}
+
+function nrProgress(id, filename, loaded, total){
+	$("#progressbar").progressbar({value:(loaded/total*100)});
+}
+
+function completeUpload(id, fileName, responseJSON){
+	if(responseJSON.success){
+		var filename = responseJSON.success;
+		saveDraft("image", filename);
+		showNRImage(filename);
+	}
+}
+
+function showNRImage(filename){
+	var $recipeImageContainer = $(".recipe_image_container");
+	$recipeImageContainer.children("img").remove();
+	$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
+	
+	var $img = $("<img/>").addClass("recipe_image").attr("src", "/gerichtebilder/big/"+filename);
+	$recipeImageContainer.append($img);
 }
