@@ -62,8 +62,7 @@ function getBigFrameText(json){
 var personen;
 
 function loadRecipewJSON(json){
-	recipe = new Recipe();
-	recipe.loadJSON(json);
+	recipe = Recipe.loadJSON(json);
 	loadRecipe(recipe);
 }
 
@@ -93,15 +92,7 @@ function loadRecipe(recipe){
     
     	
 	var steps = recipe.steps;
-	for(var j = 0; j<steps.length; j++){
-		var $step = getIngredientStep(steps[j]);
-		$("#step_container").append($step);
-		var stepheight = $step.children(".step").innerHeight();
-		var $text = $step.find(".text");
-		var newMargin = (stepheight-$text.height())/2;
-		$text.css("marginTop", newMargin);
-	
-	}
+	loadSteps(steps);
 	
 	//$("#search").attr("value", recipe.name);
 	$("#time_std, #time_min").attr("readonly", "readonly");
@@ -228,22 +219,17 @@ function loadRecipe(recipe){
 	}
 }
 
-
-// function getStep(num, text){
-	// var $step = $("<div></div>").addClass("step");
-// 	
-// 	
-	// var $left = $("<div></div>").addClass("left");
-	// var $stepmid = $("<div></div>").addClass("mid");
-	// var $right = $("<div></div>").addClass("right");
-	// var $number = $("<div></div>").addClass("number").text(num);
-	// var $text = $("<div></div>").addClass("text").text(text);
-	// $stepmid.append($number).append($text);
-	// $step.append($left).append($stepmid).append($right);
-// 	
-	// // $("#step_container").append('<div class="step"><div class="step_left"><div class="step_number">'+(j+1)+'.</div><div class="step_text">'+steps[j]+'</div></div><div class="step_right"></div></div>');
-	// return $step;
-// }
+function loadSteps(steps){
+	var $stepContainer = $("#step_container").empty();
+	for(var j = 0; j<steps.length; j++){
+		var $step = getIngredientStep(steps[j]);
+		$stepContainer.append($step);
+		var stepheight = $step.children(".step").innerHeight();
+		var $text = $step.find(".text");
+		var newMargin = (stepheight-$text.height())/2;
+		$text.css("marginTop", newMargin);	
+	}
+}
 
 function getIngredientStep(step){
 	//step-part
@@ -270,15 +256,16 @@ function getIngredientStep(step){
 	var ingredients = step.ingredients;
 	
 	//TODO testdaten
-	ingredients["Tomaten"] = "300g";
-	ingredients["Mehl"] = "500g";
-	ingredients["Knoblauch"] = "2 Zehen";
-	ingredients["Salz"] = "";
+	// ingredients["Tomaten"] = "300g";
+	// ingredients["Mehl"] = "500g";
+	// ingredients["Knoblauch"] = "2 Zehen";
+	// ingredients["Salz"] = "";
 	
 	
 	var text = "";
-	for(var ingredient in ingredients){
-		text += ingredients[ingredient]+" "+ingredient+", ";
+	for(var i in ingredients){
+		if(ingredients[i].name.length == 0) continue;
+		text += ingredients[i].menge+" "+ingredients[i].name+", ";
 	}
 	
 	text = text.substring(0, text.length-2);

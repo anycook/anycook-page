@@ -284,6 +284,19 @@
 		    		<p>Die bekanntesten Stichwörter:</p>
 		    		<div id="tagcloud"></div>
 	    		</div>
+	    		<div class="button" id="open_preview">zur Vorschau</div>
+    		</div>
+    		<div id="step4" class="sliding_container">
+    			<div id="recipe_container">
+					<div id="recipe_main">
+			    		<div class="recipe_image_container"><img class="recipe_image"/></div>
+			    	</div>
+			    	<div id="recipe_info">
+						<h1 id="recipe_headline"></h1>
+						<div id="introduction"></div>
+					</div>
+					<ul id="step_container"></ul>
+				</div>
     		</div>
     	</div>
 	</template>

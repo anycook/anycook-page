@@ -209,7 +209,7 @@ function getIngrededientsForOverview(){
 	});
 	
 	
-	var $ul = $(".lightbox ul");
+	var $ul = $(".lightbox ul").empty();
 	
 	for(var ingredient in ingredients){
 		var $ingredientLine = getNewIngredientLine();

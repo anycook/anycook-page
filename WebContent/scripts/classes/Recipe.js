@@ -28,22 +28,24 @@ Recipe.getRecipeName = function(){
 	return pathNames[1];
 };
 
-Recipe.prototype.loadJSON = function(json){
-	this.name = json.name;
-	this.beschreibung = json.description;
-	this.kategorie = json.categorie;
-	this.personen = json.person;
-	this.steps = json.steps;
-	this.skill = json.skill;
-	this.kalorien = json.calorie;
-	this.std = json.timestd;
-	this.min = json.timemin;
-	this.tags = json.tags;
-	this.ingredients = json.ingredients;
-	this.authors = json.authors;
-	this.id = json.id;
-	this.created = json.created;
-	this.active = json.active;
+Recipe.loadJSON = function(json){
+	var recipe = new Recipe();
+	recipe.name = json.name;
+	recipe.beschreibung = json.description;
+	recipe.kategorie = json.categorie;
+	recipe.personen = json.person;
+	recipe.steps = json.steps;
+	recipe.skill = json.skill;
+	recipe.kalorien = json.calorie;
+	recipe.std = json.timestd;
+	recipe.min = json.timemin;
+	recipe.tags = json.tags;
+	recipe.ingredients = json.ingredients;
+	recipe.authors = json.authors;
+	recipe.id = json.id;
+	recipe.created = json.created;
+	recipe.active = json.active;
+	return recipe;
 };
 
 Recipe.prototype.checkRecipe = function(){

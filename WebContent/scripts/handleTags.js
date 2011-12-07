@@ -82,6 +82,7 @@ function keyNewTag(event) {
 	else if(event.keyCode == 8 && text ==""){
 		$(".tagsbox").children(".tag").last().remove();
 		removeNewInput();
+		draftTags();
 		makeNewTagInput();
 		
 		return false;	
@@ -110,6 +111,7 @@ function removeNewTag(event){
 				easing: "swing",
 				complete:function(){
 					$(this).remove();
+					draftTags();
 				}
 			});
 		}

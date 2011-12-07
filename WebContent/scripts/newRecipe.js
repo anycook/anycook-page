@@ -80,10 +80,13 @@ function loadNewRecipe(){
         handleRadios(this);
         
         var $this = $(this);
+        var name = $inputs.attr("name") == "muffins" ? "calorie" : "skill";
+        	
+        
         if($inputs.attr("checked"))
-        	saveDraft($inputs.attr("name"), $inputs.val());
+        	saveDraft(name, $inputs.val());
         else
-        	saveDraft($inputs.attr("name"), "0");
+        	saveDraft(name, "0");
     	// must return false or function is sometimes called twice
     	return false;
     }).mouseover(function(){
@@ -101,6 +104,7 @@ function loadNewRecipe(){
 		
 	$(".tagsbox").click(makeNewTagInput);
 	makeTagCloud();
+	$("#open_preview").click(submitStep3);
 	
 	
 	//draft
@@ -158,6 +162,10 @@ function submitStep2(){
 	return false;
 }
 
+function submitStep3(){
+	$.address.parameter("step", "4");
+}
+
 function newRecipeAdressChange(event){
 	var $editingContainer = $("#recipe_editing_container");	
 	$editingContainer.removeClass("step2 step3");
@@ -174,6 +182,7 @@ function newRecipeAdressChange(event){
 	switch(stepNum){
 	case 4:
 		$navigation.children("#nav_step4").removeClass("inactive");
+		loadPreview();
 		step1Left -= 655;
 		
 	case 3:
@@ -231,13 +240,13 @@ function fillNewRecipe(json){
 		$("#step3 .min").val(json.time.min);
 	}
 	
-	if(json.chefhats){
-		$("#step3 .label_chefhats input[value=\""+json.chefhats+"\"]").attr("checked", "checked");
+	if(json.skill){
+		$("#step3 .label_chefhats input[value=\""+json.skill+"\"]").attr("checked", "checked");
 		handleRadios($("#step3 .label_chefhats"));
 	}
 	
-	if(json.muffins){
-		$("#step3 .label_muffins input[value=\""+json.muffins+"\"]").attr("checked", "checked");
+	if(json.calorie){
+		$("#step3 .label_muffins input[value=\""+json.calorie+"\"]").attr("checked", "checked");
 		handleRadios($("#step3 .label_muffins"));
 	}
 	
@@ -252,6 +261,8 @@ function fillNewRecipe(json){
 			$tagsbox.append(getTag(json.tags[i], "remove"));
 		}
 	}
+	
+	loadPreview();
 		
 }
 
@@ -259,7 +270,7 @@ function fillSteps(steps){
 	var $newStepContainer = $("#new_step_container").empty();
 	for(var i in steps){
 		var step = steps[i];
-		var $step = getNewIngredientStep(step.num, step.text, step.ingredients);
+		var $step = getNewIngredientStep(step.id, step.text, step.ingredients);
 		$newStepContainer.append($step);
 	}
 }
@@ -274,57 +285,23 @@ function fillIngredients(ingredients){
 	}
 }
 
-function draftSteps(){
-	var $newIngredientSteps = $(".new_ingredient_step");
-	var steps = [];
-	for(var i = 0; i < $newIngredientSteps.length; i++){
-		var $ingredientStep = $($newIngredientSteps[i]);
-		var stepText = $ingredientStep.find("textarea").val();
-		var num = i+1;
-		var $ingredients = $ingredientStep.find("li");
-		var ingredients = [];
-		for(var j = 0; j< $ingredients.length;  j++){
-			var $ingredient = $($ingredients[j]);
-			var ingredient = $ingredient.children(".new_ingredient").val();
-			var menge = $ingredient.children(".new_ingredient_menge").val();
-			var ingredientMap = {name:ingredient, menge:menge};
-			ingredients[ingredients.length] = ingredientMap;
-		}
-		var step = {num:num, text:stepText, ingredients:ingredients};
-		steps[steps.length] = step;
-	}
-	
-	saveDraft("steps", JSON.stringify(steps));
+function draftSteps(){	
+	saveDraft("steps", JSON.stringify(getSteps()));
 }
 
 function draftTags(){
-	var $tags =  $(".tagsbox .tag_text");
-	var tags = [];
-	for(var i = 0; i<$tags.length; i++){
-		var tag = $tags.eq(i).text();
-		tags[tags.length] = tag;
-	}
-	saveDraft("tags", JSON.stringify(tags));
+	
+	saveDraft("tags", JSON.stringify(getTags()));
 }
 
 function draftTime(){
-	var std = $("#step3 .std").val();
-	var min = $("#step3 .min").val();
-	var time = {std:std, min:min};
-	saveDraft("time", JSON.stringify(time));
+	
+	saveDraft("time", JSON.stringify(getTime()));
 }
 
 function draftIngredients(){
-	var $lis = $("lightbox").find("li");
-	var ingredients = [];
-	for(var i = 0; i<$lis.length; i++){
-		var $li = $lis.eq(i);
-		var name = $li.children(".new_ingredient").val();
-		var menge = $li.children(".new_ingredient_menge").val();
-		var ingredient =  {name:name, menge:menge};
-		ingredients[ingredients.length] = ingredient;		
-	}	
-	saveDraft("ingredients", JSON.stringify(ingredients));
+	
+	saveDraft("ingredients", JSON.stringify(getIngredients()));
 }
 
 function saveDraft(type, data){
@@ -334,6 +311,57 @@ function saveDraft(type, data){
 	$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
 }
 
+function getIngredients(){
+	var $lis = $("lightbox").find("li");
+	var ingredients = [];
+	for(var i = 0; i<$lis.length; i++){
+		var $li = $lis.eq(i);
+		var name = $li.children(".new_ingredient").val();
+		var menge = $li.children(".new_ingredient_menge").val();
+		var ingredient =  {name:name, menge:menge};
+		ingredients[ingredients.length] = ingredient;		
+	}
+	return ingredients;
+}
+
+function getTime(){
+	var std = $("#step3 .std").val();
+	var min = $("#step3 .min").val();
+	var time = {std:std, min:min};
+	return time;
+}
+
+function getTags(){
+	var $tags =  $(".tagsbox .tag_text");
+	var tags = [];
+	for(var i = 0; i<$tags.length; i++){
+		var tag = $tags.eq(i).text();
+		tags[tags.length] = tag;
+	}
+	return tags;
+}
+
+function getSteps(){
+	var $newIngredientSteps = $(".new_ingredient_step");
+	var steps = [];
+	for(var i = 0; i < $newIngredientSteps.length; i++){
+		var $ingredientStep = $($newIngredientSteps[i]);
+		var stepText = $ingredientStep.find("textarea").val();
+		var id = i+1;
+		var $ingredients = $ingredientStep.find("li");
+		var ingredients = [];
+		for(var j = 0; j< $ingredients.length;  j++){
+			var $ingredient = $($ingredients[j]);
+			var ingredient = $ingredient.children(".new_ingredient").val();
+			var menge = $ingredient.children(".new_ingredient_menge").val();
+			var ingredientMap = {name:ingredient, menge:menge};
+			ingredients[ingredients.length] = ingredientMap;
+		}
+		var step = {id:id, text:stepText, ingredients:ingredients};
+		steps[steps.length] = step;
+	}
+	return steps;
+}
 
 
 
@@ -440,6 +468,7 @@ function removeNewStep(){
 		$step.remove();
 		makeStepNumbers();
 		resetNewRecipeHeight();
+		draftSteps();
 	}
 	
 }
@@ -463,6 +492,8 @@ function removeNewIngredientLine(){
 	if($li.siblings().length > 0){
 		$li.remove();
 		resetNewRecipeHeight();
+		draftSteps();
+		draftIngredients();
 	}
 }
 
@@ -658,4 +689,10 @@ function showNRImage(filename){
 	
 	var $img = $("<img/>").addClass("recipe_image").attr("src", "/gerichtebilder/big/"+filename);
 	$recipeImageContainer.append($img);
+}
+
+function loadPreview(){
+	var $recipeImageContainer = $("#step4 .recipe_image_container");
+	var steps = getSteps();	
+	loadSteps(steps);
 }
