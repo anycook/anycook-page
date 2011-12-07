@@ -180,9 +180,10 @@ function getTag(name, type, number){
 	var $right = $tag.addClass("tag").append("<div class=\"right\"></div>").children()
 		.append("<div class='tag_text'>"+name+"</div>");
 	
-	if(type == "remove")
-		$right.append("<div class=\"tag_remove\">x</div>");
-	else if(type == "number" || type == "linknumber")
+	if(type == "remove"){
+		var $remove = $("<div>x</div>").addClass("tag_remove").click(removeNewTag);
+		$right.append($remove);
+	}else if(type == "number" || type == "linknumber")
 		$right.append("<div class=\"tag_num\">"+number+"</div>");
 		
 	return $tag;
@@ -197,9 +198,8 @@ function saveNewTag(text){
 		$(".tagsbox").append(getTag(text, "remove"))
 			.children(".tag").last()
 			.hide().fadeIn(100);
-		$(".tag_remove").last().click(removeNewTag);
+		draftTags();
 	}
-	draftTags();
 	
 }
 

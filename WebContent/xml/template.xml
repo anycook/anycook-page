@@ -214,13 +214,13 @@
 	    			<h2>Dauer:</h2>
 	    			<div class="time_container">
 						<div class="time numberinput">
-							<input type="text" class="std" placeholder="00" size="2" maxlength="2" />
+							<input type="text" class="std" placeholder="00" value="0" size="2" maxlength="2" />
 							<div class="up"></div>
 							<div class="down"></div>
 						</div>
 						<div class="time_text">:</div>
 						<div class="time numberinput">
-							<input type="text" class="min" placeholder="00" size="2" maxlength="2" />
+							<input type="text" class="min" placeholder="00" value="0" size="2" maxlength="2" />
 							<div class="up"></div>
 							<div class="down"></div>
 						</div>

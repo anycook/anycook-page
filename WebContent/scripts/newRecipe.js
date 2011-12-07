@@ -244,6 +244,14 @@ function fillNewRecipe(json){
 	if(json.image){
 		showNRImage(json.image);
 	}
+	
+	
+	if(json.tags){
+		var $tagsbox = $(".tagsbox");
+		for(var i  in json.tags){
+			$tagsbox.append(getTag(json.tags[i], "remove"));
+		}
+	}
 		
 }
 
@@ -289,6 +297,16 @@ function draftSteps(){
 	saveDraft("steps", JSON.stringify(steps));
 }
 
+function draftTags(){
+	var $tags =  $(".tagsbox .tag_text");
+	var tags = [];
+	for(var i = 0; i<$tags.length; i++){
+		var tag = $tags.eq(i).text();
+		tags[tags.length] = tag;
+	}
+	saveDraft("tags", JSON.stringify(tags));
+}
+
 function draftTime(){
 	var std = $("#step3 .std").val();
 	var min = $("#step3 .min").val();
@@ -310,8 +328,9 @@ function draftIngredients(){
 }
 
 function saveDraft(type, data){
-	if(!user.checkLogin) return;
 	var id = $.address.parameter("id");
+	if(!user.checkLogin || id === undefined) return;
+	
 	$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
 }
 
