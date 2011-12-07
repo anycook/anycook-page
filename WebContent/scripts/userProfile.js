@@ -15,7 +15,7 @@ function loadProfile(userid){
 	else{
 		var $follow = $("#follow");
 		if(!user.isFollowing(userid)){
-			$follow.text("").click(follow);
+			$follow.click(follow);
 		}
 		else
 			$follow.addClass("on").click(follow);
