@@ -98,6 +98,8 @@ function loadNewRecipe(){
 		.siblings(".up, .down")
 		.click(timeUpDownListener)
 		.click(draftTime);
+		
+	$(".tagsbox").click(makeNewTagInput);
 	makeTagCloud();
 	
 	

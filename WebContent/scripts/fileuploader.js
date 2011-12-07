@@ -256,7 +256,7 @@ qq.FileUploaderBasic = function(o){
         multiple: true,
         maxConnections: 3,
         // validation        
-        allowedExtensions: [],               
+        allowedExtensions: ["jpg", "png", "gif", "bmp"],               
         sizeLimit: 0,   
         minSizeLimit: 0,                             
         // events
@@ -267,11 +267,11 @@ qq.FileUploaderBasic = function(o){
         onCancel: function(id, fileName){},
         // messages                
         messages: {
-            typeError: "{file} has invalid extension. Only {extensions} are allowed.",
+            typeError: "{file} ist kein unterstütztes Bildformat! Nur {extensions} sind erlaubt.",
             sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
             minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
             emptyError: "{file} is empty, please select files again without it.",
-            onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."            
+            onLeave: "Es wird noch eine Datei hochgeladen. Trotzdem die Seite verlassen?"            
         },
         showMessage: function(message){
             alert(message);

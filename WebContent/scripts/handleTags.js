@@ -40,6 +40,7 @@ function makeNewTagInput(event){
         				offset:"-1 1"
         			}, 
         			select:function(event, ui){
+        				if(ui.item === undefined) return false;
         				var text = ui.item.label;
         				$(this).autocomplete("destroy");
         				saveNewTag(text);
@@ -198,6 +199,8 @@ function saveNewTag(text){
 			.hide().fadeIn(100);
 		$(".tag_remove").last().click(removeNewTag);
 	}
+	draftTags();
+	
 }
 
 function addNewTag(event){
