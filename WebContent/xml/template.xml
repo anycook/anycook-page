@@ -534,23 +534,23 @@
 				<div id="settings_notification_content" class="settings_content">
 				<table>
 				<tr>
-					<td>..wenn mein Rezept aktiviert wird.</td>
+					<td>...wenn mein Rezept aktiviert wird.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /><label></label></div></td>
 				</tr>
 				<tr>
-					<td>..wenn meine Stichwörter aktiviert werden.</td>
+					<td>...wenn meine Stichwörter aktiviert werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
 				</tr>
 				<tr>
-					<td>..bei Diskussionsbeiträgen zu meinem Rezept.</td>
+					<td>...bei Diskussionsbeiträgen zu meinem Rezept.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /><label></label></div></td>
 				</tr>
 				<tr>
-					<td>..bei Antworten auf meine Diskussionsbeiträge.</td>
+					<td>...bei Antworten auf meine Diskussionsbeiträge.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /><label></label></div></td>
 				</tr>
 				<tr>
-					<td>..wenn jemandem dein Rezept schmeckt.</td>
+					<td>...wenn jemandem dein Rezept schmeckt.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /><label></label></div></td>
 				</tr>
 				<tr>
