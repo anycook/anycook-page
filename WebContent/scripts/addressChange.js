@@ -38,10 +38,10 @@ function loadHome()
 // 	
 // 	
 // 	
-	// //liveupdatestuff
-	// newestid = 0;
-	// $("#news ul").jScrollPane().scroll(newsScrollListener);
-	// updateLiveAtHome();
+	//liveupdatestuff
+	newestid = 0;
+	$("#news ul").jScrollPane().scroll(newsScrollListener);
+	updateLiveAtHome();
 }
 
 function clearContent(){

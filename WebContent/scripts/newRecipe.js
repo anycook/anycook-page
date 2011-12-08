@@ -15,7 +15,7 @@ function loadNewRecipe(){
 	
 	
 	//step1	
-	var decoratorSettings = {color:"#878787"};
+	var decoratorSettings = {color:"#878787", change:validateStep1};
 	$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
 		saveDraft("name", $(this).val());
 	});
@@ -46,17 +46,17 @@ function loadNewRecipe(){
 			axis: "y"
 		});
 		//.disableSelection();
-	$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt"});
+	$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
 	$("#add_new_step").click(function(){
 		var $newStep = getNewIngredientStep($(".new_ingredient_step").length+1);
 		
 		$("#new_step_container")
 		.append($newStep);
-		$newStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt"});
+		$newStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
 		resetNewRecipeHeight();
 	});
 	makeIngredientLightBox();
-	watchSteps();
+	// watchSteps();
 	
 	$("#step2").on("focusout", "input, textarea", draftSteps);
 	
@@ -131,6 +131,48 @@ function loadNewRecipe(){
 	}
 }
 
+
+//step1
+function validateStep1(event){
+	var $this = $(this);
+	var $container = event.container;
+	var $step1 = $("#step1");
+	var check = true;
+	//var $name = $step1.find("#new_recipe_name");
+	if(!event.empty){
+		$container.next(".error").fadeOut(300);
+		if(checkValidationStep1())
+			$("#nav_step1").next().removeClass("inactive");
+			
+	}else{
+		$("#nav_step1").nextAll().addClass("inactive");
+	}
+	
+	// var $introduction = $step1.find("#new_recipe_introduction");
+	// if($introduction.val().length == 0){
+		// $step1.find("#new_recipe_introduction_error").fadeIn(300);
+		// check=false;
+	// }else{
+// 		
+	// }
+	
+	//if()
+}
+
+function checkValidationStep1(){
+	var check = true;
+	var $name = $("#new_recipe_name");
+	if($name.val().length == 0){
+		check=false;
+	}
+	
+	var $introduction = $("#new_recipe_introduction");
+	if($introduction.val().length == 0){
+		check=false;
+	}
+	return check;
+}
+
 function submitStep1(){
 	var $this = $(this);
 	var check = true;
@@ -150,10 +192,63 @@ function submitStep1(){
 		$.address.parameter("step", "2");
 	else{
 		$this.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
-		watchIntroduction();
+		//watchIntroduction();
 	}
 	return false;
 	//return false;
+}
+
+
+
+//step2
+function checkStep2(event){
+	var $this = $(this);
+	var text = $this.val();
+	var $step = $this.parents(".ingredient_step");
+	if(!event.empty){
+		var $stepIngredients = $step.find(".new_ingredient");
+		var ingredients = [];
+		for(var i = 0; i < $stepIngredients.length; i++){
+			ingredients[i] = $($stepIngredients[i]).val();
+		}
+		var lastSentences = $this.data("sentences");
+		if(lastSentences == undefined)
+			lastSentences = [];
+		
+		var currentSentences = text.split(/[!.?:;]+/g);
+		$this.data("sentences", currentSentences);
+		//console.log(currentSentences);
+		for(var i = 0; i < currentSentences.length; i++){
+			if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
+				continue;
+				
+				
+			$.getJSON("/anycook/GetZutatenfromSchritte", {q:encodeURIComponent(currentSentences[i])}, function(json){
+				for(var i in json){
+					if($.inArray(json[i], ingredients) > -1)
+						continue;
+					
+					var $stepIngredients = $step.find(".new_ingredient");
+					var $ingredientLine = null;
+					for(var j = 0; j < $stepIngredients.length; j++){
+						var $stepIngredient = $($stepIngredients[j]);
+						if($stepIngredient.val().length == 0)
+							$ingredientLine = $stepIngredient.parent();
+					}
+					
+					if($ingredientLine == null){
+						$ingredientLine = getNewIngredientLine().hide();
+						$step.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
+					}
+					
+					$ingredientLine.children(".new_ingredient").val(json[i]);
+				}
+				resetNewRecipeHeight();
+				draftSteps();
+			});
+		}
+		
+	}
 }
 
 function submitStep2(){
@@ -229,6 +324,8 @@ function fillNewRecipe(json){
 		fillSteps(json.steps);
 	if(json.ingredients)
 		fillIngredients(json.ingredients);
+	if(json.persons)
+		fillPersons(json.persons);
 	if(json.category){
 		var $container = $("#select_container");
 		$container.find("span").text(json.category);
@@ -276,6 +373,7 @@ function fillSteps(steps){
 		var step = steps[i];
 		var $step = getNewIngredientStep(step.id, step.text, step.ingredients);
 		$newStepContainer.append($step);
+		$step.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
 	}
 }
 
@@ -287,6 +385,10 @@ function fillIngredients(ingredients){
 		$ingredientLine.children(".new_ingredient_menge").val(ingredients[i].menge);
 		$ul.append($ingredientLine);
 	}
+}
+
+function fillPersons(persons){
+	$("#new_num_persons").val(persons);
 }
 
 function draftSteps(){	
@@ -343,6 +445,10 @@ function getIngredients(){
 	return ingredients;
 }
 
+function getCategory(){
+	return $("#select_container option:selected").val();
+}
+
 function getSkill(){
 	return $("#step3 .chefhats:checked").val()
 }
@@ -366,6 +472,10 @@ function getTags(){
 		tags[tags.length] = tag;
 	}
 	return tags;
+}
+
+function getPersons(){
+	return $("#new_num_persons").val();
 }
 
 function getSteps(){
@@ -524,35 +634,35 @@ function removeNewIngredientLine(){
 	}
 }
 
-function watchIntroduction(){
-	var id = $(document).data("watchIntroduction");
-	var $name = $("#new_recipe_name");
-	var $introduction = $("#new_recipe_introduction");
-	if($name.length == 0){
-		$(document).removeData("watchIntroduction");
-		window.clearInterval(id);
-		return;
-	}
-	if(id == undefined){
-		id = window.setInterval("watchIntroduction()", 1000);
-		$(document).data("watchIntroduction", id);
-	}
-	
-	var nameLength = $name.val().length;
-	var introductionLength = $introduction.val().length
-	if(nameLength > 0)
-		$("#new_recipe_name_error").fadeOut(300);
-	if(introductionLength > 0)
-		$("#new_recipe_introduction_error").fadeOut(300);
-		
-	if(nameLength>0 && introductionLength>0){
-		$(document).removeData("watchIntroduction");
-		window.clearInterval(id);
-	}
-		
-	
-	
-}
+// function watchIntroduction(){
+	// var id = $(document).data("watchIntroduction");
+	// var $name = $("#new_recipe_name");
+	// var $introduction = $("#new_recipe_introduction");
+	// if($name.length == 0){
+		// $(document).removeData("watchIntroduction");
+		// window.clearInterval(id);
+		// return;
+	// }
+	// if(id == undefined){
+		// id = window.setInterval("watchIntroduction()", 1000);
+		// $(document).data("watchIntroduction", id);
+	// }
+// 	
+	// var nameLength = $name.val().length;
+	// var introductionLength = $introduction.val().length
+	// if(nameLength > 0)
+		// $("#new_recipe_name_error").fadeOut(300);
+	// if(introductionLength > 0)
+		// $("#new_recipe_introduction_error").fadeOut(300);
+// 		
+	// if(nameLength>0 && introductionLength>0){
+		// $(document).removeData("watchIntroduction");
+		// window.clearInterval(id);
+	// }
+// 		
+// 	
+// 	
+// }
 
 function watchForIngredients(){
 	var id = $(document).data("watchForIngredients");
@@ -578,71 +688,71 @@ function watchForIngredients(){
 	
 }
 
-function watchSteps(){
-	var id = $(document).data("watchSteps");
-	var $newIngredientSteps = $(".new_ingredient_step");
-	if($newIngredientSteps.length == 0){
-		$(document).removeData("watchSteps");
-		window.clearInterval(id);
-		return;
-	}
-	
-	if(id == undefined){
-		id = window.setInterval("watchSteps()", 3000);
-		$(document).data("watchSteps", id);
-	}
-	
-	$(".new_ingredient_step").each(function(){
-		var $this = $(this);
-		var text = $this.find("textarea").val();
-		
-		var $stepIngredients = $this.find(".new_ingredient");
-		var ingredients = [];
-		for(var i = 0; i < $stepIngredients.length; i++){
-			ingredients[i] = $($stepIngredients[i]).val();
-		}
-		
-		if(text.length == 0)
-			return;
-		var lastSentences = $this.data("sentences");
-		if(lastSentences == undefined)
-			lastSentences = [];
-		
-		var currentSentences = text.split(/[!.?:;]+/g);
-		$this.data("sentences", currentSentences);
-		//console.log(currentSentences);
-		for(var i = 0; i < currentSentences.length; i++){
-			if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
-				continue;
-				
-				
-			$.getJSON("/anycook/GetZutatenfromSchritte?q="+encodeURIComponent(currentSentences[i]), function(json){
-				for(var i in json){
-					if($.inArray(json[i], ingredients) > -1)
-						continue;
-					
-					var $stepIngredients = $this.find(".new_ingredient");
-					var $ingredientLine = null;
-					for(var j = 0; j < $stepIngredients.length; j++){
-						var $stepIngredient = $($stepIngredients[j]);
-						if($stepIngredient.val().length == 0)
-							$ingredientLine = $stepIngredient.parent();
-					}
-					
-					if($ingredientLine == null){
-						$ingredientLine = getNewIngredientLine().hide();
-						$this.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
-					}
-					
-					$ingredientLine.children(".new_ingredient").val(json[i]);
-				}
-				resetNewRecipeHeight();
-				
-			});
-		}
-		
-	});
-}
+// function watchSteps(){
+	// var id = $(document).data("watchSteps");
+	// var $newIngredientSteps = $(".new_ingredient_step");
+	// if($newIngredientSteps.length == 0){
+		// $(document).removeData("watchSteps");
+		// window.clearInterval(id);
+		// return;
+	// }
+// 	
+	// if(id == undefined){
+		// id = window.setInterval("watchSteps()", 3000);
+		// $(document).data("watchSteps", id);
+	// }
+// 	
+	// $(".new_ingredient_step").each(function(){
+		// var $this = $(this);
+		// var text = $this.find("textarea").val();
+// 		
+		// var $stepIngredients = $this.find(".new_ingredient");
+		// var ingredients = [];
+		// for(var i = 0; i < $stepIngredients.length; i++){
+			// ingredients[i] = $($stepIngredients[i]).val();
+		// }
+// 		
+		// if(text.length == 0)
+			// return;
+		// var lastSentences = $this.data("sentences");
+		// if(lastSentences == undefined)
+			// lastSentences = [];
+// 		
+		// var currentSentences = text.split(/[!.?:;]+/g);
+		// $this.data("sentences", currentSentences);
+		// //console.log(currentSentences);
+		// for(var i = 0; i < currentSentences.length; i++){
+			// if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
+				// continue;
+// 				
+// 				
+			// $.getJSON("/anycook/GetZutatenfromSchritte?q="+encodeURIComponent(currentSentences[i]), function(json){
+				// for(var i in json){
+					// if($.inArray(json[i], ingredients) > -1)
+						// continue;
+// 					
+					// var $stepIngredients = $this.find(".new_ingredient");
+					// var $ingredientLine = null;
+					// for(var j = 0; j < $stepIngredients.length; j++){
+						// var $stepIngredient = $($stepIngredients[j]);
+						// if($stepIngredient.val().length == 0)
+							// $ingredientLine = $stepIngredient.parent();
+					// }
+// 					
+					// if($ingredientLine == null){
+						// $ingredientLine = getNewIngredientLine().hide();
+						// $this.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
+					// }
+// 					
+					// $ingredientLine.children(".new_ingredient").val(json[i]);
+				// }
+				// resetNewRecipeHeight();
+// 				
+			// });
+		// }
+// 		
+	// });
+// }
 
 function formatMenge(){
 	var $this = $(this);
@@ -730,7 +840,9 @@ function loadPreview(){
 		tags : getTags(),
 		ingredients : getIngredients(),
 		skill:getSkill(),
-		calorie: getCalorie()
+		calorie: getCalorie(),
+		category:getCategory(),
+		persons:getPersons()
 	}
 	loadFilter(filter);
 	var height = $("#step4").height()

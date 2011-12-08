@@ -35,7 +35,9 @@
 						marginRight: $this.css("marginRight"),						
 						marginBottom: $this.css("marginBottom"),
 						marginLeft: $this.css("marginLeft"),
-						decoratorFontSize: $this.css("fontSize")
+						decoratorFontSize: $this.css("fontSize"),
+						change:function(){}
+						
 					};
 					if ( options ) 
 				        $.extend( settings, options );
@@ -156,6 +158,8 @@
 			$decorator.html("noch <span>"+settings.maxlength+"</span> Zeichen")
 				.css({bottom:0, right:0, paddingBottom:settings.paddingBottom});
 		}
+		
+		data.$container = $container;
 		inputdecorator.addChecker(type, data);
 	};
 	
@@ -193,10 +197,18 @@
 		
 		var settings = data.settings;
 		var $parent = $this.parent();
-		if($this.val().length == 0)
-			$parent.children().first().fadeIn(settings.transitiontime);
-		else
-			$parent.children().first().fadeOut(settings.transitiontime);
+		
+		var event;
+		var $decorator =  $parent.children().first();
+		if(!$decorator.is(":visible") && $this.val().length == 0){
+			$decorator.fadeIn(settings.transitiontime);
+			event = jQuery.Event("change", {visible:true, empty:true, container:data.$container});
+		}else if($decorator.is(":visible") && $this.val().length > 0){
+			$decorator.fadeOut(settings.transitiontime);
+			event = jQuery.Event("change", {visible:false, empty:false, container:data.$container});
+		}
+		if(event !== undefined)
+			settings.change.apply(data.target, [event]);
 	}
 	
 	inputdecorator.checkMaxlength = function(data){
@@ -212,8 +224,12 @@
 		var $decoratorSpan = $parent.find(".decorator span");
 		var currentVal = Number($decoratorSpan.text());
 		var newVal = Number($this.attr("maxlength")) - $this.val().length;
-		if(newVal != currentVal)
+		
+		if(newVal != currentVal){
+			var event = jQuery.Event("change", {empty:$this.val().length == 0, container:data.$container});			
 			$decoratorSpan.text(newVal);
+			settings.change.apply(data.target, [event]);
+		}
 	}
 	
 	

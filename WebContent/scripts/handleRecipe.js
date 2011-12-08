@@ -39,8 +39,6 @@ function getBigFrameText(json) {
 	return frame_big;
 }
 
-var personen;
-
 function loadRecipewJSON(json) {
 	recipe = Recipe.loadJSON(json);
 	loadRecipe(recipe);
@@ -52,13 +50,9 @@ function loadRecipe(recipe) {
 	var rezepturi = recipe.getURI();
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
-	personen = Number(recipe.personen);
-
-	makeIngredientHeaderForRecipe(personen);
 
 	$("#filter_headline").text("Status");
 
-	$("#kategorie_head").text(recipe.kategorie);
 	$("#recipe_headline").append(recipe.name);
 	$("#introduction").append(recipe.beschreibung);
 
@@ -176,9 +170,14 @@ function loadSteps(steps) {
 }
 
 function loadFilter(filter) {
+	$("#kategorie_head").text(filter.category);
 	$("#time_std, #time_min").attr("readonly", "readonly");
 	$("#time_std").val(fillStd(filter.time.std));
 	$("#time_min").val(fillMin(filter.time.min));
+	
+	var persons = Number(filter.persons);
+
+	makeIngredientHeaderForRecipe(persons);
 
 	var $ingredientList = $("#ingredient_list").empty();
 	for(var i in filter.ingredients) {
@@ -192,6 +191,14 @@ function loadFilter(filter) {
 		$li.children().first().addClass("ingredient").text(zutat);
 		$li.children().last().addClass("amount").text(menge);
 		$ingredientList.append($li);
+	}
+	
+	if($ingredientList.children().length <6){
+		var length = $ingredientList.children().length;
+		for(var i = 0; i<= 6-length; i++){
+			var $li = $("<li></li>");
+			$ingredientList.append($li);
+		}
 	}
 
 	$(".tags_table_right > *").remove();
@@ -253,7 +260,7 @@ function makeIngredientHeaderForRecipe(personNum) {
 		value : personNum,
 		size : 2,
 		maxlength : 2
-	});
+	}).data("persons", personNum);
 
 	var person = "<span>" + personNum == 1 ? "Person:" : "Personen:" + "</span>";
 	$zutatHead.append($personsForm).append(person);
@@ -389,26 +396,25 @@ function hideaddTags() {
 	// });
 }
 
-zutatValues = new Array();
-
 function multiZutaten(perscount) {
 
 	$("#ingredient_list .amount").each(function(i) {
-		var newValue = '';
-		if(zutatValues[i] == null) {
-			zutatValues[i] = $(this).text();
-			newValue = getNumbersFromString($(this).text(), perscount);
-		} else {
-			newValue = getNumbersFromString(zutatValues[i], perscount);
+		var amount = $(this).data("amount");
+		if(amount === undefined){
+			amount = $(this).text();
+			$(this).data("amount", amount);
 		}
-
-		var zutat = recipe.getZutatOnPosition(i);
-		//var currentzutattext = $(this).prev().text();
-		if(zutat.singular != null) {
-			if(getValuefromString(newValue) == 1) {
-				$(this).prev().text(zutat.singular);
-			} else
-				$(this).prev().text(zutat.name);
+		var newValue = getNumbersFromString(amount, perscount);
+		
+		if(recipe!=null){
+			var zutat = recipe.getZutatOnPosition(i);
+			//var currentzutattext = $(this).prev().text();
+			if(zutat.singular != null) {
+				if(getValuefromString(newValue) == 1) {
+					$(this).prev().text(zutat.singular);
+				} else
+					$(this).prev().text(zutat.name);
+			}
 		}
 		$(this).text(newValue);
 	});
@@ -424,11 +430,11 @@ function getNumbersFromString(inputstring, factor) {
 
 	for(var n = 0; n < inputstring.length; n++) {
 		i = inputstring.substring(n, n + 1);
-		if(i == "1" || i == "2" || i == "3" || i == "4" || i == "5" || i == "6" || i == "7" || i == "8" || i == "9" || i == "0") {
+		if(i.match(/\d/)) {
 			valueFromString += i;
 			for(var m = n + 1; m < inputstring.length; m++) {
 				i = inputstring.substring(m, m + 1);
-				if(i == "1" || i == "2" || i == "3" || i == "4" || i == "5" || i == "6" || i == "7" || i == "8" || i == "9" || i == "0")
+				if(i.match(/\d/))
 					valueFromString += i;
 				else if(i == "," || i == ".") {
 					valueFromString += ".";
@@ -444,7 +450,7 @@ function getNumbersFromString(inputstring, factor) {
 		} else
 			beginString += i;
 	}
-	factor = factor / personen;
+	factor = factor / $("#persons_num").data("persons");
 	if(beginString.length == inputstring.length)
 		return beginString;
 	if(postProc)

@@ -109,7 +109,7 @@ function hideLightbox(){
 //ingredientLightBox
 function makeIngredientLightBox(){
 	//ingredientOverview
-	var $input = $("<input/>").attr({id:"new_num_persons", type:"text", placeholder:"0", size:"2", maxlength:"2", value:"2"});
+	var $input = $("<input/>").attr({id:"new_num_persons", type:"text", placeholder:"0", size:"2", maxlength:"2", value:"0"});
 	var $up = $("<div></div>").addClass("up");
 	var $down = $("<div></div>").addClass("down");
 	var $numberinput = $("<div></div>")
@@ -151,6 +151,7 @@ function makeIngredientLightBox(){
 		}else if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
 			return false;
 		
+		saveDraft("persons", $this.val());
 	});
 	
 	$up.click(newPersonsUp);
@@ -162,6 +163,7 @@ function newPersonsUp(){
 	var $input = $("#new_num_persons");
 	var currentNum = Number($input.val());
 	var newNum = ((currentNum)%99)+1;
+	saveDraft("persons", newNum);
 	$input.val(newNum);
 }
 
@@ -169,6 +171,7 @@ function newPersonsDown(){
 	var $input = $("#new_num_persons");
 	var currentNum = Number($input.val());
 	var newNum = ((99 - 2 + currentNum)%99)+1;
+	saveDraft("persons", newNum);
 	$input.val(newNum);
 }
 

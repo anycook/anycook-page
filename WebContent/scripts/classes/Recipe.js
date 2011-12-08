@@ -3,12 +3,12 @@
 //c'tor
 function Recipe(){
 	this.name =null;
-	this.kategorie = null;
+	this.category = null;
 	this.beschreibung = null;
 	this.skill = null;
 	this.calorie = null;
 	this.time = {};
-	this.personen = null;
+	this.persons = null;
 	this.steps = new Array();
 	this.ingredients = null;
 	this.tags = new Array();
@@ -31,8 +31,8 @@ Recipe.loadJSON = function(json){
 	var recipe = new Recipe();
 	recipe.name = json.name;
 	recipe.beschreibung = json.description;
-	recipe.kategorie = json.categorie;
-	recipe.personen = json.person;
+	recipe.category = json.categorie;
+	recipe.persons = json.person;
 	recipe.steps = json.steps;
 	recipe.skill = json.skill;
 	recipe.calorie = json.calorie;

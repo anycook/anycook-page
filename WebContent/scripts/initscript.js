@@ -104,9 +104,9 @@
 	        	            for(var i=0; i<data.user.length; i++)
 	        	            {
 	        	            	if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].id, data:"user"};
+	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
 	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].id, data:"user"};
+	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
 	        	            }
         			 	}
         			}
@@ -136,7 +136,7 @@
 					else if(type == "user"){
 						/*search.setUsername(text);
 						search.flush();*/
-						gotoProfile(text);
+						gotoProfile(ui.item.id);
 					}
 					
 					return false;
