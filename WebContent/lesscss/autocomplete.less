@@ -8,6 +8,7 @@
 		border: 1pt solid #5a5a5a;
 		border-top: 0;
 		font:  9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+
 		
 		.ui-menu {
 			margin-top: -3px;
@@ -52,7 +53,45 @@
 		width:@width !important;
 		background-color: @stepcolor;
 		border: 1px solid @kategorieborder;
+		border-radius: 5px;
 		border-top: 0;
+		color:@smalllightfontcolor;
+		
+		
+		&.ui-menu{
+			padding: 0 2px;
+			@width:@width - 4;
+			width:@width;
+			
+			.ui-menu-item{
+				//width: @width - 4;
+				a{
+					padding:2px 4px;
+					color:@smalllightfontcolor;
+					font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+				}
+			}
+			
+			.ui-menu-item+.ui-menu-item{
+					border-top: 1px solid @lightgrey;
+			}
+		}
+		
+		.ui-menu-item a.ui-state-hover,
+		.ui-menu-item a.ui-state-active {
+			background-color: @background;
+			.box-shadow2(-2px, 0, 0, 0, @background, 2px, 0px, 0, 0, @background);
+			color:@darkgrey;
+		}
+		
+	}
+	
+	&.newtag-autocomplete{
+		@width: 226px;
+		width:@width !important;
+		background-color: @stepcolor;
+		border: 1px solid @kategorieborder;
+		border-radius: 5px;
 		color:@smalllightfontcolor;
 		
 		
