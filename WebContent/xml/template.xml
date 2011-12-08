@@ -68,14 +68,14 @@
 		    	<h1>REZEPTE FINDEN, ERSTELLEN &amp; KOCHEN</h1>
 		    	
 		    	<div id="informationbox">
-		    	<div id="news">
-					<h2>Küchengeflüster:</h2>
-					<div class="content news">
-						<div class="top"></div>
-						<ul></ul>
-						<div class="bottom"></div>
+			    	<div id="news">
+						<h2>Küchengeflüster:</h2>
+						<div class="content news">
+							<div class="top"></div>
+							<ul></ul>
+							<div class="bottom"></div>
+						</div>
 					</div>
-				</div>
 				</div>
 	    	</div>
 	    	
