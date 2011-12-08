@@ -236,19 +236,19 @@
 		                </label>
 		                <label class="label_chefhats" for="new_chef_2">
 		                	<div class="active"></div>
-		                	<input type="radio" class="chefhats" id="new_chef_2" value="2" name="chefhats" />
+		                	<input type="radio" class="chefhats" id="new_chef_2" value="2" name="new_chefhats" />
 		                </label>
 		                <label class="label_chefhats" for="new_chef_3">
 		                	<div class="active"></div>
-		                	<input type="radio" class="chefhats" id="new_chef_3" value="3" name="chefhats" />
+		                	<input type="radio" class="chefhats" id="new_chef_3" value="3" name="new_chefhats" />
 		                </label>
 		                <label class="label_chefhats" for="new_chef_4">
 		                	<div class="active"></div>
-		                	<input type="radio" class="chefhats" id="new_chef_4" value="4" name="chefhats" />
+		                	<input type="radio" class="chefhats" id="new_chef_4" value="4" name="new_chefhats" />
 		                </label>
 		                <label class="label_chefhats" for="new_chef_5">
 		                	<div class="active"></div>
-		                	<input type="radio" class="chefhats" id="new_chef_5" value="5" name="chefhats" />
+		                	<input type="radio" class="chefhats" id="new_chef_5" value="5" name="new_chefhats" />
 		                </label>
 					</div>
 	    		</div>
@@ -257,23 +257,23 @@
 	    			<div class="label_container">
 	    				<label class="label_muffins" for="new_muffin_1">
 							<div class="active"></div>
-	                    	<input type="radio" class="muffins" id="new_muffin_1" value="1" name="muffins" />
+	                    	<input type="radio" class="muffins" id="new_muffin_1" value="1" name="new_muffins" />
 	                   	</label>
 	                   	<label class="label_muffins" for="new_muffin_2">
 	                   		<div class="active"></div>
-	                    	<input type="radio" class="muffins" id="new_muffin_2" value="2" name="muffins" />
+	                    	<input type="radio" class="muffins" id="new_muffin_2" value="2" name="new_muffins" />
 	                    </label>
 	                    <label class="label_muffins" for="new_muffin_3">
 	                    	<div class="active"></div>
-	                    	<input type="radio" class="muffins" id="new_muffin_3" value="3" name="muffins" />
+	                    	<input type="radio" class="muffins" id="new_muffin_3" value="3" name="new_muffins" />
 	                    </label>
 	                    <label class="label_muffins" for="new_muffin_4">
 	                    	<div class="active"></div>
-	                   		<input type="radio" class="muffins" id="new_muffin_4" value="4" name="muffins" />
+	                   		<input type="radio" class="muffins" id="new_muffin_4" value="4" name="new_muffins" />
 	                    </label>
 	                    <label class="label_muffins" for="new_muffin_5">
 	                    	<div class="active"></div>
-	                    	<input type="radio" class="muffins" id="new_muffin_5" value="5" name="muffins" />
+	                    	<input type="radio" class="muffins" id="new_muffin_5" value="5" name="new_muffins" />
 	                    </label>
 	                </div>
 	    		</div>
