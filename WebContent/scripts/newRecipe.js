@@ -248,7 +248,14 @@ function checkStep2(event){
 			});
 		}
 		
+	}else{
+		if(!checkValidationStep2())
+			$("#nav_step2").nextAll().addClass("inactive");
 	}
+}
+
+function checkValidationStep2(){
+	var check = true;
 }
 
 function submitStep2(){
