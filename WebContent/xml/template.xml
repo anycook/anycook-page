@@ -197,7 +197,7 @@
     				<div class="text">Schritt hinzufügen</div>
     			</div>
     			<div id="ingredient_overview" class="button">zur Zutatenübersicht</div>
-    			<div id="no_ingredients_error" class="error">Bitte gib erst deine Zutaten bei den Schritten ein</div>
+    			<div id="no_ingredients_error" class="error">Bitte gib erst deine Schritte und Zutaten ein</div>
     		</div>
     		<div id="step3" class="sliding_container">
     			<!-- <h2>Zu guter Letzt</h2>
@@ -211,6 +211,7 @@
 	    				<option>Kategorie auswählen</option>
 	    			</select>
 	    		</div>
+	    		<div id="category_error" class="error">Bitte wähle eine Kategorie ein</div>
 	    		<div id="new_time">
 	    			<img src="/icons/uhr.png"/>
 	    			<h2>Dauer:</h2>
@@ -229,6 +230,7 @@
 						<div class="time_text_end">h</div>
 					</div>			
 	    		</div>
+	    		<div id="time_error" class="error">Du hast noch keine Zeit eingetragen</div>
 	    		<div id="new_skill">
 	    			<h2>Schwierigkeit:</h2>
 	    			<div class="label_container">
@@ -254,6 +256,7 @@
 		                </label>
 					</div>
 	    		</div>
+	    		<div id="skill_error" class="error">Den Schwierigekeitsgrad deines Rezeptes, bitte.</div>
 	    		<div id="new_muffins">
 	    			<h2>Kalorien:</h2>
 	    			<div class="label_container">
@@ -279,6 +282,7 @@
 	                    </label>
 	                </div>
 	    		</div>
+	    		<div id="muffin_error" class="error">Wieviele Kalorien hat dieses Rezept?</div>
 	    		<div id="new_tags_container">
 		    		<h2>Stichwörter:</h2>
 		    		<p>Hilf den anderen beim finden indem du viele Stichwörter hinzufügst</p>
