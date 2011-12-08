@@ -65,9 +65,9 @@
 	    	</div>
 	    	<div class="mid">
 	    		<a id="doodle" href="/#!/search/tagged/herbst"><img src="/img/doodle.png"/></a>
-		    	<h1>REZEPT FINDEN, ERSTELLEN &amp; KOCHEN</h1>
-	    	</div>
-	    	<div id="informationbox">
+		    	<h1>REZEPTE FINDEN, ERSTELLEN &amp; KOCHEN</h1>
+		    	
+		    	<div id="informationbox">
 		    	<div id="news">
 					<h2>Küchengeflüster:</h2>
 					<div class="content news">
@@ -76,7 +76,9 @@
 						<div class="bottom"></div>
 					</div>
 				</div>
-			</div>
+				</div>
+	    	</div>
+	    	
 	    	<div class="bottom">
 	    		<div>
 	    			<span id="num_recipes"></span> Rezepte, <span id="num_ingredients"></span> Zutaten, <span id="num_tags"></span> Tags
