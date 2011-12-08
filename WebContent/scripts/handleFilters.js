@@ -9,15 +9,11 @@ function setFiltersfromSession(){
 		}
 		if(search.skill!=null){
 			checkOn("#chef_"+search.skill);
-			handleRadios(".label_chefhats");
-		}
-		if(search.wertung!=null){
-			checkOn("#star_"+search.wertung);
-			handleRadios(".label_stars");
+			handleRadios("#filter_table .label_chefhats");
 		}
 		if(search.kalorien!=null){
 			checkOn("#muffin_"+search.kalorien);
-			handleRadios(".label_muffins");
+			handleRadios("#filter_table .label_muffins");
 		}
 		if(search.time != null){
 			var time = search.time.split(":");
@@ -45,7 +41,6 @@ function setFiltersfromSession(){
 }
 
 function resetFilter(){
-	$("#progress_1, #progress_2, #progress_3, #progress_4").remove();
 	$("#userfilter").hide();
 	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
 	$("#filter_main *").not("ul.kategorie_filter, #userfilter, #userfilter *, label .active").show().css("opacity", 1);
@@ -54,8 +49,8 @@ function resetFilter(){
 	$("#time_std, #time_min").removeAttr("readonly");
 	removeChecked();
 	blockFilter(false);
-	handleRadios("#filter_container .label_chefhats, #filter_container .label_muffins");
-	
+	handleRadios("#filter_table .label_chefhats, #filter_table .label_muffins");
+	// handleRadios(".label_chefhats, .label_muffins");
 	var $ingredientList = $("#ingredient_list").empty();
 	for(var i= 0; i<6; i++)
 		$ingredientList.append("<li></li>");
@@ -207,7 +202,7 @@ function mouseoverRadio(obj){
 }
 
 function removeChecked(){
-	$('label input:checked').removeAttr("checked");
+	$('#filter_table label input:checked').removeAttr("checked");
 }
 
 function checkOnOff(obj){

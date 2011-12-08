@@ -167,6 +167,8 @@ function submitStep3(){
 }
 
 function newRecipeAdressChange(event){
+	resetFilter();
+	var checkedinput = $("#step3 .label_muffins input:checked, #step3 .label_chefhats input:checked");
 	var $editingContainer = $("#recipe_editing_container");	
 	$editingContainer.removeClass("step2 step3");
 	var $navigation = $(".navigation");
@@ -191,7 +193,6 @@ function newRecipeAdressChange(event){
 					
 	case 2:
 		$navigation.children("#nav_step2").removeClass("inactive");
-		resetNewRecipeHeight();
 		step1Left -= 655;
 		
 	default:
@@ -211,6 +212,8 @@ function newRecipeAdressChange(event){
 				}
 			});
 	}
+	
+	if(stepNum == 2) resetNewRecipeHeight();
 	
 	return false;
 }
@@ -262,7 +265,8 @@ function fillNewRecipe(json){
 		}
 	}
 	
-	loadPreview();
+	if($.address.parameter("step") == 4)
+		loadPreview();
 		
 }
 
@@ -311,8 +315,23 @@ function saveDraft(type, data){
 	$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
 }
 
+function getImageName(){
+	var image = $("#step1 .recipe_image_container img").attr("src").split("/");
+	return image[image.length-1];
+}
+
+function getRecipeName(){
+	var name = $("#new_recipe_name").val();
+	return name;
+}
+
+function getDescription(){
+	var description = $("#new_recipe_introduction").val();
+	return description;
+}
+
 function getIngredients(){
-	var $lis = $("lightbox").find("li");
+	var $lis = $(".lightbox").find("li");
 	var ingredients = [];
 	for(var i = 0; i<$lis.length; i++){
 		var $li = $lis.eq(i);
@@ -322,6 +341,14 @@ function getIngredients(){
 		ingredients[ingredients.length] = ingredient;		
 	}
 	return ingredients;
+}
+
+function getSkill(){
+	return $("#step3 .chefhats:checked").val()
+}
+
+function getCalorie(){
+	return $("#step3 .muffins:checked").val()
 }
 
 function getTime(){
@@ -692,7 +719,20 @@ function showNRImage(filename){
 }
 
 function loadPreview(){
-	var $recipeImageContainer = $("#step4 .recipe_image_container");
+	var recipeImage = getImageName();
+	$("#step4 .recipe_image_container img").attr("src", "/gerichtebilder/big/"+recipeImage);
+	$("#recipe_headline").text(getRecipeName());
+	$("#introduction").text(getDescription());
 	var steps = getSteps();	
 	loadSteps(steps);
+	var filter = {
+		time : getTime(),
+		tags : getTags(),
+		ingredients : getIngredients(),
+		skill:getSkill(),
+		calorie: getCalorie()
+	}
+	loadFilter(filter);
+	var height = $("#step4").height()
+	$("#recipe_editing_container").css("height", height);
 }
