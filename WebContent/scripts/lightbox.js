@@ -121,7 +121,8 @@ function makeIngredientLightBox(){
 	var $headline = $("<div></div>")
 		.append("<span>Zutaten für </span>")
 		.append($numberinput)
-		.append("<span> Personen</span>");
+		.append("<span> Personen</span>")
+		.append("<div id=\"numberinput_error\" class=\"error\">Bitte Personenzahl angeben</div>");
 		
 	var $ul =$("<ul></ul>").addClass("new_ingredient_list");
 		
