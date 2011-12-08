@@ -59,7 +59,7 @@
 				</div>
     	</div>-->
     	<div id="site1">
-	    	<div class="top">
+	    	<div class="top_container">
 	    		<div>Rezept des Tages:</div>
 	    		<a id="recipe_of_the_day"></a>
 	    	</div>
@@ -67,19 +67,17 @@
 	    		<a id="doodle" href="/#!/search/tagged/herbst"><img src="/img/doodle.png"/></a>
 		    	<h1>REZEPTE FINDEN, ERSTELLEN &amp; KOCHEN</h1>
 		    	
-		    	<div id="informationbox">
-			    	<div id="news">
-						<h2>Küchengeflüster:</h2>
-						<div class="content news">
-							<div class="top"></div>
-							<ul></ul>
-							<div class="bottom"></div>
-						</div>
+		    	<div id="news">
+					<h2>Küchengeflüster:</h2>
+					<div class="content news">
+						<div class="top"></div>
+						<ul></ul>
+						<div class="bottom"></div>
 					</div>
 				</div>
-	    	</div>
-	    	
-	    	<div class="bottom">
+			</div>
+	    		    	
+	    	<div class="bottom_container">
 	    		<div>
 	    			<span id="num_recipes"></span> Rezepte, <span id="num_ingredients"></span> Zutaten, <span id="num_tags"></span> Tags
 	    		</div>
