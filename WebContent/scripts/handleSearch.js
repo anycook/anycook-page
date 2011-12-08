@@ -3,7 +3,9 @@ function addResults(){
 	var gerichte = $("#result_container").data("results").gerichte;
 	var start = $(".frame_big").length;					
 	for(var i= start; i<gerichte.length && i<start+10; i++){
-		$("#result_container").append(getBigFrameText(gerichte[i]));
+		var $result = getBigFrameText(gerichte[i]);
+		$("#result_container").append($result);
+		$result.ellipsis("p");
 	}
 	if(gerichte.length > $(".frame_big").length)
 		addMoreResultsButton();
