@@ -122,12 +122,13 @@ function makeIngredientLightBox(){
 		.append("<span>Zutaten für </span>")
 		.append($numberinput)
 		.append("<span> Personen</span>")
-		.append("<div id=\"numberinput_error\" class=\"error\">Bitte Personenzahl angeben</div>");
+		.append("<span id=\"numberinput_error\" class=\"error\">Bitte Personenzahl angeben</span>");
 		
 	var $ul =$("<ul></ul>").addClass("new_ingredient_list");
 		
 	var $content = $("<div></div>")
-		.append($ul);	
+		.append($ul)
+		.append("<span id=\"ingredientoverview_error\" class=\"error\">Kein Rezept ohne Zutaten</span>");	
 
 	var $lightbox = getLightbox($headline.children(), 
 	"Dies sind alle Zutaten, die du in den Schritten angegeben hast. "+ 

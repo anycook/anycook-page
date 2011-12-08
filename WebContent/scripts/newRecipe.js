@@ -277,10 +277,48 @@ function checkValidationStep2(){
 	return stepcheck && ingredientcheck;
 }
 
-function submitStep2(){
+function checkValidateLightboxPersons(){
+	var personcheck = false;
+	var $lightbox = $(".lightbox");
+	var persons = $lightbox.find("#new_num_persons").val();
+	if(persons != ""  && Number(persons) > 0)
+		personcheck = true;
+	
+	return personcheck;
+}
+
+function checkValidateLightboxIngredients(){
+	var $lightbox = $(".lightbox");
+	var ingredienttexts = $lightbox.find(".new_ingredient").val();
+	for(var i in ingredienttexts){
+		if(ingredienttexts[i].length > 0)
+			return true;
+	}
+	return false;
+}
+
+function submitStep2(event){
+	event.preventDefault();
+	var $this = $(this);
+	
+	var check = true;
+	if(!checkValidateLightboxPersons()){
+		check = false;
+		$("#numberinput_error").fadeIn(300);
+	}
+	
+	if(!checkValidateLightboxIngredients()){
+		check = false;
+		$("#ingredientoverview_error").fadeIn(300);
+	}
+	
+	if(!check){
+		$this.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
+		return;
+	}
+		
 	hideLightbox();
 	$.address.parameter("step", "3");
-	return false;
 }
 
 function submitStep3(){

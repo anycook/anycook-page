@@ -1,4 +1,4 @@
-var settings = Settings.init();
+//var settings = Settings.init();
 
 function loadSettings(){
 	
