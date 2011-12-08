@@ -51,7 +51,7 @@ function loadRecipe(recipe) {
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
-	$("#filter_headline").text("Status");
+	$("#filter_headline").text("Legende");
 
 	$("#recipe_headline").append(recipe.name);
 	$("#introduction").append(recipe.beschreibung);

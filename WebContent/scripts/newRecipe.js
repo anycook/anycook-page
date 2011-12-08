@@ -72,6 +72,8 @@ function loadNewRecipe(){
 		var text = $this.val();
 		var span = $("#select_container span").text(text);
 		saveDraft("category", text);
+		checkValidateStep3();
+		$("#category_error").fadeOut(300);
 	});
 	
 	$("#step3 .label_chefhats, #step3 .label_muffins").click(function(){
@@ -80,14 +82,20 @@ function loadNewRecipe(){
         handleRadios(this);
         
         var $this = $(this);
-        var name = $inputs.attr("name") == "muffins" ? "calorie" : "skill";
-        	
+        var name = $inputs.attr("name") == "new_muffins" ? "calorie" : "skill";
+        
+        
         
         if($inputs.attr("checked"))
         	saveDraft(name, $inputs.val());
         else
         	saveDraft(name, "0");
     	// must return false or function is sometimes called twice
+    	checkValidateStep3();
+    	if(name == "calorie")
+			$("#muffin_error").fadeOut(300);
+		else
+			$("#skill_error").fadeOut(300);
     	return false;
     }).mouseover(function(){
     		mouseoverRadio(this);
@@ -98,9 +106,17 @@ function loadNewRecipe(){
 		.keydown(keyTime)
 		.change(draftTime)
 		.keyup(draftTime)
+		.focus(function(){
+			checkValidateStep3();
+			$("#time_error").fadeOut(300);
+		})
 		.siblings(".up, .down")
 		.click(timeUpDownListener)
-		.click(draftTime);
+		.click(draftTime)
+		.click(function(){
+			checkValidateStep3();
+			$("#time_error").fadeOut(300);
+		});
 		
 	$(".tagsbox").click(makeNewTagInput);
 	makeTagCloud();
@@ -310,6 +326,7 @@ function submitStep2(event){
 	if(!checkValidateLightboxIngredients()){
 		check = false;
 		$("#ingredientoverview_error").fadeIn(300);
+		watchForLightboxIngredients();
 	}
 	
 	if(!check){
@@ -321,8 +338,64 @@ function submitStep2(event){
 	$.address.parameter("step", "3");
 }
 
+
+//step3
+function checkCategory(){
+	var category = $("#category_select :selected").val();
+	return category != "" && category != "Kategorie auswählen";
+}
+
+function checkTime(){
+	var time = getTime();
+	return time.std != "0" || time.min != "0"; 
+}
+
+function checkSkill(){
+	var skill = getSkill();
+	return skill!==undefined;
+}
+
+function checkCalorie(){
+	return getCalorie() !== undefined;
+}
+
+function checkValidateStep3(){
+	if(checkCategory() && checkTime() && checkSkill() && checkCalorie())
+		$("#nav_step3").nextAll().removeClass("inactive");
+	else
+		$("#nav_step3").nextAll().addClass("inactive");
+}
+
+
 function submitStep3(){
-	$.address.parameter("step", "4");
+	var check = true;
+	if(!checkCategory()){
+		$("#category_error").fadeIn(300);
+		check = false;
+	}
+	
+	if(!checkTime()){
+		$("#time_error").fadeIn(300);
+		check = false;
+	}
+	
+	if(!checkSkill()){
+		$("#skill_error").fadeIn(300);
+		check = false;
+	}
+	
+	if(!checkCalorie()){
+		$("#muffin_error").fadeIn(300);
+		check = false;
+	}
+	
+	if(!check){
+		$("#open_preview").effect("shake", {distance:5, times:2}, 50);	
+	}else{
+		$.address.parameter("step", "4");
+	}
+	
+	
 }
 
 function newRecipeAdressChange(event){
@@ -748,6 +821,27 @@ function watchForIngredients(){
 			$("#no_ingredients_error").fadeOut(300);
 			break;
 		}
+	}
+	
+}
+
+function watchForLightboxIngredients(){
+	var id = $(document).data("watchForLightboxIngredients");
+	var $newIngredients = $(".lightbox .new_ingredient");
+	if($newIngredients.length == 0){
+		$(document).removeData("watchForLightboxIngredients");
+		window.clearInterval(id);
+		return;
+	}
+	if(id == undefined){
+		id = window.setInterval("watchForLightboxIngredients()", 1000);
+		$(document).data("watchForLightboxIngredients", id);
+	}
+	
+	if(checkValidateLightboxIngredients()){
+		$(document).removeData("watchForLightboxIngredients");
+		window.clearInterval(id);
+		$("#ingredientoverview_error").fadeOut(300);
 	}
 	
 }
