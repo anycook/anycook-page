@@ -255,7 +255,26 @@ function checkStep2(event){
 }
 
 function checkValidationStep2(){
-	var check = true;
+	var stepcheck = false;
+	var steptexts = $(".new_step textarea").val();
+	for(var i in steptexts){
+		if(steptexts[i].length > 0){
+			stepcheck = true;
+			break;
+		}
+	}
+	
+	
+	var ingredientcheck = false;
+	var ingredienttexts = $("#step2 .new_ingredient").val();
+	for(var i in ingredienttexts){
+		if(ingredienttexts[i].length > 0){
+			ingredientcheck = true;
+			break;		
+		}
+	}
+	
+	return stepcheck && ingredientcheck;
 }
 
 function submitStep2(){
@@ -685,7 +704,7 @@ function watchForIngredients(){
 	}
 	
 	for(var i = 0; i < $newIngredients.length; i++){
-		if($($newIngredients[i]).val().length>0){
+		if(checkValidationStep2()){
 			$(document).removeData("watchForIngredients");
 			window.clearInterval(id);
 			$("#no_ingredients_error").fadeOut(300);

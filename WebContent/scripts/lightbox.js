@@ -195,7 +195,8 @@ function showIngredientLightbox(){
 
 function getIngrededientsForOverview(){
 	var ingredients = {};
-	var noingredients = true;
+	if(!checkValidationStep2())
+		return false;
 	
 	
 	$("#step2 .new_ingredient_line").each(function(){
@@ -203,7 +204,6 @@ function getIngrededientsForOverview(){
 		var ingredient = $this.children(".new_ingredient").val();
 		if(ingredient.length == 0)
 			return;
-		noingredients = false;
 		var menge = $this.children(".new_ingredient_menge").val();
 		if(ingredients[ingredient] != undefined)
 			ingredients[ingredient] = mergeMenge(ingredients[ingredient], menge);
@@ -224,7 +224,7 @@ function getIngrededientsForOverview(){
 	
 	
 	
-	return !noingredients;
+	return true;
 }
 
 function resizeLightbox(){
