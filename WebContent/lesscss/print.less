@@ -1,5 +1,5 @@
 @media print{
-	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction{
+	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline{
 		display: none !important;
 	}
 	
@@ -16,11 +16,12 @@
 	#recipe_headline{
 		margin:0 10cm 0 0;
 		width:10cm;
-		font: 25pt Georgia;
+		font: 33pt Georgia;
 		text-align: left !important;
 	}
 	
 	.step{
+		width:100% !important;
 		border: 0 !important;
 		float:left;
 		padding:inherit;
@@ -34,16 +35,27 @@
 	}
 	
 	.number{
-		width:1cm;
+		width:1cm !important; 
 		line-height:inherit;
-		font: 16pt Georgia;
+		font: 31pt Georgia !important;
 		float:left;
-		margin:0;
+		margin:0 !important;
 		padding: inherit;
 		height:inherit;
 		border-right:none;
 		text-align: left;
 		border: 0 !important;
+	}
+	
+	.text{
+		width:10cm !important;
+		float:none;
+		padding: inherit;
+		margin: 0.2cm 0 0 1.8cm !important;
+		height:inherit;
+		text-align: justify;
+		font: 16pt Helvetica, Arial, sans-serif !important;
+		
 	}
 	
 }
