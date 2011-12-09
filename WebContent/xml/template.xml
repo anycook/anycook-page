@@ -360,7 +360,7 @@
 			<div id="profile_info">
 				<div id="profile_title">
 					<h1></h1>
-					<div id="writemassage"></div>
+					<div class="writemassage"></div>
 					<div id="follow" class="stampposition"></div><div id="followhover" class="stampposition"></div>
 					<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
 				</div>
