@@ -1,63 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <template id="home">
-    <!--<div id="home">
-        <div id="display">					
-		</div>
-		<div id="informationbox">
-			<div id="famous_tags">
-				<h2>Beliebte Tags:</h2>
-				<div class="content">
-					<div class="top"></div>
-					<div class="mid">
-						<div class="left_seam"></div>
-						<div id="famous_tags_cloud"></div>
-						<div class="right_seam"></div>
-					</div>
-					
-					<div class="bottom"></div>
-				</div>
-				
-			</div>
-			<div id="news">
-				<h2>Küchengeplapper:</h2>
-				<div class="content news">
-					<div class="top"></div>
-					<ul></ul>
-					<div class="bottom"></div>
-				</div>
-			</div>
-			
-		</div>
-		<div id="dailyrecipe">
-				<h2>Rezept des Tages:</h2>				
-		</div>
-	</div>
-    </template>
-    <template id="home_discover">
-    	<div id="discover">
-    			<h2>neuste Rezepte</h2>
-    			<div id="neuste" class="entdecken">
-					<div class="entdecken_back"></div>
-					<div class="discover_container"></div>					
-					<div class="entdecken_next"></div>
-					<div class="discover_footer"></div>
-				</div>
-				<h2>leckerste Rezepte</h2>
-				<div id="leckerste" class="entdecken">
-					<div class="entdecken_back"></div>
-					<div class="discover_container"></div>					
-					<div class="entdecken_next"></div>
-					<div class="discover_footer"></div>
-				</div>
-				<h2>empfohlene Rezepte</h2>
-				<div id="beliebte" class="entdecken">
-					<div class="entdecken_back"></div>
-					<div class="discover_container"></div>					
-					<div class="entdecken_next"></div>
-					<div class="discover_footer"></div>
-				</div>
-    	</div>-->
     	<div id="site1">
 	    	<div class="top_container">
 	    		<div>Rezept des Tages:</div>
