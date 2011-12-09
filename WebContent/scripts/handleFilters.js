@@ -28,7 +28,7 @@ function setFiltersfromSession(){
 			addIngredientRow(search.zutaten[num]);
 		
 		for(num in search.tags)
-			$(".tags_table_right").append("<div class='tag'><div class='tag_text'>"+search.tags[num]+"</div><div class='tag_remove'>x</div></div>");
+			$(".tags_list").append(getTag(search.tags[num], "remove"));
 		
 		if(search.terms!=undefined){
 			$("#search_terms").show();
@@ -62,7 +62,7 @@ function resetFilter(){
 	for(var i= 0; i<6; i++)
 		$ingredientList.append("<li></li>");
 	
-	$(".tags_table_right > *").remove();
+	$(".tags_list").empty();
 	
 	$("#kategorie_head").text("keine Kategorie");
 	$("#kategorie_filter_hidden").val("keine Kategorie");

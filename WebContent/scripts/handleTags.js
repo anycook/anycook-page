@@ -1,6 +1,6 @@
 //NEW
 function makeNewTagInput(event){
-	var $tagsbox = $(".tagsbox");
+	var $this = $(this);
 	
 	
 	if(event !== undefined){
@@ -9,10 +9,10 @@ function makeNewTagInput(event){
 			return;
 	}
 		
-	if($tagsbox.children("input").length==0){
+	if($this.children("input").length==0){
 			//var divlength = getDivLength();
 			//make new input field
-			$tagsbox.append("<input type='text'/>")
+			$this.append("<input type='text'/>")
 				.addClass("active")
 				.children("input")
 				.keydown(keyNewTag)
@@ -43,28 +43,33 @@ function makeNewTagInput(event){
         				if(ui.item === undefined) return false;
         				var text = ui.item.label;
         				$(this).autocomplete("destroy");
-        				saveNewTag(text);
-        				makeNewInput();
+        				
+        				if($this.hasClass("tags_list")){
+        					search.addTag(text);
+        					search.flush();
+        				}else
+        					saveNewTag.apply(this, [text]);
+        				makeNewTagInput.apply(this);
         				return false;
         			}
 	    	});
 	    	
 	    	
 			$(".ui-autocomplete").last().addClass("newtag-autocomplete");
-			//$(".tags_table_right form").submit(submitTag);
+			// if($this.hasClass("tags_list"))
 			
 			$("body").click(function(event){
-				if($(event.target).parents().andSelf().is($($tagsbox)))
+				if($(event.target).parents().andSelf().is($($this)))
 					return;
 				
-				$tagsbox
+				$this
 				.removeClass("active")
 				.children("input").remove();
 				
 			});
 		}
 		
-		$tagsbox.children("input").focus();
+		$this.children("input").focus();
 			
 }
 
@@ -147,6 +152,12 @@ function makeTagCloud(){
 	
 }
 
+function submitTags(event){
+	event.preventDefault();
+	var tagtext = $(this).children("input").val();
+	search.addTag(tagtext);
+}
+
 function submitSuggestTags(){
 	var pathNames = $.address.pathNames();
 	var recipe = pathNames[1];
@@ -197,7 +208,7 @@ function saveNewTag(text){
 	
 	removeNewInput();	
 	if($(".tag_text:contains("+text+")").not("#tagcloud .tag_text:contains("+text+")").length == 0){		
-		$(".tagsbox").append(getTag(text, "remove"))
+		$(this).append(getTag(text, "remove"))
 			.children(".tag").last()
 			.hide().fadeIn(100);
 		draftTags();
