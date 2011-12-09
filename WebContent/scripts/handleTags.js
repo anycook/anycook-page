@@ -102,6 +102,12 @@ function removeNewInput(){
 
 function removeNewTag(event){
 	var $this = $(this);
+	if($this.parents().is(".tags_list")){
+		search.removeTag($this.prev().text());
+		search.flush();
+		return;
+	}
+	
 	$this.parents(".tag").animate({
 		opacity:0
 	}, {
@@ -121,7 +127,6 @@ function removeNewTag(event){
 			});
 		}
 	});
-	removeNewInput();
 }
 
 
