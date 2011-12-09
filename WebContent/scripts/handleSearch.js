@@ -5,7 +5,11 @@ function addResults(){
 	for(var i= start; i<gerichte.length && i<start+10; i++){
 		var $result = getBigFrameText(gerichte[i]);
 		$("#result_container").append($result);
-		$result.ellipsis("p");
+		var $text = $result.find(".recipe_text");
+		var $p = $text.children("p");
+		var $h3 = $text.children("h3");
+		var height = $text.innerHeight()-($h3.outerHeight(true)+($p.outerHeight(true)-$p.innerHeight()));
+		$p.css("height",height).ellipsis();
 	}
 	if(gerichte.length > $(".frame_big").length)
 		addMoreResultsButton();

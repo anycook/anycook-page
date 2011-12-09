@@ -10,8 +10,8 @@ function loadHome()
 	// //new stuff
 	
 	$("#content_header").empty()
-		.append(getHeaderLink("Entdecken", "/#!/?page=discover", "recipe_btn").addClass("active"))
-		.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
+		.append(getHeaderLink("Entdecken", "/#!/?page=discover", "recipe_btn").addClass("active"));
+		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 	
 	$.ajax({
 	  url: "/anycook/LoadSide1Data",
@@ -79,19 +79,12 @@ function handleChange(event){
 		
 		search= new Search();
 		
-		$("#zutat_head").text("Zutaten:");
 		$.address.title("anycook");
 		
 		//resetSearchBar();
 		resetFilter();
 		
 		$(document).scrollTop(0);
-		
-		if($("#filter_main").css("opacity")==0){
-			$("#filter_main").animate({"opacity":1, "paddingBottom":20}, 0);
-			$("#filter_main > *").not($("ul.kategorie_filter, label .active")).show();
-			$("#filter_main").css("height", "auto");
-		}
 		
 		$("#wertung_filter").show();
 		$("#content_footer").show();		
@@ -101,7 +94,7 @@ function handleChange(event){
 		//$.xml.append(path.length == 0 ? "home" : path[0]);
 		$("#content_main").xml("append", path[0]);
 		
-		blockFilter(false);
+		//blockFilter(false);
 		if(path.length > 0){
 			$("#search_reset, #filter_reset").addClass("on");
 		}

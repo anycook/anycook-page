@@ -90,17 +90,18 @@
 			<div id="search_reset"></div>
 		</div>
 		<div id="btn_container">
-			<div id='signin_btn'>
-				<div id='login_pin'></div><div id="login_text">anmelden</div>
-			</div>
 			<a id="user_home" class="user_btn" href="/#/" title="Startseite"><span></span></a>
+			<a id="new_recipe" class="user_btn" href="/#!/recipeediting" title="Neues Rezept erstellen"><span></span></a>
 			<a id="user_profile" class="user_btn" href="/#/profile/me" title="Mein Profil"><span></span></a>
 			<!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
 			<div id="message_btn_container">
 				<a id="user_messages" class="user_btn" href="/#/newsstream" title="Benachrichtigungen"><span></span></a>
 				<div id="new_messages_bubble"><span>0</span></div>
 			</div>
-			<div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>			
+			<div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>
+			<div id='signin_btn'>
+				<div id='login_pin'></div><div id="login_text">anmelden</div>
+			</div>			
 		</div>
 		<div id="login_container">
 			<div class="head">
@@ -246,12 +247,10 @@
 							<li></li>
 							<li></li>
 						</ul>
-						<table id="tags_table">
-							<tr>
-								<td class="tags_table_left">Tags: </td>
-								<td class="tags_table_right"></td>
-							</tr>
-						</table>
+						<!-- <div id="tags_container"> -->
+						<div class="tags_head">Stichwörter: </div>
+						<div class="tags_list"></div>
+						<!-- </div> -->
 					</div>
 				</div>
 				<div id="filter_bottom"></div>
@@ -284,9 +283,6 @@
 			<div>eingeloggt als <span class="username"></span></div>
 			<a href="#!/profile/me" title="Mein Profil"><img /></a>
 		</div>
-		<p>
-			<a class="menulink" href="/#!/recipeediting">Neues Rezept erstellen</a>
-		</p>
 		<p class="admin">
 			<a class="menulink" href="https://testbackend.anycook.de">Backend(Test)</a>
 		</p>

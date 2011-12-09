@@ -193,7 +193,7 @@
             	
             	removeChecked();
             	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){
-                	if(blocked == false){
+                	if(!$("#filter_main").is(".blocked")){
 	                	checkOnOff(this);
 	                	handleRadios(this);
                 	}
@@ -201,17 +201,16 @@
                 	// must return false or function is sometimes called twice
                 	return false;
                 }).mouseover(function(){
-                	if(blocked == false)
+                	if(!$("#filter_main").is(".blocked"))
                 		mouseoverRadio(this);
             	}).mouseleave(function(){
-            		if(blocked == false)
+            		if(!$("#filter_main").is(".blocked"))
             			handleRadios(this);
             	});
 
             	//zutatentabelle
             	
-            	$("#ingredient_list").click(ingredientListClick);
-            		$("#ingredient_list .close").live('click', removeZutatField);
+            	$("#ingredient_list").click(ingredientListClick).on('click', ".close", removeZutatField);
             	
             	
             	//TODO tagsfilter

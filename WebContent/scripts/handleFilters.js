@@ -41,14 +41,21 @@ function setFiltersfromSession(){
 }
 
 function resetFilter(){
+	
+	
+	$("#filter_main").removeClass("blocked");
+	$("#zutat_head").text("Zutaten:");
 	$("#userfilter").hide();
 	$("#filter_main").show().css({paddingBottom: "20px", height: "auto"});
 	$("#filter_main *").not("ul.kategorie_filter, #userfilter, #userfilter *, label .active").show().css("opacity", 1);
 	$("#filter_headline").text("Filter");
+	
+	$("#time_form > *").show();
+	$("#time_form .time_text_end").text("h");
+	
 	$("#time_std, #time_min").val("0");
-	$("#time_std, #time_min").removeAttr("readonly");
 	removeChecked();
-	blockFilter(false);
+	//blockFilter(false);
 	handleRadios("#filter_table .label_chefhats, #filter_table .label_muffins");
 	// handleRadios(".label_chefhats, .label_muffins");
 	var $ingredientList = $("#ingredient_list").empty();
@@ -93,7 +100,7 @@ function loadAllKategories(target){
 }
 
 function handleKategories(obj){
-	if(blocked==false){
+	if(!$("#filter_main").is(".blocked")){
 		
 		$kategorieList = $("#kategorie_list");
 		animateCategory($kategorieList);
@@ -171,29 +178,11 @@ function closeKategorien(event){
 
 //radiobuttons
 
-var blocked = false;
-
 function handleRadios(obj){
 		var $obj = $(obj).removeClass('on')
 			.siblings().andSelf().removeClass('on');	
 	   		$obj.children("input:checked").parent('label').addClass('on').prevAll().addClass('on');
-	   		return;
-}
-
-function blockFilter(onoff){
-	var objs = $("#filter_container .label_chefhats, #filter_container .label_muffins, div.kategorie_filter");
-	blocked = onoff;
-	if(onoff){
-		$("#time_std, #time_min").attr("disabled", "disabled");
-		$("div.kategorie_filter > div").addClass("off");
-		$("#ingredient_list").addClass("blocked");
-	}
-	else{
-		objs.css("cursor", "pointer");
-		$("#time_std, #time_min").removeAttr("disabled");
-		$("div.kategorie_filter > div").removeClass("off");
-		$("#ingredient_list").removeClass("blocked");
-	}
+	   	return;
 }
 
 function mouseoverRadio(obj){
@@ -240,7 +229,7 @@ function textReplacement(input){
 
 //zutaten
 function ingredientListClick(){	
-	if(blocked == false){
+	if(!$("#filter_main").is(".blocked")){
 		var $this = $(this);
 		var $input = $this.find("input");
 		

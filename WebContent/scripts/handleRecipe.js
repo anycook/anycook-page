@@ -51,8 +51,6 @@ function loadRecipe(recipe) {
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
-	$("#filter_headline").text("Legende");
-
 	$("#recipe_headline").append(recipe.name);
 	$("#introduction").append(recipe.beschreibung);
 
@@ -170,10 +168,13 @@ function loadSteps(steps) {
 }
 
 function loadFilter(filter) {
+	
+	$("#filter_headline").text("Legende");
+	$("#filter_main").addClass("blocked");
 	$("#kategorie_head").text(filter.category);
-	$("#time_std, #time_min").attr("readonly", "readonly");
-	$("#time_std").val(fillStd(filter.time.std));
-	$("#time_min").val(fillMin(filter.time.min));
+	
+	$("#time_form > *").not(".time_text_end").hide();
+	$("#time_form .time_text_end").text(fillStd(filter.time.std)+" : "+fillMin(filter.time.min)+" h");
 	
 	var persons = Number(filter.persons);
 
@@ -209,7 +210,7 @@ function loadFilter(filter) {
 	checkOn("#chef_" + filter.skill);
 	checkOn("#muffin_" + filter.calorie);
 	handleRadios("#filter_table .label_chefhats, #filter_table .label_muffins");
-	blockFilter(true);
+	//blockFilter(true);
 }
 
 function getIngredientStep(step) {

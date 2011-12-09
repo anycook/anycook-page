@@ -69,15 +69,24 @@ function timeDown($input, submit){
 }
 
 function fillStd(std){
+	std = Number(std);
 	if(std==0 || std>99)
 		std = 0;
-	
+	std = String(std);
+	if(std.length == 1)
+		std = "0"+std;
 	return std;
 }
 
 function fillMin(min){
+	min = Number(min);
 	if(min==0 || min>59)
 		min = 0;
+	
+	min = String(min);
+	if(min.length == 1)
+		min = "0"+min;	
+	
 	
 	return min;
 }
