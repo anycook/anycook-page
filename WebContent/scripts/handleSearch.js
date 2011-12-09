@@ -40,7 +40,7 @@ function addMoreResultsButton(){
 }
 
 function moreresultsScrollListener(){
-	if($.address.pathNames()[0] != "search"){
+	if($.address.pathNames()[0] != "search" || $("#more_results").length == 0){
 		$(document).unbind("scroll", moreresultsScrollListener);
 		return;
 	}
