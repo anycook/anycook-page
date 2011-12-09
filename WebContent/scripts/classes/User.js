@@ -27,12 +27,9 @@ User.init = function(){
 				user.facebook_id = response.facebookID;
 				user.text = response.text;
 				user.following = response.following;
-				
+				checkNewMessageNum();
 			}
 				
-		},
-		error:function(jqXHR, textStatus, errorThrown){
-			console.error(jqXHR);
 		}
 	});
 	return user;
@@ -58,12 +55,10 @@ User.initProfileInfo = function(id){
 				profileUser.date = json.createdate;
 				profileUser.place = json.place;
 				profileUser.discussionnum = json.discussionnum;
-				profileUser.numfollower = json.numfollower;
+				profileUser.follower = json.follower;
+				profileUser.following = json.following;
 				
 			}
-		},
-		error:function(jqXHR, textStatus, errorThrown){
-			console.error(textStatus, jqXHR.responseText);
 		}
 	});
 	
@@ -104,6 +99,12 @@ User.prototype.isFollowing = function(userid){
 	return false;
 }
 
+User.prototype.isFollowedBy = function(userid){
+	for(var i in this.follower)
+		if(this.follower[i].id == userid) return true;
+	return false;
+}
+
 User.getUserImagePath = function(userid, type){
 	if(type == undefined)
 		type = "small";
@@ -131,6 +132,7 @@ User.login = function(mail, pwd, stayloggedin){
 		async: false,
 		success:function(response){
 			callback = response!="false";
+			checkNewMessageNum();
 	}
 	});
 	

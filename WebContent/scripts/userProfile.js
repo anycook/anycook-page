@@ -13,12 +13,11 @@ function loadProfile(userid){
 	if(userid ==user.id)
 		$("#follow").hide();
 	else{
-		var $follow = $("#follow");
-		if(!user.isFollowing(userid)){
-			$follow.click(follow);
-		}
-		else
-			$follow.addClass("on").click(follow);
+		var $follow = $("#follow").click(follow);
+		if(profileData.isFollowedBy(user.id))
+			$follow.addClass("on")
+
+	
 			
 		
 
@@ -29,7 +28,7 @@ function loadProfile(userid){
 	$("#profile_achievements #recipes .count").text(profileData.recipes.length);
 	$("#profile_achievements #likes .count").text(profileData.schmeckt.length);
 	$("#profile_achievements #discussions .count").text(profileData.discussionnum);
-	$("#profile_achievements #follower .count").text(profileData.numfollower);
+	$("#profile_achievements #follower .count").text(profileData.follower.length);
 	
 	if(profileData.text!=null){
 		$("#profile_text").show().text(profileData.text);
@@ -120,20 +119,18 @@ function gotoProfile(username){
 
 function follow(){
 	var $this = $(this);
-	var username = $.address.pathNames()[1];
+	var userid = $.address.pathNames()[1];
 	var data;
-	if($this.text() == "folgen")
-		data = "follow="+username;
-	else
-		data = "unfollow="+username;
+	if(!$this.hasClass("on")){
+		data = {follow:userid};
+		$this.addClass("on");
+	}else{
+		data = {unfollow:userid};
+		$this.removeClass("on");
+	}
 		
-	$.ajax({
-		url:"/anycook/Follow",
-        dataType: "json",
-        data: data,
-        success:function(json){
-        	loadProfile(username);
-        }
+	$.post("/anycook/Follow",data, function(){
+		user
 	});
 }
 

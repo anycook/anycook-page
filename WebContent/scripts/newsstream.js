@@ -62,7 +62,7 @@ function checkNewMessageNum(lastnum){
 		data:{lastnum:lastnum},
 		success:function(newNum){
 			isCheckingMessageNum = false;
-			if(newNum != null && user.checkLogin()){
+			if(newNum != "false" && user.checkLogin()){
 				var $newMessageBubble = $("#new_messages_bubble");
 				newNum = Number(newNum);
 				if(lastnum == 0)
@@ -72,6 +72,8 @@ function checkNewMessageNum(lastnum){
 				$("#new_messages_bubble span").text(newNum);
 				setTimeout("checkNewMessageNum("+newNum+")", 1000);
 								//checkNewMessageNum(newNum);
+			}else{
+				
 			}
 		},
 		error: function(error){

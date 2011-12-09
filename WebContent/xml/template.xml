@@ -246,6 +246,8 @@
 					</div>
 					<ul id="step_container"></ul>
 				</div>
+				<div class="button" id="cancel_recipe">später weiterbearbeiten</div>
+				<div class="button" id="submit_recipe">Rezept einreichen</div>
     		</div>
     	</div>
 	</template>
