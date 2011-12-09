@@ -1,5 +1,5 @@
 @media print{
-	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline{
+	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline, .tags_head, .tags_list{
 		display: none !important;
 	}
 	
@@ -48,7 +48,7 @@
 	}
 	
 	.text{
-		width:10cm !important;
+		width:20cm !important;
 		float:none;
 		padding: inherit;
 		margin: 0.2cm 0 0 1.8cm !important;
@@ -56,6 +56,28 @@
 		text-align: justify;
 		font: 16pt Helvetica, Arial, sans-serif !important;
 	}
+	
+	#filter_box{
+		margin: -3cm 0 0 0;
+		
+		#filter_table{
+			tr{
+				display: none;
+			}
+			
+			#time_filter{
+				display:inherit;
+				padding-left: 0px !important;		
+			}
+		}
+		
+		#ingredient_list li{
+			border-bottom: 0px;
+			
+		}
+		
+	}
+	
 	
 	
 	
