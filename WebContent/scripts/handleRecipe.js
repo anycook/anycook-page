@@ -202,10 +202,10 @@ function loadFilter(filter) {
 		}
 	}
 
-	$(".tags_table_right > *").remove();
+	var $tags_list = $(".tags_list").empty();
 	var tags = filter.tags;
 	for(var i = 0; i < tags.length; i++)
-	$(".tags_table_right").append(getTag(tags[i], "link"));
+	$tags_list.append(getTag(tags[i], "link"));
 
 	checkOn("#chef_" + filter.skill);
 	checkOn("#muffin_" + filter.calorie);

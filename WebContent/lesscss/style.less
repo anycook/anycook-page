@@ -532,8 +532,6 @@ header{
 			float: left;
 			min-height: 600px;
 			margin-bottom:30px;
-			background: url("/img/nr_statusbg.png") no-repeat;
-			background-position: 125px 122px;
 			opacity: 0;
 			
 			#filter_box{
@@ -841,32 +839,32 @@ header{
 							}
 						}
 						
-						#tags_table {
+						/*#tags_table {
 							float:left;
 							margin: 10px 0 10px 0;
-							border-spacing: 0;
+							border-spacing: 0;*/
 							
-							.tags_table_left {
-								vertical-align: top;
-								width: 25%;
-								padding-top: 4px;
-							}
+						.tags_head{
+							float:left;
+							margin-top: 18px;
+						}
+						
+						.tags_list{
+							float: left;
+							margin-top: 7px;
+							@width: 230px;
+							width: @width;
+							padding: 2px 0 1px 1px;
+							background-color: @filterinputbackground;
+							font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+							font-weight: 500;
+							color: #5A5A5A;
+							min-height: 30px;
+							cursor: text;
 							
-							.tags_table_right {
-								float: left;
-								display: block;
-								padding: 2px 0 1px 1px;
-								background-image: url("/img/zutaten_tags_bg.png");
-								background-color: @filterinputbackground;
-								font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-								font-weight: 500;
-								color: #5A5A5A;
-								min-height: 69px;
-								width: 169px;
-								.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
-								border:1px solid @lightgrey;
-								border-radius: 5px;
-							}
+							.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
+							border:1px solid @lightgrey;
+							border-radius: 5px;
 						}
 					}
 					
@@ -878,6 +876,15 @@ header{
 						}
 						
 						#filter_main_box #ingredient_list{
+							
+							border:0;
+							.transition(all, .2s, ease-in-out);
+							background:none;
+							.no-box-shadow();
+							cursor: default;
+						}
+						
+						#filter_main_box .tags_list{
 							
 							border:0;
 							.transition(all, .2s, ease-in-out);
