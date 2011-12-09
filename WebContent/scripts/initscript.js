@@ -215,7 +215,7 @@
             	
             	//tagsfilter
             	$(".tags_list").submit(submitTags).click(makeNewTagInput)
-            		.on("click", "tag_remove", function(event){removeTag(event.target.parentNode);});
+            		.on("click", "tag_remove", function(event){search.removeTag(event.target.parentNode);});
             	// $(".tags_table_right").click(makeNewTagInput);
             	
             	//$(".tags_table_right .tag_remove").live('click', function(event){removeTag(event.target.parentNode);});
