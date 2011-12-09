@@ -22,7 +22,7 @@
 	#buchmitte, #filter_bottom, #header_main, #recipe_general_btn, #recipe_discussion_btn, #rezept_begin, 
 	#rezept_footer, #kategorie_filter_name, #rezept_info, #header_container, #searchbar, #searchform, #header, #right,
 	#content_header, #uhr, .step_right, .kategorie_filter, #rezept_bild,
-	#filter_table tr+tr, #recipe_icons{
+	#filter_table tr+tr{
 		display: none !important;
 	}
 	
