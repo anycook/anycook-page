@@ -861,11 +861,23 @@ header{
 							font-weight: 500;
 							color: #5A5A5A;
 							min-height: 25px;
-							cursor: text;
-							
+							cursor: text;							
 							.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
 							border:1px solid @lightgrey;
 							border-radius: 5px;
+							
+							input{
+								border:none;
+								font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+								background:none;
+								.no-box-shadow();
+								
+								&:focus{
+									border:none;
+									background:none;
+									.no-box-shadow();
+								}
+							}
 						}
 					}
 					
