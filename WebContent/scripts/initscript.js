@@ -15,6 +15,9 @@
 	 left = $right.offset().left;
 	 $right.width($("body").width()-left);
 	 
+	 
+	 //anycookgraph
+	 $.anycookgraph.init({baseurl:"http://testgraph.anycook.de"});
 	 //xml
 	 $("#content_main").xml("init");
 	 
