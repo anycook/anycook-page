@@ -48,8 +48,8 @@ function makeNewTagInput(event){
         					search.addTag(text);
         					search.flush();
         				}else
-        					saveNewTag.apply(this, [text]);
-        				makeNewTagInput.apply(this);
+        					saveNewTag(text);
+        				makeNewTagInput.apply($this[0]);
         				return false;
         			}
 	    	});
@@ -213,7 +213,7 @@ function saveNewTag(text){
 	
 	removeNewInput();	
 	if($(".tag_text:contains("+text+")").not("#tagcloud .tag_text:contains("+text+")").length == 0){		
-		$(this).append(getTag(text, "remove"))
+		$(".tagsbox").append(getTag(text, "remove"))
 			.children(".tag").last()
 			.hide().fadeIn(100);
 		draftTags();
@@ -245,7 +245,7 @@ function addNewTag(event){
 		}
 	});
 	
-	saveNewTag(text);	
+	saveNewTag.apply($(".tagsbox")[0],[text]);	
 }
 
 

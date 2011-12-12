@@ -123,6 +123,8 @@ function loadNewRecipe(){
 	$("#open_preview").click(submitStep3);
 	
 	
+	$("#submit_recipe").click(saveRecipe);
+	
 	//draft
 	if(user.checkLogin()){
 		var id = $.address.parameter("id");
@@ -360,10 +362,13 @@ function checkCalorie(){
 }
 
 function checkValidateStep3(){
-	if(checkCategory() && checkTime() && checkSkill() && checkCalorie())
+	if(checkCategory() && checkTime() && checkSkill() && checkCalorie()){
 		$("#nav_step3").nextAll().removeClass("inactive");
-	else
+		return true;
+	}else{
 		$("#nav_step3").nextAll().addClass("inactive");
+		return false;
+	}
 }
 
 
@@ -396,6 +401,34 @@ function submitStep3(){
 	}
 	
 	
+}
+
+function saveRecipe(){
+	if(checkValidationStep1() && checkValidationStep2() && 
+		checkValidateLightboxPersons() && checkValidateLightboxIngredients() && 
+		checkValidateStep3()){
+		
+		var recipe = {};
+		recipe.steps = getSteps();
+		recipe.name = getRecipeName();
+		recipe.image = getImageName();
+		recipe.description = getDescription();
+		recipe.ingredients = getIngredients();
+		recipe.category = getCategory();
+		recipe.time = getTime();
+		recipe.skill = getSkill();
+		recipe.calorie = getCalorie();
+		recipe.tags = getTags();
+		recipe.persons = getPersons();
+		
+		var id =  $.address.parameter("id");
+		if(id)
+			recipe.mongoid = id;
+		
+		$.post("/anycook/SaveNewRecipe", {recipe:encodeURIComponent(JSON.stringify(recipe))},function(response){
+			alert(response);	
+		});
+	}
 }
 
 function newRecipeAdressChange(event){

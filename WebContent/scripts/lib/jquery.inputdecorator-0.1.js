@@ -46,7 +46,7 @@
 	                   target : this,
 	                   settings : settings
                		};
-		        	$(this).data("inputdecorator-required", data);
+		        	$this.data("inputdecorator-required", data);
                		
                		inputdecorator.decorate("required", data);
 				}
