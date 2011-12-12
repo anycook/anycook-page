@@ -74,19 +74,11 @@ Recipe.prototype.resetTags = function(){
 };
 
 Recipe.prototype.getImageURL = function(type){
-	if(type === undefined)
-		type = "small";
-	
-	
-	return "http://graph.anycook.de/recipe/"+this.name+"/image?type="+type;
+	return $.anycookgraph.recipeImagePath(this.name, type);
 };
 
 Recipe.getImageURL = function(recipename, type){
-	if(type === undefined)
-		type = "small";
-	
-	
-	return "http://graph.anycook.de/recipe/"+recipename+"/image?type="+type;
+	return $.anycookgraph.recipeImagePath(recipename, type);
 };
 
 
