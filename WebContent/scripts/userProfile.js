@@ -2,102 +2,96 @@ function loadProfile(userid){
 	if(userid == "me" && user.onlyUserAccess()){
 		userid = user.id;
 	}
-	var profileData = User.initProfileInfo(userid);
-	$.address.title(profileData.name+" | anycook");
-	var image = User.getUserImagePath(profileData.id, "large");
-	$("#profile_image").attr("src", image);
-	$("#profile_title h1").text(profileData.name);
-	$("#profile_date span").text(profileData.date);
+	$.when(User.initProfileInfo(userid)).then(function(profileData){
+		$.address.title(profileData.name+" | anycook");
+		var image = User.getUserImagePath(profileData.id, "large");
+		$("#profile_image").attr("src", image);
+		$("#profile_title h1").text(profileData.name);
+		$("#profile_date span").text(profileData.date);
+		
+		//TODO do right!!
+		if(userid ==user.id)
+			$("#follow").hide();
+		else{
+			var $follow = $("#follow").click(follow);
+			if(profileData.isFollowedBy(user.id))
+				$follow.addClass("on")
 	
-	//TODO do right!!
-	if(userid ==user.id)
-		$("#follow").hide();
-	else{
-		var $follow = $("#follow").click(follow);
-		if(profileData.isFollowedBy(user.id))
-			$follow.addClass("on")
-
-	
+		
+				
 			
+	
+		}
 		
-
-	}
-	
-	if(profileData.place != null)
-		$("#profile_place").show().children("span").text(profileData.place);
-	$("#profile_achievements #recipes .count").text(profileData.recipes.length);
-	$("#profile_achievements #likes .count").text(profileData.schmeckt.length);
-	$("#profile_achievements #discussions .count").text(profileData.discussionnum);
-	$("#profile_achievements #follower .count").text(profileData.follower.length);
-	
-	if(profileData.text!=null){
-		$("#profile_text").show().text(profileData.text);
-	}
-	
-	if(profileData.facebook_id>0){
-		var fblink = $("#profile_facebook");
-		fblink.attr("href", profileData.getFacebookProfileLink());
-		fblink.css("display", "block");		
-	}
-	
-	if(profileData.recipes.length>0){
-		$("#profile_recipes").show();
-		var recipes = profileData.recipes;
-		$("#profile_recipes h2").text("Rezepte von "+profileData.name+" ("+recipes.length+")");
-		for(var i in recipes){
-			var uri = "#!/recipe/"+recipes[i];
-			$("#profile_recipes p").append("<a href=\""+uri+"\" class=\"profile_rezept_bild\">" +
-					"<img src=\"http://graph.anycook.de/recipe/"+recipes[i]+"/image?type=small\"/>" +
-					"<div><span>"+recipes[i]+"</span></div></a>");
+		if(profileData.place != null)
+			$("#profile_place").show().children("span").text(profileData.place);
+		$("#profile_achievements #recipes .count").text(profileData.recipes.length);
+		$("#profile_achievements #likes .count").text(profileData.schmeckt.length);
+		$("#profile_achievements #discussions .count").text(profileData.discussionnum);
+		$("#profile_achievements #follower .count").text(profileData.follower.length);
+		
+		if(profileData.text!=null){
+			$("#profile_text").show().text(profileData.text);
+		}
+		
+		if(profileData.facebook_id>0){
+			var fblink = $("#profile_facebook");
+			fblink.attr("href", profileData.getFacebookProfileLink());
+			fblink.css("display", "block");		
+		}
+		
+		if(profileData.recipes.length>0){
+			var $recipes = $("#profile_recipes").show();
+			var recipes = profileData.recipes;
+			$recipes.children("h2").text("Rezepte von "+profileData.name+" ("+recipes.length+")");
+			var $p = $recipes.children("p");
+			for(var i in recipes){
+				$p.append(profileRecipe(recipes[i]));
+			}
+			if(recipes.length<=5)
+				$("#profile_recipes p").css("height", 120);
 			
+			if(recipes.length>10)
+				$("#profile_recipes .profile_more").show();
 		}
-		if(recipes.length<=5)
-			$("#profile_recipes p").css("height", 120);
 		
-		if(recipes.length>10)
-			$("#profile_recipes .profile_more").show();
-	}
-	
-	$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
-	
-	if(profileData.schmeckt.length>0){
-		$("#profile_schmeckt").show();
-		var schmeckt = profileData.schmeckt;
-		$("#profile_schmeckt h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
-		for(var i in schmeckt){
-			var uri = "#!/recipe/"+schmeckt[i];
-			$("#profile_schmeckt p").append("<a href=\""+uri+"\" class=\"profile_rezept_bild\">" +
-					"<img src=\"http://graph.anycook.de/recipe/"+schmeckt[i]+"/image?type=small\"/>" +
-					"<div><span>"+schmeckt[i]+"</span></div></a>");
+		$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
+		
+		if(profileData.schmeckt.length>0){
+			var $schmeckt = $("#profile_schmeckt").show();
+			var schmeckt = profileData.schmeckt;
+			$schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
+			var $p = $schmeckt.children("p");
+			for(var i in schmeckt){
+				$p.append(profileRecipe(schmeckt[i]));
+			}
+			if(schmeckt.length<=5)
+				$("#profile_schmeckt p").css("height", 120);
+			
+			if(schmeckt.length>10)
+				$("#profile_schmeckt .profile_more").show();
 		}
-		if(schmeckt.length<=5)
-			$("#profile_schmeckt p").css("height", 120);
-		
-		if(schmeckt.length>10)
-			$("#profile_schmeckt .profile_more").show();
-	}
+	});
 	
 	$(".profile_more").click(profileShowMore);
-	
+		
 	if(userid == user.id){
 		$.ajax({
 			url:"/anycook/GetRecommendation",
 	        dataType: "json",
 	        success:function(json){
 	        	if(json.length>0){
-	        		$("#profile_recommendation").show();
-	        		$("#profile_recommendation h2").text("Diese Rezepte könnten dir auch schmecken");
+	        		var $recommendation = $("#profile_recommendation").show();
+	        		$recommendation.children("h2").text("Diese Rezepte könnten dir auch schmecken");
+	        		var $p = $recommendation.children("p");
 		        	for(var i = 0; i<json.length && i<20; i++){
-		        		var uri = "#!/recipe/"+encodeURIComponent(json[i]);
-		    			$("#profile_recommendation p").append("<a href=\""+uri+"\" class=\"profile_rezept_bild\">" +
-		    					"<img src=\"http://graph.anycook.de/recipe/"+json[i]+"/image?type=small\"/>"+
-		    					"<div><span>"+json[i]+"</span></div></a>");
+		        		$p.append(profileRecipe(json[i]));
 		        	}
-		        	if($("#profile_recommendation p a").length<=5)
-		    			$("#profile_recommendation p").css("height", 120);
+		        	if($p.children("a").length<=5)
+		    			$p.css("height", 120);
 		    		
-		    		if($("#profile_recommendation p a").length>10)
-		    			$("#profile_recommendation .profile_more").show();
+		    		if($p.children("a").length>10)
+		    			$recommendation.children(".profile_more").show();
 	        	}
 	        }
 		});

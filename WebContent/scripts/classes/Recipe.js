@@ -74,11 +74,11 @@ Recipe.prototype.resetTags = function(){
 };
 
 Recipe.prototype.getImageURL = function(type){
-	return $.anycookgraph.recipeImagePath(this.name, type);
+	return $.anycook.graph.recipeImagePath(this.name, type);
 };
 
 Recipe.getImageURL = function(recipename, type){
-	return $.anycookgraph.recipeImagePath(recipename, type);
+	return $.anycook.graph.recipeImagePath(recipename, type);
 };
 
 

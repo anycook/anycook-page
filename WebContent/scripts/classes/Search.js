@@ -131,24 +131,23 @@ Search.prototype.setUsername = function(username){
 };
 
 Search.prototype.getData = function(){
-	var data = "";
-	if(this.tags.length > 0){
-		data+="&tags="+encodeURIComponent(this.tags);
-	}
+	var data = {};
+	if(this.tags.length > 0)
+		data.tags = encodeURIComponent(this.tags);
 	if(this.kategorie != null)
-		data+="&kategorie="+encodeURIComponent(this.kategorie);
+		data.category = encodeURIComponent(this.kategorie);
 	if(this.zutaten.length > 0)
-		data+="&zutaten="+encodeURIComponent(this.zutaten);
+		data.ingredients = encodeURIComponent(this.zutaten);
 	if(this.terms.length > 0)
-		data+="&terms="+encodeURIComponent(this.terms);
+		data.terms = encodeURIComponent(this.terms);
 	if(this.kalorien != null)
-		data+="&kalorien="+encodeURIComponent(this.kalorien);
+		data.calorie = encodeURIComponent(this.kalorien);
 	if(this.skill != null)
-		data+="&skill="+encodeURIComponent(this.skill);
+		data.skill = encodeURIComponent(this.skill);
 	if(this.user != null)
-		data+="&user="+encodeURIComponent(this.user);
+		data.user = encodeURIComponent(this.user);
 	if(this.time != null){
-		data+="&time="+encodeURIComponent(this.time);
+		data.time = encodeURIComponent(this.time);
 	}
 	
 	return data;
@@ -157,26 +156,22 @@ Search.prototype.getData = function(){
 Search.prototype.search = function(){
 	setFiltersfromSession();
 	var data = this.getData();
-	if(data=="" ) return;
+	//if(data=="" ) return;
 	// $.blockUI({message:null});
 	
 	$("#result_container").empty();
-	$.ajax({
-		  url: "/anycook/FullTextSearch",
-		  data:"resultanz=10&startnum=0"+data,
-		  dataType: 'json',
-		  success: function(json){
-		  	if(json!=null && json.size > 0){
-				$("#result_container").data("results", json);
-				addResults();
-				$(".frame_big:focus").live("keydown", searchKeyDown);
-				$(".frame_big").live("mouseenter", function(){
-					$(".frame_big:focus").blur();
-				});
-			}else
-		  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
-			}
-		  });
+	
+	$.anycook.graph.search(data,function(json){
+		if(json && json.size > 0){
+			$("#result_container").data("results", json);
+			addResults();
+			$(".frame_big:focus").live("keydown", searchKeyDown);
+			$(".frame_big").live("mouseenter", function(){
+				$(".frame_big:focus").blur();
+			});
+		}else
+	  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
+	});
 };
 
 

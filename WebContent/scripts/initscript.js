@@ -17,7 +17,7 @@
 	 
 	 
 	 //anycookgraph
-	 $.anycookgraph.init({baseurl:"http://testgraph.anycook.de"});
+	 $.anycook.graph.init({baseurl:"http://testgraph.anycook.de", appid:0});
 	 //xml
 	 $("#content_main").xml("init");
 	 

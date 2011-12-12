@@ -29,7 +29,7 @@ function getBigFrameText(json) {
 
 	var heart = frame_big_main.append("<div></div>").children("div").last().addClass("heart");
 
-	if(json.schmeckt)
+	if($.inArray(json.name, user.schmeckt)>=0)
 		heart.addClass("schmeckt");
 
 	frame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
@@ -37,6 +37,18 @@ function getBigFrameText(json) {
 	frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
 
 	return frame_big;
+}
+
+function profileRecipe(recipename){
+	var uri = "#!/recipe/"+encodeURIComponent(recipename);
+	
+	var $img = $("<img/>").attr("src", $.anycook.graph.recipeImagePath(recipename));
+	var $div =$("<div></div>").append("<span>"+recipename+"</span>");
+	
+	var $link = $("<a></a>").addClass("profile_rezept_bild").attr("href", uri)
+		.append($img)
+		.append($div);
+	return $link;
 }
 
 function loadRecipewJSON(json) {

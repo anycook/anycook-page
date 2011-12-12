@@ -10,6 +10,7 @@ function User(){
 	this.following = null;
 	this.follower = null;
 	this.id = null;
+	this.schmeckt = [];
 }
 
 User.init = function(){
@@ -22,6 +23,7 @@ User.init = function(){
 			if(response != false){
 				user.id = response.id;
 				user.name = response.name;
+				user.schmeckt = response.schmeckt;
 				user.level = Number(response.level);
 				user.mail = response.mail;
 				user.facebook_id = response.facebookID;
@@ -38,31 +40,27 @@ User.init = function(){
 
 
 User.initProfileInfo = function(id){
-	var profileUser = new User();
-	$.ajax({
-		url:"/anycook/GetProfileInfo",
-		data:"userid="+id,
-		async:false,
-		dataType: "json",
-		success:function(json){
-			if(json!=null){
-				profileUser.id = json.id;
-				profileUser.name = json.name;
-				profileUser.facebook_id = json.facebookID;
-				profileUser.schmeckt = json.schmeckt;
-				profileUser.recipes = json.recipes;
-				profileUser.text = json.text;
-				profileUser.date = json.createdate;
-				profileUser.place = json.place;
-				profileUser.discussionnum = json.discussionnum;
-				profileUser.follower = json.follower;
-				profileUser.following = json.following;
-				
-			}
-		}
+	var dfd = $.Deferred();
+	
+	
+	$.when($.anycook.graph.user(id)).then(function(json){
+		var profileUser = new User();
+		profileUser.id = json.id;
+		profileUser.name = json.name;
+		profileUser.facebook_id = json.facebookID;
+		profileUser.schmeckt = json.schmeckt;
+		profileUser.recipes = json.recipes;
+		profileUser.text = json.text;
+		profileUser.date = json.createdate;
+		profileUser.place = json.place;
+		profileUser.discussionnum = json.discussionnum;
+		profileUser.follower = json.follower;
+		profileUser.following = json.following;
+		
+		dfd.resolve(profileUser);
 	});
 	
-	return profileUser;
+	return dfd.promise();
 };
 
 User.getProfileURI = function(id){
@@ -106,19 +104,11 @@ User.prototype.isFollowedBy = function(userid){
 }
 
 User.getUserImagePath = function(userid, type){
-	if(type == undefined)
-		type = "small";
-		
-	//TODO change to real graph-api path
-	return "http://testgraph.anycook.de/user/"+userid+"/image?type="+type;
+	return $.anycook.graph.userImagePath(userid, type);
 }
 
 User.prototype.getUserImagePath = function(type){
-	if(type == undefined)
-		type = "small";
-		
-	//TODO change to real graph-api path
-	return "http://testgraph.anycook.de/user/"+this.id+"/image?type="+type;
+	return $.anycook.graph.userImagePath(this.id, type);
 };
 
 User.login = function(mail, pwd, stayloggedin){
