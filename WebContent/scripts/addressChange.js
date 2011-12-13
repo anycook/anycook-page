@@ -215,7 +215,7 @@ function handleChange(event){
 				case "user":
 					search.setUsername(decodeURIComponent(path[2]));
 				}
-				search.search();
+				search.flush();
 			};
 		}
 	}
