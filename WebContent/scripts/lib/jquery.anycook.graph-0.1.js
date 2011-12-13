@@ -86,7 +86,7 @@
 		var settings = $.anycook.graph._settings();
 		if(!type)
 			type = "small";
-		return settings.baseurl+"/recipe/"+encodeURIComponent(recipe)+"/image?type="+type;
+		return settings.baseurl+"/recipe/"+encodeURIComponent(recipe)+"/image?type="+type+"&appid="+settings.appid;
 	};
 	
 	
@@ -128,7 +128,7 @@
 		var settings = $.anycook.graph._settings();
 		if(!type)
 			type = "small";
-		return settings.baseurl+"/user/"+encodeURIComponent(user)+"/image?type="+type;
+		return settings.baseurl+"/user/"+encodeURIComponent(user)+"/image?type="+type+"&appid="+settings.appid;
 	};
 	
 	//search(querymap, [callback])
@@ -145,6 +145,44 @@
 		
 		return dfd.promise();
 	};
+	
+	
+	
+	//category([category], [callback])
+	$.anycook.graph.category = function(){
+		var category;
+		var callback;
+		switch(arguments.length){
+		case 2:
+			var type2 = typeof arguments[1];
+			if(type2 == "function")
+				callback = arguments[1];
+		
+		case 1:
+			var type1 = typeof arguments[0];
+			if(type1 == "string")
+				category = arguments[0];
+			else if(type1 == "function")
+				callback = arguments[0];	
+		}
+		
+		
+		
+		var dfd = $.Deferred();
+		
+		var graph = "/category";
+		if(userid)
+			graph+="/"+category;
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});			
+		
+		return dfd.promise();
+	};
+	
+	
 	
 	
 

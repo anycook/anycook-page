@@ -9,7 +9,7 @@ function makeNewTagInput(event){
 			return;
 	}
 		
-	if($this.children("input").length==0){
+	if($this.children("input").length==0 && $this.parents(".blocked").length == 0){
 			//var divlength = getDivLength();
 			//make new input field
 			$this.append("<input type='text'/>")
