@@ -153,6 +153,9 @@ function handleChange(event){
 				$("#user_messages").addClass("active");
 				loadNewsstream();
 				break;
+			case "drafts":
+				loadDrafts();
+				break;
 			}
 			break;
 		case 2:

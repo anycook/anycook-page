@@ -251,6 +251,9 @@
     		</div>
     	</div>
 	</template>
+	<template id="drafts">
+		<ul id="draft_list"></ul>
+	</template>
 	<template id="activate">
 		<div id='new_activation' class="content_message"><h5></h5><p></p></div>
 	</template>
