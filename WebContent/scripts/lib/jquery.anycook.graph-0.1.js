@@ -1,4 +1,5 @@
 (function( $ ){
+	
 	if(!$.anycook)
 		$.anycook = {};
 	
@@ -181,7 +182,6 @@
 		
 		return dfd.promise();
 	};
-	
 	
 	
 	
