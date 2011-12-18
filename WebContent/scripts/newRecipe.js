@@ -425,9 +425,13 @@ function saveRecipe(){
 		if(id)
 			recipe.mongoid = id;
 		
-		$.post("/anycook/SaveNewRecipe", {recipe:encodeURIComponent(JSON.stringify(recipe))},function(response){
-			alert(response);	
-		});
+		
+		//TODO activate again
+		// $.post("/anycook/SaveNewRecipe", {recipe:encodeURIComponent(JSON.stringify(recipe))},function(response){
+			// alert(response);	
+		// });
+		
+		$.anycook.popup("Gut gemacht!", "Dein Rezept wurde eingereicht und wird überprüft. Wir benachrichtigen dich, wenn dein Rezept akiviert wurde.\n\nDein anycook-Team");
 	}
 }
 
