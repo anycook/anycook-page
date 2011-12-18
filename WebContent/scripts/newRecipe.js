@@ -431,7 +431,7 @@ function saveRecipe(){
 			// alert(response);	
 		// });
 		
-		$.anycook.popup("Gut gemacht!", "Dein Rezept wurde eingereicht und wird überprüft. Wir benachrichtigen dich, wenn dein Rezept akiviert wurde.\n\nDein anycook-Team");
+		$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
 	}
 }
 
