@@ -53,7 +53,7 @@ function loadNewRecipe(){
 		$("#new_step_container")
 		.append($newStep);
 		$newStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
-		resetNewRecipeHeight();
+		resetNewRecipeHeight($("#step2"));
 	});
 	makeIngredientLightBox();
 	// watchSteps();
@@ -261,7 +261,7 @@ function checkStep2(event){
 					
 					$ingredientLine.children(".new_ingredient").val(json[i]);
 				}
-				resetNewRecipeHeight();
+				resetNewRecipeHeight($("#step2"));
 				draftSteps();
 			});
 		}
@@ -480,9 +480,9 @@ function newRecipeAdressChange(event){
 					$step4.css("left",now+3*655);
 				}
 			});
+		if(stepNum == 1) resetNewRecipeHeight($step1);
+		if(stepNum == 2) resetNewRecipeHeight($step2);
 	}
-	
-	if(stepNum == 2) resetNewRecipeHeight();
 	
 	return false;
 }
@@ -767,8 +767,8 @@ function getNewIngredientLine(name, menge){
 	return $newIngredientLine;
 }
 
-function resetNewRecipeHeight(){
-	$("#recipe_editing_container").animate({height:$("#step2").height()}, {duration:500});
+function resetNewRecipeHeight($container){
+	$("#recipe_editing_container").animate({height:$container.height()}, {duration:500});
 }
 
 function removeNewStep(){
@@ -778,7 +778,7 @@ function removeNewStep(){
 	if($step.siblings().length > 0){
 		$step.remove();
 		makeStepNumbers();
-		resetNewRecipeHeight();
+		resetNewRecipeHeight($("#step2"));
 		draftSteps();
 	}
 	
@@ -794,7 +794,7 @@ function addNewIngredientLine(){
 	var $this = $(this);
 	var $list = $this.prev();
 	$list.append(getNewIngredientLine());
-	resetNewRecipeHeight();
+	resetNewRecipeHeight($("#step2"));
 }
 
 function removeNewIngredientLine(){
@@ -802,7 +802,7 @@ function removeNewIngredientLine(){
 	var $li = $this.parent();
 	if($li.siblings().length > 0){
 		$li.remove();
-		resetNewRecipeHeight();
+		resetNewRecipeHeight($("#step2"));
 		draftSteps();
 		draftIngredients();
 	}
