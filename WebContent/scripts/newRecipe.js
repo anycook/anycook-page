@@ -130,7 +130,9 @@ function loadNewRecipe(){
 		 var id = $.address.parameter("id");
 		 var $db = $.couch.db("recipedrafts");
 		if(id == undefined){
-			$db.saveDoc({userid:user.id},{ success:function(doc){
+			var a = new Date();
+			a = JSON.stringify(a)
+			$db.saveDoc({userid:user.id, date:a},{ success:function(doc){
 				var newid = doc.id;
 				$.address.parameter("id", newid);
 				$(".nav_button").attr("href", function(i, attr){
@@ -575,22 +577,22 @@ function fillPersons(persons){
 }
 
 function draftSteps(){	
-	saveDraft("steps", JSON.stringify(getSteps()));
+	saveDraft("steps", getSteps());
 }
 
 function draftTags(){
 	
-	saveDraft("tags", JSON.stringify(getTags()));
+	saveDraft("tags", getTags());
 }
 
 function draftTime(){
 	
-	saveDraft("time", JSON.stringify(getTime()));
+	saveDraft("time", getTime());
 }
 
 function draftIngredients(){
 	
-	saveDraft("ingredients", JSON.stringify(getIngredients()));
+	saveDraft("ingredients", getIngredients());
 }
 
 function saveDraft(type, data){

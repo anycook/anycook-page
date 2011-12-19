@@ -12,15 +12,18 @@ function getBigFrameText(json) {
 
 	recipe_img.children("img").attr("src", Recipe.getImageURL(json.name));
 
-	var std = json.timestd;
-	if(std.length == 1)
-		std = "0" + std;
-
-	var min = json.timemin;
-	if(min.length == 1)
-		min = "0" + min;
-
-	recipe_img.children("div").addClass("recipe_time").text(std + ":" + min + " h");
+	if(json.timemin && json.timestd){
+		var std = json.timestd;
+		if(std.length == 1)
+			std = "0" + std;
+	
+		var min = json.timemin;
+		if(min.length == 1)
+			min = "0" + min;
+	
+		recipe_img.children("div").addClass("recipe_time").text(std + ":" + min + " h");
+	
+	}
 
 	var recipe_text = frame_big_main.append("<div></div>").children("div").last().addClass("recipe_text");
 
@@ -32,7 +35,8 @@ function getBigFrameText(json) {
 	if($.inArray(json.name, user.schmeckt)>=0)
 		heart.addClass("schmeckt");
 
-	frame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
+	if(json.schmecktNum!== undefined)
+		rame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
 
 	frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
 
