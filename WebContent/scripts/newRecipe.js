@@ -127,21 +127,30 @@ function loadNewRecipe(){
 	
 	//draft
 	if(user.checkLogin()){
-		var id = $.address.parameter("id");
+		 var id = $.address.parameter("id");
+		 var $db = $.couch.db("recipedrafts");
 		if(id == undefined){
-			$.ajax({
-				url:"/anycook/SaveDraft", 
-				async:false,
-				success:function(newid){
-					$.address.parameter("id", newid);
-					$(".nav_button").attr("href", function(i, attr){
-						return attr+"&id="+newid;
-					});
+			$db.saveDoc({userid:user.id},{ success:function(doc){
+				var newid = doc.id;
+				$.address.parameter("id", newid);
+				$(".nav_button").attr("href", function(i, attr){
+					return attr+"&id="+newid;
+				});
 			}});
+		
+			// $.ajax({
+				// url:"/anycook/SaveDraft", 
+				// async:false,
+				// success:function(newid){
+					// $.address.parameter("id", newid);
+					// $(".nav_button").attr("href", function(i, attr){
+						// return attr+"&id="+newid;
+					// });
+			// }});
 			return;
 		}else{
-			$.getJSON("/anycook/SaveDraft?id="+id, fillNewRecipe);
 			//link
+			$db.openDoc(id, {success:fillNewRecipe});
 			$(".nav_button").attr("href", function(i, attr){
 					return attr+"&id="+id;
 			});	
@@ -588,7 +597,14 @@ function saveDraft(type, data){
 	var id = $.address.parameter("id");
 	if(!user.checkLogin || id === undefined) return;
 	
-	$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
+	var $db = $.couch.db("recipedrafts");
+	$db.openDoc(id, {success:function(doc){
+		doc[type] = data;
+		$db.saveDoc(doc);
+	}});
+	
+	//$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
+	
 }
 
 function getImageName(){

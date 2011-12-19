@@ -34,6 +34,19 @@
     	$.address.crawlable(true);
     	
     	
+    //couchdb
+    $.couch.urlPrefix = "http://test.anycook.de/couchdb";
+	// $.couch.login({
+	    // name: "testuser",
+	    // password: "testpass",
+	    // success: function(data) {
+	        // console.log(data);
+	    // },
+	    // error: function(status) {
+	        // console.log(status);
+	    // }
+	// });
+    
     	//startfadeIn
     	if($.address.pathNames().length == 0)
     		$("#filter_container").delay(1000).animate({opacity:1},1500);
