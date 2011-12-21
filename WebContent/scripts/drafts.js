@@ -1,12 +1,16 @@
 function loadDrafts(){
 	var $db = $.couch.db("recipedrafts");
 	$db.view("drafts/byUserid", {key:user.id,reduce:false,success:function(json){
+		if(json.length == 0){
+			$("#nodrafts").show();
+			return;
+		}
+		
 		var $list = $("#draft_list");
 		for(var i in json.rows){
 			var id = json.rows[i].id;
 			var data = json.rows[i].value;
 			$list.append(getBigFrameDraft(id, data));
-			
 		}
 	}});
 	
