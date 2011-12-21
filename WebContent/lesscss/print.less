@@ -1,10 +1,11 @@
 @media print{
-	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline, .tags_head, .tags_list, footer{
+	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline, #filter_box, .tags_head, .tags_list, footer{
 		display: none !important;
 	}
-	
+
 	#container{
 		margin: -3cm 0 0 0;
+		padding: 0 4cm;
 		
 	}
 	
@@ -16,30 +17,65 @@
 	#recipe_headline{
 		margin:0 10cm 0 0;
 		width:10cm;
-		font: 33pt Georgia;
+		font: 31pt Georgia;
 		text-align: left !important;
 	}
 	
 	.ingredient_step{
 		height: auto !important;
+		.step{
+			height: auto !important;
+			box-shadow:none !important;
+			-webkit-box-shadow:none !important;
+			-moz-box-shadow:none !important;
+			border: 0 !important;
+			
+			
+			.mid{
+				float: left;
+				
+				.number{
+					border-right: 0 !important;
+					margin: 0 15px 0 0 !important;
+					height: auto !important;
+					width: auto !important;
+					line-height: normal !important;
+					text-align: left;
+					font: 30pt Georgia !important;
+				}
+				
+				.text{
+					margin: 0 0 !important;
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+/*	.ingredient_step{
+		position:relative
 		
 		.step{
-			width:100% !important;
+
 			border: 0 !important;
 			float:left;
 			padding:inherit;
 			margin:0 !important; 
-			height:inherit !important;
 			background: none;
 			box-shadow:none !important;
 			-webkit-box-shadow:none !important;
 			-moz-box-shadow:none !important;
+			width:10cm;
+			position:absolute;
+			overflow:visible;
 		}
 	
 		.number{
-			width:1cm !important; 
+			width:1cm !important;
 			line-height:inherit;
-			font: 31pt Georgia !important;
+			font: 29pt Georgia !important;
 			float:left;
 			margin:0 !important;
 			padding: inherit;
@@ -57,20 +93,20 @@
 		margin: 0.2cm 0 0 1.8cm !important;
 		height:inherit;
 		text-align: justify;
-		font: 16pt Helvetica, Arial, sans-serif !important;
+		font: 14pt Helvetica, Arial, sans-serif !important;
 	}
 	
 	#filter_box{
 		margin: -0.7cm 0 0 0 !important;
 		font-size: 17pt !important;
-		width:8cm !important;
+		width:6cm !important;
 		
 		#filter_main{
-			width:8cm !important;
+			width:6cm !important;
 			
 			#kategorie_head{
 				font-size: 17pt !important;
-				width:8cm !important;
+				width:6cm !important;
 				
 			}
 			
@@ -133,7 +169,7 @@
 			
 		}
 		
-	}
+	}*/
 	
 	
 	
