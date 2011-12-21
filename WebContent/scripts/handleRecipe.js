@@ -35,8 +35,7 @@ function getBigFrameText(json) {
 	if($.inArray(json.name, user.schmeckt)>=0)
 		heart.addClass("schmeckt");
 
-	if(json.schmecktNum!== undefined)
-		rame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
+	frame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
 
 	frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
 
