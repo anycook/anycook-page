@@ -253,7 +253,7 @@
 	<template id="drafts">
 		<div id="nodrafts">
 			<h1>Keine Entwürfe vorhanden</h1>
-			<p>Zur Zeit hast du keine unvollendete Rezepte. Du kannst aber gerne ein <a href="/#!/recipeediting">neues Rezept beginnen</a> und jederzeit unterbrechen.</p>
+			<p>Zur Zeit hast du keine unvollendeten Rezepte. Du kannst aber gerne ein <a href="/#!/recipeediting">neues Rezept beginnen</a> und jederzeit unterbrechen.</p>
 		</div>
 		<ul id="draft_list"></ul>
 	</template>
