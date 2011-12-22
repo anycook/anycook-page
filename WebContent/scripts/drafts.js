@@ -1,7 +1,7 @@
 function loadDrafts(){
 	var $db = $.couch.db("recipedrafts");
 	$db.view("drafts/byUserid", {key:user.id,reduce:false,success:function(json){
-		if(json.length == 0){
+		if(json.rows.length == 0){
 			$("#nodrafts").show();
 			return;
 		}
@@ -30,6 +30,9 @@ function deleteDraft(event){
 	$db.removeDoc(event.data);
 	$li.animate({height:0, opacity:0},{duration:500, complete:function(){
 		$(this).remove();
+		if($("#draft_list").children().length == 0){
+			$("#nodrafts").fadeIn(500);
+		}
 	}});
 }
 
