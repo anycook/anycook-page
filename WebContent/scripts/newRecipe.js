@@ -17,10 +17,10 @@ function loadNewRecipe(){
 	//step1	
 	var decoratorSettings = {color:"#878787", change:validateStep1};
 	$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
-		saveDraft("name", $(this).val());
+		Draft.saveDraft("name", $(this).val());
 	});
 	$("#step1 textarea").inputdecorator("required", decoratorSettings).focusout(function(){
-		saveDraft("description", $(this).val());
+		Draft.saveDraft("description", $(this).val());
 	});
 	$("#step1 form").submit(submitStep1);
 	
@@ -71,7 +71,7 @@ function loadNewRecipe(){
 		var $this = $(this);
 		var text = $this.val();
 		var span = $("#select_container span").text(text);
-		saveDraft("category", text);
+		Draft.saveDraft("category", text);
 		checkValidateStep3();
 		$("#category_error").fadeOut(300);
 	});
@@ -87,9 +87,9 @@ function loadNewRecipe(){
         
         
         if($inputs.attr("checked"))
-        	saveDraft(name, $inputs.val());
+        	Draft.saveDraft(name, $inputs.val());
         else
-        	saveDraft(name, "0");
+        	Draft.saveDraft(name, "0");
     	// must return false or function is sometimes called twice
     	checkValidateStep3();
     	if(name == "calorie")
@@ -132,7 +132,7 @@ function loadNewRecipe(){
 		if(id == undefined){
 			var a = new Date();
 			a = JSON.stringify(a)
-			$db.saveDoc({userid:user.id, date:a},{ success:function(doc){
+			$db.saveDoc({user:"anycook_"+user.id, date:a},{ success:function(doc){
 				var newid = doc.id;
 				$.address.parameter("id", newid);
 				$(".nav_button").attr("href", function(i, attr){
@@ -235,11 +235,6 @@ function checkStep2(event){
 	var text = $this.val();
 	var $step = $this.parents(".ingredient_step");
 	if(!event.empty){
-		var $stepIngredients = $step.find(".new_ingredient");
-		var ingredients = [];
-		for(var i = 0; i < $stepIngredients.length; i++){
-			ingredients[i] = $($stepIngredients[i]).val();
-		}
 		var lastSentences = $this.data("sentences");
 		if(lastSentences == undefined)
 			lastSentences = [];
@@ -253,6 +248,12 @@ function checkStep2(event){
 				
 				
 			$.getJSON("/anycook/GetZutatenfromSchritte", {q:encodeURIComponent(currentSentences[i])}, function(json){
+				var $stepIngredients = $step.find(".new_ingredient");
+				var ingredients = [];
+				for(var i = 0; i < $stepIngredients.length; i++){
+					ingredients[i] = $($stepIngredients[i]).val();
+				}
+				
 				for(var i in json){
 					if($.inArray(json[i], ingredients) > -1)
 						continue;
@@ -577,36 +578,22 @@ function fillPersons(persons){
 }
 
 function draftSteps(){	
-	saveDraft("steps", getSteps());
+	Draft.saveDraft("steps", getSteps());
 }
 
 function draftTags(){
 	
-	saveDraft("tags", getTags());
+	Draft.saveDraft("tags", getTags());
 }
 
 function draftTime(){
 	
-	saveDraft("time", getTime());
+	Draft.saveDraft("time", getTime());
 }
 
 function draftIngredients(){
 	
-	saveDraft("ingredients", getIngredients());
-}
-
-function saveDraft(type, data){
-	var id = $.address.parameter("id");
-	if(!user.checkLogin || id === undefined) return;
-	
-	var $db = $.couch.db("recipedrafts");
-	$db.openDoc(id, {success:function(doc){
-		doc[type] = data;
-		$db.saveDoc(doc);
-	}});
-	
-	//$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});
-	
+	Draft.saveDraft("ingredients", getIngredients());
 }
 
 function getImageName(){
@@ -1026,7 +1013,7 @@ function nrProgress(id, filename, loaded, total){
 function completeUpload(id, fileName, responseJSON){
 	if(responseJSON.success){
 		var filename = responseJSON.success;
-		saveDraft("image", filename);
+		Draft.saveDraft("image", filename);
 		showNRImage(filename);
 	}
 }

@@ -1,6 +1,9 @@
-function loadDrafts(){
+function Draft(){
+	
+}
+Draft.loadDrafts = function(){
 	var $db = $.couch.db("recipedrafts");
-	$db.view("drafts/byUserid", {key:user.id,reduce:false,success:function(json){
+	$db.view("drafts/byUserid", {key:"anycook_"+user.id,reduce:false,success:function(json){
 		if(json.rows.length == 0){
 			$("#nodrafts").show();
 			return;
@@ -10,7 +13,7 @@ function loadDrafts(){
 		for(var i in json.rows){
 			var id = json.rows[i].id;
 			var data = json.rows[i].value;
-			$list.append(getBigFrameDraft(id, data));
+			$list.append(Draft.getBigFrameDraft(id, data));
 		}
 	}});
 	
@@ -23,7 +26,7 @@ function loadDrafts(){
 }
 
 
-function deleteDraft(event){
+Draft.deleteDraft = function(event){
 	var $this = $(this);
 	var $li = $this.parent("li");
 	var $db = $.couch.db("recipedrafts");
@@ -36,9 +39,9 @@ function deleteDraft(event){
 	}});
 }
 
-function getBigFrameDraft(id, data){
+Draft.getBigFrameDraft = function(id, data){
 	
-	var date = parseDraftDate(data.date);
+	var date = Draft.parseDraftDate(data.date);
 	var percent = data.percentage*100+"%";
 	var name = !data.name ? "Noch kein Titel" : data.name;
 	var description = !data.description ? "Noch keine Beschreibung" : data.description;
@@ -81,7 +84,7 @@ function getBigFrameDraft(id, data){
 		.append($frame_big_right);
 		
 		
-	var $deletebtn =  $("<div><span></span></div>").addClass("delete").on("click", {_id:id, _rev:data._rev}, deleteDraft);
+	var $deletebtn =  $("<div><span></span></div>").addClass("delete").on("click", {_id:id, _rev:data._rev}, Draft.deleteDraft);
 	var $li = $("<li></li>")
 		.append($frame_big)
 		.append($deletebtn);
@@ -89,7 +92,7 @@ function getBigFrameDraft(id, data){
 	return $li;
 }
 
-function parseDraftDate(datestring){
+Draft.parseDraftDate = function(datestring){
 	var datestring = datestring.substring(1,11);
 	var month = Number(datestring.substring(5,7));
 	var day = Number(datestring.substring(8));
@@ -137,3 +140,38 @@ function parseDraftDate(datestring){
 	
 	
 }
+
+Draft.saveDraft = function(type, data){
+	var id = $.address.parameter("id");
+	if(!user.checkLogin || id === undefined) return;
+	
+	
+	var newDoc = {id:id};
+	newDoc[type] = data;
+	Draft.queue.push(newDoc);
+	if(Draft.queue.length == 1)
+		Draft.saveDoc();
+	// $db.openDoc(id, {success:function(doc){
+		// doc[type] = data;
+		// $db.saveDoc(doc);
+	// }});
+	
+	
+	//$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});	
+};
+
+Draft.saveDoc = function(){
+	if(Draft.queue.length > 0){
+		var newDoc = Draft.queue[0];
+		var $db = $.couch.db("recipedrafts");
+		$db.openDoc(newDoc.id, {success:function(doc){
+			$.extend(doc, newDoc);		
+			$db.saveDoc(doc, {success:function(){
+				Draft.queue.shift();
+				Draft.saveDoc();
+			}});
+		}});
+	}
+};
+
+Draft.queue = [];

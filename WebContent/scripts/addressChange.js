@@ -154,7 +154,7 @@ function handleChange(event){
 				loadNewsstream();
 				break;
 			case "drafts":
-				loadDrafts();
+				Draft.loadDrafts();
 				break;
 			}
 			break;
