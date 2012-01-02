@@ -17,10 +17,10 @@ function loadNewRecipe(){
 	//step1	
 	var decoratorSettings = {color:"#878787", change:validateStep1};
 	$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
-		Draft.saveDraft("name", $(this).val());
+		$.anycook.drafts.save("name", $(this).val());
 	});
 	$("#step1 textarea").inputdecorator("required", decoratorSettings).focusout(function(){
-		Draft.saveDraft("description", $(this).val());
+		$.anycook.drafts.save("description", $(this).val());
 	});
 	$("#step1 form").submit(submitStep1);
 	
@@ -71,7 +71,7 @@ function loadNewRecipe(){
 		var $this = $(this);
 		var text = $this.val();
 		var span = $("#select_container span").text(text);
-		Draft.saveDraft("category", text);
+		$.anycook.drafts.save("category", text);
 		checkValidateStep3();
 		$("#category_error").fadeOut(300);
 	});
@@ -87,9 +87,9 @@ function loadNewRecipe(){
         
         
         if($inputs.attr("checked"))
-        	Draft.saveDraft(name, $inputs.val());
+        	$.anycook.drafts.save(name, $inputs.val());
         else
-        	Draft.saveDraft(name, "0");
+        	$.anycook.drafts.save(name, "0");
     	// must return false or function is sometimes called twice
     	checkValidateStep3();
     	if(name == "calorie")
@@ -578,22 +578,22 @@ function fillPersons(persons){
 }
 
 function draftSteps(){	
-	Draft.saveDraft("steps", getSteps());
+	$.anycook.drafts.save("steps", getSteps());
 }
 
 function draftTags(){
 	
-	Draft.saveDraft("tags", getTags());
+	$.anycook.drafts.save("tags", getTags());
 }
 
 function draftTime(){
 	
-	Draft.saveDraft("time", getTime());
+	$.anycook.drafts.save("time", getTime());
 }
 
 function draftIngredients(){
 	
-	Draft.saveDraft("ingredients", getIngredients());
+	$.anycook.drafts.save("ingredients", getIngredients());
 }
 
 function getImageName(){
@@ -1013,7 +1013,7 @@ function nrProgress(id, filename, loaded, total){
 function completeUpload(id, fileName, responseJSON){
 	if(responseJSON.success){
 		var filename = responseJSON.success;
-		Draft.saveDraft("image", filename);
+		$.anycook.drafts.save("image", filename);
 		showNRImage(filename);
 	}
 }

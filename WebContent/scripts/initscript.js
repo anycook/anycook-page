@@ -36,16 +36,6 @@
     	
     //couchdb
     $.couch.urlPrefix = "http://test.anycook.de/couchdb";
-	// $.couch.login({
-	    // name: "testuser",
-	    // password: "testpass",
-	    // success: function(data) {
-	        // console.log(data);
-	    // },
-	    // error: function(status) {
-	        // console.log(status);
-	    // }
-	// });
     
     	//startfadeIn
     	if($.address.pathNames().length == 0)
@@ -66,6 +56,11 @@
     	buildLogin();
     	
     	search = new Search();
+    	
+    	
+    	//drafts
+	    $.anycook.drafts.init();
+	    $.anycook.drafts.num();
 
 
             //searchbar 

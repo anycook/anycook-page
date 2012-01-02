@@ -154,7 +154,7 @@ function handleChange(event){
 				loadNewsstream();
 				break;
 			case "drafts":
-				Draft.loadDrafts();
+				$.anycook.drafts.load();
 				break;
 			}
 			break;
