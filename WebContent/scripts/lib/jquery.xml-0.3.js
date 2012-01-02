@@ -1,13 +1,17 @@
 /*
- * jQuery XML Plugin v0.2
+ * jQuery XML Plugin v0.3
  * http://anycook.de
  *
  * Copyright (c) 2011 Jan Grassegger
- * Dual licensed under the MIT or GPL Version 2 licenses.
+ * Dual licensed under the MIT license.
  * http://jquery.org/license
  * 
  * Changes:
- * 
+ * --------- v0.3 -----------------
+ * - "append" method supports callback method
+ * - added option the submit error method for settings on init
+ * - error method is called if access to template is restricted (403) or template doesn't exist (404)
+ * - restricted access is detected if template tag has an "access" attribute. value is submitted in event.access
  * 
  * --------- v0.2 -----------------
  * - fixed error with double <br>'s
@@ -15,6 +19,9 @@
  */
 
 (function( $ ){
+	
+	if(!$.xml)
+		$.xml = {};
 
   var methods = {
     init : function( options ) {  
@@ -27,7 +34,8 @@
              
         	 var settings = {
 			      xml         : '/xml/template.xml',
-			      async: false
+			      async: false,
+			      error: function(){}
         	};
         	 
 		      // If options exist, lets merge them
@@ -38,7 +46,7 @@
 		      
 		      var $xmlDoc = null;
 		      if(settings.async == false)
-		    	  $xmlDoc = $.fn.xml.loadXml(settings.xml);
+		    	  $xmlDoc = $.xml.loadXml(settings.xml);
 		      
                $(this).data("xml", {
                    target : $this,
@@ -49,7 +57,7 @@
              }
     	});
     },
-    append : function(contentName) {
+    append : function(contentName, callback) {
     	return this.each(function(){
     		 if(!contentName)
     			 contentName = "home";
@@ -61,15 +69,25 @@
              
              var $xmlDoc = data.$xmlDoc;
              if(data.settings.async == true)
-            	 $xmlDoc = $.fn.xml.loadXml(settings.xml);
+            	 $xmlDoc = $.xml.loadXml(settings.xml);
              
              $xmlDoc.find("template#"+contentName).each(function(){
+             	var access = $(this).attr("access");
+             	if(access){
+             		var event = $.Event("error", {type:403, access:access});
+             		if(!data.settings.error.apply(data.target, [event]))
+             			return;
+             	}
+             	
              	var obj = $(this).clone().contents();
                  var $div = $("<div/>").append(obj);
                  
                  //fixes bug with double br's
                  $div.find("br").replaceWith("<br/>");
                  $this.append($div.html());
+                 
+                 if(callback)
+                 	callback.apply($this.target);
              });
     	});
     }
@@ -89,7 +107,7 @@
   
   };
   
-  $.fn.xml.loadXml = function(xml){
+  $.xml.loadXml = function(xml){
 	  var xmlDoc =null;
 	  
 	  $.ajax({
@@ -98,20 +116,14 @@
 			async:false,
 			success: function(data){
 				if (typeof data == "string") {
-					if(Number($.browser.version)>=9){
-						var div = $("<div/>").html(data);
-						xmlDoc =  div.html();
-					}else{
-						xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-						xmlDoc.async = false;
-						xmlDoc.loadXML(data);
-					}
+					var div = $("<div/>").html(data);
+					xmlDoc =  div.html();
 				} else {
 					xmlDoc = data;
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
-				alert(jqXHR, textStatus, errorThrown);
+				console.error(jqXHR.responseText);
 			}
     });
 	  $xmlDoc = $(xmlDoc);
