@@ -19,7 +19,17 @@
 	 //anycookgraph
 	 $.anycook.graph.init({baseurl:"http://testgraph.anycook.de", appid:0});
 	 //xml
-	 $("#content_main").xml("init");
+	 $("#content_main").xml("init", {error:function(event){
+	 	switch(event.type){
+	 		case 403:
+	 			if(!user.checkLogin()){
+	 				console.log("access only for logged-in users");
+	 				$.address.path("");
+	 			}
+	 	}
+	 	
+	 	
+	 }});
 	 
     	$.ajaxSetup({
         	type:"POST", 
@@ -59,8 +69,10 @@
     	
     	
     	//drafts
-	    $.anycook.drafts.init();
-	    $.anycook.drafts.num();
+    	if(user.checkLogin()){
+		    $.anycook.drafts.init();
+		    $.anycook.drafts.num();
+		}
 
 
             //searchbar 

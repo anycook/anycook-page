@@ -13,6 +13,9 @@
  */
 
 (function( $ ){
+	
+	if(!$.xml)
+		$.xml = {};
 
   var methods = {
     init : function( options ) {  
@@ -25,7 +28,8 @@
              
         	 var settings = {
 			      xml         : '/xml/template.xml',
-			      async: false
+			      async: false,
+			      error: function(){}
         	};
         	 
 		      // If options exist, lets merge them
@@ -36,7 +40,7 @@
 		      
 		      var $xmlDoc = null;
 		      if(settings.async == false)
-		    	  $xmlDoc = $.fn.xml.loadXml(settings.xml);
+		    	  $xmlDoc = $.xml.loadXml(settings.xml);
 		      
                $(this).data("xml", {
                    target : $this,
@@ -59,9 +63,15 @@
              
              var $xmlDoc = data.$xmlDoc;
              if(data.settings.async == true)
-            	 $xmlDoc = $.fn.xml.loadXml(settings.xml);
+            	 $xmlDoc = $.xml.loadXml(settings.xml);
              
              $xmlDoc.find("template#"+contentName).each(function(){
+             	var access = $(this).attr("access");
+             	if(access){
+             		var event = $.Event("error", {type:403, level:access});
+             		data.settings.error.apply(data.target, [event]);
+             	}
+             	
              	var obj = $(this).clone().contents();
                  var $div = $("<div/>").append(obj);
                  
@@ -87,7 +97,7 @@
   
   };
   
-  $.fn.xml.loadXml = function(xml){
+  $.xml.loadXml = function(xml){
 	  var xmlDoc =null;
 	  
 	  $.ajax({

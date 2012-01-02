@@ -250,7 +250,7 @@
     		</div>
     	</div>
 	</template>
-	<template id="drafts">
+	<template id="drafts" access="restricted">
 		<div id="nodrafts">
 			<h1>Keine Entwürfe vorhanden</h1>
 			<p>Zur Zeit hast du keine unvollendeten Rezepte. Du kannst aber gerne ein <a href="/#!/recipeediting">neues Rezept beginnen</a> und jederzeit unterbrechen.</p>
@@ -411,12 +411,12 @@
 			<div class="profile_more">mehr anzeigen</div>
 		</div>
 	</template>
-	<template id="newsstream">
+	<template id="newsstream" access="restricted">
 		<h1 class="center_headline">Neuigkeiten</h1>
 		<div id="newMessageBtn" class="button">+ neue Nachricht</div>
 		<ul id="newsstream"></ul>
 	</template>
-	<template id="messagesession">
+	<template id="messagesession" access="restricted">
 		<h1 class="center_headline"><span>Meine Nachrichten mit</span><br/><span></span></h1>
 		<ul id="messagestream"></ul>
 		<form id="message_answer">
@@ -427,7 +427,7 @@
 			<input type="submit" value="antworten"/>
 		</form>
 	</template>
-	<template id="settings">
+	<template id="settings" access="restricted">
 		<div id="settings_container">
 			<h2 class="border_headline">Profileinstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
