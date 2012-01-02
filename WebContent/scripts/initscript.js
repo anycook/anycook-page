@@ -25,8 +25,10 @@
 	 			if(!user.checkLogin()){
 	 				console.log("access only for logged-in users");
 	 				$.address.path("");
+	 				return false;
 	 			}
 	 	}
+	 	return true;
 	 	
 	 	
 	 }});

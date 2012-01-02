@@ -90,10 +90,8 @@ function handleChange(event){
 		$("#content_footer").show();		
 		clearContent();
 		
-		var path = event.pathNames;
-		//$.xml.append(path.length == 0 ? "home" : path[0]);
-		$("#content_main").xml("append", path[0]);
 		
+		var path = event.pathNames;
 		//blockFilter(false);
 		if(path.length > 0){
 			$("#search_reset, #filter_reset").addClass("on");
@@ -103,124 +101,126 @@ function handleChange(event){
 		}
 		
 		
-		
-		switch(path.length){
-		case 0:
-			$("#user_home").addClass("active");
-			loadHome();
-			break;
-		case 1:
-			switch(path[0]){
-			case "search":
-				//fullTextSearch();
-				search = Search.init();
-				search.search();
+		//$.xml.append(path.length == 0 ? "home" : path[0]);
+		$("#content_main").xml("append", path[0], function(){
+			switch(path.length){
+			case 0:
+				$("#user_home").addClass("active");
+				loadHome();
 				break;
-			case "recipeediting":
-				$.address.title("Neues Rezept erstellen | anycook");
-				loadNewRecipe();
+			case 1:
+				switch(path[0]){
+				case "search":
+					//fullTextSearch();
+					search = Search.init();
+					search.search();
+					break;
+				case "recipeediting":
+					$.address.title("Neues Rezept erstellen | anycook");
+					loadNewRecipe();
+					break;
+				case "feedback":
+					$.address.title("Feedback | anycook");
+					loadContact();
+					break;
+				case "preview":
+					loadPreview();
+					break;
+				case "about_us":
+					$.address.title("Über uns | anycook");
+					break;
+				case "impressum":
+					$.address.title("Impressum | anycook");
+					break;
+				case "fbregistration":
+					loadFBRegistrationMessage();
+					break;
+				case "resetpassword":
+					loadResetPasswordStep1();
+					break;
+				case "registration":
+					$.address.title("Registrierung | anycook");
+					showRegistration();
+					break;
+				case "settings":
+					loadSettings();
+					break;
+				case "developer":
+					$.address.title("Entwickler | anycook");
+					break;
+				case "newsstream":
+					$("#user_messages").addClass("active");
+					loadNewsstream();
+					break;
+				case "drafts":
+					$.anycook.drafts.load();
+					break;
+				}
 				break;
-			case "feedback":
-				$.address.title("Feedback | anycook");
-				loadContact();
-				break;
-			case "preview":
-				loadPreview();
-				break;
-			case "about_us":
-				$.address.title("Über uns | anycook");
-				break;
-			case "impressum":
-				$.address.title("Impressum | anycook");
-				break;
-			case "fbregistration":
-				loadFBRegistrationMessage();
-				break;
-			case "resetpassword":
-				loadResetPasswordStep1();
-				break;
-			case "registration":
-				$.address.title("Registrierung | anycook");
-				showRegistration();
-				break;
-			case "settings":
-				loadSettings();
-				break;
-			case "developer":
-				$.address.title("Entwickler | anycook");
-				break;
-			case "newsstream":
-				$("#user_messages").addClass("active");
-				loadNewsstream();
-				break;
-			case "drafts":
-				$.anycook.drafts.load();
-				break;
-			}
-			break;
-		case 2:
-			switch(path[0]){
-			case "recipe":
-				$("#content_header")
-					.append(getHeaderLink("Rezept", "", "recipe_btn"))
-					.append(getHeaderLink("Diskussion", "", "discussion_btn"));
-				$.anycook.graph.recipe(path[1], loadRecipewJSON);
-				break;
-				
-			/*case "search":				
-				setFiltersfromSession();
-				$("#search").focus();
-				$("#search").val(path[1]);
-				fullTextSearch();
-				break;*/
-				
-			case "activate":
-				activateUser(path[1]);
-				break;
-				
-			case "profile":
-				$("#user_profile").addClass("active");
-				loadProfile(path[1]);
-				break;
-				
-			case "resetpassword":
-				loadResetPasswordStep2();
-				break;
-			
-			case "messagesession":
-				loadMessagesession(path[1]);
-				break;
-			}
-			break;
-		case 3:
-			switch(path[0]){
-			case "recipe":
-				$("#content_header")
+			case 2:
+				switch(path[0]){
+				case "recipe":
+					$("#content_header")
 						.append(getHeaderLink("Rezept", "", "recipe_btn"))
 						.append(getHeaderLink("Diskussion", "", "discussion_btn"));
-				$.ajax({
-			  		  url: "/anycook/LoadRecipe",
-			  		  dataType: 'json',
-			  		  data: {recipe:path[1], version:path[2]},
-			  		  success: function(json){
-						loadRecipewJSON(json);
-					}
-			  	});
-				break;
-				
-			case "search":
-				search = new Search();
-				switch(path[1]){
-				case "tagged":				
-					search.addTag(decodeURIComponent(path[2]));					
+					$.anycook.graph.recipe(path[1], loadRecipewJSON);
 					break;
 					
-				case "user":
-					search.setUsername(decodeURIComponent(path[2]));
+				/*case "search":				
+					setFiltersfromSession();
+					$("#search").focus();
+					$("#search").val(path[1]);
+					fullTextSearch();
+					break;*/
+					
+				case "activate":
+					activateUser(path[1]);
+					break;
+					
+				case "profile":
+					$("#user_profile").addClass("active");
+					loadProfile(path[1]);
+					break;
+					
+				case "resetpassword":
+					loadResetPasswordStep2();
+					break;
+				
+				case "messagesession":
+					loadMessagesession(path[1]);
+					break;
 				}
-				search.flush();
-			};
-		}
+				break;
+			case 3:
+				switch(path[0]){
+				case "recipe":
+					$("#content_header")
+							.append(getHeaderLink("Rezept", "", "recipe_btn"))
+							.append(getHeaderLink("Diskussion", "", "discussion_btn"));
+					$.ajax({
+				  		  url: "/anycook/LoadRecipe",
+				  		  dataType: 'json',
+				  		  data: {recipe:path[1], version:path[2]},
+				  		  success: function(json){
+							loadRecipewJSON(json);
+						}
+				  	});
+					break;
+					
+				case "search":
+					search = new Search();
+					switch(path[1]){
+					case "tagged":				
+						search.addTag(decodeURIComponent(path[2]));					
+						break;
+						
+					case "user":
+						search.setUsername(decodeURIComponent(path[2]));
+					}
+					search.flush();
+				};
+			}
+		});		
 	}
 	$("#content_header *").removeClass("active");
 	

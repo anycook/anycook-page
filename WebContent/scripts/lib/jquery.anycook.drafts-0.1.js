@@ -43,6 +43,8 @@
 	}
 	
 	$.anycook.drafts.num = function(){
+		if(!user.checkLogin())
+			return;
 		var $db = settings.$db;
 		$db.view("drafts/num", {key:"anycook_"+user.id,success:function(json){
 			var num = json.rows.length == 1 ? json.rows[0].value : 0;
@@ -53,7 +55,7 @@
 			else
 				$messageBubble.fadeOut(200);
 				
-			setTimeout("$.anycook.drafts.num()", 2500);		
+			setTimeout("$.anycook.drafts.num()", 2000);		
 		}
 		});
 	};

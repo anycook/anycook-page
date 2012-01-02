@@ -51,7 +51,7 @@
              }
     	});
     },
-    append : function(contentName) {
+    append : function(contentName, callback) {
     	return this.each(function(){
     		 if(!contentName)
     			 contentName = "home";
@@ -69,7 +69,8 @@
              	var access = $(this).attr("access");
              	if(access){
              		var event = $.Event("error", {type:403, level:access});
-             		data.settings.error.apply(data.target, [event]);
+             		if(!data.settings.error.apply(data.target, [event]))
+             			return;
              	}
              	
              	var obj = $(this).clone().contents();
@@ -78,6 +79,9 @@
                  //fixes bug with double br's
                  $div.find("br").replaceWith("<br/>");
                  $this.append($div.html());
+                 
+                 if(callback)
+                 	callback.apply($this.target);
              });
     	});
     }

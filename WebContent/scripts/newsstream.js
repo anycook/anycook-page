@@ -55,25 +55,22 @@ function checkNewMessageNum(lastnum){
 	
 	isCheckingMessageNum = true;
 	
-	if(lastnum === undefined)
+	if(!lastnum)
 		lastnum = 0;
 	$.ajax({
-		url:"/anycook/GetMessageNum",
+		url:"/anycook/GetNotificationNumbers",
 		data:{lastnum:lastnum},
 		success:function(newNum){
 			isCheckingMessageNum = false;
 			if(newNum != "false" && user.checkLogin()){
-				var $newMessageBubble = $("#new_messages_bubble");
+				var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
 				newNum = Number(newNum);
-				if(lastnum == 0)
+				if(lastnum == 0 && newNum > 0)
 					$newMessageBubble.fadeIn();
 				else if(newNum == 0)
 					$newMessageBubble.fadeOut();
-				$("#new_messages_bubble span").text(newNum);
+				$newMessageBubble.children().text(newNum);
 				setTimeout("checkNewMessageNum("+newNum+")", 1000);
-								//checkNewMessageNum(newNum);
-			}else{
-				
 			}
 		},
 		error: function(error){
