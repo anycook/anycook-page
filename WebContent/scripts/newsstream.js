@@ -1,16 +1,23 @@
 function loadNewsstream(){
+	var $ul = $("#newsstream");
+	
+	var olddatamap = $ul.data("map");
+	
 	$.ajax({
 		url:"/anycook/GetNewsstream",
 		dataType:"json",
 		success:function(json){
-			var $ul = $("#newsstream");
+			var datamap = {};
+						
 			for(var i = 0; i<json.length; i++){
 				var $appendTo = $ul;
 				var $li;
+				var oldData = json[i].id;
+				var data = json[i];
 				
-				switch(json[i].type){
+				switch(data.type){
 				case "life":
-					$li = parseLife(json[i]);
+					$li = parseLife(data);
 					
 					if(i>0 && json[i-1].type == "life")
 						$appendTo = $ul.find("ul").last();
@@ -21,13 +28,24 @@ function loadNewsstream(){
 					}
 					break;
 				case "messagesession":
-					$li = $("<li></li>").append(getMessageContainer(json[i]));
+					if(oldData){
+						if(oldData.datetime != data.datetime){
+							//var $target = 
+						}
+					}else{					
+						$li = $("<li></li>").append(getMessageContainer(data));
+					}		
 					break;
 				
 				}
-				$appendTo.append($li);
+				json[i].target = $li;
 				
+				datamap[json[i].id] = json[i];
+				//$li.data("data", json[i]);
+				$appendTo.append($li);				
 			}
+			
+			$ul.data("map", datamap);
 		}
 	});
 	var $lightbox = getLightbox("Neue Nachricht", 
