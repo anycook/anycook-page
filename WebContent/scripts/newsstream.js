@@ -1,7 +1,7 @@
 function loadNewsstream(){
 	var $ul = $("#newsstream");
 	
-	var olddatamap = $ul.data("map");
+	var oldDatamap = $ul.data("map") || {};
 	
 	$.ajax({
 		url:"/anycook/GetNewsstream",
@@ -12,7 +12,7 @@ function loadNewsstream(){
 			for(var i = 0; i<json.length; i++){
 				var $appendTo = $ul;
 				var $li;
-				var oldData = json[i].id;
+				var oldData = oldDatamap[json[i].id];
 				var data = json[i];
 				
 				switch(data.type){
@@ -26,23 +26,24 @@ function loadNewsstream(){
 						$temp.find("ul").append($li);
 						$li = $temp;
 					}
+					$appendTo.append($li);
 					break;
 				case "messagesession":
 					if(oldData){
 						if(oldData.datetime != data.datetime){
-							//var $target = 
+							var $target = oldData.target;
+							$target.find("p").text(data.text);
 						}
 					}else{					
 						$li = $("<li></li>").append(getMessageContainer(data));
+						$appendTo.append($li);
 					}		
 					break;
 				
 				}
-				json[i].target = $li;
-				
+				json[i].target = $li;				
 				datamap[json[i].id] = json[i];
-				//$li.data("data", json[i]);
-				$appendTo.append($li);				
+				//$li.data("data", json[i]);				
 			}
 			
 			$ul.data("map", datamap);
