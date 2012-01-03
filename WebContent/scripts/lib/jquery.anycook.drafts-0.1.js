@@ -119,7 +119,7 @@
 			.append($frame_big_right);
 			
 			
-		var $deletebtn =  $("<div><span></span></div>").addClass("delete").on("click", {_id:id, _rev:data._rev}, $.anycook.drafts.remove);
+		var $deletebtn =  $("<div><span></span></div>").attr("title", "Entwurf löschen").addClass("delete").on("click", {_id:id, _rev:data._rev}, $.anycook.drafts.remove);
 		var $li = $("<li></li>")
 			.append($frame_big)
 			.append($deletebtn);

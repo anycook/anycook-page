@@ -236,7 +236,7 @@
     		</div>
     		<div id="step4" class="sliding_container">
     			<div id="recipe_container">
-    				<a href="#!/recipeediting?step=1">
+    				<a href="#!/recipeediting?step=1" title="Einleitung und Bild bearbeiten">
 						<div id="recipe_main">
 				    		<div class="recipe_image_container"><img class="recipe_image"/></div>
 				    	</div>
