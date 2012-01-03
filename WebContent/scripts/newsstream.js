@@ -1,15 +1,14 @@
 function loadNewsstream(){
 	var $ul = $("#newsstream");
 	
-	var oldDatamap = $ul.data("map") || {};
-	
 	$.ajax({
 		url:"/anycook/GetNewsstream",
 		dataType:"json",
 		success:function(json){
 			var datamap = {};
+			var oldDatamap = $ul.data("map") || {};
 						
-			for(var i = 0; i<json.length; i++){
+			for(var i = json.length-1; i>=0; i--){
 				var $appendTo = $ul;
 				var $li;
 				var oldData = oldDatamap[json[i].id];
@@ -17,27 +16,39 @@ function loadNewsstream(){
 				
 				switch(data.type){
 				case "life":
+				
+					if(oldData) 
+						continue;
+						
 					$li = parseLife(data);
 					
-					if(i>0 && json[i-1].type == "life")
-						$appendTo = $ul.find("ul").last();
+					if(i<json.length-1 && json[i+1].type == "life")
+						$appendTo = $ul.find("ul").first();
 					else{
 						$temp = $("<li><div class=\"top\"></div><ul></ul></li>").addClass("news");
-						$temp.find("ul").append($li);
+						$temp.find("ul").prepend($li);
 						$li = $temp;
 					}
-					$appendTo.append($li);
+					$appendTo.prepend($li);
 					break;
 				case "messagesession":
 					if(oldData){
 						if(oldData.datetime != data.datetime){
 							var $target = oldData.target;
-							$target.find("p").text(data.text);
+							$target.animate({height:0, opacity:0}, {duration: 800, complete:function(){
+								$(this).remove();
+							}});
+							
 						}
-					}else{					
-						$li = $("<li></li>").append(getMessageContainer(data));
-						$appendTo.append($li);
-					}		
+						else
+							continue;
+					}			
+					$li = $("<li></li>").append(getMessageContainer(data));
+					$appendTo.prepend($li);
+					if(oldData){
+						var oldHeight = $li.css("height");
+						$li.css({height:0, opacity:0}).animate({height:oldHeight, opacity:1}, {duration:800});
+					}	
 					break;
 				
 				}
@@ -46,7 +57,8 @@ function loadNewsstream(){
 				//$li.data("data", json[i]);				
 			}
 			
-			$ul.data("map", datamap);
+			$.extend(oldDatamap, datamap);			
+			$ul.data("map", oldDatamap);
 		}
 	});
 	var $lightbox = getLightbox("Neue Nachricht", 
@@ -80,6 +92,7 @@ function checkNewMessageNum(lastnum){
 		url:"/anycook/GetNotificationNumbers",
 		data:{lastnum:lastnum},
 		success:function(newNum){
+			
 			isCheckingMessageNum = false;
 			if(newNum != "false" && user.checkLogin()){
 				var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
@@ -89,6 +102,10 @@ function checkNewMessageNum(lastnum){
 				else if(newNum == 0)
 					$newMessageBubble.fadeOut();
 				$newMessageBubble.children().text(newNum);
+				
+				if($.address.pathNames()[0] == "newsstream")
+					loadNewsstream();
+				
 				setTimeout("checkNewMessageNum("+newNum+")", 1000);
 			}
 		},
@@ -271,6 +288,12 @@ function getMessageContainer(message){
 	var $datetime = $("<div></div>").addClass("datetime").text(getDateString(message.datetime));
 	for(var i = 0; i<recipients.length; i++){
 		var recipient = recipients[i];
+		var $image = $("<img />").attr("src", User.getUserImagePath(recipient.id));
+		if(recipient.id == message.sender)
+			$imageborder.prepend($image);
+		else
+			$imageborder.append($image);
+		
 		if(recipient.id == user.id)
 			continue;
 		
@@ -278,16 +301,16 @@ function getMessageContainer(message){
 		var $recipientlink = $("<a></a>")
 			.attr("href", User.getProfileURI(recipient.id))
 			.text(recipient.name);
-		if($imageborder.children().length > 0)
+		if($headline.children("a").length > 0)
 			$headline.append("<span>, </span>");
 		$headline.append($recipientlink);
 		
-		var $image = $("<img />").attr("src", User.getUserImagePath(recipient.id));
-		if(recipient.id == message.sender)
-			$imageborder.prepend($image);
-		else
-			$imageborder.append($image);
 	}
+	
+	$imageborder.children().each(function(i){
+		$(this).css("left", i*60);
+	});
+	
 	
 	$headline.append("<span> und </span><a href=\""+user.getProfileURI()+"\">Ich</a>");
 	
@@ -304,6 +327,50 @@ function getMessageContainer(message){
 		
 		if(message.unread)
 			$a.addClass("unread");
+	
+	var numImages = $imageborder.children().length;
+	if(numImages > 1){
 		
+		$a.mouseover(function(){
+			$imageborder.children().stop();
+			// var i = 0;
+			var $children = []; 
+			
+			var $imgs = $imageborder.children();
+			
+			for(var i = 1; i < $imageborder.children().length; i++){
+				$children.push($imgs.eq(i));
+			}
+			
+			var animation = function(){
+				if($children.length>0){
+					$children.shift().animate({left:0}, {duration:500, easing:"easeInOutExpo", complete:animation});
+				}
+			};
+			animation();
+		}).mouseleave(function(){
+			$imageborder.children().stop();
+			var $children = [];			
+			var $imgs = $imageborder.children();
+			
+			for(var i = 0; i < $imageborder.children().length; i++){
+				$children.push($imgs.eq(i));
+			}
+			
+			var animation = function(){
+				if($children.length>0){
+					var $element = $children.pop();
+					var newPosition = $children.length*60;
+					var currentPos = $element.css("left");
+					currentPos = Number(currentPos.substring(0, currentPos.length-2));
+					if(currentPos == newPosition)
+						animation();
+					else
+						$element.animate({left:newPosition}, {duration:500, easing:"easeInOutExpo", complete:animation});
+				}
+			};
+			animation();
+		});	
+	}	
 	return $a;
 }

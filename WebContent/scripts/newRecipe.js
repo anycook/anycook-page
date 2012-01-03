@@ -53,7 +53,8 @@ function loadNewRecipe(){
 		$("#new_step_container")
 		.append($newStep);
 		$newStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
-		resetNewRecipeHeight($("#step2"));
+		if($.address.parameter("step") == 2)
+			resetNewRecipeHeight($("#step2"));
 	});
 	makeIngredientLightBox();
 	// watchSteps();
@@ -125,6 +126,11 @@ function loadNewRecipe(){
 	
 	$("#submit_recipe").click(saveRecipe);
 	
+	
+	//preview (step4)
+	
+	
+	
 	//draft
 	if(user.checkLogin()){
 		 var id = $.address.parameter("id");
@@ -135,7 +141,7 @@ function loadNewRecipe(){
 			$db.saveDoc({user:"anycook_"+user.id, date:a},{ success:function(doc){
 				var newid = doc.id;
 				$.address.parameter("id", newid);
-				$(".nav_button").attr("href", function(i, attr){
+				$(".nav_button, #step4 a").attr("href", function(i, attr){
 					return attr+"&id="+newid;
 				});
 			}});
@@ -153,7 +159,7 @@ function loadNewRecipe(){
 		}else{
 			//link
 			$db.openDoc(id, {success:fillNewRecipe});
-			$(".nav_button").attr("href", function(i, attr){
+			$(".nav_button, #step4 a").attr("href", function(i, attr){
 					return attr+"&id="+id;
 			});	
 		}
@@ -273,7 +279,8 @@ function checkStep2(event){
 					
 					$ingredientLine.children(".new_ingredient").val(json[i]);
 				}
-				resetNewRecipeHeight($("#step2"));
+				if($.address.parameter("step") == 2)
+					resetNewRecipeHeight($("#step2"));
 				draftSteps();
 			});
 		}
@@ -494,6 +501,7 @@ function newRecipeAdressChange(event){
 			});
 		if(stepNum == 1) resetNewRecipeHeight($step1);
 		if(stepNum == 2) resetNewRecipeHeight($step2);
+		if(stepNum == 4) resetNewRecipeHeight($step4);
 	}
 	
 	return false;
@@ -773,7 +781,8 @@ function getNewIngredientLine(name, menge){
 }
 
 function resetNewRecipeHeight($container){
-	$("#recipe_editing_container").animate({height:$container.height()}, {duration:500});
+	var height = $container.height()+20;
+	$("#recipe_editing_container").animate({height:height}, {duration:500});
 }
 
 function removeNewStep(){
@@ -799,7 +808,8 @@ function addNewIngredientLine(){
 	var $this = $(this);
 	var $list = $this.prev();
 	$list.append(getNewIngredientLine());
-	resetNewRecipeHeight($("#step2"));
+	if($.address.parameter("step") == 2)
+		resetNewRecipeHeight($("#step2"));
 }
 
 function removeNewIngredientLine(){
@@ -812,36 +822,6 @@ function removeNewIngredientLine(){
 		draftIngredients();
 	}
 }
-
-// function watchIntroduction(){
-	// var id = $(document).data("watchIntroduction");
-	// var $name = $("#new_recipe_name");
-	// var $introduction = $("#new_recipe_introduction");
-	// if($name.length == 0){
-		// $(document).removeData("watchIntroduction");
-		// window.clearInterval(id);
-		// return;
-	// }
-	// if(id == undefined){
-		// id = window.setInterval("watchIntroduction()", 1000);
-		// $(document).data("watchIntroduction", id);
-	// }
-// 	
-	// var nameLength = $name.val().length;
-	// var introductionLength = $introduction.val().length
-	// if(nameLength > 0)
-		// $("#new_recipe_name_error").fadeOut(300);
-	// if(introductionLength > 0)
-		// $("#new_recipe_introduction_error").fadeOut(300);
-// 		
-	// if(nameLength>0 && introductionLength>0){
-		// $(document).removeData("watchIntroduction");
-		// window.clearInterval(id);
-	// }
-// 		
-// 	
-// 	
-// }
 
 function watchForIngredients(){
 	var id = $(document).data("watchForIngredients");
@@ -887,72 +867,6 @@ function watchForLightboxIngredients(){
 	}
 	
 }
-
-// function watchSteps(){
-	// var id = $(document).data("watchSteps");
-	// var $newIngredientSteps = $(".new_ingredient_step");
-	// if($newIngredientSteps.length == 0){
-		// $(document).removeData("watchSteps");
-		// window.clearInterval(id);
-		// return;
-	// }
-// 	
-	// if(id == undefined){
-		// id = window.setInterval("watchSteps()", 3000);
-		// $(document).data("watchSteps", id);
-	// }
-// 	
-	// $(".new_ingredient_step").each(function(){
-		// var $this = $(this);
-		// var text = $this.find("textarea").val();
-// 		
-		// var $stepIngredients = $this.find(".new_ingredient");
-		// var ingredients = [];
-		// for(var i = 0; i < $stepIngredients.length; i++){
-			// ingredients[i] = $($stepIngredients[i]).val();
-		// }
-// 		
-		// if(text.length == 0)
-			// return;
-		// var lastSentences = $this.data("sentences");
-		// if(lastSentences == undefined)
-			// lastSentences = [];
-// 		
-		// var currentSentences = text.split(/[!.?:;]+/g);
-		// $this.data("sentences", currentSentences);
-		// //console.log(currentSentences);
-		// for(var i = 0; i < currentSentences.length; i++){
-			// if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
-				// continue;
-// 				
-// 				
-			// $.getJSON("/anycook/GetZutatenfromSchritte?q="+encodeURIComponent(currentSentences[i]), function(json){
-				// for(var i in json){
-					// if($.inArray(json[i], ingredients) > -1)
-						// continue;
-// 					
-					// var $stepIngredients = $this.find(".new_ingredient");
-					// var $ingredientLine = null;
-					// for(var j = 0; j < $stepIngredients.length; j++){
-						// var $stepIngredient = $($stepIngredients[j]);
-						// if($stepIngredient.val().length == 0)
-							// $ingredientLine = $stepIngredient.parent();
-					// }
-// 					
-					// if($ingredientLine == null){
-						// $ingredientLine = getNewIngredientLine().hide();
-						// $this.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
-					// }
-// 					
-					// $ingredientLine.children(".new_ingredient").val(json[i]);
-				// }
-				// resetNewRecipeHeight();
-// 				
-			// });
-		// }
-// 		
-	// });
-// }
 
 function formatMenge(){
 	var $this = $(this);
@@ -1030,7 +944,11 @@ function showNRImage(filename){
 
 function loadPreview(){
 	var recipeImage = getImageName();
-	$("#step4 .recipe_image_container img").attr("src", "/gerichtebilder/big/"+recipeImage);
+	$("#step4 .recipe_image_container img").attr("src", "/gerichtebilder/big/"+recipeImage)
+	.load(function(){
+		if($.address.parameter("step") == 4)
+			resetNewRecipeHeight($("#step4"));
+	});
 	$("#recipe_headline").text(getRecipeName());
 	$("#introduction").text(getDescription());
 	var steps = getSteps();	
@@ -1045,6 +963,17 @@ function loadPreview(){
 		persons:getPersons()
 	}
 	loadFilter(filter);
-	var height = $("#step4").height()
-	$("#recipe_editing_container").css("height", height);
+	var id = $.address.parameter("id");
+	$(".tags_list a").attr("href", function(i, attr){
+		if(id)
+			return "#!/recipeediting?step=3&id="+id;
+		return "#!/recipeediting?step=3";
+	});
+	$("#filter_main.blocked").one("click", function(){$.address.parameter("step", 3)});
+	
+	
+	if($.address.parameter("step") == 4)
+		resetNewRecipeHeight($("#step4"));
+	//var height = $("#step4").height()
+	//$("#recipe_editing_container").css("height", height+20);
 }

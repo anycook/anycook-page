@@ -37,9 +37,9 @@
         	type:"POST", 
             scriptCharset: "utf8" , 
             contentType: "application/x-www-form-urlencoded; charset=utf8",
-            error:function(error){
-            	console.error(error.responseText);
-            }
+            // error:function(error){
+            	// console.error(error.responseText);
+            // }
         }); 
     	$.address.bind("change",handleChange);
     	

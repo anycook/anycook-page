@@ -45,34 +45,42 @@ function loadMessagesession(sessionid){
 	
 }
 
-var gettingMessages = [];
-
 function getMessages(sessionid, startid){
 	if(startid === undefined)
 		startid = -1;
 	
-	if(gettingMessages[sessionid])
-		return;
-	gettingMessages[sessionid] = true;
 	$.ajax({
 		url:"/anycook/PushMessages",
 		data:{sessionid:sessionid, lastid:startid},
 		dataType:"json",
 		success: function(messages){
-			gettingMessages[sessionid] = false;
+			
+			// gettingMessages[sessionid] = false;
 			var path = $.address.pathNames();
 			var $lastli;
 			var lastid = startid;
 			if(path[0] == "messagesession" && path[1] == sessionid){
 				//if(json === undefined) return;			
 				var $messagestream = $("#messagestream");
+				var oldDataMap = $messagestream.data("messages") || {};
+				var datamap = {};
+				
 				var $jspPane = $messagestream.find(".jspPane");
 				for(var i in messages){
+					lastid = messages[i].id;
+					var oldData = oldDataMap[lastid];
+					if(oldData)
+						continue;
 					$lastli = getMessageContainerforSession(messages[i]);
 					$jspPane.append($lastli);
-					lastid = messages[i].id;
+					datamap[lastid] = messages[i];
+					
+					
 					if(messages[i].unread)
 						readMessage(messages[i], sessionid);
+						
+					$.extend(oldDataMap, datamap);
+					$messagestream.data("messages", oldDataMap);
 				}
 				if(messages!= null && messages.length>0){
 					

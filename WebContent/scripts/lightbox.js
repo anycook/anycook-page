@@ -154,7 +154,7 @@ function makeIngredientLightBox(){
 			return false;
 		
 		if($this.val()!="" && $this.val() != "0") $("#numberinput_error").fadeOut(300);
-		saveDraft("persons", $this.val());
+		$.anycook.drafts.save("persons", $this.val());
 	});
 	
 	$up.click(newPersonsUp);
@@ -166,7 +166,7 @@ function newPersonsUp(){
 	var $input = $("#new_num_persons");
 	var currentNum = Number($input.val());
 	var newNum = ((currentNum)%99)+1;
-	saveDraft("persons", newNum);
+	$.anycook.drafts.save("persons", newNum);
 	$input.val(newNum);
 	$("#numberinput_error").fadeOut(300);
 }
