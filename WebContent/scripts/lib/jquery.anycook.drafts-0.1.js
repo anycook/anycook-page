@@ -77,7 +77,7 @@
 	$.anycook.drafts.getBigFrameDraft = function(id, data){
 		
 		var date = $.anycook.drafts.parseDraftDate(data.date);
-		var percent = data.percentage*100+"%";
+		var percent = data.percentage+"%";
 		var name = !data.name ? "Noch kein Titel" : data.name;
 		var description = !data.description ? "Noch keine Beschreibung" : data.description;
 		var image = !data.image ? "nopicture.png" : data.image;

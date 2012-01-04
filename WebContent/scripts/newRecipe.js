@@ -234,10 +234,16 @@ function checkStep2(event){
 				
 				
 			$.getJSON("/anycook/GetZutatenfromSchritte", {q:encodeURIComponent(currentSentences[i])}, function(json){
-				var $stepIngredients = $step.find(".new_ingredient, new_ingredient_question");
+				var $stepIngredients = $step.find(".new_ingredient");
+				var $stepQuestions = $step.find(".new_ingredient_question");
 				var ingredients = [];
 				for(var i = 0; i < $stepIngredients.length; i++){
-					ingredients[i] = $($stepIngredients[i]).val();
+					ingredients[i] = $stepIngredients.eq(i).val();
+				}
+				
+				for(var i = 0; i < $stepQuestions.length; i++){
+					var text = $stepQuestions.eq(i).text();
+					ingredients.push(text.substring(0, text.length-1));
 				}
 				
 				for(var i in json){
@@ -251,20 +257,7 @@ function checkStep2(event){
 						continue;
 					}
 					
-					var $stepIngredients = $step.find(".new_ingredient");
-					var $ingredientLine = null;
-					for(var j = 0; j < $stepIngredients.length; j++){
-						var $stepIngredient = $($stepIngredients[j]);
-						if($stepIngredient.val().length == 0)
-							$ingredientLine = $stepIngredient.parent();
-					}
-					
-					if($ingredientLine == null){
-						$ingredientLine = getNewIngredientLine().hide();
-						$step.find(".new_ingredient_list").append($ingredientLine.fadeIn(300));
-					}
-					
-					$ingredientLine.children(".new_ingredient").val(json[i]);
+					addNewStepIngredient($step, json[i]);
 				}
 				if($.address.parameter("step") == 2)
 					resetNewRecipeHeight($("#step2"));
@@ -659,7 +652,7 @@ function getSteps(){
 		var $ingredientStep = $($newIngredientSteps[i]);
 		var stepText = $ingredientStep.find("textarea").val();
 		var id = i+1;
-		var $ingredients = $ingredientStep.find("li");
+		var $ingredients = $ingredientStep.find(".new_ingredient_line");
 		var ingredients = [];
 		for(var j = 0; j< $ingredients.length;  j++){
 			var $ingredient = $($ingredients[j]);
@@ -684,15 +677,27 @@ function getCurrentStepIngredients(){
 
 function getIngredientQuestion(ingredient){
 	var $span = $("<span></span>").text(ingredient+"?").addClass("new_ingredient_question");
-	var $spanJa =  $("<span></span>").text("Ja").addClass("yes");
-	var $spanNein =  $("<span></span>").text("Nein").addClass("no");
+	var $spanJa =  $("<span></span>").text("Ja").addClass("yes")
+		.click(function(event){
+			var $this = $(this);
+			var ingredient = $this.prev().text();
+			ingredient = ingredient.substring(0, ingredient.length -1);
+			addNewStepIngredient($this.parents(".new_ingredient_step"), ingredient);
+			removeIngredientQuestion.apply($this);
+		});
+	var $spanNein =  $("<span></span>").text("Nein").addClass("no")
+		.click(removeIngredientQuestion);
 	
-	var $li = $("<li></li>").addClass("ingredientQuestion")
+	var $li = $("<li></li>").addClass("ingredient_question")
 		.append($span)
 		.append($spanJa)
 		.append($spanNein);
 		
 	return $li;
+}
+
+function removeIngredientQuestion(event){
+	$(this).parent().fadeOut(300);
 }
 
 
@@ -823,12 +828,29 @@ function addNewIngredientLine(){
 function removeNewIngredientLine(){
 	var $this = $(this);
 	var $li = $this.parent();
-	if($li.siblings().length > 0){
+	if($li.siblings(".new_ingredient_line").length > 0){
 		$li.remove();
 		resetNewRecipeHeight($("#step2"));
 		draftSteps();
 		draftIngredients();
 	}
+}
+
+function addNewStepIngredient($step, ingredient){
+	var $stepIngredients = $step.find(".new_ingredient");
+	var $ingredientLine = null;
+	for(var j = 0; j < $stepIngredients.length; j++){
+		var $stepIngredient = $($stepIngredients[j]);
+		if($stepIngredient.val().length == 0)
+			$ingredientLine = $stepIngredient.parent();
+	}
+	
+	if($ingredientLine == null){
+		$ingredientLine = getNewIngredientLine().hide();
+		$step.find(".new_ingredient_line").last().after($ingredientLine.fadeIn(300));
+	}
+	
+	$ingredientLine.children(".new_ingredient").val(ingredient);
 }
 
 function watchForIngredients(){
