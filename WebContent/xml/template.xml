@@ -363,19 +363,19 @@
 				<table>
 					<tr>
 						<td>User:</td>
-						<td>152</td>
+						<td class="usercounter">152</td>
 					</tr>
 					<tr>
 						<td>Rezepte:</td>
-						<td>70</td>
+						<td class="recipecounter">70</td>
 					</tr>
 					<tr>
 						<td>Zutaten:</td>
-						<td>152</td>
+						<td class="ingredientcounter">152</td>
 					</tr>
 					<tr>
 						<td>Tags:</td>
-						<td>70</td>
+						<td class="tagcounter">70</td>
 					</tr>
 				</table>
 				<div id="online_since">online seit:<div id="online_time"><span class="days">212 Tage</span><span class="hours">12 Std.</span><span class="minutes">5 Min.</span><span class="seconds">56 Sek.</span></div></div>
