@@ -340,31 +340,58 @@
 		
 	</template>
 	<template id="about_us">
-		<div class="footerpages">
-			<h1>Über uns</h1>
-			<h2>Die Idee</h2>
-			<p>Als ambitionierte Gelegenheitsköche ist uns aufgefallen wie umständlich die Recherche nach Rezepten im Internet, ganz im Gegensatz zu der in Kochbüchern, ist. Deshalb haben wir uns ein Konzept überlegt, wie man solch eine Suche erleichtert.<br/>
-			Rezepte bringen viele Daten und Eigenschaften mit, die gesucht und ausgewertet werden können. In Kochbüchern gibt es ein starres Inhaltsverzeichnis, das auf eine begrenzte Anzahl von Rezepten übersichtlich verweist. Dabei ist jedes Rezept nur einmal vorhanden, sodass man nicht zwischen scheinbar gleichem unterscheiden muss. Zusätzlich sind diese Rezepte auch in Kategorien eingeteilt.<br/>
-			Unser Konzept basiert auf den Eigenschaften eines Kochbuches erweitert um die Möglichkeiten des Internets. Wir haben uns eine Suchmaschine ausgedacht, die schnell konkrete Ergebnisse liefert. Die Suche reagiert dynamisch auf die Eingabe des Nutzers und schlägt verschiedene Suchfilter und Rezepte vor. Unter Suchfiltern verstehen wir Kategorien, Kochzeiten, Zutaten, Bewertungen, den Schwierigkeitsgrad, Kalorien und Tags. Mit all diesen Werkzeugen kann sich der Nutzer effektiv an seine Vorstellung annähern.<br/>
-			Ebenfalls ist es Nutzern möglich eigene Rezepte zu erstellen, die vor der Veröffentlichung von Moderatoren auf Übersichtlichkeit und Überschneidungen mit bestehenden Rezepten, geprüft werden. Dabei ist uns bewusst, dass es sehr schwierig werden kann gegen die großen Rezepteseiten eine eigenständige Community aufzubauen. Dies wollen wir vermeiden, indem wir jegliche sozialen Features mit der Facebook-Community verbinden. So können Nutzer innerhalb ihres bestehenden sozialen Umfelds Freunde zum Kochen einladen, über das Abendessen abstimmen lassen oder ihre Lieblingsrezepte veröffentlichen.
-			</p>
-			<h2>Was unterscheidet uns von den Anderen?</h2>
-			<p>Unsere Webseite soll, im Gegensatz zur Konkurrenz, den Nutzer bei der Suche nach Rezepten nicht verhungern lassen, sondern ihn auch zu Neuem anregen und inspirieren.<br/>
-				So kann der hungrige Hans mit seinem halb gefülltem Kühlschrank, der in einer Stunde wieder an der Arbeit sein muss, bei uns die Zutaten und die Zeit, die er hat, angeben und findet sofort die passenden Rezepte. Durch unsere auf AJaX basierende Suche, deren Ergebnisse sich Live mit der Eingabe aktualisieren, findet Hans vielleicht schon vor Eingabe seines ganzen Kühlschrankinhalts etwas Leckeres. Und hat Hans Lust auf Lasagne, findet er ein Standardgericht und kann sich zwischen verschiedenen Variationen entscheiden.<br/>
-				Bei chefkoch.de findet Hans unter "Lasagne" 8392 Treffer, wovon aber nur 3492 wirklich Rezepte sind, zwischen denen er dann wählen darf. Unter Marions Kochbuch findet er zwar auch nur eine Lasagne, seinen Kühlschrankinhalt interessiert Marion aber leider nicht. Rezeptewiki.org spricht Hans vom Konzept vielleicht noch an, aber leider kann das Wiki-Interface ihn nicht überzeugen.<br/>
-				Durch dieses Fallbeispiel wird deutlich, dass die großen Rezeptseiten zwar einen großen Corpus an Inhalten besitzen, aber die verwendeten Konzepte, Interfaces und Technologien zu statisch und umständlich sind.<br/>
-				Wir sehen deshalb ein großes Potenzial für eine junge und dynamische Rezeptesuche, die Spaß macht und die bestehenden Communities des Web2.0 nutzt.
-			</p>
-			<h2>Das Team</h2>
-			<p>Wir sind vier Studenten der Bauhaus Universität Weimar:
-				<ul>
-					<li><a href="mailto:giacomo@anycook.de">Giacomo Blume</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>
-					<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;kboAbozdppl/ef');">Jan Grassegger</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>					
-					<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;nbyAbozdppl/ef');">Maximilian Michel</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
-					<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;ebojfmAbozdppl/ef');">Daniel Plath</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>
-					
-				</ul>
-			</p>					
+		<div id="about_us" class="footerpages">
+			<h1 class="center_headline">Eine ganze Seite über uns.</h1>
+			<div class="column left">
+				<h2>Die Idee</h2>
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+				</p>
+			</div>
+			<div id="weimarmap"></div>
+			<div class="column right">
+				<h2>Das Projekt</h2>
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+				</p>
+			</div>
+			<div id="anycookdata">
+				<div id="data_top"></div>
+				<div id="data_header">
+					<div class="header_stripes"></div>
+					<div class="black_logo"></div>
+					<div class="header_stripes"></div>
+				</div>
+				<table>
+					<tr>
+						<td>User:</td>
+						<td>152</td>
+					</tr>
+					<tr>
+						<td>Rezepte:</td>
+						<td>70</td>
+					</tr>
+					<tr>
+						<td>Zutaten:</td>
+						<td>152</td>
+					</tr>
+					<tr>
+						<td>Tags:</td>
+						<td>70</td>
+					</tr>
+				</table>
+				<div id="online_since">online seit:<div id="online_time"><span class="days">212 Tage</span><span class="hours">12 Std.</span><span class="minutes">5 Min.</span><span class="seconds">56 Sek.</span></div></div>
+			</div>
+			
+			<div id="team">
+				<h2>Das Team</h2>
+				<p>Wir sind vier Studenten der Bauhaus Universität Weimar:
+					<ul>
+						<li><a href="mailto:giacomo@anycook.de">Giacomo Blume</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>
+						<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;kboAbozdppl/ef');">Jan Grassegger</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>					
+						<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;nbyAbozdppl/ef');">Maximilian Michel</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
+						<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;ebojfmAbozdppl/ef');">Daniel Plath</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>	
+					</ul>
+				</p>	
+			</div>				
 		</div>
 	</template>
 	<template id="profile">
