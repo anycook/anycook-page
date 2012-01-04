@@ -378,7 +378,7 @@
 						<td class="tagcounter">70</td>
 					</tr>
 				</table>
-				<div id="online_since">online seit:<div id="online_time"><span class="days">212 Tage</span><span class="hours">12 Std.</span><span class="minutes">5 Min.</span><span class="seconds">56 Sek.</span></div></div>
+				<div id="online_since">online seit:<div id="online_time"><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
 			</div>
 			
 			<div id="team">

@@ -19,10 +19,10 @@ function loadHome()
 	  success: function(json){
 	  	$("#recipe_of_the_day").attr("href", Recipe.getURI(json.dailyrecipe))
 	  		.text(json.dailyrecipe);
-	  	$("#num_authors").text(json.users);
-	  	$("#num_tags").text(json.tags);
-	  	$("#num_ingredients").text(json.ingredients);
-	  	$("#num_recipes").text(json.recipes);
+	  	// $("#num_authors").text(json.users);
+	  	// $("#num_tags").text(json.tags);
+	  	// $("#num_ingredients").text(json.ingredients);
+	  	// $("#num_recipes").text(json.recipes);
 	  }
 	});
 // 	
@@ -128,6 +128,7 @@ function handleChange(event){
 					break;
 				case "about_us":
 					$.address.title("Über uns | anycook");
+					loadAboutUs();
 					break;
 				case "impressum":
 					$.address.title("Impressum | anycook");
