@@ -182,16 +182,6 @@ function validateStep1(event){
 	}else{
 		$("#nav_step1").nextAll().addClass("inactive");
 	}
-	
-	// var $introduction = $step1.find("#new_recipe_introduction");
-	// if($introduction.val().length == 0){
-		// $step1.find("#new_recipe_introduction_error").fadeIn(300);
-		// check=false;
-	// }else{
-// 		
-	// }
-	
-	//if()
 }
 
 function checkValidationStep1(){
@@ -246,6 +236,8 @@ function checkStep2(event){
 			lastSentences = [];
 		
 		var currentSentences = text.split(/[!.?:;]+/g);
+		
+		var currentIngredients = getCurrentStepIngredients();
 		$this.data("sentences", currentSentences);
 		//console.log(currentSentences);
 		for(var i = 0; i < currentSentences.length; i++){
@@ -254,7 +246,7 @@ function checkStep2(event){
 				
 				
 			$.getJSON("/anycook/GetZutatenfromSchritte", {q:encodeURIComponent(currentSentences[i])}, function(json){
-				var $stepIngredients = $step.find(".new_ingredient");
+				var $stepIngredients = $step.find(".new_ingredient, new_ingredient_question");
 				var ingredients = [];
 				for(var i = 0; i < $stepIngredients.length; i++){
 					ingredients[i] = $($stepIngredients[i]).val();
@@ -263,6 +255,12 @@ function checkStep2(event){
 				for(var i in json){
 					if($.inArray(json[i], ingredients) > -1)
 						continue;
+						
+					if($.inArray(json[i], currentIngredients) >-1){
+						var $ingredientQuestion = getIngredientQuestion(json[i]);
+						
+						continue;
+					}
 					
 					var $stepIngredients = $step.find(".new_ingredient");
 					var $ingredientLine = null;
@@ -685,6 +683,24 @@ function getSteps(){
 		steps[steps.length] = step;
 	}
 	return steps;
+}
+
+function getCurrentStepIngredients(){
+	var stepingredients = $(".new_ingredient_step .new_ingredient").val() || [];
+	return stepingredients;
+}
+
+function getIngredientQuestion(ingredient){
+	var $span = $("<span></span>").text(ingredient+"?").addClass("new_ingredient_question");
+	var $spanJa =  $("<span></span>").text("Ja").addClass("yes");
+	var $spanNein =  $("<span></span>").text("Nein").addClass("no");
+	
+	var $li = $("<li></li>").addClass("ingredientQuestion")
+		.append($span)
+		.append($spanJa)
+		.append($spanNein);
+		
+	return $li;
 }
 
 
