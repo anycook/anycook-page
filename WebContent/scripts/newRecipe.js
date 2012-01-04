@@ -145,16 +145,6 @@ function loadNewRecipe(){
 					return attr+"&id="+newid;
 				});
 			}});
-		
-			// $.ajax({
-				// url:"/anycook/SaveDraft", 
-				// async:false,
-				// success:function(newid){
-					// $.address.parameter("id", newid);
-					// $(".nav_button").attr("href", function(i, attr){
-						// return attr+"&id="+newid;
-					// });
-			// }});
 			return;
 		}else{
 			//link
@@ -259,6 +249,7 @@ function checkStep2(event){
 					if($.inArray(json[i], currentIngredients) >-1){
 						var $ingredientQuestion = getIngredientQuestion(json[i]);
 						
+						$step.find(".new_ingredient_list").append($ingredientQuestion);
 						continue;
 					}
 					
@@ -686,7 +677,10 @@ function getSteps(){
 }
 
 function getCurrentStepIngredients(){
-	var stepingredients = $(".new_ingredient_step .new_ingredient").val() || [];
+	var stepingredients = [];
+	var $ingredients = $(".new_ingredient_step .new_ingredient");
+	for(var i =0; i<$ingredients.length; i++)
+		stepingredients.push($ingredients.eq(i).val());
 	return stepingredients;
 }
 
