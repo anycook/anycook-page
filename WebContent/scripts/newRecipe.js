@@ -40,8 +40,6 @@ function loadNewRecipe(){
 	var $firstStep = getNewIngredientStep(1);
 	$("#new_step_container").append($firstStep)
 		.sortable({
-			//placeholder: "ui-state-highlight",
-			//cursorAt:"top",
 			distance: 15,
 			axis: "y"
 		});
