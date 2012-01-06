@@ -500,7 +500,7 @@
 			<h2 class="border_headline">Profileinstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_content" class="settings profile_container">
-					<div id="account_image" class="image_container">
+					<div class="profile_image image_container">
 						<div class="image_layer"></div>
 						<div class="image_upload">
 	    					<div>
