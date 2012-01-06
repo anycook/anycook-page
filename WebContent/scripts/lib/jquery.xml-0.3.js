@@ -9,7 +9,7 @@
  * Changes:
  * --------- v0.3 -----------------
  * - "append" method supports callback method
- * - added option the submit error method for settings on init
+ * - added option to submit error method for settings on init
  * - error method is called if access to template is restricted (403) or template doesn't exist (404)
  * - restricted access is detected if template tag has an "access" attribute. value is submitted in event.access
  * 

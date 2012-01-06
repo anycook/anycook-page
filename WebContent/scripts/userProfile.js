@@ -5,15 +5,15 @@ function loadProfile(userid){
 	$.when(User.initProfileInfo(userid)).then(function(profileData){
 		$.address.title(profileData.name+" | anycook");
 		var image = User.getUserImagePath(profileData.id, "large");
-		$("#profile_image").attr("src", image);
-		$("#profile_title h1").text(profileData.name);
-		$("#profile_date span").text(profileData.date);
+		$(".profile_image").attr("src", image);
+		$(".profile_title h1").text(profileData.name);
+		$(".profile_date span").text(profileData.date);
 		
 		//TODO do right!!
 		if(userid ==user.id)
-			$("#follow").hide();
+			$(".follow").hide();
 		else{
-			var $follow = $("#follow").click(follow);
+			var $follow = $(".follow").click(follow);
 			if(profileData.isFollowedBy(user.id))
 				$follow.addClass("on")
 	
@@ -24,18 +24,18 @@ function loadProfile(userid){
 		}
 		
 		if(profileData.place != null)
-			$("#profile_place").show().children("span").text(profileData.place);
-		$("#profile_achievements #recipes .count").text(profileData.recipes.length);
-		$("#profile_achievements #likes .count").text(profileData.schmeckt.length);
-		$("#profile_achievements #discussions .count").text(profileData.discussionnum);
-		$("#profile_achievements #follower .count").text(profileData.follower.length);
+			$("profile_place").show().children("span").text(profileData.place);
+		$(".profile_achievements .recipes .count").text(profileData.recipes.length);
+		$(".profile_achievements .likes .count").text(profileData.schmeckt.length);
+		$(".profile_achievements .discussions .count").text(profileData.discussionnum);
+		$(".profile_achievements .follower .count").text(profileData.follower.length);
 		
 		if(profileData.text!=null){
-			$("#profile_text").show().text(profileData.text);
+			$(".profile_text").show().text(profileData.text);
 		}
 		
 		if(profileData.facebook_id>0){
-			var fblink = $("#profile_facebook");
+			var fblink = $(".profile_facebook");
 			fblink.attr("href", profileData.getFacebookProfileLink());
 			fblink.css("display", "block");		
 		}
