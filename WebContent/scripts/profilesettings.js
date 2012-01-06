@@ -23,7 +23,7 @@ function loadSettings(){
 }
 
 function fillAccountSettings(){
-	$("#account_image img").attr("src", user.getUserImagePath("large"));
+	$(".profile_image img").attr("src", user.getUserImagePath("large"));
 	$("#account_name").val(user.name);
 	$("#account_mail").val(user.mail);
 	$("#account_aboutme").val(user.text);
