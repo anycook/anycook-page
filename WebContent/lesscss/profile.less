@@ -8,20 +8,20 @@
 	position: relative;
 	min-height: 155px;
 	
-	#profile_image{
+	.profile_image{
 		float:left;
 		border: 8px solid @stepcolor;
 		outline: 1px solid @lightgrey;
 		width:200px;
 	}
 	
-	#profile_info{
+	.profile_info{
 		float:left;
 		width: @width - 245px;
 		margin: 8px 0 0 25px;
 		color: @smalllightfontcolor;
 		
-		#profile_title{
+		.profile_title{
 			position: relative;
 			
 			h1{
@@ -37,7 +37,7 @@
 				top: 0;
 			}
 			
-			#follow{
+			.follow{
 				background: url("/img/followerBtn80x80.png") no-repeat;
 				background-position: 0px 0px;
 				z-index: 20;
@@ -54,7 +54,7 @@
 				}			
 			}
 			
-			#follow+#followhover {
+			.follow+.followhover {
 				z-index: 19;
 		        background: url("/img/followerBtn80x80.png") no-repeat;
 		        background-position: 0 -80px;
@@ -62,19 +62,19 @@
 		        .transition(opacity, .1s, ease-in);
 			}
 			
-			#follow:hover + #followhover{
+			.follow:hover + .followhover{
 				opacity:1;
 				.transition(opacity, .1s, ease-out);
 			}
 			
-			#follow.on + #followhover {
+			.follow.on + .followhover {
 				background-position: -80px -80px;
 			}
 
 			
 		}
 		
-		#profile_date, #profile_place{
+		.profile_date, .profile_place{
 			div{
 				float: left;
 				background-image: url("/img/icons20x20.png");
@@ -85,7 +85,7 @@
 			}
 		}
 		
-		#profile_place{
+		.profile_place{
 			margin-top:4px;
 			display:none;
 			div{
@@ -93,7 +93,7 @@
 			}
 		}
 		
-		#profile_date, #profile_text{
+		.profile_date, .profile_text, .profile_position{
 			margin-top: 8px;
 			width: 325px;
 		}
@@ -122,7 +122,7 @@
 		}
 	}
 	
-	#profile_achievements{
+	.profile_achievements{
 		float:right;
 		position: absolute;
 		bottom: 28px;
