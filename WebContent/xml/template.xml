@@ -378,50 +378,86 @@
 						<td class="tagcounter">70</td>
 					</tr>
 				</table>
-				<div id="online_since">online seit:<div id="online_time"><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
+				<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahr </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
 			</div>
 			
 			<div id="team">
-				<h2>Das Team</h2>
-				<p>Wir sind vier Studenten der Bauhaus Universität Weimar:
-					<ul>
-						<li><a href="mailto:giacomo@anycook.de">Giacomo Blume</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>
-						<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;kboAbozdppl/ef');">Jan Grassegger</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>					
-						<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;nbyAbozdppl/ef');">Maximilian Michel</a> studiert Mediensysteme an der Fakultät Medien (Bachelor of Science)</li>
-						<li><a href="javascript:linkTo_UnCryptMailto('nbjmup;ebojfmAbozdppl/ef');">Daniel Plath</a> studiert Visuelle Kommunikation an der Fakultät Gestaltung (Diplom Designer)</li>	
-					</ul>
-				</p>	
+				<h2 class="border_headline">Das Team</h2>
+				<div class="profile_container">
+					<img class="profile_image" src="http://testgraph.anycook.de/user/8/image?type=large&amp;appid=0"/>			
+					<div class="profile_info">
+						<div class="profile_title">
+							<h1>Giacomo Blume</h1>
+						</div>
+						<div class="profile_position">Kommunikation und Marketing</div>
+						<div class="profile_text">Giacomo ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+					</div>
+				</div>	
+				<div class="profile_container">
+					<img class="profile_image" src="http://testgraph.anycook.de/user/6/image?type=large&amp;appid=0"/>			
+					<div class="profile_info">
+						<div class="profile_title">
+							<h1>Jan Grassegger</h1>
+						</div>
+						<div class="profile_position">Entwickler</div>
+						<div class="profile_text">Jan ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+					</div>
+				</div>	
+				<div class="profile_container">
+					<img class="profile_image" src="http://testgraph.anycook.de/user/7/image?type=large&amp;appid=0"/>			
+					<div class="profile_info">
+						<div class="profile_title">
+							<h1>Maximilian Michel</h1>
+						</div>
+						<div class="profile_position">Entwicklung</div>
+						<div class="profile_text">Max ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+					</div>
+				</div>
+				<div class="profile_container">
+					<img class="profile_image" src="http://testgraph.anycook.de/user/0/image?type=large&amp;appid=0"/>			
+					<div class="profile_info">
+						<div class="profile_title">
+							<h1>Daniel Plath</h1>
+						</div>
+						<div class="profile_position">Designer</div>
+						<div class="profile_text">Daniel ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+					</div>
+				</div>
 			</div>				
 		</div>
 	</template>
 	<template id="profile">
 		<div class="profile_container">
-			<img id="profile_image" src=""/>					
-			<div id="profile_info">
-				<div id="profile_title">
+			<img class="profile_image" src=""/>					
+			<div class="profile_info">
+				<div class="profile_title">
 					<h1></h1>
-					<div id="follow" class="stampposition"></div><div id="followhover" class="stampposition"></div>
+					<div class="follow stampposition"></div><div class="followhover stampposition"></div>
 					<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
 				</div>
-				<div id="profile_date"><div></div>seit <span></span> dabei</div>
-				<div id="profile_place"><div></div>aus <span></span></div>
-				<div id="profile_text"></div>
+				<div class="profile_date"><div></div>seit <span></span> dabei</div>
+				<div class="profile_place"><div></div>aus <span></span></div>
+				<div class="profile_text"></div>
 				<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 			</div>
-			<div id="profile_achievements">
-				<div id="recipes" class="achievement">
+			<div class="profile_achievements">
+				<div class="recipes achievement">
 					<div class="count"></div>
 					<div class="title">Rezepte</div>
 				</div>
-				<div id="likes" class="achievement">
+				<div class="likes achievement">
 					<div class="count"></div>
 					<div class="title">Lieblingsrezepte</div>
 				</div>
-				<div id="discussions" class="achievement">
+				<div class="discussions achievement">
 					<div class="count"></div>
 					<div class="title">Diskussionen</div>
 				</div>
-				<div id="follower" class="achievement">
+				<div class="follower achievement">
 					<div class="count"></div>
 					<div class="title">Follower</div>
 				</div>
