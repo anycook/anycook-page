@@ -1,7 +1,8 @@
-.settings_saved{ /*temp*/
+.settings_saved{
 		float: right;
 		margin: -20px 10px 0 0;
 		color: @smalllightfontcolor;
+		display:none;
 }
 
 #settings_content{
@@ -15,8 +16,9 @@
 	}*/
 	
 	.profile_image{
-		.image_layer{
-			
+		position:relative;
+		.image_upload{
+			margin-left:25px;
 		}
 		
 		img{
@@ -160,40 +162,41 @@
 }
 
 .settings_content{
-			position: relative;
-			z-index: 1;
-			width: 430px;
-			margin: 0 0 5px 5px;
-			background-color:@imginnerbordercolor;
-			border:1px solid @lightbrown;
-			border-top: 0;
-			.border-radius(0px, 0px, 5px, 5px);
+	display:none;
+		position: relative;
+		z-index: 1;
+		width: 430px;
+		margin: 0 0 5px 5px;
+		background-color:@imginnerbordercolor;
+		border:1px solid @lightbrown;
+		border-top: 0;
+		.border-radius(0px, 0px, 5px, 5px);
+		
+		table{
+			width: 100%;
+			color: @darkfontcolor;
+			border-collapse: collapse;
 			
-			table{
-				width: 100%;
-				color: @darkfontcolor;
-				border-collapse: collapse;
+			tr{
+				border-bottom:1px solid @lightbrown;
+				line-height: 37px;
+									
+				td{
+					padding-left: 10px;
+				}
+				td+td{
+					padding: 0 10px 0 0;
+				}
 				
-				tr{
-					border-bottom:1px solid @lightbrown;
-					line-height: 37px;
-										
-					td{
-						padding-left: 10px;
-					}
-					td+td{
-						padding: 0 10px 0 0;
-					}
-					
-					
-					
-				}
-				tr:last-child{
-					border-bottom:0px;
-				}
-	
-	
+				
+				
 			}
+			tr:last-child{
+				border-bottom:0px;
+			}
+
+
+		}
 		
 		
 	}

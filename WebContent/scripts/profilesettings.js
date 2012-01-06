@@ -3,15 +3,19 @@ function loadSettings(){
 	
 	fillAccountSettings();
 	//var uploader = 
-		new qq.FileUploader({
-	    // pass the dom node (ex. $(selector)[0] for jQuery users)
-	    element: $('#account_upload div')[0],
-	    // path to server-side upload script
-	    action: '/anycook/UploadUserImage',
-	    onComplete:saveUserImage
-	});
+		// new qq.FileUploader({
+	    // // pass the dom node (ex. $(selector)[0] for jQuery users)
+	    // element: $('#account_upload div')[0],
+	    // // path to server-side upload script
+	    // action: '/anycook/UploadUserImage',
+	    // onComplete:saveUserImage
+	// });
 	
-	fillNotificationSettings();
+	fillAccountSettings();
+	
+	$.getJSON("/anycook/GetSettings", function(settings){
+		fillMailSettings(settings.mail);
+	});
 	// $("#settings_notification input").change(saveSettings);
 // 	
 	// if(user.facebook_id == 0){
@@ -27,4 +31,9 @@ function fillAccountSettings(){
 	$("#account_name").val(user.name);
 	$("#account_mail").val(user.mail);
 	$("#account_aboutme").val(user.text);
+}
+
+function fillMailSettings(mailsettings){
+	if(!mailsettings) return;
+	console.log(mailsettings);
 }
