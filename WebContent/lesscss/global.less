@@ -547,3 +547,65 @@ input:-moz-placeholder{
 .qq-upload-list{
 	display:none;
 }
+
+.image_container{
+	.image_layer{
+		position:absolute;
+		opacity: 0;
+		background-color: black;
+		width:100%;
+		height:100%;
+		.transition(opacity, .3s, ease-out);
+	}
+	
+	.image_upload{
+		top: 50%;
+		margin-top: -61px;
+		padding: 7px 17px 10px 17px; 
+		position:absolute;
+		width:116px;
+		margin-left:171px;
+		height:49px;
+		background-color: @background;
+		opacity: 0;
+		.transition(opacity, .3s, ease-out);
+		border-radius: 5px;
+
+		
+		#cam{
+			width:20px;
+			height:20px;
+			background: url("/img/icons20x20.png") no-repeat;
+			background-position: -80px -20px;
+			float: left;
+			margin-top:1px;
+		}
+		
+		p{
+			float:left;
+			margin-left:4px;
+			font-size: 9pt;
+		}
+	}
+	
+	&:hover, &.visible{
+		.image_layer{
+			opacity: .5;
+			.transition(opacity, .3s, ease-in);
+		}
+		
+		.image_upload{
+			opacity: 1;
+			.transition(opacity, .4s, ease-in);
+		}
+	}
+	
+	#progressbar{
+		display:none;
+		top:50%;
+		position:absolute;
+		width:200px;
+		height:20px;
+		margin-left:155px;
+	}
+}
