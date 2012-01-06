@@ -2,28 +2,23 @@
 function loadSettings(){
 	
 	fillAccountSettings();
-	//var uploader = 
-		// new qq.FileUploader({
-	    // // pass the dom node (ex. $(selector)[0] for jQuery users)
-	    // element: $('#account_upload div')[0],
-	    // // path to server-side upload script
-	    // action: '/anycook/UploadUserImage',
-	    // onComplete:saveUserImage
-	// });
+	new qq.FileUploader({
+	    // pass the dom node (ex. $(selector)[0] for jQuery users)
+	    element: $("#upload_button")[0],
+	    multiple:false,
+	    onSubmit:addProgressBar,
+	    onProgress:nrProgress,
+	    onComplete:completeUserUpload,
+	    // path to server-side upload script
+	    action: '/anycook/UploadUserImage'
+	});
 	
 	fillAccountSettings();
+	$("#account_form").submit(changeAccountSettings);
 	
 	$.getJSON("/anycook/GetSettings", function(settings){
 		fillMailSettings(settings.mail);
 	});
-	// $("#settings_notification input").change(saveSettings);
-// 	
-	// if(user.facebook_id == 0){
-		// $("#settings_password").show();
-		// $("#showpassword").click(togglePasswordField);
-	// }
-// 	
-	// $(".settings h2").click(showSettings);
 }
 
 function fillAccountSettings(){
@@ -31,19 +26,47 @@ function fillAccountSettings(){
 	$("#account_name").val(user.name);
 	$("#account_mail").val(user.mail);
 	$("#account_aboutme").val(user.text);
+	$("#account_place").val(user.place);
+	
 }
 
 function fillMailSettings(mailsettings){
 	if(!mailsettings) return;
 	var checker = false;
 	for(var type in mailsettings){
-		if(type[mailsettings]){
+		if(mailsettings[type]){
 			checker=true;
-			console.log($("#"+type+" input[type=\"checkbox\"]").attr("checked", "checked"));
+			$("#"+type+" input[type=\"checkbox\"]").attr("checked", "checked");
 		}
 	}
-	$("#mail_notification input[type=\"checkbox\"]").attr("checked", "checked");
-	$("#settings_notification_content").show();
 	
-	console.log(mailsettings);
+	if(checker){
+		$("#mail_notification input[type=\"checkbox\"]").attr("checked", "checked");
+		$("#settings_notification_content").show();
+	}
+}
+
+function completeUserUpload(){
+	var $recipeImageContainer = $(".profile_image");
+	$recipeImageContainer.children("img").remove();
+	$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
+	$recipeImageContainer.children(".image_upload").show();
+	var $img = $("<img/>").attr("src", user.getUserImagePath("large")+"&"+Math.random());
+	$(".profile_image").append($img);
+}
+
+function changeAccountSettings(event){
+	event.preventDefault();
+	
+	var newSettings = {};
+	
+	var newPlace = $("#account_place").val();
+	
+	if(newPlace != "" && newPlace != user.place)
+		newSettings["place"] = newPlace;
+		
+	$.post("/anycook/ChangeAccountSettings", newSettings,function(){
+		user = User.init();
+	});
+	
 }

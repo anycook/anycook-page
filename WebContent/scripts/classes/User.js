@@ -11,6 +11,7 @@ function User(){
 	this.follower = null;
 	this.id = null;
 	this.schmeckt = [];
+	this.place = null;
 }
 
 User.init = function(){
@@ -29,6 +30,7 @@ User.init = function(){
 				user.facebook_id = response.facebookID;
 				user.text = response.text;
 				user.following = response.following;
+				user.place = response.place;
 				checkNewMessageNum();
 			}
 				

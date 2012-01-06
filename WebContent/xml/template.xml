@@ -523,7 +523,7 @@
 						</li>
 						<li>
 							<h2>Ort:</h2>
-							<input type="text" id="account_mail" maxlength="45"/>
+							<input type="text" id="account_place" maxlength="45"/>
 						</li>
 						<li>
 							<h2 id="about_me">Über mich:</h2>
@@ -541,7 +541,7 @@
 					<form id="account_data">
 						<h2>Email-Adresse ändern:</h2>
 						<p>Deine E-Mail Adresse, auf der wir dich erreichen können.</p>
-						<input type="email" id="mailadress"/>
+						<input type="email" id="account_mail"/>
 						<h2>Passwort ändern:</h2>
 						<div id="old_password_container">
 							<p class="password_label">Gib dein altes Passwort ein.</p>

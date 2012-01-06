@@ -24,7 +24,7 @@ function loadProfile(userid){
 		}
 		
 		if(profileData.place != null)
-			$("profile_place").show().children("span").text(profileData.place);
+			$(".profile_place").show().children("span").text(profileData.place);
 		$(".profile_achievements .recipes .count").text(profileData.recipes.length);
 		$(".profile_achievements .likes .count").text(profileData.schmeckt.length);
 		$(".profile_achievements .discussions .count").text(profileData.discussionnum);
