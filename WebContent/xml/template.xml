@@ -342,45 +342,48 @@
 	<template id="about_us">
 		<div id="about_us" class="footerpages">
 			<h1 class="center_headline">Eine ganze Seite über uns.</h1>
-			<div class="column left">
-				<h2>Die Idee</h2>
-				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
-				</p>
-			</div>
-			<div id="weimarmap"><img class="googlemap" src="http://maps.google.com/maps/api/staticmap?center=Weimar&amp;zoom=13&amp;size=270x230&amp;maptype=roadmap&amp;sensor=false&amp;style=feature:poi|element:labels|visibility:off&amp;style=feature:administrative.neighborhood|element:labels|visibility:off&amp;style=feature:road.arterial|element:labels|visibility:off&amp;style=feature:road|element:labels|visibility:off&amp;style=feature:transit.station.rail|visibility:off"/><img class="mapoverlay" src="/img/maplayer.png"/></div>
-			<div class="column right">
-				<h2>Das Projekt</h2>
-				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
-				</p>
-			</div>
-			<div id="anycookdata">
-				<div id="data_top"></div>
-				<div id="data_header">
-					<div class="header_stripes"></div>
-					<div class="black_logo"></div>
-					<div class="header_stripes"></div>
+			<div class="row">
+				<div class="column left">
+					<h2>Die Idee</h2>
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+					</p>
 				</div>
-				<table>
-					<tr>
-						<td>User:</td>
-						<td class="usercounter">152</td>
-					</tr>
-					<tr>
-						<td>Rezepte:</td>
-						<td class="recipecounter">70</td>
-					</tr>
-					<tr>
-						<td>Zutaten:</td>
-						<td class="ingredientcounter">152</td>
-					</tr>
-					<tr>
-						<td>Tags:</td>
-						<td class="tagcounter">70</td>
-					</tr>
-				</table>
-				<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahr </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
+				<a id="weimarmap" href="http://maps.google.com/maps?q=Karl-Liebknecht-Stra%C3%9Fe+7,+Weimar,+Deutschland&amp;hl=de&amp;ie=UTF8&amp;ll=50.983154,11.325617&amp;spn=0.011874,0.033023&amp;sll=50.939123,11.583671&amp;sspn=0.011885,0.033023&amp;vpsrc=6&amp;hnear=Karl-Liebknecht-Stra%C3%9Fe+7,+Deutschland&amp;t=m&amp;z=16" target="_blank"><img class="googlemap" src="http://maps.google.com/maps/api/staticmap?center=Weimar&amp;zoom=13&amp;size=270x230&amp;maptype=roadmap&amp;sensor=false&amp;style=feature:poi|element:labels|visibility:off&amp;style=feature:administrative.neighborhood|element:labels|visibility:off&amp;style=feature:road.arterial|element:labels|visibility:off&amp;style=feature:road|element:labels|visibility:off&amp;style=feature:transit.station.rail|visibility:off"/><img class="mapoverlay" src="/img/maplayer.png"/></a>
 			</div>
-			
+			<div class="row">
+				<div class="column right">
+					<h2>Das Projekt</h2>
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+					</p>
+				</div>
+				<div id="anycookdata">
+					<div id="data_top"></div>
+					<div id="data_header">
+						<div class="header_stripes"></div>
+						<div class="black_logo"></div>
+						<div class="header_stripes"></div>
+					</div>
+					<table>
+						<tr>
+							<td>User:</td>
+							<td class="usercounter">152</td>
+						</tr>
+						<tr>
+							<td>Rezepte:</td>
+							<td class="recipecounter">70</td>
+						</tr>
+						<tr>
+							<td>Zutaten:</td>
+							<td class="ingredientcounter">152</td>
+						</tr>
+						<tr>
+							<td>Tags:</td>
+							<td class="tagcounter">70</td>
+						</tr>
+					</table>
+					<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahr </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
+				</div>
+			</div>
 			<div id="team">
 				<h2 class="border_headline">Das Team</h2>
 				<div class="profile_container">
@@ -508,7 +511,8 @@
 	    						<p>Bild hochladen:</p>
 	    					</div>
 	    					<div id="upload_button" class="button">durchsuchen</div>
-	    				</div>			
+	    				</div>	
+	    				<div id="progressbar"></div>		
 						<img src=""/>								
 					</div>
 					<form id="account_form">

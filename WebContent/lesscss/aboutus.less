@@ -1,14 +1,22 @@
 #about_us{
+.row{
+	float: left;
+	width: 100%;
+	margin: 5px 0 10px 0;
+	padding-left: 10px;	
+	
 	.left, .right, #weimarmap, #anycookdata{
-		width: 300px;
+		width: 280px;
 	}
 	
 	.left{
 		float: left;
+		margin-bottom: 22px;
 	}
 	
 	.right{
 		float: right;
+		margin-right: 15px;
 	}
 	
 	#weimarmap, #anycookdata{
@@ -25,6 +33,21 @@
 	
 	#weimarmap{
 		float: right;
+		position: relative;
+		margin: 15px 5px 0 0;
+		-moz-transform:rotate(4deg);
+		-webkit-transform:rotate(4deg);
+		-o-transform:rotate(4deg);
+		transform:rotate(4deg);
+		
+		.googlemap, .mapoverlay{
+			position: absolute;
+		}
+		
+		.mapoverlay{
+			left: -15px;
+			top: -16px;
+		}
 		
 	}
 	
@@ -100,6 +123,7 @@
 			}
 		}
 	}
+}
 	
 	#team{
 		float: left;
