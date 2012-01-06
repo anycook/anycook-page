@@ -35,5 +35,15 @@ function fillAccountSettings(){
 
 function fillMailSettings(mailsettings){
 	if(!mailsettings) return;
+	var checker = false;
+	for(var type in mailsettings){
+		if(type[mailsettings]){
+			checker=true;
+			console.log($("#"+type+" input[type=\"checkbox\"]").attr("checked", "checked"));
+		}
+	}
+	$("#mail_notification input[type=\"checkbox\"]").attr("checked", "checked");
+	$("#settings_notification_content").show();
+	
 	console.log(mailsettings);
 }

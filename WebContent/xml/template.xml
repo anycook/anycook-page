@@ -564,27 +564,27 @@
 				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
-				<tr>
+				<tr id="recipeactivation">
 					<td>...wenn mein Rezept aktiviert wird.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /><label></label></div></td>
 				</tr>
-				<tr>
+				<tr id="tagactivation">
 					<td>...wenn meine Stichwörter aktiviert werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
 				</tr>
-				<tr>
+				<tr id="recipediscussion">
 					<td>...bei Diskussionsbeiträgen zu meinem Rezept.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /><label></label></div></td>
 				</tr>
-				<tr>
+				<tr id="discussionanswer">
 					<td>...bei Antworten auf meine Diskussionsbeiträge.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /><label></label></div></td>
 				</tr>
-				<tr>
+				<tr id="schmeckt">
 					<td>...wenn jemandem dein Rezept schmeckt.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /><label></label></div></td>
 				</tr>
-				<tr>
+				<tr id="newsletter">
 					<td>Newsletter</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /><label></label></div></td>
 				</tr>
