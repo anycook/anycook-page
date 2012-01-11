@@ -19,6 +19,21 @@ function loadSettings(){
 	$.getJSON("/anycook/GetSettings", function(settings){
 		fillMailSettings(settings.mail);
 	});
+	
+	$("#showpassword").click(function() {		
+		var $container = $("#new_password_container");
+		var $password = $container.children("#password_new");
+		var $new_password = $password.clone();
+		if($password.attr("type") == "password")
+			$new_password.attr("type", "text");
+		else
+			$new_password.attr("type", "password");
+		
+		$password.remove();
+		$(this).before($new_password);
+	});
+	
+	
 }
 
 function fillAccountSettings(){
@@ -32,6 +47,9 @@ function fillAccountSettings(){
 
 function fillMailSettings(mailsettings){
 	if(!mailsettings) return;
+		
+	$("#settings_notification").data("mailsettings", mailsettings);
+		
 	var checker = false;
 	for(var type in mailsettings){
 		if(mailsettings[type]){
@@ -40,9 +58,32 @@ function fillMailSettings(mailsettings){
 		}
 	}
 	
+	var $bigCheckbox = $("#mail_notification input").change(toggleMailSettings);
 	if(checker){
-		$("#mail_notification input[type=\"checkbox\"]").attr("checked", "checked");
+		$bigCheckbox.attr("checked", "checked");
 		$("#settings_notification_content").show();
+	}
+	
+	$("#settings_notification_content input").change(changeMailSettings);
+}
+
+function toggleMailSettings(){
+	var $this = $(this);
+	var $content = $("#settings_notification_content");
+	var checked = $this.attr("checked");
+	var $smallCheckboxes = $("#settings_notification_content input");
+	if(!checked){
+		$content.animate({height:0}, {duration:700,easing:"easeInQuad", complete:function(){
+			$(this).hide().css("height", "");
+			$smallCheckboxes.attr("checked", "");
+		}});
+	}else{
+		var oldHeight = $content.height();
+		$content.css("height", 0).show();
+		$content.animate({height:oldHeight}, {duration:700,easing:"easeOutQuad", complete:function(){
+			$(this).show().css("height", "");
+			$smallCheckboxes.attr("checked", "checked");
+		}});
 	}
 }
 
@@ -67,6 +108,24 @@ function changeAccountSettings(event){
 		
 	$.post("/anycook/ChangeAccountSettings", newSettings,function(){
 		user = User.init();
+	});
+	
+}
+
+function changeMailSettings(){
+	var oldSettings = $("#settings_notification").data("mailsettings");
+	var newSettings = {};
+	for(var type in oldSettings){
+		var setting = $("#"+type+" input[type=\"checkbox\"]").attr("checked") ? true : false;
+		if(oldSettings[type] != setting)
+			newSettings[type] = setting;
+	}
+	
+	$.extend(oldSettings, newSettings);	
+	$("#settings_notification").data("mailsettings", oldSettings);
+	
+	$.post("/anycook/ChangeMailSettings", newSettings, function(){
+		console.log("saved mailsettings");
 	});
 	
 }
