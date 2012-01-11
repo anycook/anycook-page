@@ -538,26 +538,28 @@
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
 			<div class="settings_saved">gespeichert</div>
 			<div id="settings_account" class="settings">
-				<h2>Email-Adresse ändern:</h2>
-				<p>Deine E-Mail Adresse, unter der wir dich erreichen können.</p>
-				<input type="email" id="account_mail"/>
-				<h2>Passwort ändern:</h2>
-				<div id="old_password_container">
-					<p class="password_label">Gib dein altes Passwort ein.</p>
-					<input type="password" id="password_old"/>
-				</div>
-				<div id="new_password_container">
-					<p class="password_label">Gib dein neues Passwort ein.</p>
-					<input type="password" id="password_new"/>
-					<div id="showpassword">Passwort anzeigen</div>
-				</div>
-				<div id="password_secure"></div>
-				<!-- <h2>Standart Stichwörter hinzufügen:</h2>
-				<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
-				<div class="tagsbox"></div>
-				<p>Die bekanntesten Tags als Inspiration:</p>
-				<div id="tagcloud"></div> -->
-				<input type="submit" value="speichern"/>
+				<form id="mail_pass_form">
+					<h2>Email-Adresse ändern:</h2>
+					<p>Deine E-Mail Adresse, unter der wir dich erreichen können.</p>
+					<input type="email" id="account_mail"/>
+					<h2>Passwort ändern:</h2>
+					<div id="old_password_container">
+						<p class="password_label">Gib dein altes Passwort ein.</p>
+						<input type="password" id="password_old"/>
+					</div>
+					<div id="new_password_container">
+						<p class="password_label">Gib dein neues Passwort ein.</p>
+						<input type="password" id="password_new"/>
+						<div id="showpassword">Passwort anzeigen</div>
+					</div>
+					<div id="password_secure"></div>
+					<!-- <h2>Standart Stichwörter hinzufügen:</h2>
+					<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
+					<div class="tagsbox"></div>
+					<p>Die bekanntesten Tags als Inspiration:</p>
+					<div id="tagcloud"></div> -->
+					<input type="submit" value="speichern"/>
+				</form>
 			</div>
 			
 			<h2 class="border_headline">Erweiterte Einstellungen</h2>
