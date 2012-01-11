@@ -119,9 +119,7 @@ function changeMailSettings(){
 	
 	var oldSettings = $("#settings_notification").data("mailsettings");
 	var newSettings = {};
-	for(var type in oldSettings){
-		if(type == "tagdenied") continue;
-		
+	for(var type in oldSettings){		
 		var setting = $("#"+type+" input[type=\"checkbox\"]").attr("checked") ? true : false;
 		if(oldSettings[type] != setting)
 			newSettings[type] = setting;
@@ -139,9 +137,7 @@ function changeMailSettings(){
 function changeAllMailSettings(property){
 	var oldSettings = $("#settings_notification").data("mailsettings");
 	var newSettings = {};
-	for(var type in oldSettings){
-		if(type == "tagdenied") continue;
-		
+	for(var type in oldSettings){		
 		if(oldSettings[type] != property)
 			newSettings[type] = property;
 	}

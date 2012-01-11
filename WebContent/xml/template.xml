@@ -552,11 +552,11 @@
 					<div id="showpassword">Passwort anzeigen</div>
 				</div>
 				<div id="password_secure"></div>
-				<h2>Standart Stichwörter hinzufügen:</h2>
+				<!-- <h2>Standart Stichwörter hinzufügen:</h2>
 				<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
 				<div class="tagsbox"></div>
 				<p>Die bekanntesten Tags als Inspiration:</p>
-				<div id="tagcloud"></div>
+				<div id="tagcloud"></div> -->
 				<input type="submit" value="speichern"/>
 			</div>
 			
