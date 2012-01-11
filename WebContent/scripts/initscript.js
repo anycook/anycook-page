@@ -27,6 +27,9 @@
 	 				$.address.path("");
 	 				return false;
 	 			}
+	 			break;
+	 		case 404:
+	 			$.address.path("404");
 	 	}
 	 	return true;
 	 	

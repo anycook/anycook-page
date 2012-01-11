@@ -777,5 +777,8 @@
 			<h4>Ausgabe</h4>
 			<textarea readonly="readonly" class="code">{"recipes":["Spinat-Quiche","Kartoffelpuffer","Pfannkuchen mit Äpfeln","Quarkbuletten","Semmelknödel","Eierstich","Rührei mit Speck","Korsische Paprikaschoten"],"name":"Eierspeisen","recipenum":8}</textarea>
 		</div>
-	</template>			
+	</template>
+	<template id="404">
+		<h1>Fehler 404</h1>
+	</template>		
 </templates>

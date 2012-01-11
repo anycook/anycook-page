@@ -71,24 +71,30 @@
              if(data.settings.async == true)
             	 $xmlDoc = $.xml.loadXml(settings.xml);
              
-             $xmlDoc.find("template#"+contentName).each(function(){
-             	var access = $(this).attr("access");
-             	if(access){
-             		var event = $.Event("error", {type:403, access:access});
+             var $template = $xmlDoc.find("template#"+contentName).first();
+             if($template.length == 0){
+             	var event = $.Event("error", {type:404});
              		if(!data.settings.error.apply(data.target, [event]))
              			return;
-             	}
-             	
-             	var obj = $(this).clone().contents();
-                 var $div = $("<div/>").append(obj);
-                 
-                 //fixes bug with double br's
-                 $div.find("br").replaceWith("<br/>");
-                 $this.append($div.html());
-                 
-                 if(callback)
-                 	callback.apply($this.target);
-             });
+             }
+             
+             
+         	var access = $template.attr("access");
+         	if(access){
+         		var event = $.Event("error", {type:403, access:access});
+         		if(!data.settings.error.apply(data.target, [event]))
+         			return;
+         	}
+         	
+         	var obj = $template.clone().contents();
+             var $div = $("<div/>").append(obj);
+             
+             //fixes bug with double br's
+             $div.find("br").replaceWith("<br/>");
+             $this.append($div.html());
+             
+             if(callback)
+             	callback.apply($this.target);
     	});
     }
     
