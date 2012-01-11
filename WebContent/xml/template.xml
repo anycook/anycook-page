@@ -777,6 +777,10 @@
 		</div>
 	</template>
 	<template id="404">
-		<h1>Fehler 404</h1>
+		<div class="404img"></div>
+		<h1>Seite nicht gefunden</h1>
+		<p></p>
+		<div class="404recipes"></div>
+		<p><a href="/#!/?page=discover">Entdecke</a> weitere Rezepte oder erfahre mehr <a href="/#!/about_us">über uns</a>.</p>
 	</template>		
 </templates>
