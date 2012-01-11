@@ -574,6 +574,10 @@
 					<td>...wenn meine Stichwörter aktiviert werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
 				</tr>
+				<tr id="tagdenied">
+					<td>...wenn meine Stichwörter abgelehnt werden.</td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGDENIED" /><label></label></div></td>
+				</tr>
 				<tr id="recipediscussion">
 					<td>...bei Diskussionsbeiträgen zu meinem Rezept.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /><label></label></div></td>

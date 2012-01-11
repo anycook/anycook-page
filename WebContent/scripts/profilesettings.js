@@ -76,6 +76,7 @@ function toggleMailSettings(){
 		$content.animate({height:0}, {duration:700,easing:"easeInQuad", complete:function(){
 			$(this).hide().css("height", "");
 			$smallCheckboxes.attr("checked", "");
+			changeAllMailSettings(false);
 		}});
 	}else{
 		var oldHeight = $content.height();
@@ -83,8 +84,10 @@ function toggleMailSettings(){
 		$content.animate({height:oldHeight}, {duration:700,easing:"easeOutQuad", complete:function(){
 			$(this).show().css("height", "");
 			$smallCheckboxes.attr("checked", "checked");
+			changeAllMailSettings(true);
 		}});
 	}
+	
 }
 
 function completeUserUpload(){
@@ -113,9 +116,12 @@ function changeAccountSettings(event){
 }
 
 function changeMailSettings(){
+	
 	var oldSettings = $("#settings_notification").data("mailsettings");
 	var newSettings = {};
 	for(var type in oldSettings){
+		if(type == "tagdenied") continue;
+		
 		var setting = $("#"+type+" input[type=\"checkbox\"]").attr("checked") ? true : false;
 		if(oldSettings[type] != setting)
 			newSettings[type] = setting;
@@ -128,4 +134,22 @@ function changeMailSettings(){
 		console.log("saved mailsettings");
 	});
 	
+}
+
+function changeAllMailSettings(property){
+	var oldSettings = $("#settings_notification").data("mailsettings");
+	var newSettings = {};
+	for(var type in oldSettings){
+		if(type == "tagdenied") continue;
+		
+		if(oldSettings[type] != property)
+			newSettings[type] = property;
+	}
+	
+	$.extend(oldSettings, newSettings);	
+	$("#settings_notification").data("mailsettings", oldSettings);
+	
+	$.post("/anycook/ChangeMailSettings", newSettings, function(){
+		console.log("saved mailsettings");
+	});
 }
