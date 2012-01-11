@@ -780,7 +780,7 @@
 			<textarea readonly="readonly" class="code">{"recipes":["Spinat-Quiche","Kartoffelpuffer","Pfannkuchen mit Äpfeln","Quarkbuletten","Semmelknödel","Eierstich","Rührei mit Speck","Korsische Paprikaschoten"],"name":"Eierspeisen","recipenum":8}</textarea>
 		</div>
 	</template>
-	<template id="404">
+	<template id="notfound">
 		<div class="404img"></div>
 		<h1>Seite nicht gefunden</h1>
 		<p></p>
