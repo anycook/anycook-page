@@ -67,7 +67,9 @@
 	    	<div id="recipe_info">
 				<h1 id="recipe_headline"></h1>
 				<p id="autoren">von <span></span></p>
-				<div id="introduction"></div>
+				<div id="introductionposition">
+					<div id="introduction"></div>
+				</div>
 			</div>
 			<ul id="step_container"></ul>
 		</div>
@@ -348,7 +350,7 @@
 					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volu ptua. At vero eos et accusam et jLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
 					</p>
 				</div>
-				<a id="weimarmap" href="http://maps.google.com/maps?q=Karl-Liebknecht-Stra%C3%9Fe+7,+Weimar,+Deutschland&amp;hl=de&amp;ie=UTF8&amp;ll=50.983154,11.325617&amp;spn=0.011874,0.033023&amp;sll=50.939123,11.583671&amp;sspn=0.011885,0.033023&amp;vpsrc=6&amp;hnear=Karl-Liebknecht-Stra%C3%9Fe+7,+Deutschland&amp;t=m&amp;z=16" target="_blank"><img class="googlemap" src="http://maps.google.com/maps/api/staticmap?center=Weimar&amp;zoom=13&amp;size=270x230&amp;maptype=roadmap&amp;sensor=false&amp;style=feature:poi|element:labels|visibility:off&amp;style=feature:administrative.neighborhood|element:labels|visibility:off&amp;style=feature:road.arterial|element:labels|visibility:off&amp;style=feature:road|element:labels|visibility:off&amp;style=feature:transit.station.rail|visibility:off"/><img class="mapoverlay" src="/img/maplayer.png"/></a>
+				<a id="weimarmap" href="http://maps.google.com/maps?q=Karl-Hau%C3%9Fknecht-Stra%C3%9Fe+7,+Weimar,+Deutschland&amp;hl=de&amp;ie=UTF8&amp;sll=50.974082,11.326454&amp;sspn=0.005938,0.016512&amp;vpsrc=0&amp;hnear=Karl-Hau%C3%9Fknecht-Stra%C3%9Fe+7,+99423+Weimar,+Th%C3%BCringen,+Deutschland&amp;t=m&amp;z=16" target="_blank"><img class="googlemap" src="http://maps.google.com/maps/api/staticmap?center=Weimar&amp;zoom=13&amp;size=268x230&amp;maptype=roadmap&amp;sensor=false&amp;style=feature:poi|element:labels|visibility:off&amp;style=feature:administrative.neighborhood|element:labels|visibility:off&amp;style=feature:road.arterial|element:labels|visibility:off&amp;style=feature:road|element:labels|visibility:off&amp;style=feature:transit.station.rail|visibility:off"/><img class="mapoverlay" src="/img/maplayer.png"/></a>
 			</div>
 			<div class="row">
 				<div class="column right">
