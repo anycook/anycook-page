@@ -787,7 +787,7 @@
 		<div class="notfound_content">
 			<img src="/img/404.png" alt="404" class="404img" />
 			<h1>Seite nicht gefunden</h1>
-			<p>Suchst du vielleicht ein leckeres Rezept?</p>
+			<p>Diese Seite existiert nicht mehr, gab es nie oder wurde geklaut. Suchst du vielleicht ein leckeres Rezept?</p>
 			<div class="404recipes"></div>
 			<p><a href="/#!/?page=discover">Entdecke</a> weitere Rezepte oder erfahre mehr <a href="/#!/about_us">über uns</a>.</p>
 		</div>
