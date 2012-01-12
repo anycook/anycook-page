@@ -118,6 +118,8 @@ function changeAccountSettings(event){
 		
 	$.post("/anycook/ChangeAccountSettings", newSettings,function(){
 		user = User.init();
+		var $container = $("#profile_saved");		
+		settingsSaved($container);
 	});
 	
 }
@@ -136,7 +138,7 @@ function changeMailSettings(){
 	$("#settings_notification").data("mailsettings", oldSettings);
 	
 	$.post("/anycook/ChangeMailSettings", newSettings, function(){
-		var $container = $("#settings_content .settings_saved");		
+		var $container = $("#notification_saved");		
 		settingsSaved($container);
 	});
 	
@@ -154,13 +156,13 @@ function changeAllMailSettings(property){
 	$("#settings_notification").data("mailsettings", oldSettings);
 	
 	$.post("/anycook/ChangeMailSettings", newSettings, function(){
-		var $container = $("#settings_content .settings_saved");		
+		var $container = $("#notification_saved");		
 		settingsSaved($container);
 	});
 }
 
 function settingsSaved($container){
-	$container.stop().fadeIn(500, function(){
+	$container.stop(true).fadeIn(500, function(){
 		$container.delay(2000).fadeOut(500);
 	})
 }

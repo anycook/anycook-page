@@ -501,7 +501,7 @@
 	<template id="settings" access="restricted">
 		<div id="settings_container">
 			<h2 class="border_headline">Profileinstellungen</h2>
-			<div class="settings_saved">gespeichert</div>
+			<div id="profile_saved" class="settings_saved">gespeichert</div>
 			<div id="settings_content" class="settings profile_container">
 					<div class="profile_image image_container">
 						<div class="image_layer"></div>
@@ -536,7 +536,7 @@
 					</form>
 			</div>
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
-			<div class="settings_saved">gespeichert</div>
+			<div id="mail_pwd_saved" class="settings_saved">gespeichert</div>
 			<div id="settings_account" class="settings">
 				<form id="mail_pass_form">
 					<h2>Email-Adresse ändern:</h2>
@@ -563,7 +563,7 @@
 			</div>
 			
 			<h2 class="border_headline">Erweiterte Einstellungen</h2>
-			<div class="settings_saved">gespeichert</div>
+			<div id="notification_saved" class="settings_saved">gespeichert</div>
 			<div id="settings_notification" class="settings">
 				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_notification_content" class="settings_content">
