@@ -676,7 +676,7 @@ function getCurrentStepIngredients(){
 }
 
 function getIngredientQuestion(ingredient){
-	var $span = $("<span></span>").text(ingredient+"?").addClass("new_ingredient_question");
+	var $span = $("<span></span>").text(ingredient+"auch zu diesem Schritt hinzufügen?").addClass("new_ingredient_question");
 	var $spanJa =  $("<span></span>").text("Ja").addClass("yes")
 		.click(function(event){
 			var $this = $(this);
