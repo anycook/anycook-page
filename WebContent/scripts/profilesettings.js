@@ -104,10 +104,17 @@ function changeAccountSettings(event){
 	
 	var newSettings = {};
 	
-	var newPlace = $("#account_place").val();
-	
-	if(newPlace != "" && newPlace != user.place)
-		newSettings["place"] = newPlace;
+	var newPlace = $("#account_place").val();	
+	if(newPlace != user.place)
+		newSettings.place = newPlace;
+		
+	var newName = $("#account_name").val();
+	if(newName != "" && newName != user.name)
+		newSettings.username = newName;
+		
+	var newText = $("#account_aboutme").val();
+	if(newText != user.text)
+		newSettings.text = newText;
 		
 	$.post("/anycook/ChangeAccountSettings", newSettings,function(){
 		user = User.init();

@@ -29,7 +29,7 @@
 	 			}
 	 			break;
 	 		case 404:
-	 			$.address.path("404");
+	 			$.address.path("notfound");
 	 	}
 	 	return true;
 	 	
