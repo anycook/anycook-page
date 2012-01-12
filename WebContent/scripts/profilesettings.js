@@ -136,7 +136,8 @@ function changeMailSettings(){
 	$("#settings_notification").data("mailsettings", oldSettings);
 	
 	$.post("/anycook/ChangeMailSettings", newSettings, function(){
-		console.log("saved mailsettings");
+		var $container = $("#settings_content .settings_saved");		
+		settingsSaved($container);
 	});
 	
 }
@@ -153,6 +154,13 @@ function changeAllMailSettings(property){
 	$("#settings_notification").data("mailsettings", oldSettings);
 	
 	$.post("/anycook/ChangeMailSettings", newSettings, function(){
-		console.log("saved mailsettings");
+		var $container = $("#settings_content .settings_saved");		
+		settingsSaved($container);
 	});
+}
+
+function settingsSaved($container){
+	$container.stop().fadeIn(500, function(){
+		$container.delay(2000).fadeOut(500);
+	})
 }
