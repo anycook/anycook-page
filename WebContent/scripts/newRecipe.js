@@ -677,15 +677,15 @@ function getCurrentStepIngredients(){
 
 function getIngredientQuestion(ingredient){
 	var $span = $("<span></span>").text(ingredient+" auch zu diesem Schritt hinzufügen?").addClass("new_ingredient_question");
-	var $spanJa =  $("<span></span>").text("Ja").addClass("yes")
+	var $spanJa =  $("<a></a>").text("Ja").addClass("yes")
 		.click(function(event){
 			var $this = $(this);
-			var ingredient = $this.prev().text();
-			ingredient = ingredient.substring(0, ingredient.length -1);
+			// var ingredient = $this.prev().text();
+			// ingredient = ingredient.substring(0, ingredient.length -35);
 			addNewStepIngredient($this.parents(".new_ingredient_step"), ingredient);
 			removeIngredientQuestion.apply($this);
 		});
-	var $spanNein =  $("<span></span>").text("Nein").addClass("no")
+	var $spanNein =  $("<a></a>").text("Nein").addClass("no")
 		.click(removeIngredientQuestion);
 	
 	var $li = $("<li></li>").addClass("ingredient_question")
