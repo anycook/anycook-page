@@ -124,6 +124,10 @@ function changeAccountSettings(event){
 	
 }
 
+function changeMailPwdSettings(){
+	
+}
+
 function changeMailSettings(){
 	
 	var oldSettings = $("#settings_notification").data("mailsettings");
