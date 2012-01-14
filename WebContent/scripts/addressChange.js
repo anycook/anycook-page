@@ -144,7 +144,7 @@ function handleChange(event){
 					showRegistration();
 					break;
 				case "settings":
-					loadSettings();
+					$.anycook.user.settings.load();
 					break;
 				case "developer":
 					$.address.title("Entwickler | anycook");

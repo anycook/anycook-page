@@ -544,7 +544,7 @@
 					<h2>Email-Adresse ändern:</h2>
 					<p>Deine E-Mail Adresse, unter der wir dich erreichen können.</p>
 					<input type="email" id="account_mail"/>
-					<div id="mail_validation"></div>
+					<div id="mail_validation">Dies ist keine gültige Emailaddresse</div>
 					<h2>Passwort ändern:</h2>
 					<div id="old_password_container">
 						<p class="password_label">Gib dein altes Passwort ein.</p>
