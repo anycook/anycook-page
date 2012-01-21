@@ -5,11 +5,9 @@ function loadMessagesession(sessionid){
 	$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
 	$messageAnswer.find("textarea").autoGrow();
 	
-	$.ajax({
-		url:"/anycook/GetMessageSession",
-		data:{sessionid:sessionid},
-		dataType:"json",
-		success: function(json){
+	$.getJson("/anycook/GetMessageSession",
+		{sessionid:sessionid},
+		function(json){
 			var recipients = json.recipients;
 			var $recipientSpan = $("h1 span").last();
 			for(var i = 0; i<recipients.length; i++){
@@ -29,16 +27,8 @@ function loadMessagesession(sessionid){
 					
 				$recipientSpan.append($a);
 			}
-			//var $messagestream = $("#messagestream");
-			//for(var i in json.messages){
-			//	$messagestream.append(getMessageContainerforSession(json.messages[i], recipientsMap));
-			//}
-			
-			// var path = $.address.pathNames();
-			// if(path[0] == "messagesession" && path[1] == sessionid)
-				// getMessageSession(sessionid);
 		}
-	});
+	);
 	
 	$("#messagestream").jScrollPane();
 	getMessages(sessionid);

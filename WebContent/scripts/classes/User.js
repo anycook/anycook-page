@@ -31,7 +31,6 @@ User.init = function(){
 				user.text = response.text;
 				user.following = response.following;
 				user.place = response.place;
-				checkNewMessageNum();
 			}
 				
 		}
@@ -124,7 +123,7 @@ User.login = function(mail, pwd, stayloggedin){
 		async: false,
 		success:function(response){
 			callback = response!="false";
-			checkNewMessageNum();
+			// checkNewMessageNum();
 	}
 	});
 	

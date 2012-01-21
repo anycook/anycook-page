@@ -81,39 +81,40 @@ function loadNewsstream(){
 var isCheckingMessageNum = false;
 
 function checkNewMessageNum(lastnum){
-	if(isCheckingMessageNum)
+	if(isCheckingMessageNum || !user.checkLogin())
 		return;
 	
 	isCheckingMessageNum = true;
 	
 	if(!lastnum)
 		lastnum = 0;
-	$.ajax({
-		url:"/anycook/GetNotificationNumbers",
-		data:{lastnum:lastnum},
-		success:function(newNum){
-			
+	$.getJSON("/anycook/GetNotificationNumbers",{lastnum:lastnum},
+		function(json){
 			isCheckingMessageNum = false;
-			if(newNum != "false" && user.checkLogin()){
-				var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
-				newNum = Number(newNum);
-				if(lastnum == 0 && newNum > 0)
-					$newMessageBubble.fadeIn();
-				else if(newNum == 0)
-					$newMessageBubble.fadeOut();
-				$newMessageBubble.children().text(newNum);
+			var newNum = lastnum;
+			if(json != null){
+				newNum = json.notificationnumber;
+				if(user.checkLogin()){
+					var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
+					if(lastnum == 0 && newNum > 0)
+						$newMessageBubble.fadeIn();
+					else if(newNum == 0)
+						$newMessageBubble.fadeOut();
+					$newMessageBubble.children().text(newNum);
+					
+					if($.address.pathNames()[0] == "newsstream")
+						loadNewsstream();
+				}
 				
-				if($.address.pathNames()[0] == "newsstream")
-					loadNewsstream();
-				
-				setTimeout("checkNewMessageNum("+newNum+")", 1000);
+			
 			}
-		},
-		error: function(error){
-			console.log("error loading messageNum. trying again in 10 sec");
-			setTimeout("checkNewMessageNum(0)", 10000);
-		}
-	});
+			setTimeout("checkNewMessageNum("+newNum+")", 1000);
+		});
+		// error: function(error){
+			// console.log("error loading messageNum. trying again in 10 sec");
+			// setTimeout("checkNewMessageNum(0)", 10000);
+		// }
+	// });
 }
 
 function clickRecipients(){

@@ -23,7 +23,7 @@ function makeUsermenuText(){
 	
 	$(document).click(hideUserMenu).scroll(hideUserMenu);
 	
-	//checkNewMessageNum();
+	checkNewMessageNum();
 	
 	// $("#signin_btn span").text("Konto");
 // 	
