@@ -48,7 +48,7 @@
 		var $db = settings.$db;
 		$db.view("drafts/num", {key:"anycook_"+user.id,success:function(json){
 			var num = json.rows.length == 1 ? json.rows[0].value : 0;
-			$("#drafts span").text(num);
+			$("#drafts #draftnum").text(num);
 			var $messageBubble = $("#settings_btn_container .new_messages_bubble");
 			if(num>0)			
 				$messageBubble.fadeIn(200).children().text(num);
