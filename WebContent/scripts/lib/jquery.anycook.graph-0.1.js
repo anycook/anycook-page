@@ -114,8 +114,8 @@
 		var dfd = $.Deferred();
 		
 		var graph = "/user";
-		if(userid)
-			graph+="/"+userid;
+		if(userid !== undefined)
+			graph+=("/"+userid);
 		$.when($.anycook.graph._getJSON(graph)).then(function(json){
 			dfd.resolve(json);
 			if(callback)

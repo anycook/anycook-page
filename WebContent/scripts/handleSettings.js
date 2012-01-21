@@ -100,10 +100,10 @@ function saveAccountSettings(event){
 		newData+="username="+username;
 		user.name = username;
 	}
-	if(mail!=user.mail){
-		newData+="&mail="+mail;
-		user.mail = mail;
-	}
+	// if(mail!=user.mail){
+		// newData+="&mail="+mail;
+		// user.mail = mail;
+	// }
 	if(text!=user.text){
 		newData+="&text="+text;
 		user.text = text;
@@ -147,6 +147,8 @@ function togglePasswordField(event){
 	}
 	$pass.first().remove();
 }
+
+function 
 
 /*function settingsOpen(event){
 	var newheight;

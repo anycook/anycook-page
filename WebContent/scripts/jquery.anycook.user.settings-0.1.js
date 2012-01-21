@@ -175,17 +175,47 @@
 	
 	$.anycook.user.settings.changeMailPwd = function(event){
 		event.preventDefault();
+		var mailPwd = {};
+		
+		
 		var mail = $("#account_mail").val();
 		if(!$.anycook.user.settings.checkMail(mail)){
 			$("#mail_validation").animate({opacity:1}, {duration:500, complete:function(){
 				$(this).delay(2000).animate({opacity:0}, 500);
 			}});
+		}else{
+			if(user.mail != mail)
+				mailPwd.mail = mail;
 		}
+		
+		var oldPw = $("#password_old").val();
+		var newPw = $("#password_new").val();
+		
+		if(oldPw.length > 0 || newPw.length > 0){
+			if(!$.anycook.user.settings.checkPwd(newPw)){
+				$("#pwd_validation").animate({opacity:1}, {duration:500, complete:function(){
+					$(this).delay(2000).animate({opacity:0}, 500);
+				}});
+			}else{
+				mailPwd.oldpw = oldPw;
+				mailPwd.newpw = newPw;
+			}
+		}
+		
+		$.post("/anycook/ChangeAccountSettings", mailPwd, function(){
+			var $container = $("#mail_pwd_saved");		
+			$.anycook.user.settings.saved($container);
+		});
 	};
 	
 	$.anycook.user.settings.checkMail = function(mail){
 		var regex = /^(([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+)?$/;
 		return regex.test(mail);
+	};
+	
+	$.anycook.user.settings.checkPwd = function(pwd){
+		var regex = /((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/;
+		return regex.test(pwd);
 	}
 	
 })(jQuery);

@@ -266,7 +266,7 @@ function changePage(event){
 	case 0:
 		switch(page){
 		case "discover":
-			$("#home").hide();
+			$("#site1").hide();
 			if($("#discover").length==0){
 				$("#content_main").xml("append", "home_discover");
 				loadDiscover();
