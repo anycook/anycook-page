@@ -32,7 +32,7 @@
 	}
 	
 	li:last-child .frame_big.draft{
-		border-bottom: 1px solid @shadowbeige;
+		border-bottom: 1px solid $shadowbeige;
 	}
 	
 	.frame_big.draft{
@@ -41,13 +41,13 @@
 		
 		.date_container{
 			.year{
-				color: @smalllightfontcolor;
+				color: $smalllightfontcolor;
 			}
 			
 			.percent{
 				bottom: 17px;
 				position: absolute;
-				color: @smalllightfontcolor;
+				color: $smalllightfontcolor;
 			}
 			
 		}
@@ -72,12 +72,12 @@
 			right:0;
 			opacity: 0;
 			background-position: 0 -27px;
-			.transition(opacity, .1s, ease-out);
+			@include transition(opacity, .1s, ease-out);
 		}
 		&:hover{
 			span{
 				opacity: 1;
-				.transition(opacity, .1s, ease-out);
+				@include transition(opacity, .1s, ease-out);
 			}
 		}
 	}

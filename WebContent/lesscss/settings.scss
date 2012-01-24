@@ -1,7 +1,7 @@
 .settings_saved{
 		float: right;
 		margin: -20px 10px 0 0;
-		color: @smalllightfontcolor;
+		color: $smalllightfontcolor;
 		display:none;
 }
 
@@ -10,8 +10,8 @@
 		
 	/*account_image{
 		float: left;
-		border: 8px solid @stepcolor;
-		outline: 1px solid @lightgrey;
+		border: 8px solid $stepcolor;
+		outline: 1px solid $lightgrey;
 		width: 200px;	
 	}*/
 	
@@ -128,11 +128,11 @@
 		}
 				
 		/*var for position*/
-		@bigcheckboxposition: 17px; 
+		$bigcheckboxposition: 17px; 
 		
 		input{
 				position:absolute;
-				right: @bigcheckboxposition;
+				right: $bigcheckboxposition;
 				opacity: 0;
 				width: 16px;
 				height: 16px;
@@ -150,7 +150,7 @@
 		
 		input + .bigcheckbox{
 			position:absolute;
-			right: @bigcheckboxposition;
+			right: $bigcheckboxposition;
 			width: 22px;
 			height: 22px;
 			background-image: url("/img/bigcheckbox22x22.png");
@@ -164,8 +164,8 @@
 }
 	
 #mail_notification{
-		background-color:@stepcolor;
-		border: 1px solid @lightbrown;
+		background-color:$stepcolor;
+		border: 1px solid $lightbrown;
 }
 
 #fb_notification{
@@ -182,18 +182,18 @@
 		z-index: 1;
 		width: 430px;
 		margin: 0 0 5px 5px;
-		background-color:@imginnerbordercolor;
-		border:1px solid @lightbrown;
+		background-color:$imginnerbordercolor;
+		border:1px solid $lightbrown;
 		border-top: 0;
-		.border-radius(0px, 0px, 5px, 5px);
+		@include border-radius(0px, 0px, 5px, 5px);
 		
 		table{
 			width: 100%;
-			color: @darkfontcolor;
+			color: $darkfontcolor;
 			border-collapse: collapse;
 			
 			tr{
-				border-bottom:1px solid @lightbrown;
+				border-bottom:1px solid $lightbrown;
 				line-height: 37px;
 									
 				td{

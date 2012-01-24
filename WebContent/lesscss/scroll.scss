@@ -12,7 +12,7 @@
 	&:hover{		
 		.jspDrag{
 			opacity:0.7;
-			.transition(opacity, .3s, ease-in-out);
+			@include transition(opacity, .3s, ease-in-out);
 		}
 	}
 	
@@ -75,9 +75,9 @@
 
 .jspDrag
 {
-	background: @darkergrey;
+	background: $darkergrey;
 	opacity: 0;
-	.transition(opacity, .3s, ease-in-out);
+	@include transition(opacity, .3s, ease-in-out);
 	position: relative;
 	top: 0;
 	left: 0;

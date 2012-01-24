@@ -1,9 +1,9 @@
 
-@import "bootstrap";
-@import "functions";
-@import "colors";
-@import "fonts";
-@import "lengths";
+
+@import "lib/functions";
+@import "lib/colors";
+@import "lib/fonts";
+@import "lib/lengths";
 @import "global";
 @import "lightbox";
 @import "search";
@@ -30,7 +30,7 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 }
 
 body{
-	font: @standardfont;
+	font: $standardfont;
 	overflow-y: scroll;
 }
 
@@ -75,19 +75,19 @@ header{
 		}
 		
 		#searchbar{
-			@height: 28px;
-			@width: 368px;
+			$height: 28px;
+			$width: 368px;
 			float:left;
 			margin: 22px 0 0 128px;
-			width: @width;
-			height: @height;
+			width: $width;
+			height: $height;
 			background-color:white;
-			border: 1px solid @searchbarborder;
-			.box-shadow(1px, 2px, 3px, rgba(0,0,0,0.15));
+			border: 1px solid $searchbarborder;
+			@include box-shadow(1px, 2px, 3px, rgba(0,0,0,0.15));
 			
 			#loupe{
 				float:left;
-				margin: ( @height - 14px ) / 2 8px;
+				margin: ( $height - 14px ) / 2 8px;
 				width:14px;
 				height: 14px;
 				background: url("/img/loupe.png") no-repeat;		
@@ -97,15 +97,15 @@ header{
 				height:100%;
 				float:left;
 				#search{
-					font: @searchbarfont;
-					color: @darkgrey;
+					font: $searchbarfont;
+					color: $darkgrey;
 					float:left;
 					height:	100%;
 					width:310px;
 					border:0;
 					border-radius:0;
 					padding:0;
-					.no-box-shadow();
+					@include no-box-shadow();
 					background-color:white;
 					
 				}
@@ -125,15 +125,15 @@ header{
 			#search_reset{
 				width:9px;
 				height:9px;
-				margin: ( @height - 9px ) / 2 8px;
+				margin: ( $height - 9px ) / 2 8px;
 				float:left;
 				background:url("/img/searchreset.png") no-repeat;
 				opacity:.0;
-				.transition(opacity, 0.3s, ease-out);
+				@include transition(opacity, 0.3s, ease-out);
 				&.on{
 					opacity:1.0;
 					cursor:pointer;
-					.transition(opacity, 0.3s, ease-in);
+					@include transition(opacity, 0.3s, ease-in);
 				}
 			}
 		}
@@ -144,18 +144,18 @@ header{
 			cursor:pointer;
 		
 			#signin_btn{
-				background: @headergreen;
-				.transition(background, 0.1s, ease-out);
+				background: $headergreen;
+				@include transition(background, 0.1s, ease-out);
 				width:97px;
 				height: 26px;
 				float: left;
-				border: 1px solid @darkgreencontour;
+				border: 1px solid $darkgreencontour;
 				border-radius: 4px;
 				box-shadow:0px 1px 0px #b2c77d;
 				
 				&:hover{
-					background: @headergreenbright;
-					.transition(background, 0.1s, ease-in);					
+					background: $headergreenbright;
+					@include transition(background, 0.1s, ease-in);					
 				}
 				
 				
@@ -170,7 +170,7 @@ header{
 				#login_text{
 					margin: 5px 0 0 31px;
 					font-size: 8pt;
-					color: @darkgreencontour;
+					color: $darkgreencontour;
 					text-shadow: 1px 1px 0px #b2c77d;
 				}
 			}
@@ -194,7 +194,7 @@ header{
 					background-repeat: no-repeat;
 					background-position: 0px -25px;
 					opacity: 0;
-					.transition(opacity, 0.1s, ease-out);
+					@include transition(opacity, 0.1s, ease-out);
 					display: block;
 				}
 				
@@ -235,7 +235,7 @@ header{
 				&:hover{
 					span{
 						opacity:1;
-						.transition(opacity, 0.1s, ease-in);
+						@include transition(opacity, 0.1s, ease-in);
 					}
 				}
 				
@@ -264,9 +264,9 @@ header{
 					min-width:10px;
 					text-align: center;
 					right:9px;
-					.box-shadow-inset(0px, 0px, 2px, #f29f9f);
+					@include box-shadow-inset(0px, 0px, 2px, #f29f9f);
 					font-family: Arial, "Lucida Sans Unicode","Lucida Grande",sans-serif;
-					.box-shadow(0, 1px, 4px, rgba(0,0,0,0.31));
+					@include box-shadow(0, 1px, 4px, rgba(0,0,0,0.31));
 					
 				}
 				
@@ -279,19 +279,19 @@ header{
 		
 		#login_container{
 			float:right;
-			@width:475px - 100;
-			@height:285px  - 60;
-			@headheight: 40px;
-			width:@width ;
-			height:@height;
-			@background-color: white;
-			background-color: @background-color;
+			$width:475px - 100;
+			$height:285px  - 60;
+			$headheight: 40px;
+			width:$width ;
+			height:$height;
+			$background-color: white;
+			background-color: $background-color;
 			margin-top:30px;
 			clear: right;
 			padding: 30px 40px 30px 40px; 
 			
 			.head{
-				height:@headheight;
+				height:$headheight;
 				h1{
 					float:left;
 				}
@@ -302,8 +302,8 @@ header{
 			}
 			
 			.content{
-				width:@width;
-				height: @height - @headheight;
+				width:$width;
+				height: $height - $headheight;
 				
 				.left{
 					float:left;
@@ -311,7 +311,7 @@ header{
 					width:160px;
 					
 					p{
-						color: @smalllightfontcolor;
+						color: $smalllightfontcolor;
 						margin-bottom:40px;
 					}
 					
@@ -353,14 +353,14 @@ header{
 					.line{
 						width:50%;
 						height: 100%;
-						border-right: 1px solid @lightgrey;
+						border-right: 1px solid $lightgrey;
 					}
 					.oder{
 						position:absolute;
 						top:55px;
-						background-color: @background-color;
+						background-color: $background-color;
 						padding: 5px 0;
-						color: @smalllightfontcolor;
+						color: $smalllightfontcolor;
 						font-style: italic;
 					}
 				}
@@ -388,7 +388,7 @@ header{
 						}
 						
 						div{
-							color:@smalllightfontcolor;
+							color:$smalllightfontcolor;
 							cursor: pointer;
 						}
 					}
@@ -411,29 +411,29 @@ header{
 #main{
 	width:100%;
 	float:left;
-	@top:@headercontentheight + 25;
-	top:@top;
-	.transition(top, .7s, ease-in-out);
+	$top:$headercontentheight + 25;
+	top:$top;
+	@include transition(top, .7s, ease-in-out);
 	position:relative;
-	background-color:@background;
+	background-color:$background;
 	min-height: 600px;
 	margin-bottom:30px;
 	
 	&.down{
-		top:@top + 285;
-		.transition(top, .7s, ease-in-out);
+		top:$top + 285;
+		@include transition(top, .7s, ease-in-out);
 	}
 	
 	#right{
 		position: absolute;
 		margin-top:-27px;
-		margin-left: @containerwidth / 2;
-		background:url("/img/right_stripes.png") repeat-y @background-right;
+		margin-left: $containerwidth / 2;
+		background:url("/img/right_stripes.png") repeat-y $background-right;
 		height:100%;
 		left:50%;
 		z-index:15;
 		padding-bottom:27px;
-		.box-shadow-inset(0, 3px, 3px, rgba(0,0,0,0.1));
+		@include box-shadow-inset(0, 3px, 3px, rgba(0,0,0,0.1));
 		
 		#right_edge{
 			position:absolute;
@@ -459,10 +459,10 @@ header{
 		z-index:10;
 		position:relative;
 		float: left;
-		width: @containerwidth;
+		width: $containerwidth;
 		margin-left: -508px;
 		overflow-x:visible;
-		background: url("/img/buchmitte.png") repeat-y @background;
+		background: url("/img/buchmitte.png") repeat-y $background;
 		background-position: 285px 0;
 		
 		#buchmitte_top{
@@ -470,11 +470,11 @@ header{
 			height:40px;
 			position: absolute;
 			left:285px;
-			background: url("/img/buchmitte_top.png") no-repeat @background;
+			background: url("/img/buchmitte_top.png") no-repeat $background;
 		}
 		
 		#peak_bottom{
-			background:url("/img/peak_bottom.png") no-repeat @background;
+			background:url("/img/peak_bottom.png") no-repeat $background;
 			width: 108px;
 			height: 46px;
 			position:absolute;
@@ -490,7 +490,7 @@ header{
 			padding-top:15px;
 			width:100%;
 			color:white;
-			font:@standardfont;
+			font:$standardfont;
 			float:left;
 			margin: 20px 0 0 0;
 			font-size: 9pt;
@@ -513,24 +513,24 @@ header{
 		
 		
 		#container_head{
-			@height:36px;
+			$height:36px;
 			width:100%;
 			position:absolute;
-			height:@height;
+			height:$height;
 			top:-36px;
 			
 			#container_head_peak{
 					float:left;
 					position:relative;				
 					background:url("/img/peak.png") no-repeat;
-					height:@height;
+					height:$height;
 					width:94px;
 					left:241px;
 			}
 			
 			#container_head_left, #container_head_right{
 				position:absolute;
-				height:@height;
+				height:$height;
 				background:url("/img/header_shadow.png") repeat-x;
 				float:left;
 				width:2000px;
@@ -557,8 +557,8 @@ header{
 				float: left;
 				background: url("/img/filter_bg.png") repeat-y;
 				margin: 6px 0 0 15px;
-				@width: 268px;
-				width:@width;
+				$width: 268px;
+				width:$width;
 				
 				
 				#filter_head{
@@ -601,8 +601,8 @@ header{
 					float:left;
 					background-color: #F9F8F6;
 					margin: 0 5px;
-					@width:@width - 10;
-					width:@width;
+					$width:$width - 10;
+					width:$width;
 					
 					#userfilter{
 						background-color: #ECE9E3;
@@ -646,19 +646,19 @@ header{
 					
 					#kategorie_filter{
 						margin-top:10px;
-						@bordercolor: @kategorieborder;
+						$bordercolor: $kategorieborder;
 						
 						
 						#kategorie_head{
-							background: @stepcolor;
+							background: $stepcolor;
 							background-position:0 30px;
 							text-align: center;
-							font:@headlinefont;
-							color: @darkfontcolor;
+							font:$headlinefont;
+							color: $darkfontcolor;
 							font-style: italic;
 							padding:5px;
 							cursor: pointer;
-							border: 1px solid @bordercolor;
+							border: 1px solid $bordercolor;
 							border-right: 0;
 							border-left: 0;
 							
@@ -682,10 +682,10 @@ header{
 							top:-10px;
 							position:relative;
 							overflow: hidden;
-							background-color: @kategoriehead;
+							background-color: $kategoriehead;
 							ul{
 								cursor: default;
-								color:@darkfontcolor;
+								color:$darkfontcolor;
 								font-size: 10pt;
 								width:100%;
 								position: absolute;
@@ -701,18 +701,18 @@ header{
 									
 									.right{
 										float:right;
-										color:@smalllightfontcolor;
+										color:$smalllightfontcolor;
 									}
 									
 									&:hover{
 										.left{
-											color:@smalllightfontcolor;
+											color:$smalllightfontcolor;
 										}
 									}
 								}
 								
 								li+li{
-									border-top: 1px solid @bordercolor;
+									border-top: 1px solid $bordercolor;
 								}
 							
 							}
@@ -792,27 +792,27 @@ header{
 						}
 						
 						#ingredient_list {
-							@width: 230px;
-							width:@width;
+							$width: 230px;
+							width:$width;
 							float:left;
-							background-color: @filterinputbackground;
+							background-color: $filterinputbackground;
 							list-style: none;
-							border:1px solid @lightgrey;
+							border:1px solid $lightgrey;
 							border-radius: 5px;
 							margin-top:7px;
 							padding-bottom:20px;
-							.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
+							@include box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
 							font-size: 11pt;
 							font-style: italic;
-							color: @smalllightfontcolor;
+							color: $smalllightfontcolor;
 							cursor: text;
 							
 							
 							li{
 								min-height:18px;
 								float:left;
-								width:@width - 10px;
-								border-bottom: 1px solid @lightgrey;
+								width:$width - 10px;
+								border-bottom: 1px solid $lightgrey;
 								padding: 3px 4px 0;
 								
 								.ingredient{
@@ -828,7 +828,7 @@ header{
 								input{
 									float:left;
 									background:none;
-									.no-box-shadow();
+									@include no-box-shadow();
 									border:0;
 									border-radius: 0;
 									padding:0;
@@ -872,16 +872,16 @@ header{
 							padding: 5px 3px 1px;
 							float: left;
 							margin-top: 7px;
-							@width: 230px - 6px;
-							width: @width;
-							background-color: @filterinputbackground;
+							$width: 230px - 6px;
+							width: $width;
+							background-color: $filterinputbackground;
 							font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 							font-weight: 500;
 							color: #5A5A5A;
 							min-height: 25px;
 							cursor: text;							
-							.box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
-							border:1px solid @lightgrey;
+							@include box-shadow-inset(0, 0px, 2px, rgba(0,0,0,.25));
+							border:1px solid $lightgrey;
 							border-radius: 5px;
 							
 							input{
@@ -889,13 +889,13 @@ header{
 								border:none;
 								font: 10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 								background:none;
-								.no-box-shadow();
-								color:@darkgrey;
+								@include no-box-shadow();
+								color:$darkgrey;
 								
 								&:focus{
 									border:none;
 									background:none;
-									.no-box-shadow();
+									@include no-box-shadow();
 								}
 							}
 						}
@@ -911,18 +911,18 @@ header{
 						#filter_main_box #ingredient_list{
 							
 							border:0;
-							.transition(all, .2s, ease-in-out);
+							@include transition(all, .2s, ease-in-out);
 							background:none;
-							.no-box-shadow();
+							@include no-box-shadow();
 							cursor: default;
 						}
 						
 						#filter_main_box .tags_list{
 							
 							border:0;
-							.transition(all, .2s, ease-in-out);
+							@include transition(all, .2s, ease-in-out);
 							background:none;
-							.no-box-shadow();
+							@include no-box-shadow();
 							cursor: default;
 						}
 						
@@ -930,8 +930,8 @@ header{
 							height: 45px;
 							overflow:hidden;
 							#kategorie_peak{
-								background: @imginnerbordercolor;
-								border-top: 1px solid @kategorieborder;
+								background: $imginnerbordercolor;
+								border-top: 1px solid $kategorieborder;
 							}
 							
 						}
@@ -949,8 +949,8 @@ header{
 		}
 		
 		#content{
-			@contentWidth: 655px;
-			width:@contentWidth;
+			$contentWidth: 655px;
+			width:$contentWidth;
 			min-height:624px;
 			float:left;
 			margin: 20px 0 60px 50px;
@@ -963,8 +963,8 @@ header{
 				a{
 					float:left;
 					display:block;
-					@width:120px;
-					width:@width;
+					$width:120px;
+					width:$width;
 					position:relative;
 					margin:0 1px;
 					
@@ -981,25 +981,25 @@ header{
 					.button{
 						text-align:center;
 						position:relative;
-						background-color:@stepcolor;
+						background-color:$stepcolor;
 						border-top-right-radius:0;
 						border-top-left-radius:0;
 						border-bottom-right-radius:8px;
 						border-bottom-left-radius:8px;
-						border: 1px solid @inactivebuttonoutline;
-						color:@buttonfontcolor;
+						border: 1px solid $inactivebuttonoutline;
+						color:$buttonfontcolor;
 						width:100px;
 						height:22px;
 						padding-top:6px;
-						font:@standardfont;
+						font:$standardfont;
 						font-size:9pt;
-						.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+						@include box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 						
 					}
 					
 					&:hover, &:focus{
 							.button{
-								color:@smalllightfontcolor;
+								color:$smalllightfontcolor;
 							}
 							text-decoration:none;
 					}
@@ -1007,7 +1007,7 @@ header{
 							top:1px;
 							
 							.button{
-								.box-shadow2withinset(0, 1px, 0px, -1px, @inactivebuttondepth, 0, 1px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+								@include box-shadow2withinset(0, 1px, 0px, -1px, $inactivebuttondepth, 0, 1px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 							}
 					}
 					
@@ -1021,10 +1021,10 @@ header{
 						}
 						
 						.button{
-							background-color:@activebuttonbackground;
-							border: 1px solid @activebuttonoutline;
-							.box-shadow2withinset(0, 2px, 0px, -1px, @activebuttondepth, 0, 2px, 0, 0, @activebuttonoutline, 0, 2px, 2px, rgba(243,255,218, 0.6));
-							color:@activebuttonfontcolor;
+							background-color:$activebuttonbackground;
+							border: 1px solid $activebuttonoutline;
+							@include box-shadow2withinset(0, 2px, 0px, -1px, $activebuttondepth, 0, 2px, 0, 0, $activebuttonoutline, 0, 2px, 2px, rgba(243,255,218, 0.6));
+							color:$activebuttonfontcolor;
 						}
 					}
 					
@@ -1055,14 +1055,14 @@ header{
 	position: fixed;
 	z-index:20;
 	float:left;
-	@width:190px;
-	width:@width;
+	$width:190px;
+	width:$width;
 	visibility: hidden;
 	
 	&.visible{
 		visibility: visible;
 		opacity: 1;
-		.transition(opacity, .3s, ease-in-out);
+		@include transition(opacity, .3s, ease-in-out);
 	}
 	
 	.peak{
@@ -1074,25 +1074,25 @@ header{
 	}
 	
 	.menu{
-		@width: @width - 20;
-		width:@width;
+		$width: $width - 20;
+		width:$width;
 		margin-top:10px;
 		padding: 5px 10px 0;
 		float:left;
-		border: 1px solid @lightgrey;
-		background-color: @stepcolor;
+		border: 1px solid $lightgrey;
+		background-color: $stepcolor;
 		border-radius: 5px;
-		.box-shadow(1px, 1px, 1px, rgba(150,139,131,0.68));
+		@include box-shadow(1px, 1px, 1px, rgba(150,139,131,0.68));
 		
 		.top{
 			float:left;
-			width:@width;
+			width:$width;
 			padding: 5px 0 8px 0;
 			
 			div{
 				float:left;
-				width: @width - 70px;
-				color: @smalllightfontcolor;
+				width: $width - 70px;
+				color: $smalllightfontcolor;
 				font-style:italic;
 				
 				a{
@@ -1112,7 +1112,7 @@ header{
 			}
 		}
 		p{
-			border-top: 1px solid @lightgrey;
+			border-top: 1px solid $lightgrey;
 			float:left;
 			display:block;
 			&.admin{
@@ -1121,7 +1121,7 @@ header{
 			
 			.menulink{
 				display:block;
-				width:@width;
+				width:$width;
 				float:left;
 				padding: 5px 0;
 				cursor: pointer;
@@ -1172,7 +1172,7 @@ header{
 	&.on{
 		.active{
 			opacity:1;
-			.transition(opacity, .1s, ease-in);
+			@include transition(opacity, .1s, ease-in);
 		}
 	}
 	
@@ -1190,7 +1190,7 @@ header{
 		left:0;
 		opacity: 0;
 		background: url("/img/icons20x20.png") no-repeat;
-		.transition(opacity, .1s, ease-out);
+		@include transition(opacity, .1s, ease-out);
 		background-position:0 -20px;
 	}
 }
@@ -1212,10 +1212,10 @@ header{
 	overflow:hidden;
 	height: 195px;
 	width: 475px;
-	background-color: @background;
+	background-color: $background;
 	border: 1px solid rgba(255,255,255,0.5);
 	border-radius: 5px;
-	.box-shadow(0, 0, 0, 8px, rgba(0,0,0,0.3));
+	@include box-shadow-spread(0, 0, 0, 8px, rgba(0,0,0,0.3));
 	padding: 40px 12px 13px 12px;
 	margin-left: -99px;
 	margin-top: -120px;
@@ -1227,12 +1227,12 @@ header{
 	}
 	
 	.content{
-		border: 1px solid @lightgrey;
+		border: 1px solid $lightgrey;
 		width: 100%;
 		height: 100%;
 		
 		h1{
-			color: @activebuttonfontcolor;
+			color: $activebuttonfontcolor;
 			margin: 35px 0 10px 0;
 			text-align: center;
 		}

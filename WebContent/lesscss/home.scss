@@ -1,27 +1,27 @@
 /*Home sweet home*/
 
 #site1{
-	@topfontsize:13pt;
-	@bottomfontsize: @topfontsize - 2pt;
-	font: @headlinefont;
-	color:@darkfontcolor;
-	@borderpadding:80px;
+	$topfontsize:13pt;
+	$bottomfontsize: $topfontsize - 2pt;
+	font: $headlinefont;
+	color:$darkfontcolor;
+	$borderpadding:80px;
 	margin-left:18px;
 	text-align: center;
 	.top_container{
-		//font:@headlinefont;
-		font-size:@topfontsize;
+		//font:$headlinefont;
+		font-size:$topfontsize;
 		margin: 6px auto 0;
-		padding: 0 @borderpadding 10px;
+		padding: 0 $borderpadding 10px;
 		text-align: center;
 		a{
 			display:block;
 			font-style: italic;
 			margin-top:1px;
-			font-size: @bottomfontsize;
+			font-size: $bottomfontsize;
 			min-height:16px;
 		}
-		border-bottom: 1px solid @lightgrey;
+		border-bottom: 1px solid $lightgrey;
 		width:200px;
 	}
 	.mid{
@@ -50,8 +50,8 @@
 		}
 		
 		#news{
-			@width: 323px;
-			width:@width;
+			$width: 323px;
+			width:$width;
 			margin: 0px auto;
 			
 			h2{
@@ -59,9 +59,9 @@
 			}
 	
 			.content{
-				@height:300px;
-				height:@height;
-				width:@width - 2;
+				$height:300px;
+				height:$height;
+				width:$width - 2;
 				position:relative;
 			
 				.top{
@@ -69,15 +69,15 @@
 				}
 				ul{
 					margin-top:5px;
-					border-top:1px solid @lightgrey;
+					border-top:1px solid $lightgrey;
 					background-image: url("/img/news_redstripes.png");
 					background-repeat:repeat-y;
 					background-position:27px 0;
 					width:100%;
-					height:@height - 15px;
+					height:$height - 15px;
 					overflow:hidden;
 					list-style: none;
-					font:@standardfont;
+					font:$standardfont;
 					text-align: left;
 					
 					&:focus{
@@ -85,9 +85,9 @@
 					}
 					
 					li{
-						border-bottom: 1px solid @lightgrey;
+						border-bottom: 1px solid $lightgrey;
 						width:100%;
-						color:@darkfontcolor;
+						color:$darkfontcolor;
 						
 						.left{
 							float:left;
@@ -109,7 +109,7 @@
 					width:100%;
 					height:10px;
 					background-color:none;
-					#gradient.vertical(rgba(249,248,246,0), rgba(249,248,246,1));
+					@include gradient-vertical(rgba(249,248,246,0), rgba(249,248,246,1));
 					border-bottom-left-radius: 4px;
 					border-bottom-right-radius: 4px;
 				}
@@ -119,18 +119,18 @@
 	}
 	
 	.authors{
-		font-size:@topfontsize;
+		font-size:$topfontsize;
 		margin: 0 auto;
 		
 	}
 	
 	.bottom_container{
-		border-top: 1px solid @lightgrey;
+		border-top: 1px solid $lightgrey;
 		margin:0px auto;
-		padding:12px @borderpadding 0;
+		padding:12px $borderpadding 0;
 		width:260px;
 		font-style:italic;
-		font-size: @bottomfontsize;
+		font-size: $bottomfontsize;
 		
 		div{
 			padding: 0 0 2px 0;
@@ -139,8 +139,8 @@
 }
 
 #home{
-	@width: @contentwidth;
-	width: @width;
+	$width: $contentwidth;
+	width: $width;
 	
 	h2{
 		text-align:center;
@@ -148,7 +148,7 @@
 	}
 	
 	#display{
-		width:@contentwidth;
+		width:$contentwidth;
 		height:270px;
 		
 		background: url("/img/slideshow/1.png") no-repeat;
@@ -163,14 +163,14 @@
 		
 		#famous_tags{
 			float:left;
-			@width: 323px;
-			width: @width;
+			$width: 323px;
+			width: $width;
 			
 			
 			.content{
-				@width:@width - 2 - 4;
-				width:@width;
-				border:1px solid @lightgrey;
+				$width:$width - 2 - 4;
+				width:$width;
+				border:1px solid $lightgrey;
 				border-top: 0;
 				border-bottom: 0;
 				position: relative;
@@ -182,9 +182,9 @@
 				}
 				
 				.mid{
-					@height:260px;
-					height:@height;
-					background-color:@stepcolor;
+					$height:260px;
+					height:$height;
+					background-color:$stepcolor;
 					
 					.left_seam, .right_seam{
 						float:left;
@@ -192,7 +192,7 @@
 						background-image:url("/img/seam_tags.png");
 						background-repeat: repeat-y;
 						width:2px;
-						height:@height - 10px;
+						height:$height - 10px;
 					}
 					
 					.right_seam{
@@ -201,7 +201,7 @@
 				
 					#famous_tags_cloud{
 						float:left;
-						width:@width - 2 * 16px - 2 * 2px;
+						width:$width - 2 * 16px - 2 * 2px;
 						margin:10px 2px;
 						height: 260px - 2 * 10px;
 						overflow: hidden;

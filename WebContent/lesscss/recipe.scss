@@ -1,16 +1,16 @@
 .recipe_image_container{
 	float:left;
 	position:relative;
-	border: 8px solid @stepcolor;
-	outline: 1px solid @lightgrey;
+	border: 8px solid $stepcolor;
+	outline: 1px solid $lightgrey;
 	margin: 1px;
-	width: @stepwidth - 18;
+	width: $stepwidth - 18;
 	min-height: 300px;
 	background-color: #585858;
 	
 	.recipe_image{
 		float:left;
-		width: @stepwidth - 20;
+		width: $stepwidth - 20;
 		border: 1px solid #737373;
 	}
 }
@@ -47,23 +47,23 @@
 		        background: url("/img/schmecktmir95x95.png") no-repeat;
 		        background-position: 0 -190px;
 		        opacity: 0;
-		        .transition(opacity, .1s, ease-in);
+		        @include transition(opacity, .1s, ease-in);
 			}
 			
 			&:hover span{
 				opacity:1;
-				.transition(opacity, .1s, ease-out);
+				@include transition(opacity, .1s, ease-out);
 			}
 			
 		}
 	
 	#recipe_options{
-		@optionswidth: @contentwidth - @stepwidth;
+		$optionswidth: $contentwidth - $stepwidth;
 		float:left;
 		position:absolute;
 		bottom:30px;
 		right:0;
-		width: @optionswidth;
+		width: $optionswidth;
 		//padding-top:200px;
 		
 		.option{
@@ -72,22 +72,22 @@
 			height:29px;
 			font-size:9pt;
 			position:relative;
-			background-color:@stepcolor;
+			background-color:$stepcolor;
 			margin-bottom: 5px;
-			border-top:1px solid @lightgrey;
-			border-bottom:1px solid @lightgrey;
-			color: @darkfontcolor;
-			.transition(padding-left, .1s, ease-out);
-			.transition(background-color, .1s, ease-out);
+			border-top:1px solid $lightgrey;
+			border-bottom:1px solid $lightgrey;
+			color: $darkfontcolor;
+			@include transition(padding-left, .1s, ease-out);
+			@include transition(background-color, .1s, ease-out);
 			
 			&:active{
-				background-color:@activeoptions;
-				.transition(background-color, .1s, ease-in);
+				background-color:$activeoptions;
+				@include transition(background-color, .1s, ease-in);
 				
 				.right{
 					span{
 						 opacity: 1;
-			        	.transition(opacity, .1s, ease-in);
+			        	@include transition(opacity, .1s, ease-in);
 					}
 				}
 			}
@@ -105,7 +105,7 @@
 			
 			&:hover{
 				padding-left:5px;
-				.transition(padding-left, .2s, ease-in);
+				@include transition(padding-left, .2s, ease-in);
 			}
 			
 			.img{
@@ -143,7 +143,7 @@
 				.share_container{
 					float:left;
 					padding:2px;
-					background-color:@facebookbg;
+					background-color:$facebookbg;
 					border-radius:2px;
 					margin: 5px 0 0 2px;
 					
@@ -175,7 +175,7 @@
 							&:hover{
 								span{
 									opacity: 1;
-			        				.transition(opacity, .1s, ease-out);
+			        				@include transition(opacity, .1s, ease-out);
 								}
 							}
 							
@@ -185,7 +185,7 @@
 						        background: url("/img/twitter15x15.png") no-repeat;
 						        background-position: 0 -15px;
 						        opacity: 0;
-						        .transition(opacity, .1s, ease-out);
+						        @include transition(opacity, .1s, ease-out);
 							}
 						}
 					}
@@ -198,7 +198,7 @@
 				height:100%;
 				width:6px;
 				margin-left:7px;
-				background:url("/img/option_btn_right6x29.png") no-repeat @background;
+				background:url("/img/option_btn_right6x29.png") no-repeat $background;
 				
 				span{
 					position: absolute;
@@ -206,7 +206,7 @@
 			        background: url("/img/option_btn_right6x29.png") no-repeat;
 			        background-position: 0 -29px;
 			        opacity: 0;
-			        .transition(opacity, .1s, ease-out);
+			        @include transition(opacity, .1s, ease-out);
 				}
 			}
 		}
@@ -218,8 +218,8 @@
 
 #recipe_info{
 	float:left;
-	@width: @stepwidth - 20;
-	width:@width;
+	$width: $stepwidth - 20;
+	width:$width;
 	padding: 0 10px;
 	margin: 10px 0 10px;
 	
@@ -234,7 +234,7 @@
 		font-style:italic;
 		text-align:center;
 		font-size:10pt;
-		color: @smalllightfontcolor;
+		color: $smalllightfontcolor;
 	}
 	
 	#introductionposition{
@@ -248,10 +248,10 @@
 			/*float:left;*/
 			position: relative;
 			left: 50%;
-			/*width:@width - 10;*/
+			/*width:$width - 10;*/
 			margin: 5px 0 0;
 			padding: 0 5px;
-			color: @smalllightfontcolor;
+			color: $smalllightfontcolor;
 		}
 	}
 }
@@ -269,12 +269,12 @@
 	.step{
 		position:relative;
 		z-index: 2;	
-		width:@stepwidth;
+		width:$stepwidth;
 		height:142px;
 		//margin-bottom:15px;
-		border-top:1px solid @lightgrey;
-		border-bottom:1px solid @lightgrey;
-		.box-shadow(0, 3px, 2px, -2px, @shadowbeige);		
+		border-top:1px solid $lightgrey;
+		border-bottom:1px solid $lightgrey;
+		@include box-shadow-spread(0, 3px, 2px, -2px, $shadowbeige);		
 		
 		.left{
 			float:left;
@@ -284,11 +284,11 @@
 		}
 		
 		.mid{
-			width:@stepwidth - 12;
+			width:$stepwidth - 12;
 			height:100%;
 			float:left;
-			background-color: @stepcolor;
-			color: @darkfontcolor;
+			background-color: $stepcolor;
+			color: $darkfontcolor;
 			.number{
 				margin:8px 0;
 				float: left;
@@ -297,7 +297,7 @@
 				font: 45pt Georgia;
 				line-height: 110px;						
 				text-align: center;
-				border-right: 1pt solid @lightgrey;
+				border-right: 1pt solid $lightgrey;
 				margin-right: 15px;
 			}
 		
@@ -319,14 +319,14 @@
 		z-index: 1;
 		width:462px;
 		/*float:left;*/
-		background-color: @imginnerbordercolor;
-		border: 1px solid @lightgrey;
+		background-color: $imginnerbordercolor;
+		border: 1px solid $lightgrey;
 		border-top: 0;
 		margin: -1px 12px 0;
 		padding: 7px 10px 6px;
-		color: @smalllightfontcolor;
+		color: $smalllightfontcolor;
 		font-size: 9pt;
-		.box-shadow-inset(0, 5px, 12px, -4px, @shadowbeige);
+		@include box-shadow-inset-spread(0, 5px, 12px, -4px, $shadowbeige);
 	}
 }
 
@@ -339,22 +339,22 @@
 	position:relative;
 	margin-bottom:15px;
 	padding: 0 12px 0 18px;
-	background: url("/img/recipe_event_yellow_left.png") repeat-y @discussionyellow;
-	border-top:1px solid @discussionyellowborder;
-	border-bottom:1px solid @discussionyellowborder;
-	.box-shadow-inset(0, 2px, 2px, rgba(255,255,255, 0.4));
+	background: url("/img/recipe_event_yellow_left.png") repeat-y $discussionyellow;
+	border-top:1px solid $discussionyellowborder;
+	border-bottom:1px solid $discussionyellowborder;
+	@include box-shadow-inset(0, 2px, 2px, rgba(255,255,255, 0.4));
 	float:left;
-	width:@contentwidth - 30px;
+	width:$contentwidth - 30px;
 	
 	&.active{
-		background:url("/img/recipe_event_green_left.png") repeat-y @activebuttonbackground;
-		border-top:1px solid @activebuttonoutline;
-		border-bottom:1px solid @activebuttonoutline;
+		background:url("/img/recipe_event_green_left.png") repeat-y $activebuttonbackground;
+		border-top:1px solid $activebuttonoutline;
+		border-bottom:1px solid $activebuttonoutline;
 		
 		
 		.left{
 			.headline{
-				color:@activebuttonfontcolor;
+				color:$activebuttonfontcolor;
 			}
 		}
 		.rightbackground{
@@ -381,7 +381,7 @@
 		
 		.headline{
 			float:left;
-			color:@discussionyellowfont;
+			color:$discussionyellowfont;
 			line-height:15px;
 		}
 	}

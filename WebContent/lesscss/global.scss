@@ -1,12 +1,12 @@
 h1{
-	font:@headlinefont;
+	font:$headlinefont;
 	font-size:18pt;
-	color:@darkfontcolor;
+	color:$darkfontcolor;
 	
 	&.center_headline{
 		width: 100%;
-		border-top:1px solid @lightgrey;
-		border-bottom: 1px solid @lightgrey;
+		border-top:1px solid $lightgrey;
+		border-bottom: 1px solid $lightgrey;
 		text-align: center;
 		padding: 13px 0 17px;
 		margin: 0 0 15px 0;
@@ -19,12 +19,12 @@ h1{
 }
 
 h2{
-	font:@headlinefont;
+	font:$headlinefont;
 	font-size:14pt;
-	color:@darkfontcolor;
+	color:$darkfontcolor;
 	
 	&.border_headline{
-		border-bottom: 1px solid @lightgrey;
+		border-bottom: 1px solid $lightgrey;
 		padding:2px 0 2px 10px;
 		// cursor: pointer;
 		margin: 5px 0 0;
@@ -33,42 +33,42 @@ h2{
 	
 	&.link_headline{		
 		a{
-			color:@darkfontcolor;
+			color:$darkfontcolor;
 			text-decoration: none;
 			border-bottom:0;
-			.transition(all, .2s, ease-out);
+			@include transition(all, .2s, ease-out);
 			border-bottom: 1px solid transparent;
 			
 			&:hover{
-				.transition(all, .2s, ease-in);
-				border-bottom: 1px solid @darkfontcolor;
+				@include transition(all, .2s, ease-in);
+				border-bottom: 1px solid $darkfontcolor;
 			}
 		}
 	}
 }
 
 h3{
-	font:@headlinefont;
+	font:$headlinefont;
 	font-size:12pt;
-	color:@darkfontcolor;
+	color:$darkfontcolor;
 }
 
 h4{
-	color:@smalllightfontcolor;
+	color:$smalllightfontcolor;
 	font-size: 8pt;
 	font-weight: normal;
 }
 
 h6{
-	font:@headlinefont;
+	font:$headlinefont;
 	font-size:14pt;
-	color:@darkfontcolor;
+	color:$darkfontcolor;
 	font-style: italic;
 	margin:0;
 }
 
 p{
-	color:@smalllightfontcolor;
+	color:$smalllightfontcolor;
 	font-size: 8pt;
 	margin: 2px 0 2px;
 }
@@ -79,7 +79,7 @@ form{
 	}
 	
 	p{
-		color:@smalllightfontcolor;
+		color:$smalllightfontcolor;
 		font-size: 8pt;
 		margin: 2px 0 2px;
 		width:100%;
@@ -94,9 +94,9 @@ form{
 }
 
 .error{
-	font:@standardfont;
+	font:$standardfont;
 	font-size:8pt;
-	color: @error;
+	color: $error;
 	padding: 5px 10px;
 	display:none;
 }
@@ -104,7 +104,7 @@ form{
 
 
 a{ 
-	color:@linkcolor;
+	color:$linkcolor;
 	text-decoration:none;
 	
 	&:hover{
@@ -122,27 +122,27 @@ a{
 		text-align:center;
 		outline:none;
 		position:relative;
-		background-color:@stepcolor;
+		background-color:$stepcolor;
 		border-radius:4px;
-		border: 1px solid @inactivebuttonoutline;
-		color:@buttonfontcolor;
+		border: 1px solid $inactivebuttonoutline;
+		color:$buttonfontcolor;
 		min-width:100px;
 		height:20px;
 		padding: 3px 6px 0px 6px;
-		font:@standardfont;
+		font:$standardfont;
 		font-size:9pt;
 		//text-shadow: 1px 1px 0px #faf7f0;
-		.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+		.box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 		
 		&:hover, &:focus{
-			color:@smalllightfontcolor;
+			color:$smalllightfontcolor;
 			text-decoration:none;
 			cursor:default;
 		}
 		
 		&:active{
 			top:1px;
-			.box-shadow2withinset(0, 1px, 0px, -1px, @inactivebuttondepth, 0, 1px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+			.box-shadow2withinset(0, 1px, 0px, -1px, $inactivebuttondepth, 0, 1px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 		}
 	}*/
 }
@@ -155,27 +155,27 @@ a{
 	text-align:center;
 	outline:none;
 	position:relative;
-	background-color:@stepcolor;
+	background-color:$stepcolor;
 	border-radius:4px;
-	border: 1px solid @inactivebuttonoutline;
-	color:@buttonfontcolor;
+	border: 1px solid $inactivebuttonoutline;
+	color:$buttonfontcolor;
 	min-width:100px;
 	height:20px;
 	padding: 3px 6px 0px 6px;
-	font:@standardfont;
+	font:$standardfont;
 	font-size:9pt;
 	//text-shadow: 1px 1px 0px #faf7f0;
-	.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+	@include box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 	
 	&:hover, &:focus{
-		color:@smalllightfontcolor;
+		color:$smalllightfontcolor;
 		text-decoration:none;
 		cursor:default;
 	}
 	
 	&:active{
 		top:1px;
-		.box-shadow2withinset(0, 1px, 0px, -1px, @inactivebuttondepth, 0, 1px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+		@include box-shadow2withinset(0, 1px, 0px, -1px, $inactivebuttondepth, 0, 1px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 	}
 }
 
@@ -186,18 +186,18 @@ input{
 		font:  12pt Georgia;
 		color: #404040;
 		padding:4px 5px;
-		background-color:@input-background;
-		.transition(background-color, 0.1s, ease-out);
-		border: 1px solid @tagborder;
+		background-color:$input-background;
+		@include transition(background-color, 0.1s, ease-out);
+		border: 1px solid $tagborder;
 		border-radius:3px;
-		.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);	
+		@include box-shadow2-spread(0, 2px, 0px, -1px, $tags, 0, 2px, 0, 0, $tagborder);	
 		height:18px;
 		
 		&:focus{
-			.transition(background-color, 0.1s, ease-in);
-			background-color:@input-background-active;
-			border: 1px solid @innerborder;
-			.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);
+			@include transition(background-color, 0.1s, ease-in);
+			background-color:$input-background-active;
+			border: 1px solid $innerborder;
+			@include box-shadow2-spread(0, 2px, 0px, -1px, $darkergrey, 0, 2px, 0, 0, $innerborder);
 		}
 		
 	}
@@ -206,25 +206,25 @@ input{
 		-webkit-user-select:none;
 		float:left;
 		position:relative;
-		background-color:@stepcolor;
+		background-color:$stepcolor;
 		border-radius:4px;
-		border: 1px solid @inactivebuttonoutline;
-		color:@buttonfontcolor;
+		border: 1px solid $inactivebuttonoutline;
+		color:$buttonfontcolor;
 		min-width:100px;
 		height:25px;
 		padding-bottom:1px;
-		font:@standardfont;
+		font:$standardfont;
 		font-size:9pt;
 		//text-shadow: 1px 1px 0px #faf7f0;
-		.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+		@include box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 		
 		&:hover, &:focus{
-			color:@smalllightfontcolor;
+			color:$smalllightfontcolor;
 		}
 		
 		&:active{
 			top:1px;
-			.box-shadow2withinset(0, 1px, 0px, -1px, @inactivebuttondepth, 0, 1px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+			@include box-shadow2withinset(0, 1px, 0px, -1px, $inactivebuttondepth, 0, 1px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
 		}
 	}
 }
@@ -233,34 +233,34 @@ textarea{
 	outline:none;
 	resize: none;
 	width: 99%;
-	color: @darkfontcolor;
+	color: $darkfontcolor;
 	overflow:auto;
-	font: @standardfont;
+	font: $standardfont;
 	padding: 4px 5px;
 	
 	margin: 0 0 10px 0;
 	
-	background-color:@input-background;
-	.transition(background-color, 0.1s, ease-out);
-	border: 1px solid @tagborder;
+	background-color:$input-background;
+	@include transition(background-color, 0.1s, ease-out);
+	border: 1px solid $tagborder;
 	border-radius:3px;
-	.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);
+	@include box-shadow2-spread(0, 2px, 0px, -1px, $tags, 0, 2px, 0, 0, $tagborder);
 	
 	&:focus{
-		background-color:@input-background-active;
-		.transition(background-color, 0.1s, ease-in);
-		border: 1px solid @innerborder;
+		background-color:$input-background-active;
+		@include transition(background-color, 0.1s, ease-in);
+		border: 1px solid $innerborder;
 		border-radius:3px;
-		.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);
+		@include box-shadow2-spread(0, 2px, 0px, -1px, $darkergrey, 0, 2px, 0, 0, $innerborder);
 	}
 	
 	&.light{
-		background-color:@imginnerbordercolor;
+		background-color:$imginnerbordercolor;
 		
 		&:focus{
-			background-color:@imginnerbordercolor;
-			border: 1px solid @innerborder;
-			.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);
+			background-color:$imginnerbordercolor;
+			border: 1px solid $innerborder;
+			@include box-shadow2-spread(0, 2px, 0px, -1px, $darkergrey, 0, 2px, 0, 0, $innerborder);
 		}
 	}
 
@@ -306,23 +306,23 @@ textarea{
 }
 
 input::-webkit-input-placeholder{
-			font:@standardfont;
+			font:$standardfont;
 			text-align:right;
 			
 }
 
 input:-moz-placeholder{
-			font:@standardfont;
+			font:$standardfont;
 			text-align:right;
 }
 
 .news{
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
-	border:1px solid @lightgrey;
+	border:1px solid $lightgrey;
 	border-top: 0;
-	background-color:@imginnerbordercolor;
-	.box-shadow(0px, 1px, 1px, rgba(150, 139, 131, 0.5));
+	background-color:$imginnerbordercolor;
+	@include box-shadow(0px, 1px, 1px, rgba(150, 139, 131, 0.5));
 	
 	.top{
 		width:100%;
@@ -332,7 +332,7 @@ input:-moz-placeholder{
 
 	ul{
 		margin-top:5px;
-		border-top:1px solid @lightgrey;
+		border-top:1px solid $lightgrey;
 		background-image: url("/img/news_redstripes.png");
 		background-repeat:repeat-y;
 		background-position:27px 0;
@@ -344,9 +344,9 @@ input:-moz-placeholder{
 		}
 		
 		li{
-			border-bottom: 1px solid @lightgrey;
+			border-bottom: 1px solid $lightgrey;
 			width:100%;
-			color:@darkfontcolor;
+			color:$darkfontcolor;
 			
 			.left{
 				float:left;
@@ -378,16 +378,16 @@ input:-moz-placeholder{
 	
 	.right{
 		float:left;
-		background-color:@tags;
+		background-color:$tags;
 		height:19px;
-		border: 1px solid @tagborder;
+		border: 1px solid $tagborder;
 		border-top-right-radius:2px;
 		border-bottom-right-radius:2px;
 		
 		border-left:0;
-		.box-shadow-inset(0, 1px, 1px, #e6e3dd);
+		@include box-shadow-inset(0, 1px, 1px, #e6e3dd);
 		font-size:8pt;
-		color:@darkgrey;
+		color:$darkgrey;
 		
 		.tag_text{
 			float:left;
@@ -399,8 +399,8 @@ input:-moz-placeholder{
 		.tag_num{
 			float:left;
 			height: 17px;
-			color:@tagnumber;
-			border-left: 1px solid @tagborder;
+			color:$tagnumber;
+			border-left: 1px solid $tagborder;
 			padding: 1px 2px;
 		}
 		
@@ -409,7 +409,7 @@ input:-moz-placeholder{
 		.tag_remove{
 			float:left;
 			height: 17px;
-			color:@tagnumber;
+			color:$tagnumber;
 			padding: 1px 4px 1px 2px;
 			cursor:pointer;
 		}
@@ -419,36 +419,36 @@ input:-moz-placeholder{
 .tagsbox{
 	height:105px;
 	width:97%;
-	color: @darkfontcolor;
+	color: $darkfontcolor;
 	padding:5px 5px;
 	overflow:auto;
 	
 	margin: 0 0 10px 0;
 	
-	background-color:@input-background;
-	.transition(background-color, 0.1s, ease-out);
-	border: 1px solid @tagborder;
+	background-color:$input-background;
+	@include transition(background-color, 0.1s, ease-out);
+	border: 1px solid $tagborder;
 	border-radius:3px;
-	.box-shadow2(0, 2px, 0px, -1px, @tags, 0, 2px, 0, 0, @tagborder);
+	@include box-shadow2-spread(0, 2px, 0px, -1px, $tags, 0, 2px, 0, 0, $tagborder);
 	
 	&.active{
-		background-color:@input-background-active;
-		.transition(background-color, 0.1s, ease-in);
-		border: 1px solid @innerborder;
+		background-color:$input-background-active;
+		@include transition(background-color, 0.1s, ease-in);
+		border: 1px solid $innerborder;
 		border-radius:3px;
-		.box-shadow2(0, 2px, 0px, -1px, @darkergrey, 0, 2px, 0, 0, @innerborder);
+		@include box-shadow2-spread(0, 2px, 0px, -1px, $darkergrey, 0, 2px, 0, 0, $innerborder);
 	}
 	
 	input{
 		border:0;
 		background:none;
-		.no-box-shadow();
+		@include no-box-shadow();
 		
 		
 		&:focus{
 			background:none;
 			border:0;
-			.no-box-shadow();
+			@include no-box-shadow();
 		}
 	}
 }
@@ -456,7 +456,7 @@ input:-moz-placeholder{
 .numberinput{
 	float:left;
 	border-radius:3px;
-	border: 1px solid @lightgrey;
+	border: 1px solid $lightgrey;
 	width:32px;
 	height:21px;
 	margin: 0 1px;
@@ -465,8 +465,8 @@ input:-moz-placeholder{
 		float:left;
 		font: 10pt Helvetica, Arial, sans-serif;
 		padding: 2px 2px 2px 2px;
-		.no-box-shadow();
-		background-color: @filterinputbackground;
+		@include no-box-shadow();
+		background-color: $filterinputbackground;
 		border-radius:0;
 		border-bottom-left-radius:2px;
 		border-top-left-radius:2px;
@@ -476,13 +476,13 @@ input:-moz-placeholder{
 		text-align: right;
 		
 		&:focus{
-			background-color: @filterinputbackground;
+			background-color: $filterinputbackground;
 			border-radius:0;
 			border-bottom-left-radius:2px;
 			border-top-left-radius:2px;
 			border:0;
 			padding: 2px 2px 2px 2px;
-			.no-box-shadow();
+			@include no-box-shadow();
 		}
 	}
 	
@@ -490,7 +490,7 @@ input:-moz-placeholder{
 		width:10px;
 		height:10px;
 		float:right;
-		border-left: 1px solid @lightgrey;
+		border-left: 1px solid $lightgrey;
 		background-image:url("/img/time_arrow_up6x10.png");
 		background-repeat:no-repeat;
 		background-position-x: 2px;
@@ -501,7 +501,7 @@ input:-moz-placeholder{
 	}
 	.down{
 		background-image:url("/img/time_arrow_down6x10.png");
-		border-top: 1px solid @lightgrey;
+		border-top: 1px solid $lightgrey;
 	}
 }
 
@@ -533,10 +533,10 @@ input:-moz-placeholder{
 	
 	label{
 		float: left;
-		font:@headlinefont;
+		font:$headlinefont;
 		font-style:italic;
 		font-size:10pt;
-		color: @darkgrey;
+		color: $darkgrey;
 		padding-top: 6px;
 	}
 	
@@ -555,7 +555,7 @@ input:-moz-placeholder{
 		background-color: black;
 		width:100%;
 		height:100%;
-		.transition(opacity, .3s, ease-out);
+		@include transition(opacity, .3s, ease-out);
 	}
 	
 	.image_upload{
@@ -566,9 +566,9 @@ input:-moz-placeholder{
 		width:116px;
 		margin-left:171px;
 		height:49px;
-		background-color: @background;
+		background-color: $background;
 		opacity: 0;
-		.transition(opacity, .3s, ease-out);
+		@include transition(opacity, .3s, ease-out);
 		border-radius: 5px;
 
 		
@@ -591,12 +591,12 @@ input:-moz-placeholder{
 	&:hover, &.visible{
 		.image_layer{
 			opacity: .5;
-			.transition(opacity, .3s, ease-in);
+			@include transition(opacity, .3s, ease-in);
 		}
 		
 		.image_upload{
 			opacity: 1;
-			.transition(opacity, .4s, ease-in);
+			@include transition(opacity, .4s, ease-in);
 		}
 	}
 	
@@ -637,7 +637,7 @@ input:-moz-placeholder{
 				opacity: 0;
 				position: absolute;
 				text-decoration: none;
-				.transition(opacity, .4s, ease-out);
+				@include transition(opacity, .4s, ease-out);
 				
 				span{
 					display: block;
@@ -651,7 +651,7 @@ input:-moz-placeholder{
 			
 			&:hover div{
 				opacity:0.7;
-				.transition(opacity, .4s, ease-in);
+				@include transition(opacity, .4s, ease-in);
 
 			}
 }

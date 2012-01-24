@@ -6,17 +6,17 @@
 	
 	.nav_button{
 		float:left;
-		background-color: @stepcolor;
-		border: 1px solid @inactivebuttonoutline;
+		background-color: $stepcolor;
+		border: 1px solid $inactivebuttonoutline;
 		border-radius: 10px;
 		width: 125px;
 		height: 18px;
 		margin: -16px 8px 0;
 		padding: 6px 0;
-		.transition(all, 200ms, ease-in-out);
+		@include transition(all, 200ms, ease-in-out);
 		
 		font-size: 10pt;
-		color: @buttonfontcolor;
+		color: $buttonfontcolor;
 		text-align: center;
 		
 		&:hover{
@@ -24,18 +24,18 @@
 		}
 		
 		&.inactive{
-			background-color: @background;
-			border-color:@lightgrey;
-			color: @smalllightfontcolor;
+			background-color: $background;
+			border-color:$lightgrey;
+			color: $smalllightfontcolor;
 			cursor: default;
-			.transition(all, 200ms, ease-out);
+			@include transition(all, 200ms, ease-out);
 		}
 		
 		&.active{
-			background-color: @activebuttonbackground;
-			border-color:@linkcolor;
-			color: @activebuttonfontcolor;
-			.transition(all, 200ms, ease-in);
+			background-color: $activebuttonbackground;
+			border-color:$linkcolor;
+			color: $activebuttonfontcolor;
+			@include transition(all, 200ms, ease-in);
 		}
 	}
 	
@@ -100,7 +100,7 @@
 						.mid{
 							.number_container{
 								margin: 8px 15px 8px 0;
-								border-right:1pt solid @lightgrey;
+								border-right:1pt solid $lightgrey;
 								width: 110px;
 								height: 123px;
 								cursor: move;
@@ -136,8 +136,8 @@
 						z-index: 1;
 						width:462px;
 						/*float:left;*/
-						background-color: @imginnerbordercolor;
-						border: 1px solid @lightgrey;
+						background-color: $imginnerbordercolor;
+						border: 1px solid $lightgrey;
 						border-top: 0;
 						margin: 0 12px;
 						padding: 7px 10px 5px;
@@ -183,13 +183,13 @@
 								right:0;
 								opacity: 0;
 								background-position: -20px -100px;
-								.transition(opacity, .1s, ease-out);
+								@include transition(opacity, .1s, ease-out);
 							}
 							
 							&:hover{
 								span{
 									opacity: 1;
-									.transition(opacity, .1s, ease-out);
+									@include transition(opacity, .1s, ease-out);
 								}
 							}
 						}
@@ -215,13 +215,13 @@
 							right:0;
 							opacity: 0;
 							background-position: 0 -27px;
-							.transition(opacity, .1s, ease-out);
+							@include transition(opacity, .1s, ease-out);
 						}
 						
 						&:hover{
 							span{
 								opacity: 1;
-								.transition(opacity, .1s, ease-out);
+								@include transition(opacity, .1s, ease-out);
 							}
 						}
 						
@@ -252,7 +252,7 @@
 						right:0;
 						opacity: 0;
 						background-position: -27px -27px;
-						.transition(opacity, .1s, ease-out);
+						@include transition(opacity, .1s, ease-out);
 						
 					}
 				}
@@ -260,13 +260,13 @@
 					.img{
 						span{
 							opacity: 1;
-							.transition(opacity, .1s, ease-in);
+							@include transition(opacity, .1s, ease-in);
 						}
 					}
 				}
 				
 				.text{
-					color:@smalllightfontcolor;
+					color:$smalllightfontcolor;
 					padding: 4px 0 0 30px;
 				}
 			}
@@ -291,12 +291,12 @@
 				height:22px;
 				width: 218px;
 				border-radius:4px;
-				.box-shadow2withinset(0, 2px, 0px, -1px, @inactivebuttondepth, 0, 2px, 0, 0, @inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
-				border: 1px solid @inactivebuttonoutline;
-				background-color:@stepcolor;
-				color:@buttonfontcolor;
+				@include box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+				border: 1px solid $inactivebuttonoutline;
+				background-color:$stepcolor;
+				color:$buttonfontcolor;
 				border-radius:4px;
-				font:@standardfont;
+				font:$standardfont;
 				padding: 4px 6px 1px;
 				position: relative;
 				text-align: center;	
@@ -405,7 +405,7 @@
 form.recipeediting{
 	clear:both;
 	
-	@inputwidth: 340px;
+	$inputwidth: 340px;
 	
 	h2{
 		//margin-top: 10px;
@@ -420,19 +420,19 @@ form.recipeediting{
 	}
 	
 	input[type="text"]{
-		width: @inputwidth;
+		width: $inputwidth;
 		float:left;
 		margin-bottom: 10px;
 	}
 	textarea{
-		width: @inputwidth;
+		width: $inputwidth;
 		height: 110px;
 		padding: 4px 5px;
 		float:left;
 	}
 	
 	.error{
-		margin: 7px 0 0 (@inputwidth + 12px);
+		margin: 7px 0 0 ($inputwidth + 12px);
 	}
 	
 	input[type="submit"]{
@@ -488,13 +488,13 @@ ul.new_ingredient_list{
 				right:0;
 				opacity: 0;
 				background-position: 0 -100px;
-				.transition(opacity, .1s, ease-out);
+				@include transition(opacity, .1s, ease-out);
 			}
 			
 			&:hover{
 				span{
 					opacity: 1;
-					.transition(opacity, .1s, ease-out);
+					@include transition(opacity, .1s, ease-out);
 				}
 			}
 		}
@@ -518,13 +518,13 @@ ul.new_ingredient_list{
 		right:0;
 		opacity: 0;
 		background-position: -20px -100px;
-		.transition(opacity, .1s, ease-out);
+		@include transition(opacity, .1s, ease-out);
 	}
 	
 	&:hover{
 		span{
 			opacity: 1;
-			.transition(opacity, .1s, ease-out);
+			@include transition(opacity, .1s, ease-out);
 		}
 	}
 }

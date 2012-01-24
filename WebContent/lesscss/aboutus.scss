@@ -56,12 +56,12 @@
 		float: left;
 		margin-top: 5px;
 		height: 250px;
-		@datawidth: 290px;
-		width: @datawidth;
+		$datawidth: 290px;
+		width: $datawidth;
 		background-color: #fbf7f4;
 		background-image: url("/img/papernoise.png");
 		border: 1px solid #ebebeb;
-		.box-shadow(0, 1px, 2px, rgba(0,0,0,0.6));
+		@include box-shadow(0, 1px, 2px, rgba(0,0,0,0.6));
 		
 		#data_top{
 			width:100%;
@@ -98,7 +98,7 @@
 		table{
 			width:100%;
 			font:  16pt Georgia;
-			color: @darkfontcolor;
+			color: $darkfontcolor;
 			margin-top: -2px;
 			
 			td{
@@ -111,13 +111,13 @@
 		}
 		
 		#online_since{
-			width: @datawidth - 20px;
+			width: $datawidth - 20px;
 			height: 40px;
-			border-top:1px solid @lightgrey;
+			border-top:1px solid $lightgrey;
 			margin-top: 10px;
 			padding: 15px 12px;
 			text-align: center;
-			color: @darkfontcolor;
+			color: $darkfontcolor;
 			
 			.years{
 				display: none;

@@ -1,7 +1,7 @@
 // Entdecken
 #discover{
-	@width: @contentwidth;
-	width: @width;
+	$width: $contentwidth;
+	width: $width;
 	display: block;
 	
 	.entdecken{
@@ -23,18 +23,18 @@
 				background: url("/img/dogear9x8left.png") no-repeat;
 				float: left;
 				margin-top: 20px;
-				.transition(opacity, .2s, ease-in);	
+				@include transition(opacity, .2s, ease-in);	
 			}
 			
 			.scroll_left{
 				width: 26px;
 				height: 83px;
-				background-color: @imginnerbordercolor;
-				border:1px solid @lightbrown;
+				background-color: $imginnerbordercolor;
+				border:1px solid $lightbrown;
 				float: left;
 				cursor: pointer;
 				position: relative;
-				.transition(opacity, .2s, ease-in);
+				@include transition(opacity, .2s, ease-in);
 				
 				.scroll_left_arrow{
 					background: url("/img/icons20x20.png") no-repeat;
@@ -67,18 +67,18 @@
 				background: url("/img/dogear9x8.png") no-repeat;
 				float: right;
 				margin-top: 20px;	
-				.transition(opacity, .2s, ease-in);
+				@include transition(opacity, .2s, ease-in);
 			}
 			
 			.scroll_right{
 				width: 26px;
 				height: 83px;
-				background-color: @imginnerbordercolor;
-				border:1px solid @lightbrown;
+				background-color: $imginnerbordercolor;
+				border:1px solid $lightbrown;
 				float: right;
 				cursor: pointer;
 				position: relative;
-				.transition(opacity, .2s, ease-in);
+				@include transition(opacity, .2s, ease-in);
 				
 				.scroll_right_arrow{
 					background: url("/img/icons20x20.png") no-repeat;
@@ -102,16 +102,16 @@
 			.dogear_right, .dogear_left, .scroll_left, .scroll_right{
 				cursor: default;
 				opacity: 0;
-				.transition(opacity, .2s, ease-out);
+				@include transition(opacity, .2s, ease-out);
 			}
 		}
 		
 		
 		.discover_border{
 			height:110px;
-			background-color: @stepcolor;
-			border-top: 1px solid @lightbrown;
-			border-bottom: 1px solid @lightbrown;
+			background-color: $stepcolor;
+			border-top: 1px solid $lightbrown;
+			border-bottom: 1px solid $lightbrown;
 			margin: 0 0 20px 0;
 			padding: 10px 1px;
 			width: 590px;

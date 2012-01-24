@@ -1,36 +1,36 @@
 .frame_big{
 	position:relative;
-	@width: 596px;
-	@height: 130px;
-	@innerheight: 110px;
-	width:@width;
-	color:@darkfontcolor;
-	height:@height;
+	$width: 596px;
+	$height: 130px;
+	$innerheight: 110px;
+	width:$width;
+	color:$darkfontcolor;
+	height:$height;
 	display:block;
-	border-top:1px solid @shadowbeige;
-	//border-bottom: 1px solid @lightgrey;
-	.transition(border-top-color, .1s, ease-out);
+	border-top:1px solid $shadowbeige;
+	//border-bottom: 1px solid $lightgrey;
+  @include transition(border-top-color, .1s, ease-out);
 	
 	&:last-child{
-		border-bottom:1px solid @shadowbeige;
+		border-bottom:1px solid $shadowbeige;
 	}
 	
 	&:hover, &:focus{
 		outline:none;
 		text-decoration:none;
-		border-top-color: @lightgrey;
-		.transition(border-top-color, .14s, ease-in);
-		.box-shadow(0, 3px, 2px, -2px, @shadowbeige);
-		.transition(box-shadow, .15s, ease-in);
+		border-top-color: $lightgrey;
+		@include transition(border-top-color, .14s, ease-in);
+		@include box-shadow-spread(0, 3px, 2px, -2px, $shadowbeige);
+		@include transition(box-shadow, .15s, ease-in);
 		
 		.frame_big_main{
-			background-color:@stepcolor;
-			.transition(background-color, .15s, ease-in);
+			background-color:$stepcolor;
+			@include transition(background-color, .15s, ease-in);
 		}
 		
 		.frame_big_left, .frame_big_right{
 			opacity:1.0;
-			.transition(opacity, .15s, ease-in);
+			@include transition(opacity, .15s, ease-in);
 		}
 		
 	}
@@ -40,7 +40,7 @@
 		opacity:.0;
 		width:12px;
 		height:100%;
-		.transition(opacity, .1s, ease-out);
+		@include transition(opacity, .1s, ease-out);
 	}
 	.frame_big_left{
 		float:left;			
@@ -53,34 +53,34 @@
 	}
 	
 	.frame_big_main{
-		@width: @width - 32px;
+		$width: $width - 32px;
 		
 		float:left;
-		width:@width;
-		height:@innerheight;
-		@verticalpadding: @height / 2 - @innerheight / 2;
-		padding: @verticalpadding 4px;
-		.transition(background-color, .1s, ease-out);
+		width:$width;
+		height:$innerheight;
+		$verticalpadding: $height / 2 - $innerheight / 2;
+		padding: $verticalpadding 4px;
+		@include transition(background-color, .1s, ease-out);
 		
 		
 		.recipe_img{
-			@width: 100px;
-			@height: 100px;
+			$width: 100px;
+			$height: 100px;
 			
-			height:@height;
-			width:@width;
+			height:$height;
+			width:$width;
 			
 			float:left;
 			
 			margin: 1px;
 			
 			position:relative;
-			border:3pt solid @imginnerbordercolor;
-			outline: 1px solid @lightgrey;
+			border:3pt solid $imginnerbordercolor;
+			outline: 1px solid $lightgrey;
 			
 			img{
-				height:@height;
-				width:@width;
+				height:$height;
+				width:$width;
 			}
 			
 			.recipe_time{
@@ -101,17 +101,17 @@
 			margin: 5px 10px;
 			float:left;
 			width:340px;
-			height:@innerheight - 10px;
+			height:$innerheight - 10px;
 			overflow:hidden;
 			
 			h3{
-				font:@headlinefont;
+				font:$headlinefont;
 				font-size:14pt;
 			}
 			p{
 				margin-top:4px;
 				font-size:8pt;
-				color:@smalllightfontcolor;
+				color:$smalllightfontcolor;
 			}
 		}
 		
@@ -137,7 +137,7 @@
 		
 		.schmeckt_num{
 			float:left;
-			font:@headlinefont;
+			font:$headlinefont;
 			font-size:16pt;
 			margin: -2px 0 0 54px;
 		}
@@ -146,21 +146,21 @@
 
 
 #noresult_headline, #noresult_subline{
-	font:@headlinefont;
-	color: @darkfontcolor;
+	font:$headlinefont;
+	color: $darkfontcolor;
 }
 
 #noresult_headline{
 	padding-top: 50px;
 	font-size: 25pt;
-	border-top: 1px solid @lightgrey;
+	border-top: 1px solid $lightgrey;
 }
 
 #noresult_subline{
 	padding: 2px 0 55px;
 	margin-bottom: 10px;
 	font-size: 14pt;
-	border-bottom: 1px solid @lightgrey;
+	border-bottom: 1px solid $lightgrey;
 }
 
 
