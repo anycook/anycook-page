@@ -73,7 +73,9 @@
 			</div>
 			<ul id="step_container"></ul>
 		</div>
-		<div id="discussion_container">
+    </template>
+    <template id="recipe_discussion">
+    	<div id="discussion_container">
     		<h1 class="center_headline"></h1>
     		<div id="comment_container">
     			<div id="comment_discussion"></div>

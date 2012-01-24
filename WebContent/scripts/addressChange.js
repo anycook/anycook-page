@@ -287,8 +287,14 @@ function changePage(event){
 			switch(page){
 			case "discussion":
 				$("#recipe_container").hide();
-				$("#discussion_container").show();
-				loadDiscussion(event.pathNames[1]);
+				var $discussionContainer = $("#discussion_container");
+				if($discussionContainer.length==0){
+					$("#content_main").xml("append", "recipe_discussion");
+					loadDiscussion(event.pathNames[1]);
+				}
+				else
+					$discussionContainer.show();
+				
 				$("#discussion_btn").addClass("active");
 				break;
 			

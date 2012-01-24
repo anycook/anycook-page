@@ -6,8 +6,8 @@
 		//Variabelen:
 		//MUSS BEARBEITET WERDEN! Momentan comment_discussion 655px breit
 		$discussionwidth: 655px;
-		$bigpicturewidth:50px+18px;
-		$bigcommentwidth: 655-2*($bigpicturewidth)-26px;
+		$bigpicturewidth:50px + 18px;
+		$bigcommentwidth: 655px - 2*($bigpicturewidth) - 26px;
 		$smallcommentwidth: $bigcommentwidth - 32px - 18px;
 
 
