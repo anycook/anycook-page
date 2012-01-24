@@ -290,7 +290,8 @@ function changePage(event){
 				var $discussionContainer = $("#discussion_container");
 				if($discussionContainer.length==0){
 					$("#content_main").xml("append", "recipe_discussion");
-					loadDiscussion(event.pathNames[1]);
+					loadDiscussion(decodeURI(event.pathNames[1]));
+					
 				}
 				else
 					$discussionContainer.show();

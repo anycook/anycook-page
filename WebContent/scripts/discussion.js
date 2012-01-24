@@ -1,11 +1,16 @@
 function loadDiscussion(recipename) {
 	var $commentDiscussion = $("#comment_discussion");
+	var login = user.checkLogin();
+	if(login)
+		$("#no_comment").hide();
+	else
+		$("#yes_commit").hide();
 	$.getJSON("/anycook/GetDiscussion", {gericht:recipename}, function(json){
 		if(json.length == 0) {
 			$commentDiscussion.html("<div class='no_discussion'>Zu diesem Rezept existiert noch keine Diskussion.<br/>Mach doch den Anfang!</div>");
 		} else {
 			var $ul = $commentDiscussion.append("<ul></ul>").children("ul");
-			var login = user.checkLogin();
+			
 			for(var i in json) {
 				maxID = Math.max(maxID, Number(json[i].id));
 				var $li;
