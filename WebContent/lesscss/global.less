@@ -609,3 +609,49 @@ input:-moz-placeholder{
 		margin-left:155px;
 	}
 }
+
+.recipe_thumbnail{
+			float: left;
+			display: block;
+			position: relative;
+			margin: 0 10px 10px 0;
+			width: 108px;
+			height: 108px;
+			border: 1px solid #D7D3C7;
+			text-decoration: none;
+			
+			img{
+				border: 3pt solid #F9F8F6;
+				width: 100px;
+				height: 100px;
+				
+			}
+			
+			div{
+				bottom: 0;
+				padding: 3px;
+				margin: 3px;
+				height: 96px;
+				width: 96px;
+				background-color: black;
+				opacity: 0;
+				position: absolute;
+				text-decoration: none;
+				.transition(opacity, .4s, ease-out);
+				
+				span{
+					display: block;
+					margin: 3px;
+					opacity: 1;
+					font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+					color: white;
+					text-decoration: none;
+				}
+			}
+			
+			&:hover div{
+				opacity:0.7;
+				.transition(opacity, .4s, ease-in);
+
+			}
+}

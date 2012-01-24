@@ -4,40 +4,134 @@
 	width: @width;
 	display: block;
 	
-	h2{
-		text-align:center;
-		margin:0 0 8px 0 ;
-	}
-	
 	.entdecken{
-		width:@contentwidth;
-		height:135px;
-		background-color: @stepcolor;
-		border-top: 1px solid @lightbrown;
-		border-bottom: 1px solid @lightbrown;
-		margin:0 0 20px 0 ;
-		
-		text-decoration: none;
-		
-		.discover_rezept_bild{
-			float: left;
-			display: block;
-			position: absolute;
-			height: 100px;
-			width: 100px;
-			border: 3pt solid @imginnerbordercolor;
-			outline: 1px solid @lightgrey;
-
-			span{
-					display: block;
-					margin: 3px;
-					opacity: 1;
-					font: 7pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-					color: white;
-				}
-				
+		h2{
+			text-align:center;
+			margin:0 0 8px 0 ;
 		}
 		
+		.entdecken_back{
+			float: left;
+			width: 31px;
+			height: 132px;
+			background: url("/img/discoverborder31x132.png") no-repeat;
+			
+			
+			.dogear_left{
+				height: 8px;
+				width: 9px;
+				background: url("/img/dogear9x8left.png") no-repeat;
+				float: left;
+				margin-top: 20px;
+				.transition(opacity, .2s, ease-in);	
+			}
+			
+			.scroll_left{
+				width: 26px;
+				height: 83px;
+				background-color: @imginnerbordercolor;
+				border:1px solid @lightbrown;
+				float: left;
+				cursor: pointer;
+				position: relative;
+				.transition(opacity, .2s, ease-in);
+				
+				.scroll_left_arrow{
+					background: url("/img/icons20x20.png") no-repeat;
+					background-position: 0px -140px;
+					height: 20px;
+					width: 13px;
+					margin: 30px 5px 27px;
+				}
+			}
+		}
+		.entdecken_back:active{
+			.dogear_left{
+				height: 8px;
+				margin-top: 19px;
+			}
+		}
+		
+		
+		.entdecken_next{
+			float: right;
+			width: 31px;
+			height: 132px;
+			background: url("/img/discoverborder31x132.png") no-repeat;
+			background-position: -31px 0px;
+			margin-right: 1px;
+			
+			.dogear_right{
+				height: 8px;
+				width: 9px;
+				background: url("/img/dogear9x8.png") no-repeat;
+				float: right;
+				margin-top: 20px;	
+				.transition(opacity, .2s, ease-in);
+			}
+			
+			.scroll_right{
+				width: 26px;
+				height: 83px;
+				background-color: @imginnerbordercolor;
+				border:1px solid @lightbrown;
+				float: right;
+				cursor: pointer;
+				position: relative;
+				.transition(opacity, .2s, ease-in);
+				
+				.scroll_right_arrow{
+					background: url("/img/icons20x20.png") no-repeat;
+					background-position: -20px -140px;
+					height: 20px;
+					width: 13px;
+					margin: 30px 8px 34px;
+				}
+				
+			}
+		}
+		
+		.entdecken_next:active{
+			.dogear_right{
+				height: 8px;
+				margin-top: 19px;
+			}
+		}
+		
+		.entdecken_back.off, .entdecken_next.off{
+			.dogear_right, .dogear_left, .scroll_left, .scroll_right{
+				cursor: default;
+				opacity: 0;
+				.transition(opacity, .2s, ease-out);
+			}
+		}
+		
+		
+		.discover_border{
+			height:110px;
+			background-color: @stepcolor;
+			border-top: 1px solid @lightbrown;
+			border-bottom: 1px solid @lightbrown;
+			margin: 0 0 20px 0;
+			padding: 10px 1px;
+			width: 590px;
+			float: left;
+			
+			.discover_container{
+				float: left;
+				overflow: hidden;
+				position: relative;
+				width: 590px;
+				height: 110px;
+				text-decoration: none;
+				
+				a{
+					position: absolute;
+				}
+	
+				
+			}
+		}
 	}
 	
 	

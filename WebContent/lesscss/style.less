@@ -1138,7 +1138,7 @@ header{
 			}
 			
 			#drafts{
-					span{
+					#draftnum{
 						float: right;
 						font-family: Arial, "Lucida Sans Unicode","Lucida Grande",sans-serif;
 						border-radius: 10px;
@@ -1148,10 +1148,12 @@ header{
 						text-align: center;
 						text-shadow: 1px 1px #a19f9d;
 						border: 1px solid #AEACA9;
-						
-					
 					}
 				}
+			#drafts:hover{
+				text-decoration: none;
+				.name{text-decoration: underline;}
+			}	
 		}
 	}
 }

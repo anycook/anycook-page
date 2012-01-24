@@ -7,8 +7,8 @@ var length = new Object();*/
 function loadDiscover(){
 	/*$("#neuste_container > *, #leckerste_container > *, #beliebte_container > *").remove();*/
 	fillDiscover();
-	$(".entdecken_next").click(showNextDiscover);
-	$(".entdecken_back").click(showBackDiscover).addClass("off");
+	$(".scroll_right").click(showNextDiscover).disableSelection();
+	$(".scroll_left").click(showBackDiscover).addClass("off").disableSelection();
 	/*$(".entdecken_back").click(function(event){
 		var target = event.target;
 		var type = $(target.parentNode).attr("id");
@@ -32,11 +32,11 @@ function fillDiscover(){
 					for(var type in json){
 						var recipe = json[type][i];
 							var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
-							$("#"+type+" .discover_container").append("<a href=\""+uri+"\" class=\"discover_rezept_bild\">" +
+							$("#"+type+" .discover_border .discover_container").append("<a href=\""+uri+"\" class=\"recipe_thumbnail\">" +
 									"<img src=\"http://graph.anycook.de/recipe/"+recipe.name+"/image?type=small\"/>" +
 									"<div><span>"+recipe.name+"</span></div></a>");
 							
-							$("#"+type+" .discover_container a").last().css("margin-left", 120*i);							
+							$("#"+type+" .discover_border .discover_container a").last().css("margin-left", 120*i);							
 					}
 				}
 			}				  
@@ -44,18 +44,22 @@ function fillDiscover(){
 }
 
 function showNextDiscover(event){
-	if(checkRightPos($(this).prev()) && !blockDiscover){
-		blockDiscover = true;
-		$(this).prev().children(".discover_rezept_bild").first().animate({left: "-=600"}, 
+	var $entdecken = $(this).parents(".entdecken");
+	var $discoverContainer = $entdecken.find(".discover_container");
+	var $toAnimate = $discoverContainer.children(".recipe_thumbnail").first().stop(true,true);
+	if(checkRightPos($discoverContainer)){
+		$toAnimate.animate({left: "-=600"}, 
 				{duration: 700, step:synchronizeDiscover, complete:checkButtons});
 	}
 	
 }
 
 function showBackDiscover(event){
-	if(checkLeftPos($(this).next()) && !blockDiscover){
-		blockDiscover = true;
-		$(this).next().children(".discover_rezept_bild").first().animate({left: "+=600"}, 
+	var $entdecken = $(this).parents(".entdecken");
+	var $discoverContainer = $entdecken.find(".discover_container");
+	var $toAnimate = $discoverContainer.children(".recipe_thumbnail").first().stop(true,true);
+	if(checkLeftPos($discoverContainer)){
+		$toAnimate.animate({left: "+=600"}, 
 				{duration: 700,  step:synchronizeDiscover, complete:checkButtons});
 	}
 	
@@ -65,42 +69,41 @@ function synchronizeDiscover(now){
 	$(this).siblings().css("left", now);
 }
 
-function checkLeftPos(container){
-	var firstpos = $(container).find(".discover_rezept_bild").first().position();
+function checkLeftPos($container){
+	var firstpos = $container.find(".recipe_thumbnail").first().position();
 	if(firstpos.left >= 0)
 		return false;
 	return true;
 }
 
-function checkRightPos(container){
-	var elements = $(container).find(".discover_rezept_bild");
-	var firstpos = elements.first().position();
-	if(firstpos.left <= -(elements.length-5)*120)
+function checkRightPos($container){
+	var $elements = $container.find(".recipe_thumbnail");
+	var firstpos = $elements.first().position();
+	if(firstpos.left <= -($elements.length-5)*120)
 		return false;
 	return true;
 }
 
 
 function checkButtons(){
-	blockDiscover = false;
-	var back = $(this).parent().prev();
-	if(!checkLeftPos(back.next()) && !back.hasClass("off")){
-		back.addClass("off");
+	var $entdecken = $(this).parents(".entdecken");
+	var $discoverContainer = $entdecken.find(".discover_container");
+	var $back = $entdecken.find(".entdecken_back");
+	if(!checkLeftPos($discoverContainer) && !$back.hasClass("off")){
+		$back.addClass("off");
 	}
-	else if(back.hasClass("off")){
-		back.removeClass("off");
+	else if($back.hasClass("off")){
+		$back.removeClass("off");
 	}
 	
-	var next = $(this).parent().next();
-	if(!checkRightPos(next.prev()) && !next.hasClass("off")){
-		next.addClass("off");
+	var $next = $entdecken.find(".entdecken_next")
+	if(!checkRightPos($discoverContainer) && !$next.hasClass("off")){
+		$next.addClass("off");
 	}
-	else if(next.hasClass("off")){
-		next.removeClass("off");
+	else if($next.hasClass("off")){
+		$next.removeClass("off");
 	}
 }
-
-var blockDiscover = false;
 
 /*function loadDiscoverRecipe(response, type){
 	// Methode lädt neue Elemente hinzu. Sind bereits welche vorhanden, werden sie erst einmal versteckt.

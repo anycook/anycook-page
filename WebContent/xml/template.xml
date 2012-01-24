@@ -785,6 +785,64 @@
 			<textarea readonly="readonly" class="code">{"recipes":["Spinat-Quiche","Kartoffelpuffer","Pfannkuchen mit Äpfeln","Quarkbuletten","Semmelknödel","Eierstich","Rührei mit Speck","Korsische Paprikaschoten"],"name":"Eierspeisen","recipenum":8}</textarea>
 		</div>
 	</template>
+	<template id="home_discover">
+		<div id="discover">
+			<div id="neuste" class="entdecken">
+				<h2>neuste Rezepte</h2>
+				<div class="entdecken_back off">
+					<div class="dogear_left"></div>
+					<div class="scroll_left">
+						<div class="scroll_left_arrow"></div>
+					</div>
+				</div>
+				<div class="discover_border">
+					<div class="discover_container"></div>
+				</div>
+				<div class="entdecken_next">
+					<div class="dogear_right"></div>
+					<div class="scroll_right">
+						<div class="scroll_right_arrow"></div>
+					</div>
+				</div>
+			</div>
+			<div id="leckerste" class="entdecken">
+				<h2>leckerste Rezepte</h2>
+				<div class="entdecken_back off">
+					<div class="dogear_left"></div>
+					<div class="scroll_left">
+						<div class="scroll_left_arrow"></div>
+					</div>
+				</div>
+				<div class="discover_border">
+					<div class="discover_container"></div>
+				</div>
+				<div class="entdecken_next">
+					<div class="dogear_right"></div>
+					<div class="scroll_right">
+						<div class="scroll_right_arrow"></div>
+					</div>
+				</div>
+			</div>
+			<div id="beliebte" class="entdecken">
+				<h2>beliebteste Rezepte</h2>
+				<div class="entdecken_back off">
+					<div class="dogear_left"></div>
+					<div class="scroll_left">
+						<div class="scroll_left_arrow"></div>
+					</div>
+				</div>
+				<div class="discover_border">
+					<div class="discover_container"></div>
+				</div>
+				<div class="entdecken_next">
+					<div class="dogear_right"></div>
+					<div class="scroll_right">
+						<div class="scroll_right_arrow"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>	
 	<template id="notfound">
 		<div class="paperrip"></div>
 		<div class="notfound_content">
