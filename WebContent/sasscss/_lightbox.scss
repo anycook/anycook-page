@@ -1,0 +1,78 @@
+.lightbox{
+	$width: 500px;
+	$height: 360px;
+	
+	position:absolute;
+	width:$width;
+	height:$height;
+	overflow:hidden;
+	z-index:20;
+	
+	.dogear{
+		height:100%;
+		position:absolute;
+		right:9px;
+		top:-8px;
+		width:9px;
+		
+		.top, .bottom{
+			height:8px;
+			width:100%;
+			background: url("/img/dogear9x8.png") no-repeat;
+			position:absolute;
+			
+		}
+		
+		.middle{
+			background-color:$dogear;
+			position:absolute;
+			width:100%;
+			top:8px;
+			bottom:8px;
+		}
+		
+		.bottom{
+			background-position:0 -8px;
+			bottom:0;
+		}
+		
+		
+		
+		
+	}
+	
+	.mask{
+		height:100%;
+		position:absolute;
+		right:9px;
+		width:9px;
+		background-color: $background;
+	}
+	
+	.contentbox{
+		position:absolute;
+		background-color: $background;
+		width: $width - 54;
+		height: $height - 50;
+		top: 8px;
+		left:$width;
+		border: 1px solid $lightgrey;
+		padding: 20px 30px 20px 20px;
+		@include box-shadow-spread(-1px, -1px, 5px, -3px, $darkgrey);
+		
+		h2{
+			
+		}
+		
+		p{
+			font-size:8pt;
+			margin: 2px 0 5px;
+			color: $smalllightfontcolor;
+		}
+		
+		input[type="submit"]{
+			float:right;
+			margin:15px 0 0 0;
+		}
+	}
+}
