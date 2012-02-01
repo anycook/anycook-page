@@ -71,7 +71,7 @@
 		
 		var graph = "/recipe";
 		if(recipe)
-			graph+="/"+encodeURIComponent(recipe);
+			graph+="/"+recipe;
 		if(version)
 			graph+="/"+version;
 		$.when($.anycook.graph._getJSON(graph)).then(function(json){
@@ -87,7 +87,7 @@
 		var settings = $.anycook.graph._settings();
 		if(!type)
 			type = "small";
-		return settings.baseurl+"/recipe/"+encodeURIComponent(recipe)+"/image?type="+type+"&appid="+settings.appid;
+		return settings.baseurl+"/recipe/"+recipe+"/image?type="+type+"&appid="+settings.appid;
 	};
 	
 	
