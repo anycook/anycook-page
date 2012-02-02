@@ -133,21 +133,21 @@ Search.prototype.setUsername = function(username){
 Search.prototype.getData = function(){
 	var data = {};
 	if(this.tags.length > 0)
-		data.tags = encodeURIComponent(this.tags);
+		data.tags = this.tags.toString();
 	if(this.kategorie != null)
-		data.category = encodeURIComponent(this.kategorie);
+		data.category = this.kategorie;
 	if(this.zutaten.length > 0)
-		data.ingredients = encodeURIComponent(this.zutaten);
+		data.ingredients = this.zutaten.toString();
 	if(this.terms.length > 0)
-		data.terms = encodeURIComponent(this.terms);
+		data.terms = this.terms.toString();
 	if(this.kalorien != null)
-		data.calorie = encodeURIComponent(this.kalorien);
+		data.calorie = this.kalorien;
 	if(this.skill != null)
-		data.skill = encodeURIComponent(this.skill);
+		data.skill = this.skill;
 	if(this.user != null)
-		data.user = encodeURIComponent(this.user);
+		data.user = this.user;
 	if(this.time != null){
-		data.time = encodeURIComponent(this.time);
+		data.time = this.time;
 	}
 	
 	return data;

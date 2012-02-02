@@ -235,7 +235,7 @@ function checkStep2(event){
 				
 			$.getJSON("/anycook/GetZutatenfromSchritte", {q:encodeURIComponent(currentSentences[i])}, function(json){
 				var $stepIngredients = $step.find(".new_ingredient");
-				var $stepQuestions = $step.find(".new_ingredient_question");
+				var $stepQuestions = $step.find(".new_ingredient_question .ingredient");
 				var ingredients = [];
 				for(var i = 0; i < $stepIngredients.length; i++){
 					ingredients[i] = $stepIngredients.eq(i).val();
@@ -243,7 +243,7 @@ function checkStep2(event){
 				
 				for(var i = 0; i < $stepQuestions.length; i++){
 					var text = $stepQuestions.eq(i).text();
-					ingredients.push(text.substring(0, text.length-1));
+					ingredients.push(text);
 				}
 				
 				for(var i in json){
@@ -431,6 +431,21 @@ function saveRecipe(){
 		// });
 		
 		$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
+		$("body").on("click", function(){
+			$.address.path("");
+			$(".fixedpopup").remove();
+		});
+		
+		$(".fixedpopup").show(1).delay(5000).fadeOut(500, function(){
+			$(this).remove();
+			var pathNames = $.address.pathNames();
+			if(pathNames.length > 0 && pathNames[0] == "recipeediting"){
+				$.address.path("");
+			}
+		});
+		
+		
+		return false;
 	}
 }
 
@@ -676,7 +691,7 @@ function getCurrentStepIngredients(){
 }
 
 function getIngredientQuestion(ingredient){
-	var $span = $("<span></span>").text(ingredient+" auch zu diesem Schritt hinzufügen?").addClass("new_ingredient_question");
+	var $span = $("<span></span>").html("<span class=\"ingredient\">"+ingredient+"</span> auch zu diesem Schritt hinzufügen?").addClass("new_ingredient_question");
 	var $spanJa =  $("<a></a>").text("Ja").addClass("yes")
 		.click(function(event){
 			var $this = $(this);

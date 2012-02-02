@@ -19,10 +19,10 @@ function loadHome()
 	  success: function(json){
 	  	$("#recipe_of_the_day").attr("href", Recipe.getURI(json.dailyrecipe))
 	  		.text(json.dailyrecipe);
-	  	// $("#num_authors").text(json.users);
-	  	// $("#num_tags").text(json.tags);
-	  	// $("#num_ingredients").text(json.ingredients);
-	  	// $("#num_recipes").text(json.recipes);
+	  	$("#num_authors").text(json.users);
+	  	$("#num_tags").text(json.tags);
+	  	$("#num_ingredients").text(json.ingredients);
+	  	$("#num_recipes").text(json.recipes);
 	  }
 	});
 // 	
@@ -64,16 +64,16 @@ function handleChange(event){
 	var lastAddress = $(document).data("lastAddress");
 	if(lastAddress == undefined || lastAddress.path != event.path){
 		
-		if(lastAddress != undefined && lastAddress.pathNames[0] == "recipeediting"){
-			var check = confirm("Willst du wirklich aufhören, an diesem Rezept zu arbeiten?");
-			if(!check) {
-				$.address.autoUpdate(false);
-				window.location.hash = lastAddress.value;
-				$.address.autoUpdate(true);
-				
-				return false;
-			}
-		}
+		// if(lastAddress != undefined && lastAddress.pathNames[0] == "recipeediting"){
+			// var check = confirm("Willst du wirklich aufhören, an diesem Rezept zu arbeiten?");
+			// if(!check) {
+				// $.address.autoUpdate(false);
+				// window.location.hash = lastAddress.value;
+				// $.address.autoUpdate(true);
+// 				
+				// return false;
+			// }
+		// }
 		$(document).data("lastAddress", event);
 		
 		

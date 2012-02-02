@@ -5,7 +5,7 @@ function loadMessagesession(sessionid){
 	$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
 	$messageAnswer.find("textarea").autoGrow();
 	
-	$.getJson("/anycook/GetMessageSession",
+	$.getJSON("/anycook/GetMessageSession",
 		{sessionid:sessionid},
 		function(json){
 			var recipients = json.recipients;
@@ -39,11 +39,8 @@ function getMessages(sessionid, startid){
 	if(startid === undefined)
 		startid = -1;
 	
-	$.ajax({
-		url:"/anycook/PushMessages",
-		data:{sessionid:sessionid, lastid:startid},
-		dataType:"json",
-		success: function(messages){
+	$.getJSON("/anycook/PushMessages",{sessionid:sessionid, lastid:startid},
+		function(messages){
 			
 			// gettingMessages[sessionid] = false;
 			var path = $.address.pathNames();
@@ -104,8 +101,7 @@ function getMessages(sessionid, startid){
 				}
 				getMessages(sessionid, lastid);
 			}
-		}
-	});
+		});
 }
 
 function submitAnswerMessage(){
