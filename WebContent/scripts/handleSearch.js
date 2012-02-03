@@ -1,8 +1,8 @@
-function addResults(){
+function addResults(json){
 	$("#more_results").remove();
-	var recipes = $("#result_container").data("results").recipes;
-	var start = $(".frame_big").length;					
-	for(var i= start; i<recipes.length && i<start+10; i++){
+	var recipes = json.recipes;
+	// var start = $(".frame_big").length;					
+	for(var i= 0; i<recipes.length; i++){
 		var $result = getBigFrameText(recipes[i]);
 		$("#result_container").append($result);
 		var $text = $result.find(".recipe_text");
@@ -11,7 +11,7 @@ function addResults(){
 		var height = $text.innerHeight()-($h3.outerHeight(true)+($p.outerHeight(true)-$p.innerHeight()));
 		$p.css("height",height).ellipsis();
 	}
-	if(recipes.length > $(".frame_big").length)
+	if(json.size> $(".frame_big").length)
 		addMoreResultsButton();
 }
 
@@ -49,7 +49,9 @@ function moreresultsScrollListener(){
 	var top = $("#more_results").position().top;
 	if(scrollTop > top +100){
 		$(document).unbind("scroll", moreresultsScrollListener);
-		addResults();
+		// addResults();
+		var start = $(".frame_big").length;
+		search.search(start);
 	}
 		
 }

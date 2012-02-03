@@ -153,22 +153,32 @@ Search.prototype.getData = function(){
 	return data;
 };
 
-Search.prototype.search = function(){
+Search.prototype.search = function(start, num){
+	if(start=== undefined)
+		start = 0;
+	
+	if(num === undefined)
+		num = 10;
+	
 	setFiltersfromSession();
 	var data = this.getData();
+	data.num = num;
+	data.start = start;
 	//if(data=="" ) return;
 	// $.blockUI({message:null});
 	
-	$("#result_container").empty();
+	if(start === 0)
+		$("#result_container").empty();
 	
 	$.anycook.graph.search(data,function(json){
 		if(json && json.size > 0){
-			$("#result_container").data("results", json);
-			addResults();
-			$(".frame_big:focus").live("keydown", searchKeyDown);
-			$(".frame_big").live("mouseenter", function(){
-				$(".frame_big:focus").blur();
-			});
+			// $("#result_container").data("results", json);
+			// addResults();
+			// $(".frame_big:focus").live("keydown", searchKeyDown);
+			// $(".frame_big").live("mouseenter", function(){
+				// $(".frame_big:focus").blur();
+			// });
+			addResults(json);
 		}else
 	  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
 	});
