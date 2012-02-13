@@ -200,6 +200,16 @@ input{
 			@include box-shadow2-spread(0, 2px, 0px, -1px, $darkergrey, 0, 2px, 0, 0, $innerborder);
 		}
 		
+		&.light{
+    background-color:$imginnerbordercolor;
+    
+      &:focus{
+        background-color:$imginnerbordercolor;
+        border: 1px solid $innerborder;
+        @include box-shadow2-spread(0, 2px, 0px, -1px, $darkergrey, 0, 2px, 0, 0, $innerborder);
+      }
+    }
+		
 	}
 	
 	&[type="submit"], &[type="file"]{

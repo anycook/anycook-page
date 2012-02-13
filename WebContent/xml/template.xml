@@ -78,7 +78,7 @@
     	<div id="discussion_container">
     		<h1 class="center_headline"></h1>
     		<div id="comment_container">
-    			<div id="comment_discussion"></div>
+    			<div id="comment_discussion"><ul></ul></div>
     			<div id="discussion_buttons">
     				<input type="submit" value="Diskussion ausblenden" id="hide_discussion" class="notavailable"/>
     				<a class="notavailable button" id="edit_recipe">Rezept bearbeiten</a>

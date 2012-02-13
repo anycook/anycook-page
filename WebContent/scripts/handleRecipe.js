@@ -135,8 +135,6 @@ function loadRecipe(recipe) {
 		$("#discussion_footer .nologin").hide();
 		$("#discussion_footer img").attr("src", user.getUserImagePath());
 		$(".comment_btn").click(comment);
-		$(".answer_btn").live("click", answerBtnClick);
-		$(".like").live("click", discussionLike);
 	} else {
 		$("#discussion_footer .login").hide();
 		$("#no_comment").click(clickSignin);

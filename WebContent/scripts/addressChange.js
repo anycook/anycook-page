@@ -110,11 +110,11 @@ function handleChange(event){
 				break;
 			case 1:
 				switch(path[0]){
-				case "search":
-					//fullTextSearch();
-					search = Search.init();
-					search.search();
-					break;
+				// case "search":
+					// //fullTextSearch();
+					// search = Search.init();
+					// search.search();
+					// break;
 				case "recipeediting":
 					$.address.title("Neues Rezept erstellen | anycook");
 					loadNewRecipe();
