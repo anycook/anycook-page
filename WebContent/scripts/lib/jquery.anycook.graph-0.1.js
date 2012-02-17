@@ -25,6 +25,20 @@
 		
 	}
 	
+	$.anycook.graph.postData = function(graph, data){
+		if(!graph) graph = "";
+		if(!data) data = {};
+		
+		var settings = $.anycook.graph._settings();
+		$.extend(data, {appid : settings.appid});
+		
+		return $.ajax({
+			url:settings.baseurl+graph,
+			type:"POST",
+			crossDomain:true,
+			data:data});
+	}
+	
 	$.anycook.graph.init = function(options){
 		var settings = {
 			appid: -1,
@@ -82,6 +96,19 @@
 		
 		return dfd.promise();
 	};
+	
+	//saveRecipe(recipename, dataJSON [, callback])
+	$.anycook.graph.saveRecipe = function(recipename, dataJSON, callback){
+		var dfd = $.Deferred();
+		var graph = "/recipe/"+recipename;
+		$.when($.anycook.graph.postData(graph, dataJSON)).then(function(response){
+			dfd.resolve(response);
+			if(callback)
+				callback(response);
+		});
+		
+		return dfd.promise();
+	}
 	
 	$.anycook.graph.recipeImagePath = function(recipe, type){
 		var settings = $.anycook.graph._settings();

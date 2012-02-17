@@ -409,7 +409,7 @@ function saveRecipe(){
 		
 		var recipe = {};
 		recipe.steps = getSteps();
-		recipe.name = getRecipeName();
+		// recipe.name = getRecipeName();
 		recipe.image = getImageName();
 		recipe.description = getDescription();
 		recipe.ingredients = getIngredients();
@@ -424,11 +424,8 @@ function saveRecipe(){
 		if(id)
 			recipe.mongoid = id;
 		
-		
-		//TODO activate again
-		// $.post("/anycook/SaveNewRecipe", {recipe:encodeURIComponent(JSON.stringify(recipe))},function(response){
-			// alert(response);	
-		// });
+
+		$.anycook.graph.saveRecipe(getRecipeName(), JSON.stringify(recipe));
 		
 		$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
 		$("body").on("click", function(){

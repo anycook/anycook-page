@@ -44,8 +44,11 @@ function getDateString(fromdatetime){
 	if(monthdifference > 0)
 		return "am "+date+"."+month+".";
 	if(daydifference == 0){
-		if(hourdifference == 0)
+		if(hourdifference == 0){
+			if(minutedifference<5)
+				return "vor kurzem";
 			return "vor "+minutedifference+" Minuten";
+		}
 		if(hourdifference == 1)
 			return "vor einer Stunde";
 		return "vor "+hourdifference+" Stunden";
