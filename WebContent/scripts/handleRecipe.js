@@ -127,18 +127,6 @@ function loadRecipe(recipe) {
 	if($.address.pathNames().length == 3) {
 		showVersionInfo(recipe);
 	}
-
-	//discussion
-	$(".center_headline").html("Diskussion zum Rezept<br/>" + recipe.name);
-	var login = user.checkLogin();
-	if(login) {
-		$("#discussion_footer .nologin").hide();
-		$("#discussion_footer img").attr("src", user.getUserImagePath());
-		$(".comment_btn").click(comment);
-	} else {
-		$("#discussion_footer .login").hide();
-		$("#no_comment").click(clickSignin);
-	}
 }
 
 function loadSteps(steps) {

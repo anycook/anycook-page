@@ -290,6 +290,17 @@ function changePage(event){
 				var $discussionContainer = $("#discussion_container");
 				if($discussionContainer.length==0){
 					$("#content_main").xml("append", "recipe_discussion");
+					//discussion
+					$(".center_headline").html("Diskussion zum Rezept<br/>" + decodeURIComponent(event.pathNames[1]));
+					var login = user.checkLogin();
+					if(login) {
+						$("#discussion_footer .nologin").hide();
+						$("#discussion_footer img").attr("src", user.getUserImagePath());
+						$(".comment_btn").click(comment);
+					} else {
+						$("#discussion_footer .login").hide();
+						$("#no_comment").click(clickSignin);
+					}
 					loadDiscussion(decodeURI(event.pathNames[1]));
 					
 				}
