@@ -383,7 +383,7 @@ function multiZutaten(perscount) {
 		var newValue = getNumbersFromString(amount, perscount);
 		
 		if(recipe!=null){
-			var zutat = recipe.getZutatOnPosition(i);
+			var zutat = recipe.ingredients[i];
 			//var currentzutattext = $(this).prev().text();
 			if(zutat.singular != null) {
 				if(getValuefromString(newValue) == 1) {

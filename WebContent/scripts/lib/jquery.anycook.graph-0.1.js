@@ -25,29 +25,44 @@
 		
 	}
 	
-	$.anycook.graph.postData = function(graph, data){
+	$.anycook.graph.postMessage = function(graph, data){
 		if(!graph) graph = "";
 		if(!data) data = {};
 		
-		var settings = $.anycook.graph._settings();
-		$.extend(data, {appid : settings.appid});
 		
-		return $.ajax({
-			url:settings.baseurl+graph,
-			type:"POST",
-			crossDomain:true,
-			data:data});
+		
+		var settings = $.anycook.graph._settings();
+		
+		var $iframe = $("#"+settings.frameId);
+		var message = {target:graph, data:data};
+		$iframe.get(0).contentWindow.postMessage(JSON.stringify(message), settings.baseurl);
+		// $.extend(data, {appid : settings.appid});
+// 		
+		// return $.ajax({
+			// url:settings.baseurl+graph,
+			// type:"POST",
+			// crossDomain:true,
+			// data:data});
 	}
 	
 	$.anycook.graph.init = function(options){
 		var settings = {
 			appid: -1,
 			baseurl: "http://graph.anycook.de",
-			callbackName: "callback"
+			callbackName: "callback",
+			frameId:"anycook-graph-frame"
 		};
 		
 		if(options)
 			$.extend(settings, options);
+		
+		var $div = $("<div></div>").css({height:0, width:0})
+			.append("<iframe id=\""+settings.frameId+"\" src=\""+settings.baseurl+"\"></iframe>");
+		$("#anycook-root").append($div);
+		
+		window.addEventListener("message", function(event){
+			// alert(event.data);
+		}, false);
 		
 		$.anycook.graph._settings(settings);
 	};
@@ -101,7 +116,7 @@
 	$.anycook.graph.saveRecipe = function(recipename, dataJSON, callback){
 		var dfd = $.Deferred();
 		var graph = "/recipe/"+recipename;
-		$.when($.anycook.graph.postData(graph, dataJSON)).then(function(response){
+		$.when($.anycook.graph.postMessage(graph, dataJSON)).then(function(response){
 			dfd.resolve(response);
 			if(callback)
 				callback(response);
