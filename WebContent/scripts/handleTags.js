@@ -163,19 +163,21 @@ function submitTags(event){
 	search.addTag(tagtext);
 }
 
-function submitSuggestTags(){
+function submitSuggestTags(event){
+	event.preventDefault();	
 	var pathNames = $.address.pathNames();
 	var recipe = pathNames[1];
-	$(".tagsbox .tag_text").each(function(index){
-		var tag = $(this).text();
-		$.ajax({
-			url:"/anycook/SuggestTags",
-			data:"recipe="+recipe+"&tag="+tag,
-		});
-	});
-	hideAddTags();
-	
-	return false;
+	var $tags_text = $(".tagsbox .tag_text");
+	var tags = [];
+	for(var i = 0; i<$tags_text.length; i++){
+		tags.push($tags_text.eq(i).text());
+	}
+	var userid = -1;
+	if(user.checkLogin())
+		userid = user.id;
+	$.anycook.graph.suggestTags(recipe, tags, userid);
+	hideLightbox();
+	$(".tagsbox").empty();
 	/*$("#recipe_tags").empty();
 	$("#addtags_container").fadeOut(200, function(){
 		$("#bezeichner_container").append("<div id='suggestedtags_message' class='content_message'>" +

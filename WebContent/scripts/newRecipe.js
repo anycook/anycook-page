@@ -417,15 +417,19 @@ function saveRecipe(){
 		recipe.time = getTime();
 		recipe.skill = getSkill();
 		recipe.calorie = getCalorie();
-		recipe.tags = getTags();
+		// recipe.tags = getTags();
 		recipe.persons = getPersons();
+		
+		var userid = -1;
+		if(user.checkLogin())
+			userid = user.id;
 		
 		var id =  $.address.parameter("id");
 		if(id)
 			recipe.mongoid = id;
 		
 
-		$.anycook.graph.saveRecipe(getRecipeName(), JSON.stringify(recipe));
+		$.anycook.graph.saveRecipe(getRecipeName(), recipe,getTags(), userid);
 		
 		$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
 		$("body").on("click", function(){

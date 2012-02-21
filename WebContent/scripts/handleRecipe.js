@@ -366,12 +366,6 @@ function makeAddTags() {
 	$("#main").append($lightbox);
 }
 
-function hideaddTags() {
-	// $("#recipetags").fadeOut(200, function(){
-	// $tagcontainer.remove();
-	// });
-}
-
 function multiZutaten(perscount) {
 
 	$("#ingredient_list .amount").each(function(i) {
