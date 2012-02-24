@@ -89,6 +89,10 @@
 						width:100%;
 						color:$darkfontcolor;
 						
+						&.following{
+						  background-color: grey;
+						}
+						
 						.left{
 							float:left;
 							width:25px;

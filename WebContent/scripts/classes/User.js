@@ -15,12 +15,10 @@ function User(){
 }
 
 User.init = function(){
+	var dfd = $.Deferred();
 	var user = new User();
-	$.ajax({
-		url: "/anycook/Login",
-		async: false,
-		dataType: "json",
-		success: function(response){
+	var dereffered = $.anycook.graph.getSession();
+	dereffered.done(function(response){
 			if(response != false){
 				user.id = response.id;
 				user.name = response.name;
@@ -32,10 +30,11 @@ User.init = function(){
 				user.following = response.following;
 				user.place = response.place;
 			}
+			dfd.resolve(user);
 				
-		}
 	});
-	return user;
+	
+	return dfd.promise();
 };
 
 

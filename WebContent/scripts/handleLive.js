@@ -60,13 +60,14 @@ function parseLife(life){
 	var text = life.syntax;
 	var regex = /#[ug]/;
 	var pos = text.search(regex);
-	
+	var userid = -1;
 	while(pos>=0){
 		if(text[pos+1]=="u"){
 			var array = text.split("#u");
 			text = "";
 			for(var j = 0; j<array.length-1;++j){
 				var uri = User.getProfileURI(life.user.id);
+				userid = life.user.id;
 				var link = "<a href=\""+uri+"\">"+life.user.name+"</a>";
 				text+=array[j]+link;
 			}
@@ -87,6 +88,9 @@ function parseLife(life){
 	}
 	
 	var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>").data("id", life.id);
+	if(user.checkLogin() && user.isFollowing(userid))
+		$li.addClass("following");
+	
 	$li.children(".right").html(text);
 	return $li;
 }

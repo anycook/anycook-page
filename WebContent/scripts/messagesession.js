@@ -1,46 +1,36 @@
-function loadMessagesession(sessionid){
-	
-	
-	var $messageAnswer = $("#message_answer").submit(submitAnswerMessage);
-	$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
-	$messageAnswer.find("textarea").autoGrow();
-	
-	$.getJSON("/anycook/GetMessageSession",
-		{sessionid:sessionid},
-		function(json){
-			var recipients = json.recipients;
-			var $recipientSpan = $("h1 span").last();
-			for(var i = 0; i<recipients.length; i++){
-				var recipient = recipients[i];
-				
-				if(recipient.id == user.id)
-					continue;
-				
-				if($recipientSpan.children("a").length == recipients.length -2 && 
-					$recipientSpan.children("a").length != 0)
-					$recipientSpan.append("<span> und </span>");
-				else if($recipientSpan.children().length > 0)
-					$recipientSpan.append("<span>, </span>");
-				
-				var $a = $("<a></a>").attr("href", User.getProfileURI(recipient.id))
-					.text(recipient.name);
-					
-				$recipientSpan.append($a);
-			}
-		}
-	);
-	
-	$("#messagestream").jScrollPane();
-	getMessages(sessionid);
-	
-}
-
 function getMessages(sessionid, startid){
 	if(startid === undefined)
 		startid = -1;
 	
-	$.getJSON("/anycook/PushMessages",{sessionid:sessionid, lastid:startid},
-		function(messages){
+	$.anycook.graph.getMessageSession(sessionid, startid,
+		function(json){
+			var messages = json.messages;
+			
+			if(startid == -1){
+				var $messageAnswer = $("#message_answer").submit(submitAnswerMessage);
+				$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
+				$messageAnswer.find("textarea").autoGrow();
+				var recipients = json.recipients;
+				var $recipientSpan = $("h1 span").last();
+				for(var i = 0; i<recipients.length; i++){
+					var recipient = recipients[i];
+					
+					if(recipient.id == user.id)
+						continue;
+					
+					if($recipientSpan.children("a").length == recipients.length -2 && 
+						$recipientSpan.children("a").length != 0)
+						$recipientSpan.append("<span> und </span>");
+					else if($recipientSpan.children().length > 0)
+						$recipientSpan.append("<span>, </span>");
+					
+					var $a = $("<a></a>").attr("href", User.getProfileURI(recipient.id))
+						.text(recipient.name);
+						
+					$recipientSpan.append($a);
+					$("#messagestream").jScrollPane();
+				}
+			}
 			
 			// gettingMessages[sessionid] = false;
 			var path = $.address.pathNames();
@@ -113,7 +103,7 @@ function submitAnswerMessage(){
 	if(message.length == 0)
 		return false;
 	
-	$.post("/anycook/NewMessage?streamid="+sessionid+"&text="+encodeURIComponent(message));
+	$.anycook.graph.writeMessage(sessionid, message);
 	
 	//console.log(encodeURIComponent(message));
 	$textarea.val("");

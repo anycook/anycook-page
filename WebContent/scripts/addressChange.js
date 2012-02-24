@@ -188,7 +188,7 @@ function handleChange(event){
 					break;
 				
 				case "messagesession":
-					loadMessagesession(path[1]);
+					getMessages(path[1]);
 					break;
 				}
 				break;

@@ -103,29 +103,16 @@ function gotoProfile(username){
 	$.address.value("profile/"+encodeURIComponent(username));
 }
 
-/*function profileVerticalCenter(element){
-	var span = element.children("span").first();
-	var spanheight = span.css("height");
-	var margintop = (102-spanheight)/2;
-	span.css("marginTop", margintop);
-	
-}*/
-
 function follow(){
 	var $this = $(this);
 	var userid = $.address.pathNames()[1];
-	var data;
 	if(!$this.hasClass("on")){
-		data = {follow:userid};
+		$.anycook.graph.follow(userid);
 		$this.addClass("on");
 	}else{
-		data = {unfollow:userid};
+		$.anycook.graph.unfollow(userid);
 		$this.removeClass("on");
 	}
-		
-	$.post("/anycook/Follow",data, function(){
-		user
-	});
 }
 
 

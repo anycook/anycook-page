@@ -183,6 +183,18 @@
 		return settings.baseurl+"/user/"+encodeURIComponent(user)+"/image?type="+type+"&appid="+settings.appid;
 	};
 	
+	//follow(userid)
+	$.anycook.graph.follow = function(userid){
+		var graph = "/user/"+userid+"/follow";
+		$.anycook.graph._postMessage(graph);
+	}
+	
+	//unfollow(userid)
+	$.anycook.graph.unfollow = function(userid){
+		var graph = "/user/"+userid+"/unfollow";
+		$.anycook.graph._postMessage(graph, data);
+	}
+	
 	//search(querymap, [callback])
 	$.anycook.graph.search = function(data, callback){
 		
@@ -240,7 +252,124 @@
 		$.anycook.graph._postMessage(graph, data);
 	}
 	
+	//login(username, password [,callback])
+	$.anycook.graph.login = function(username, password, callback){
+		var graph = "/session/login";
+		var data = {username:username, password:password};
+		$.when($.anycook.graph._getJSON(graph, data)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+		
+		return dfd.promise();
+	}
 	
+	//logout([callback])
+	$.anycook.graph.logout = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/session/logout";
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+		
+		return dfd.promise();
+	}
+	
+	//getSession([callback])
+	$.anycook.graph.getSession = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/session";
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+		
+		return dfd.promise();
+	}
+	
+	//getNewsstream([callback])
+	$.anycook.graph.getNewsstream = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/message";
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+		
+		return dfd.promise();
+	}
+	
+	//getMessageSession(sessionid [,lastid] [,callback])
+	$.anycook.graph.getMessageSession = function(sessionid){
+		var callback;
+		var lastid = -1;
+		
+		switch(arguments.length){
+		case 3:
+			var type2 = typeof arguments[2];
+			if(type2 == "function")
+				callback = arguments[2];
+		case 2:
+			var type1 = typeof arguments[1];
+			if(type1 == "number" || type1 == "string")
+				lastid = Number(arguments[1]);
+			else if(type1 == "function")
+				callback = arguments[1];
+		}
+		
+		var dfd = $.Deferred();
+		var graph = "/message/"+sessionid;
+		var data = {lastid : lastid};
+		$.when($.anycook.graph._getJSON(graph, data)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+		
+		return dfd.promise();
+	}
+	
+	//getMessageNum([lastnum] [,callback])
+	$.anycook.graph.getMessageNum = function(){
+		var lastnum = -1;
+		var callback;
+		
+		switch(arguments.length){
+		case 2:
+			var type2 = typeof arguments[1];
+			if(type2 == "function")
+				callback = arguments[1];
+		case 1:
+			var type1 = typeof arguments[0];
+			if(type1 == "number" || type1 == "string")
+				lastnum = Number(arguments[0]);
+			else if(type1 == "function")
+				callback = arguments[1];
+		}
+		
+		var dfd = $.Deferred();
+		var graph = "/message/number";
+		var data = {lastnum : lastnum};
+		$.when($.anycook.graph._getJSON(graph, data)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+		
+		return dfd.promise();
+	};
+	
+	//writeMessage(sessionid, text, [,callback])
+	$.anycook.graph.writeMessage = function(sessionid, text, callback){
+		var graph = "/message/"+sessionid;
+		var data = {message:text};
+		$.anycook.graph._postMessage(graph, data);
+	}
 	
 
 })( jQuery );

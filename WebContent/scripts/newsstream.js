@@ -1,10 +1,7 @@
 function loadNewsstream(){
 	var $ul = $("#newsstream");
 	
-	$.ajax({
-		url:"/anycook/GetNewsstream",
-		dataType:"json",
-		success:function(json){
+	$.anycook.graph.getNewsstream(function(json){
 			var datamap = {};
 			var oldDatamap = $ul.data("map") || {};
 						
@@ -59,8 +56,7 @@ function loadNewsstream(){
 			
 			$.extend(oldDatamap, datamap);			
 			$ul.data("map", oldDatamap);
-		}
-	});
+		});
 	var $lightbox = getLightbox("Neue Nachricht", 
 		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
 	$lightbox.find("form").submit(submitNewMessage);
@@ -88,7 +84,7 @@ function checkNewMessageNum(lastnum){
 	
 	if(!lastnum)
 		lastnum = 0;
-	$.getJSON("/anycook/GetNotificationNumbers",{lastnum:lastnum},
+	$.anycook.graph.getMessageNum(lastnum,
 		function(json){
 			isCheckingMessageNum = false;
 			var newNum = lastnum;
@@ -108,7 +104,7 @@ function checkNewMessageNum(lastnum){
 				
 			
 			}
-			setTimeout("checkNewMessageNum("+newNum+")", 1000);
+			checkNewMessageNum(newNum);
 		});
 		// error: function(error){
 			// console.log("error loading messageNum. trying again in 10 sec");

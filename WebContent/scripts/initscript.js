@@ -15,26 +15,7 @@
 	 left = $right.offset().left;
 	 $right.width($("body").width()-left);
 	 
-	 
-	 //anycookgraph
-	 $.anycook.graph.init({baseurl:"http://testgraph.anycook.de", appid:0});
-	 //xml
-	 $("#content_main").xml("init", {error:function(event){
-	 	switch(event.type){
-	 		case 403:
-	 			if(!user.checkLogin()){
-	 				console.log("access only for logged-in users");
-	 				$.address.path("");
-	 				return false;
-	 			}
-	 			break;
-	 		case 404:
-	 			$.address.path("notfound");
-	 	}
-	 	return true;
 	 	
-	 	
-	 }});
 	 
     	$.ajaxSetup({
         	type:"POST", 
@@ -44,11 +25,9 @@
             	// console.error(error.responseText);
             // }
         }); 
-    	$.address.bind("change",handleChange);
     	
-    	$.address.crawlable(true);
-    	
-    	
+    	//anycookgraph
+			 $.anycook.graph.init({baseurl:"http://testgraph.anycook.de", appid:0});
     //couchdb
     $.couch.urlPrefix = "http://test.anycook.de/couchdb";
     
@@ -64,20 +43,44 @@
     	    }
     	});
     	
+    	 //xml
+		 $("#content_main").xml("init", {error:function(event){
+		 	switch(event.type){
+		 		case 403:
+		 			if(!user.checkLogin()){
+		 				console.log("access only for logged-in users");
+		 				$.address.path("");
+		 				return false;
+		 			}
+		 			break;
+		 		case 404:
+		 			$.address.path("notfound");
+		 	}
+		 	return true;
+		 	 }});
+			 	 
     	
 
             //Login
-    	user = User.init();
-    	buildLogin();
+            
+    	$.when(User.init()).then(function(userinit){
+    		user = userinit;
+    		buildLogin();
+    		
+			$.address.bind("change",handleChange);
+    		$.address.crawlable(true);
+    		$.address.update();
+    		
+    		//drafts
+	    	if(user.checkLogin()){
+			    $.anycook.drafts.init();
+			    $.anycook.drafts.num();
+			}
+    	});
     	
     	search = new Search();
     	
     	
-    	//drafts
-    	if(user.checkLogin()){
-		    $.anycook.drafts.init();
-		    $.anycook.drafts.num();
-		}
 
 
             //searchbar 
