@@ -55,10 +55,13 @@
 				a{
 					float:left;
 					
+					
 					//Verhindert verrücken des CSS wenn FB mal länger braucht
 					img{
 						width: 50px;
-						height: 50px;					
+						height: 50px;	
+						@include box-shadow-spread(0px, 1px, 2px, 0px, rgba(0, 0, 0, 0.2));
+						border-radius: 5px;				
 					}
 				}
 				
@@ -68,21 +71,23 @@
 					width: 16px;
 					height: 21px;
 					background: url("/img/comment_arrow16x21.png") no-repeat;
-					margin: 13px -1px 0 3px;	
+					margin: 16px -1px 0 3px;	
 				}
 				
 				.comment_arrow_small, .comment_arrow_answer{
-					margin-top:7px;
+					margin-top:11px;
 				}
 				
 				.recipe_comment, .recipe_comment_small, .recipe_comment_answer{
 					float: left;
 					width: $bigcommentwidth;
 					border:1px solid $lightgrey;
+					border-radius: 5px;  
 					background-color: $stepcolor;
 					padding: 7px 12px 5px 12px;
 					margin: 0 0 15px 0;
 					color: $darkfontcolor;
+					@include box-shadow-spread(0px, 1px, 1px, 0px, rgba(127,127,127,0.1));
 					
 					// textarea{
 					  // width: 445px;
@@ -244,6 +249,7 @@
 					.recipe_comment{
 						float: left;
 						width: $smallcommentwidth;
+						@include box-shadow-spread(0px, 1px, 1px, 0px, rgba(127,127,127,0.1));
 					}
 					
 					.recipe_comment_answer{
@@ -276,11 +282,11 @@
 				
 				.comment_arrow, .comment_arrow_small, .comment_arrow_answer{
 					background-position: 0 -21px;	
-					margin: 13px 3px 0 -1px;	
+					margin: 16px 3px 0 -1px;	
 				}
 				
 				.comment_arrow_small, .comment_arrow_answer{
-					margin-top:7px;
+					margin-top:11px;
 				}
 				
 				.recipe_comment a, .recipe_comment_small a{
