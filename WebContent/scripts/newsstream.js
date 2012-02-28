@@ -10,45 +10,24 @@ function loadNewsstream(){
 				var $li;
 				var oldData = oldDatamap[json[i].id];
 				var data = json[i];
-				
-				switch(data.type){
-				case "life":
-				
-					if(oldData) 
-						continue;
+				if(oldData){
+					if(oldData.datetime != data.datetime){
+						var $target = oldData.target;
+						$target.animate({height:0, opacity:0}, {duration: 800, complete:function(){
+							$(this).remove();
+						}});
 						
-					$li = parseLife(data);
-					
-					if(i<json.length-1 && json[i+1].type == "life")
-						$appendTo = $ul.find("ul").first();
-					else{
-						$temp = $("<li><div class=\"top\"></div><ul></ul></li>").addClass("news");
-						$temp.find("ul").prepend($li);
-						$li = $temp;
 					}
-					$appendTo.prepend($li);
-					break;
-				case "messagesession":
-					if(oldData){
-						if(oldData.datetime != data.datetime){
-							var $target = oldData.target;
-							$target.animate({height:0, opacity:0}, {duration: 800, complete:function(){
-								$(this).remove();
-							}});
-							
-						}
-						else
-							continue;
-					}			
-					$li = $("<li></li>").append(getMessageContainer(data));
-					$appendTo.prepend($li);
-					if(oldData){
-						var oldHeight = $li.css("height");
-						$li.css({height:0, opacity:0}).animate({height:oldHeight, opacity:1}, {duration:800});
-					}	
-					break;
-				
+					else
+						continue;
+				}			
+				$li = $("<li></li>").append(getMessageContainer(data));
+				$appendTo.prepend($li);
+				if(oldData){
+					var oldHeight = $li.css("height");
+					$li.css({height:0, opacity:0}).animate({height:oldHeight, opacity:1}, {duration:800});
 				}
+				
 				json[i].target = $li;				
 				datamap[json[i].id] = json[i];
 				//$li.data("data", json[i]);				
