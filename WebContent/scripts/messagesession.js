@@ -54,7 +54,7 @@ function getMessages(sessionid, startid){
 					
 					
 					if(messages[i].unread)
-						readMessage(messages[i], sessionid);
+						$.anycook.graph.readMessage(sessionid, messages[i].id);
 						
 					$.extend(oldDataMap, datamap);
 					$messagestream.data("messages", oldDataMap);
@@ -137,10 +137,6 @@ function getMessageContainerforSession(message){
 	
 	return $li;
 
-}
-
-function readMessage(message, sessionid){
-	$.post("/anycook/ReadMessages?sessionid="+sessionid+"&messageid="+message.id);
 }
 
 

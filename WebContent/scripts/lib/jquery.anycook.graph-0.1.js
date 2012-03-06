@@ -252,10 +252,13 @@
 		$.anycook.graph._postMessage(graph, data);
 	}
 	
-	//login(username, password [,callback])
-	$.anycook.graph.login = function(username, password, callback){
+	//login(username, password, stayloggedin [,callback])
+	$.anycook.graph.login = function(username, password, stayloggedin, callback){
+		var dfd = $.Deferred();
 		var graph = "/session/login";
 		var data = {username:username, password:password};
+		if(stayloggedin)
+			data.stayloggedin = "";
 		$.when($.anycook.graph._getJSON(graph, data)).then(function(json){
 			dfd.resolve(json);
 			if(callback)
@@ -291,11 +294,27 @@
 		return dfd.promise();
 	}
 	
-	//getNewsstream([callback])
-	$.anycook.graph.getNewsstream = function(callback){
+	//getNewsstream([lastdate [, callback]])
+	$.anycook.graph.getNewsstream = function(){
+		var lastdate;
+		var callback;
+		switch(arguments.length){
+		case 2:
+			var type2 = typeof arguments[1];
+			if(type2 == "function")
+				callback = arguments[1];
+		
+		case 1:
+			var type1 = typeof arguments[0];
+			if(type1 == "string" || type1 == "number")
+				lastdate = Number(arguments[0]);
+			else if(type1 == "function")
+				callback = arguments[0];	
+		}
 		var dfd = $.Deferred();
 		var graph = "/message";
-		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+		var data = {lastchange:lastdate};
+		$.when($.anycook.graph._getJSON(graph, data)).then(function(json){
 			dfd.resolve(json);
 			if(callback)
 				callback(json);
@@ -369,6 +388,19 @@
 		var graph = "/message/"+sessionid;
 		var data = {message:text};
 		$.anycook.graph._postMessage(graph, data);
+	}
+	
+	//writeNewMessage(recipients, text [, callback])
+	$.anycook.graph.writeNewMessage = function(recipients, text, callback){
+		var graph = "/message";
+		var data = {message:text, recipients:JSON.stringify(recipients)};
+		$.anycook.graph._postMessage(graph, data);
+	}
+	
+	//readMessage(sessionid, messageid [,callback])
+	$.anycook.graph.readMessage = function(sessionid, messageid, callback){
+		var graph = "/message/"+sessionid+"/"+messageid;
+		$.anycook.graph._postMessage(graph);
 	}
 	
 

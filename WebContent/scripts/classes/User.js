@@ -113,17 +113,9 @@ User.prototype.getUserImagePath = function(type){
 
 User.login = function(mail, pwd, stayloggedin){
 	var callback = false;
-	var data = "mail="+mail+"&pwd="+pwd;
-	if(stayloggedin)
-		data+="&stayloggedin";
-	$.ajax({
-		url:"/anycook/Login",
-		data:data,
-		async: false,
-		success:function(response){
+	$.anycook.graph.login(mail, pwd, stayloggedin, function(response){
 			callback = response!="false";
 			// checkNewMessageNum();
-	}
 	});
 	
 	return callback;
@@ -136,18 +128,15 @@ User.prototype.logout = function(){
 		this.mail = null;
 		this.facebook_id = null;
 		this.image = null;
-		$.ajax({
-			url:"/anycook/Logout",
-			success:function(){
-				FB.getLoginStatus(function(response){
-					if(response.status == "connected"){
-						FB.logout(function() {
-							  window.location.reload();
-							});
-					}else
-						window.location.reload();
-				});
-			}
+		$.anycook.graph.logout(function(){
+			FB.getLoginStatus(function(response){
+				if(response.status == "connected"){
+					FB.logout(function() {
+						  window.location.reload();
+						});
+				}else
+					window.location.reload();
+			});
 		});
 	}
 };

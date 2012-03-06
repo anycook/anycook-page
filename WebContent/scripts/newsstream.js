@@ -1,11 +1,35 @@
 function loadNewsstream(){
-	var $ul = $("#newsstream");
 	
+	var $lightbox = getLightbox("Neue Nachricht", 
+		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
+	$lightbox.find("form").submit(submitNewMessage);
+	
+	$("#newMessageBtn").click(function(){
+		var top = $(this).offset().top-113;
+		showLightbox($lightbox, top);
+		return false;
+	});
+	
+	var $recipients = $lightbox.find(".recipients").click(clickRecipients);
+	$recipients.data("height", 22);
+	
+	getNewsstream();
+	
+}
+
+function getNewsstream(lastDatetime){
+	var pathNames = $.address.pathNames();
+	if(pathNames.length != 1 || pathNames[0] != "newsstream")
+		return;
+	
+	var $ul = $("#newsstream");
+	if(!lastDatetime)
+		lastDatetime = 0;
 	$.anycook.graph.getNewsstream(function(json){
 			var datamap = {};
 			var oldDatamap = $ul.data("map") || {};
 						
-			for(var i = json.length-1; i>=0; i--){
+			for(var i = 0; i<json.length; i++){
 				var $appendTo = $ul;
 				var $li;
 				var oldData = oldDatamap[json[i].id];
@@ -35,22 +59,11 @@ function loadNewsstream(){
 			
 			$.extend(oldDatamap, datamap);			
 			$ul.data("map", oldDatamap);
+			if(json.length >0){
+				lastDatetime = json[0].datetime;
+			}
+			getNewsstream(lastDatetime);		
 		});
-	var $lightbox = getLightbox("Neue Nachricht", 
-		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
-	$lightbox.find("form").submit(submitNewMessage);
-	
-	$("#newMessageBtn").click(function(){
-		var top = $(this).offset().top-113;
-		showLightbox($lightbox, top);
-		return false;
-	});
-	
-	var $recipients = $lightbox.find(".recipients").click(clickRecipients);
-	$recipients.data("height", 22);
-	
-	
-	
 }
 
 var isCheckingMessageNum = false;
@@ -236,6 +249,7 @@ function getNewMessageContent(){
 }
 
 function submitNewMessage(){
+	event.preventDefault();
 	var $this = $(this);
 	var $recipients = $(".recipients");
 	var recipientIds = $recipients.data("ids");
@@ -243,9 +257,9 @@ function submitNewMessage(){
 	var message = $textarea.val();
 	
 	if(recipientIds.length == 0 || message.length == 0)
-		return false;
+		return;
 	
-	$.post("/anycook/NewMessage?recipients="+recipientIds+"&text="+encodeURIComponent(message));
+	$.anycook.graph.writeNewMessage(recipientIds, encodeURIComponent(message));
 	
 	//console.log(encodeURIComponent(message));
 	$recipients.empty().data("ids", []);
@@ -253,7 +267,6 @@ function submitNewMessage(){
 	
 	hideLightbox($this.parents(".lightbox"));
 	
-	return false;
 }
 
 function getMessageContainer(message){
@@ -265,8 +278,12 @@ function getMessageContainer(message){
 	for(var i = 0; i<recipients.length; i++){
 		var recipient = recipients[i];
 		var $image = $("<img />").attr("src", User.getUserImagePath(recipient.id));
-		if(recipient.id == message.sender)
-			$imageborder.prepend($image);
+		if(recipient.id == message.sender){
+			if(message.sender == user.id)
+				$imageborder.append($image);
+			else
+				$imageborder.prepend($image);
+		}
 		else
 			$imageborder.append($image);
 		

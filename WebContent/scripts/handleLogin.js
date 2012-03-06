@@ -169,6 +169,7 @@ function focusoutInputs(event){
 
 
 function submitForm(event){
+	event.preventDefault();
 	var $this = $(this);
 	var $mail = $this.find("input[type=\"text\"]");
 	var $pwd = $this.find("input[type=\"password\"]");
@@ -176,13 +177,15 @@ function submitForm(event){
 	var mail = $mail.val();
 	var pwd = $pwd.val();
 	var stayloggedin =$("#stayloggedin input").is(":checked");
-	if(User.login(mail, pwd, stayloggedin)){
+	$.anycook.graph.login(mail, pwd, stayloggedin, function(json){
+		if(!json){
+			console.log("login failed");
+			return;
+		}
 		user = User.init();
 		//TODO code Login behavior
 		location.reload();
-	}
-	
-	return false;
+	});
 }
 
 
