@@ -92,17 +92,31 @@ function checkNewMessageNum(lastnum){
 					
 					if($.address.pathNames()[0] == "newsstream")
 						loadNewsstream();
+						
+					setTitlePrefix(newNum);
 				}
-				
-			
 			}
 			checkNewMessageNum(newNum);
+			
 		});
 		// error: function(error){
 			// console.log("error loading messageNum. trying again in 10 sec");
 			// setTimeout("checkNewMessageNum(0)", 10000);
 		// }
 	// });
+}
+
+function setTitlePrefix(newNum){
+	$(document).data("messageNum", newNum);
+	setTitle();
+}
+
+function getTitlePrefix(){
+	var messageNum = $(document).data("messageNum") || 0;
+	if(messageNum == 0)
+		return "";
+	return "("+messageNum+") ";	
+	
 }
 
 function clickRecipients(){

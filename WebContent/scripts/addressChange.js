@@ -63,23 +63,11 @@ function getHeaderLink(value, href, id){
 function handleChange(event){
 	var lastAddress = $(document).data("lastAddress");
 	if(lastAddress == undefined || lastAddress.path != event.path){
-		
-		// if(lastAddress != undefined && lastAddress.pathNames[0] == "recipeediting"){
-			// var check = confirm("Willst du wirklich aufhören, an diesem Rezept zu arbeiten?");
-			// if(!check) {
-				// $.address.autoUpdate(false);
-				// window.location.hash = lastAddress.value;
-				// $.address.autoUpdate(true);
-// 				
-				// return false;
-			// }
-		// }
 		$(document).data("lastAddress", event);
-		
-		
+			
 		search= new Search();
 		
-		$.address.title("anycook");
+		setTitle("anycook");
 		
 		//resetSearchBar();
 		resetFilter();
@@ -116,22 +104,22 @@ function handleChange(event){
 					// search.search();
 					// break;
 				case "recipeediting":
-					$.address.title("Neues Rezept erstellen | anycook");
+					setTitle("Neues Rezept erstellen");
 					loadNewRecipe();
 					break;
 				case "feedback":
-					$.address.title("Feedback | anycook");
+					setTitle("Feedback");
 					loadContact();
 					break;
 				case "preview":
 					loadPreview();
 					break;
 				case "about_us":
-					$.address.title("Über uns | anycook");
+					setTitle("Über uns");
 					loadAboutUs();
 					break;
 				case "impressum":
-					$.address.title("Impressum | anycook");
+					setTitle("Impressum");
 					break;
 				case "fbregistration":
 					loadFBRegistrationMessage();
@@ -140,14 +128,14 @@ function handleChange(event){
 					loadResetPasswordStep1();
 					break;
 				case "registration":
-					$.address.title("Registrierung | anycook");
+					setTitle("Registrierung");
 					showRegistration();
 					break;
 				case "settings":
 					$.anycook.user.settings.load();
 					break;
 				case "developer":
-					$.address.title("Entwickler | anycook");
+					setTitle("Entwickler");
 					break;
 				case "newsstream":
 					$("#user_messages").addClass("active");
@@ -256,6 +244,18 @@ function handleChange(event){
 			}
 		}
 	}
+	
+	setTitlePrefix();
+			
+	
+}
+
+function setTitle(newTitle){
+	if(!newTitle)
+		newTitle = $(document).data("title") || "anycook";
+	else
+		$(document).data("title", newTitle);
+	$.address.title(getTitlePrefix()+newTitle);
 }
 
 // behandelt change bei $.address.parameters
