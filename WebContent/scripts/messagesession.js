@@ -116,9 +116,7 @@ function getMessageContainerforSession(message){
 	var $sender = $("<a></a>").attr("href", User.getProfileURI(sender.id))
 		.text(sender.name);
 	var $image = $("<img />").attr("src", User.getUserImagePath(sender.id));
-	
-	var $imageborder = $("<div></div>").addClass("messageimageborder")
-		.append($image);
+
 	var $headline = $("<div></div>").addClass("message_headline")
 		.append($sender);
 	var $datetime = $("<div></div>").addClass("datetime").text(getDateString(message.datetime));
@@ -131,8 +129,8 @@ function getMessageContainerforSession(message){
 		.append($p)
 		.append($datetime);
 	
-	var $li = $("<li></li>").addClass("message")
-		.append($imageborder)
+	var $li = $("<li></li>").addClass("messagedialog")
+		.append($image)
 		.append($messageright);
 	
 	return $li;
