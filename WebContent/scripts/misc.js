@@ -22,18 +22,52 @@ function linkTo_UnCryptMailto( s )
 
 function getDateString(fromdatetime){
 	var datetime = fromdatetime.split(".")[0].split(" ");
+	if(datetime.length == 2){
+		var date = datetime[0].split("-");
+		var time = datetime[1].split(":");
+		var discdate = new Date(date[0], Number(date[1])-1, date[2], time[0], time[1]);
+		var today = new Date();
+		var yeardifference = today.getFullYear() -discdate.getFullYear();
+		var monthdifference = today.getMonth() - discdate.getMonth();
+		var daydifference = today.getDate() - discdate.getDate();
+		var hourdifference = today.getHours() - discdate.getHours();
+		var minutedifference = today.getMinutes() - discdate.getMinutes();
+		var hours = formatNumberLength(discdate.getHours(), 2);
+		var minutes = formatNumberLength(discdate.getMinutes(), 2);
+		var timestring = " um "+hours+":"+minutes+" Uhr";
+		
+		var date = discdate.getDate();
+		var month = formatNumberLength(discdate.getMonth()+1, 2);
+		var year = discdate.getFullYear();
+		var daystring = getDayString(discdate.getDay());
+		if(yeardifference > 0)
+			return "am "+date+"."+month+"."+year;
+		if(monthdifference > 0)
+			return "am "+date+"."+month+".";
+		if(daydifference == 0){
+			if(hourdifference == 0){
+				if(minutedifference<5)
+					return "vor kurzem";
+				return "vor "+minutedifference+" Minuten";
+			}
+			if(hourdifference == 1)
+				return "vor einer Stunde";
+			return "vor "+hourdifference+" Stunden";
+		}	
+			
+		if(daydifference == 1)
+			return "gestern"+timestring;
+		if(daydifference < 7)
+			return "am "+daystring+timestring;
+		return "vor "+daydifference+" Tagen";
+	}
+	
 	var date = datetime[0].split("-");
-	var time = datetime[1].split(":");
-	var discdate = new Date(date[0], Number(date[1])-1, date[2], time[0], time[1]);
+	var discdate = new Date(date[0], Number(date[1])-1, date[2]);
 	var today = new Date();
 	var yeardifference = today.getFullYear() -discdate.getFullYear();
 	var monthdifference = today.getMonth() - discdate.getMonth();
 	var daydifference = today.getDate() - discdate.getDate();
-	var hourdifference = today.getHours() - discdate.getHours();
-	var minutedifference = today.getMinutes() - discdate.getMinutes();
-	var hours = formatNumberLength(discdate.getHours(), 2);
-	var minutes = formatNumberLength(discdate.getMinutes(), 2);
-	var timestring = " um "+hours+":"+minutes+" Uhr";
 	
 	var date = discdate.getDate();
 	var month = formatNumberLength(discdate.getMonth()+1, 2);
@@ -44,21 +78,15 @@ function getDateString(fromdatetime){
 	if(monthdifference > 0)
 		return "am "+date+"."+month+".";
 	if(daydifference == 0){
-		if(hourdifference == 0){
-			if(minutedifference<5)
-				return "vor kurzem";
-			return "vor "+minutedifference+" Minuten";
-		}
-		if(hourdifference == 1)
-			return "vor einer Stunde";
-		return "vor "+hourdifference+" Stunden";
+		return "heute"
 	}	
 		
 	if(daydifference == 1)
-		return "gestern"+timestring;
+		return "gestern";
 	if(daydifference < 7)
-		return "am "+daystring+timestring;
+		return "am "+daystring;
 	return "vor "+daydifference+" Tagen";
+	
 }
 
 function formatNumberLength(num, length) {
