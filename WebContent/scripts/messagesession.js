@@ -119,6 +119,8 @@ function getMessageContainerforSession(message){
 
 	var $headline = $("<div></div>").addClass("message_headline")
 		.append($sender);
+		
+	var lastdate = $(".datetime").last().val();
 	var $datetime = $("<div></div>").addClass("datetime").text(getDateString(message.datetime));
 	
 	

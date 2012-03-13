@@ -186,13 +186,8 @@ function handleChange(event){
 					$("#content_header")
 							.append(getHeaderLink("Rezept", "", "recipe_btn"))
 							.append(getHeaderLink("Diskussion", "", "discussion_btn"));
-					$.ajax({
-				  		  url: "/anycook/LoadRecipe",
-				  		  dataType: 'json',
-				  		  data: {recipe:path[1], version:path[2]},
-				  		  success: function(json){
+					$.anycook.graph.recipe(path[1], path[2], function(json){
 							loadRecipewJSON(json);
-						}
 				  	});
 					break;
 					

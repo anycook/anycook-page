@@ -125,11 +125,6 @@ function loadRecipe(recipe) {
 	});
 	//addtagsbox
 	makeAddTags();
-
-	//version
-	if($.address.pathNames().length == 3) {
-		showVersionInfo(recipe);
-	}
 }
 
 function loadSteps(steps) {
@@ -282,24 +277,6 @@ function personsDown() {
 	var newNum = ((99 - 2 + currentNum) % 99) + 1;
 	$input.val(newNum);
 	multiZutaten(newNum);
-}
-
-function showVersionInfo(recipe) {
-	if($("#version_info").length == 0) {
-		var $versionInfo = $("<div></div>").attr("id", "version_info").addClass("info");
-		$versionInfo.append("<div class=\"left\"><div class=\"headline\"></div></div>").append("<div class=\"text\"></div>").append("<div class=\"right\"><a class=\"button\">Version bearbeiten</a></div>").append("<div class=\"rightbackground\"></div>");
-		$("#recipe_container").prepend($versionInfo);
-	}
-	var $versionInfo = $("#version_info");
-	$versionInfo.find(".right").show();
-	$versionInfo.children(".left").width("auto");
-	$versionInfo.find(".headline").text("Diese Version wurde " + getDateString(recipe.created) + " von " + recipe.usernames[0] + " erstellt.");
-	$versionInfo.find(".button").attr("href", recipe.getURI() + "/" + recipe.id + "?page=edit");
-
-	if(recipe.active)
-		$versionInfo.addClass("active");
-
-	$versionInfo.fadeIn(500);
 }
 
 function showShare() {
