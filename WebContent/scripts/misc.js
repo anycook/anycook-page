@@ -58,7 +58,7 @@ function getDateString(fromdatetime){
 		if(daydifference == 1)
 			return "gestern"+timestring;
 		if(daydifference < 7)
-			return "am "+daystring+timestring;
+			return "am "+daystring;
 		return "vor "+daydifference+" Tagen";
 	}
 	
