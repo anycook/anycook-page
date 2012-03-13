@@ -24,23 +24,19 @@ function loadDiscover(){
 
 
 function fillDiscover(){
-		$.ajax({
-			url: "/anycook/GetDiscoverRecipes",
-			dataType: 'json',
-			success: function(json){
-				for(var i = 0; i<json.leckerste.length; i++){
-					for(var type in json){
-						var recipe = json[type][i];
-							var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
-							$("#"+type+" .discover_border .discover_container").append("<a href=\""+uri+"\" class=\"recipe_thumbnail\">" +
-									"<img src=\"http://graph.anycook.de/recipe/"+recipe.name+"/image?type=small\"/>" +
-									"<div><span>"+recipe.name+"</span></div></a>");
-							
-							$("#"+type+" .discover_border .discover_container a").last().css("margin-left", 120*i);							
-					}
+		$.anycook.graph.discover(function(json){
+			for(var i = 0; i<json.leckerste.length; i++){
+				for(var type in json){
+					var recipe = json[type][i];
+						var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
+						$("#"+type+" .discover_border .discover_container").append("<a href=\""+uri+"\" class=\"recipe_thumbnail\">" +
+								"<img src=\"http://graph.anycook.de/recipe/"+recipe.name+"/image?type=small\"/>" +
+								"<div><span>"+recipe.name+"</span></div></a>");
+						
+						$("#"+type+" .discover_border .discover_container a").last().css("margin-left", 120*i);							
 				}
-			}				  
-			});
+			}
+		});
 }
 
 function showNextDiscover(event){

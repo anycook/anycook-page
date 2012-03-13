@@ -8,7 +8,7 @@ function loadDiscussion(recipename, lastid) {
 		$("#no_comment").hide();
 	else
 		$("#yes_commit").hide();
-	$.getJSON("/anycook/GetDiscussion", {gericht:recipename, lastid:lastid}, function(json){
+	$.anycook.graph.getDiscussion(recipename, lastid, function(json){
 		var pathNames = $.address.pathNames();
 		if(pathNames[0] != "recipe" || decodeURI(pathNames[1]) != recipename)
 			return;
@@ -238,10 +238,7 @@ function getChildComment(user, id){
 function comment(event) {
 	var text = $(this).prev().children().val();
 	if(text != "") {
-		$.ajax({
-			url : "/anycook/Discuss",
-			data : {comment:text, gericht:encodeURIComponent(recipe.name)}
-		});
+		$.anycook.graph.discuss(recipe.name, text);
 	}
 }
 
@@ -251,7 +248,7 @@ function childComment(event) {
 		var pid = $this.parents(".comment").data("comment_id");
 		var text = $this.val();
 		if(text != "") {
-			$.post("/anycook/Discuss",{comment: text, gericht:encodeURIComponent(recipe.name),pid:pid});
+			$.anycook.graph.discuss(recipe.name, text, pid);
 			$this.parents(".child_comment").remove();
 		}
 	}

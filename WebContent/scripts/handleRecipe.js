@@ -79,12 +79,15 @@ function loadRecipe(recipe) {
 
 	//schmeckt-button
 	if(user.checkLogin()) {
-		if(schmecktChecker(recipe.name)) {
-			$("#schmecktmir").click(schmecktmir);
-		} else {
-			$("#schmecktmir").addClass("on");
-			$("#schmecktmir").click(schmecktmirnicht);
-		}
+		$.anycook.graph.checkSchmeckt(recipe.name, function(schmeckt){
+			if(!schmeckt) {
+				$("#schmecktmir").click(schmecktmir);
+			} else {
+				$("#schmecktmir").addClass("on");
+				$("#schmecktmir").click(schmecktmirnicht);
+			}
+		});
+		
 	}
 
 	$.address.title(recipe.name + " | anycook");

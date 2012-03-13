@@ -403,5 +403,87 @@
 		$.anycook.graph._postMessage(graph);
 	}
 	
-
+	//getRecommendations([callback])
+	$.anycook.graph.getRecommendations = function(callback){
+		var graph = "/user/recommendations";
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
+	}
+	
+	//checkSchmeckt(recipename, [callback])
+	$.anycook.graph.checkSchmeckt = function(recipename, callback){
+		var graph = "/recipe/"+recipename+"/schmeckt";
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
+	}
+	
+	//schmeckt(recipename)
+	$.anycook.graph.schmeckt = function(recipename){
+		var graph = "/recipe/"+recipename+"/schmeckt";
+		$.anycook.graph._postMessage(graph);
+	}
+	
+	//schmecktnicht(recipename)
+	$.anycook.graph.schmecktnicht = function(recipename){
+		var graph = "/recipe/"+recipename+"/schmecktnicht";
+		$.anycook.graph._postMessage(graph);
+	}
+	
+	//discover([callback])
+	$.anycook.graph.discover = function(callback){
+		var graph = "/discover";
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
+	}
+	
+	
+	//discussion
+	
+	//getDiscussion(recipename [, callback])
+	$.anycook.graph.getDiscussion = function(recipename, lastid, callback){
+		var graph = "/discussion/"+recipename;
+		var data = {lastid:lastid};
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph, data)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
+	}
+	
+	//discuss(recipename, text, [, parentid] [, callback])
+	$.anycook.graph.discuss = function(recipename, text){
+		var graph = "/discussion/"+recipename;
+		var data = {comment:text};
+		var callback;
+		switch(arguments.length){
+		case 4:
+			callback = arguments[3];
+		case 3:
+			var type = typeof arguments[2];
+			if(type == "function")
+				callback = arguments[2];
+			else
+				data.lastid = Number(arguments[2]);
+		}
+		
+		$.anycook.graph._postMessage(graph, data);
+	}
+	
 })( jQuery );

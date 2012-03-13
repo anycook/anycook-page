@@ -61,20 +61,6 @@ function hideUserMenu(event){
 	
 }
 
-function schmecktChecker(gericht){
-	var schmecktcheck = false;
-	$.ajax({
-		url: "/anycook/CheckSchmeckt",
-		data: "g="+gericht,
-		async: false,
-		success: function(response){
-			if(response != "false")
-				schmecktcheck = true;
-		}
-	});
-	return schmecktcheck;
-}
-
 function initMenus(){
 	//loginmenu
 	$("#login_container form").submit(submitForm);	

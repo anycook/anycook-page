@@ -76,24 +76,20 @@ function loadProfile(userid){
 	$(".profile_more").click(profileShowMore);
 		
 	if(userid == user.id){
-		$.ajax({
-			url:"/anycook/GetRecommendation",
-	        dataType: "json",
-	        success:function(json){
-	        	if(json.length>0){
-	        		var $recommendation = $("#profile_recommendation").show();
-	        		$recommendation.children("h2").text("Diese Rezepte könnten dir auch schmecken");
-	        		var $p = $recommendation.children("p");
-		        	for(var i = 0; i<json.length && i<20; i++){
-		        		$p.append(profileRecipe(json[i]));
-		        	}
-		        	if($p.children("a").length<=5)
-		    			$p.css("height", 120);
-		    		
-		    		if($p.children("a").length>10)
-		    			$recommendation.children(".profile_more").show();
+		$.anycook.graph.getRecommendations(function(json){
+        	if(json.length>0){
+        		var $recommendation = $("#profile_recommendation").show();
+        		$recommendation.children("h2").text("Diese Rezepte könnten dir auch schmecken");
+        		var $p = $recommendation.children("p");
+	        	for(var i = 0; i<json.length && i<20; i++){
+	        		$p.append(profileRecipe(json[i]));
 	        	}
-	        }
+	        	if($p.children("a").length<=5)
+	    			$p.css("height", 120);
+	    		
+	    		if($p.children("a").length>10)
+	    			$recommendation.children(".profile_more").show();
+        	}
 		});
 	}
 	
