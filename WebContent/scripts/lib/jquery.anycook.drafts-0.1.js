@@ -12,11 +12,32 @@
 	
 	var queue = [];
 	
-	$.anycook.drafts.init = function(dbname){
+	//init([dbname][,callback])
+	$.anycook.drafts.init = function(){
+		var dbname;
+		var callback = function(){};
+		
+		switch(arguments.length){
+			case 2:
+				callback = arguments[1];
+			case 1:
+				var type = typeof arguments[0];
+				if(type === "function")
+					callback = arguments[0]
+				else if(type === "string")
+					dbname = arguments[0];
+		}
+		
 		if(dbname !== undefined)
 			settings.dbname = dbname;
 		settings.$db = $.couch.db(settings.dbname);
+		
+		$.anycook.drafts.getCookie(callback);
 	};
+	
+	$.anycook.drafts.getCookie = function(callback){
+		$.getJSON("http://testgraph.anycook.de/session/couchdb?callback=?", callback);
+	}
 		
 	$.anycook.drafts.load = function(){
 		var $db = settings.$db;

@@ -73,8 +73,10 @@
     		
     		//drafts
 	    	if(user.checkLogin()){
-			    $.anycook.drafts.init();
-			    $.anycook.drafts.num();
+			    $.anycook.drafts.init(function(){
+			    	$.anycook.drafts.num();
+			    });
+			    
 			}
     	});
     	
