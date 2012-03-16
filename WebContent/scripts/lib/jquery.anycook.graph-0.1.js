@@ -25,6 +25,17 @@
 		
 	}
 	
+	$.anycook.graph._post = function(graph, data, callback){
+		if(!graph) graph = "";
+		if(!data) data = {};
+		var callback = callback || callback;
+		
+		var settings = $.anycook.graph._settings();
+		//data[settings.callbackName] = "?";		
+		$.extend(data, {appid : settings.appid});
+		return $.post(settings.baseurl+graph, data, callback);
+	}
+	
 	$.anycook.graph._postMessage = function(graph, data){
 		if(!graph) graph = "";
 		if(!data) data = {};
@@ -507,9 +518,9 @@
 	
 	
 	//changeAccountSettings(data)
-	$.anycook.graph.changeAccountSettings = function(data){
+	$.anycook.graph.changeAccountSettings = function(data,callback){
 		var graph = "/session/settings/account/";		
-		$.anycook.graph._postMessage(graph, data);
+		return $.anycook.graph._post(graph, data, callback);
 	}
 	
 })( jQuery );

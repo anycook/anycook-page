@@ -122,7 +122,7 @@
 		if(newText != user.text)
 			newSettings.text = newText;
 			
-		$.post("/anycook/ChangeAccountSettings", newSettings,function(){
+		$.anycook.graph.changeAccountSettings(newSettings,function(){
 			user = User.init();
 			var $container = $("#profile_saved");		
 			$.anycook.user.settings.saved($container);

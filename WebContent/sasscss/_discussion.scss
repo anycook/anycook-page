@@ -145,96 +145,148 @@
 					}
 				}
 				
-				.recipe_event{
-					position:relative;
-					margin-bottom:15px;
-					padding: 0 12px 0 18px;
-					background: url("/img/recipe_event_yellow_left.png") repeat-y $discussionyellow;
-					border-top:1px solid $discussionyellowborder;
-					border-bottom:1px solid $discussionyellowborder;
-					@include box-shadow-inset(0, 2px, 2px, rgba(255,255,255, 0.4));
-					float:left;
-					width:$discussionwidth - 30;
-					
-					&.active{
-						background:url("/img/recipe_event_green_left.png") repeat-y $activebuttonbackground;
-						border-top:1px solid $activebuttonoutline;
-						border-bottom:1px solid $activebuttonoutline;
-						
-						.left{
-							.comment_headline{
-								color:$activebuttonfontcolor;
-							}
-						}
-						
-						.right{
-							
-							border-left:1px solid $activebuttonoutline;
-							
-							.comment_like{				
-								.like{
-									background-position:-60px -20px;
-								}
-								
-								.like_nr{
-									color:$activebuttonfontcolor;
-								}
-							}
-						}
-						.rightbackground{
-							background: url("/img/recipe_event_green_right.png") repeat-y;
-						}
-					}
-					
-					.left{
-						float:left;
-						height:100%;
-						padding: 16px 0 19px 0;
-						width:573px;
-						cursor:pointer;
-						display:block;
-						
-						&:hover{
-							text-decoration:none;
-						}
-						
-						.comment_headline{
-							float:left;
-							color:$discussionyellowfont;
-							line-height:15px;
-						}
-					}
-					
-					.right{		
-						position:absolute;
-						width:68px;
-						top:4px;
-						bottom:4px;
-						right:0;
-						border-left:1px solid $discussionyellowborder;
-						
-						
-						.comment_like{
-							margin-left:10px;					
-							.like{
-								background-position:-60px -40px;
-							}
-							
-							.like_nr{
-								color:$discussionyellowfont;
-							}
-						}
-					}
-					
-					.rightbackground{
-						position:absolute;
-						background: url("/img/recipe_event_yellow_right.png") repeat-y;
-						top:0px;
-						bottom:0px;
-						right:0;
-						width:4px;
-					}
+				&.event{
+				  border-bottom: 1px solid #DAD9D7;
+				  border-top: 1px solid #DAD9D7;
+				  padding: 15px 0 5px;
+				  margin: 5px 0 10px 0;
+				  min-height:50px;
+				  
+				  
+				  .left{
+				    float:left;
+				    width: 20px;
+				    height:50px;
+				    margin:  4px 0 0 10px;
+				    
+				    .up, .down{
+				      background-image:url("/img/icons20x20.png");
+				      background-position:-60px -60px;
+				      height:8px;
+				      width:12px;
+				      margin:0px 4px;
+				    }
+				    
+				    .votes{
+				      font-size:12pt;
+				      text-align:center;
+				      padding:3px 0;
+				    }
+				    
+				    .down{
+				      background-position:-60px -80px;
+				    }
+				  }
+				  
+				  .mid{
+				    float:left;
+				    margin-left:30px;
+				    .infodata{
+				      color:$smalllightfontcolor;
+				      font-size:11px;
+				    }
+				    
+				    .title{
+				      margin:5px 0 0 0;
+				      font: 13pt Georgia,serif;
+				    }
+				    
+				    .text{
+				      
+				    }
+				  }
 				}
+				
+				// .recipe_event{
+					// position:relative;
+					// margin-bottom:15px;
+					// padding: 0 12px 0 18px;
+					// background: url("/img/recipe_event_yellow_left.png") repeat-y $discussionyellow;
+					// border-top:1px solid $discussionyellowborder;
+					// border-bottom:1px solid $discussionyellowborder;
+					// @include box-shadow-inset(0, 2px, 2px, rgba(255,255,255, 0.4));
+					// float:left;
+					// width:$discussionwidth - 30;
+// 					
+					// &.active{
+						// background:url("/img/recipe_event_green_left.png") repeat-y $activebuttonbackground;
+						// border-top:1px solid $activebuttonoutline;
+						// border-bottom:1px solid $activebuttonoutline;
+// 						
+						// .left{
+							// .comment_headline{
+								// color:$activebuttonfontcolor;
+							// }
+						// }
+// 						
+						// .right{
+// 							
+							// border-left:1px solid $activebuttonoutline;
+// 							
+							// .comment_like{				
+								// .like{
+									// background-position:-60px -20px;
+								// }
+// 								
+								// .like_nr{
+									// color:$activebuttonfontcolor;
+								// }
+							// }
+						// }
+						// .rightbackground{
+							// background: url("/img/recipe_event_green_right.png") repeat-y;
+						// }
+					// }
+// 					
+					// .left{
+						// float:left;
+						// height:100%;
+						// padding: 16px 0 19px 0;
+						// width:573px;
+						// cursor:pointer;
+						// display:block;
+// 						
+						// &:hover{
+							// text-decoration:none;
+						// }
+// 						
+						// .comment_headline{
+							// float:left;
+							// color:$discussionyellowfont;
+							// line-height:15px;
+						// }
+					// }
+// 					
+					// .right{		
+						// position:absolute;
+						// width:68px;
+						// top:4px;
+						// bottom:4px;
+						// right:0;
+						// border-left:1px solid $discussionyellowborder;
+// 						
+// 						
+						// .comment_like{
+							// margin-left:10px;					
+							// .like{
+								// background-position:-60px -40px;
+							// }
+// 							
+							// .like_nr{
+								// color:$discussionyellowfont;
+							// }
+						// }
+					// }
+// 					
+					// .rightbackground{
+						// position:absolute;
+						// background: url("/img/recipe_event_yellow_right.png") repeat-y;
+						// top:0px;
+						// bottom:0px;
+						// right:0;
+						// width:4px;
+					// }
+				// }
 				
 				li{
 					margin-left: $bigpicturewidth;

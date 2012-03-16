@@ -107,39 +107,52 @@ function getDiscussionElement(children, text, user, likes, login, datetime, id) 
 }
 
 function getDiscussionEvent(recipename, syntax, versions_id, text, user, likes, login, eingefuegt, id,active) {
-	//var datetime = getDateString(eingefuegt);
 	var $li = $("<li></li>").addClass("event");
-
-	if(Number(likes) > 0) {
-		likes = "+" + likes;
-	}
-
-	var $comment = $("<div></div>").addClass("recipe_event");
-	if(active)
-		$comment.addClass("active");
-
-	var altText = "Hier klicken um diese Version zu öffnen";
-	var $comment_headline = $("<div></div>").addClass("comment_headline").append(parseDiscussionEvent(recipename, syntax, eingefuegt, versions_id, user.name));
-	var $left = $("<a></a>").addClass("left").attr({
-		href : Recipe.getURI(recipename) + "/" + versions_id,
-		title : altText
-	}).append($comment_headline);
-
-	var $text = $("<div></div>").addClass("comment_text").text(text);
-
-	var $like = $("<div></div>").addClass("comment_like").append("<div class=\"like\"></div>").append("<div class=\"like_nr\">" + likes + "</div>");
-	var $hiddeninput = $("<input />").attr({
-		type : "hidden",
-		value : id
-	}).addClass("comment_id");
-
-	var $right = $("<div></div>").addClass("right").append($like);
-
-	var $rightbackground = $("<div></div>").addClass("rightbackground");
-
-	$comment.append($left).append($text).append($hiddeninput).append($right).append($rightbackground);
-	$li.append($comment).append("<ul></ul>");
-
+	var $left = $("<div></div>").addClass('left');
+	var $main = $("<div></div>").addClass('mid');
+	
+	$("<div></div>").addClass("up").appendTo($left);
+	$("<div></div>").addClass("votes").text(likes).appendTo($left);
+	$("<div></div>").addClass("down").text(text).appendTo($left);	
+	
+	var datetime = getDateString(eingefuegt,false);
+	$("<div></div>").addClass("infodata").text(datetime+", von "+user.name).appendTo($main);
+	$("<div></div>").addClass("title").text(syntax).appendTo($main);
+	$("<div></div>").addClass("text").text(text).appendTo($main);
+	
+	$li.append($left).append($main);
+	
+// 
+	// if(Number(likes) > 0) {
+		// likes = "+" + likes;
+	// }
+// 
+	// var $comment = $("<div></div>").addClass("recipe_event");
+	// if(active)
+		// $comment.addClass("active");
+// 
+	// var altText = "Hier klicken um diese Version zu öffnen";
+	// var $comment_headline = $("<div></div>").addClass("comment_headline").append(parseDiscussionEvent(recipename, syntax, eingefuegt, versions_id, user.name));
+	// var $left = $("<a></a>").addClass("left").attr({
+		// href : Recipe.getURI(recipename) + "/" + versions_id,
+		// title : altText
+	// }).append($comment_headline);
+// 
+	// var $text = $("<div></div>").addClass("comment_text").text(text);
+// 
+	// var $like = $("<div></div>").addClass("comment_like").append("<div class=\"like\"></div>").append("<div class=\"like_nr\">" + likes + "</div>");
+	// var $hiddeninput = $("<input />").attr({
+		// type : "hidden",
+		// value : id
+	// }).addClass("comment_id");
+// 
+	// var $right = $("<div></div>").addClass("right").append($like);
+// 
+	// var $rightbackground = $("<div></div>").addClass("rightbackground");
+// 
+	// $comment.append($left).append($text).append($hiddeninput).append($right).append($rightbackground);
+	// $li.append($comment).append("<ul></ul>");
+// 
 	return $li;
 }
 
