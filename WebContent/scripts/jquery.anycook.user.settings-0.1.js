@@ -11,7 +11,7 @@
 	$.anycook.user.settings.load = function(){
 		$.anycook.user.settings.loadAccount();
 		
-		$.getJSON("/anycook/GetSettings", function(json){
+		$.anycook.graph.getSettings(function(json){
 			$.extend(settings, json);
 			$.anycook.user.settings.loadMail();
 		});

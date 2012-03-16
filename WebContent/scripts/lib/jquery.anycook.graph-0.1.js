@@ -480,10 +480,23 @@
 			if(type == "function")
 				callback = arguments[2];
 			else
-				data.lastid = Number(arguments[2]);
+				data.pid = Number(arguments[2]);
 		}
 		
 		$.anycook.graph._postMessage(graph, data);
+	}
+	
+	//settings
+	
+	$.anycook.graph.getSettings = function(callback){
+		var graph = "/session/settings";
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
 	}
 	
 })( jQuery );
