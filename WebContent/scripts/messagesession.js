@@ -120,8 +120,8 @@ function getMessageContainerforSession(message){
 	var $headline = $("<div></div>").addClass("message_headline")
 		.append($sender);
 		
-	var lastdate = $(".datetime").last().val();
-	var $datetime = $("<div></div>").addClass("datetime").text(getDateString(message.datetime));
+	
+	
 	
 	
 	var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
@@ -129,7 +129,16 @@ function getMessageContainerforSession(message){
 	var $messageright = $("<div></div>").addClass("message_right")
 		.append($headline)
 		.append($p)
-		.append($datetime);
+		
+	var $dates = $(".messagedialog .datetime");
+	var lastDate = $dates.last().text();
+	var newDate = getDateString(message.datetime);
+	if(lastDate !== newDate){
+		var $datetime = $("<div></div>").addClass("datetime").text(newDate);
+		$messageright.append($datetime);
+	}
+	
+		
 	
 	var $li = $("<li></li>").addClass("messagedialog")
 		.append($image)
