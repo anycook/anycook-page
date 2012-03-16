@@ -499,4 +499,17 @@
 		return dfd.promise();
 	}
 	
+	$.anycook.graph.changeMailSettings = function(type, value){
+		var graph = "/session/settings/mail/"+type;
+		var data = {value:value};		
+		$.anycook.graph._postMessage(graph, data);
+	}
+	
+	
+	//changeAccountSettings(data)
+	$.anycook.graph.changeAccountSettings = function(data){
+		var graph = "/session/settings/account/";		
+		$.anycook.graph._postMessage(graph, data);
+	}
+	
 })( jQuery );

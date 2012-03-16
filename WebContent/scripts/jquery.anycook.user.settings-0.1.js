@@ -24,7 +24,7 @@
 		    onProgress:nrProgress,
 		    onComplete:$.anycook.user.settings.completeUpload,
 		    // path to server-side upload script
-		    action: '/anycook/UploadUserImage'
+		    action: 'http://testgraph.anycook.de/upload/image/user'
 		});
 		
 		
@@ -130,41 +130,16 @@
 		
 	};
 	
-	$.anycook.user.settings.changeMail = function(){
-		
-		var oldSettings = settings.mail;
-		var newSettings = {};
-		for(var type in oldSettings){		
-			var setting = $("#"+type+" input[type=\"checkbox\"]").attr("checked") ? true : false;
-			if(oldSettings[type] != setting)
-				newSettings[type] = setting;
-		}
-		
-		$.extend(oldSettings, newSettings);	
-		settings.mail = oldSettings;
-		
-		$.post("/anycook/ChangeMailSettings", newSettings, function(){
-			var $container = $("#notification_saved");		
-			$.anycook.user.settings.saved($container);
-		});
+	$.anycook.user.settings.changeMail = function(event){
+		var $this = $(this);		
+		$.anycook.graph.changeMailSettings($this.val(), $this.attr("checked")? true : false);
+		var $container = $("#notification_saved");		
+		$.anycook.user.settings.saved($container);
 		
 	};
 	
-	$.anycook.user.settings.changeAllMail = function(){
-		var oldSettings = settings.mail;
-		var newSettings = {};
-		for(var type in oldSettings){		
-			if(oldSettings[type] != property)
-				newSettings[type] = property;
-		}
-		
-		$.extend(oldSettings, newSettings);	
-		settings.mail = oldSettings;
-		
-		$.post("/anycook/ChangeMailSettings", newSettings, function(){
-			var $container = $("#notification_saved");		
-			$.anycook.user.settings.saved($container);
-		});
+	$.anycook.user.settings.changeAllMail = function(value){
+		$.anycook.graph.changeMailSettings("all", value);
 	};
 	
 	$.anycook.user.settings.saved = function($container){
