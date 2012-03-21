@@ -65,6 +65,10 @@ ul#messagestream{
           .message_content{
             float: left;
             margin-left: 15px;
+            
+            p{
+              color: $darkfontcolor;
+            }
           }
      }
      
