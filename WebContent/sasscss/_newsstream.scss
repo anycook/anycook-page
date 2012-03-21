@@ -33,20 +33,42 @@ ul#messagestream{
 	position: relative;
 	overflow:auto;
 	height:500px;
+	list-style: none;
 	
 	li{
-		width:510px  - 26px;
-		margin: 0 72px;
-		position: relative;
+		width:100%;
+		margin: 0 0;
 		margin-bottom: 10px;
+		
+		.messagecontainer{
+		  float: left;
+      width: 480px;
+      margin-left: 30px;
+      padding: 20px 0;
+      border-bottom: 1px solid $lightgrey;
+		  
+          img{
+            float: left;
+          }
+          
+          .message_content{
+            float: left;
+            margin-left: 15px;
+          }
+     }
+     
+     .timeline_container{
+        float: right;
+        
+        .datetime{
+          float: right;
+          margin-top: 15px;
+          color: $smalllightfontcolor;
+        }
+      }
+     
 	}
 	
-	.message{
-		
-		&:hover{
-			@include no-box-shadow();
-		}
-	}
 }
 
 .messageimageborder{

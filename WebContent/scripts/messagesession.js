@@ -126,23 +126,28 @@ function getMessageContainerforSession(message){
 	
 	var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
 	
-	var $messageright = $("<div></div>").addClass("message_right")
+	var $messageright = $("<div></div>").addClass("message_content")
 		.append($headline)
-		.append($p)
+		.append($p);
+	
+	var $datetimeline = $("<div></div>").addClass("timeline_container");
 		
 	var $dates = $(".messagedialog .datetime");
 	var lastDate = $dates.last().text();
 	var newDate = getDateString(message.datetime);
 	if(lastDate !== newDate){
 		var $datetime = $("<div></div>").addClass("datetime").text(newDate);
-		$messageright.append($datetime);
+		$datetimeline.append($datetime);
 	}
 	
-		
+	var $massagecontainer = $("<div></div>").addClass("messagecontainer")
+		.append($image)
+		.append($messageright);	
 	
 	var $li = $("<li></li>").addClass("messagedialog")
-		.append($image)
-		.append($messageright);
+		.append($massagecontainer)
+		.append($datetimeline);
+		
 	
 	return $li;
 
