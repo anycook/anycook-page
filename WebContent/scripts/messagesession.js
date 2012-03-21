@@ -123,13 +123,13 @@ function getMessageContainerforSession(message){
 	
 	
 	
-	
 	var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
 	
 	var $messageright = $("<div></div>").addClass("message_content")
 		.append($headline)
 		.append($p);
 	
+	var $clockicon = $("<div></div>").addClass("clock");
 	var $datetimeline = $("<div></div>").addClass("timeline_container");
 		
 	var $dates = $(".messagedialog .datetime");
@@ -137,6 +137,7 @@ function getMessageContainerforSession(message){
 	var newDate = getDateString(message.datetime);
 	if(lastDate !== newDate){
 		var $datetime = $("<div></div>").addClass("datetime").text(newDate);
+		$datetimeline.append($clockicon);
 		$datetimeline.append($datetime);
 	}
 	

@@ -29,11 +29,22 @@ ul#newsstream{
 	}	
 }
 
+
+//MassageDialog
 ul#messagestream{
 	position: relative;
 	overflow:auto;
 	height:500px;
 	list-style: none;
+	
+	.timeline_stripe{
+	  width: 1px;
+	  height: 100%;
+	  background-color: $lightgrey;
+	  position: absolute;
+	  right: 99px;
+	  z-index: -1;
+	}
 	
 	li{
 		width:100%;
@@ -59,11 +70,22 @@ ul#messagestream{
      
      .timeline_container{
         float: right;
+        padding-top: 15px;
+        width: 105px;
+        
+        .clock{
+          float: left;
+          width: 12px;
+          height: 11px;
+          background: url("/img/icons20x20.png") no-repeat;
+          background-position: -104px -23px;;
+          margin: 3px 8px 0 0;
+        }
         
         .datetime{
-          float: right;
-          margin-top: 15px;
+          float: left;
           color: $smalllightfontcolor;
+          width: 85px;
         }
       }
      
@@ -109,7 +131,9 @@ ul#messagestream{
 			font-size:10pt;
 			color:$darkfontcolor;
 		}
+		
 		.datetime{
+		  float: left;
 			margin-top:5px;
 			color:$smalllightfontcolor;
 			opacity: 0;
