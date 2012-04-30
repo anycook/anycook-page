@@ -27,7 +27,7 @@
         }); 
     	
     	//anycookgraph
-			 $.anycook.graph.init({baseurl:"http://testgraph.anycook.de", appid:0});
+			 $.anycook.graph.init({appid:0});
     //couchdb
     $.couch.urlPrefix = "http://test.anycook.de/couchdb";
     
