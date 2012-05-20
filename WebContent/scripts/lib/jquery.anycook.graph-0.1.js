@@ -63,7 +63,7 @@
 			// type:"POST",
 			// crossDomain:true,
 			// data:data});
-	}
+	};
 	
 	$.anycook.graph.init = function(options){
 		var settings = {
@@ -277,7 +277,7 @@
 		});
 		
 		return dfd.promise();
-	}
+	};
 	
 	//logout([callback])
 	$.anycook.graph.logout = function(callback){
