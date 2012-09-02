@@ -3,14 +3,10 @@ function updateLiveAtHome(){
 	var newestid = getNewestNewsId();
 	
 	if(path == "/"){
-		$.ajax({
-			url:"/anycook/GetLifes",
-			dataType:"json",
-			data:"newestid="+newestid,
-			success:function(response){
+		var data = {newestid:newestid};
+		$.anycook.graph.life(data,function(response){
 				parseAndAddLiveAtHome(response);
 				window.setTimeout(updateLiveAtHome, 5000);
-			}
 		});
 	}
 }
@@ -102,14 +98,10 @@ function newsScrollListener(e){
 	if(delta < 40){
 		$this.unbind("scroll", newsScrollListener);
 		var oldestid = $last.data("id");
-		$.ajax({
-			url:"/anycook/GetLifes",
-			dataType:"json",
-			data:"oldestid="+oldestid,
-			success:function(response){
+		var data = {oldestid:oldestid};
+		$.anycook.graph.life(data,function(response){
 				parseAndAddLiveAtHome(response);
 				$this.scroll(newsScrollListener);
-			}
 		});
 	}
 	return false;

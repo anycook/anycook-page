@@ -84,17 +84,14 @@ function loadAllKategories(target){
 			target.append("<li><span class=\"left\">keine Kategorie</span><span class=\"right\"></span></li>");
 			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 		}
-		$.ajax({
-			url:"/anycook/GetAllKategories",
-			dataType: 'json',
-			success:function(json){
-				var totalrecipes = 0;
+		
+		$.anycook.graph.getOrderedCategories(function(json){
+			var totalrecipes = 0;
 				for(var k in json){
 					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
 					totalrecipes+=Number(json[k])
 				}
 				$(target.find(".right")[1]).text(totalrecipes);
-		}
 		});
 	}
 }

@@ -70,15 +70,11 @@
 			appid: -1,
 			baseurl: "http://graph.anycook.de",
 			callbackName: "callback",
-			frameId:"anycook-graph-frame"
+			// frameId:"anycook-graph-frame"
 		};
 		
 		if(options)
 			$.extend(settings, options);
-		
-		var $div = $("<div></div>").css({height:0, width:0})
-			.append("<iframe id=\""+settings.frameId+"\" src=\""+settings.baseurl+"\"></iframe>");
-		$("#anycook-root").append($div);
 		
 		$.anycook.graph._settings(settings);
 	};
@@ -127,6 +123,39 @@
 		
 		return dfd.promise();
 	};
+	
+	//recipeOfTheDay([callback])
+	$.anycook.graph.recipeOfTheDay = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/recipe/oftheday"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
+	
+	//numRecipes([callback])
+	$.anycook.graph.recipeNumber = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/recipe/number"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
+	
+	//getOrderedCategories([callback])
+	$.anycook.graph.getOrderedCategories = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/category/sorted"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
 	
 	//saveRecipe(recipename, dataJSON [, callback])
 	$.anycook.graph.saveRecipe = function(recipename, recipeData, tags, userid, callback){
@@ -187,6 +216,17 @@
 		return dfd.promise();
 	};
 	
+	$.anycook.graph.numUsers = function(){
+		var dfd = $.Deferred();
+		var graph = "/user/number"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
+	
+	//userImagePath(user [, type])
 	$.anycook.graph.userImagePath = function(user, type){
 		var settings = $.anycook.graph._settings();
 		if(!type)
@@ -256,6 +296,36 @@
 		
 		return dfd.promise();
 	};
+	
+	$.anycook.graph.categoryNumber = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/category/number"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
+	
+	$.anycook.graph.tagNumber = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/tag/number"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
+	
+	$.anycook.graph.ingredientNumber = function(callback){
+		var dfd = $.Deferred();
+		var graph = "/ingredient/number"
+		$.when($.anycook.graph._getJSON(graph)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});
+	}
 	
 	$.anycook.graph.suggestTags = function(recipename, tags, userid, callback){
 		var graph = "/recipe/"+recipename;
@@ -521,6 +591,18 @@
 	$.anycook.graph.changeAccountSettings = function(data,callback){
 		var graph = "/session/settings/account/";		
 		return $.anycook.graph._post(graph, data, callback);
+	}
+	
+	//life(data, [callback])
+	$.anycook.graph.life = function(data, callback){
+		var graph = "/life";
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph,data)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
 	}
 	
 })( jQuery );

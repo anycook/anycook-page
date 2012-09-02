@@ -13,31 +13,24 @@ function loadHome()
 		.append(getHeaderLink("Entdecken", "/#!/?page=discover", "recipe_btn").addClass("active"));
 		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 	
-	$.ajax({
-	  url: "/anycook/LoadSide1Data",
-	  dataType: "json",
-	  success: function(json){
-	  	$("#recipe_of_the_day").attr("href", Recipe.getURI(json.dailyrecipe))
-	  		.text(json.dailyrecipe);
-	  	$("#num_authors").text(json.users);
-	  	$("#num_tags").text(json.tags);
-	  	$("#num_ingredients").text(json.ingredients);
-	  	$("#num_recipes").text(json.recipes);
-	  }
+	$.anycook.graph.recipeOfTheDay(function(json){
+		$("#recipe_of_the_day").attr("href", Recipe.getURI(json.name))
+	  		.text(json.name);
 	});
-// 	
-// 	
-	// $.ajax({
-		  // url: "/anycook/GetPopularTags",
-		  // dataType: 'json',
-		  // data: "num=15",
-		  // success: loadFamousTags
-		// });
-// 	
-// 	
-// 	
-// 	
-// 	
+	
+	$.anycook.graph.recipeNumber(function(num){
+		$("#num_recipes").text(num);
+	});
+	
+	$.anycook.graph.tagNumber(function(num){
+		$("#num_tags").text(num);
+	});
+	
+	$.anycook.graph.ingredientNumber(function(num){
+		$("#num_ingredients").text(num);
+	});
+	
+	
 	//liveupdatestuff
 	newestid = 0;
 	$("#news ul").jScrollPane().scroll(newsScrollListener);
