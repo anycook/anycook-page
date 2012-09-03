@@ -109,16 +109,12 @@ function newsScrollListener(e){
 
 function schmecktmir(){
 		var gericht = $.address.pathNames()[1];
-		$.ajax({
-			url:"/anycook/Schmeckt",
-			data:"g="+gericht,
-			success:function(response){
+		$.anycook.graph.schmeckt(gericht, function(response){
 				if(response != "false"){
 					$("#schmecktmir").unbind("click", schmecktmir);
 					$("#schmecktmir").addClass("on");
 					$("#schmecktmir").click(schmecktmirnicht);
 				}				
-			}
 		});
 }
 
