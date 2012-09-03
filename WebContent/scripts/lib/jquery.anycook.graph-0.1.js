@@ -33,7 +33,15 @@
 		var settings = $.anycook.graph._settings();
 		//data[settings.callbackName] = "?";		
 		$.extend(data, {appid : settings.appid});
-		return $.post(settings.baseurl+graph, data, callback);
+		return $.ajax({
+		    url: settings.baseurl+graph,
+		    type: 'POST',
+		    data:data,
+		    xhrFields:{
+                withCredentials: true
+           },
+		    success: callback
+		});
 	}
 	
 	$.anycook.graph._put = function(graph,data, callback){
@@ -48,6 +56,9 @@
 		    url: settings.baseurl+graph,
 		    type: 'PUT',
 		    data:data,
+		    xhrFields:{
+                withCredentials: true
+           },
 		    success: callback
 		});
 	}
@@ -64,6 +75,9 @@
 		    url: settings.baseurl+graph,
 		    type: 'DELETE',
 		    data:data,
+		    xhrFields:{
+                withCredentials: true
+           	},
 		    success: callback
 		});
 	}
