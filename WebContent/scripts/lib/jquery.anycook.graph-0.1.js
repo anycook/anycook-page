@@ -28,12 +28,44 @@
 	$.anycook.graph._post = function(graph, data, callback){
 		if(!graph) graph = "";
 		if(!data) data = {};
-		var callback = callback || callback;
+		var callback = callback || function(){};
 		
 		var settings = $.anycook.graph._settings();
 		//data[settings.callbackName] = "?";		
 		$.extend(data, {appid : settings.appid});
 		return $.post(settings.baseurl+graph, data, callback);
+	}
+	
+	$.anycook.graph._put = function(graph,data, callback){
+		if(!graph) graph = "";
+		if(!data) data = {};
+		var callback = callback || function(){};
+		
+		var settings = $.anycook.graph._settings();
+		//data[settings.callbackName] = "?";		
+		$.extend(data, {appid : settings.appid});
+		return $.ajax({
+		    url: settings.baseurl+graph,
+		    type: 'PUT',
+		    data:data,
+		    success: callback
+		});
+	}
+	
+	$.anycook.graph._delete = function(graph,data, callback){
+		if(!graph) graph = "";
+		if(!data) data = {};
+		var callback = callback || function(){};
+		
+		var settings = $.anycook.graph._settings();
+		//data[settings.callbackName] = "?";		
+		$.extend(data, {appid : settings.appid});
+		return $.ajax({
+		    url: settings.baseurl+graph,
+		    type: 'DELETE',
+		    data:data,
+		    success: callback
+		});
 	}
 	
 	$.anycook.graph._postMessage = function(graph, data){
@@ -509,9 +541,9 @@
 	}
 	
 	//schmeckt(recipename)
-	$.anycook.graph.schmeckt = function(recipename){
+	$.anycook.graph.schmeckt = function(recipename, callback){
 		var graph = "/recipe/"+recipename+"/schmeckt";
-		$.anycook.graph._postMessage(graph);
+		$.anycook.graph._put(graph,callback);
 	}
 	
 	//schmecktnicht(recipename)
@@ -596,6 +628,32 @@
 	//life(data, [callback])
 	$.anycook.graph.life = function(data, callback){
 		var graph = "/life";
+		var dfd = $.Deferred();
+		$.when($.anycook.graph._getJSON(graph,data)).then(function(json){
+			dfd.resolve(json);
+			if(callback)
+				callback(json);
+		});		
+		return dfd.promise();
+	}
+	
+	//popularTags([recipe], [callback])
+	$.anycook.graph.popularTags = function(){
+		var callback;
+		var data ={};
+		switch(arguments.length){
+		case 2:
+			var type2 = typeof arguments[1];
+			if(type2 == "function")
+				callback = arguments[1];
+		case 1:
+			var type1 = typeof arguments[0];
+			if(type1 == "string")
+				data.recipe = arguments[0];
+			else if(type1 == "function")
+				callback = arguments[1];
+		}
+		var graph = "/tag/popular";
 		var dfd = $.Deferred();
 		$.when($.anycook.graph._getJSON(graph,data)).then(function(json){
 			dfd.resolve(json);
