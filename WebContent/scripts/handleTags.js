@@ -139,19 +139,12 @@ function makeTagCloud(){
 	if(recipe != null)
 		data+="recipe="+recipe;
 	
-	$.ajax({
-		  url: "/anycook/GetPopularTags",
-		  dataType: 'json',
-		  data: data,
-		  success: function(response){
-				if(response != "false"){
-					for(tag in response){
-						$("#tagcloud").append(getTag(tag, "number", response[tag]));
-					}
-					
-					$("#tagcloud .tag").click(addNewTag);
-				}
+	$.anycook.graph.popularTags(recipe, function(response){
+			for(tag in response){
+				$("#tagcloud").append(getTag(tag, "number", response[tag]));
 			}
+			
+			$("#tagcloud .tag").click(addNewTag);
 		});
 	
 	
