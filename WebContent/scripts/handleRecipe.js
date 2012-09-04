@@ -45,7 +45,7 @@ function getBigFrameText(json) {
 function profileRecipe(recipe){
 	var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
 	
-	var $img = $("<img/>").attr("src", $.anycook.graph.recipeImagePath(recipe.name));
+	var $img = $("<img/>").attr("src", $.anycook.graph.recipe.image(recipe.name));
 	var $div =$("<div></div>").append("<span>"+recipe.name+"</span>");
 	
 	var $link = $("<a></a>").addClass("profile_rezept_bild").attr("href", uri)
@@ -79,15 +79,14 @@ function loadRecipe(recipe) {
 
 	//schmeckt-button
 	if(user.checkLogin()) {
-		$.anycook.graph.checkSchmeckt(recipe.name, function(schmeckt){
+		$.anycook.graph.schmeckt(recipe.name, function(schmeckt){
 			if(!schmeckt) {
 				$("#schmecktmir").click(schmecktmir);
 			} else {
 				$("#schmecktmir").addClass("on");
 				$("#schmecktmir").click(schmecktmirnicht);
 			}
-		});
-		
+		});		
 	}
 
 	$.address.title(recipe.name + " | anycook");

@@ -8,7 +8,7 @@ function loadDiscussion(recipename, lastid) {
 		$("#no_comment").hide();
 	else
 		$("#yes_commit").hide();
-	$.anycook.graph.getDiscussion(recipename, lastid, function(json){
+	$.anycook.graph.discussion(recipename, lastid, function(json){
 		var pathNames = $.address.pathNames();
 		if(pathNames[0] != "recipe" || decodeURI(pathNames[1]) != recipename)
 			return;

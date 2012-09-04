@@ -82,34 +82,9 @@
 		});
 	}
 	
-	$.anycook.graph._postMessage = function(graph, data){
-		if(!graph) graph = "";
-		if(!data) data = {};
+	$.anycook.graph._loadSubScript = function(script){
 		
-		
-		
-		var settings = $.anycook.graph._settings();
-		
-		var $iframe = $("#"+settings.frameId);
-		var message = {target:graph, data:data};
-		$iframe.get(0).contentWindow.postMessage(JSON.stringify(message), settings.baseurl);
-		
-		// if(callback){
-			// var callbackFunction = function(event){
-				// window.removeEventListener("message", callbackFunction, false);
-				// callback(event);
-			// };
-			// window.addEventListener("message", callbackFunction, false);
-		// }
-		
-		// $.extend(data, {appid : settings.appid});
-// 		
-		// return $.ajax({
-			// url:settings.baseurl+graph,
-			// type:"POST",
-			// crossDomain:true,
-			// data:data});
-	};
+	}
 	
 	$.anycook.graph.init = function(options){
 		var settings = {
@@ -117,6 +92,7 @@
 			baseurl: "http://graph.anycook.de",
 			callbackName: "callback",
 			// frameId:"anycook-graph-frame"
+			scripts: []
 		};
 		
 		if(options)

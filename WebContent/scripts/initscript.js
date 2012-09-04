@@ -26,8 +26,29 @@
             // }
         }); 
     	
-    	//anycookgraph
-			 $.anycook.graph.init({appid:2});
+    //anycookgraph
+	$.when($.anycook.graph.init({appid:2})).then(function(){
+    	loadAllKategories($("#kategorie_filter ul"));
+    	
+    	$.when(User.init()).then(function(userinit){
+    		user = userinit;
+    		buildLogin();
+    		
+			$.address.bind("change",handleChange);
+    		$.address.crawlable(true);
+    		$.address.update();
+    		
+    		//drafts
+	    	if(user.checkLogin()){
+			    $.anycook.drafts.init(function(){
+			    	$.anycook.drafts.num();
+			    });
+			    
+			}
+    	});
+    	
+	});
+	
     //couchdb
     $.couch.urlPrefix = "http://test.anycook.de/couchdb";
     
@@ -59,26 +80,8 @@
 		 	return true;
 		 	 }});
 			 	 
-    	
 
-            //Login
-            
-    	$.when(User.init()).then(function(userinit){
-    		user = userinit;
-    		buildLogin();
-    		
-			$.address.bind("change",handleChange);
-    		$.address.crawlable(true);
-    		$.address.update();
-    		
-    		//drafts
-	    	if(user.checkLogin()){
-			    $.anycook.drafts.init(function(){
-			    	$.anycook.drafts.num();
-			    });
-			    
-			}
-    	});
+   
     	
     	search = new Search();
     	
@@ -222,7 +225,7 @@
             	
             	//Kategoriefilter
             	$("#kategorie_head").click(handleKategories);
-            	loadAllKategories($("#kategorie_filter ul"));
+            	// loadAllKategories($("#kategorie_filter ul"));
             	
             	removeChecked();
             	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){

@@ -139,7 +139,7 @@ function makeTagCloud(){
 	if(recipe != null)
 		data+="recipe="+recipe;
 	
-	$.anycook.graph.popularTags(recipe, function(response){
+	$.anycook.graph.tag.popular(recipe, function(response){
 			for(tag in response){
 				$("#tagcloud").append(getTag(tag, "number", response[tag]));
 			}

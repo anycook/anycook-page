@@ -76,7 +76,7 @@ function loadProfile(userid){
 	$(".profile_more").click(profileShowMore);
 		
 	if(userid == user.id){
-		$.anycook.graph.getRecommendations(function(json){
+		$.anycook.graph.user.recommendations (function(json){
         	if(json.length>0){
         		var $recommendation = $("#profile_recommendation").show();
         		$recommendation.children("h2").text("Diese Rezepte könnten dir auch schmecken");

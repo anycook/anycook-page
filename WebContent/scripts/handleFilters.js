@@ -85,7 +85,7 @@ function loadAllKategories(target){
 			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 		}
 		
-		$.anycook.graph.getOrderedCategories(function(json){
+		$.anycook.graph.category.sorted(function(json){
 			var totalrecipes = 0;
 				for(var k in json){
 					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");

@@ -17,7 +17,7 @@ function User(){
 User.init = function(){
 	var dfd = $.Deferred();
 	var user = new User();
-	var dereffered = $.anycook.graph.getSession();
+	var dereffered = $.anycook.graph.session();
 	dereffered.done(function(response){
 			if(response != false){
 				user.id = response.id;
@@ -104,11 +104,11 @@ User.prototype.isFollowedBy = function(userid){
 }
 
 User.getUserImagePath = function(userid, type){
-	return $.anycook.graph.userImagePath(userid, type);
+	return $.anycook.graph.user.image(userid, type);
 }
 
 User.prototype.getUserImagePath = function(type){
-	return $.anycook.graph.userImagePath(this.id, type);
+	return $.anycook.graph.user.image(this.id, type);
 };
 
 User.login = function(mail, pwd, stayloggedin){

@@ -13,20 +13,20 @@ function loadHome()
 		.append(getHeaderLink("Entdecken", "/#!/?page=discover", "recipe_btn").addClass("active"));
 		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 	
-	$.anycook.graph.recipeOfTheDay(function(json){
+	$.anycook.graph.recipe.ofTheDay(function(json){
 		$("#recipe_of_the_day").attr("href", Recipe.getURI(json.name))
 	  		.text(json.name);
 	});
 	
-	$.anycook.graph.recipeNumber(function(num){
+	$.anycook.graph.recipe.number(function(num){
 		$("#num_recipes").text(num);
 	});
 	
-	$.anycook.graph.tagNumber(function(num){
+	$.anycook.graph.tag.number(function(num){
 		$("#num_tags").text(num);
 	});
 	
-	$.anycook.graph.ingredientNumber(function(num){
+	$.anycook.graph.ingredient.number(function(num){
 		$("#num_ingredients").text(num);
 	});
 	

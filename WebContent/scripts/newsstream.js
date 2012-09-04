@@ -76,7 +76,7 @@ function checkNewMessageNum(lastnum){
 	
 	if(!lastnum)
 		lastnum = 0;
-	$.anycook.graph.getMessageNum(lastnum,
+	$.anycook.graph.message.number(lastnum,
 		function(json){
 			isCheckingMessageNum = false;
 			var newNum = lastnum;
