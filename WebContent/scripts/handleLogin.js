@@ -70,14 +70,6 @@ function initMenus(){
 		var checkbox = $("#stayloggedin input");
 		checkbox.attr('checked', !checkbox.attr('checked'));
 	});
-	
-	//usermenu
-	if(user.checkLogin()){
-		makeUsermenuText();
-	}
-	// $("#logout").click(function(){
-		// user.logout();
-	// });
 }
 
 
