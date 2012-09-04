@@ -40,7 +40,9 @@
     		
     		//drafts
 	    	if(user.checkLogin()){
-	    		makeUsermenuText();
+	    		// wait ressources to complete loading and the wait another 500ms.
+	    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
+	    		$(window).load(function(){setTimeout(makeUsermenuText,500);})
 			    $.anycook.drafts.init(function(){
 			    	$.anycook.drafts.num();
 			    });
