@@ -67,7 +67,7 @@ function getNewsstream(lastDatetime){
 }
 
 function checkNewMessageNum(num){
-	num = num || -1;
+	num = num || 0;
 	setTitlePrefix(num);
 	
 	var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
