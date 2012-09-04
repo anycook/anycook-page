@@ -25,7 +25,7 @@ function getNewsstream(lastDatetime){
 	var $ul = $("#newsstream");
 	if(!lastDatetime)
 		lastDatetime = 0;
-	$.anycook.graph.getNewsstream(function(json){
+	$.anycook.graph.message(function(json){
 			var datamap = {};
 			var oldDatamap = $ul.data("map") || {};
 						
@@ -66,44 +66,20 @@ function getNewsstream(lastDatetime){
 		});
 }
 
-var isCheckingMessageNum = false;
-
-function checkNewMessageNum(lastnum){
-	if(isCheckingMessageNum || !user.checkLogin())
-		return;
+function checkNewMessageNum(num){
+	num = num || -1;
+	setTitlePrefix(num);
 	
-	isCheckingMessageNum = true;
+	var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
+	$newMessageBubble.children().text(num);
+	if(num <= 0)
+		$newMessageBubble.fadeOut();
+	else
+		$newMessageBubble.fadeIn();
 	
-	if(!lastnum)
-		lastnum = 0;
-	$.anycook.graph.message.number(lastnum,
-		function(json){
-			isCheckingMessageNum = false;
-			var newNum = lastnum;
-			if(json != null){
-				newNum = json.notificationnumber;
-				if(user.checkLogin()){
-					var $newMessageBubble = $("#message_btn_container .new_messages_bubble");
-					if(lastnum == 0 && newNum > 0)
-						$newMessageBubble.fadeIn();
-					else if(newNum == 0)
-						$newMessageBubble.fadeOut();
-					$newMessageBubble.children().text(newNum);
-					
-					if($.address.pathNames()[0] == "newsstream")
-						loadNewsstream();
-						
-					setTitlePrefix(newNum);
-				}
-			}
-			checkNewMessageNum(newNum);
-			
-		});
-		// error: function(error){
-			// console.log("error loading messageNum. trying again in 10 sec");
-			// setTimeout("checkNewMessageNum(0)", 10000);
-		// }
-	// });
+	
+	if(user.checkLogin())
+		$.anycook.graph.message.number(num, checkNewMessageNum);
 }
 
 function setTitlePrefix(newNum){
@@ -113,7 +89,7 @@ function setTitlePrefix(newNum){
 
 function getTitlePrefix(){
 	var messageNum = $(document).data("messageNum") || 0;
-	if(messageNum == 0)
+	if(messageNum <= 0)
 		return "";
 	return "("+messageNum+") ";	
 	
