@@ -23,12 +23,13 @@ function getNewsstream(lastDatetime){
 		return;
 	
 	var $ul = $("#newsstream");
-	if(!lastDatetime)
-		lastDatetime = 0;
-	$.anycook.graph.message(function(json){
+	var timeout = 0;
+	if(lastDatetime)
+		timeout = 500;
+	setTimeout(function(){$.anycook.graph.message(lastDatetime,function(json){
 			var datamap = {};
 			var oldDatamap = $ul.data("map") || {};
-						
+			
 			for(var i = 0; i<json.length; i++){
 				var $appendTo = $ul;
 				var $li;
@@ -59,11 +60,15 @@ function getNewsstream(lastDatetime){
 			
 			$.extend(oldDatamap, datamap);			
 			$ul.data("map", oldDatamap);
-			if(json.length >0){
+			if(json.length >0)
 				lastDatetime = json[0].datetime;
+			else{
+				var now = new Date();
+				lastDatetime = now.getTime();
 			}
+			
 			getNewsstream(lastDatetime);		
-		});
+		});},timeout);
 }
 
 function checkNewMessageNum(num){
