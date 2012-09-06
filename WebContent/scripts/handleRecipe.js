@@ -79,7 +79,7 @@ function loadRecipe(recipe) {
 
 	//schmeckt-button
 	if(user.checkLogin()) {
-		$.anycook.graph.schmeckt(recipe.name, function(schmeckt){
+		$.anycook.graph.recipe.schmeckt(recipe.name, function(schmeckt){
 			if(!schmeckt) {
 				$("#schmecktmir").click(schmecktmir);
 			} else {

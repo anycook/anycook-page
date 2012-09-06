@@ -109,7 +109,7 @@ function newsScrollListener(e){
 
 function schmecktmir(){
 		var gericht = $.address.pathNames()[1];
-		$.anycook.graph.schmeckt(gericht, function(response){
+		$.anycook.graph.recipe.makeSchmeckt(gericht, function(response){
 				if(response != "false"){
 					$("#schmecktmir").unbind("click", schmecktmir);
 					$("#schmecktmir").addClass("on");
@@ -120,15 +120,11 @@ function schmecktmir(){
 
 function schmecktmirnicht(){
 	var gericht = $.address.pathNames()[1];
-	$.ajax({
-		url:"/anycook/Schmeckt",
-		data:"g="+gericht+"&schmecktnicht",
-		success:function(response){
+	$.anycook.graph.recipe.unmakeSchmeckt(gericht,function(response){
 			if(response != "false"){
 				$("#schmecktmir").unbind("click", schmecktmirnicht);
 				$("#schmecktmir").removeClass("on");
 				$("#schmecktmir").click(schmecktmir);
 			}				
-		}
 	});
 }
