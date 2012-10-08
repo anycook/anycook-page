@@ -61,7 +61,7 @@ function loadNewRecipe(){
 	
 	//step3
 	
-	$.getJSON("/anycook/GetAllKategories", function(json){
+	$.anycook.graph.category.sorted(function(json){
 		var $category_select = $("#category_select");
 		for(var category in json)
 			$category_select.append("<option>"+category+"</option>");
