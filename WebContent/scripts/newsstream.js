@@ -17,6 +17,8 @@ function loadNewsstream(){
 	
 }
 
+
+// TODO Platzhalter wenn keine Nachrichten 
 function getNewsstream(lastDatetime){
 	var pathNames = $.address.pathNames();
 	if(pathNames.length != 1 || pathNames[0] != "newsstream")
@@ -117,20 +119,15 @@ function clickRecipients(){
 			source:function(req,resp){
 	    		var array = [];
 	    		var term = req.term;
-				$.ajax({
-					url:"/anycook/AutocompleteUsers",
-					dataType:"json",
-					async:false,
-					data:"q="+term,
-					success:function(json){
+	    		$.anycook.graph.autocomplete.user(term, function(json){
 						var ids = getRecipientIds();
 						for(var i = 0; i<json.length; i++){
 							if($.inArray(json[i].id, ids) == -1)
 								array[array.length] = {label: json[i].name, value: json[i].name, data: json[i].id};	
 						}
-					}
-				});
-				resp(array);},
+						resp(array);
+					});
+				},
 	    		minLength:1,   
 				select:function(event, ui){
 					var id = ui.item.data;
@@ -243,7 +240,7 @@ function getNewMessageContent(){
 		
 }
 
-function submitNewMessage(){
+function submitNewMessage(event){
 	event.preventDefault();
 	var $this = $(this);
 	var $recipients = $(".recipients");
@@ -254,7 +251,9 @@ function submitNewMessage(){
 	if(recipientIds.length == 0 || message.length == 0)
 		return;
 	
-	$.anycook.graph.writeNewMessage(recipientIds, encodeURIComponent(message));
+	$.anycook.graph.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
+		console.log(xhr);
+	});
 	
 	//console.log(encodeURIComponent(message));
 	$recipients.empty().data("ids", []);
@@ -269,7 +268,7 @@ function getMessageContainer(message){
 	
 	var $imageborder = $("<div></div>").addClass("messageimageborder");
 	var $headline = $("<div></div>").addClass("message_headline");
-	var $datetime = $("<div></div>").addClass("datetime").text(getDateString(message.datetime));
+	var $datetime = $("<div></div>").addClass("datetime").text(getDateTimeString(message.datetime));
 	for(var i = 0; i<recipients.length; i++){
 		var recipient = recipients[i];
 		var $image = $("<img />").attr("src", User.getUserImagePath(recipient.id));

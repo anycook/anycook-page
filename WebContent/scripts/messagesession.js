@@ -1,8 +1,11 @@
 function getMessages(sessionid, startid){
-	if(startid === undefined)
+	var timeout = 500;
+	if(startid === undefined){
 		startid = -1;
+		timeout = 0;
+	}
 	
-	$.anycook.graph.getMessageSession(sessionid, startid,
+	setTimeout(function(){$.anycook.graph.message.session(sessionid, startid,
 		function(json){
 			var messages = json.messages;
 			
@@ -91,24 +94,23 @@ function getMessages(sessionid, startid){
 				}
 				getMessages(sessionid, lastid);
 			}
-		});
+		});},timeout);
 }
 
-function submitAnswerMessage(){
+function submitAnswerMessage(event){
+	event.preventDefault();
 	var $this = $(this);
 	var $textarea = $this.find("textarea")
 	var message = $textarea.val();
 	var sessionid = $.address.pathNames()[1];
 	
 	if(message.length == 0)
-		return false;
+		return;
 	
-	$.anycook.graph.writeMessage(sessionid, message);
+	$.anycook.graph.message.answer(sessionid, message);
 	
 	//console.log(encodeURIComponent(message));
 	$textarea.val("");
-	
-	return false;
 }
 
 function getMessageContainerforSession(message){

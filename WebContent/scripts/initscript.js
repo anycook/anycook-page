@@ -6,6 +6,10 @@
 			 document.location.href="http://news.anycook.de/tagged/internet_explorer";
 	 }
 	 
+	 //CORS
+	 //source: http://api.jquery.com/jQuery.support/	 
+	 $.support.cors = true;
+	 
 	 
 	 //makeWidth
 	 var $headerRight = $("#container_head_right");
