@@ -21,18 +21,12 @@ function makeNewTagInput(event){
 	    		source:function(req,resp){
         			//var array = [];
         		var term = req.term;
-        		$.ajax({
-        			url:"/anycook/AutocompleteTags",
-        			dataType: "json",
-        			async:false,
-        			data:"q="+term,
-        			success:function(data){
+        		$.anycook.graph.autocomplete.tag(term,function(data){
         				resp($.map(data, function(item){
         					return{
         						label:item
         						};
-        					}));        			
-        					}
+        					}));
         				});
         			},
         			minlength:1,
