@@ -272,14 +272,9 @@ function getMessageContainer(message){
 	for(var i = 0; i<recipients.length; i++){
 		var recipient = recipients[i];
 		var $image = $("<img />").attr("src", User.getUserImagePath(recipient.id));
-		if(recipient.id == message.sender){
-			if(message.sender == user.id)
-				$imageborder.append($image);
-			else
-				$imageborder.prepend($image);
-		}
-		else
-			$imageborder.append($image);
+		
+		if(recipient.id == message.sender) $imageborder.prepend($image);
+		else $imageborder.append($image);
 		
 		if(recipient.id == user.id)
 			continue;
