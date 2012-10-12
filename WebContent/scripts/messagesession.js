@@ -57,19 +57,26 @@ function getMessages(sessionid, startid){
 					
 					
 					if(messages[i].unread)
-						$.anycook.graph.readMessage(sessionid, messages[i].id);
+						$.anycook.graph.message.read(sessionid, messages[i].id);
 						
 					$.extend(oldDataMap, datamap);
 					$messagestream.data("messages", oldDataMap);
 				}
 				if(messages!= null && messages.length>0){
 					
-					var lasttop = $lastli.position().top;
-					var lastheight = $lastli.outerHeight(true);
-					var oldtop = $messagestream.innerHeight() -(lasttop);
-					var newtop = $messagestream.innerHeight() -(lasttop+lastheight);					
-					var $jspContainer = $messagestream.children(".jspContainer");
 					$messagestream.jScrollPane();
+					
+					var jspPaneHeight = $jspPane.outerHeight();
+					var messageHeight =  $messagestream.innerHeight();
+					var oldtop = $jspPane.position().top;
+					var newtop = messageHeight-jspPaneHeight;
+					
+					// var lasttop = $lastli.position().top;
+					// var lastheight = $lastli.outerHeight(true);
+					// var oldtop = $messagestream.innerHeight() -(lasttop);
+					// var newtop = $messagestream.innerHeight() -(lasttop+lastheight);					
+					var $jspContainer = $messagestream.children(".jspContainer");
+					
 					
 					
 					if(startid == -1){
