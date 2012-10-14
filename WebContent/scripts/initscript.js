@@ -58,7 +58,7 @@
 	});
 	
     //couchdb
-    $.couch.urlPrefix = "http://test.anycook.de/couchdb";
+    $.couch.urlPrefix = "http://anycook.de:5984";
     
     	//startfadeIn
     	if($.address.pathNames().length == 0)

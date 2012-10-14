@@ -36,7 +36,7 @@
 	};
 	
 	$.anycook.drafts.getCookie = function(callback){
-		$.getJSON("http://testgraph.anycook.de/session/couchdb?callback=?", callback);
+		$.getJSON("http://graph.anycook.de/session/couchdb?callback=?", callback);
 	}
 		
 	$.anycook.drafts.load = function(){
