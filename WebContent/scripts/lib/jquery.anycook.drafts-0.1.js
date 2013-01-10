@@ -12,48 +12,40 @@
 	
 	var queue = [];
 	
-	//init([dbname][,callback])
-	$.anycook.drafts.init = function(){
-		var dbname;
-		var callback = function(){};
-		
-		switch(arguments.length){
-			case 2:
-				callback = arguments[1];
-			case 1:
-				var type = typeof arguments[0];
-				if(type === "function")
-					callback = arguments[0]
-				else if(type === "string")
-					dbname = arguments[0];
-		}
-		
-		if(dbname !== undefined)
-			settings.dbname = dbname;
-		settings.$db = $.couch.db(settings.dbname);
-		
-		$.anycook.drafts.getCookie(callback);
-	};
+	// //init([dbname][,callback])
+	// $.anycook.drafts.init = function(){
+		// var dbname;
+		// var callback = function(){};
+// 		
+		// switch(arguments.length){
+			// case 2:
+				// callback = arguments[1];
+			// case 1:
+				// var type = typeof arguments[0];
+				// if(type === "function")
+					// callback = arguments[0]
+				// else if(type === "string")
+					// dbname = arguments[0];
+		// }
+// 		
+		// if(dbname !== undefined)
+			// settings.dbname = dbname;
+		// settings.$db = $.couch.db(settings.dbname);
+// 		
+		// $.anycook.drafts.getCookie(callback);
+	// };
 	
-	$.anycook.drafts.getCookie = function(callback){
-		$.getJSON("http://graph.anycook.de/session/couchdb?callback=?", callback);
-	}
-		
 	$.anycook.drafts.load = function(){
-		var $db = settings.$db;
-		$db.view("drafts/byUserid", {key:"anycook_"+user.id,reduce:false,success:function(json){
-			if(json.rows.length == 0){
+		$.anycook.graph._getJSON("/drafts", {}, function(drafts){
+			if(drafts.length == 0){
 				$("#nodrafts").show();
 				return;
-			}
-			
+			}			
 			var $list = $("#draft_list");
-			for(var i in json.rows){
-				var id = json.rows[i].id;
-				var data = json.rows[i].value;
-				$list.append($.anycook.drafts.getBigFrameDraft(id, data));
+			for(var i in drafts){
+				$list.append($.anycook.drafts.getBigFrameDraft(drafts[i]));
 			}
-		}});
+		});
 		
 		// $.getJSON("/anycook/GetDrafts", function(json){
 			// var $draftList = $("#draft_list");
@@ -64,21 +56,19 @@
 	}
 	
 	$.anycook.drafts.num = function(){
-		if(!user.checkLogin())
+		if(!user.checkLogin()){
 			return;
-		var $db = settings.$db;
-		$db.view("drafts/num", {key:"anycook_"+user.id,success:function(json){
-			var num = json.rows.length == 1 ? json.rows[0].value : 0;
-			$("#drafts #draftnum").text(num);
-			var $messageBubble = $("#settings_btn_container .new_messages_bubble");
-			if(num>0)			
-				$messageBubble.fadeIn(200).children().text(num);
-			else
-				$messageBubble.fadeOut(200);
-				
-			setTimeout("$.anycook.drafts.num()", 2000);		
+			$.anycook.graph._getJSON("/drafts/num", {}, function(num){
+				$("#drafts #draftnum").text(num);
+				var $messageBubble = $("#settings_btn_container .new_messages_bubble");
+				if(num>0)			
+					$messageBubble.fadeIn(200).children().text(num);
+				else
+					$messageBubble.fadeOut(200);
+					
+				setTimeout("$.anycook.drafts.num()", 2000);	
+			});
 		}
-		});
 	};
 	
 	

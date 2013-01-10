@@ -52,10 +52,10 @@ function loadProfile(userid){
 				for(var i in recipes.names){
 					$p.append(profileRecipe(recipes.names[i]));
 				}
-				if(recipes.length<=5)
+				if(recipes.total<=5)
 					$("#profile_recipes p").css("height", 120);
 				
-				if(recipes.length>10)
+				if(recipes.total>10)
 					$("#profile_recipes .profile_more").show();
 			}
 		});
