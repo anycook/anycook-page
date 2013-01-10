@@ -77,13 +77,22 @@ User.prototype.getFacebookProfileLink = function(){
 };
 
 User.prototype.getRecipes = function(callback){
-	User.getRecipes(this.id, callback);
+	return User.getRecipes(this.id, callback);
 }
 
 User.getRecipes = function(userid, callback){
 	var data = {userid:userid};
 	return $.anycook.graph.recipe(data,callback);
 }
+
+User.prototype.getSchmecktRecipes = function(callback){
+	return $User.getSchmecktRecipes(this.id, callback);
+}
+
+User.getSchmecktRecipes = function(userid, callback){
+	return $.anycook.graph.user.schmeckt(userid,callback);
+}
+
 
 
 User.prototype.checkLogin = function(){

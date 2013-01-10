@@ -60,20 +60,20 @@ function loadProfile(userid){
 			}
 		});
 		
-		// if(profileData.schmeckt.length>0){
-			// var $schmeckt = $("#profile_schmeckt").show();
-			// var schmeckt = profileData.schmeckt;
-			// $schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
-			// var $p = $schmeckt.children("p");
-			// for(var i in schmeckt){
-				// $p.append(profileRecipe(schmeckt[i]));
-			// }
-			// if(schmeckt.length<=5)
-				// $("#profile_schmeckt p").css("height", 120);
-// 			
-			// if(schmeckt.length>10)
-				// $("#profile_schmeckt .profile_more").show();
-		// }
+		User.getSchmecktRecipes(userid, function(schmeckt){
+			$(".profile_achievements .likes .count").text(schmeckt.length);
+			var $schmeckt = $("#profile_schmeckt").show();
+			$schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
+			var $p = $schmeckt.children("p");
+			for(var i in schmeckt){
+				$p.append(profileRecipe(schmeckt[i]));
+			}
+			if(schmeckt.length<=5)
+				$("#profile_schmeckt p").css("height", 120);
+			
+			if(schmeckt.length>10)
+				$("#profile_schmeckt .profile_more").show();
+		});
 	});
 	
 	$(".profile_more").click(profileShowMore);
