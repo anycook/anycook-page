@@ -49,7 +49,6 @@ User.initProfileInfo = function(id){
 		profileUser.name = json.name;
 		profileUser.facebook_id = json.facebookID;
 		profileUser.schmeckt = json.schmeckt;
-		profileUser.recipes = json.recipes;
 		profileUser.text = json.text;
 		profileUser.date = json.createdate;
 		profileUser.place = json.place;
@@ -76,6 +75,15 @@ User.prototype.getProfileURI = function(){
 User.prototype.getFacebookProfileLink = function(){
 	return "http://www.facebook.com/people/@/"+this.facebook_id;
 };
+
+User.prototype.getRecipes = function(callback){
+	User.getRecipes(this.id, callback);
+}
+
+User.getRecipes = function(userid, callback){
+	var data = {userid:userid};
+	return $.anycook.graph.recipe(data,callback);
+}
 
 
 User.prototype.checkLogin = function(){

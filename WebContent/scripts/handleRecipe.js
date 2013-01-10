@@ -43,10 +43,10 @@ function getBigFrameText(json) {
 }
 
 function profileRecipe(recipe){
-	var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
+	var uri = "#!/recipe/"+encodeURIComponent(recipe);
 	
-	var $img = $("<img/>").attr("src", $.anycook.graph.recipe.image(recipe.name));
-	var $div =$("<div></div>").append("<span>"+recipe.name+"</span>");
+	var $img = $("<img/>").attr("src", $.anycook.graph.recipe.image(recipe));
+	var $div =$("<div></div>").append("<span>"+recipe+"</span>");
 	
 	var $link = $("<a></a>").addClass("profile_rezept_bild").attr("href", uri)
 		.append($img)

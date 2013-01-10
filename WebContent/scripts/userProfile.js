@@ -25,8 +25,8 @@ function loadProfile(userid){
 		
 		if(profileData.place != null)
 			$(".profile_place").show().children("span").text(profileData.place);
-		$(".profile_achievements .recipes .count").text(profileData.recipes.length);
-		$(".profile_achievements .likes .count").text(profileData.schmeckt.length);
+		//$(".profile_achievements .recipes .count").text(profileData.recipes.length);		
+		// $(".profile_achievements .likes .count").text(profileData.schmeckt.length);
 		$(".profile_achievements .discussions .count").text(profileData.discussionnum);
 		$(".profile_achievements .follower .count").text(profileData.follower.length);
 		
@@ -40,37 +40,40 @@ function loadProfile(userid){
 			fblink.css("display", "block");		
 		}
 		
-		if(profileData.recipes.length>0){
-			var $recipes = $("#profile_recipes").show();
-			var recipes = profileData.recipes;
-			$recipes.children("h2").text("Rezepte von "+profileData.name+" ("+recipes.length+")");
-			var $p = $recipes.children("p");
-			for(var i in recipes){
-				$p.append(profileRecipe(recipes[i]));
-			}
-			if(recipes.length<=5)
-				$("#profile_recipes p").css("height", 120);
-			
-			if(recipes.length>10)
-				$("#profile_recipes .profile_more").show();
-		}
-		
 		$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
 		
-		if(profileData.schmeckt.length>0){
-			var $schmeckt = $("#profile_schmeckt").show();
-			var schmeckt = profileData.schmeckt;
-			$schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
-			var $p = $schmeckt.children("p");
-			for(var i in schmeckt){
-				$p.append(profileRecipe(schmeckt[i]));
-			}
-			if(schmeckt.length<=5)
-				$("#profile_schmeckt p").css("height", 120);
+		User.getRecipes(userid, function(recipes){
+			$(".profile_achievements .recipes .count").text(recipes.total);
 			
-			if(schmeckt.length>10)
-				$("#profile_schmeckt .profile_more").show();
-		}
+			if(recipes.total>0){
+				var $recipes = $("#profile_recipes").show();
+				$recipes.children("h2").text("Rezepte von "+profileData.name+" ("+recipes.total+")");
+				var $p = $recipes.children("p");
+				for(var i in recipes.names){
+					$p.append(profileRecipe(recipes.names[i]));
+				}
+				if(recipes.length<=5)
+					$("#profile_recipes p").css("height", 120);
+				
+				if(recipes.length>10)
+					$("#profile_recipes .profile_more").show();
+			}
+		});
+		
+		// if(profileData.schmeckt.length>0){
+			// var $schmeckt = $("#profile_schmeckt").show();
+			// var schmeckt = profileData.schmeckt;
+			// $schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
+			// var $p = $schmeckt.children("p");
+			// for(var i in schmeckt){
+				// $p.append(profileRecipe(schmeckt[i]));
+			// }
+			// if(schmeckt.length<=5)
+				// $("#profile_schmeckt p").css("height", 120);
+// 			
+			// if(schmeckt.length>10)
+				// $("#profile_schmeckt .profile_more").show();
+		// }
 	});
 	
 	$(".profile_more").click(profileShowMore);
