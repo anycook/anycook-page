@@ -12,28 +12,9 @@
 	
 	var queue = [];
 	
-	// //init([dbname][,callback])
-	// $.anycook.drafts.init = function(){
-		// var dbname;
-		// var callback = function(){};
-// 		
-		// switch(arguments.length){
-			// case 2:
-				// callback = arguments[1];
-			// case 1:
-				// var type = typeof arguments[0];
-				// if(type === "function")
-					// callback = arguments[0]
-				// else if(type === "string")
-					// dbname = arguments[0];
-		// }
-// 		
-		// if(dbname !== undefined)
-			// settings.dbname = dbname;
-		// settings.$db = $.couch.db(settings.dbname);
-// 		
-		// $.anycook.drafts.getCookie(callback);
-	// };
+	$.anycook.drafts.newDraft = function(callback){
+		$.anycook.graph._put("/drafts",{}, callback);
+	}
 	
 	$.anycook.drafts.load = function(){
 		$.anycook.graph._getJSON("/drafts", {}, function(drafts){
@@ -43,21 +24,14 @@
 			}			
 			var $list = $("#draft_list");
 			for(var i in drafts){
-				$list.append($.anycook.drafts.getBigFrameDraft(drafts[i]));
+				var draft = drafts[i];
+				$list.append($.anycook.drafts.getBigFrameDraft(draft._id.$oid,draft.value));
 			}
 		});
-		
-		// $.getJSON("/anycook/GetDrafts", function(json){
-			// var $draftList = $("#draft_list");
-			// for(var i in json){
-				// $draftList.append("<li>"+JSON.stringify(json[i])+"</li>");
-			// }
-		// });
 	}
 	
 	$.anycook.drafts.num = function(){
-		if(!user.checkLogin()){
-			return;
+		if(user.checkLogin()){
 			$.anycook.graph._getJSON("/drafts/num", {}, function(num){
 				$("#drafts #draftnum").text(num);
 				var $messageBubble = $("#settings_btn_container .new_messages_bubble");
@@ -75,29 +49,32 @@
 	$.anycook.drafts.remove = function(event){
 		var $this = $(this);
 		var $li = $this.parent("li");
-		var $db = settings.$db;
-		$db.removeDoc(event.data);
-		$li.animate({height:0, opacity:0},{duration:500, complete:function(){
-			$(this).remove();
-			if($("#draft_list").children().length == 0){
-				$("#nodrafts").fadeIn(500);
-			}
-		}});
+		$.anycook.graph._delete("/drafts/"+event.data._id,{}, function(){
+			$li.animate({height:0, opacity:0},{duration:500, complete:function(){
+				$(this).remove();
+				if($("#draft_list").children().length == 0){
+					$("#nodrafts").fadeIn(500);
+				}
+			}});
+		});
+		
 	}
 	
-	$.anycook.drafts.getBigFrameDraft = function(id, data){
+	$.anycook.drafts.getBigFrameDraft = function(id,draft){
 		
-		var date = $.anycook.drafts.parseDraftDate(data.date);
-		var percent = data.percentage+"%";
-		var name = !data.name ? "Noch kein Titel" : data.name;
-		var description = !data.description ? "Noch keine Beschreibung" : data.description;
-		var image = !data.image ? "nopicture.png" : data.image;
+		var date = new Date(draft.timestamp);
+		var dateString = $.anycook.drafts.parseDraftDate(date);
+		// var percent = draft.percentage+"%";
+		var percent = 0+"%";
+		var name = !draft.name ? "Noch kein Titel" : draft.name;
+		var description = !draft.description ? "Noch keine Beschreibung" : draft.description;
+		var image = !draft.image ? "nopicture.png" : draft.image;
 	
 		var uri = encodeURI("/#!/recipeediting?id="+id);
 		
 		var $frame_big_left = $("<div></div>").addClass("frame_big_left");
 		
-		var $img = $("<img/>").attr("src", "/gerichtebilder/small/"+image);
+		var $img = $("<img/>").attr("src", "http://images.anycook.de/gerichtebilder/small/"+image);
 		var $recipe_img = $("<div></div>").addClass("recipe_img")
 			.append($img);
 		
@@ -108,8 +85,8 @@
 			.append("<p>"+description+"</p>");
 	
 	
-		var $date = $("<div>"+date+"</div>").addClass("date");
-		var $year = $("<div>"+data.date.substring(1,5)+"</div>").addClass("year");
+		var $date = $("<div>"+dateString+"</div>").addClass("date");
+		var $year = $("<div>"+date.getFullYear()+"</div>").addClass("year");
 		var $percent = $("<div>"+percent+"</div>").addClass("percent");
 		var $datecontainer = $("<div></div>").addClass("date_container")
 			.append($date)
@@ -130,7 +107,7 @@
 			.append($frame_big_right);
 			
 			
-		var $deletebtn =  $("<div><span></span></div>").attr("title", "Entwurf löschen").addClass("delete").on("click", {_id:id, _rev:data._rev}, $.anycook.drafts.remove);
+		var $deletebtn =  $("<div><span></span></div>").attr("title", "Entwurf löschen").addClass("delete").on("click", {_id:id}, $.anycook.drafts.remove);
 		var $li = $("<li></li>")
 			.append($frame_big)
 			.append($deletebtn);
@@ -138,45 +115,45 @@
 		return $li;
 	}
 	
-	$.anycook.drafts.parseDraftDate = function(datestring){
-		var datestring = datestring.substring(1,11);
-		var month = Number(datestring.substring(5,7));
-		var day = Number(datestring.substring(8));
+	$.anycook.drafts.parseDraftDate = function(date){
+		
+		var month = date.getMonth();
+		var day = date.getDate();
 		switch(month){
-			case 1:
+			case 0:
 				month = "Jan";
 				break;
-			case 2:
+			case 1:
 				month = "Feb";
 				break;
-			case 3:
+			case 2:
 				month = "Mär";
 				break;
-			case 4:
+			case 3:
 				month = "Apr";
 				break;
-			case 5:
+			case 4:
 				month = "Mai";
 				break;
-			case 6:
+			case 5:
 				month = "Jun";
 				break;
-			case 7:
+			case 6:
 				month = "Jul";
 				break;
-			case 8:
+			case 7:
 				month = "Aug";
 				break;
-			case 9:
+			case 8:
 				month = "Sep";
 				break;
-			case 10:
+			case 9:
 				month = "Okt";
 				break;
-			case 11:
+			case 10:
 				month = "Nov";
 				break;
-			case 12:
+			case 11:
 				month = "Dez";
 				break;
 		}	

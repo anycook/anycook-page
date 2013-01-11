@@ -132,17 +132,10 @@ function loadNewRecipe(){
 	//draft
 	if(user.checkLogin()){
 		 var id = $.address.parameter("id");
-		 var $db = $.couch.db("recipedrafts");
 		if(id == undefined){
-			var a = new Date();
-			a = JSON.stringify(a)
-			$db.saveDoc({user:"anycook_"+user.id, date:a},{ success:function(doc){
-				var newid = doc.id;
-				$.address.parameter("id", newid);
-				$(".nav_button, #step4 a").attr("href", function(i, attr){
-					return attr+"&id="+newid;
-				});
-			}});
+			$.anycook.drafts.newDraft(function(id){
+				$.address.parameter("id", id);
+			});
 			return;
 		}else{
 			//link
