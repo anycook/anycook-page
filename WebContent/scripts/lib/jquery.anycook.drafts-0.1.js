@@ -45,6 +45,10 @@
 		}
 	};
 	
+	$.anycook.drafts.open = function(id, callback){
+		return $.anycook.graph._getJSON("/drafts/"+id, {}, callback);
+	}
+	
 	
 	$.anycook.drafts.remove = function(event){
 		var $this = $(this);
@@ -169,31 +173,21 @@
 		if(!user.checkLogin || id === undefined) return;
 		
 		
-		var newDoc = {id:id};
-		newDoc[type] = data;
-		queue.push(newDoc);
+		var newData = {id:id, data:{}};
+		newData.data[type] = data;
+		queue.push(newData);
 		if(queue.length == 1)
 			$.anycook.drafts.saveDoc();
-		// $db.openDoc(id, {success:function(doc){
-			// doc[type] = data;
-			// $db.saveDoc(doc);
-		// }});
-		
-		
-		//$.get("/anycook/SaveDraft", {id:id, type:type, data:encodeURIComponent(data)});	
 	};
 	
 	$.anycook.drafts.saveDoc = function(){
 		if(queue.length > 0){
-			var newDoc = queue[0];
-			var $db = settings.$db;
-			$db.openDoc(newDoc.id, {success:function(doc){
-				$.extend(doc, newDoc);		
-				$db.saveDoc(doc, {success:function(){
-					queue.shift();
+			var data = queue[0];
+			var newData = JSON.stringify(data.data);
+			$.anycook.graph._post("/drafts/"+data.id,{data:newData}, function(){
+				queue.shift();
 					$.anycook.drafts.saveDoc();
-				}});
-			}});
+			});
 		}
 	};
 		

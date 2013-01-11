@@ -139,10 +139,11 @@ function loadNewRecipe(){
 			return;
 		}else{
 			//link
-			$db.openDoc(id, {success:fillNewRecipe});
+			$.anycook.drafts.open(id, fillNewRecipe);
+			// $db.openDoc(id, {success:fillNewRecipe});
 			$(".nav_button, #step4 a").attr("href", function(i, attr){
 					return attr+"&id="+id;
-			});	
+			});
 		}
 	}
 }
@@ -225,8 +226,7 @@ function checkStep2(event){
 			if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
 				continue;
 				
-				
-			$.getJSON("/anycook/GetZutatenfromSchritte", {q:encodeURIComponent(currentSentences[i])}, function(json){
+			$.anycook.graph.ingredient.extract(currentSentences[i], function(json){
 				var $stepIngredients = $step.find(".new_ingredient");
 				var $stepQuestions = $step.find(".new_ingredient_question .ingredient");
 				var ingredients = [];
