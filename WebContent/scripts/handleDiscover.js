@@ -28,10 +28,10 @@ function fillDiscover(){
 			for(var i = 0; i<json.leckerste.length; i++){
 				for(var type in json){
 					var recipe = json[type][i];
-						var uri = "#!/recipe/"+encodeURIComponent(recipe.name);
+						var uri = "#!/recipe/"+encodeURIComponent(recipe);
 						$("#"+type+" .discover_border .discover_container").append("<a href=\""+uri+"\" class=\"recipe_thumbnail\">" +
-								"<img src=\"http://graph.anycook.de/recipe/"+recipe.name+"/image?type=small\"/>" +
-								"<div><span>"+recipe.name+"</span></div></a>");
+								"<img src=\"http://graph.anycook.de/recipe/"+recipe+"/image?type=small\"/>" +
+								"<div><span>"+recipe+"</span></div></a>");
 						
 						$("#"+type+" .discover_border .discover_container a").last().css("margin-left", 120*i);							
 				}
