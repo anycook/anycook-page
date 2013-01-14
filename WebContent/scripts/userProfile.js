@@ -27,7 +27,7 @@ function loadProfile(userid){
 			$(".profile_place").show().children("span").text(profileData.place);
 		//$(".profile_achievements .recipes .count").text(profileData.recipes.length);		
 		// $(".profile_achievements .likes .count").text(profileData.schmeckt.length);
-		$(".profile_achievements .discussions .count").text(profileData.discussionnum);
+		
 		$(".profile_achievements .follower .count").text(profileData.follower.length);
 		
 		if(profileData.text!=null){
@@ -73,6 +73,10 @@ function loadProfile(userid){
 			
 			if(schmeckt.length>10)
 				$("#profile_schmeckt .profile_more").show();
+		});
+		
+		User.getDiscussionNum(userid, function(discussionNum){
+			$(".profile_achievements .discussions .count").text(discussionNum);
 		});
 	});
 	

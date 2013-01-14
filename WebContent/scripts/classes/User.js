@@ -93,6 +93,10 @@ User.getSchmecktRecipes = function(userid, callback){
 	return $.anycook.graph.user.schmeckt(userid,callback);
 }
 
+User.getDiscussionNum = function(userid, callback){
+	return $.anycook.graph.user.discussionNum(userid, callback);
+}
+
 
 
 User.prototype.checkLogin = function(){
