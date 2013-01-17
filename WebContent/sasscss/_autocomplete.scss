@@ -122,6 +122,43 @@
 		
 	}
 	
+	&.recipient-autocomplete{
+	  $width: 164px;
+    width:auto !important;
+    background-color: $stepcolor;
+    border: 1px solid $kategorieborder;
+    border-radius: 5px;
+    color:$smalllightfontcolor;
+    
+    &.ui-menu{
+      padding: 0 2px;
+      $width:$width - 4;
+      width:auto !important;
+      
+      .ui-menu-item{
+        //width: $width - 4;
+        a{
+          padding:2px 8px;
+          color:$smalllightfontcolor;
+          font:  10pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+      }
+      
+      .ui-menu-item+.ui-menu-item{
+          border-top: 1px solid $lightgrey;
+      }
+    }
+    
+    .ui-menu-item a.ui-state-hover,
+    .ui-menu-item a.ui-state-active {
+      background-color: $background;
+      @include box-shadow2-spread(-2px, 0, 0, 0, $background, 2px, 0px, 0, 0, $background);
+      color:$darkgrey;
+      border-radius: 5px;
+    }
+	  
+	}
+	
 	.autocomplete-h1{
 		font-weight:normal !important;
 		float: left;
