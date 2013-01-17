@@ -5,10 +5,6 @@
 	
 	if(!$.anycook.drafts)
 		$.anycook.drafts = {};
-		
-	var settings = {
-		dbname:"recipedrafts"
-	};
 	
 	var queue = [];
 	

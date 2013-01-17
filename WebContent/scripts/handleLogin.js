@@ -191,24 +191,25 @@ function checkEmail(showerror){
 	var mail = $("#reg_email").val();
 	var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var checker = false;
+	var dfd = $.Deferred();
 	if (filter.test(mail)){
-		$.ajax({
-			url:"/anycook/NewUser",
-			data:"mail="+mail,
-			async:false,
-			success:function(response){
-				if(response == "false"){
-					$("#reg_error_mail").addClass("wrong").text("schon vorhanden");
-				}
-				else{
-					$("#reg_error_mail").addClass("right").text("OK!");
-					checker = true;
-				}
-			}});
+		$.anycook.registration.checkMail(mail, function(response){
+			if(response === true){
+				$("#reg_error_mail").addClass("wrong").text("schon vorhanden");
+			}
+			else{
+				$("#reg_error_mail").addClass("right").text("OK!");
+				checker = true;
+			}
+			dfd.resolve(checker);
+		});
 	}else if(showerror){
 		$("#reg_error_mail").addClass("wrong").text("keine gültige Mailadresse");
+		dfd.resolve(checker);
+	}else{
+		dfd.resolve(checker);
 	}
-	return checker;
+	return dfd.promise();
 }
 
 function checkPassword(showerror){
@@ -227,38 +228,45 @@ function checkUsername(showerror){
 	$("#reg_error_user").removeClass("right").removeClass("wrong").text("");
 	var username = $("#reg_username").val();
 	var checker = false;
+	var dfd = $.Deferred();
 	if(username.length >2){
-		$.ajax({
-			url:"/anycook/NewUser",
-			async:false,
-			data:"username="+username,
-			success:function(response){
-				if(response == "false")
-					$("#reg_error_user").addClass("wrong").text("schon vorhanden");
-				else{
-					$("#reg_error_user").addClass("right").text("OK!");
-					checker = true;
-				}
-		}});
+		$.anycook.registration.checkUsername(username, function(response){
+			if(response === true)
+				$("#reg_error_user").addClass("wrong").text("schon vorhanden");
+			else{
+				$("#reg_error_user").addClass("right").text("OK!");
+				checker = true;
+			}
+			dfd.resolve(checker);
+		});
 	}else if(showerror){
 		$("#reg_error_user").addClass("wrong").text("zu kurz");
+		dfd.resolve(checker);
+	}else{
+		dfd.resolve(checker);
 	}
-	return checker;
+	return dfd.promise();
 	
 }
 
 function submitRegistration(event){
 	var checker = true;
-	if(!checkEmail(true)) checker = false;
-	if(!checkPassword(true)) checker = false;
-	if(!checkUsername(true)) checker = false;
+	$.when(checkEmail(true), checkUsername(true)).then(function(check1, check2){
+		if(!check1 || !check2 || !checkPassword(true)) 
+			checker = false;
 	
-	if(checker){
-		var mail = $("#reg_email").val();
-		var username = $("#reg_username").val();
-		var passwd = $("#reg_pass").val();
-		User.register(mail, passwd, username);
-	}
+		if(checker){
+			var mail = $("#reg_email").val();
+			var username = $("#reg_username").val();
+			var password = $("#reg_pass").val();
+			$.anycook.registration(mail, username, password, function(response){
+				if(response===true)
+					showRegistrationStep2(username,mail);
+			});
+			
+		}
+	});
+	
 	return false;
 }
 

@@ -147,7 +147,7 @@ function getMessageContainerforSession(message){
 		
 	var $dates = $(".messagedialog .datetime");
 	var lastDate = $dates.last().text();
-	var newDate = getDateString(message.datetime);
+	var newDate = getDateTimeString(message.datetime);
 	if(lastDate !== newDate){
 		var $datetime = $("<div></div>").addClass("datetime").text(newDate);
 		$datetimeline.append($clockicon);
