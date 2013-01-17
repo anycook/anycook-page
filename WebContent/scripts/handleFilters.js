@@ -71,7 +71,7 @@ function resetFilter(){
 	
 	$(".search_term").remove();
 	$("#terms_text").hide();
-	$(".close_term").die("click", removeTerm);
+	$(".close_term").off("click", removeTerm);
 	
 }
 

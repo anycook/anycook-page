@@ -25,16 +25,22 @@
         	type:"POST", 
             scriptCharset: "utf8" , 
             contentType: "application/x-www-form-urlencoded; charset=utf8"
+            // beforeSend:function(){
+            	// $("#loadpoints").addClass("loading");
+            // },
+            // complete:function(){
+    			// $("#loadpoints").removeClass("loading");
+    		// }
             // error:function(error){
             	// console.error(error.responseText);
             // }
         });
-        $("body").ajaxStart(function(){
-        		$("#loadpoints").addClass("loading");
-        	})
-        	.ajaxStop(function(){
-        		$("#loadpoints").removeClass("loading");
-        	});
+        $(document).ajaxStart(function(){
+    		$("#loadpoints").addClass("loading");
+    	})
+    	.ajaxStop(function(){
+    		
+    	});
     	
     //anycookgraph
 	$.when($.anycook.graph.init({appid:2})).then(function(){
