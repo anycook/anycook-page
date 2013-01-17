@@ -23,23 +23,15 @@
 	 
     	$.ajaxSetup({
         	type:"POST", 
+        	global:true,
             scriptCharset: "utf8" , 
             contentType: "application/x-www-form-urlencoded; charset=utf8"
-            // beforeSend:function(){
-            	// $("#loadpoints").addClass("loading");
-            // },
-            // complete:function(){
-    			// $("#loadpoints").removeClass("loading");
-    		// }
-            // error:function(error){
-            	// console.error(error.responseText);
-            // }
         });
         $(document).ajaxStart(function(){
-    		$("#loadpoints").addClass("loading");
+    		$("#loadpoints span").addClass("loading");
     	})
     	.ajaxStop(function(){
-    		
+    		$("#loadpoints span").removeClass("loading");
     	});
     	
     //anycookgraph
