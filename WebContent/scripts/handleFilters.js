@@ -327,28 +327,29 @@ function removeZutatField(event){
 //userfilter
 
 function setUserfilter(username){
-	if($("#userfilter span>a").text() == username){
-		$("#userfilter").css({display:"block", opacity:1, height:50});
-	}else{
-	
-		$.ajax({
-			  url: "/anycook/GetUserInformation",
-			  data:"username="+username,
-			  success: function(imagepath){
-				  var uri = User.getProfileURI(username);
-				  $("#userfilter a").attr("href", uri);
-				  $("#userfilter img").attr("src", imagepath);
-				  var text = "<span><a href=\"/"+uri+"\">"+username+"</a>'s<br/>Rezepte</span>";
-				  $("#userfiltertext").html(text);
-				  
-				  if($("#userfilter").css("display")=="none"){
-					  $("#userfilter").css({display:"block", opacity:0, height:0}).animate({height:50}, {duration:300, complete:function(){
-						  $(this).animate({opacity:1}, 400);
-					  }});
-				  }
-			  }
-		});
-	}
+	//TODO show filtered user in filterbar
+	// if($("#userfilter span>a").text() == username){
+		// $("#userfilter").css({display:"block", opacity:1, height:50});
+	// }else{
+// 	
+		// $.ajax({
+			  // url: "/anycook/GetUserInformation",
+			  // data:"username="+username,
+			  // success: function(imagepath){
+				  // var uri = User.getProfileURI(username);
+				  // $("#userfilter a").attr("href", uri);
+				  // $("#userfilter img").attr("src", imagepath);
+				  // var text = "<span><a href=\"/"+uri+"\">"+username+"</a>'s<br/>Rezepte</span>";
+				  // $("#userfiltertext").html(text);
+// 				  
+				  // if($("#userfilter").css("display")=="none"){
+					  // $("#userfilter").css({display:"block", opacity:0, height:0}).animate({height:50}, {duration:300, complete:function(){
+						  // $(this).animate({opacity:1}, 400);
+					  // }});
+				  // }
+			  // }
+		// });
+	// }
 }
 
 function showUserfilterremove(event){
