@@ -22,13 +22,16 @@ User.init = function(){
 			if(response != false){
 				user.id = response.id;
 				user.name = response.name;
-				user.schmeckt = response.schmeckt;
+				// user.schmeckt = response.schmeckt;
 				user.level = Number(response.level);
 				user.mail = response.mail;
 				user.facebook_id = response.facebookID;
 				user.text = response.text;
 				user.following = response.following;
 				user.place = response.place;
+				$.when(user.getSchmecktRecipes()).then(function(schmeckt){
+					user.schmeckt = schmeckt;
+				})
 			}
 			dfd.resolve(user);
 				
@@ -86,7 +89,7 @@ User.getRecipes = function(userid, callback){
 }
 
 User.prototype.getSchmecktRecipes = function(callback){
-	return $User.getSchmecktRecipes(this.id, callback);
+	return User.getSchmecktRecipes(this.id, callback);
 }
 
 User.getSchmecktRecipes = function(userid, callback){

@@ -169,7 +169,7 @@ Search.prototype.search = function(start, num){
 	
 	if(start === 0)
 		$("#result_container").empty();
-	
+	// $.when($.anycook.graph.search(data),user.getSchmecktRecipes()).then(function(json, schmeckt){
 	$.anycook.graph.search(data,function(json){
 		if(json && json.size > 0){
 			// $("#result_container").data("results", json);

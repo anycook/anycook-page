@@ -60,20 +60,19 @@ function loadProfile(userid){
 			}
 		});
 		
-		User.getSchmecktRecipes(userid, function(schmeckt){
-			$(".profile_achievements .likes .count").text(schmeckt.length);
-			var $schmeckt = $("#profile_schmeckt").show();
-			$schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
-			var $p = $schmeckt.children("p");
-			for(var i in schmeckt){
-				$p.append(profileRecipe(schmeckt[i]));
-			}
-			if(schmeckt.length<=5)
-				$("#profile_schmeckt p").css("height", 120);
-			
-			if(schmeckt.length>10)
-				$("#profile_schmeckt .profile_more").show();
-		});
+		var schmeckt = user.schmeckt;
+		$(".profile_achievements .likes .count").text(schmeckt.length);
+		var $schmeckt = $("#profile_schmeckt").show();
+		$schmeckt.children("h2").text("Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")");
+		var $p = $schmeckt.children("p");
+		for(var i in schmeckt){
+			$p.append(profileRecipe(schmeckt[i]));
+		}
+		if(schmeckt.length<=5)
+			$("#profile_schmeckt p").css("height", 120);
+		
+		if(schmeckt.length>10)
+			$("#profile_schmeckt .profile_more").show();
 		
 		User.getDiscussionNum(userid, function(discussionNum){
 			$(".profile_achievements .discussions .count").text(discussionNum);
