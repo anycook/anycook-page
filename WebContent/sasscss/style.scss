@@ -553,6 +553,28 @@ header{
 			margin-bottom:30px;
 			opacity: 0;
 			
+			#loadpoints{
+              height: 15px;
+              width: 29px;
+              margin: 0 auto;
+              background: url("/img/loading_static.png") no-repeat 15px 0;
+              padding-left: 15px; //das Bild mittig aussrichten
+              
+              
+              span{
+                 float: left;
+                 background-image: url("/img/loading.gif");
+                 width: 100%;
+                 height: 100%;
+                 opacity: 0;
+                 @include transition(opacity, .1s, ease);
+                 &.loading{
+                   opacity: 1;
+                 }
+              }
+              
+          }
+			
 			#filter_box{
 				float: left;
 				background: url("/img/filter_bg.png") repeat-y;
@@ -560,12 +582,15 @@ header{
 				$width: 268px;
 				width:$width;
 				
-				
+					
 				#filter_head{
 					background: url("/img/filter_head_main.png");
+					
+					
 					#filter_head_top {
-						height: 26px;
-						background: url("/img/filter_head_top.png") no-repeat;
+						height: 15px;
+            background: url("/img/filter_head_top.png") no-repeat;
+            background-position: 0 -12px;
 					}
 					#filter_head_main {
 						height: 25px;

@@ -35,6 +35,7 @@
         	.ajaxStop(function(){
         		$("#loadpoints").removeClass("loading");
         	});
+       }
     	
     //anycookgraph
 	$.when($.anycook.graph.init({appid:2})).then(function(){
