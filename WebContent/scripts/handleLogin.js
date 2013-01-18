@@ -214,8 +214,9 @@ function checkEmail(showerror){
 
 function checkPassword(showerror){
 	$("#reg_error_pass").removeClass("right").removeClass("wrong").text("");
+	var passRegex = /((?=.*\d)(?=.*[a-zA-Z@#$%]).{6,})/
 	var passwd = $("#reg_pass").val();
-	if(passwd.length>=5){
+	if(passRegex.test(passwd)){
 		$("#reg_error_pass").addClass("right").text("OK!");
 		return true;
 	}else if(showerror){
