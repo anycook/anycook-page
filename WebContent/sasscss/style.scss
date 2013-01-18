@@ -22,6 +22,7 @@
 @import "impressum";
 @import "aboutus";
 @import "notfound";
+@import "register";
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
@@ -110,13 +111,13 @@ header{
 					
 				}
 				#search::-webkit-input-placeholder{
-					font:inherit;
+
 					font-style: italic;
 					text-align: inherit;
 				}
 
 				#search:-moz-placeholder{
-					font:inherit;
+
 					font-style: italic;
 					text-align: inherit;
 				}

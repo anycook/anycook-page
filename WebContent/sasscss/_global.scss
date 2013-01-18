@@ -315,15 +315,9 @@ textarea{
 	
 }
 
-input::-webkit-input-placeholder{
+input::-webkit-input-placeholder,input:-moz-placeholder{
 			font:$standardfont;
-			text-align:right;
 			
-}
-
-input:-moz-placeholder{
-			font:$standardfont;
-			text-align:right;
 }
 
 .news{

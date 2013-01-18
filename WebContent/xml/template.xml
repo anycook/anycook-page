@@ -678,52 +678,30 @@
 	<template id="registration">
 		<div id="registration_container">
 			<div id="reg_step1" class="registration_step">
-				<h1>Herzlich Willkommen!</h1>
-				<div id="reg_left">
-					<p>Wir brauchen nur ein paar Daten von dir, dann bist du schon dabei.</p>
-					<p>Hast du vielleicht schon einen Facebookaccount? Dann melde dich doch damit an:</p>
-					<div id="facebook_login"></div>
-				</div>
-				<div id="reg_right">
-					<form id="reg_form">
-						<table>
-							<tr>
-								<td>
-									<p>Email</p>
-									<input type="email" id="reg_email" />
-								</td>
-								<td class="reg_error" id="reg_error_mail"></td>
-							</tr>
-							<tr>
-								<td>
-									<p>Passwort</p>
-									<input type="password" id="reg_pass" />
-								</td>
-								<td class="reg_error" id="reg_error_pass"></td>
-							</tr>
-							<tr>
-								<td>
-									<span id="showpassword">Passwort anzeigen</span>
-								</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>
-									<p>Username</p>
-									<input type="text" id="reg_username" />
-								</td>
-								<td class="reg_error" id="reg_error_user"></td>
-							</tr>
-							<tr>
-								<td>
-								</td>
-								<td>
-									<input type="submit" id="reg_submit" class="next_step" value="registrieren" />											
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
+				<h1 class="center_headline">Registrieren</h1>
+				<p>Wir brauchen nur ein paar Daten von dir, dann bist du schon dabei.</p>
+				<form id="reg_form">
+					<table>
+						<tr>
+							<td>
+								<input type="email" id="reg_email" placeholder="E-Mail"/>
+								<div class="reg_error" id="reg_error_mail"></div>
+							</td>
+							<td>
+								<input type="password" id="reg_pass" placeholder="Passwort"/>
+								<span id="showpassword">Passwort anzeigen</span>
+								<div class="reg_error" id="reg_error_pass"></div>
+							</td>
+							<td>
+								<input type="text" id="reg_username" placeholder="Name"/>
+								<div class="reg_error" id="reg_error_user"></div>
+								<input type="submit" id="reg_submit" class="next_step" value="registrieren" />
+							</td>
+						</tr>
+					</table>
+				</form>
+				<p>Oder noch einfacher! Melde dich mit deinem Facebook-Account an:</p>
+				<div class="social" id="facebook_login"></div>
 			</div>
 			<div id="reg_step2" class="registration_step">
 				<h1></h1>
