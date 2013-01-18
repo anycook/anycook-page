@@ -83,16 +83,20 @@ function getMessages(sessionid, startid){
 						if(newtop<0)
 							$jspPane.css({top:newtop});
 					}else{
-						
-						$lastli.css({backgroundColor:"#D7E8B5", borderColor:"#859F5E"});
+						var $messageContainer = $lastli.children(".messagecontainer");
+						$messageContainer.css({backgroundColor:"#D7E8B5"});
 						if(newtop<0){								
 							$jspPane.css({top:oldtop}).animate({top:newtop}, {duration:"slow", complete:function(){
-									$lastli.animate({backgroundColor:"#E6E2D7", borderColor:"#C2C0BE"},
-										{duration:2000});											
+									$messageContainer.animate({backgroundColor:"#F7F4F1"},
+										{duration:2000, complete:function(){
+											$messageContainer.css("backgroundColor", "");
+										}});							
 							}});
 						}else{
-							$lastli.hide().fadeIn(1000).animate({backgroundColor:"#E6E2D7", borderColor:"#C2C0BE"},
-								{duration:2000});
+							$messageContainer.hide().fadeIn(1000).animate({backgroundColor:"#E6E2D7", borderColor:"#C2C0BE"},
+								{duration:2000, complete:function(){
+									$messageContainer.css("backgroundColor", "");
+								}});
 						}
 					}
 					
@@ -143,7 +147,7 @@ function getMessageContainerforSession(message){
 		
 	var $dates = $(".messagedialog .datetime");
 	var lastDate = $dates.last().text();
-	var newDate = getDateString(message.datetime);
+	var newDate = getDateTimeString(message.datetime);
 	if(lastDate !== newDate){
 		var $datetime = $("<div></div>").addClass("datetime").text(newDate);
 		$datetimeline.append($clockicon);

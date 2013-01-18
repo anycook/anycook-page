@@ -165,16 +165,17 @@ User.prototype.logout = function(){
 	}
 };
 
-User.register = function(mail, pwd, username){
-	
-	 $.ajax({
-		url:"/anycook/NewUser",
-		data:"mail="+mail+"&pwd="+pwd+"&username="+username,
-		success:function(response){
-			if(response=="true"){
-				showRegistrationStep2(username,mail);
-			}
-	}});
-};
+// User.register = function(mail, pwd, username){
+// 	
+// 	
+	 // $.ajax({
+		// url:"/anycook/NewUser",
+		// data:"mail="+mail+"&pwd="+pwd+"&username="+username,
+		// success:function(response){
+			// if(response=="true"){
+				// showRegistrationStep2(username,mail);
+			// }
+	// }});
+// };
 
 

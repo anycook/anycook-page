@@ -5,10 +5,6 @@
 	
 	if(!$.anycook.drafts)
 		$.anycook.drafts = {};
-		
-	var settings = {
-		dbname:"recipedrafts"
-	};
 	
 	var queue = [];
 	
@@ -17,7 +13,7 @@
 	}
 	
 	$.anycook.drafts.load = function(){
-		$.anycook.graph._getJSON("/drafts", {}, function(drafts){
+		$.anycook.graph._get("/drafts", {}, function(drafts){
 			if(drafts.length == 0){
 				$("#nodrafts").show();
 				return;
