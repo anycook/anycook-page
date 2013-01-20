@@ -101,6 +101,15 @@ Search.prototype.excludeIngredient = function(excludedIngredient){
 	this.excludedingredients[this.excludedingredients.length] = excludedIngredient;
 };
 
+Search.prototype.removeExcludedingredient = function(zutat){
+	for(var i = 0; i<this.excludedingredients.length; i++){
+		if(this.excludedingredients[i]==zutat){
+			this.excludedingredients.splice(i, 1);
+			break;
+		}
+	}
+};
+
 Search.prototype.addTerm = function(term){
 	for(var i in this.terms){
 		if(this.terms[i] == term) return;

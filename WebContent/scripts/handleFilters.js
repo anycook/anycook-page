@@ -26,6 +26,9 @@ function setFiltersfromSession(){
 		
 		for(num in search.zutaten)
 			addIngredientRow(search.zutaten[num]);
+			
+		for(num in search.excludedingredients)
+			addExcludedIngredientRow(search.excludedingredients[num]);
 		
 		for(num in search.tags)
 			$(".tags_list").append(getTag(search.tags[num], "remove"));
@@ -316,9 +319,12 @@ function removeZutatField(event){
 	if($input.length == 1){
 		$input.remove();
 		$this.remove();
-	}else{	
-		var zutat = $this.siblings().text();
-		search.removeZutat(zutat);
+	}else{
+		var ingredient = $this.siblings();
+		if(ingredient.hasClass("excluded"))
+			search.removeExcludedingredient(ingredient.text());
+		else
+			search.removeZutat(ingredient.text());
 		search.flush();
 	}
 }
@@ -390,3 +396,22 @@ function addIngredientRow(ingredient){
 	
 	$li.append("<div class=\"ingredient\">"+ingredient+"</div><div class=\"close\"></div>");
 }
+
+function addExcludedIngredientRow(ingredient){	
+	var $ingredientList = $("#ingredient_list");
+	var $li = null;
+	$ingredientList.children("li").each(function(i){
+		var $this = $(this);
+		if($li!=null) return;
+		if($this.children().length == 0)
+			$li = $this;
+	});
+	
+	if($li == null){
+		$li = $("<li></li>");
+		$ingredientList.append($li);
+	}
+	
+	$li.append("<div class=\"ingredient excluded\">"+ingredient+"</div><div class=\"close\"></div>");
+}
+

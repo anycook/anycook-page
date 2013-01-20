@@ -818,6 +818,10 @@ header{
 								.ingredient{
 									float:left;
 									margin: 2px 0 -2px 0;
+									
+									&.excluded{
+									  color:red;
+									}
 								}
 								
 								.amount{
