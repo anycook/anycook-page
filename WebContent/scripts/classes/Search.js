@@ -4,6 +4,7 @@ function Search(){
 	this.kategorie = null;
 	this.time = null;
 	this.zutaten = new Array();
+	this.excludedingredients = new Array();
 	this.tags = new Array();
 	this.terms = new Array();
 	this.user = null;
@@ -21,6 +22,10 @@ Search.init = function(){
 			
 		case "kategorie":
 			temp.kategorie = value;
+			break;
+			
+		case "excludedingredients":
+			temp.excludedingredients = value.split(",");
 			break;
 		
 		case "zutaten":
@@ -78,6 +83,7 @@ Search.prototype.addZutat = function(zutat){
 	this.zutaten[this.zutaten.length] = zutat;
 };
 
+
 Search.prototype.removeZutat = function(zutat){
 	for(var i = 0; i<this.zutaten.length; i++){
 		if(this.zutaten[i]==zutat){
@@ -85,6 +91,14 @@ Search.prototype.removeZutat = function(zutat){
 			break;
 		}
 	}
+};
+
+Search.prototype.excludeIngredient = function(excludedIngredient){
+	for(var i in this.excludedingredients){
+		if(this.excludedingredients[i] == excludedIngredient) return;
+	}
+	
+	this.excludedingredients[this.excludedingredients.length] = excludedIngredient;
 };
 
 Search.prototype.addTerm = function(term){
@@ -138,6 +152,8 @@ Search.prototype.getData = function(){
 		data.category = this.kategorie;
 	if(this.zutaten.length > 0)
 		data.ingredients = this.zutaten.toString();
+	if(this.excludedingredients.length > 0)
+		data.excludedingredients = this.excludedingredients.toString();
 	if(this.terms.length > 0)
 		data.terms = this.terms.toString();
 	if(this.kalorien != null)
@@ -164,8 +180,6 @@ Search.prototype.search = function(start, num){
 	var data = this.getData();
 	data.num = num;
 	data.start = start;
-	//if(data=="" ) return;
-	// $.blockUI({message:null});
 	
 	if(start === 0)
 		$("#result_container").empty();
@@ -199,6 +213,7 @@ Search.prototype.flush = function(){
 	
 	$.address.parameter("tags" , this.tags);
 	$.address.parameter("zutaten", this.zutaten);
+	$.address.parameter("excludedingredients", this.excludedingredients);
 	$.address.parameter("terms", this.terms);
 	$.address.parameter("kategorie", this.kategorie);
 	$.address.parameter("skill", this.skill);
@@ -211,8 +226,8 @@ Search.prototype.flush = function(){
 
 Search.prototype.hasData = function(){
 	var check = this.skill != null || this.kalorien != null || this.kategorie != null 
-		|| this.time != null || this.zutaten.length > 0 || this.tags.length > 0
-		|| this.terms.length > 0 || this.user != null;
+		|| this.time != null || this.zutaten.length > 0 || this.excludedingredients.length > 0
+		 || this.tags.length > 0 || this.terms.length > 0 || this.user != null;
 	return check;
 };
 

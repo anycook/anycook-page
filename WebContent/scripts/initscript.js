@@ -21,18 +21,18 @@
 	 
 	 	
 	 
-    	$.ajaxSetup({
-        	type:"POST", 
-        	global:true,
-            scriptCharset: "utf8" , 
-            contentType: "application/x-www-form-urlencoded; charset=utf8"
-        });
-        $(document).ajaxStart(function(){
-    		$("#loadpoints span").addClass("loading");
-    	})
-    	.ajaxStop(function(){
-    		$("#loadpoints span").removeClass("loading");
-    	});
+	$.ajaxSetup({
+    	type:"POST", 
+    	global:true,
+        scriptCharset: "utf8" , 
+        contentType: "application/x-www-form-urlencoded; charset=utf8"
+    });
+    $(document).ajaxStart(function(){
+		$("#loadpoints span").addClass("loading");
+	})
+	.ajaxStop(function(){
+		$("#loadpoints span").removeClass("loading");
+	});
     	
     //anycookgraph
 	$.when($.anycook.graph.init({appid:2})).then(function(){
@@ -103,54 +103,7 @@
             
             
         	$("#search").autocomplete({
-        		source:function(req,resp){
-        			var array = [];
-        		var term = req.term;
-        		$.anycook.graph.autocomplete(term, function(data){
-        				if(data.gerichte!=undefined){
-	        				for(var i=0;i<data.gerichte.length;i++){
-	        	                if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>Gerichte</div><div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
-	        	            }
-        				}
-        				if(data.zutaten!=undefined){
-	        			 	for(var i=0;i<data.zutaten.length;i++){
-	        			 		if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
-	        	            }
-        				}
-        			 	if(data.kategorien!=undefined){        			 		
-	        			 	for(var i=0;i<data.kategorien.length;i++){
-	        	                    if(i==0)
-	        	    		 			array[array.length] = { label: "<div class='autocomplete-h1'>Kategorien</div><div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
-	        	    		 		else
-	        	    		 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
-	        	            }
-        			 	}
-        			 	if(data.tags!=undefined){
-	        	            for(var i=0; i<data.tags.length; i++)
-	        	            {
-	        	            	if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>Tags</div><div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
-	        	            }
-        			 	}
-        			 	if(data.user!=undefined){
-	        	            for(var i=0; i<data.user.length; i++)
-	        	            {
-	        	            	if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
-	        	            }
-        			 	}
-        			 	resp(array);
-        			});},
+        		source:searchAutocomplete,
         		minLength:1,   
 				select:function(event, ui){
 					var text = ui.item.value;
@@ -161,6 +114,10 @@
 					}
 					else if(type == "zutaten"){
 						search.addZutat(text);
+						search.flush();
+					}
+					else if(type == "excludedingredients"){
+						search.excludeIngredient(text.substr(1));
 						search.flush();
 					}
 					else if(type == "kategorie"){
