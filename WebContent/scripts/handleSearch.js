@@ -25,6 +25,10 @@ function searchAutocomplete(req,resp){
 		autocomplete(term,resp);
 }
 
+function autocompleteIngredients(term, resp){
+	
+}
+
 function autocompleteExcludedIngredients(term, resp){
 	$.anycook.graph.autocomplete.ingredient(term, function(data){
 		var array = [];

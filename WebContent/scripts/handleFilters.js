@@ -259,10 +259,19 @@ function ingredientListClick(){
 	    		source:function(req,resp){
         			//var array = [];
         		var term = req.term;
+        		var excluded = false;
+        		if(term.charAt(0)=== "-"){
+        			excluded = true;
+        			term = term.substr(1);
+        			if(term.length == 0) return;
+        		}
+        		
         		$.anycook.graph.autocomplete.ingredient(term,function(data){
         				resp($.map(data, function(item){
         					return{
-        						label:item
+        						data:item,
+        						value:"-"+item,
+        						excluded:excluded
         						};
         					}));        			
         				});
@@ -272,9 +281,12 @@ function ingredientListClick(){
         				offset:"-5 1"
         			}, 
         			select:function(event, ui){
-        				var text = ui.item.label;
+        				var text = ui.item.data;
         				$("#ingredient_list input").autocomplete("destroy");
-        				search.addZutat(text);
+        				if(ui.item.excluded)
+        					search.excludeIngredient(text);
+        				else
+        					search.addZutat(text);
         				search.flush();
         				return false;
         			}
