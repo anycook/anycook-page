@@ -269,8 +269,9 @@ function ingredientListClick(){
         		$.anycook.graph.autocomplete.ingredient(term,function(data){
         				resp($.map(data, function(item){
         					return{
+        						label:item,
         						data:item,
-        						value:"-"+item,
+        						value:excluded?"-"+item:item,
         						excluded:excluded
         						};
         					}));        			
