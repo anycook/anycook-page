@@ -155,7 +155,7 @@ function submitForm(event){
 	var mail = $mail.val();
 	var pwd = $pwd.val();
 	var stayloggedin =$("#stayloggedin input").is(":checked");
-	$.anycook.graph.login(mail, pwd, stayloggedin, function(json){
+	$.anycook.graph.session.login(mail, pwd, stayloggedin, function(json){
 		if(!json){
 			console.log("login failed");
 			return;
