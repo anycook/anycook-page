@@ -606,7 +606,7 @@
 					<td>...wenn mein Rezept aktiviert wird.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /><label></label></div></td>
 				</tr>
-				<tr id="tagactivation">
+				<tr id="tagaccepted">
 					<td>...wenn meine Stichwörter aktiviert werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
 				</tr>
