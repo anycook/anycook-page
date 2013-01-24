@@ -83,7 +83,7 @@ function handleChange(event){
 		
 		
 		//$.xml.append(path.length == 0 ? "home" : path[0]);
-		$("#content_main").xml("append", path[0], function(){
+		$.xml.append(path[0], function(){
 			switch(path.length){
 			case 0:
 				$("#user_home").addClass("active");

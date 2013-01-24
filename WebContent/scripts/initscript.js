@@ -74,18 +74,19 @@
     	});
     	
     	 //xml
-		 $("#content_main").xml("init", {error:function(event){
-		 	switch(event.type){
-		 		case 403:
-		 			if(!user.checkLogin()){
-		 				console.log("access only for logged-in users");
-		 				$.address.path("");
-		 				return false;
-		 			}
-		 			break;
-		 		case 404:
-		 			$.address.path("notfound");
-		 	}
+		 $("#content_main").xml({
+		 	error:function(event){
+			 	switch(event.type){
+			 		case 403:
+			 			if(!user.checkLogin()){
+			 				console.log("access only for logged-in users");
+			 				$.address.path("");
+			 				return false;
+			 			}
+			 			break;
+			 		case 404:
+			 			$.address.path("notfound");
+			 	}
 		 	return true;
 		 	 }});
 			 	 
