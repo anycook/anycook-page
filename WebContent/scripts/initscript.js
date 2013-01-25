@@ -20,7 +20,6 @@
 	 $right.width($("body").width()-left);
 	 
 	 	
-	 enableIeCors();
 	$.ajaxSetup({
         scriptCharset: "utf8" , 
         contentType: "application/x-www-form-urlencoded; charset=utf8"
