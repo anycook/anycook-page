@@ -1,10 +1,10 @@
  $(document).ready(function(){
 	 //setup
-	 if($.browser.msie){
-		 var version = Number($.browser.version);		
-		 if(version<9)
-			 document.location.href="http://news.anycook.de/tagged/internet_explorer";
-	 }
+	 // if($.browser.msie){
+		 // var version = Number($.browser.version);		
+		 // if(version<9)
+			 // document.location.href="http://news.anycook.de/tagged/internet_explorer";
+	 // }
 	 
 	 //CORS
 	 //source: http://api.jquery.com/jQuery.support/	 
@@ -20,10 +20,8 @@
 	 $right.width($("body").width()-left);
 	 
 	 	
-	 
+	 enableIeCors();
 	$.ajaxSetup({
-    	type:"POST", 
-    	global:true,
         scriptCharset: "utf8" , 
         contentType: "application/x-www-form-urlencoded; charset=utf8"
     });
@@ -38,27 +36,49 @@
 	$.when($.anycook.graph.init({appid:2})).then(function(){
     	loadAllKategories($("#kategorie_filter ul"));
     	
-    	$.when(User.init()).then(function(userinit){
-    		user = userinit;
-    		buildLogin();
-    		
-			$.address.bind("change",handleChange);
-    		$.address.crawlable(true);
-    		$.address.update();
-    		
-    		//drafts
-	    	if(user.checkLogin()){
-	    		// wait ressources to complete loading and the wait another 500ms.
-	    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-	    		$(window).load(function(){setTimeout(makeUsermenuText,500);});
-	    		
-	    		$.anycook.drafts.num();
-			    
-			    
-			}
-    	});
+    	var xmlErrorFunction = function(event){
+		 	switch(event.type){
+		 		case 403:
+		 			if(!user.checkLogin()){
+		 				console.log("access only for logged-in users");
+		 				$.address.path("");
+		 				return false;
+		 			}
+		 			break;
+		 		case 404:
+		 			$.address.path("notfound");
+		 	}
+		 	return true;
+	 	};
     	
-	});
+    	
+    	$.when($("#content_main").xml({error:xmlErrorFunction})).then(function(){
+	    	$.when(User.init()).then(function(userinit){
+	    		user = userinit;
+	    		buildLogin();
+	    		
+	    		
+	    		 
+	    		 
+		 	 	$.address.bind("change",handleChange);
+	    		$.address.crawlable(true);
+	    		$.address.update();
+	    		
+	    		//drafts
+		    	if(user.checkLogin()){
+		    		// wait ressources to complete loading and the wait another 500ms.
+		    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
+		    		$(window).load(function(){setTimeout(makeUsermenuText,500);});
+		    		
+		    		$.anycook.drafts.num();
+				    
+				    
+				}
+		 	 });
+				
+	    	});
+    	
+		});
 	
     
     	//startfadeIn
@@ -72,23 +92,6 @@
     	        return element == document.activeElement; 
     	    }
     	});
-    	
-    	 //xml
-		 $("#content_main").xml({
-		 	error:function(event){
-			 	switch(event.type){
-			 		case 403:
-			 			if(!user.checkLogin()){
-			 				console.log("access only for logged-in users");
-			 				$.address.path("");
-			 				return false;
-			 			}
-			 			break;
-			 		case 404:
-			 			$.address.path("notfound");
-			 	}
-		 	return true;
-		 	 }});
 			 	 
 
    
