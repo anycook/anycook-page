@@ -127,10 +127,13 @@ function getDayString(daynumber){
 }
 
 function updateWidth(){
-	 var $headerRight = $("#container_head_right");
-	 var left = $headerRight.offset().left;
-	 $headerRight.width($("body").width()-left);
-	 var $right  = $("#right");
-	 left = $right.offset().left;
-	 $right.width($("body").width()-left);
+	var minWidth = 1024;
+	var bodyWidth = $("body").width();
+	var width = Math.max(minWidth, bodyWidth);
+	var $headerRight = $("#container_head_right");
+	var left = $headerRight.offset().left;
+	$headerRight.width(width-left);
+	var $right  = $("#right");
+	left = $right.offset().left;
+	$right.width(width-left);
 }
