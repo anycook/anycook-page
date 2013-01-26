@@ -102,7 +102,8 @@
             
         	$("#search").autocomplete({
         		source:searchAutocomplete,
-        		minLength:1,   
+        		minLength:1,
+        		autoFocus:true,
 				select:function(event, ui){
 					var text = ui.item.value;
 					var type = ui.item.data;

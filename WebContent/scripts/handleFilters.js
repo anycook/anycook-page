@@ -278,6 +278,7 @@ function ingredientListClick(){
         				});
         			},
         			minlength:1,
+        			autoFocus:true,
         			position:{
         				offset:"-5 1"
         			}, 

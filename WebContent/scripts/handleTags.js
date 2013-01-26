@@ -29,6 +29,7 @@ function makeNewTagInput(event){
         					}));
         				});
         			},
+        			autoFocus:true,
         			minlength:1,
         			position:{
         				offset:"-1 1"
