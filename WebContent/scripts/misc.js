@@ -125,3 +125,12 @@ function getDayString(daynumber){
 		return "Samstag";
 	}
 }
+
+function updateWidth(){
+	 var $headerRight = $("#container_head_right");
+	 var left = $headerRight.offset().left;
+	 $headerRight.width($("body").width()-left);
+	 var $right  = $("#right");
+	 left = $right.offset().left;
+	 $right.width($("body").width()-left);
+}
