@@ -123,7 +123,9 @@ function clickRecipients(){
 			source:function(req,resp){
 	    		var array = [];
 	    		var term = req.term;
-	    		$.anycook.graph.autocomplete.user(term, function(json){
+	    		var exclude = getRecipientIds();
+	    		exclude.push(user.id);
+	    		$.anycook.graph.autocomplete.user(term, exclude, function(json){
 						var ids = getRecipientIds();
 						for(var i = 0; i<json.length; i++){
 							if($.inArray(json[i].id, ids) == -1)
