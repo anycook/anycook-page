@@ -40,8 +40,15 @@ function loadNewRecipe(){
 	var $firstStep = getNewIngredientStep(1);
 	$("#new_step_container").append($firstStep)
 		.sortable({
+			placeholder:"step-placeholder",
+			forcePlaceholderSize : true,
 			distance: 15,
-			axis: "y"
+			axis: "y",
+			containment: "parent",
+			opacity:0.75,
+			scroll:true,
+			tolerance:"pointer",
+			update:updateStepNumbers
 		});
 		//.disableSelection();
 	$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
@@ -550,6 +557,12 @@ function fillNewRecipe(json){
 		
 }
 
+function updateStepNumbers(){
+	$(".new_ingredient_step .number").each(function(i){
+		$(this).text(i+1);
+	});
+}
+
 function fillSteps(steps){
 	var $newStepContainer = $("#new_step_container").empty();
 	for(var i in steps){
@@ -748,10 +761,14 @@ function getNewIngredientStep(number, text, ingredients){
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
 	var $newIngredientList = $("<ul></ul>").addClass("new_ingredient_list")
 		.sortable({
-			placeholder: "ui-state-highlight",
-			cursorAt:"top",
+			axis: "y",
+			containment: "parent",
+			cursorAt:{top : 5},
 			distance: 15,
-			axis: "y"
+			forcePlaceholderSize : true,		
+			opacity:0.75,
+			placeholder: "ingredient-placeholder",
+			tolerance:"pointer"			
 		});
 		
 	if(ingredients === undefined || ingredients.length == 0)
