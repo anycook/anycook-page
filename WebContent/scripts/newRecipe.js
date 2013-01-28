@@ -559,9 +559,15 @@ function fillNewRecipe(json){
 }
 
 function updateStepNumbers(){
+	draftSteps();
+	
 	$(".new_ingredient_step .number").each(function(i){
 		$(this).text(i+1);
 	});
+}
+
+function updateIngredients(){
+	draftSteps();
 }
 
 function fillSteps(steps){
@@ -769,7 +775,8 @@ function getNewIngredientStep(number, text, ingredients){
 			forcePlaceholderSize : true,		
 			opacity:0.75,
 			placeholder: "ingredient-placeholder",
-			tolerance:"pointer"			
+			tolerance:"pointer",
+			update: updateIngredients			
 		});
 		
 	if(ingredients === undefined || ingredients.length == 0)
