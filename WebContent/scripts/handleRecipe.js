@@ -179,9 +179,8 @@ function loadFilter(filter) {
 	for(var i = 0; i < tags.length; i++)
 	$tags_list.append(getTag(tags[i], "link"));
 
-	checkOn("#chef_" + filter.skill);
-	checkOn("#muffin_" + filter.calorie);
-	handleRadios("#filter_table .label_chefhats, #filter_table .label_muffins");
+	checkOn($("#chef_" + filter.skill));
+	checkOn($("#muffin_" + filter.calorie));
 	//blockFilter(true);
 }
 
