@@ -1,6 +1,6 @@
 // alle Filter
 function setFiltersfromSession(){
-	// resetFilter();
+	resetFilter();
 	
 	if(search != null){
 		if(search.kategorie!=null){
