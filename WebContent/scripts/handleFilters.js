@@ -196,7 +196,7 @@ function mouseoverRadio(obj){
 }
 
 function removeChecked(){
-	$('#filter_table label input:checked').removeAttr("checked");
+	$('#filter_table label input[checked]').removeAttr("checked");
 }
 
 function checkOnOff(obj){

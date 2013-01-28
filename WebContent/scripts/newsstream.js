@@ -116,7 +116,7 @@ function clickRecipients(){
 		$this.append("<input type=\"text\"/>")
 			.children("input").focus().focusout(focusoutRecipientInput)
 			.keydown(function(event){
-				if(event.keyCode == 8)
+				if($(this).val().length == 0 && event.keyCode == 8)
 					$(this).prev(".recipient").remove();
 			})
 			.autocomplete({
