@@ -42,6 +42,7 @@ function loadNewRecipe(){
 		.sortable({
 			placeholder:"step-placeholder",
 			forcePlaceholderSize : true,
+			cursorAt : {bottom: 200},
 			distance: 15,
 			axis: "y",
 			containment: "parent",
