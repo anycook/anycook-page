@@ -118,7 +118,7 @@ function clickSignin(event){
 
 function clickOthers(event){
 	var $target = $(event.target);
-	if (!$target.parents().andSelf().is("#login_container, #signin_btn")|| $target.is("a")){
+	if (event.type == "scroll" || !$target.parents().andSelf().is("#login_container, #signin_btn")|| $target.is("a")){
 		clickSignin();
 	}
 }
