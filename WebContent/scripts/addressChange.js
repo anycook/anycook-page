@@ -91,11 +91,6 @@ function handleChange(event){
 				break;
 			case 1:
 				switch(path[0]){
-				// case "search":
-					// //fullTextSearch();
-					// search = Search.init();
-					// search.search();
-					// break;
 				case "recipeediting":
 					setTitle("Neues Rezept erstellen");
 					loadNewRecipe();
@@ -146,15 +141,8 @@ function handleChange(event){
 						.append(getHeaderLink("Rezept", "", "recipe_btn"))
 						.append(getHeaderLink("Diskussion", "", "discussion_btn"));
 					$.anycook.graph.recipe(path[1], loadRecipewJSON);
-					break;
-					
-				/*case "search":				
-					setFiltersfromSession();
-					$("#search").focus();
-					$("#search").val(path[1]);
-					fullTextSearch();
-					break;*/
-					
+					break;		
+		
 				case "activate":
 					activateUser(path[1]);
 					break;
