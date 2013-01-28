@@ -10,6 +10,7 @@ function scrollListener(){
 	else if(scrollTop < filterheight && $("#backtothetop").length > 0){
 		$("#backtothetop").fadeOut(700,function(){$("#backtothetop").remove();});
 	}
+	
 }
 
 function backtothetop(){
