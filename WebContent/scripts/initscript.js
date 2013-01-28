@@ -185,7 +185,7 @@
             	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){
                 	if(!$("#filter_main").is(".blocked")){
 	                	checkOnOff(this);
-	                	handleRadios(this);
+	                	// handleRadios(this);
                 	}
                 	
                 	// must return false or function is sometimes called twice
@@ -193,9 +193,11 @@
                 }).mouseover(function(){
                 	if(!$("#filter_main").is(".blocked"))
                 		mouseoverRadio(this);
-            	}).mouseleave(function(){
+            	})
+            	
+            	$(".filter_table_right").mouseleave(function(){
             		if(!$("#filter_main").is(".blocked"))
-            			handleRadios(this);
+            			handleRadios($(this).children());
             	});
 
             	//zutatentabelle

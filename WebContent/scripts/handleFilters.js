@@ -1,6 +1,6 @@
 // alle Filter
 function setFiltersfromSession(){
-	resetFilter();
+	// resetFilter();
 	
 	if(search != null){
 		if(search.kategorie!=null){
@@ -8,12 +8,14 @@ function setFiltersfromSession(){
 			$("#kategorie_filter_hidden").val(search.kategorie);
 		}
 		if(search.skill!=null){
-			checkOn("#chef_"+search.skill);
-			handleRadios("#filter_table .label_chefhats");
+			$(".chefhats").removeAttr("checked");
+			checkOn($("#chef_"+search.skill));
+			// handleRadios($("#filter_table .label_chefhats"));
 		}
 		if(search.kalorien!=null){
-			checkOn("#muffin_"+search.kalorien);
-			handleRadios("#filter_table .label_muffins");
+			$(".muffins").removeAttr("checked");
+			checkOn($("#muffin_"+search.kalorien));
+			// handleRadios($("#filter_table .label_muffins"));
 		}
 		if(search.time != null){
 			var time = search.time.split(":");
@@ -59,7 +61,7 @@ function resetFilter(){
 	$("#time_std, #time_min").val("0");
 	removeChecked();
 	//blockFilter(false);
-	handleRadios("#filter_table .label_chefhats, #filter_table .label_muffins");
+	handleRadios($("#filter_table .label_chefhats, #filter_table .label_muffins"));
 	// handleRadios(".label_chefhats, .label_muffins");
 	var $ingredientList = $("#ingredient_list").empty();
 	for(var i= 0; i<6; i++)
@@ -178,11 +180,14 @@ function closeKategorien(event){
 
 //radiobuttons
 
-function handleRadios(obj){
-		var $obj = $(obj).removeClass('on')
-			.siblings().andSelf().removeClass('on');	
-	   		$obj.children("input:checked").parent('label').addClass('on').prevAll().addClass('on');
-	   	return;
+function handleRadios($obj){
+	$obj.removeClass("on");
+	$obj.each(function(){
+		var $this = $(this);
+		var $input = $this.children("input");
+		if($input.attr("checked"))			
+			$this.prevAll().andSelf().addClass('on');
+	});
 }
 
 function mouseoverRadio(obj){
@@ -209,11 +214,9 @@ function checkOnOff(obj){
 	search.flush();
 }
 
-function checkOn(obj){
-	if($(obj).attr("ckecked")==null){
-		$(obj).siblings().removeAttr("checked");
-		$(obj).attr("checked", "checked");
-	}
+function checkOn($obj){
+	$obj.attr("checked", "checked");
+	handleRadios($obj.parent().siblings().andSelf());
 }
 
 function textReplacement(input){
@@ -294,16 +297,6 @@ function ingredientListClick(){
         			}
 	    	});
 	    	$(".ui-autocomplete").last().addClass("ingredient-autocomplete");
-	    	
-	    	/*$("#zutat_form").submit(function(event){
-	    		var zutat = $("#zutat_input").val();
-	    		$("#zutat_input").autocomplete("destroy");
-				$("#zutat_input").parents("tr").remove();
-	    		search.addZutat(zutat);
-	    		search.flush();
-	    		//zutatentableclick();
-	    		return false;
-	    	});*/
 	    	
 	    	
 		}
