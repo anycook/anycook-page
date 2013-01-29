@@ -32,7 +32,7 @@ function loadNewRecipe(){
 	    onProgress:nrProgress,
 	    onComplete:completeUpload,
 	    // path to server-side upload script
-	    action: 'http://testgraph.anycook.de/upload/image/recipe'
+	    action: 'http://graph.anycook.de/upload/image/recipe'
 	});
 	
 	
