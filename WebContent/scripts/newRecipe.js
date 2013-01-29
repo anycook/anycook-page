@@ -86,9 +86,9 @@ function loadNewRecipe(){
 	$("#step3 .label_chefhats, #step3 .label_muffins").click(function(){
 		var $inputs = $(this).children("input");
 		$inputs.attr("checked") ? $inputs.removeAttr("checked") : $inputs.attr("checked", "checked");
-        handleRadios(this);
         
         var $this = $(this);
+        handleRadios($this);
         var name = $inputs.attr("name") == "new_muffins" ? "calorie" : "skill";
         
         
@@ -106,8 +106,9 @@ function loadNewRecipe(){
     	return false;
     }).mouseover(function(){
     		mouseoverRadio(this);
-	}).mouseleave(function(){
-			handleRadios(this);
+	});
+	$("#step3 .label_container").mouseleave(function(){
+			handleRadios($(this).children());
 	});
 	$("#step3 .std,#step3 .min")
 		.keydown(keyTime)
