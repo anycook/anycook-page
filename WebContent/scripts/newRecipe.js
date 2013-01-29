@@ -1002,13 +1002,13 @@ function showNRImage(filename){
 	$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
 	$recipeImageContainer.children(".image_upload").show();
 	
-	var $img = $("<img/>").addClass("recipe_image").attr("src", "/gerichtebilder/big/"+filename);
+	var $img = $("<img/>").addClass("recipe_image").attr("src", "http://images.anycook.de/gerichtebilder/big/"+filename);
 	$recipeImageContainer.append($img);
 }
 
 function loadPreview(){
 	var recipeImage = getImageName();
-	$("#step4 .recipe_image_container img").attr("src", "/gerichtebilder/big/"+recipeImage)
+	$("#step4 .recipe_image_container img").attr("src", "http://images.anycook.de/gerichtebilder/big/"+recipeImage)
 	.load(function(){
 		if($.address.parameter("step") == 4)
 			resetNewRecipeHeight($("#step4"));
