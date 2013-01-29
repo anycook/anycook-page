@@ -5,18 +5,18 @@ function loadAboutUs(){
 
 function setWebsiteData(){
 	if($.address.pathNames()[0] == "about_us"){
-		$.ajax({
-		  url: "/anycook/LoadSide1Data",
-		  dataType: "json",
-		  success: function(json){
-		  	$(".usercounter").text(json.users);
-		  	$(".tagcounter").text(json.tags);
-		  	$(".ingredientcounter").text(json.ingredients);
-		  	$(".recipecounter").text(json.recipes);
-		  	setTimeout("setWebsiteData()",7000);
-		  	
-		  }
+		$.when($.anycook.graph.user.number(),
+			$.anycook.graph.tag.number(),
+			$.anycook.graph.ingredient.number(),
+			$.anycook.graph.recipe.number())
+		.then(function(numUsers, numTags, numIngredients, numRecipes){
+			$(".usercounter").text(numUsers[0]);
+		  	$(".tagcounter").text(numTags[0]);
+		  	$(".ingredientcounter").text(numIngredients[0]);
+		  	$(".recipecounter").text(numRecipes[0]);
+		  	setTimeout(setWebsiteData,5000);
 		});
+		  	
 	}
 }
 
