@@ -43,7 +43,12 @@ function autocompleteExcludedIngredients(term, resp){
 }
 
 function autocomplete(term, resp){
-	$.anycook.graph.autocomplete(term, function(data){
+	var categorie = search.kategorie;
+	var ingredients = search.zutaten;
+	var tags = search.tags;
+	var user = search.user;
+	
+	$.anycook.graph.autocomplete(term, categorie, ingredients, tags, user, function(data){
 		var array = [];
 		if(data.gerichte!=undefined){
 			for(var i=0;i<data.gerichte.length;i++){
