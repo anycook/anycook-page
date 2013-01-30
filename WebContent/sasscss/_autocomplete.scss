@@ -160,12 +160,13 @@
     }
     
     .ui-menu-item a.ui-state-hover,
-    .ui-menu-item a.ui-state-active {
+    .ui-menu-item a.ui-state-active,
+    .ui-menu-item a.ui-state-focus {
       background-color: $background;
       @include box-shadow2-spread(-2px, 0, 0, 0, $background, 2px, 0px, 0, 0, $background);
       color:$darkgrey;
-      border-radius: 5px;
     }
+    
 	  
 	}
 	
