@@ -32,7 +32,7 @@ function loadNewRecipe(){
 	    onProgress:nrProgress,
 	    onComplete:completeUpload,
 	    // path to server-side upload script
-	    action: 'http://testgraph.anycook.de/upload/image/recipe'
+	    action: 'http://graph.anycook.de/upload/image/recipe'
 	});
 	
 	
@@ -40,8 +40,16 @@ function loadNewRecipe(){
 	var $firstStep = getNewIngredientStep(1);
 	$("#new_step_container").append($firstStep)
 		.sortable({
+			placeholder:"step-placeholder",
+			forcePlaceholderSize : true,
+			cursorAt : {bottom: 200},
 			distance: 15,
-			axis: "y"
+			axis: "y",
+			containment: "parent",
+			opacity:0.75,
+			scroll:true,
+			tolerance:"pointer",
+			update:updateStepNumbers
 		});
 		//.disableSelection();
 	$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
@@ -78,9 +86,9 @@ function loadNewRecipe(){
 	$("#step3 .label_chefhats, #step3 .label_muffins").click(function(){
 		var $inputs = $(this).children("input");
 		$inputs.attr("checked") ? $inputs.removeAttr("checked") : $inputs.attr("checked", "checked");
-        handleRadios(this);
         
         var $this = $(this);
+        handleRadios($this);
         var name = $inputs.attr("name") == "new_muffins" ? "calorie" : "skill";
         
         
@@ -98,8 +106,9 @@ function loadNewRecipe(){
     	return false;
     }).mouseover(function(){
     		mouseoverRadio(this);
-	}).mouseleave(function(){
-			handleRadios(this);
+	});
+	$("#step3 .label_container").mouseleave(function(){
+			handleRadios($(this).children());
 	});
 	$("#step3 .std,#step3 .min")
 		.keydown(keyTime)
@@ -550,6 +559,18 @@ function fillNewRecipe(json){
 		
 }
 
+function updateStepNumbers(){
+	draftSteps();
+	
+	$(".new_ingredient_step .number").each(function(i){
+		$(this).text(i+1);
+	});
+}
+
+function updateIngredients(){
+	draftSteps();
+}
+
 function fillSteps(steps){
 	var $newStepContainer = $("#new_step_container").empty();
 	for(var i in steps){
@@ -748,10 +769,15 @@ function getNewIngredientStep(number, text, ingredients){
 	var $menge = $("<h4></h4>").addClass("menge_headline").text("Menge");
 	var $newIngredientList = $("<ul></ul>").addClass("new_ingredient_list")
 		.sortable({
-			placeholder: "ui-state-highlight",
-			cursorAt:"top",
+			axis: "y",
+			containment: "parent",
+			cursorAt:{top : 5},
 			distance: 15,
-			axis: "y"
+			forcePlaceholderSize : true,		
+			opacity:0.75,
+			placeholder: "ingredient-placeholder",
+			tolerance:"pointer",
+			update: updateIngredients			
 		});
 		
 	if(ingredients === undefined || ingredients.length == 0)
@@ -977,13 +1003,13 @@ function showNRImage(filename){
 	$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
 	$recipeImageContainer.children(".image_upload").show();
 	
-	var $img = $("<img/>").addClass("recipe_image").attr("src", "/gerichtebilder/big/"+filename);
+	var $img = $("<img/>").addClass("recipe_image").attr("src", "http://images.anycook.de/gerichtebilder/big/"+filename);
 	$recipeImageContainer.append($img);
 }
 
 function loadPreview(){
 	var recipeImage = getImageName();
-	$("#step4 .recipe_image_container img").attr("src", "/gerichtebilder/big/"+recipeImage)
+	$("#step4 .recipe_image_container img").attr("src", "http://images.anycook.de/gerichtebilder/big/"+recipeImage)
 	.load(function(){
 		if($.address.parameter("step") == 4)
 			resetNewRecipeHeight($("#step4"));

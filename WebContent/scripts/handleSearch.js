@@ -15,6 +15,87 @@ function addResults(json){
 		addMoreResultsButton();
 }
 
+function searchAutocomplete(req,resp){
+	var term = req.term;
+	if(term.charAt(0) === "-"){
+		if(term.length > 1)
+			autocompleteExcludedIngredients(term.substr(1), resp);
+	}
+	else
+		autocomplete(term,resp);
+}
+
+function autocompleteIngredients(term, resp){
+	
+}
+
+function autocompleteExcludedIngredients(term, resp){
+	$.anycook.graph.autocomplete.ingredient(term, function(data){
+		var array = [];
+	 	for(var i=0;i<data.length;i++){
+	 		if(i==0)
+	 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedingredients"};
+	 		else
+	 			array[array.length] = { label: "<div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedingredients"};
+        }
+		resp(array);
+	});
+}
+
+function autocomplete(term, resp){
+	var categorie = search.kategorie;
+	var ingredients = search.zutaten;
+	var tags = search.tags;
+	var user = search.user;
+	
+	$.anycook.graph.autocomplete(term, categorie, ingredients, tags, user, function(data){
+		var array = [];
+		if(data.gerichte!=undefined){
+			for(var i=0;i<data.gerichte.length;i++){
+	            if(i==0)
+		 			array[array.length] = { label: "<div class='autocomplete-h1'>Gerichte</div><div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
+		 		else
+		 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
+	        }
+		}
+		if(data.zutaten!=undefined){
+		 	for(var i=0;i<data.zutaten.length;i++){
+		 		if(i==0)
+		 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
+		 		else
+		 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
+	        }
+		}
+	 	if(data.kategorien!=undefined){        			 		
+		 	for(var i=0;i<data.kategorien.length;i++){
+	                if(i==0)
+			 			array[array.length] = { label: "<div class='autocomplete-h1'>Kategorien</div><div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
+			 		else
+			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
+	        }
+	 	}
+	 	if(data.tags!=undefined){
+	        for(var i=0; i<data.tags.length; i++)
+	        {
+	        	if(i==0)
+		 			array[array.length] = { label: "<div class='autocomplete-h1'>Tags</div><div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
+		 		else
+		 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
+	        }
+	 	}
+	 	if(data.user!=undefined){
+	        for(var i=0; i<data.user.length; i++)
+	        {
+	        	if(i==0)
+		 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
+		 		else
+		 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
+	        }
+	 	}
+	 	resp(array);
+	});
+}
+
 function searchKeyDown(event){
 	var newFocus = undefined;
 	switch(event.keyCode){
@@ -90,7 +171,11 @@ function handleSearchResults(result, terms){
 	else if(result.zutaten!=null){
 		search.addZutat(result.zutaten[0]);
 		search.flush();
-	}		
+	}
+	else if(result.excludedingredients != null){
+		search.excludeIngredient(result.excludedingredients[0]);
+		search.flush();
+	}
 	else if(result.user!=null){
 		gotoProfile(result.user[0]);
 	}

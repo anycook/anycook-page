@@ -407,7 +407,29 @@
 			<div id="team">
 				<h2 class="border_headline">Das Team</h2>
 				<div class="profile_container">
-					<img class="profile_image" src="http://graph.anycook.de/user/9/image?type=large&amp;appid=0"/>			
+					<img class="profile_image" src="http://graph.anycook.de/user/8/image?type=large&amp;appid=2"/>			
+					<div class="profile_info">
+						<div class="profile_title">
+							<h1>Jan Grassegger</h1>
+						</div>
+						<div class="profile_position">Entwicklung</div>
+						<div class="profile_text">Jan ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+					</div>
+				</div>
+				<div class="profile_container">
+					<img class="profile_image" src="http://graph.anycook.de/user/2/image?type=large&amp;appid=2"/>			
+					<div class="profile_info">
+						<div class="profile_title">
+							<h1>Daniel Plath</h1>
+						</div>
+						<div class="profile_position">Design</div>
+						<div class="profile_text">Daniel ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+					</div>
+				</div>
+				<div class="profile_container">
+					<img class="profile_image" src="http://graph.anycook.de/user/10/image?type=large&amp;appid=2"/>			
 					<div class="profile_info">
 						<div class="profile_title">
 							<h1>Giacomo Blume</h1>
@@ -418,46 +440,24 @@
 					</div>
 				</div>
 				<div class="profile_container">
-					<img class="profile_image" src="http://graph.anycook.de/user/9898/image?type=large&amp;appid=0"/>			
+					<img class="profile_image" src="http://graph.anycook.de/user/9898/image?type=large&amp;appid=2"/>			
 					<div class="profile_info">
 						<div class="profile_title">
 							<h1>Moritz Glück</h1>
 						</div>
-						<div class="profile_position">Entwickler</div>
-						<div class="profile_text">Jan ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+						<div class="profile_position">Design</div>
+						<div class="profile_text">Moritz ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
 						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 					</div>
 				</div>
 				<div class="profile_container">
-					<img class="profile_image" src="http://graph.anycook.de/user/7/image?type=large&amp;appid=0"/>			
-					<div class="profile_info">
-						<div class="profile_title">
-							<h1>Jan Grassegger</h1>
-						</div>
-						<div class="profile_position">Entwickler</div>
-						<div class="profile_text">Jan ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
-					</div>
-				</div>	
-				<div class="profile_container">
-					<img class="profile_image" src="http://graph.anycook.de/user/8/image?type=large&amp;appid=0"/>			
+					<img class="profile_image" src="http://graph.anycook.de/user/9/image?type=large&amp;appid=2"/>			
 					<div class="profile_info">
 						<div class="profile_title">
 							<h1>Maximilian Michel</h1>
 						</div>
 						<div class="profile_position">Entwicklung</div>
 						<div class="profile_text">Max ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
-					</div>
-				</div>
-				<div class="profile_container">
-					<img class="profile_image" src="http://graph.anycook.de/user/1/image?type=large&amp;appid=0"/>			
-					<div class="profile_info">
-						<div class="profile_title">
-							<h1>Daniel Plath</h1>
-						</div>
-						<div class="profile_position">Designer</div>
-						<div class="profile_text">Daniel ist Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
 						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 					</div>
 				</div>
@@ -606,7 +606,7 @@
 					<td>...wenn mein Rezept aktiviert wird.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /><label></label></div></td>
 				</tr>
-				<tr id="tagactivation">
+				<tr id="tagaccepted">
 					<td>...wenn meine Stichwörter aktiviert werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
 				</tr>

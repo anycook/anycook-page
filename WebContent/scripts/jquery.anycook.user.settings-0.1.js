@@ -61,7 +61,7 @@
 		for(var type in mailsettings){
 			if(mailsettings[type]){
 				checker=true;
-				$("#"+type+" input[type=\"checkbox\"]").attr("checked", "checked");
+				$("#"+type.toLowerCase()+" input[type=\"checkbox\"]").attr("checked", "checked");
 			}
 		}
 		

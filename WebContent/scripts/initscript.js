@@ -1,10 +1,10 @@
  $(document).ready(function(){
 	 //setup
-	 if($.browser.msie){
-		 var version = Number($.browser.version);		
-		 if(version<9)
-			 document.location.href="http://news.anycook.de/tagged/internet_explorer";
-	 }
+	 // if($.browser.msie){
+		 // var version = Number($.browser.version);		
+		 // if(version<9)
+			 // document.location.href="http://news.anycook.de/tagged/internet_explorer";
+	 // }
 	 
 	 //CORS
 	 //source: http://api.jquery.com/jQuery.support/	 
@@ -12,14 +12,10 @@
 	 
 	 
 	 //makeWidth
-	 var $headerRight = $("#container_head_right");
-	 var left = $headerRight.offset().left;
-	 $headerRight.width($("body").width()-left);
-	 var $right  = $("#right");
-	 left = $right.offset().left;
-	 $right.width($("body").width()-left);
-	 
+	updateWidth();
+	$(window).resize(updateWidth);	 
 	 	
+
 	 
     	$.ajaxSetup({
         	type:"POST", 
@@ -34,32 +30,54 @@
     	.ajaxStop(function(){
     		$("#loadpoints span").removeClass("loading");
     	});
-    	
+
     //anycookgraph
 	$.when($.anycook.graph.init({appid:2})).then(function(){
     	loadAllKategories($("#kategorie_filter ul"));
     	
-    	$.when(User.init()).then(function(userinit){
-    		user = userinit;
-    		buildLogin();
-    		
-			$.address.bind("change",handleChange);
-    		$.address.crawlable(true);
-    		$.address.update();
-    		
-    		//drafts
-	    	if(user.checkLogin()){
-	    		// wait ressources to complete loading and the wait another 500ms.
-	    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-	    		$(window).load(function(){setTimeout(makeUsermenuText,500);});
-	    		
-	    		$.anycook.drafts.num();
-			    
-			    
-			}
-    	});
+    	var xmlErrorFunction = function(event){
+		 	switch(event.type){
+		 		case 403:
+		 			if(!user.checkLogin()){
+		 				console.log("access only for logged-in users");
+		 				$.address.path("");
+		 				return false;
+		 			}
+		 			break;
+		 		case 404:
+		 			$.address.path("notfound");
+		 	}
+		 	return true;
+	 	};
     	
-	});
+    	
+    	$.when($("#content_main").xml({error:xmlErrorFunction})).then(function(){
+	    	$.when(User.init()).then(function(userinit){
+	    		user = userinit;
+	    		buildLogin();
+	    		    		 
+	    		 
+		 	 	$.address.bind("change",handleChange);
+	    		$.address.crawlable(true);
+	    		$.address.update();
+	    		
+	    		//drafts
+		    	if(user.checkLogin()){
+		    		makeUsermenuText();
+		    		
+		    		// wait ressources to complete loading and the wait another 500ms.
+		    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
+		    		$(window).load(function(){setTimeout(checkNewMessageNum,500);});
+		    		
+		    		$.anycook.drafts.num();
+				    
+				    
+				}
+		 	 });
+				
+	    	});
+    	
+		});
 	
     
     	//startfadeIn
@@ -73,22 +91,6 @@
     	        return element == document.activeElement; 
     	    }
     	});
-    	
-    	 //xml
-		 $("#content_main").xml("init", {error:function(event){
-		 	switch(event.type){
-		 		case 403:
-		 			if(!user.checkLogin()){
-		 				console.log("access only for logged-in users");
-		 				$.address.path("");
-		 				return false;
-		 			}
-		 			break;
-		 		case 404:
-		 			$.address.path("notfound");
-		 	}
-		 	return true;
-		 	 }});
 			 	 
 
    
@@ -104,55 +106,9 @@
             
             
         	$("#search").autocomplete({
-        		source:function(req,resp){
-        			var array = [];
-        		var term = req.term;
-        		$.anycook.graph.autocomplete(term, function(data){
-        				if(data.gerichte!=undefined){
-	        				for(var i=0;i<data.gerichte.length;i++){
-	        	                if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>Gerichte</div><div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
-	        	            }
-        				}
-        				if(data.zutaten!=undefined){
-	        			 	for(var i=0;i<data.zutaten.length;i++){
-	        			 		if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
-	        	            }
-        				}
-        			 	if(data.kategorien!=undefined){        			 		
-	        			 	for(var i=0;i<data.kategorien.length;i++){
-	        	                    if(i==0)
-	        	    		 			array[array.length] = { label: "<div class='autocomplete-h1'>Kategorien</div><div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
-	        	    		 		else
-	        	    		 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
-	        	            }
-        			 	}
-        			 	if(data.tags!=undefined){
-	        	            for(var i=0; i<data.tags.length; i++)
-	        	            {
-	        	            	if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>Tags</div><div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
-	        	            }
-        			 	}
-        			 	if(data.user!=undefined){
-	        	            for(var i=0; i<data.user.length; i++)
-	        	            {
-	        	            	if(i==0)
-	        			 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
-	        			 		else
-	        			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
-	        	            }
-        			 	}
-        			 	resp(array);
-        			});},
-        		minLength:1,   
+        		source:searchAutocomplete,
+        		minLength:1,
+        		autoFocus:true,
 				select:function(event, ui){
 					var text = ui.item.value;
 					var type = ui.item.data;
@@ -162,6 +118,10 @@
 					}
 					else if(type == "zutaten"){
 						search.addZutat(text);
+						search.flush();
+					}
+					else if(type == "excludedingredients"){
+						search.excludeIngredient(text.substr(1));
 						search.flush();
 					}
 					else if(type == "kategorie"){
@@ -230,7 +190,7 @@
             	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){
                 	if(!$("#filter_main").is(".blocked")){
 	                	checkOnOff(this);
-	                	handleRadios(this);
+	                	// handleRadios(this);
                 	}
                 	
                 	// must return false or function is sometimes called twice
@@ -238,9 +198,11 @@
                 }).mouseover(function(){
                 	if(!$("#filter_main").is(".blocked"))
                 		mouseoverRadio(this);
-            	}).mouseleave(function(){
+            	})
+            	
+            	$(".filter_table_right").mouseleave(function(){
             		if(!$("#filter_main").is(".blocked"))
-            			handleRadios(this);
+            			handleRadios($(this).children());
             	});
 
             	//zutatentabelle

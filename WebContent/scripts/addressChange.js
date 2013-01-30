@@ -83,7 +83,7 @@ function handleChange(event){
 		
 		
 		//$.xml.append(path.length == 0 ? "home" : path[0]);
-		$("#content_main").xml("append", path[0], function(){
+		$.xml.append(path[0], function(){
 			switch(path.length){
 			case 0:
 				$("#user_home").addClass("active");
@@ -91,11 +91,6 @@ function handleChange(event){
 				break;
 			case 1:
 				switch(path[0]){
-				// case "search":
-					// //fullTextSearch();
-					// search = Search.init();
-					// search.search();
-					// break;
 				case "recipeediting":
 					setTitle("Neues Rezept erstellen");
 					loadNewRecipe();
@@ -146,15 +141,8 @@ function handleChange(event){
 						.append(getHeaderLink("Rezept", "", "recipe_btn"))
 						.append(getHeaderLink("Diskussion", "", "discussion_btn"));
 					$.anycook.graph.recipe(path[1], loadRecipewJSON);
-					break;
-					
-				/*case "search":				
-					setFiltersfromSession();
-					$("#search").focus();
-					$("#search").val(path[1]);
-					fullTextSearch();
-					break;*/
-					
+					break;		
+		
 				case "activate":
 					activateUser(path[1]);
 					break;
@@ -256,7 +244,7 @@ function changePage(event){
 		case "discover":
 			$("#site1").hide();
 			if($("#discover").length==0){
-				$("#content_main").xml("append", "home_discover");
+				$.xml.append("home_discover");
 				loadDiscover();
 			}
 			else
@@ -277,7 +265,7 @@ function changePage(event){
 				$("#recipe_container").hide();
 				var $discussionContainer = $("#discussion_container");
 				if($discussionContainer.length==0){
-					$("#content_main").xml("append", "recipe_discussion");
+					$.xml.append("recipe_discussion");
 					//discussion
 					$(".center_headline").html("Diskussion zum Rezept<br/>" + decodeURIComponent(event.pathNames[1]));
 					var login = user.checkLogin();

@@ -21,4 +21,10 @@
 		return $.anycook.graph._get(graph, data, callback);		
 	}
 	
+	$.anycook.registration.activate = function(activationKey, callback){
+		var graph = "/session/activate";
+		var data = {activationkey:activationKey};
+		return $.anycook.graph._post(graph, data, callback);
+	}
+	
 })(jQuery);

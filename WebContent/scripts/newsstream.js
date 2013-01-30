@@ -115,11 +115,17 @@ function clickRecipients(){
 	else{
 		$this.append("<input type=\"text\"/>")
 			.children("input").focus().focusout(focusoutRecipientInput)
+			.keydown(function(event){
+				if($(this).val().length == 0 && event.keyCode == 8)
+					$(this).prev(".recipient").remove();
+			})
 			.autocomplete({
 			source:function(req,resp){
 	    		var array = [];
 	    		var term = req.term;
-	    		$.anycook.graph.autocomplete.user(term, function(json){
+	    		var exclude = getRecipientIds();
+	    		exclude.push(user.id);
+	    		$.anycook.graph.autocomplete.user(term, exclude, function(json){
 						var ids = getRecipientIds();
 						for(var i = 0; i<json.length; i++){
 							if($.inArray(json[i].id, ids) == -1)
@@ -128,7 +134,9 @@ function clickRecipients(){
 						resp(array);
 					});
 				},
-	    		minLength:1,   
+	    		minLength:1,
+	    		// selectFirst:true,
+	    		autoFocus:true,
 				select:function(event, ui){
 					var id = ui.item.data;
 					var name = ui.item.value;
@@ -187,13 +195,10 @@ function addRecipient(name, id){
 }
 
 function focusoutRecipientInput(event){
-	var $this = $(this);
-	
-	if($this.val().length == 0){
-		$this.parent().removeClass("focus");
-		$this.remove();
-		resizeMessageTextarea();
-	}
+	var $this = $(this);	
+	$this.parent().removeClass("focus");
+	$this.remove();
+	resizeMessageTextarea();
 }
 
 function closeRecipient(){

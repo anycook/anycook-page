@@ -1,9 +1,5 @@
 function activateUser(id){
-	$.ajax({
-		url:"/anycook/ActivateUser",
-		data:"id="+id,
-		success:addActivationStuff
-	});
+	$.anycook.registration.activate(id, addActivationStuff);
 }
 
 function addActivationStuff(response){

@@ -23,8 +23,6 @@ function makeUsermenuText(){
 	
 	$(document).click(hideUserMenu).scroll(hideUserMenu);
 	
-	checkNewMessageNum();
-	
 	// $("#signin_btn span").text("Konto");
 // 	
 	// $("#user img").attr("src", user.getSmallImage());
@@ -54,7 +52,7 @@ function toggleUserMenu(){
 function hideUserMenu(event){
 	var $userMenu = $("#user_menu");
 	var $target = $(event.target);
-	if (!$target.parents().andSelf().is("#user_menu, #user_settings")|| $target.is("a")){
+	if (event.type === "scroll" || !$target.parents().andSelf().is("#user_menu, #user_settings")|| $target.is("a")){
 		$userMenu.removeClass("visible");
 		$("#user_settings").removeClass("focus");
 	}
@@ -118,7 +116,7 @@ function clickSignin(event){
 
 function clickOthers(event){
 	var $target = $(event.target);
-	if (!$target.parents().andSelf().is("#login_container, #signin_btn")|| $target.is("a")){
+	if (event.type == "scroll" || !$target.parents().andSelf().is("#login_container, #signin_btn")|| $target.is("a")){
 		clickSignin();
 	}
 }
@@ -155,7 +153,7 @@ function submitForm(event){
 	var mail = $mail.val();
 	var pwd = $pwd.val();
 	var stayloggedin =$("#stayloggedin input").is(":checked");
-	$.anycook.graph.login(mail, pwd, stayloggedin, function(json){
+	$.anycook.graph.session.login(mail, pwd, stayloggedin, function(json){
 		if(!json){
 			console.log("login failed");
 			return;
@@ -214,8 +212,9 @@ function checkEmail(showerror){
 
 function checkPassword(showerror){
 	$("#reg_error_pass").removeClass("right").removeClass("wrong").text("");
+	var passRegex = /((?=.*\d)(?=.*[a-zA-Z@#$%]).{6,})/
 	var passwd = $("#reg_pass").val();
-	if(passwd.length>=5){
+	if(passRegex.test(passwd)){
 		$("#reg_error_pass").addClass("right").text("OK!");
 		return true;
 	}else if(showerror){
