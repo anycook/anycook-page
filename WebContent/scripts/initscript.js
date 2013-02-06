@@ -18,7 +18,6 @@
 
 	 
     	$.ajaxSetup({
-        	type:"POST", 
         	global:true,
             scriptCharset: "utf8" , 
             contentType: "application/x-www-form-urlencoded; charset=utf8"
@@ -50,8 +49,11 @@
 		 	return true;
 	 	};
     	
+    	var xmlOptions = {
+    		error:xmlErrorFunction
+    	}
     	
-    	$.when($("#content_main").xml({error:xmlErrorFunction})).then(function(){
+    	$.when($("#content_main").xml(xmlOptions)).then(function(){
 	    	$.when(User.init()).then(function(userinit){
 	    		user = userinit;
 	    		buildLogin();
