@@ -50,6 +50,24 @@
                 color: $darkfontcolor;
               }
             }
+            
+            .reg_error{
+              float: left;
+              color: #878787;
+              font-size: 8pt;
+              margin: 4px 2px 2px;
+              
+              &.wrong{
+                color: $error;
+              }
+              &.right{
+                color: $linkcolor;
+              }
+              
+              &#reg_error_pass{
+                float: right;
+              }
+            }
           }
       }
     }

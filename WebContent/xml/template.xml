@@ -503,6 +503,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="profile_buttons">
+			<a class="button">+ Folgen</a>
+			<a class="button">Nachricht schreiben</a>
+		</div>
 		<div id="profile_recipes" class="profile_recipes">
 			<h2></h2>
 			<p></p>

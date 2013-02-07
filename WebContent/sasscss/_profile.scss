@@ -98,28 +98,28 @@
 			width: 325px;
 		}
 		
-		.writemassage{
-			width: 180px;
-			float: left;
-			margin-right: 5px;
-			cursor: pointer;
-			
-			.massageicon{
-					width: 20px;
-					height: 13px;
-					cursor: pointer;
-					float: left;
-					margin: 2px 5px 0 0;
-					background: url("/img/icons20x20.png") no-repeat;
-					background-position: -40px -100px;
-			}
-			
-			&:hover{
-					.massageicon{
-							background-position: -40px -120px;
-					}
-			}
-		}
+		// .writemassage{
+			// width: 180px;
+			// float: left;
+			// margin-right: 5px;
+			// cursor: pointer;
+// 			
+			// .massageicon{
+					// width: 20px;
+					// height: 13px;
+					// cursor: pointer;
+					// float: left;
+					// margin: 2px 5px 0 0;
+					// background: url("/img/icons20x20.png") no-repeat;
+					// background-position: -40px -100px;
+			// }
+// 			
+			// &:hover{
+					// .massageicon{
+							// background-position: -40px -120px;
+					// }
+			// }
+		// }
 	}
 	
 	.profile_achievements{
@@ -148,9 +148,23 @@
 	
 }
 
+.profile_buttons{
+    $width: $contentwidth - 1px;
+    width: $width;
+    float: left;
+    height: 50px;
+    border: 1px solid $lightgrey; 
+    @include border-radius(0px,0px,5px,5px);
+    background: $stepcolor url("/img/diagonal_texture.png");
+    
+    .button{
+      float: right;
+      margin: 11px 10px 0 0;
+    }
+}
+
 .profile_recipes{
 	display: none;
-	
 	$width: $contentwidth;
 	width: $width;
 	margin: 0 0 20px 0;
