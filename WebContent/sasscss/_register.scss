@@ -1,5 +1,12 @@
 #registration_container{
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+  width: 655px;
+  
   #reg_step1{
+    position: absolute;
+    
     p{
       text-align: center;
       color: $darkfontcolor;
@@ -103,7 +110,9 @@
     
   }
   #reg_step2{
-    display: none;
+    position: absolute;
+    left: 700px;
+    width: 655px;
     
   }
 	
