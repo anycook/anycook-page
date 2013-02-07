@@ -279,8 +279,12 @@ function showRegistrationStep2(username, mail){
 			var redirect = json.redirect;
 			$("#reg_step2").append("<p id='register_forward'>Wir können dich auch direkt <a href='"+redirect+"' target='_blank'>weiterleiten</a>!</div><div id='register_mailprovider'><a href='"+redirect+"' target='_blank'><img src='./img/maillogos/"+image+"' alt='"+shortname+"'/></a><div id='register_copyright'>&copy; "+fullname+"</div></p>");
 		}
-		$("#reg_step1").animate({left:-655}, 1000);
-		$("#reg_step2").animate({left:0}, 1000);
+		$("#reg_step1").animate({left:-655}, {
+			step:function(now){
+				$("#reg_step2").css("left",now+655);
+			},
+			duration:1000
+		});
 	});
 }
 
