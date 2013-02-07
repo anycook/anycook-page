@@ -522,6 +522,10 @@
 	<template id="newsstream" access="restricted">
 		<h1 class="center_headline">Neuigkeiten</h1>
 		<div id="newMessageBtn" class="button">+ neue Nachricht</div>
+		<div id="nomassages">
+			<h1>Keine Nachrichten</h1>
+			<p>Zur Zeit hast du keine Nachrichten in deinem Postfach.</p>
+		</div>
 		<ul id="newsstream"></ul>
 	</template>
 	<template id="messagesession" access="restricted">
