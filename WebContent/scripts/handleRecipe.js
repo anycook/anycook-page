@@ -59,27 +59,37 @@ function loadRecipewJSON(json) {
 	loadRecipe(recipe);
 }
 
-function loadRecipe(recipe) {
+function loadRecipe(recipeName) {
 	resetFilter();
-
-	var rezepturi = recipe.getURI();
+	
+	var rezepturi = "#!/recipe/"+encodeURIComponent(recipeName);
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
-	$("#recipe_headline").append(recipe.name);
-	$("#introduction").append(recipe.beschreibung);
+	$.anycook.graph.recipe(recipeName, function(recipe){
+		$.address.title(recipe.name + " | anycook");
+		$("#recipe_headline").append(recipe.name);
+		$("#introduction").append(recipe.description);
+		loadFilter(recipe);
+	});
+	
+	$(".recipe_image").attr("src", $.anycook.graph.recipe.image(recipeName, "large"));
+
+	$.anycook.graph.recipe.ingredients(recipeName, loadIngredients);
+	$.anycook.graph.recipe.tags(recipeName, loadTags);
+	$.anycook.graph.recipe.steps(recipeName, loadSteps);
 
 	//recipe_image
-	$(".recipe_image").attr("src", recipe.getImageURL("large"));
+	
 
-	var steps = recipe.steps;
-	loadSteps(steps);
-	loadFilter(recipe);
+	// var steps = recipe.steps;
+	// loadSteps(steps);
+	// loadFilter(recipe);
 	//$("#search").attr("value", recipe.name);
 
 	//schmeckt-button
 	if(user.checkLogin()) {
-		$.anycook.graph.recipe.schmeckt(recipe.name, function(schmeckt){
+		$.anycook.graph.recipe.schmeckt(recipeName, function(schmeckt){
 			if(!schmeckt) {
 				$("#schmecktmir").click(schmecktmir);
 			} else {
@@ -89,24 +99,24 @@ function loadRecipe(recipe) {
 		});		
 	}
 
-	$.address.title(recipe.name + " | anycook");
+	
 
 	// if($.address.pathNames().length == 3 && user.level > 0){
 	// addEditingHandler();
 	// }
 
 	//Autoren
-	var num_autoren = recipe.authors.length;
-	var $autoren = $("#autoren span");
-
-	for(var i in recipe.authors) {
-		var author = recipe.authors[i];
-		$autoren.append("<a href='#!/profile/" + author.id + "'>" + author.name + "</a>");
-		if(i <= num_autoren - 3)
-			$autoren.append(", ");
-		if(i == num_autoren - 2)
-			$autoren.append(" und ");
-	}
+	// var num_autoren = recipe.authors.length;
+	// var $autoren = $("#autoren span");
+// 
+	// for(var i in recipe.authors) {
+		// var author = recipe.authors[i];
+		// $autoren.append("<a href='#!/profile/" + author.id + "'>" + author.name + "</a>");
+		// if(i <= num_autoren - 3)
+			// $autoren.append(", ");
+		// if(i == num_autoren - 2)
+			// $autoren.append(" und ");
+	// }
 
 	//bezeichner
 	//$("#zubereitung").addClass("on");
@@ -139,24 +149,12 @@ function loadSteps(steps) {
 	return true;
 }
 
-function loadFilter(filter) {
-	
-	$("#filter_headline").text("Legende");
-	$("#filter_main").addClass("blocked");
-	$("#kategorie_head").text(filter.category);
-	
-	$("#time_form > *").not(".time_text_end").hide();
-	$("#time_form .time_text_end").text(fillStd(filter.time.std)+" : "+fillMin(filter.time.min)+" h");
-	
-	var persons = Number(filter.persons);
-
-	makeIngredientHeaderForRecipe(persons);
-
+function loadIngredients(ingredients){
 	var $ingredientList = $("#ingredient_list").empty();
-	for(var i in filter.ingredients) {
-		var zutat = filter.ingredients[i].name;
-		var menge = filter.ingredients[i].menge;
-		var singular = filter.ingredients[i].singular;
+	for(var i in ingredients) {
+		var zutat = ingredients[i].name;
+		var menge = ingredients[i].menge;
+		var singular = ingredients[i].singular;
 		if(singular !== undefined && singular != null && getValuefromString(menge) == 1)
 			zutat = singular;
 
@@ -173,11 +171,28 @@ function loadFilter(filter) {
 			$ingredientList.append($li);
 		}
 	}
+}
 
+function loadTags(tags){
 	var $tags_list = $(".tags_list").empty();
-	var tags = filter.tags;
 	for(var i = 0; i < tags.length; i++)
-	$tags_list.append(getTag(tags[i], "link"));
+		$tags_list.append(getTag(tags[i], "link"));
+}
+
+function loadFilter(filter) {
+	
+	$("#filter_headline").text("Legende");
+	$("#filter_main").addClass("blocked");
+	$("#kategorie_head").text(filter.category);
+	
+	$("#time_form > *").not(".time_text_end").hide();
+	$("#time_form .time_text_end").text(fillStd(filter.timestd)+" : "+fillMin(filter.timemin)+" h");
+	
+	var persons = Number(filter.person);
+
+	makeIngredientHeaderForRecipe(persons);
+
+	
 
 	checkOn($("#chef_" + filter.skill));
 	checkOn($("#muffin_" + filter.calorie));

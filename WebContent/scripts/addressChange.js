@@ -140,7 +140,7 @@ function handleChange(event){
 					$("#content_header")
 						.append(getHeaderLink("Rezept", "", "recipe_btn"))
 						.append(getHeaderLink("Diskussion", "", "discussion_btn"));
-					$.anycook.graph.recipe(path[1], loadRecipewJSON);
+					loadRecipe(path[1]);
 					break;		
 		
 				case "activate":
