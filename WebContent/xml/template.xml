@@ -29,7 +29,7 @@
 	    </div>
     </template>
     <template id="impressum">
-    	<div id="impressum" class="footerpages">
+    	<!--<div id="impressum" class="footerpages">
     	<h1 class="center_headline">Impressum</h1><p>
 			<div id="websiteinfo"><h2>Website</h2>
 			<p>Diese Website wird von Jan Grassegger<br/>Eckermannstr. 2<br/>99423 Weimar, Deutschland<br/>und  Daniel Plath<br/>betrieben.</p></div>
@@ -47,7 +47,7 @@
 		<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
 		Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
 		Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.</p>
-		</div>
+		</div>-->
     </template>
     <template id="search">
     	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div>   		
@@ -404,7 +404,7 @@
 					<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahr </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
 				</div>
 			</div>
-			<div id="team">
+			<!--<div id="team">
 				<h2 class="border_headline">Das Team</h2>
 				<div class="profile_container">
 					<img class="profile_image" src="http://graph.anycook.de/user/8/image?type=large&amp;appid=2"/>			
@@ -414,7 +414,6 @@
 						</div>
 						<div class="profile_position">Entwicklung</div>
 						<div class="profile_text">Jan ist das nerdige Herz anycook`s. Unzufrieden mit den Rezepteplattformen dieser Welt nahm er die Herausforderung an etwas zu schaffen, das alles zuvor dagewesene in den Schatten stellen sollte. Mit viel Energie und Ehrgeiz widmet er sich seitdem seinen Aufgaben bei anycook und leistet unmenschliches. Auch wenn man bei Jan manchmal etwas länger warten muss, das Ergebnis wird perfekt. Egal ob beim programmieren oder kochen.</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 					</div>
 				</div>
 				<div class="profile_container">
@@ -427,7 +426,7 @@
 						<div class="profile_text">
 							Als Daniel, jung, aufstrebend, männlich, vom Hunger geplagt in seinem mager gefüllten Kühlschrank nach etwas brauchbaren zu Essen suchte, ereilte ihn die Idee etwas Leckeres aus verbliebenen Zutaten zu kochen. Hoch motiviert öffnete er das Internet und suchte nach passenden Rezepten. Doch die widerlichen Angebote deutscher Kochcommunities verursachten bei ihn binnen einer Eieruhrumdrehung eine übele Magenverstimmung. Diese Nahtoderfahrung veranlasste Daniel gemeinsam mit Jan Grassegger eine Selbsthilfegruppe zu eröffnen, um die grauenvollen Geschehnisse zu verarbeiten. Seitdem beschäftigt sich Daniel nur noch mit schönen Sachen, wie Interfaces, Design &amp; Konzeption. Das Ergebnis: Das Auge isst wieder mit.
 						</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+						
 					</div>
 				</div>
 				<div class="profile_container">
@@ -438,7 +437,7 @@
 						</div>
 						<div class="profile_position">Design</div>
 						<div class="profile_text">Moritz, Schuhgröße 43, ist der einzige Befürworter der fortschrittlichen High Tech Küche bei anycook. Fritteuse und Mikrowelle sind seine ständigen Begleiter auf der endlosen Suche nach mehr Geschmack. Er mag weniger mehr oder weniger mehr als mehr, besonders im Design.  Warum er im Team ist, weiß er selbst nicht so genau, vermutlich wegen diesem Photoshop und so. Er ist Bayer und mag kein Lakritz, nicht mal frittiert. *ting*</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+						
 					</div>
 				</div>
 				<div class="profile_container">
@@ -451,7 +450,6 @@
 						<div class="profile_text">
 							Der einzige waschechte Weimarer im Team ist Max. Seine detailverliebte Arbeit in der Entwicklung von iOS-Apps und Webtechnologien geben der anycook-Plattform den letzten Schliff. ER IST HEISS AUF HEISSES ESSEN!!!
 						</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 					</div>
 				</div>
 				<div class="profile_container">
@@ -464,10 +462,9 @@
 						<div class="profile_text">
 							Seine Freude am Essen scheint genetisch bedingt. Von seinem Vater werden sich noch immer Schauergeschichten erzählt, wenn er Hunger bekommt  … und das geschieht regelmäßig, 3 Mal am Tag. Wie der Vater so der Sohn – so sind die Strategien um an leckeres Essen zu kommen vielfältig geworden – das der neuen, mobilen Internetzeit angepasste anycook kann als das  logische Produkt eines ständigen Genießers gesehen werden. Denn nichts ist schöner als eine Wohnung zu betreten und zu wissen, dass das Essen nicht mehr lange auf sich warten lassen wird. Das ist generationsübergreifender Konsens.
 						</div>
-						<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 					</div>
 				</div>
-			</div>				
+			</div>-->			
 		</div>
 	</template>
 	<template id="profile">

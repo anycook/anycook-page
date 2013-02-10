@@ -1,6 +1,21 @@
 function loadAboutUs(){
 	setTimeSinceStart();
 	setWebsiteData();
+	loadPeople();
+}
+
+function loadPeople(){
+	$.ajax({
+		url:"https://api.github.com/repos/anycook/anycook-content/contents/people.md?callback=?",
+		type:"GET",
+		dataType:"jsonp",
+		success:function(json){
+			var content = Base64.decode(json.data.content);
+			content = marked(content);
+			// var content = window.atob(json.data.content);
+			$("#content_main").append(content);
+		}
+	});
 }
 
 function setWebsiteData(){
@@ -57,4 +72,18 @@ function setTimeSinceStart(){
 	
 	
 	
+}
+
+function loadImpressum(){
+	$.ajax({
+		url:"https://api.github.com/repos/anycook/anycook-content/contents/impressum.md?callback=?",
+		type:"GET",
+		dataType:"jsonp",
+		success:function(json){
+			var content = Base64.decode(json.data.content);
+			content = marked(content);
+			// var content = window.atob(json.data.content);
+			$("#content_main").append(content);
+		}
+	});
 }

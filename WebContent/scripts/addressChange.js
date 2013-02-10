@@ -108,6 +108,7 @@ function handleChange(event){
 					break;
 				case "impressum":
 					setTitle("Impressum");
+					loadImpressum();
 					break;
 				case "fbregistration":
 					loadFBRegistrationMessage();
