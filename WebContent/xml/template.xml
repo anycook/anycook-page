@@ -807,7 +807,7 @@
 	</template>
 	<template id="home_discover">
 		<div id="discover">
-			<div id="neuste" class="entdecken">
+			<div id="new" class="entdecken">
 				<h2>neuste Rezepte</h2>
 				<div class="entdecken_back off">
 					<div class="dogear_left"></div>
@@ -825,7 +825,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="leckerste" class="entdecken">
+			<div id="tasty" class="entdecken">
 				<h2>leckerste Rezepte</h2>
 				<div class="entdecken_back off">
 					<div class="dogear_left"></div>
@@ -843,7 +843,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="beliebte" class="entdecken">
+			<div id="recommended" class="entdecken">
 				<h2>empfohlene Rezepte</h2>
 				<div class="entdecken_back off">
 					<div class="dogear_left"></div>
