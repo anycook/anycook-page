@@ -113,6 +113,36 @@
     position: absolute;
     left: 700px;
     width: 655px;
+        
+       h1{
+            position: relative;
+            left: 0;
+            text-align: center;
+            font-size: 32pt;
+            
+       }
+       p{
+            margin-top: 19px;
+            position: relative;
+            left: 22.9%;
+            width: 60%;
+       }
+       
+       #register_forward{
+            left: 0;
+            width: 100%;
+            text-align: center;  
+       }
+       
+       #register_mailprovider{
+            margin-top: 19px;
+            position: relative;
+            margin: 19px 0;
+            width: 100%;
+         
+       }
+       
+       
     
   }
 	

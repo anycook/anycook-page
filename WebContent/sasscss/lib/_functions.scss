@@ -62,11 +62,19 @@
 	-o-box-shadow: $right $bottom $blur $color, $right2 $bottom2 $blur2 $color2, $right3 $bottom3 $blur3 $color3;
 }
 
+
 @mixin box-shadow-inset($right, $bottom, $blur, $color){
-	box-shadow: inset $right $bottom $blur $color;
-	-moz-box-shadow: inset $right $bottom $blur $color;
-	-webkit-box-shadow:inset $right $bottom $blur $color;
-	-o-box-shadow: inset $right $bottom $blur $color;	
+  box-shadow: inset $right $bottom $blur $color;
+  -moz-box-shadow: inset $right $bottom $blur $color;
+  -webkit-box-shadow:inset $right $bottom $blur $color;
+  -o-box-shadow: inset $right $bottom $blur $color; 
+}
+
+@mixin box-shadow-inset2($right, $bottom, $blur, $size, $color){
+  box-shadow: inset $right $bottom $blur $size $color;
+  -moz-box-shadow: inset $right $bottom $blur $size $color;
+  -webkit-box-shadow:inset $right $bottom $blur $size $color;
+  -o-box-shadow: inset $right $bottom $blur $size $color; 
 }
 
 @mixin box-shadow-inset-spread($right, $bottom, $blur, $spread, $color){
