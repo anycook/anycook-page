@@ -1,16 +1,23 @@
 function addResults(json){
 	$("#more_results").remove();
 	var recipes = json.recipes;
-	// var start = $(".frame_big").length;					
-	for(var i= 0; i<recipes.length; i++){
-		var $result = getBigFrameText(recipes[i]);
-		$("#result_container").append($result);
-		var $text = $result.find(".recipe_text");
-		var $p = $text.children("p");
-		var $h3 = $text.children("h3");
-		var height = $text.innerHeight()-($h3.outerHeight(true)+($p.outerHeight(true)-$p.innerHeight()));
-		$p.css("height",height).ellipsis();
-	}
+	// var start = $(".frame_big").length;
+
+	$.each(recipes, function(i, recipe){
+		var $frame_big = getBigFrame();
+		$frame_big = $frame_big.appendTo("#result_container");
+		// $("#result_container").append($frame_big);
+
+		$.anycook.graph.recipe(recipe, function(recipe){
+			fillBigFrame($frame_big, recipe);
+			var $text = $frame_big.find(".recipe_text");
+			var $p = $text.children("p");
+			var $h3 = $text.children("h3");
+			var height = $text.innerHeight()-($h3.outerHeight(true)+($p.outerHeight(true)-$p.innerHeight()));
+			$p.css("height",height).ellipsis();
+		});
+	});
+		
 	if(json.size> $(".frame_big").length)
 		addMoreResultsButton();
 }

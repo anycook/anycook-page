@@ -1,12 +1,12 @@
-function getBigFrameText(json) {
+function fillBigFrame($frame_big, json){
 	var beschreibung = json.description;
 
 	var uri = encodeURI("/#!/recipe/" + json.name);
-	var frame_big = $("<a></a>").addClass("frame_big").attr("href", uri).append("<div></div>");
+	$frame_big.attr("href", uri).append("<div></div>");
 
-	frame_big.append("<div></div>").children("div").last().addClass("frame_big_left");
+	$frame_big.append("<div></div>").children("div").last().addClass("frame_big_left");
 
-	var frame_big_main = frame_big.append("<div></div>").children("div").last().addClass("frame_big_main");
+	var frame_big_main = $frame_big.append("<div></div>").children("div").last().addClass("frame_big_main");
 
 	var recipe_img = frame_big_main.append("<div></div>").children("div").last().addClass("recipe_img").append("<img/>").append("<div></div>");
 
@@ -37,9 +37,11 @@ function getBigFrameText(json) {
 
 	frame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
 
-	frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
+	$frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
+}
 
-	return frame_big;
+function getBigFrame() {
+	return $("<a></a>").addClass("frame_big");
 }
 
 function profileRecipe(recipe){
