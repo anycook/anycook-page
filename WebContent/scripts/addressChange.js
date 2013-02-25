@@ -93,6 +93,7 @@ function handleChange(event){
 				switch(path[0]){
 				case "recipeediting":
 					setTitle("Neues Rezept erstellen");
+					$("#new_recipe").addClass("active");
 					loadNewRecipe();
 					break;
 				case "feedback":
