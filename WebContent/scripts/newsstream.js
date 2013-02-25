@@ -120,8 +120,13 @@ function clickRecipients(){
 		$this.append("<input type=\"text\"/>")
 			.children("input").focus().focusout(focusoutRecipientInput)
 			.keydown(function(event){
-				if($(this).val().length == 0 && event.keyCode == 8)
-					$(this).prev(".recipient").remove();
+				if($(this).val().length == 0 && event.keyCode == 8){
+					var $prevRecipient = $(this).prev(".recipient");
+					var id = $prevRecipient.data("id");
+					removeRecipient(id);
+					$prevRecipient.remove();
+					resizeMessageTextarea();
+				}
 			})
 			.autocomplete({
 			source:function(req,resp){
@@ -198,6 +203,17 @@ function addRecipient(name, id){
 	
 }
 
+function removeRecipient(id){
+	var ids = $(".recipients").data("ids");
+	for(var i = 0; i< ids.length; i++){
+		if(ids[i] == id){
+			ids.splice(i, 1);
+			break;
+		}
+	}
+	$(".recipients").data("ids", ids);
+}
+
 function focusoutRecipientInput(event){
 	var $this = $(this);	
 	$this.parent().removeClass("focus");
@@ -208,13 +224,7 @@ function focusoutRecipientInput(event){
 function closeRecipient(){
 	var $this = $(this);
 	var id = $this.data("id");
-	var ids = $(".recipients").data("ids");
-	for(var i = 0; i<ids.length; i++){
-		if(ids[i] == id){
-			ids.splice(i, 1);
-			break;
-		}
-	}
+	removeRecipient(id);
 	$this.remove();
 	resizeMessageTextarea();
 	return false;
@@ -257,7 +267,7 @@ function submitNewMessage(event){
 	var $textarea = $this.find("textarea")
 	var message = $textarea.val();
 	
-	if(recipientIds.length == 0 || message.length == 0)
+	if(recipientIds === undefined || recipientIds.length == 0 || message.length == 0)
 		return;
 	
 	$.anycook.graph.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
