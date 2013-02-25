@@ -11,6 +11,25 @@ h1.newsstream{
 	margin: 0 0 15px 0;
 }
 
+#nomassages{
+  padding-left: 23px;
+
+  
+  h1{
+    text-align: center;
+    font-size: 23pt;
+    color: #B5B5B5;
+    text-shadow: 0px 2px 3px white;
+    margin-top: 80px;
+  }
+  p{
+    width: 360px;
+    margin: auto;
+    text-align: center;
+    margin-top: 10px;
+  }  
+}
+
 // .ui-menu .recipient-autocomplete{
 // 
     // width: 164px !important;
