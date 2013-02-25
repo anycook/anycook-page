@@ -18,7 +18,6 @@ function loadNewsstream(){
 }
 
 
-// TODO Platzhalter wenn keine Nachrichten 
 function getNewsstream(lastDatetime){
 	var pathNames = $.address.pathNames();
 	if(pathNames.length != 1 || pathNames[0] != "newsstream")
@@ -31,6 +30,11 @@ function getNewsstream(lastDatetime){
 	setTimeout(function(){$.anycook.graph.message(lastDatetime,function(json){
 			var datamap = {};
 			var oldDatamap = $ul.data("map") || {};
+
+			var $nomessages = $("#nomessages");
+			if(json.length > 0 && $nomessages.css("display") === "block"){
+				$nomessages.hide();
+			}
 			
 			for(var i = 0; i<json.length; i++){
 				var $appendTo = $ul;

@@ -86,7 +86,6 @@ function resetFilter(){
 function loadAllKategories(target){
 	if(!target.children().size() > 0){
 		if(target.parents(".step_1_right").length == 0){
-			target.append("<li><span class=\"left\">keine Kategorie</span><span class=\"right\"></span></li>");
 			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 		}
 		
@@ -96,7 +95,7 @@ function loadAllKategories(target){
 					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
 					totalrecipes+=Number(json[k])
 				}
-				$(target.find(".right")[1]).text(totalrecipes);
+				$(target.find(".right")[0]).text(totalrecipes);
 		});
 	}
 }
