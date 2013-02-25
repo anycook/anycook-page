@@ -32,7 +32,7 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 
 body{
 	font: $standardfont;
-	/*overflow-y: scroll;*/
+	overflow-y: scroll;
 	min-width:1024px;
 	position:relative;
 	float:left;
@@ -1033,6 +1033,7 @@ header{
 						  border-top-right-radius:4px;
               border-top-left-radius:4px;
 							background-color:$background;
+							padding-top: 9px;
 							border: 0px solid $activebuttonoutline;
 							color:$smalllightfontcolor;
 							@include box-shadow(0, -2px, 3px, rgba(0,0,0,0.2));
