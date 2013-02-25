@@ -267,8 +267,13 @@ function ingredientListClick(){
         			term = term.substr(1);
         			if(term.length == 0) return;
         		}
+
+        		var excludedIngredients = [];
+        		$("#ingredient_list .ingredient").each(function() {
+        			excludedIngredients.push($(this).text());
+        		});
         		
-        		$.anycook.graph.autocomplete.ingredient(term,function(data){
+        		$.anycook.graph.autocomplete.ingredient(term,excludedIngredients,function(data){
         				resp($.map(data, function(item){
         					return{
         						label:item,
