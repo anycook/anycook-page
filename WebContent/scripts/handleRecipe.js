@@ -64,7 +64,7 @@ function loadRecipewJSON(json) {
 function loadRecipe(recipeName) {
 	resetFilter();
 	
-	var rezepturi = "#!/recipe/"+encodeURIComponent(recipeName);
+	var rezepturi = "#!/recipe/"+recipeName;
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
