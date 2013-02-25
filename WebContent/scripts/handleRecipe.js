@@ -64,7 +64,7 @@ function loadRecipewJSON(json) {
 function loadRecipe(recipeName) {
 	resetFilter();
 	
-	var rezepturi = "#!/recipe/"+encodeURIComponent(recipeName);
+	var rezepturi = "#!/recipe/"+recipeName;
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
@@ -72,6 +72,9 @@ function loadRecipe(recipeName) {
 		$.address.title(recipe.name + " | anycook");
 		$("#recipe_headline").append(recipe.name);
 		$("#introduction").append(recipe.description);
+		var $author = $("<a></a>").attr("href", User.getProfileURI(recipe.author.id))
+			.text(recipe.author.name);
+		$("#autoren").append($author);
 		loadFilter(recipe);
 	});
 	

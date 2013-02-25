@@ -51,7 +51,8 @@ function loadDiscussion(recipename, lastid) {
 			centercommenteventlikes();
 			$commentDiscussion.data("discussion", discussion);
 		}
-		loadDiscussion(recipename, newLastid);
+		setTimeout("loadDiscussion("+recipename+", "+newLastid+")", 2000);
+		// loadDiscussion(recipename, newLastid);
 	});
 }
 

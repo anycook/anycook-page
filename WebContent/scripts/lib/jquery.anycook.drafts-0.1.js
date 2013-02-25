@@ -26,17 +26,20 @@
 		});
 	}
 	
-	$.anycook.drafts.num = function(){
+	$.anycook.drafts.num = function(lastnum){
+		if(lastnum === undefined) lastnum = -1;
+
 		if(user.checkLogin()){
-			$.anycook.graph._getJSON("/drafts/num", {}, function(num){
+			$.anycook.graph._getJSON("/drafts/num", {lastnum:lastnum}, function(num){
 				$("#drafts #draftnum").text(num);
 				var $messageBubble = $("#settings_btn_container .new_messages_bubble");
 				if(num>0)			
 					$messageBubble.fadeIn(200).children().text(num);
 				else
 					$messageBubble.fadeOut(200);
-					
-				setTimeout("$.anycook.drafts.num()", 2000);	
+				
+				// $.anycook.drafts.num(num);	
+				setTimeout("$.anycook.drafts.num("+num+")", 2000);	
 			});
 		}
 	};
