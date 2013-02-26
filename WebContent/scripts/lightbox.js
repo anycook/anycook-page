@@ -108,8 +108,7 @@ function showLightboxfromBottom($lightbox, bottom){
 
 function hideLightbox(){
 	$(".lightbox").fadeOut(200, function(){
-			$(this).css({left:getLightBoxLeft()});
-			$this.remove();
+			$(this).css({left:getLightBoxLeft()}).remove();
 	});
 }
 
