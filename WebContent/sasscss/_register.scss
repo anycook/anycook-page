@@ -139,6 +139,21 @@
             position: relative;
             margin: 19px 0;
             width: 100%;
+            
+            a{          
+            margin: 0px auto;
+            width: 250px;
+            display: block;
+            position: relative;
+            
+              img{
+                margin: auto;
+                display: block;
+              }
+            }
+            #register_copyright{
+              text-align: center;
+            }
          
        }
        
