@@ -770,8 +770,8 @@ function getNewIngredientStep(number, text, ingredients){
 	var $newIngredientList = $("<ul></ul>").addClass("new_ingredient_list")
 		.sortable({
 			axis: "y",
-			containment: "parent",
-			cursorAt:{top : 5},
+			// containment: "parent",
+			cursorAt:{top : 0},
 			distance: 15,
 			forcePlaceholderSize : true,		
 			opacity:0.75,

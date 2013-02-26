@@ -137,7 +137,7 @@ User.prototype.getUserImagePath = function(type){
 
 User.login = function(mail, pwd, stayloggedin){
 	var callback = false;
-	$.anycook.graph.login(mail, pwd, stayloggedin, function(response){
+	$.anycook.graph.session.login(mail, pwd, stayloggedin, function(response){
 			callback = response!="false";
 			// checkNewMessageNum();
 	});
@@ -152,7 +152,7 @@ User.prototype.logout = function(){
 		this.mail = null;
 		this.facebook_id = null;
 		this.image = null;
-		$.anycook.graph.logout(function(){
+		$.anycook.graph.session.logout(function(){
 			FB.getLoginStatus(function(response){
 				if(response.status == "connected"){
 					FB.logout(function() {

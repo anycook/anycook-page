@@ -16,7 +16,9 @@ function makeUsermenuText(){
 	$userMenu.find("img").attr("src", User.getUserImagePath(user.id));
 	var $profileLink = $("<a></a>").text(user.name).attr("href", user.getProfileURI());
 	$userMenu.find(".username").append($profileLink);
-	$userMenu.find("#logout").click(function(){user.logout();});
+	$userMenu.find("#logout").click(function(){
+		user.logout();
+	});
 	
 	if(user.level == 2)
 		$userMenu.find(".admin").show();

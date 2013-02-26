@@ -24,7 +24,7 @@
 		    onProgress:nrProgress,
 		    onComplete:$.anycook.user.settings.completeUpload,
 		    // path to server-side upload script
-		    action: 'http://testgraph.anycook.de/upload/image/user'
+		    action: 'http://graph.anycook.de/upload/image/user'
 		});
 		
 		
@@ -99,10 +99,14 @@
 	$.anycook.user.settings.completeUpload = function(){
 		var $recipeImageContainer = $(".profile_image");
 		$recipeImageContainer.children("img").remove();
+
+
 		$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
 		$recipeImageContainer.children(".image_upload").show();
-		var $img = $("<img/>").attr("src", user.getUserImagePath("large")+"&"+Math.random());
-		$(".profile_image").append($img);
+		var $large_img = $("<img/>").attr("src", user.getUserImagePath("large"));
+		var $small_img = $("<img/>").attr("src", user.getUserImagePath("small"));
+		$(".profile_image").append($large_img);
+		$("#menu_profile_image").empty().append($small_img);
 	};
 	
 	$.anycook.user.settings.changeAccount = function(event){
