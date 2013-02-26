@@ -34,7 +34,9 @@ function getLightbox(headline, subhead, $content, inputvalue){
 	return $lightbox;
 }
 
-function showLightbox($lightbox, top){
+function showLightbox($lightbox, top, callback){
+
+	var callback = callback || function(){};
 	
 	$lightbox.show();
 	resizeLightbox();
@@ -51,7 +53,12 @@ function showLightbox($lightbox, top){
 			complete:function(){
 				$(".contentbox").animate({
 					left: 3
-				}, {duration: 500});
+				}, {
+					duration: 500,
+					complete: function(){
+						callback.call($lightbox);
+					}
+				});
 			}
 		});
 		
@@ -102,7 +109,7 @@ function showLightboxfromBottom($lightbox, bottom){
 function hideLightbox(){
 	$(".lightbox").fadeOut(200, function(){
 			$(this).css({left:getLightBoxLeft()});
-			
+			$this.remove();
 	});
 }
 

@@ -1,20 +1,27 @@
 function loadNewsstream(){
 	
-	var $lightbox = getLightbox("Neue Nachricht", 
-		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
-	$lightbox.find("form").submit(submitNewMessage);
+	
 	
 	$("#newMessageBtn").click(function(){
+		var $lightbox = getNewMessageLightbox();
 		var top = $(this).offset().top-113;
 		showLightbox($lightbox, top);
 		return false;
 	});
 	
-	var $recipients = $lightbox.find(".recipients").click(clickRecipients);
-	$recipients.data("height", 22);
-	
 	getNewsstream();
 	
+}
+
+function getNewMessageLightbox(){
+	var $lightbox = getLightbox("Neue Nachricht", 
+		"Schreibe einem oder mehreren Usern eine Nachricht", getNewMessageContent(), "abschicken");
+	$lightbox.find("form").submit(submitNewMessage);
+
+	var $recipients = $lightbox.find(".recipients").click(clickRecipients);
+	$recipients.data("height", 22);
+
+	return $lightbox;
 }
 
 
@@ -193,10 +200,14 @@ function addRecipient(name, id){
 	
 	$recipients.data("ids", ids);
 	
-	
-	$input.before($recipient).val("").focus();
-	if($(".recipient").length == 7)
-		$input.remove();
+	if($input.length > 0){		
+		$input.before($recipient).val("").focus();
+		if($(".recipient").length == 7)
+			$input.remove();
+	}else{
+		$recipients.append($recipient);
+	}
+
 		
 	
 	resizeMessageTextarea();

@@ -20,6 +20,19 @@ function loadProfile(userid){
 				$("#stamp").show();
 				$("#follow").text("- Entfolgen").addClass("on");
 			}
+
+			//lightbox	
+			$("#sendmessage").click(function(){
+				var $lightbox = getNewMessageLightbox();
+				var top = $(this).offset().top-313;
+				showLightbox($lightbox, top, function(){
+					this.find("textarea").focus();
+				});
+				addRecipient(profileData.name, profileData.id);
+
+
+				return false;
+			});
 		}		
 		
 		if(profileData.place != null)
