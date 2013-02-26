@@ -475,7 +475,7 @@
 					<h1></h1>
 					<div id="stamp"></div>
 				</div>
-				<div class="profile_date"><div></div>seit <span></span> dabei</div>
+				<div class="profile_date"><div></div> <span></span></div>
 				<div class="profile_place"><div></div>aus <span></span></div>
 				<div class="profile_text"></div>
 				<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
@@ -491,7 +491,7 @@
 				</div>
 				<div class="discussions achievement">
 					<div class="count"></div>
-					<div class="title">Diskussionen</div>
+					<div class="title">Kommentare</div>
 				</div>
 				<div class="follower achievement">
 					<div class="count"></div>

@@ -106,25 +106,3 @@ function newsScrollListener(e){
 	}
 	return false;
 }
-
-function schmecktmir(){
-		var gericht = $.address.pathNames()[1];
-		$.anycook.graph.recipe.makeSchmeckt(gericht, function(response){
-				if(response != "false"){
-					$("#schmecktmir").unbind("click", schmecktmir);
-					$("#schmecktmir").addClass("on");
-					$("#schmecktmir").click(schmecktmirnicht);
-				}				
-		});
-}
-
-function schmecktmirnicht(){
-	var gericht = $.address.pathNames()[1];
-	$.anycook.graph.recipe.unmakeSchmeckt(gericht,function(response){
-			if(response != "false"){
-				$("#schmecktmir").unbind("click", schmecktmirnicht);
-				$("#schmecktmir").removeClass("on");
-				$("#schmecktmir").click(schmecktmir);
-			}				
-	});
-}

@@ -7,10 +7,12 @@ function loadProfile(userid){
 		var image = User.getUserImagePath(profileData.id, "large");
 		$(".profile_image").attr("src", image);
 		$(".profile_title h1").text(profileData.name);
-		$(".profile_date span").text(profileData.date);
+
+		var date = getDateString(profileData.date);
+		$(".profile_date span").text(date);
 		
 
-		if(user.id !== userid){
+		if(user.id != userid){
 			$(".profile_buttons").show();
 			$("#follow").click(follow);
 

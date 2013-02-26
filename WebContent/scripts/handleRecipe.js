@@ -491,4 +491,26 @@ function postProcessString(string, factor) {
 	}
 
 }
-//var commenttimeout;
+
+
+function schmecktmir(){
+		var gericht = $.address.pathNames()[1];
+		$("#schmecktmir").unbind("click");
+		$.anycook.graph.recipe.makeSchmeckt(gericht, function(response){
+				if(response != "false"){
+					$("#schmecktmir").addClass("on");
+					$("#schmecktmir").click(schmecktmirnicht);
+				}				
+		});
+}
+
+function schmecktmirnicht(){
+	var gericht = $.address.pathNames()[1];
+	$("#schmecktmir").unbind("click");
+	$.anycook.graph.recipe.unmakeSchmeckt(gericht,function(response){
+			if(response != "false"){
+				$("#schmecktmir").removeClass("on");
+				$("#schmecktmir").click(schmecktmir);
+			}				
+	});
+}
