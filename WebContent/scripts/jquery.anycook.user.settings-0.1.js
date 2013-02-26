@@ -135,15 +135,18 @@
 	};
 	
 	$.anycook.user.settings.changeMail = function(event){
-		var $this = $(this);		
-		$.anycook.graph.changeMailSettings($this.val(), $this.attr("checked")? true : false);
+		var $this = $(this);
+		if($this.is(":checked"))
+			$.anycook.graph.session.addMailSettings($this.val());
+		else
+			$.anycook.graph.session.removeMailSettings($this.val());
 		var $container = $("#notification_saved");		
 		$.anycook.user.settings.saved($container);
 		
 	};
 	
 	$.anycook.user.settings.changeAllMail = function(value){
-		$.anycook.graph.changeMailSettings("all", value);
+		$.anycook.graph.session.setMail("all", value);
 	};
 	
 	$.anycook.user.settings.saved = function($container){

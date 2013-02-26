@@ -9,24 +9,19 @@ function loadProfile(userid){
 		$(".profile_title h1").text(profileData.name);
 		$(".profile_date span").text(profileData.date);
 		
-		//TODO do right!!
-		if(userid ==user.id)
-			$(".follow").hide();
-		else{
-			var $follow = $(".follow").click(follow);
-			if(profileData.isFollowedBy(user.id))
-				$follow.addClass("on")
-	
-		
-				
-			
-	
-		}
+
+		if(user.id !== userid){
+			$(".profile_buttons").show();
+			$("#follow").click(follow);
+
+			if(profileData.isFollowedBy(user.id)){
+				$("#stamp").show();
+				$("#follow").text("- Entfolgen").addClass("on");
+			}
+		}		
 		
 		if(profileData.place != null)
 			$(".profile_place").show().children("span").text(profileData.place);
-		//$(".profile_achievements .recipes .count").text(profileData.recipes.length);		
-		// $(".profile_achievements .likes .count").text(profileData.schmeckt.length);
 		
 		$(".profile_achievements .follower .count").text(profileData.follower.length);
 		
@@ -108,12 +103,19 @@ function gotoProfile(username){
 function follow(){
 	var $this = $(this);
 	var userid = $.address.pathNames()[1];
+	var $follower = $(".follower .count");
+	var numFollowers = Number($follower.text());
 	if(!$this.hasClass("on")){
-		$.anycook.graph.follow(userid);
-		$this.addClass("on");
+		$.anycook.graph.user.follow(userid);
+		$this.addClass("on").text("- Entfolgen");
+		$("#stamp").fadeIn(500);
+		$follower.text(numFollowers+1);
 	}else{
-		$.anycook.graph.unfollow(userid);
-		$this.removeClass("on");
+		$.anycook.graph.user.unfollow(userid);
+		$this.removeClass("on").text("+ Folgen");
+		$("#stamp").fadeOut(500);
+
+		$follower.text(numFollowers-1);
 	}
 }
 

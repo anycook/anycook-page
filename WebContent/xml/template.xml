@@ -473,8 +473,7 @@
 			<div class="profile_info">
 				<div class="profile_title">
 					<h1></h1>
-					<div class="follow stampposition"></div><div class="followhover stampposition"></div>
-					<!--<a id="profile_facebook" target="_blank"><img src="/icons/facebook_on.png"/></a>-->
+					<div id="stamp"></div>
 				</div>
 				<div class="profile_date"><div></div>seit <span></span> dabei</div>
 				<div class="profile_place"><div></div>aus <span></span></div>
@@ -501,7 +500,7 @@
 			</div>
 		</div>
 		<div class="profile_buttons">
-			<a class="button">+ Folgen</a>
+			<a id="follow" class="button">+ Folgen</a>
 			<a class="button">Nachricht schreiben</a>
 		</div>
 		<div id="profile_recipes" class="profile_recipes">
@@ -615,31 +614,31 @@
 				<table>
 				<tr id="recipeactivation">
 					<td>...wenn mein Rezept aktiviert wird.</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="RECIPEACTIVATION" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="recipeactivation" /><label></label></div></td>
 				</tr>
 				<tr id="tagaccepted">
 					<td>...wenn meine Stichwörter aktiviert werden.</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGACTIVATION" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="tagactivation" /><label></label></div></td>
 				</tr>
 				<tr id="tagdenied">
 					<td>...wenn meine Stichwörter abgelehnt werden.</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="TAGDENIED" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="tagdenied" /><label></label></div></td>
 				</tr>
 				<tr id="recipediscussion">
 					<td>...bei Diskussionsbeiträgen zu meinem Rezept.</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="RECIPEDISCUSSION" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="recipediscussion" /><label></label></div></td>
 				</tr>
 				<tr id="discussionanswer">
 					<td>...bei Antworten auf meine Diskussionsbeiträge.</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_reply" value="DISCUSSIONANWSER" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_reply" value="discussionanswer" /><label></label></div></td>
 				</tr>
 				<tr id="schmeckt">
 					<td>...wenn jemandem dein Rezept schmeckt.</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="SCHMECKT" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="schmeckt" /><label></label></div></td>
 				</tr>
 				<tr id="newsletter">
 					<td>Newsletter</td>
-					<td><div class="checkbox"><input type="checkbox" name="notification_newsletter" value="NEWSLETTER" /><label></label></div></td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_newsletter" value="newsletter" /><label></label></div></td>
 				</tr>
 				</table>						
 				</div>
