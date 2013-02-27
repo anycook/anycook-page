@@ -9,6 +9,10 @@
 	var settings = {};
 		
 	$.anycook.user.settings.load = function(){
+
+		var data = {change:function(){}};
+			$("#account_aboutme").inputdecorator("maxlength", data);
+
 		$.anycook.user.settings.loadAccount();
 		
 		$.anycook.graph.session.settings(function(json){
@@ -40,17 +44,19 @@
 			$password.remove();
 			$(this).before($new_password);
 		});
+
+
+
+
 	};
 	
 	$.anycook.user.settings.loadAccount = function(){
 		$(".profile_image img").attr("src", user.getUserImagePath("large"));
-		$("#account_name").val(user.name);
-		$("#account_mail").val(user.mail);
-		$("#account_aboutme").val(user.text);
-		$("#account_place").val(user.place);
-		$("#account_form").submit($.anycook.user.settings.changeAccount);
-		
-		$("#mail_pass_form").submit($.anycook.user.settings.changeMailPwd);
+		$("#account_name").val(user.name).blur($.anycook.user.settings.saveAccount);
+		$("#account_mail").val(user.mail).blur($.anycook.user.settings.saveMail);
+		$("#account_aboutme").val(user.text).blur($.anycook.user.settings.saveAccount);;
+		$("#account_place").val(user.place).blur($.anycook.user.settings.saveAccount);;
+		// $("#account_form").submit($.anycook.user.settings.changeAccount);
 	};
 	
 	$.anycook.user.settings.loadMail = function(){
@@ -108,31 +114,58 @@
 		$(".profile_image").append($large_img);
 		$("#menu_profile_image").empty().append($small_img);
 	};
-	
-	$.anycook.user.settings.changeAccount = function(event){
-		event.preventDefault();
-		
-		var newSettings = {};
-		
-		var newPlace = $("#account_place").val();	
-		if(newPlace != user.place)
-			newSettings.place = newPlace;
-			
-		var newName = $("#account_name").val();
-		if(newName != "" && newName != user.name)
-			newSettings.username = newName;
-			
-		var newText = $("#account_aboutme").val();
-		if(newText != user.text)
-			newSettings.text = newText;
-			
-		$.anycook.graph.changeAccountSettings(newSettings,function(){
-			user = User.init();
+
+	$.anycook.user.settings.saveAccount = function(event){
+		var $this = $(this);
+		var type;
+		var value = $this.val();
+
+		switch($this.attr("id")){
+			case "account_name":
+				type = "name";
+				if(value === user.name || value.length == 0 && user.name == null) return;
+				break;
+			case "account_place":
+				type = "place";
+				if(value === user.place || value.length == 0 && user.place == null) return;
+				break;
+			case "account_aboutme":
+				type = "text";
+				if(value === user.text || value.length == 0 && user.text == null) return;
+				break;
+		}
+
+		$.anycook.graph.session.setAccount(type, value, function(){
+			user[type] = value;
 			var $container = $("#profile_saved");		
 			$.anycook.user.settings.saved($container);
 		});
+	}
+	
+	// $.anycook.user.settings.changeAccount = function(event){
+	// 	event.preventDefault();
 		
-	};
+	// 	var newSettings = {};
+		
+	// 	var newPlace = $("#account_place").val();	
+	// 	if(newPlace != user.place)
+	// 		newSettings.place = newPlace;
+			
+	// 	var newName = $("#account_name").val();
+	// 	if(newName != "" && newName != user.name)
+	// 		newSettings.username = newName;
+			
+	// 	var newText = $("#account_aboutme").val();
+	// 	if(newText != user.text)
+	// 		newSettings.text = newText;
+			
+	// 	$.anycook.graph.session.setAccount(newSettings,function(){
+	// 		user = User.init();
+	// 		var $container = $("#profile_saved");		
+	// 		$.anycook.user.settings.saved($container);
+	// 	});
+		
+	// };
 	
 	$.anycook.user.settings.changeMail = function(event){
 		var $this = $(this);

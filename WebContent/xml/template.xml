@@ -558,7 +558,6 @@
 	    				<div id="progressbar"></div>		
 						<img src=""/>								
 					</div>
-					<form id="account_form">
 					<ul id="account_data">
 						<li>
 							<h2>Name:</h2>
@@ -569,14 +568,10 @@
 							<input type="text" id="account_place" maxlength="45"/>
 						</li>
 						<li>
-							<h2 id="about_me">Über mich:</h2>
-							<textarea id="account_aboutme"></textarea>
-						</li>
-						<li>
-							<input type="submit" value="speichern" />
+							<h2 id="about_me">Zitat:</h2>
+							<textarea id="account_aboutme" maxlength="140"></textarea>
 						</li>
 					</ul>
-					</form>
 			</div>
 			<h2 class="border_headline">Allgemeine Einstellungen</h2>
 			<div id="mail_pwd_saved" class="settings_saved">gespeichert</div>

@@ -41,7 +41,7 @@ function loadProfile(userid){
 		$(".profile_achievements .follower .count").text(profileData.follower.length);
 		
 		if(profileData.text!=null){
-			$(".profile_text").show().text(profileData.text);
+			$(".profile_text").show().text("»"+profileData.text+"«");
 		}
 		
 		if(profileData.facebook_id>0){
