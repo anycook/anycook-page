@@ -825,6 +825,40 @@ function getNewIngredientLine(name, menge){
 		.append($ingredient)
 		.append($menge)
 		.append($remove);
+
+	$ingredient.autocomplete({
+	    		source:function(req,resp){
+        			//var array = [];
+        		var term = req.term;
+
+        		var $list = $newIngredientLine.parent("ul");
+
+        		var excludedIngredients = [];
+        		$list.find(".new_ingredient").not($ingredient).each(function() {
+        			excludedIngredients.push($(this).val());
+        		});
+        		
+        		$.anycook.graph.autocomplete.ingredient(term,excludedIngredients,function(data){
+        				resp($.map(data, function(item){
+        					return{
+        						label:item,
+        						data:item,
+        						value:item
+        						};
+        					}));        			
+        				});
+        			},
+        			minlength:1,
+        			autoFocus:true,
+        			position:{
+        				offset:"-5 1"
+        			}, 
+        			select:function(event, ui){
+        				var text = ui.item.data;
+        				$ingredient.val(text);
+        				return false;
+        			}
+	    	});
 		
 	return $newIngredientLine;
 }
@@ -861,39 +895,9 @@ function addNewIngredientLine(){
 	if($.address.parameter("step") == 2)
 		resetNewRecipeHeight($("#step2"));
 
-	var $input = $newIngredientLine.children("input");
+	var $input = $newIngredientLine.children(".new_ingredient");
 	
-	$input.autocomplete({
-	    		source:function(req,resp){
-        			//var array = [];
-        		var term = req.term;
-
-        		var excludedIngredients = [];
-        		$list.find(".new_ingredient").not($input).each(function() {
-        			excludedIngredients.push($(this).val());
-        		});
-        		
-        		$.anycook.graph.autocomplete.ingredient(term,excludedIngredients,function(data){
-        				resp($.map(data, function(item){
-        					return{
-        						label:item,
-        						data:item,
-        						value:item
-        						};
-        					}));        			
-        				});
-        			},
-        			minlength:1,
-        			autoFocus:true,
-        			position:{
-        				offset:"-5 1"
-        			}, 
-        			select:function(event, ui){
-        				var text = ui.item.data;
-        				$input.val(text);
-        				return false;
-        			}
-	    	});
+	
 
 }
 
