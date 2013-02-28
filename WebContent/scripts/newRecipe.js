@@ -284,23 +284,18 @@ function checkStep2(event){
 
 function checkValidationStep2(){
 	var stepcheck = false;
-	var steptexts = $(".new_step textarea").val();
-	for(var i in steptexts){
-		if(steptexts[i].length > 0){
+	$(".new_step textarea").each(function(){
+		if($(this).val().length > 0)
 			stepcheck = true;
-			break;
-		}
-	}
+	});
 	
 	
 	var ingredientcheck = false;
-	var ingredienttexts = $("#step2 .new_ingredient").val();
-	for(var i in ingredienttexts){
-		if(ingredienttexts[i].length > 0){
+	$("#step2 .new_ingredient").each(function(){
+		if($(this).val().length > 0)
 			ingredientcheck = true;
-			break;		
-		}
-	}
+		
+	})
 	
 	return stepcheck && ingredientcheck;
 }
