@@ -74,11 +74,6 @@
 		    			setTimeout($.anycook.drafts.num,500);
 		    		});
 		    		
-		    		// setTimeout(checkNewMessageNum,500);
-
-		    		
-				    
-				    
 				}
 		 	 });
 				

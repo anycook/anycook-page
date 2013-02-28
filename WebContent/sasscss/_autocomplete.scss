@@ -2,6 +2,7 @@
 	position: absolute; 
 	cursor: pointer;
 	background-color: #ffffff;
+	z-index: 100 !important;
 	
 	&.ui-menu {
 		list-style:none;

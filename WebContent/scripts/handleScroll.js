@@ -13,6 +13,8 @@ function scrollListener(){
 	
 }
 
-function backtothetop(){
-	$("html, body").animate({scrollTop:0}, {duration:1000, easing:"easeInOutQuart"});
+function backtothetop(time, callback){
+	if(time  === undefined) time = 1000;
+ 	if(!callback) callback = function(){};
+	$("html, body").animate({scrollTop:0}, {duration:time, easing:"easeInOutQuart", complete: callback});
 }

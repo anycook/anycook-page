@@ -5,7 +5,7 @@ function loadAboutUs(){
 }
 
 function loadPeople(){
-	$("#content_main").appendGitHub("anycook/anycook-content/contents/people.md");
+	$("#team").appendGitHub("anycook/anycook-content/contents/people.md");
 }
 
 function setWebsiteData(){
