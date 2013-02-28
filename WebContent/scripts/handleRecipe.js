@@ -138,7 +138,7 @@ function loadRecipe(recipeName) {
 		window.print();
 	});
 	//addtagsbox
-	makeAddTags();
+	// makeAddTags();
 }
 
 function loadSteps(steps) {
@@ -344,7 +344,9 @@ function showaddTags() {
 	if(!user.checkLogin())
 		return;
 
-	var $lightbox = $(".lightbox");
+	
+
+	var $lightbox = getAddTagsLightbox();
 
 	var top = $("#tags").offset().top - 113;
 	showLightbox($lightbox, top);
@@ -356,12 +358,14 @@ function showaddTags() {
 	return false;
 }
 
-function makeAddTags() {
+function getAddTagsLightbox() {
 	var $content = $("<div class=\"tagsbox\"></div>" + "<p>Die bekanntesten Tags:</p>" + "<div id=\"tagcloud\"></div>")
 
 	var $lightbox = getLightbox("Tags hinzufügen:", "Hilf den anderen beim finden, in dem du neue Tags vorschlägst.", $content, "einreichen");
 	makeTagCloud();
 	$("#main").append($lightbox);
+
+	return $lightbox;
 }
 
 function multiZutaten(perscount) {

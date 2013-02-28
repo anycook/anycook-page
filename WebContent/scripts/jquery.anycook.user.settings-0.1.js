@@ -30,20 +30,24 @@
 		    // path to server-side upload script
 		    action: 'http://graph.anycook.de/upload/image/user'
 		});
+
+		if(user.facebook_id <= 0){
+			$("#showpassword").click(function() {		
+				var $container = $("#new_password_container");
+				var $password = $container.children("#password_new");
+				var $new_password = $password.clone();
+				if($password.attr("type") == "password")
+					$new_password.attr("type", "text");
+				else
+					$new_password.attr("type", "password");
+				
+				$password.remove();
+				$(this).before($new_password);
+			});
+		}
 		
 		
-		$("#showpassword").click(function() {		
-			var $container = $("#new_password_container");
-			var $password = $container.children("#password_new");
-			var $new_password = $password.clone();
-			if($password.attr("type") == "password")
-				$new_password.attr("type", "text");
-			else
-				$new_password.attr("type", "password");
-			
-			$password.remove();
-			$(this).before($new_password);
-		});
+		
 
 
 

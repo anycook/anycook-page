@@ -12,7 +12,8 @@ function loadProfile(userid){
 		$(".profile_date span").text(date);
 		
 
-		if(user.id != userid){
+
+		if(user.checkLogin() && user.id != userid){
 			$(".profile_buttons").show();
 			$("#follow").click(follow);
 

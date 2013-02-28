@@ -5,8 +5,13 @@
 		display:none;
 }
 
+.settings{
+	float:left;
+	margin-top:25px;
+}
+
 #settings_content{
-	margin: 10px 0 25px;
+	margin: 10px 0 0;
 		
 	/*account_image{
 		float: left;
@@ -73,12 +78,16 @@
 	}
 }
 
-#settings_account{
+#settings_mail{
 	padding: 0 0 0 10px;
 	
 	h2{
 		margin-top: 10px;
 		
+	}
+
+	#mail_form{
+		float: left;
 	}
 	
 	#account_mail{
@@ -93,6 +102,20 @@
 		opacity: 0;
 	}
 	
+	.tagsbox, #tagcloud{
+		width:390px;
+	}
+	
+}
+
+#settings_pass{
+	display:none;
+	padding: 0 0 0 10px;
+
+	#pass_form{
+		float: left;
+	}
+
 	#old_password_container, #new_password_container{
 		float: left;
 		
@@ -107,11 +130,6 @@
 		width: 230px;
 		height: 65px;
 	}
-	
-	.tagsbox, #tagcloud{
-		width:390px;
-	}
-	
 }
 
 

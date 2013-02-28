@@ -571,17 +571,36 @@
 							<h2 id="about_me">Zitat:</h2>
 							<textarea id="account_aboutme" maxlength="140"></textarea>
 						</li>
+						<li>
+							<div class="button">Speichern</div>
+						</li>
+
 					</ul>
 			</div>
-			<h2 class="border_headline">Allgemeine Einstellungen</h2>
-			<div id="mail_pwd_saved" class="settings_saved">gespeichert</div>
-			<div id="settings_account" class="settings">
-				<form id="mail_pass_form">
-					<h2>Email-Adresse ändern:</h2>
+			
+			<div id="settings_mail" class="settings">
+				<h2 class="border_headline">Email-Adresse ändern</h2>
+				<div id="mail_saved" class="settings_saved">gespeichert</div>
+				<form id="mail_form">
 					<p>Deine E-Mail Adresse, unter der wir dich erreichen können.</p>
 					<input type="email" id="account_mail"/>
 					<div id="mail_validation">Dies ist keine gültige Emailaddresse</div>
-					<h2>Passwort ändern:</h2>
+					<input type="submit" value="speichern"/>
+					<!-- <h2>Standart Stichwörter hinzufügen:</h2>
+					<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
+					<div class="tagsbox"></div>
+					<p>Die bekanntesten Tags als Inspiration:</p>
+					<div id="tagcloud"></div> -->					
+				</form>
+			</div>
+
+
+			
+			
+			<div id="settings_pass" class="settings">
+				<h2 class="border_headline">Passwort ändern</h2>
+				<div id="pwd_saved" class="settings_saved">gespeichert</div>
+				<form id="pass_form">
 					<div id="old_password_container">
 						<p class="password_label">Gib dein altes Passwort ein.</p>
 						<input type="password" id="password_old"/>
@@ -592,18 +611,14 @@
 						<div id="showpassword">Passwort anzeigen</div>
 					</div>
 					<div id="password_secure"></div>
-					<!-- <h2>Standart Stichwörter hinzufügen:</h2>
-					<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
-					<div class="tagsbox"></div>
-					<p>Die bekanntesten Tags als Inspiration:</p>
-					<div id="tagcloud"></div> -->
 					<input type="submit" value="speichern"/>
 				</form>
 			</div>
 			
-			<h2 class="border_headline">Erweiterte Einstellungen</h2>
-			<div id="notification_saved" class="settings_saved">gespeichert</div>
+			
 			<div id="settings_notification" class="settings">
+				<h2 class="border_headline">Erweiterte Einstellungen</h2>
+				<div id="notification_saved" class="settings_saved">gespeichert</div>
 				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
@@ -637,8 +652,7 @@
 				</tr>
 				</table>						
 				</div>
-			</div>
-			<div id="settings_facebook" class="settings">
+
 				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_facebook_content" class="settings_content">
 					<table>
