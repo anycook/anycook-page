@@ -809,6 +809,7 @@ function getNewIngredientStep(number, text, ingredients){
 function getNewIngredientLine(name, menge){
 	var $dragdrop = $("<div></div>").addClass("ingredient_dragdrop");	
 	var $ingredient = $("<input type=\"text\">").addClass("new_ingredient");
+
 	if(name !== undefined)
 		$ingredient.val(name);
 	var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge")
@@ -855,9 +856,45 @@ function makeStepNumbers(){
 function addNewIngredientLine(){
 	var $this = $(this);
 	var $list = $this.prev();
-	$list.append(getNewIngredientLine());
+	var $newIngredientLine = getNewIngredientLine();
+	$list.append($newIngredientLine);
 	if($.address.parameter("step") == 2)
 		resetNewRecipeHeight($("#step2"));
+
+	var $input = $newIngredientLine.children("input");
+	
+	$input.autocomplete({
+	    		source:function(req,resp){
+        			//var array = [];
+        		var term = req.term;
+
+        		var excludedIngredients = [];
+        		$list.find(".new_ingredient").not($input).each(function() {
+        			excludedIngredients.push($(this).val());
+        		});
+        		
+        		$.anycook.graph.autocomplete.ingredient(term,excludedIngredients,function(data){
+        				resp($.map(data, function(item){
+        					return{
+        						label:item,
+        						data:item,
+        						value:item
+        						};
+        					}));        			
+        				});
+        			},
+        			minlength:1,
+        			autoFocus:true,
+        			position:{
+        				offset:"-5 1"
+        			}, 
+        			select:function(event, ui){
+        				var text = ui.item.data;
+        				$input.val(text);
+        				return false;
+        			}
+	    	});
+
 }
 
 function removeNewIngredientLine(){
