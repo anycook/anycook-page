@@ -71,7 +71,7 @@
 		var percent = 0+"%";
 		var name = !draft.name ? "Noch kein Titel" : draft.name;
 		var description = !draft.description ? "Noch keine Beschreibung" : draft.description;
-		var image = !draft.image ? "nopicture.png" : draft.image;
+		var image = !draft.image ? "category/sonstiges.png" : draft.image;
 	
 		var uri = encodeURI("/#!/recipeediting?id="+id);
 		
