@@ -1,0 +1,179 @@
+@media print{
+	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline, #filter_box, .tags_head, .tags_list, footer{
+		display: none !important;
+	}
+
+	#container{
+		margin: -3cm 0 0 0;
+		padding: 0 4cm;
+		
+	}
+	
+	#recipe_info{
+		width: 100%;
+		
+	}
+	
+	#recipe_headline{
+		margin:0 10cm 0 0;
+		width:10cm;
+		font: 31pt Georgia;
+		text-align: left !important;
+	}
+	
+	.ingredient_step{
+		height: auto !important;
+		.step{
+			height: auto !important;
+			box-shadow:none !important;
+			-webkit-box-shadow:none !important;
+			-moz-box-shadow:none !important;
+			border: 0 !important;
+			
+			
+			.mid{
+				float: left;
+				
+				.number{
+					border-right: 0 !important;
+					margin: 0 15px 0 0 !important;
+					height: auto !important;
+					width: auto !important;
+					line-height: 25px !important;
+					text-align: left;
+					font: 20pt Georgia !important;
+				}
+				
+				.text{
+					margin: 0 0 !important;
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+/*	.ingredient_step{
+		position:relative
+		
+		.step{
+
+			border: 0 !important;
+			float:left;
+			padding:inherit;
+			margin:0 !important; 
+			background: none;
+			box-shadow:none !important;
+			-webkit-box-shadow:none !important;
+			-moz-box-shadow:none !important;
+			width:10cm;
+			position:absolute;
+			overflow:visible;
+		}
+	
+		.number{
+			width:1cm !important;
+			line-height:inherit;
+			font: 29pt Georgia !important;
+			float:left;
+			margin:0 !important;
+			padding: inherit;
+			height:inherit;
+			border-right:none;
+			text-align: left;
+			border: 0 !important;
+		}
+	}	
+	
+	.text{
+		width:15cm !important;
+		float:none;
+		padding: inherit;
+		margin: 0.2cm 0 0 1.8cm !important;
+		height:inherit;
+		text-align: justify;
+		font: 14pt Helvetica, Arial, sans-serif !important;
+	}
+	
+	#filter_box{
+		margin: -0.7cm 0 0 0 !important;
+		font-size: 17pt !important;
+		width:6cm !important;
+		
+		#filter_main{
+			width:6cm !important;
+			
+			#kategorie_head{
+				font-size: 17pt !important;
+				width:6cm !important;
+				
+			}
+			
+			#filter_main_box{
+				margin: 0.3cm 0 0 0 !important;
+			
+				#filter_table{
+					tr{
+						display: none !important;
+					}
+					
+					#time_filter{
+						display:inline !important;
+						font-size: 17pt !important;	
+						.filter_table_left{
+							padding-left: 0px !important;
+						}
+					}
+				}
+				
+				#zutat_head{
+					font-size: 17pt !important;
+	
+						
+						.numberinput{ 
+							font: 17pt "Times New Roman" !important;
+							border: 0 !important;
+							width: 0.8cm !important; 
+							
+							.up, .down{
+								display: none;	
+							}
+							
+							input{
+								border: 0 !important;
+								background: none !important;
+								font: 17pt "Times New Roman" !important;
+								border: 0 !important;
+								height:100%; 
+								margin: 0 !important;
+								width: 100% !important; 
+							}
+						}
+					
+				}
+				
+				#ingredient_list li{
+					font-size: 15pt !important;
+					border-bottom: 0px !important;
+					
+				}
+				
+				#ingredient_list{
+					width:8cm !important;
+					 li{
+					 	width:100% !important;
+					 }
+				}
+			}
+			
+		}
+		
+	}*/
+	
+	
+	
+	
+	
+	
+}

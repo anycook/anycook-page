@@ -129,14 +129,59 @@
 	#team{
 		float: left;
 		width: 100%;
+		padding: 30px 0 0 18px;
+		
+		h1{
+      width: 100%;
+      border-top: 1px solid #dad9d7;
+      border-bottom: 1px solid #dad9d7;
+      text-align: center;
+      padding: 13px 0 17px;
+      margin: 0 0 40px 0;
+    }
 		
 		h2{
 			margin: 20px 0 20px 0;
 		}
 		
-		.profile_container{
-				margin-bottom: 10px;
-		}
+		li{
+		  float: left;
+      width: 100%;
+      margin: 0 0 40px 0;
+      list-style-type: none;
+		  
+  		p{ //sind hier nur die bilder!
+  		  float: left;
+  		  
+  		  img{
+  		    width: 180px;
+  		    border: 8px solid #ece9e3;
+          outline: 1px solid #dad9d7;
+  		  }
+  		}
+  		
+  		blockquote{ // Ist der Block mit Name und Text
+  		  float: left;
+  		  width: 400px;
+  		  margin: 0 25px;
+  		  
+  		  h2{
+  		    margin: 0 0;
+  		  }
+  		  
+  		  em{
+  		    display: block;
+          width: 100%;
+          height: 10px;
+          font-size: 10pt;
+         }
+  		  
+  		}
+  		
+  		.profile_container{
+  				margin-bottom: 10px;
+  		}
+    }
 		
 	}	
 	
