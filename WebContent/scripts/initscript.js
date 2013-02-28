@@ -69,11 +69,14 @@
 		    		
 		    		// wait ressources to complete loading and the wait another 500ms.
 		    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-		    		// $(window).load(function(){setTimeout(checkNewMessageNum,500);});
+		    		$(window).load(function(){
+		    			setTimeout(checkNewMessageNum,500);
+		    			setTimeout($.anycook.drafts.num,500);
+		    		});
 		    		
-		    		setTimeout(checkNewMessageNum,500);
+		    		// setTimeout(checkNewMessageNum,500);
 
-		    		$.anycook.drafts.num();
+		    		
 				    
 				    
 				}
