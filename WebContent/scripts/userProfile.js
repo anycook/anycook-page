@@ -41,7 +41,7 @@ function loadProfile(userid){
 		
 		$(".profile_achievements .follower .count").text(profileData.follower.length);
 		
-		if(profileData.text!=null){
+		if(profileData.text!=null && profileData.text.length > 0){
 			$(".profile_text").show().text("»"+profileData.text+"«");
 		}
 		
@@ -54,6 +54,8 @@ function loadProfile(userid){
 		$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
 		
 		User.getRecipes(userid, function(recipes){
+			$(".profile_achievements .recipes .count").text(recipes.total);
+
 			var headline;
 			if(userid == user.id)
 				headline = "Deine Rezepte ("+recipes.total+")";
@@ -63,6 +65,8 @@ function loadProfile(userid){
 		});
 		
 		$.anycook.graph.user.schmeckt(userid, function(schmeckt){
+			$(".profile_achievements .likes .count").text(schmeckt.length);
+
 			var headline;
 
 			if(userid == user.id)
