@@ -413,23 +413,31 @@ function submitStep3(){
 }
 
 function saveRecipe(){
+	var ingredients = getIngredients();
+	var ingredientsCheck = ingredients !== undefined && ingredients.length > 0;
+
+	var persons = getPersons();
+	var personCheck = persons !== undefined && persons > 0
+
+
 	if(checkValidationStep1() && checkValidationStep2() && 
-		checkValidateLightboxPersons() && checkValidateLightboxIngredients() && 
+		ingredientsCheck && personCheck && 
 		checkValidateStep3()){
 		
-		var recipe = {};
-		recipe.steps = getSteps();
-		// recipe.name = getRecipeName();
-		recipe.image = getImageName();
-		recipe.description = getDescription();
-		recipe.ingredients = getIngredients();
-		recipe.category = getCategory();
-		recipe.time = getTime();
-		recipe.skill = getSkill();
-		recipe.calorie = getCalorie();
-		// recipe.tags = getTags();
-		recipe.persons = getPersons();
-		
+		var recipe = {
+			name : getRecipeName(),
+			steps : getSteps(),
+			image : getImageName(),
+			description : getDescription(),
+			ingredients : ingredients,
+			category : getCategory(),
+			time : getTime(),
+			skill : getSkill(),
+			calorie : getCalorie(),
+			persons : persons,
+			tags : getTags()
+		};
+
 		var userid = -1;
 		if(user.checkLogin())
 			userid = user.id;
@@ -439,21 +447,23 @@ function saveRecipe(){
 			recipe.mongoid = id;
 		
 
-		$.anycook.graph.saveRecipe(getRecipeName(), recipe,getTags(), userid);
-		
-		$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
-		$("body").on("click", function(){
-			$.address.path("");
-			$(".fixedpopup").remove();
-		});
-		
-		$(".fixedpopup").show(1).delay(5000).fadeOut(500, function(){
-			$(this).remove();
-			var pathNames = $.address.pathNames();
-			if(pathNames.length > 0 && pathNames[0] == "recipeediting"){
+		$.anycook.graph.recipe.save(recipe, function(response){
+			$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
+			$("body").on("click", function(){
 				$.address.path("");
-			}
+				$(".fixedpopup").remove();
+			});
+			
+			$(".fixedpopup").show(1).delay(5000).fadeOut(500, function(){
+				$(this).remove();
+				var pathNames = $.address.pathNames();
+				if(pathNames.length > 0 && pathNames[0] == "recipeediting"){
+					$.address.path("");
+				}
+			});
 		});
+		
+		
 		
 		
 		return false;
@@ -1089,8 +1099,8 @@ function loadPreview(data){
 	});
 	$("#recipe_headline").text(getRecipeName());
 	$("#introduction").text(getDescription());
-	var steps = getSteps();	
-	loadSteps(steps);
+
+	loadSteps(data.steps);
 	var filter = {
 		timestd : data.time.std,
 		timemin : data.time.min,
