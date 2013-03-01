@@ -26,7 +26,7 @@
 
             if(recipes.length > 10)
                   $this.append($show_more);
-            else if(recipe.length <=5)
+            else if(recipes.length <=5)
                   $p.height(120);
 
       	return $this;
