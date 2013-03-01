@@ -74,7 +74,8 @@ function loadNewRecipe(){
 		// if($.address.parameter("step") == 2)
 		// 	resetNewRecipeHeight($("#step2"));
 	});
-	makeIngredientLightBox();
+
+	$("#ingredient_overview").click(makeIngredientLightBox);
 	// watchSteps();
 	
 	$("#step2").on("focusout", "input, textarea", draftSteps);
@@ -109,7 +110,7 @@ function loadNewRecipe(){
         	$.anycook.drafts.save(name, $inputs.val());
         else
         	$.anycook.drafts.save(name, "0");
-    	// must return false or function is sometimes called twice
+    	
     	checkValidateStep3();
     	if(name == "calorie")
 			$("#muffin_error").fadeOut(300);
@@ -161,9 +162,11 @@ function loadNewRecipe(){
 		}else{
 			//link
 			$.anycook.drafts.open(id, fillNewRecipe);
-			$(".nav_button, #step4 a").attr("href", function(i, attr){
+			$(".nav_button, #step4 a").not("#cancel_recipe").attr("href", function(i, attr){
 					return attr+"&id="+id;
 			});
+
+			$("#cancel_recipe").show();
 		}
 	}
 }
@@ -340,7 +343,8 @@ function submitStep2(event){
 		$this.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
 		return;
 	}
-		
+
+	saveLightbox();
 	hideLightbox();
 	$.address.parameter("step", "3");
 }
@@ -348,7 +352,7 @@ function submitStep2(event){
 
 //step3
 function checkCategory(){
-	var category = $("#category_select :selected").val();
+	var category = $("#select_container span").text();
 	return category != "" && category != "Kategorie auswählen";
 }
 
@@ -473,7 +477,27 @@ function newRecipeAdressChange(event){
 	switch(stepNum){
 	case 4:
 		$navigation.children("#nav_step4").removeClass("inactive");
-		loadPreview();
+		var id = $.address.parameter("id");
+		//draft
+		if(user.checkLogin() && id !== undefined)
+			$.anycook.drafts.open(id, loadPreview);
+		else{
+			var data = {
+				time : getTime(),
+				skill : getSkill(),
+				calorie : getCalorie(),
+				category : getCategory(),
+				persons : getPersons(),
+				ingredients : getIngredients(),
+				steps : getSteps(),
+				name : getRecipeName(),
+				image : getImageName(),
+				tags : getTags()
+			}
+			loadPreview(data);
+		}
+			
+
 		step1Left -= 655;
 		
 	case 3:
@@ -530,13 +554,14 @@ function fillNewRecipe(json){
 	if(json.steps)
 		fillSteps(json.steps);
 	if(json.ingredients)
-		fillIngredients(json.ingredients);
+		$("#step2").data("ingredients", json.ingredients);
 	if(json.persons)
-		fillPersons(json.persons);
+		$("#step2").data("numPersons", json.persons);
+
 	if(json.category){
 		var $container = $("#select_container");
 		$container.find("span").text(json.category);
-		$container.find("option").attr("selected", "").each(function(){
+		$container.find("option").each(function(){
 			var $this = $(this);
 			if($this.val() == json.category)
 				$this.attr("selected", "selected");
@@ -568,9 +593,6 @@ function fillNewRecipe(json){
 			$tagsbox.append(getTag(json.tags[i], "remove"));
 		}
 	}
-	
-	if($.address.parameter("step") == 4)
-		loadPreview();
 		
 }
 
@@ -596,15 +618,15 @@ function fillSteps(steps){
 	}
 }
 
-function fillIngredients(ingredients){
-	var $ul = $(".lightbox ul");
-	for(var i in ingredients){
-		var $ingredientLine = getNewIngredientLine();
-		$ingredientLine.children(".new_ingredient").val(ingredients[i].name);
-		$ingredientLine.children(".new_ingredient_menge").val(ingredients[i].menge);
-		$ul.append($ingredientLine);
-	}
-}
+// function fillIngredients(ingredients){
+// 	var $ul = $(".lightbox ul");
+// 	for(var i in ingredients){
+// 		var $ingredientLine = getNewIngredientLine();
+// 		$ingredientLine.children(".new_ingredient").val(ingredients[i].name);
+// 		$ingredientLine.children(".new_ingredient_menge").val(ingredients[i].menge);
+// 		$ul.append($ingredientLine);
+// 	}
+// }
 
 function fillPersons(persons){
 	$("#new_num_persons").val(persons);
@@ -631,7 +653,8 @@ function draftIngredients(){
 
 function getImageName(){
 	var image = $("#step1 .recipe_image_container img").attr("src").split("/");
-	return image[image.length-1];
+	var imageName = image[image.length-1];
+	return imageName == "sonstiges.png" ? undefined : imageName;
 }
 
 function getRecipeName(){
@@ -645,20 +668,11 @@ function getDescription(){
 }
 
 function getIngredients(){
-	var $lis = $(".lightbox").find("li");
-	var ingredients = [];
-	for(var i = 0; i<$lis.length; i++){
-		var $li = $lis.eq(i);
-		var name = $li.children(".new_ingredient").val();
-		var menge = $li.children(".new_ingredient_menge").val();
-		var ingredient =  {name:name, menge:menge};
-		ingredients[ingredients.length] = ingredient;		
-	}
-	return ingredients;
+	return $("#step2").data("ingredients");
 }
 
 function getCategory(){
-	return $("#select_container option:selected").val();
+	return $("#select_container span").text();
 }
 
 function getSkill(){
@@ -687,7 +701,7 @@ function getTags(){
 }
 
 function getPersons(){
-	return $("#new_num_persons").val();
+	return $("#step2").data("numPersons");
 }
 
 function getSteps(){
@@ -1067,9 +1081,9 @@ function showNRImage(filename){
 	$img.load(function(){$("#step1").trigger($.Event('resize'))});
 }
 
-function loadPreview(){
-	var recipeImage = getImageName();
-	$("#step4 .recipe_image_container img").attr("src", "http://images.anycook.de/gerichtebilder/big/"+recipeImage)
+function loadPreview(data){
+	var image = data.image || "category/sonstiges.png";
+	$("#step4 .recipe_image_container img").attr("src", "http://images.anycook.de/gerichtebilder/big/"+image)
 	.load(function(){
 		$("#step4").trigger($.Event('resize'));
 	});
@@ -1078,15 +1092,16 @@ function loadPreview(){
 	var steps = getSteps();	
 	loadSteps(steps);
 	var filter = {
-		time : getTime(),
-		tags : getTags(),
-		ingredients : getIngredients(),
-		skill:getSkill(),
-		calorie: getCalorie(),
-		category:getCategory(),
-		persons:getPersons()
+		timestd : data.time.std,
+		timemin : data.time.min,
+		skill:data.skill,
+		calorie: data.calorie,
+		category:data.category,
+		person:data.persons
 	}
 	loadFilter(filter);
+	loadIngredients(data.ingredients);
+	loadTags(data.tags);
 	var id = $.address.parameter("id");
 	$(".tags_list a").attr("href", function(i, attr){
 		if(id)
@@ -1100,4 +1115,154 @@ function loadPreview(){
 	// 	resetNewRecipeHeight($("#step4"));
 	//var height = $("#step4").height()
 	//$("#recipe_editing_container").css("height", height+20);
+}
+
+//ingredientLightBox
+function makeIngredientLightBox(){
+	//ingredientOverview
+	var numPersons = $("#step2").data("numPersons");
+
+	var $input = $("<input/>").attr({id:"new_num_persons", type:"text", placeholder:"0", size:"2", maxlength:"2"})
+		.val(!numPersons ? 0 : numPersons);
+	var $up = $("<div></div>").addClass("up");
+	var $down = $("<div></div>").addClass("down");
+	var $numberinput = $("<div></div>")
+		.addClass("numberinput")
+		.attr("id", "new_person_num")
+		.append($input)
+		.append($up)
+		.append($down);
+	var $headline = $("<div></div>")
+		.append("<span>Zutaten für </span>")
+		.append($numberinput)
+		.append("<span> Personen</span>")
+		.append("<span id=\"numberinput_error\" class=\"error\">Bitte Personenzahl angeben</span>");
+		
+	var $ul =$("<ul></ul>").addClass("new_ingredient_list");
+		
+	var $content = $("<div></div>")
+		.append($ul)
+		.append("<span id=\"ingredientoverview_error\" class=\"error\">Kein Rezept ohne Zutaten</span>");	
+
+	var $lightbox = getLightbox($headline.children(), 
+	"Dies sind alle Zutaten, die du in den Schritten angegeben hast. "+ 
+	"Falls Zutaten fehlen, füge diese bitte noch zu den entsprechenden Schritten hinzu.", $content, "Rezept abschließen")
+		.addClass("ingredient_overview");
+	$("#main").append($lightbox);
+	
+	$lightbox.find("form").submit(submitStep2);
+	
+	$input.keydown(function(e){
+		var $this = $(this);
+		if(e.which==13){
+			persCount = $this.val();
+			$this.blur();
+		}else if(e.which == 38){ //up{
+			newPersonsUp();
+			return false;
+		}else if(e.which == 40){ //down
+			newPersonsDown();
+			return false;
+		}else if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
+			return false;
+		
+		if($this.val()!="" && $this.val() != "0") $("#numberinput_error").fadeOut(300);
+		$.anycook.drafts.save("persons", $this.val());
+	});
+	
+	$up.click(newPersonsUp);
+	
+	$down.click(newPersonsDown);
+
+	showIngredientLightbox();
+
+	return false;
+}
+
+function saveLightbox(){
+	var $lis = $(".lightbox").find("li");
+	var ingredients = [];
+	for(var i = 0; i<$lis.length; i++){
+		var $li = $lis.eq(i);
+		var name = $li.children(".new_ingredient").val();
+		var menge = $li.children(".new_ingredient_menge").val();
+		var ingredient =  {name:name, menge:menge};
+		ingredients[ingredients.length] = ingredient;		
+	}
+
+	$("#step2").data("ingredients", ingredients);
+
+	var numPersons = $("#new_num_persons").val();
+	$("#step2").data("numPersons", numPersons);
+}
+
+function newPersonsUp(){
+	var $input = $("#new_num_persons");
+	var currentNum = Number($input.val());
+	var newNum = ((currentNum)%99)+1;
+	$.anycook.drafts.save("persons", newNum);
+	$("#step2").data("numPersons", newNum);
+	$input.val(newNum);
+	$("#numberinput_error").fadeOut(300);
+}
+
+function newPersonsDown(){
+	var $input = $("#new_num_persons");
+	var currentNum = Number($input.val());
+	var newNum = ((99 - 2 + currentNum)%99)+1;
+	$.anycook.drafts.save("persons", newNum);
+	$("#step2").data("numPersons", newNum);
+	$input.val(newNum);
+	$("#numberinput_error").fadeOut(300);
+}
+
+function showIngredientLightbox(){
+	var $this = $(this);
+	var $lightbox = $(".lightbox");
+	if(getIngrededientsForOverview()){
+		draftIngredients();
+		var $ingredientOverview = $("#ingredient_overview");
+		var bottom = $ingredientOverview.offset().top - 60;
+		showLightboxfromBottom($lightbox, bottom);
+		$lightbox.on("focusout", "input", draftIngredients);
+	}else{
+		$("#no_ingredients_error").fadeIn(300);
+		$this.effect("shake", {distance:5, times:2}, 50);
+		watchForIngredients();
+	}
+	return false;
+}
+
+function getIngrededientsForOverview(){
+	var ingredients = {};
+	if(!checkValidationStep2())
+		return false;
+	
+	
+	$("#step2 .new_ingredient_line").each(function(){
+		var $this = $(this);
+		var ingredient = $this.children(".new_ingredient").val();
+		if(ingredient.length == 0)
+			return;
+		var menge = $this.children(".new_ingredient_menge").val();
+		if(ingredients[ingredient] != undefined)
+			ingredients[ingredient] = mergeMenge(ingredients[ingredient], menge);
+		else
+			ingredients[ingredient] = menge;
+		
+	});
+	
+	
+	var $ul = $(".lightbox ul").empty();
+	
+	for(var ingredient in ingredients){
+		var $ingredientLine = getNewIngredientLine();
+		$ingredientLine.children(".new_ingredient").val(ingredient);
+		$ingredientLine.children(".new_ingredient_menge").val(ingredients[ingredient]);
+		$ul.append($ingredientLine);
+	}
+	
+	
+	
+	return true;
 }
