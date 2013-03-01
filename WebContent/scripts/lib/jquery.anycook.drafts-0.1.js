@@ -45,7 +45,7 @@
 	};
 	
 	$.anycook.drafts.open = function(id, callback){
-		return $.anycook.graph._getJSON("/drafts/"+id, {}, callback);
+		return $.anycook.graph._get("/drafts/"+id, {}, callback);
 	}
 	
 	

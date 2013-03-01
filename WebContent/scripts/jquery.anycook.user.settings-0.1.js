@@ -32,6 +32,8 @@
 		});
 
 		if(user.facebook_id <= 0){
+			
+
 			$("#showpassword").click(function() {		
 				var $container = $("#new_password_container");
 				var $password = $container.children("#password_new");
