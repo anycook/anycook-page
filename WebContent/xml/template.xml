@@ -756,57 +756,24 @@
 	<template id="home_discover">
 		<div id="discover">
 			<div id="new" class="entdecken">
-				<h2>neuste Rezepte</h2>
-				<div class="entdecken_back off">
-					<div class="dogear_left"></div>
-					<div class="scroll_left">
-						<div class="scroll_left_arrow"></div>
-					</div>
-				</div>
-				<div class="discover_border">
-					<div class="discover_container"></div>
-				</div>
-				<div class="entdecken_next">
-					<div class="dogear_right"></div>
-					<div class="scroll_right">
-						<div class="scroll_right_arrow"></div>
-					</div>
+				<div id="discover_new" class="discover_recipes">
+					<h2>neuste Rezepte</h2>
+					<p class="discover_container"></p>
+					<div class="profile_more">mehr anzeigen</div>
 				</div>
 			</div>
 			<div id="tasty" class="entdecken">
-				<h2>leckerste Rezepte</h2>
-				<div class="entdecken_back off">
-					<div class="dogear_left"></div>
-					<div class="scroll_left">
-						<div class="scroll_left_arrow"></div>
-					</div>
-				</div>
-				<div class="discover_border">
-					<div class="discover_container"></div>
-				</div>
-				<div class="entdecken_next">
-					<div class="dogear_right"></div>
-					<div class="scroll_right">
-						<div class="scroll_right_arrow"></div>
-					</div>
+				<div id="discover_tasty" class="discover_recipes">
+					<h2>leckerste Rezepte</h2>
+					<p class="discover_container"></p>
+					<div class="profile_more">mehr anzeigen</div>
 				</div>
 			</div>
 			<div id="recommended" class="entdecken">
-				<h2>empfohlene Rezepte</h2>
-				<div class="entdecken_back off">
-					<div class="dogear_left"></div>
-					<div class="scroll_left">
-						<div class="scroll_left_arrow"></div>
-					</div>
-				</div>
-				<div class="discover_border">
-					<div class="discover_container"></div>
-				</div>
-				<div class="entdecken_next">
-					<div class="dogear_right"></div>
-					<div class="scroll_right">
-						<div class="scroll_right_arrow"></div>
-					</div>
+				<div id="discover_recommended" class="discover_recipes">
+					<h2>empfohlen Rezepte</h2>
+					<p class="discover_container"></p>
+					<div class="profile_more">mehr anzeigen</div>
 				</div>
 			</div>
 		</div>
