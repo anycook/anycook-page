@@ -7,31 +7,17 @@ var length = new Object();*/
 function loadDiscover(){
 	/*$("#neuste_container > *, #leckerste_container > *, #beliebte_container > *").remove();*/
 	$.anycook.graph.discover.recommended(function(json){
-		fillDiscover(json, "recommended");
+		$("#discover_recommended").recipeoverview("empfohlene Rezepte", json);
 	});
 	
 	$.anycook.graph.discover.tasty(function(json){
-		fillDiscover(json, "tasty");
+		$("#discover_tasty").recipeoverview("leckerste Rezepte", json);
 	});
 	
 	
 	$.anycook.graph.discover.new(function(json){
-		fillDiscover(json, "new");
-	});
-	
-	$(".scroll_right").click(showNextDiscover).disableSelection();
-	$(".scroll_left").click(showBackDiscover).addClass("off").disableSelection();
-	/*$(".entdecken_back").click(function(event){
-		var target = event.target;
-		var type = $(target.parentNode).attr("id");
-		zurueckDiscover(type);
-		});
-	$(".entdecken_next").click(function(event){
-		var target = event.target;
-		var type = $(target.parentNode).attr("id");
-		weiterDiscover(type);
-		});*/
-	
+		$("#discover_new").recipeoverview("neueste Rezepte", json);
+	});	
 }
 
 

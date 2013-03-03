@@ -56,11 +56,6 @@ function profileRecipe(recipe){
 	return $link;
 }
 
-function loadRecipewJSON(json) {
-	recipe = Recipe.loadJSON(json);
-	loadRecipe(recipe);
-}
-
 function loadRecipe(recipeName) {
 	resetFilter();
 	
@@ -298,8 +293,8 @@ function personsDown() {
 }
 
 function showShare() {
-	var recipeURI = recipe.getURI();
-	var $this = $(this).unbind("click", showShare);
+	var recipeURI = Recipe.getURI($.address.pathNames()[1]);
+	var $this = $(this).unbind("click");
 	$this.children(".img").hide();
 	var $left = $this.children(".left").empty();
 
