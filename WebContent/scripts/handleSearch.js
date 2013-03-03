@@ -229,4 +229,50 @@ function focusoutSearch(){
 	$("#search").val("");	
 }
 
+function fillBigFrame($frame_big, json){
+	var beschreibung = json.description;
+
+	var uri = encodeURI("/#!/recipe/" + json.name);
+	$frame_big.attr("href", uri).append("<div></div>");
+
+	$frame_big.append("<div></div>").children("div").last().addClass("frame_big_left");
+
+	var frame_big_main = $frame_big.append("<div></div>").children("div").last().addClass("frame_big_main");
+
+	var recipe_img = frame_big_main.append("<div></div>").children("div").last().addClass("recipe_img").append("<img/>").append("<div></div>");
+
+	recipe_img.children("img").attr("src", Recipe.getImageURL(json.name));
+
+	if(json.timemin !== undefined && json.timestd !== undefined){
+		var std = json.timestd.toString();
+		if(std.length == 1)
+			std = "0" + std;
+	
+		var min = json.timemin.toString();
+		if(min.length == 1)
+			min = "0" + min;
+	
+		recipe_img.children("div").addClass("recipe_time").text(std + ":" + min + " h");
+	
+	}
+
+	var recipe_text = frame_big_main.append("<div></div>").children("div").last().addClass("recipe_text");
+
+	recipe_text.append("<h3></h3>").children("h3").text(json.name);
+	recipe_text.append("<p></p>").children("p").text(beschreibung);
+
+	var heart = frame_big_main.append("<div></div>").children("div").last().addClass("heart");
+
+	if($.inArray(json.name, user.schmeckt)>=0)
+		heart.addClass("schmeckt");
+
+	frame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
+
+	$frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
+}
+
+function getBigFrame() {
+	return $("<a></a>").addClass("frame_big");
+}
+
 var search = null;
