@@ -58,7 +58,8 @@ function profileRecipe(recipe){
 
 function loadRecipe(recipeName) {
 	resetFilter();
-	
+	recipeName = decodeURIComponent(recipeName);
+
 	var rezepturi = "#!/recipe/"+recipeName;
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
