@@ -54,26 +54,29 @@ function loadProfile(userid){
 		$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
 		
 		User.getRecipes(userid, function(recipes){
-			$(".profile_achievements .recipes .count").text(recipes.total);
-
-			var headline;
-			if(userid == user.id)
-				headline = "Deine Rezepte ("+recipes.total+")";
-			else
-				headline = "Rezepte von "+profileData.name+" ("+recipes.total+")";
-			$("#profile_recipes").recipeoverview(headline, recipes.names).show();
+			if(recipes.total > 0){
+				$(".profile_achievements .recipes .count").text(recipes.total);
+				var headline;
+				if(userid == user.id)
+					headline = "Deine Rezepte ("+recipes.total+")";
+				else
+					headline = "Rezepte von "+profileData.name+" ("+recipes.total+")";
+				$("#profile_recipes").recipeoverview(headline, recipes.names).show();
+			}
 		});
 		
 		$.anycook.graph.user.schmeckt(userid, function(schmeckt){
-			$(".profile_achievements .likes .count").text(schmeckt.length);
+			if(schmeckt.length > 0){
+				$(".profile_achievements .likes .count").text(schmeckt.length);
 
-			var headline;
+				var headline;
 
-			if(userid == user.id)
-				headline = "Deine Lieblingsrezepte ("+schmeckt.length+")";
-			else
-				headline = "Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")";
-			$("#profile_schmeckt").recipeoverview(headline, schmeckt).show();
+				if(userid == user.id)
+					headline = "Deine Lieblingsrezepte ("+schmeckt.length+")";
+				else
+					headline = "Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")";
+				$("#profile_schmeckt").recipeoverview(headline, schmeckt).show();
+			}
 		});
 
 		
