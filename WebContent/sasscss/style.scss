@@ -38,6 +38,9 @@ body{
 	position:relative;
 	float:left;
 	width:100%;
+	//Markierung Rot machen
+	::selection { background: #f05f4e; color: #fff; }
+  ::-moz-selection { background: #f05f4e; color: #fff; }
 }
 
 /*Für Praesentation*/
@@ -531,6 +534,7 @@ header{
 			min-height: 600px;
 			margin-bottom:30px;
 			opacity: 0;
+			@include userselectnone;
 			
 			#loadpoints{
               height: 15px;
@@ -564,6 +568,7 @@ header{
 				margin: 6px 0 0 15px;
 				$width: 268px;
 				width:$width;
+				@include userselecttext;
 				
 					
 				#filter_head{

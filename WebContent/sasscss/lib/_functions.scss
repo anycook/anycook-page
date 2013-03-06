@@ -135,3 +135,19 @@
     background-image: linear-gradient(to bottom, $startColor 90%, $endColor);
 
   }
+
+
+//markierbare und nicht markierbare Container
+@mixin userselectnone
+{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+@mixin userselecttext
+{
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
