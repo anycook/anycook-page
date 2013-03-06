@@ -259,7 +259,8 @@ function getChildComment(user, id){
 function comment(event) {
 	var text = $(this).prev().children().val();
 	if(text != "") {
-		$.anycook.graph.discuss(recipe.name, text);
+		var recipeName = $.address.parameterNames()[1];
+		$.anycook.graph.discussion.answer(recipeName, text);
 	}
 }
 
@@ -269,7 +270,8 @@ function childComment(event) {
 		var pid = $this.parents(".comment").data("comment_id");
 		var text = $this.val();
 		if(text != "") {
-			$.anycook.graph.discuss(recipe.name, text, pid);
+			var recipeName = $.address.parameterNames()[1];
+			$.anycook.graph.discussion.answer(recipeName, text, pid);
 			$this.parents(".child_comment").remove();
 		}
 	}
