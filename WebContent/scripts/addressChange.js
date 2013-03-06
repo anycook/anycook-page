@@ -10,7 +10,8 @@ function loadHome()
 	// //new stuff
 	
 	$("#content_header").empty()
-		.append(getHeaderLink("Entdecken", "/#!/?page=discover", "recipe_btn").addClass("active"));
+		.append(getHeaderLink("Startseite", "/#", "startpage_button").addClass("active"))
+		.append(getHeaderLink("Entdecken", "/#?page=discover", "discover_button").addClass("active"));
 		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 	
 	$.anycook.graph.recipe.ofTheDay(function(recipeOfTheDay){
@@ -203,6 +204,7 @@ function handleChange(event){
 			$("#content_main > div").hide();
 			$("#site1").show();
 			$("#home_button").addClass("on");
+			$("#startpage_button").addClass("active");
 		}else{
 			switch(event.pathNames[0]){
 				case "newrecipe":
@@ -245,6 +247,7 @@ function changePage(event){
 		switch(page){
 		case "discover":
 			$("#site1").hide();
+			$("#discover_button").addClass("active");
 			if($("#discover").length==0){
 				$.xml.append("home_discover");
 				loadDiscover();
