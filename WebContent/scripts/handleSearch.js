@@ -1,6 +1,13 @@
 function addResults(json){
 	$("#more_results").remove();
 	var recipes = json.recipes;
+
+	var currentRecipes = $("#result_container").data("recipes");
+	if(currentRecipes == undefined || $(".frame_big").length == 0) currentRecipes = [];
+
+	
+
+
 	// var start = $(".frame_big").length;
 
 	$.each(recipes, function(i, recipe){
@@ -9,6 +16,8 @@ function addResults(json){
 		// $("#result_container").append($frame_big);
 
 		$.anycook.graph.recipe(recipe, function(recipe){
+			if($.inArray(currentRecipes, recipes[0]) > -1)	return;
+
 			fillBigFrame($frame_big, recipe);
 			var $text = $frame_big.find(".recipe_text");
 			var $p = $text.children("p");
@@ -17,6 +26,9 @@ function addResults(json){
 			$p.css("height",height).ellipsis();
 		});
 	});
+
+	currentRecipes = currentRecipes.concat(recipes);
+	$("#result_container").data("recipes", currentRecipes);
 		
 	if(json.size> $(".frame_big").length)
 		addMoreResultsButton();
