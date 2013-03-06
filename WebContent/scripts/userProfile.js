@@ -62,6 +62,8 @@ function loadProfile(userid){
 				else
 					headline = "Rezepte von "+profileData.name+" ("+recipes.total+")";
 				$("#profile_recipes").recipeoverview(headline, recipes.names).show();
+			}else{
+				$(".profile_achievements .recipes .count").text(0);
 			}
 		});
 		
@@ -76,6 +78,8 @@ function loadProfile(userid){
 				else
 					headline = "Lieblingsrezepte von "+profileData.name+" ("+schmeckt.length+")";
 				$("#profile_schmeckt").recipeoverview(headline, schmeckt).show();
+			}else{
+				$(".profile_achievements .likes .count").text(0);
 			}
 		});
 
