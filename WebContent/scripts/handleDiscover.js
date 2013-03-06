@@ -7,7 +7,7 @@ var length = new Object();*/
 function loadDiscover(){
 	/*$("#neuste_container > *, #leckerste_container > *, #beliebte_container > *").remove();*/
 	$.anycook.graph.discover.recommended(function(json){
-		$("#discover_recommended").recipeoverview("empfohlene Rezepte", json);
+		$("#discover_recommended").recipeoverview("diese Rezepte könnten dir auch schmecken...", json);
 	});
 	
 	$.anycook.graph.discover.tasty(function(json){
