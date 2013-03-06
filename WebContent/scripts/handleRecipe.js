@@ -130,6 +130,9 @@ function loadIngredients(ingredients){
 
 function loadTags(tags){
 	var $tags_list = $(".tags_list").empty();
+	
+	if(tags === undefined) return;
+	
 	for(var i = 0; i < tags.length; i++)
 		$tags_list.append(getTag(tags[i], "link"));
 }
@@ -141,9 +144,9 @@ function loadFilter(filter) {
 	$("#kategorie_head").text(filter.category);
 	
 	$("#time_form > *").not(".time_text_end").hide();
-	$("#time_form .time_text_end").text(fillStd(filter.timestd)+" : "+fillMin(filter.timemin)+" h");
+	$("#time_form .time_text_end").text(fillStd(filter.time.std)+" : "+fillMin(filter.time.min)+" h");
 	
-	var persons = Number(filter.person);
+	var persons = Number(filter.persons);
 
 	makeIngredientHeaderForRecipe(persons);
 

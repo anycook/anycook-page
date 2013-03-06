@@ -189,5 +189,15 @@
 			});
 		}
 	};
+
+	$.anycook.drafts.getDraftFromRecipe = function(recipename){
+		var graph = "/drafts/"+encodeURIComponent(recipename);
+		var data = {};
+
+		$.anycook.graph._put(graph, {}, function(draft_id){
+			if(draft_id != null)
+				$.address.value("/recipeediting?step=4&id="+draft_id);
+		})
+	}
 		
 })(jQuery);

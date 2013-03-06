@@ -62,7 +62,7 @@
     			<div id="comment_discussion"><ul></ul></div>
     			<div id="discussion_buttons">
     				<input type="submit" value="Diskussion ausblenden" id="hide_discussion" class="notavailable"/>
-    				<a class="notavailable button" id="edit_recipe">Rezept bearbeiten</a>
+    				<a class="button" id="edit_recipe">Rezept bearbeiten</a>
     			</div>
     			<div id="discussion_footer">
     				<div class="login">
@@ -421,6 +421,7 @@
 			</div>
 		</div>
 		<div class="profile_buttons">
+			<!--<a id="search_profile" class="button"><img src="/img/loupe.png"/> Rezepte</a>-->
 			<a id="follow" class="button">+ Folgen</a>
 			<a id="sendmessage" class="button">Nachricht schreiben</a>
 		</div>

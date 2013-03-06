@@ -1,6 +1,13 @@
 function loadDiscussion(recipename, lastid) {
-	if(lastid === undefined)
+	if(lastid === undefined){
 		lastid = -1;
+
+		$("#edit_recipe").click(function(){
+			$.anycook.drafts.getDraftFromRecipe(recipename);
+		});
+	}
+
+	
 		
 	var $commentDiscussion = $("#comment_discussion");
 	var login = user.checkLogin();

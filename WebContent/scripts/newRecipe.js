@@ -1101,16 +1101,9 @@ function loadPreview(data){
 	$("#introduction").text(getDescription());
 
 	loadSteps(data.steps);
-	var filter = {
-		timestd : data.time.std,
-		timemin : data.time.min,
-		skill:data.skill,
-		calorie: data.calorie,
-		category:data.category,
-		person:data.persons
-	}
-	loadFilter(filter);
+	loadFilter(data);
 	loadIngredients(data.ingredients);
+
 	loadTags(data.tags);
 	var id = $.address.parameter("id");
 	$(".tags_list a").attr("href", function(i, attr){
