@@ -1,174 +1,128 @@
-@media print{
-	#header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #filter_headline, #filter_box, .tags_head, .tags_list, footer{
-		display: none !important;
-	}
+@media print {
+  #header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #container_head, #buchmitte_top, #filter_head, #filter_bottom, #filter_headline, #kategorie_list, .kategorie_filter, #kategorie_head, 
+  .tags_head, .tags_list, #user_menu, #loadpoints, #kategorie_filter, #background, #peak_bottom, #filter_devider, #right, #content_header, #container_bottom, #bookskin, footer {
+      display: none !important; }
+      
+  *{
+      margin: 0 0 !important;
+      padding: 0 0 !important;
+    
+  }    
+  
+  #backtothetop{
+    left: -6000px !important; 
+  }
+  
+  body /*A4 Formatierung ?*/
+  {
+      size:210mm 297mm !important;
+      margin-top:1.5cm !important;
+      margin-bottom:1.5cm !important;
+      margin-left:2.5cm !important;
+      margin-right:0.5cm !important;
+      font: 13pt "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+  }
+  
+  #main{
+      background: none !important;
+      top: inherit !important;
+  }
+  
+  #container{
+      background: none !important;
+      width: auto !important;
+      left: inherit !important;
+      margin: 0 0 !important;
+  }
+  
+  #filter_main{
+      float: left;
+      width: 100% !important;
+  }
+  
+  #filter_container{ float: right!important; margin: 2.5cm 0 0 0 !important; height: auto !important; min-height: inherit !important; font: 18pt Georgia !important; text-align: left !important; 
+                     border-left: 1px solid black; padding-left: 0.5cm !important;}
+  #filter_box{
+    float: left; background: none !important; width: 7cm !important;
+    #filter_main{      background: none !important;      #filter_main_box, #ingredient_list{        font: 13pt Georgia !important;      }    }
+  }
+  
+  /*Zeit Tabelle*/
+  .filter_table_left{float: left; margin-left: -0.07cm !important; background: none !important;}
+  .filter_table_right{float: left; margin: -0.04cm 0 0 0.3cm !important;}
+  #filter_table tr+tr{ display: none !important;}
+  
+  /*Für Anzahl Personen*/
+  #zutat_head{float: left; width: 100%; padding-bottom: 0.5cm !important; border: 0!important;}
+  #zutat_head span, #zutat_head div{float: left; border: 0!important;}
+  #zutat_head div .up,#zutat_head div .down,{display: none;}
+  #zutat_head input{ height: 100%; width: auto; margin: -0.09cm 0 0 0 !important; border: 0!important; font: 14pt Georgia!important; text-align: center; }
+  
+  /*Zutaten*/
+  #ingredient_list { float: left; list-style: none; width: 100% !important;}
+  #ingredient_list li { float: left; width: 100% !important; border: 0!important; }
+  
+  .ingredient {float:right; max-width:75%;}
+  .amount{float: left; min-width: 20%; text-align: right;}
+  
+  
+  #recipe_info {width: 100%;}
+  
+  #recipe_headline{
+      float: left;    
+      width: 15.5cm !important;
+      height: auto !important;
+      font: 31pt Georgia !important; 
+      text-align: left !important;
+      margin-bottom: 1cm !important; 
+  }
+  
+  
+  #step_container{
+      /*float: left;*/
+      list-style-type:none;
+  }
+  .ingredient_step {
+      height: auto !important; 
+      width: 35%!important; 
+  }
+      
+  .ingredient_step .step {
+      height: auto !important;
+      box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      border: 0 !important; 
+      margin: 0.3cm 15px 0 0 !important;
+      float: left;
+      min-height: 1cm !important;
+      
+      .left, .right{
+        background: none !important;
+      }
+      
+  }
+  .ingredient_step .step .mid {
+      float: left; 
+      background: none !important;
+      width: 15.5cm !important;
+  }
+    
+  .ingredient_step .step .mid .number {
+      border-right: 0 !important;
+      
+      height: auto !important;
+      line-height: 25px !important;
+      text-align: left;
+      font: 22pt Georgia !important; 
+      width: 1cm !important; 
+      float: left !important; 
+  }
+  .ingredient_step .step .mid .text {
+      margin: 0.17cm 0 0 0 !important;
+      width: 14cm !important;
+      float: left;
+  }
 
-	#container{
-		margin: -3cm 0 0 0;
-		padding: 0 4cm;
-		
-	}
+ }
 	
-	#recipe_info{
-		width: 100%;
-		
-	}
-	
-	#recipe_headline{
-		margin:0 10cm 0 0;
-		width:10cm;
-		font: 31pt Georgia;
-		text-align: left !important;
-	}
-	
-	.ingredient_step{
-		height: auto !important;
-		.step{
-			height: auto !important;
-			box-shadow:none !important;
-			-webkit-box-shadow:none !important;
-			-moz-box-shadow:none !important;
-			border: 0 !important;
-			
-			
-			.mid{
-				float: left;
-				
-				.number{
-					border-right: 0 !important;
-					margin: 0 15px 0 0 !important;
-					height: auto !important;
-					width: auto !important;
-					line-height: 25px !important;
-					text-align: left;
-					font: 20pt Georgia !important;
-				}
-				
-				.text{
-					margin: 0 0 !important;
-				}
-			}
-		}
-		
-	}
-	
-	
-	
-/*	.ingredient_step{
-		position:relative
-		
-		.step{
-
-			border: 0 !important;
-			float:left;
-			padding:inherit;
-			margin:0 !important; 
-			background: none;
-			box-shadow:none !important;
-			-webkit-box-shadow:none !important;
-			-moz-box-shadow:none !important;
-			width:10cm;
-			position:absolute;
-			overflow:visible;
-		}
-	
-		.number{
-			width:1cm !important;
-			line-height:inherit;
-			font: 29pt Georgia !important;
-			float:left;
-			margin:0 !important;
-			padding: inherit;
-			height:inherit;
-			border-right:none;
-			text-align: left;
-			border: 0 !important;
-		}
-	}	
-	
-	.text{
-		width:15cm !important;
-		float:none;
-		padding: inherit;
-		margin: 0.2cm 0 0 1.8cm !important;
-		height:inherit;
-		text-align: justify;
-		font: 14pt Helvetica, Arial, sans-serif !important;
-	}
-	
-	#filter_box{
-		margin: -0.7cm 0 0 0 !important;
-		font-size: 17pt !important;
-		width:6cm !important;
-		
-		#filter_main{
-			width:6cm !important;
-			
-			#kategorie_head{
-				font-size: 17pt !important;
-				width:6cm !important;
-				
-			}
-			
-			#filter_main_box{
-				margin: 0.3cm 0 0 0 !important;
-			
-				#filter_table{
-					tr{
-						display: none !important;
-					}
-					
-					#time_filter{
-						display:inline !important;
-						font-size: 17pt !important;	
-						.filter_table_left{
-							padding-left: 0px !important;
-						}
-					}
-				}
-				
-				#zutat_head{
-					font-size: 17pt !important;
-	
-						
-						.numberinput{ 
-							font: 17pt "Times New Roman" !important;
-							border: 0 !important;
-							width: 0.8cm !important; 
-							
-							.up, .down{
-								display: none;	
-							}
-							
-							input{
-								border: 0 !important;
-								background: none !important;
-								font: 17pt "Times New Roman" !important;
-								border: 0 !important;
-								height:100%; 
-								margin: 0 !important;
-								width: 100% !important; 
-							}
-						}
-					
-				}
-				
-				#ingredient_list li{
-					font-size: 15pt !important;
-					border-bottom: 0px !important;
-					
-				}
-				
-				#ingredient_list{
-					width:8cm !important;
-					 li{
-					 	width:100% !important;
-					 }
-				}
-			}
-			
-		}
-		
-	}*/
-	
-}
