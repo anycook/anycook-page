@@ -257,10 +257,14 @@ function getChildComment(user, id){
 }
 
 function comment(event) {
-	var text = $(this).prev().children().val();
+	var $textarea = $(this).prev().children();
+	var text = $textarea.val();
 	if(text != "") {
-		var recipeName = $.address.parameterNames()[1];
-		$.anycook.graph.discussion.answer(recipeName, text);
+		var parameterNames = $.address.pathNames();
+		var recipeName = parameterNames[1];
+		$.anycook.graph.discussion.answer(recipeName, text, function(){
+			$textarea.val("");
+		});
 	}
 }
 
@@ -270,9 +274,14 @@ function childComment(event) {
 		var pid = $this.parents(".comment").data("comment_id");
 		var text = $this.val();
 		if(text != "") {
-			var recipeName = $.address.parameterNames()[1];
-			$.anycook.graph.discussion.answer(recipeName, text, pid);
-			$this.parents(".child_comment").remove();
+			var parameterNames = $.address.pathNames();
+			var recipeName = parameterNames[1];
+			$.anycook.graph.discussion.answer(recipeName, text, pid, function(){
+				$this.parents(".child_comment").fadeOut(200, function(){
+					$(this).remove();
+				});
+			});
+			
 		}
 	}
 
