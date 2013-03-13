@@ -283,6 +283,7 @@ function childComment(event) {
 			});
 			
 		}
+		return false;
 	}
 
 }
@@ -291,19 +292,12 @@ function discussionLike(event) {
 	var $this = $(this);
 	var id = $this.parents(".comment").data("id");
 
-	$.post("/anycook/LikeDislike",{id:id,gericht:encodeURIComponent(recipe.name)},
-		function(response) {
-			if(response != "false") {
-				var $like_nr = $this.siblings(".like_nr");
-				$like_nr.removeClass("plus").removeClass("minus");
-				if(Number(response) > 0) {
-					response = "+" + response;
-					$like_nr.addClass("plus");
-				}
+	var parameterNames = $.address.pathNames();
+	var recipeName = parameterNames[1];
 
-				$like_nr.text(response);
-			}
-		});
+	$.anycook.graph.discussion.like(recipeName, id, function(){
+		var $like_nr = $this.siblings(".like_nr");
+		var oldNum = Number($like_nr.text());
+		$like_nr.text(++oldNum);
+	});
 }
-
-var recipe = null;
