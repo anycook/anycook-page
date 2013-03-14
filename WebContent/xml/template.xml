@@ -48,8 +48,10 @@
 	    	<div id="recipe_info">
 				<h1 id="recipe_headline"></h1>
 				<p id="autoren">von <span></span></p>
-				<div id="introductionposition">
-					<div id="introduction"></div>
+				<div id="introductionContainer">
+					<div id="introductionposition">
+						<div id="introduction"></div>
+					</div>
 				</div>
 			</div>
 			<ul id="step_container"></ul>
