@@ -61,7 +61,7 @@
     		<div id="comment_container">
     			<div id="comment_discussion"><ul></ul></div>
     			<div id="discussion_buttons">
-    				<input type="submit" value="Diskussion ausblenden" id="hide_discussion" class="notavailable"/>
+    				<div id="hide_discussion" class="button">Diskussion ausblenden</div>
     				<a class="button" id="edit_recipe">Rezept bearbeiten</a>
     			</div>
     			<div id="discussion_footer">

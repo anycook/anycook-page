@@ -5,6 +5,8 @@ function loadDiscussion(recipename, lastid) {
 		$("#edit_recipe").click(function(){
 			$.anycook.drafts.getDraftFromRecipe(recipename);
 		});
+
+		$("#hide_discussion").click(toggleDiscussion);
 	}
 
 	
@@ -32,14 +34,14 @@ function loadDiscussion(recipename, lastid) {
 				var $li;
 				if(parent_id == -1){
 					if(json[i].syntax == null)
-						$li = getDiscussionElement(false, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
+						$li = getDiscussionElement(false, login, json[i]);
 					else
-						$li = getDiscussionEvent(recipename, json[i].syntax, json[i].versions_id, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id, json[i].active);
+						$li = getDiscussionEvent(recipename, login, json[i]);
 					discussion[i] = $li;
 					$ul.append($li);
 					$li.data("comment_id", json[i].id);
 				} else{
-					$li = getDiscussionElement(true, json[i].text, json[i].user, json[i].likes, login, json[i].datetime, json[i].id);
+					$li = getDiscussionElement(true, login, json[i]);
 					discussion[parent_id].children("ul").append($li);
 					$li.data("comment_id", parent_id);
 				}
@@ -63,8 +65,15 @@ function loadDiscussion(recipename, lastid) {
 	});
 }
 
-function getDiscussionElement(children, text, user, likes, login, datetime, id) {
-	var datetime = getDateString(datetime);
+function getDiscussionElement(children, login, json) {
+	var id = json.id;
+	var text = json.text;
+	var user = json.user;
+	var likes = json.likes;
+
+	var likedByUser = json.liked_by_user;
+
+	var datetime = getDateString(json.datetime);
 	var linktext = "/#!/profile/" + user.id;
 	var image = User.getUserImagePath(user.id);
 	var $li = $("<li></li>").addClass("comment").append("<a></a>");
@@ -95,6 +104,10 @@ function getDiscussionElement(children, text, user, likes, login, datetime, id) 
 		$footer.append($answer_btn);
 	}
 	var $like = $("<div class=\"like\"></div>");
+
+	if(likedByUser)
+		$like.addClass("liked_by_user");
+
 	var $comment_like = $("<div></div>").addClass("comment_like")
 		.append($like)
 		.append("<div class=\"like_nr\">" + likes + "</div>");
@@ -114,7 +127,16 @@ function getDiscussionElement(children, text, user, likes, login, datetime, id) 
 
 }
 
-function getDiscussionEvent(recipename, syntax, versions_id, text, user, likes, login, eingefuegt, id,active) {
+function getDiscussionEvent(recipename, login, json) {
+	var syntax = json.syntax;
+	var versions_id = json.versions_id;
+	var text = json.text;
+	var user = json.user;
+	var likes = json.likes;
+	var id = json.id;
+	var eingefuegt = json.datetime;
+	var active = json.active;
+
 	var $li = $("<li></li>").addClass("event");
 	var $left = $("<div></div>").addClass('left');
 	var $main = $("<div></div>").addClass('mid');
@@ -295,9 +317,23 @@ function discussionLike(event) {
 	var parameterNames = $.address.pathNames();
 	var recipeName = parameterNames[1];
 
-	$.anycook.graph.discussion.like(recipeName, id, function(){
-		var $like_nr = $this.siblings(".like_nr");
-		var oldNum = Number($like_nr.text());
-		$like_nr.text(++oldNum);
-	});
+	if(!$this.hasClass("liked_by_user")){
+		$.anycook.graph.discussion.like(recipeName, id, function(){
+			var $like_nr = $this.siblings(".like_nr");
+			var oldNum = Number($like_nr.text());
+			$like_nr.text(++oldNum);
+			$this.addClass("liked_by_user");
+		});
+	}else{
+		$.anycook.graph.discussion.unlike(recipeName, id, function(){
+			var $like_nr = $this.siblings(".like_nr");
+			var oldNum = Number($like_nr.text());
+			$like_nr.text(--oldNum);
+			$this.removeClass("liked_by_user");
+		});
+	}	
+}
+
+function toggleDiscussion(){
+	$("#comment_discussion > ul > li.comment").toggle(500);
 }

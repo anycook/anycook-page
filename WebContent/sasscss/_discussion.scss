@@ -39,6 +39,10 @@
 						height: 20px;
 						background: url("/img/icons20x20.png") no-repeat;
 						background-position: -60px 0;
+
+						&.liked_by_user{
+							outline: 1px solid green;
+						}
 					}
 					
 					.like_nr{
