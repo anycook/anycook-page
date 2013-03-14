@@ -35,7 +35,10 @@ function loadHome()
 	//liveupdatestuff
 	newestid = 0;
 	$("#news ul").jScrollPane().scroll(newsScrollListener);
-	updateLiveAtHome();
+
+	onReady(function(){
+		updateLiveAtHome();
+	});
 }
 
 function clearContent(){

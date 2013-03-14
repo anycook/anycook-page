@@ -69,11 +69,10 @@
 		    		
 		    		// wait ressources to complete loading and the wait another 500ms.
 		    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-		    		$(window).load(function(){
+		    		onReady(function(){
 		    			setTimeout(checkNewMessageNum,500);
 		    			setTimeout($.anycook.drafts.num,500);
 		    		});
-		    		
 				}
 		 	 });
 				
@@ -238,7 +237,7 @@
             	
             	
             	//ellipsis for .big_rezept p
-            	$(".big_rezept p").ellipsis({live:true});
+            	// $(".big_rezept p").ellipsis({live:true});
             	
             	
             	//Facebook

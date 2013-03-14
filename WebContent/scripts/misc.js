@@ -137,3 +137,12 @@ function updateWidth(){
 	left = $right.offset().left;
 	$right.width(width-left);
 }
+
+function onReady(callback) {
+	if(document.readyState === "complete"){
+		callback();
+		return;
+	}
+
+	$(window).load(callback);
+}
