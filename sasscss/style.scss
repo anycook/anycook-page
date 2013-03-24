@@ -435,7 +435,7 @@ header{
 		position: absolute;
 		overflow:hidden;
 		margin-top:-27px;
-		margin-left: $containerwidth / 2;
+		margin-left: $containerwidth/2;
 		background:url("/img/right_stripes.png") repeat-y $background-right;
 		height:100%;
 		left:50%;
@@ -817,8 +817,8 @@ header{
 							font-style: italic;
 							color: $smalllightfontcolor;
 							cursor: text;
-							
-							
+
+
 							li{
 								min-height:18px;
 								float:left;

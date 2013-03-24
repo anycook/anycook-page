@@ -173,9 +173,7 @@ function handleChange(event){
 					$("#content_header")
 							.append(getHeaderLink("Rezept", "", "recipe_btn"))
 							.append(getHeaderLink("Diskussion", "", "discussion_btn"));
-					$.anycook.graph.recipe(path[1], path[2], function(json){
-							loadRecipewJSON(json);
-				  	});
+					loadRecipe(path[1], path[2]);
 					break;
 					
 				case "search":

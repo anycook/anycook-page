@@ -10,7 +10,7 @@ function profileRecipe(recipe){
 	return $link;
 }
 
-function loadRecipe(recipeName) {
+function loadRecipe(recipeName, versionid) {
 	resetFilter();
 	recipeName = decodeURIComponent(recipeName);
 
@@ -18,7 +18,7 @@ function loadRecipe(recipeName) {
 	$("#content_header #recipe_btn").attr("href", rezepturi);
 	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
-	$.anycook.graph.recipe(recipeName, function(recipe){
+	$.anycook.graph.recipe(recipeName, versionid, function(recipe){
 		$.address.title(recipe.name + " | anycook");
 		$("#recipe_headline").append(recipe.name);
 		$("#introduction").append(recipe.description);
@@ -30,9 +30,9 @@ function loadRecipe(recipeName) {
 	
 	$(".recipe_image").attr("src", $.anycook.graph.recipe.image(recipeName, "large"));
 
-	$.anycook.graph.recipe.ingredients(recipeName, loadIngredients);
-	$.anycook.graph.recipe.tags(recipeName, loadTags);
-	$.anycook.graph.recipe.steps(recipeName, loadSteps);
+	$.anycook.graph.recipe.ingredients(recipeName, versionid, loadIngredients);
+	$.anycook.graph.recipe.tags(recipeName, versionid, loadTags);
+	$.anycook.graph.recipe.steps(recipeName, versionid, loadSteps);
 
 	//recipe_image
 	
@@ -321,7 +321,7 @@ function getAddTagsLightbox() {
 	return $lightbox;
 }
 
-function multiZutaten(perscount) {
+function multiZutaten(perscount, recipe) {
 
 	$("#ingredient_list .amount").each(function(i) {
 		var amount = $(this).data("amount");
