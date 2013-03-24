@@ -31,7 +31,7 @@ function loadRecipe(recipeName, versionid) {
 	$(".recipe_image").attr("src", $.anycook.graph.recipe.image(recipeName, "large"));
 
 	$.anycook.graph.recipe.ingredients(recipeName, versionid, loadIngredients);
-	$.anycook.graph.recipe.tags(recipeName, versionid, loadTags);
+	$.anycook.graph.recipe.tags(recipeName, loadTags);
 	$.anycook.graph.recipe.steps(recipeName, versionid, loadSteps);
 
 	//recipe_image
