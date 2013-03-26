@@ -71,6 +71,7 @@ header{
 	//z-index: 0;
 	width:100%;
 	height:500px;
+	@include userselectnone;
 	
 	
 	#header{
@@ -568,7 +569,7 @@ header{
 				margin: 6px 0 0 15px;
 				$width: 268px;
 				width:$width;
-				@include userselecttext;
+				
 				
 					
 				#filter_head{
@@ -616,6 +617,7 @@ header{
 					margin: 0 5px;
 					$width:$width - 10;
 					width:$width;
+					@include userselecttext;
 					
 					#userfilter{
 						background-color: #ECE9E3;
@@ -972,6 +974,7 @@ header{
 			float:left;
 			margin: 20px 0 60px 50px;
 			
+			
 			#content_header{
 				position:absolute;
 				top:-35px;
@@ -1072,6 +1075,7 @@ header{
       float:left;
       font-size: 9pt;
       background: url("/img/bg_texture.png");
+      @include userselectnone;
       
       #footercontent{
         margin:0 auto;

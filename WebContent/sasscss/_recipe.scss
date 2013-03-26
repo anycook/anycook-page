@@ -20,6 +20,7 @@
 	width:100%;
 	float:left;
 	position:relative;
+	@include userselectnone;
 	
 	#schmecktmir{
 			cursor:pointer;
@@ -222,6 +223,7 @@
 	width:$width;
 	padding: 0 10px;
 	margin: 10px 0 10px;
+	@include userselecttext;
 	
 	#recipe_headline{
 		float:left;
@@ -306,6 +308,7 @@
 		
 			.text{
 				padding: 0 15px 0 0;
+				@include userselecttext;
 			}
 		}
 		
