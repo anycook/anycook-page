@@ -1,0 +1,144 @@
+.profile_container{
+	$width: $contentwidth - 40px;
+	width: $width;
+	float:left;
+	border: 1px solid $lightgrey;
+	background-color: $imginnerbordercolor;
+	padding: 20px;
+	position: relative;
+	min-height: 155px;
+	
+	.profile_image{
+		float:left;
+		border: 8px solid $stepcolor;
+		outline: 1px solid $lightgrey;
+		width:200px;
+	}
+	
+	.profile_info{
+		float:left;
+		width: $width - 245px;
+		margin: 8px 0 0 25px;
+		color: $smalllightfontcolor;
+		
+		.profile_title{
+			position: relative;
+			
+			h1{
+				width: 325px;
+			}
+			
+			#stamp{
+				background: url("/img/following.png") no-repeat;
+				z-index: 20;
+				display: none;
+				position:absolute;
+				width: 80px;
+				height: 80px;
+				right: -41px;
+				top: 0;
+			}
+			
+
+			
+		}
+		
+		.profile_date, .profile_place{
+			div{
+				float: left;
+				background-image: url("/img/icons20x20.png");
+				background-repeat: no-repeat;
+				width: 20px;
+				height: 20px;
+				background-position: -100px -20px;
+			}
+		}
+		
+		.profile_place{
+			margin-top:4px;
+			display:none;
+			div{
+				background-position: -120px -20px;
+			}
+		}
+		
+		.profile_date, .profile_text, .profile_position{
+			margin-top: 8px;
+			width: 325px;
+		}
+
+		.profile_text{
+			font: 11pt Georgia serif;
+			font-style: italic;
+		}
+		
+		// .writemassage{
+			// width: 180px;
+			// float: left;
+			// margin-right: 5px;
+			// cursor: pointer;
+// 			
+			// .massageicon{
+					// width: 20px;
+					// height: 13px;
+					// cursor: pointer;
+					// float: left;
+					// margin: 2px 5px 0 0;
+					// background: url("/img/icons20x20.png") no-repeat;
+					// background-position: -40px -100px;
+			// }
+// 			
+			// &:hover{
+					// .massageicon{
+							// background-position: -40px -120px;
+					// }
+			// }
+		// }
+
+	}
+	
+	.profile_achievements{
+		float:right;
+		position: absolute;
+		bottom: 28px;
+		left: 250px;
+		
+		
+		.achievement{
+			float:left;
+			margin:0 10px;
+			
+			.count{
+				font: $headlinefont;
+				font-size: 13pt;
+				text-align: center;
+			}
+			.title{
+				color: $smalllightfontcolor;
+				text-align: center;
+				font-size: 9pt;
+			}
+		}
+	}
+	
+}
+
+.profile_buttons{
+    $width: $contentwidth - 1px;
+    width: $width;
+    float: left;
+    height: 50px;
+    border: 1px solid $lightgrey; 
+    @include border-radius(0px,0px,5px,5px);
+    background: $stepcolor url("/img/diagonal_texture.png");
+    display: none;
+    
+    .button{
+      float: right;
+      margin: 11px 10px 0 0;
+    }
+}
+
+.profile_recipes{
+	display:none;
+}

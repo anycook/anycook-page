@@ -1,0 +1,424 @@
+#discussion_container{
+	width: 100%;
+	float: left;
+
+		
+		//Variabelen:
+		//MUSS BEARBEITET WERDEN! Momentan comment_discussion 655px breit
+		$discussionwidth: 655px;
+		$bigpicturewidth:50px + 18px;
+		$bigcommentwidth: 655px - 2*($bigpicturewidth) - 26px;
+		$smallcommentwidth: $bigcommentwidth - 32px - 18px;
+
+
+	.no_discussion{
+		color: $smalllightfontcolor;
+		margin: 0 0 10px 0;
+	}
+	#comment_container{
+		float:left;
+
+		#comment_discussion{
+			width: 100%;
+			float: left;
+			
+			//Kommentare
+			li{
+				list-style-type: none;
+				float: left;
+				width: 100%;
+				
+				
+				.comment_like{
+					float: left;
+					
+					.like{
+						cursor:pointer;
+						float: left;
+						width: 20px;
+						height: 20px;
+						background: url("/img/icons20x20.png") no-repeat;
+						background-position: -60px 0;
+
+						&.liked_by_user{
+							outline: 1px solid green;
+						}
+					}
+					
+					.like_nr{
+						float: left;
+						min-width: 10px;
+						margin-top: 2px;
+						text-align: center;
+						cursor:auto;
+					}
+					
+					
+				}
+				
+				a{
+					float:left;
+					
+					
+					//Verhindert verrücken des CSS wenn FB mal länger braucht
+					img{
+						width: 50px;
+						height: 50px;	
+						@include box-shadow-spread(0px, 1px, 2px, 0px, rgba(0, 0, 0, 0.2));
+						border-radius: 5px;				
+					}
+				}
+				
+				.comment_arrow, .comment_arrow_small, .comment_arrow_answer{
+					position:relative;
+					float: left;
+					width: 16px;
+					height: 21px;
+					background: url("/img/comment_arrow16x21.png") no-repeat;
+					margin: 16px -1px 0 3px;	
+				}
+				
+				.comment_arrow_small, .comment_arrow_answer{
+					margin-top:11px;
+				}
+				
+				.recipe_comment, .recipe_comment_small, .recipe_comment_answer{
+					float: left;
+					width: $bigcommentwidth;
+					border:1px solid $lightgrey;
+					border-radius: 5px;  
+					background-color: $stepcolor;
+					padding: 7px 12px 5px 12px;
+					margin: 0 0 15px 0;
+					color: $darkfontcolor;
+					@include box-shadow-spread(0px, 1px, 1px, 0px, rgba(127,127,127,0.1));
+					
+					// textarea{
+					  // width: 445px;
+					// }
+					
+					.comment_headline{
+						height: 17px;	
+						width:100%;
+						
+						.comment_date{
+							margin-left:4px;
+							@include transition(opacity, .4s, ease-out);
+							opacity:0;
+							color: $smalllightfontcolor;
+						}
+					}
+					
+					.comment_text{
+						margin: 2px 0;
+						
+					}
+					
+					.comment_footer{
+	
+						.answer_btn, .comment_like{
+							height: 100%;
+							width: auto;
+							float: right;
+							color: $smalllightfontcolor;
+							cursor: pointer;
+						}
+						
+						.answer_btn{
+							margin-top: 2px;
+							@include transition(opacity, .4s, ease-out);
+							opacity:0;
+						}
+						
+						.comment_like{
+							float:left;
+						}
+							
+					}
+					
+					&:hover{
+						.answer_btn{
+							@include transition(opacity, .2s, ease-in);
+							opacity:1;
+						}
+						
+						.comment_date{
+							@include transition(opacity, .2s, ease-in);
+							opacity:1;
+						}
+					}
+				}
+				
+				&.event{
+				  border-bottom: 1px solid #DAD9D7;
+				  border-top: 1px solid #DAD9D7;
+				  padding: 15px 0 5px;
+				  margin: 5px 0 10px 0;
+				  min-height:50px;
+				  
+				  
+				  .left{
+				    float:left;
+				    width: 20px;
+				    height:50px;
+				    margin:  4px 0 0 10px;
+				    
+				    .up, .down{
+				      background-image:url("/img/icons20x20.png");
+				      background-position:-60px -60px;
+				      height:8px;
+				      width:12px;
+				      margin:0px 4px;
+				    }
+				    
+				    .votes{
+				      font-size:12pt;
+				      text-align:center;
+				      padding:3px 0;
+				    }
+				    
+				    .down{
+				      background-position:-60px -80px;
+				    }
+				  }
+				  
+				  .mid{
+				    float:left;
+				    margin-left:30px;
+				    .infodata{
+				      color:$smalllightfontcolor;
+				      font-size:11px;
+				    }
+				    
+				    .title{
+				      margin:5px 0 0 0;
+				      font: 13pt Georgia,serif;
+				    }
+				    
+				    .text{
+				      
+				    }
+				  }
+				}
+				
+				// .recipe_event{
+					// position:relative;
+					// margin-bottom:15px;
+					// padding: 0 12px 0 18px;
+					// background: url("/img/recipe_event_yellow_left.png") repeat-y $discussionyellow;
+					// border-top:1px solid $discussionyellowborder;
+					// border-bottom:1px solid $discussionyellowborder;
+					// @include box-shadow-inset(0, 2px, 2px, rgba(255,255,255, 0.4));
+					// float:left;
+					// width:$discussionwidth - 30;
+// 					
+					// &.active{
+						// background:url("/img/recipe_event_green_left.png") repeat-y $activebuttonbackground;
+						// border-top:1px solid $activebuttonoutline;
+						// border-bottom:1px solid $activebuttonoutline;
+// 						
+						// .left{
+							// .comment_headline{
+								// color:$activebuttonfontcolor;
+							// }
+						// }
+// 						
+						// .right{
+// 							
+							// border-left:1px solid $activebuttonoutline;
+// 							
+							// .comment_like{				
+								// .like{
+									// background-position:-60px -20px;
+								// }
+// 								
+								// .like_nr{
+									// color:$activebuttonfontcolor;
+								// }
+							// }
+						// }
+						// .rightbackground{
+							// background: url("/img/recipe_event_green_right.png") repeat-y;
+						// }
+					// }
+// 					
+					// .left{
+						// float:left;
+						// height:100%;
+						// padding: 16px 0 19px 0;
+						// width:573px;
+						// cursor:pointer;
+						// display:block;
+// 						
+						// &:hover{
+							// text-decoration:none;
+						// }
+// 						
+						// .comment_headline{
+							// float:left;
+							// color:$discussionyellowfont;
+							// line-height:15px;
+						// }
+					// }
+// 					
+					// .right{		
+						// position:absolute;
+						// width:68px;
+						// top:4px;
+						// bottom:4px;
+						// right:0;
+						// border-left:1px solid $discussionyellowborder;
+// 						
+// 						
+						// .comment_like{
+							// margin-left:10px;					
+							// .like{
+								// background-position:-60px -40px;
+							// }
+// 							
+							// .like_nr{
+								// color:$discussionyellowfont;
+							// }
+						// }
+					// }
+// 					
+					// .rightbackground{
+						// position:absolute;
+						// background: url("/img/recipe_event_yellow_right.png") repeat-y;
+						// top:0px;
+						// bottom:0px;
+						// right:0;
+						// width:4px;
+					// }
+				// }
+				
+				li{
+					margin-left: $bigpicturewidth;
+					width: auto;
+					
+					img{
+						float: left;
+						width: 32px;
+						height: 32px;
+						
+					}
+					.recipe_comment{
+						float: left;
+						width: $smallcommentwidth;
+						@include box-shadow-spread(0px, 1px, 1px, 0px, rgba(127,127,127,0.1));
+					}
+					
+					.recipe_comment_answer{
+						float: left;
+						width: $smallcommentwidth + 12px;
+						padding: 4px 6px 4px 6px;
+					}
+					
+					textarea{
+						resize:none;
+						height:17px;
+						margin:0;
+					}
+					
+					.answer_info{
+						float:right;
+						font-size:7pt;
+						color: $smalllightfontcolor;
+					}
+					
+				}
+				
+			}
+			
+			//Kommentare rechtsbündig
+			li.odd{
+				.comment_arrow, .comment_arrow_small, .comment_arrow_answer, .recipe_comment, a{
+					float:right;
+				}
+				
+				.comment_arrow, .comment_arrow_small, .comment_arrow_answer{
+					background-position: 0 -21px;	
+					margin: 16px 3px 0 -1px;	
+				}
+				
+				.comment_arrow_small, .comment_arrow_answer{
+					margin-top:11px;
+				}
+				
+				.recipe_comment a, .recipe_comment_small a{
+					float: left;
+					text-align: left;
+				}
+				
+				li{
+					img{
+							float: right;
+						}
+	
+				}
+	
+			}
+		}
+	}
+	//buttons
+	#discussion_buttons{
+		float:right;
+		padding-bottom: 15px;
+		display:table;
+		*{
+			margin-left:5px;
+		}
+	}
+	
+	
+	
+	//Footer
+	#discussion_footer{
+		width: 100%;
+		float: left;
+		border-top: 1px solid $lightgrey;
+		
+		h6{
+			margin: 10px 0;
+		}
+		
+		img{
+			float:left;
+		}
+		
+		.comment_arrow{
+				position:relative;
+				float: left;
+				width: 16px;
+				height: 21px;
+				background: url("/img/comment_arrow16x21.png") no-repeat;
+				margin: 13px -1px 0 3px;	
+		}
+		
+		.recipe_comment{
+				float: left;
+				width: $bigcommentwidth;
+				height: 103px;
+				border:1px solid $lightgrey;
+				background-color: $stepcolor;
+				padding: 7px 12px 5px 12px;
+				margin: 0 60px 8px 0;
+				color: $darkfontcolor;
+				
+				textarea{
+					height: 90px;
+				}
+		}
+		
+		.comment_btn{
+			float:right;
+			margin-right:68px;
+		}
+		
+		
+	}
+
+
+
+}	
+
