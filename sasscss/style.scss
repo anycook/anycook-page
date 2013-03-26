@@ -1,5 +1,4 @@
 
-
 @import "lib/functions";
 @import "lib/colors";
 @import "lib/fonts";
@@ -32,12 +31,13 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 }
 
 body{
+	background: url("/img/bg_texture.png");
 	font: $standardfont;
-	overflow-y: scroll;
+	// overflow-y: scroll;
 	min-width:1024px;
-	position:relative;
-	float:left;
-	width:100%;
+	// position:relative;
+	// float:left;
+	// width:100%;
 	//Markierung Rot machen
 	::selection { background: #f05f4e; color: #fff; }
   ::-moz-selection { background: #f05f4e; color: #fff; }
@@ -46,14 +46,6 @@ body{
 /*Für Praesentation*/
 .notavailable{
 	cursor:no-drop;
-}
-
-
-#background{
-	background: url("/img/bg_texture.png");
-	position:fixed;
-	height:100%;
-	width:100%;	
 }
 
 .time_text, .time_text_end{
@@ -67,352 +59,218 @@ body{
 
 // HEADER
 header{
-	position: absolute;
 	//z-index: 0;
-	width:100%;
-	height:500px;
 	@include userselectnone;
+	margin: 0 auto;
+	width:1014px;
+	height:80px;
 	
+	#logo{
+		float:left;
+		margin:11px 0 0 74px;		
+	}
 	
-	#header{
-		margin: 0 auto;
-		width:1014px;
-		height:100%;
+	#searchbar{
+		$height: 28px;
+		$width: 368px;
+		float:left;
+		margin: 22px 0 0 128px;
+		width: $width;
+		height: $height;
+		background-color:white;
+		border: 1px solid $searchbarborder;
+		@include box-shadow(1px, 2px, 3px, rgba(0,0,0,0.15));
 		
-		#logo{
+		#loupe{
 			float:left;
-			margin:11px 0 0 74px;		
+			margin: ( $height - 14px ) / 2 8px;
+			width:14px;
+			height: 14px;
+			background: url("/img/loupe.png") no-repeat;		
 		}
 		
-		#searchbar{
-			$height: 28px;
-			$width: 368px;
+		form{
+			height:100%;
 			float:left;
-			margin: 22px 0 0 128px;
-			width: $width;
-			height: $height;
-			background-color:white;
-			border: 1px solid $searchbarborder;
-			@include box-shadow(1px, 2px, 3px, rgba(0,0,0,0.15));
-			
-			#loupe{
+			#search{
+				font: $searchbarfont;
+				color: $darkgrey;
 				float:left;
-				margin: ( $height - 14px ) / 2 8px;
-				width:14px;
-				height: 14px;
-				background: url("/img/loupe.png") no-repeat;		
+				height:	100%;
+				width:310px;
+				border:0;
+				border-radius:0;
+				padding:0;
+				@include no-box-shadow();
+				background-color:white;
+				
+			}
+			#search::-webkit-input-placeholder{
+
+				font-style: italic;
+				text-align: inherit;
+			}
+
+			#search:-moz-placeholder{
+
+				font-style: italic;
+				text-align: inherit;
+			}
+		}
+		
+		#search_reset{
+			width:9px;
+			height:9px;
+			margin: ( $height - 9px ) / 2 8px;
+			float:left;
+			background:url("/img/searchreset.png") no-repeat;
+			opacity:.0;
+			@include transition(opacity, 0.3s, ease-out);
+			&.on{
+				opacity:1.0;
+				cursor:pointer;
+				@include transition(opacity, 0.3s, ease-in);
+			}
+		}
+	}
+	
+	#btn_container{
+		float: right;
+		margin: 25px 0 0 0;
+		cursor:pointer;
+	
+		#signin_btn{
+			background: $headergreen;
+			@include transition(background, 0.1s, ease-out);
+			width:97px;
+			height: 26px;
+			float: left;
+			border: 1px solid $darkgreencontour;
+			border-radius: 4px;
+			box-shadow:0px 1px 0px #b2c77d;
+			
+			&:hover{
+				background: $headergreenbright;
+				@include transition(background, 0.1s, ease-in);					
 			}
 			
-			form{
+			
+			#login_pin{
+				float:left;
+				background:url("/icons/anmelden_off.png") no-repeat;
+				height:19px;
+				width:19px;
+				margin: 4px 0 0 6px;			
+			}
+			
+			#login_text{
+				margin: 5px 0 0 31px;
+				font-size: 8pt;
+				color: $darkgreencontour;
+				text-shadow: 1px 1px 0px #b2c77d;
+			}
+		}
+		
+		.user_btn{
+			
+			
+			display: none;
+			float:left;
+			width:40px;
+			height:25px;
+			margin:0 2px;
+			
+			background-image: url("/img/topbuttons40x25.png");
+			background-repeat: no-repeat;
+			
+			span{
+				width:100%;
 				height:100%;
-				float:left;
-				#search{
-					font: $searchbarfont;
-					color: $darkgrey;
-					float:left;
-					height:	100%;
-					width:310px;
-					border:0;
-					border-radius:0;
-					padding:0;
-					@include no-box-shadow();
-					background-color:white;
-					
-				}
-				#search::-webkit-input-placeholder{
-
-					font-style: italic;
-					text-align: inherit;
-				}
-
-				#search:-moz-placeholder{
-
-					font-style: italic;
-					text-align: inherit;
-				}
-			}
-			
-			#search_reset{
-				width:9px;
-				height:9px;
-				margin: ( $height - 9px ) / 2 8px;
-				float:left;
-				background:url("/img/searchreset.png") no-repeat;
-				opacity:.0;
-				@include transition(opacity, 0.3s, ease-out);
-				&.on{
-					opacity:1.0;
-					cursor:pointer;
-					@include transition(opacity, 0.3s, ease-in);
-				}
-			}
-		}
-		
-		#btn_container{
-			float: right;
-			margin: 25px 0 0 0;
-			cursor:pointer;
-		
-			#signin_btn{
-				background: $headergreen;
-				@include transition(background, 0.1s, ease-out);
-				width:97px;
-				height: 26px;
-				float: left;
-				border: 1px solid $darkgreencontour;
-				border-radius: 4px;
-				box-shadow:0px 1px 0px #b2c77d;
-				
-				&:hover{
-					background: $headergreenbright;
-					@include transition(background, 0.1s, ease-in);					
-				}
-				
-				
-				#login_pin{
-					float:left;
-					background:url("/icons/anmelden_off.png") no-repeat;
-					height:19px;
-					width:19px;
-					margin: 4px 0 0 6px;			
-				}
-				
-				#login_text{
-					margin: 5px 0 0 31px;
-					font-size: 8pt;
-					color: $darkgreencontour;
-					text-shadow: 1px 1px 0px #b2c77d;
-				}
-			}
-			
-			.user_btn{
-				
-				
-				display: none;
-				float:left;
-				width:40px;
-				height:25px;
-				margin:0 2px;
-				
 				background-image: url("/img/topbuttons40x25.png");
 				background-repeat: no-repeat;
-				
+				background-position: 0px -25px;
+				opacity: 0;
+				@include transition(opacity, 0.1s, ease-out);
+				display: block;
+			}
+			
+			&#user_home{
+				display:inline;
+			}
+			
+			&#user_profile{
+				background-position: -40px 0;
 				span{
-					width:100%;
-					height:100%;
-					background-image: url("/img/topbuttons40x25.png");
-					background-repeat: no-repeat;
-					background-position: 0px -25px;
-					opacity: 0;
-					@include transition(opacity, 0.1s, ease-out);
-					display: block;
+					background-position: -40px -25px;
 				}
-				
-				&#user_home{
-					display:inline;
+			}
+			
+			
+			&#new_recipe{
+				display:inline;
+				background-position: -160px 0;
+				span{
+					background-position: -160px -25px;
 				}
-				
-				&#user_profile{
-					background-position: -40px 0;
-					span{
-						background-position: -40px -25px;
-					}
+			}
+			
+			&#user_messages{
+				background-position: -80px 0;
+				span{
+					background-position: -80px -25px;
 				}
-				
-				
-				&#new_recipe{
-					display:inline;
-					background-position: -160px 0;
-					span{
-						background-position: -160px -25px;
-					}
+			}
+			
+			&#user_settings{
+				background-position: -120px 0;
+				span{
+					background-position: -120px -25px;
 				}
-				
-				&#user_messages{
-					background-position: -80px 0;
-					span{
-						background-position: -80px -25px;
-					}
+			}
+			
+			&:hover{
+				span{
+					opacity:1;
+					@include transition(opacity, 0.1s, ease-in);
 				}
-				
+			}
+			
+			&.focus{
 				&#user_settings{
-					background-position: -120px 0;
-					span{
-						background-position: -120px -25px;
-					}
-				}
-				
-				&:hover{
-					span{
-						opacity:1;
-						@include transition(opacity, 0.1s, ease-in);
-					}
-				}
-				
-				&.focus{
-					&#user_settings{
-						background-position:-120px -50px;
-					}
-				}
-				&.active{
-					span{
-						opacity:1;
-					}
+					background-position:-120px -50px;
 				}
 			}
-			.btn_container{
-				float:left;
-				position: relative;
-				.new_messages_bubble{
-					display:none;
-					position: absolute;
-					background-color: #E23E2B;
-					border-radius: 8px;
-					color:white;
-					font-size: 8pt;
-					padding:0 2px;
-					min-width:10px;
-					text-align: center;
-					right:9px;
-					@include box-shadow-inset(0px, 0px, 2px, #f29f9f);
-					font-family: Arial, "Lucida Sans Unicode","Lucida Grande",sans-serif;
-					@include box-shadow(0, 1px, 4px, rgba(0,0,0,0.31));
-					
+			&.active{
+				span{
+					opacity:1;
 				}
-				
-				#user_settings + .new_messages_bubble{
-					right:10px;
-				}
-				
 			}
 		}
-		
-		#login_container{
-			float:right;
-			$width:475px - 100;
-			$height:285px  - 60;
-			$headheight: 40px;
-			width:$width ;
-			height:$height;
-			$background-color: white;
-			background-color: $background-color;
-			margin-top:30px;
-			clear: right;
-			padding: 30px 40px 30px 40px; 
-			
-			.head{
-				height:$headheight;
-				h1{
-					float:left;
-				}
-				div{
-					float:left;
-					margin:10px 0 0 6px;
-				}
+		.btn_container{
+			float:left;
+			position: relative;
+			.new_messages_bubble{
+				display:none;
+				position: absolute;
+				background-color: #E23E2B;
+				border-radius: 8px;
+				color:white;
+				font-size: 8pt;
+				padding:0 2px;
+				min-width:10px;
+				text-align: center;
+				right:9px;
+				@include box-shadow-inset(0px, 0px, 2px, #f29f9f);
+				font-family: Arial, "Lucida Sans Unicode","Lucida Grande",sans-serif;
+				@include box-shadow(0, 1px, 4px, rgba(0,0,0,0.31));
+				
 			}
 			
-			.content{
-				width:$width;
-				height: $height - $headheight;
-				
-				.left{
-					float:left;
-					height:100%;
-					width:160px;
-					
-					p{
-						color: $smalllightfontcolor;
-						margin-bottom:40px;
-					}
-					
-					.social{
-						width:150px;
-						height:24px;
-						margin-bottom:7px;
-						cursor:pointer;
-						
-						background-repeat: no-repeat;
-						&:hover{
-							background-position-y: -24px;
-						}
-						
-						&:active{
-							background-position-y: -48px;
-						}
-						
-						&#facebook_login{
-							background-image: url("/img/facebook_signin.png");
-						}
-						
-						&#twitter_login{
-							background-image: url("/img/twitter_signin.png");
-						}
-						
-						&#openid_login{
-							background-image: url("/img/openid_signin.png");
-						}
-					}
-				}
-				
-				.mid{
-					float:left;
-					width:35px;
-					height: 100%;
-					position: relative;
-					
-					.line{
-						width:50%;
-						height: 100%;
-						border-right: 1px solid $lightgrey;
-					}
-					.oder{
-						position:absolute;
-						top:55px;
-						background-color: $background-color;
-						padding: 5px 0;
-						color: $smalllightfontcolor;
-						font-style: italic;
-					}
-				}
-				
-				form{
-					float:left;
-					height:100%;
-					width:170px;
-					margin-left: 10px;
-					
-					h6{
-						font-size:11pt;
-						margin: 0 0 3px 2px;
-					}
-					
-					input[type="text"]{
-						margin-bottom: 15px;
-					}
-					
-					#stayloggedin{
-						margin: 3px 0 0 0;
-						
-						input{
-							float:left;
-						}
-						
-						div{
-							color:$smalllightfontcolor;
-							cursor: pointer;
-						}
-					}
-					
-					input[type="submit"]{
-						clear:both;
-						float:right;
-						margin: 15px 0 0 0;
-					}
-				}
+			#user_settings + .new_messages_bubble{
+				right:10px;
 			}
 			
-		}
-		
+		}	
 	}
 }
 
@@ -420,19 +278,10 @@ header{
 //CONTENT
 #main{
 	width:100%;
-	float:left;
-	$top:$headercontentheight + 25;
-	top:$top;
-	@include transition(top, .7s, ease-in-out);
 	position:relative;
 	background-color:$background;
 	min-height: 600px;
-	margin-bottom:30px;
-	
-	&.down{
-		top:$top + 285;
-		@include transition(top, .7s, ease-in-out);
-	}
+	margin: 27px 0 30px;
 	
 	#right{
 		position: absolute;
@@ -456,12 +305,21 @@ header{
 		}
 		
 	}
+
+	#peak_bottom{
+		background:url("/img/peak_bottom.png") no-repeat $background;
+		width: 108px;
+		height: 46px;
+		position:absolute;
+		top:100%;
+		margin-top:-12px;
+		left:234px;
+	}
 	
 	#container_bottom{
 			width:100%;
 			//overflow: visible;
 			background:url("/img/pages_bottom.png") repeat-x;
-			float:left;
 			height:27px;
 	}
 	
@@ -469,7 +327,7 @@ header{
 		left:50%;
 		z-index:10;
 		position:relative;
-		float: left;
+		//float: left;
 		width: $containerwidth;
 		margin-left: -508px;
 		overflow-x:visible;
@@ -482,16 +340,6 @@ header{
 			position: absolute;
 			left:285px;
 			background: url("/img/buchmitte_top.png") no-repeat $background;
-		}
-		
-		#peak_bottom{
-			background:url("/img/peak_bottom.png") no-repeat $background;
-			width: 108px;
-			height: 46px;
-			position:absolute;
-			top:100%;
-			margin-top:-12px;
-			left:234px;
 		}
 		
 		
@@ -971,8 +819,8 @@ header{
 			$contentWidth: 655px;
 			width:$contentWidth;
 			min-height:624px;
-			float:left;
-			margin: 20px 0 60px 50px;
+			// float:left;
+			margin: 20px 0 0 340px;
 			
 			
 			#content_header{
@@ -1057,8 +905,8 @@ header{
 			}
 			
 			#content_main{
-				float:left;
 				width:100%;
+				padding-bottom:60px;
 			}
 		}
 		
@@ -1307,7 +1155,4 @@ header{
 		
 	}
 }
-
-
-// @import "print";
 

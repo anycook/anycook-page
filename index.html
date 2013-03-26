@@ -86,60 +86,29 @@
 </head>
 <body>
 <div id="fb-root"></div>
-<div id="background"></div>
 <header>
-	<div id="header">
-		<a href="/#!" id="logo"><img src="/img/logo.png" alt="anycook.de" /></a>
-		<div id="searchbar">
-			<div id="loupe"></div>
-			<form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
-			<div id="search_reset"></div>
+	<a href="/#!" id="logo"><img src="/img/logo.png" alt="anycook.de" /></a>
+	<div id="searchbar">
+		<div id="loupe"></div>
+		<form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
+		<div id="search_reset"></div>
+	</div>
+	<div id="btn_container">
+		<a id="user_home" class="user_btn" href="/#/" title="Startseite"><span></span></a>
+		<a id="new_recipe" class="user_btn" href="/#!/recipeediting" title="Neues Rezept erstellen"><span></span></a>
+		<a id="user_profile" class="user_btn" href="/#/profile/me" title="Mein Profil"><span></span></a>
+		<!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
+		<div id="message_btn_container" class="btn_container">
+			<a id="user_messages" class="user_btn" href="/#/newsstream" title="Benachrichtigungen"><span></span></a>
+			<div class="new_messages_bubble"><span>0</span></div>
 		</div>
-		<div id="btn_container">
-			<a id="user_home" class="user_btn" href="/#/" title="Startseite"><span></span></a>
-			<a id="new_recipe" class="user_btn" href="/#!/recipeediting" title="Neues Rezept erstellen"><span></span></a>
-			<a id="user_profile" class="user_btn" href="/#/profile/me" title="Mein Profil"><span></span></a>
-			<!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
-			<div id="message_btn_container" class="btn_container">
-				<a id="user_messages" class="user_btn" href="/#/newsstream" title="Benachrichtigungen"><span></span></a>
-				<div class="new_messages_bubble"><span>0</span></div>
-			</div>
-			<div id="settings_btn_container" class="btn_container">
-				<div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>
-				<div class="new_messages_bubble"><span>0</span></div>
-			</div>
-			<div id='signin_btn'>
-				<div id='login_pin'></div><div id="login_text">anmelden</div>
-			</div>			
+		<div id="settings_btn_container" class="btn_container">
+			<div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>
+			<div class="new_messages_bubble"><span>0</span></div>
 		</div>
-		<div id="login_container">
-			<div class="head">
-				<h1>Login</h1><div>oder <a href="/#/registration">registrieren</a></div>
-			</div>
-			<div class="content">
-				<div class="left">
-					<p>Mach es dir einfach und log dich über deinen Netzwerk-Account ein.</p>
-					<div class="social" id="facebook_login"></div>
-					<div class="social" id="twitter_login"></div>
-					<div class="social" id="openid_login"></div>
-				</div>
-				<div class="mid">
-					<div class="line"></div>
-					<div class="oder">oder</div>
-				</div>
-				<form>
-					<h6>E-Mail/Username:</h6>
-					<input type="text"/>
-					<h6>Passwort:</h6>
-					<input type="password" />
-					<div id="stayloggedin">
-						<input type="checkbox" checked="checked" /> 
-						<div>angemeldet bleiben</div>
-					</div>
-					<input type="submit" value="anmelden" />
-				</form>
-			</div>
-		</div>
+		<div id='signin_btn'>
+			<div id='login_pin'></div><div id="login_text">anmelden</div>
+		</div>			
 	</div>
 </header>
 <div id="main">
