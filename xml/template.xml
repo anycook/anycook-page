@@ -8,8 +8,14 @@
 	    	</div>
 	    	<div class="mid">
 	    		<a id="doodle" href="/#!/search?tags=herbst"><img src="/img/doodle.png"/></a>
-		    	<h2 class="link_headline"><a href="/#!/search?kategorie=alle Kategorien">REZEPTE FINDEN</a>, <a href="/#!/recipeediting">ERSTELLEN</a> &amp; <a href="/#!/recipe/random">KOCHEN</a></h2>
-		    	
+		    	<h1 class="welcome_headline">Willkommen auf anycook</h1>
+		    	<h2 class="welcome_subheadline">Das Rezeptesuchnetzwerk für Köche und alle, die es werden wollen.</h2>
+		    	<div class="login_container">
+		    		<input type="email" class="login_email" placeholder="Nutzername"/>
+		    		<input type="password" class="login_pass" placeholder="Passwort"/>
+		    		<input type="submit" class="login_submit" value="anmelden"/>
+		    		<p>Du hast noch keinen Account? <a href="/#!/register">Dann registrier dich jetzt!</a></p>
+		    	</div>
 		    	<div id="news">
 					<h2>Küchengeflüster:</h2>
 					<div class="content news">
