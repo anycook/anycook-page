@@ -1,5 +1,4 @@
 .recipe_image_container{
-	float:left;
 	position:relative;
 	border: 8px solid $stepcolor;
 	outline: 1px solid $lightgrey;
@@ -9,7 +8,7 @@
 	background-color: #585858;
 	
 	.recipe_image{
-		float:left;
+		display: block;
 		width: $stepwidth - 20;
 		border: 1px solid #999999;
 	}
@@ -18,7 +17,6 @@
 
 #recipe_main{
 	width:100%;
-	float:left;
 	position:relative;
 	@include userselectnone;
 	
@@ -218,7 +216,6 @@
 }
 
 #recipe_info{
-	float:left;
 	$width: $stepwidth - 20;
 	width:$width;
 	padding: 0 10px;
@@ -226,12 +223,10 @@
 	@include userselecttext;
 	
 	#recipe_headline{
-		float:left;
 		width:100%;
 		text-align:center;
 	}
 	#autoren{
-		float:left;
 		width:100%;
 		font-style:italic;
 		text-align:center;
@@ -240,7 +235,6 @@
 	}
 	
 	#introductionposition{
-	float: right;
 	left: -50%;
 	margin: 0 auto;
 	text-align: left;
@@ -249,7 +243,6 @@
 	
 	
 	#introduction{
-			/*float:left;*/
 			position: relative;
 			left: 50%;
 			/*width:$width - 10;*/
@@ -262,7 +255,6 @@
 }
 		
 #step_container{
-	float:left;
 	width:100%;
 	list-style: none;
 	
