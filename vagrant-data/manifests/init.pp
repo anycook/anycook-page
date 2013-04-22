@@ -20,4 +20,39 @@ class  apache2 {
 	}
 }
 
+# Class: ruby
+#
+#
+class ruby {
+	package{ "ruby1.9.1-full":
+		ensure => present,
+		require => Exec["apt-get update"],	
+	}
+}
+
+class{"ruby" :}
+
+# Class: sass
+#
+#
+class sass {
+	package { "sass":
+		ensure => installed,
+		provider => 'gem',
+		require => Class["ruby"],
+		
+	}
+
+
+
+	exec { "sass --watch /var/www/sasscss:/var/www/css &":
+		require => Package["sass"],
+		path => "/usr/local/bin/",
+		#hasrestart => true,
+		#hasstatus => true,
+	}
+}
+
 include apache2
+include sass
+
