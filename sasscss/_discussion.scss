@@ -158,46 +158,46 @@
 				  
 				  
 				  .left{
-				    float:left;
-				    width: 20px;
-				    height:50px;
-				    margin:  4px 0 0 10px;
-				    
-				    .up, .down{
-				      background-image:url("/img/icons20x20.png");
-				      background-position:-60px -60px;
-				      height:8px;
-				      width:12px;
-				      margin:0px 4px;
-				    }
-				    
-				    .votes{
-				      font-size:12pt;
-				      text-align:center;
-				      padding:3px 0;
-				    }
-				    
-				    .down{
-				      background-position:-60px -80px;
-				    }
+					float:left;
+					width: 20px;
+					height:50px;
+					margin:  4px 0 0 10px;
+					
+					.up, .down{
+					  background-image:url("/img/icons20x20.png");
+					  background-position:-60px -60px;
+					  height:8px;
+					  width:12px;
+					  margin:0px 4px;
+					}
+					
+					.votes{
+					  font-size:12pt;
+					  text-align:center;
+					  padding:3px 0;
+					}
+					
+					.down{
+					  background-position:-60px -80px;
+					}
 				  }
 				  
 				  .mid{
-				    float:left;
-				    margin-left:30px;
-				    .infodata{
-				      color:$smalllightfontcolor;
-				      font-size:11px;
-				    }
-				    
-				    .title{
-				      margin:5px 0 0 0;
-				      font: 13pt Georgia,serif;
-				    }
-				    
-				    .text{
-				      
-				    }
+					float:left;
+					margin-left:30px;
+					.infodata{
+					  color:$smalllightfontcolor;
+					  font-size:11px;
+					}
+					
+					.title{
+					  margin:5px 0 0 0;
+					  font: 13pt Georgia,serif;
+					}
+					
+					.text{
+					  
+					}
 				  }
 				}
 				
