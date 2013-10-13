@@ -1,2 +1,3 @@
 web/.sass-cache
 .DS_STORE
+.vagrant/
