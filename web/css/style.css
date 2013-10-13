@@ -1,47 +1,0 @@
-/*
-Syntax error: Invalid US-ASCII character "\xC3"
-        on line 46 of /var/www/sasscss/style.scss
-
-41: 	//Markierung Rot machen
-42: 	::selection { background: #f05f4e; color: #fff; }
-43:   ::-moz-selection { background: #f05f4e; color: #fff; }
-44: }
-45: 
-46: /*Für Praesentation*/
-47: .notavailable{
-48: 	cursor:no-drop;
-49: }
-50: 
-51: .time_text, .time_text_end{
-
-Backtrace:
-/var/www/sasscss/style.scss:46
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:373:in `block in check_encoding!'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/util.rb:603:in `rescue in block in check_encoding'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/util.rb:600:in `block in check_encoding'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/util.rb:599:in `each'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/util.rb:599:in `each_with_index'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/util.rb:599:in `check_encoding'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/util.rb:653:in `check_sass_encoding'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:372:in `check_encoding!'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:339:in `_to_tree'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:315:in `_render'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:262:in `render'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/plugin/compiler.rb:341:in `update_stylesheet'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/plugin/compiler.rb:201:in `each'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/plugin/compiler.rb:235:in `watch'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/plugin.rb:107:in `method_missing'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/exec.rb:445:in `watch_or_update'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/exec.rb:307:in `process_result'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/exec.rb:41:in `parse'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/lib/sass/exec.rb:21:in `parse!'
-/var/lib/gems/1.9.1/gems/sass-3.2.7/bin/sass:9:in `<top (required)>'
-/usr/local/bin//sass:19:in `load'
-/usr/local/bin//sass:19:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Invalid US-ASCII character \"\xC3\"\A         on line 46 of /var/www/sasscss/style.scss\A \A 41: 	//Markierung Rot machen\A 42: 	::selection { background: #f05f4e; color: #fff; }\A 43:   ::-moz-selection { background: #f05f4e; color: #fff; }\A 44: }\A 45: \A 46: /*Für Praesentation*/\A 47: .notavailable{\A 48: 	cursor:no-drop;\A 49: }\A 50: \A 51: .time_text, .time_text_end{"; }
