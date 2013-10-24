@@ -1,4 +1,7 @@
-@media print {
+@charset "UTF-8";
+
+@media print {
+
   #header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #container_head, #buchmitte_top, #filter_head, #filter_bottom, #filter_headline, #kategorie_list, .kategorie_filter, #kategorie_head, 
   .tags_head, .tags_list, #user_menu, #loadpoints, #kategorie_filter, #background, #peak_bottom, #filter_devider, #right, #content_header, #container_bottom, #bookskin, footer {
       display: none !important; }
@@ -44,7 +47,12 @@
                      border-left: 1px solid black; padding-left: 0.5cm !important;}
   #filter_box{
     float: left; background: none !important; width: 7cm !important;
-    #filter_main{      background: none !important;      #filter_main_box, #ingredient_list{        font: 13pt Georgia !important;      }    }
+    #filter_main{
+      background: none !important;
+      #filter_main_box, #ingredient_list{
+        font: 13pt Georgia !important;
+      }
+    }
   }
   
   /*Zeit Tabelle*/
