@@ -15,8 +15,9 @@ function loadHome()
 		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 	
 	$.anycook.graph.recipe.ofTheDay(function(recipeOfTheDay){
-		$("#recipe_of_the_day").attr("href", Recipe.getURI(recipeOfTheDay))
-	  		.text(recipeOfTheDay);
+		var recipeName = recipeOfTheDay.name;
+		$("#recipe_of_the_day").attr("href", Recipe.getURI(recipeName))
+	  		.text(recipeName);
 	});
 	
 	$.anycook.graph.recipe.number(function(num){
