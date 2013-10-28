@@ -1,6 +1,6 @@
 function addResults(json){
 	$("#more_results").remove();
-	var recipes = json.recipes;
+	var recipes = json.results;
 
 	var currentRecipes = $("#result_container").data("recipes");
 	if(currentRecipes == undefined || $(".frame_big").length == 0) currentRecipes = [];
