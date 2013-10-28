@@ -62,9 +62,8 @@ function parseLife(life){
 			var array = text.split("#u");
 			text = "";
 			for(var j = 0; j<array.length-1;++j){
-				var userId = life.userid;
-				var uri = User.getProfileURI(userId);
-				var link = "<a href=\""+uri+"\">"+userId+"</a>";
+				var uri = User.getProfileURI(life.user.id);
+				var link = "<a href=\""+uri+"\">"+life.user.name+"</a>";
 				text+=array[j]+link;
 			}
 			text+=array[array.length-1];
