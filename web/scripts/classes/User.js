@@ -17,24 +17,26 @@ function User(){
 User.init = function(){
 	var dfd = $.Deferred();
 	var user = new User();
-	var dereffered = $.anycook.graph.session();
-	dereffered.done(function(response){
-			if(response != false){
-				user.id = response.id;
-				user.name = response.name;
-				// user.schmeckt = response.schmeckt;
-				user.level = Number(response.level);
-				user.mail = response.mail;
-				user.facebook_id = response.facebookID;
-				user.text = response.text;
-				user.following = response.following;
-				user.place = response.place;
-				$.when(user.getSchmecktRecipes()).then(function(schmeckt){
-					user.schmeckt = schmeckt;
-				})
-			}
-			dfd.resolve(user);
-				
+
+	var dfd = $.Deferred();
+	$.anycook.graph.session(function(response){
+			user.id = response.id;
+			user.name = response.name;
+			// user.schmeckt = response.schmeckt;
+			user.level = Number(response.level);
+			user.mail = response.mail;
+			user.facebook_id = response.facebookID;
+			user.text = response.text;
+			user.following = response.following;
+			user.place = response.place;
+			$.when(user.getSchmecktRecipes()).then(function(schmeckt){
+				user.schmeckt = schmeckt;
+				dfd.resolve(user);
+			});
+	},
+	function(response){
+		console.log(response);
+		dfd.resolve(user);
 	});
 	
 	return dfd.promise();
