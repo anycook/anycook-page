@@ -58,7 +58,7 @@ User.initProfileInfo = function(id){
 		profileUser.date = json.createdate;
 		profileUser.place = json.place;
 		profileUser.discussionnum = json.discussionnum;
-		profileUser.follower = json.follower;
+		profileUser.followers = json.followers;
 		profileUser.following = json.following;
 		
 		dfd.resolve(profileUser);
@@ -85,8 +85,8 @@ User.prototype.getRecipes = function(callback){
 	return User.getRecipes(this.id, callback);
 }
 
-User.getRecipes = function(userid, callback){
-	var data = {userid:userid};
+User.getRecipes = function(userId, callback){
+	var data = {userId:userId};
 	return $.anycook.graph.recipe(data,callback);
 }
 

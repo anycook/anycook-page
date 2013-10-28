@@ -39,7 +39,7 @@ function loadProfile(userid){
 		if(profileData.place != null)
 			$(".profile_place").show().children("span").text(profileData.place);
 		
-		$(".profile_achievements .follower .count").text(profileData.follower.length);
+		$(".profile_achievements .follower .count").text(profileData.followers.length);
 		
 		if(profileData.text!=null && profileData.text.length > 0){
 			$(".profile_text").show().text("»"+profileData.text+"«");
@@ -54,15 +54,15 @@ function loadProfile(userid){
 		$(".profile_search").attr("href", "#!/search/user/"+encodeURIComponent(profileData.name));
 		
 		User.getRecipes(userid, function(recipes){
-			$(".profile_achievements .recipes .count").text(recipes.total);
-			if(recipes.total > 0){
+			$(".profile_achievements .recipes .count").text(recipes.length);
+			if(recipes.length > 0){
 				
 				var headline;
 				if(userid == user.id)
-					headline = "Deine Rezepte ("+recipes.total+")";
+					headline = "Deine Rezepte ("+recipes.length+")";
 				else
-					headline = "Rezepte von "+profileData.name+" ("+recipes.total+")";
-				$("#profile_recipes").recipeoverview(headline, recipes.names).show();
+					headline = "Rezepte von "+profileData.name+" ("+recipes.length+")";
+				$("#profile_recipes").recipeoverview(headline, recipes).show();
 			}
 		});
 		
