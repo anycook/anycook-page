@@ -28,24 +28,26 @@ function loadDiscussion(recipename, lastid) {
 			
 			var $ul = $commentDiscussion.children("ul");
 			
-			for(var i in json) {
-				newLastid = Math.max(newLastid, Number(json[i].id));
-				var parent_id = json[i].parent_id;
+			var elements = json.elements;
+
+			for(var i in elements) {
+				newLastid = Math.max(newLastid, Number(elements[i].id));
+				var parentId = elements[i].parentId;
 				var $li;
-				if(parent_id == -1){
-					if(json[i].syntax == null)
-						$li = getDiscussionElement(false, login, json[i]);
+				if(parentId == -1){
+					if(elements[i].syntax == null)
+						$li = getDiscussionElement(false, login, elements[i]);
 					else
-						$li = getDiscussionEvent(recipename, login, json[i]);
+						$li = getDiscussionEvent(recipename, login, elements[i]);
 					discussion[i] = $li;
 					$ul.append($li);
-					$li.data("comment_id", json[i].id);
+					$li.data("comment_id", elements[i].id);
 				} else{
-					$li = getDiscussionElement(true, login, json[i]);
-					discussion[parent_id].children("ul").append($li);
-					$li.data("comment_id", parent_id);
+					$li = getDiscussionElement(true, login, elements[i]);
+					discussion[parentId].children("ul").append($li);
+					$li.data("comment_id", parentId);
 				}
-				$li.data("id", json[i].id);
+				$li.data("id", elements[i].id);
 				
 				if(lastid>-1){
 					var height = $li.height();
@@ -60,7 +62,7 @@ function loadDiscussion(recipename, lastid) {
 			centercommenteventlikes();
 			$commentDiscussion.data("discussion", discussion);
 		}
-		setTimeout("loadDiscussion(\""+recipename+"\", "+newLastid+")", 2000);
+		//setTimeout("loadDiscussion(\""+recipename+"\", "+newLastid+")", 2000);
 		// loadDiscussion(recipename, newLastid);
 	});
 }
