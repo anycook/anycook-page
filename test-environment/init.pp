@@ -11,13 +11,22 @@ class  apache2 {
 		require => Exec["apt-get update"],
 	}
 
+	file { "sendfile":
+		ensure => file,
+		path => "/etc/apache2/conf.d/sendfile",
+		require => Package["apache2"],
+		content => "EnableSendFile Off",
+	}
+
 	service { "apache2":
 	    enable => true,
 		ensure => running,
 		#hasrestart => true,
 		#hasstatus => true,
-		require => Package["apache2"],
+		require => [Package["apache2"], File["sendfile"]],
 	}
+
+
 }
 
 # Class: ruby
