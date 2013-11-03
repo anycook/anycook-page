@@ -31,7 +31,7 @@ function loadRecipe(recipeName, versionid) {
 	$(".recipe_image").attr("src", $.anycook.graph.recipe.image(recipeName, "large"));
 
 	$.anycook.graph.recipe.ingredients(recipeName, versionid, function(ingredients){
-		if($.address.path() != "/recipe/"+recipeName) return;
+		if(decodeURIComponent($.address.pathNames()[1]) != recipeName) return;
 		var $ingredientList = $("#ingredient_list").empty();
 		for(var i in ingredients) {
 			var zutat = ingredients[i].name;
@@ -56,7 +56,7 @@ function loadRecipe(recipeName, versionid) {
 	});
 
 	$.anycook.graph.recipe.tags(recipeName, function(tags){
-		if($.address.path() != "/recipe/"+recipeName) return;
+		if(decodeURIComponent($.address.pathNames()[1]) != recipeName) return;
 		var $tags_list = $(".tags_list").empty();
 		
 		if(tags === undefined) return;
