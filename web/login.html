@@ -25,9 +25,14 @@
 <!-- external scripts -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://connect.facebook.net/de_DE/all.js"></script>
-<script type="text/javascript" src="/scripts/lib/jquery.anycook.graph-0.1.js"></script>
+<script type="text/javascript" src="http://10.1.0.200/js/jquery.anycook.api.js"></script>
 <script type="text/javascript" src="/scripts/login.js"></script>
 <script type="text/javascript" src="/scripts/facebook.js"></script>
+<script>
+	$.when($.anycook.graph.init({appid:2, baseUrl: "http://10.1.0.200"})).then(function(){
+		
+	});
+</script>
 </head>
 <body>
 	<div id="fb-root"></div>

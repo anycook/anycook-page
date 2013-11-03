@@ -1,10 +1,39 @@
 
 function buildLogin(){
-	initMenus();
+	/*initMenus();
 	$("#signin_btn").click(clickSignin);
-	$("#login_container form").submit(submitForm);
-		
+	$("#login_container form").submit(submitForm);*/
+	$.get("/templates/login.erb", function(template){
+		$("body").append(template);
+		$("#signin_btn").click(toggleLoginMenu);
+		$("#login_menu form").submit(submitForm);
+	});		
 };
+
+function toggleLoginMenu(){
+		var $loginMenu = $("#login_menu");
+		var $this = $(this);
+		if($loginMenu.hasClass("visible")){
+			$loginMenu.removeClass("visible");
+			$this.removeClass("focus");
+		}else{
+			var buttonOffset = $this.offset();
+			$loginMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
+			$loginMenu.addClass("visible");
+			$this.addClass("focus");
+		}
+}
+
+function initMenus(){
+	//loginmenu
+	$("#login_container form").submit(submitForm);	
+	$("#facebook_login").click(fbLogin);
+	$(".social").click(clickSignin);
+	$("#stayloggedin div").click(function(){
+		var checkbox = $("#stayloggedin input");
+		checkbox.attr('checked', !checkbox.attr('checked'));
+	});
+}
 
 function makeUsermenuText(){
 	$("#signin_btn").hide();
@@ -59,17 +88,6 @@ function hideUserMenu(event){
 		$("#user_settings").removeClass("focus");
 	}
 	
-}
-
-function initMenus(){
-	//loginmenu
-	$("#login_container form").submit(submitForm);	
-	$("#facebook_login").click(fbLogin);
-	$(".social").click(clickSignin);
-	$("#stayloggedin div").click(function(){
-		var checkbox = $("#stayloggedin input");
-		checkbox.attr('checked', !checkbox.attr('checked'));
-	});
 }
 
 
