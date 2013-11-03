@@ -30,8 +30,41 @@ function loadRecipe(recipeName, versionid) {
 	
 	$(".recipe_image").attr("src", $.anycook.graph.recipe.image(recipeName, "large"));
 
-	$.anycook.graph.recipe.ingredients(recipeName, versionid, loadIngredients);
-	$.anycook.graph.recipe.tags(recipeName, loadTags);
+	$.anycook.graph.recipe.ingredients(recipeName, versionid, function(ingredients){
+		if($.address.path() != "/recipe/"+recipeName) return;
+		var $ingredientList = $("#ingredient_list").empty();
+		for(var i in ingredients) {
+			var zutat = ingredients[i].name;
+			var menge = ingredients[i].menge;
+			var singular = ingredients[i].singular;
+			if(singular !== undefined && singular != null && getValuefromString(menge) == 1)
+				zutat = singular;
+
+			var $li = $("<li></li>").append("<div></div>").append("<div></div>");
+			$li.children().first().addClass("ingredient").text(zutat);
+			$li.children().last().addClass("amount").text(menge);
+			$ingredientList.append($li);
+		}
+		
+		if($ingredientList.children().length <6){
+			var length = $ingredientList.children().length;
+			for(var i = 0; i<= 6-length; i++){
+				var $li = $("<li></li>");
+				$ingredientList.append($li);
+			}
+		}
+	});
+
+	$.anycook.graph.recipe.tags(recipeName, function(tags){
+		if($.address.path() != "/recipe/"+recipeName) return;
+		var $tags_list = $(".tags_list").empty();
+		
+		if(tags === undefined) return;
+		
+		for(var i = 0; i < tags.length; i++)
+			$tags_list.append(getTag(tags[i], "link"));
+	});
+
 	$.anycook.graph.recipe.steps(recipeName, versionid, loadSteps);
 
 	//recipe_image
@@ -104,38 +137,7 @@ function loadSteps(steps) {
 	return true;
 }
 
-function loadIngredients(ingredients){
-	var $ingredientList = $("#ingredient_list").empty();
-	for(var i in ingredients) {
-		var zutat = ingredients[i].name;
-		var menge = ingredients[i].menge;
-		var singular = ingredients[i].singular;
-		if(singular !== undefined && singular != null && getValuefromString(menge) == 1)
-			zutat = singular;
 
-		var $li = $("<li></li>").append("<div></div>").append("<div></div>");
-		$li.children().first().addClass("ingredient").text(zutat);
-		$li.children().last().addClass("amount").text(menge);
-		$ingredientList.append($li);
-	}
-	
-	if($ingredientList.children().length <6){
-		var length = $ingredientList.children().length;
-		for(var i = 0; i<= 6-length; i++){
-			var $li = $("<li></li>");
-			$ingredientList.append($li);
-		}
-	}
-}
-
-function loadTags(tags){
-	var $tags_list = $(".tags_list").empty();
-	
-	if(tags === undefined) return;
-	
-	for(var i = 0; i < tags.length; i++)
-		$tags_list.append(getTag(tags[i], "link"));
-}
 
 function loadFilter(filter) {
 	
