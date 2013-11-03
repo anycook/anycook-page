@@ -647,9 +647,11 @@
 		</div>
 	</template>
 	<template id="home_discover">
+		<div id="discover">
 			<div id="discover_new"></div>
 			<div id="discover_tasty"></div>
 			<div id="discover_recommended" class="discover_recipes"></div>
+		</div>
 	</template>	
 	<template id="notfound">
 		<div class="paperrip"></div>
