@@ -71,21 +71,20 @@ function makeNewTagInput(event){
 function keyNewTag(event) {
 	var $this = $(this);
 	var text = $this.val();
+	var $tagsbox = $this.parent();
 
 	if((event.keyCode == 13 || event.keyCode == 188 || event.keyCode == 32) && text!="" ){
+		event.preventDefault();
 		saveNewTag(text);
 		removeNewInput();
-		makeNewTagInput();	
-		
-		return false;
+		makeNewTagInput.call($tagsbox[0]);
 	}
 	else if(event.keyCode == 8 && text ==""){
-		$(".tagsbox").children(".tag").last().remove();
+		event.preventDefault();
+		$tagsbox.children(".tag").last().remove();
 		removeNewInput();
 		draftTags();
-		makeNewTagInput();
-		
-		return false;	
+		makeNewTagInput.call($tagsbox[0]);
 	}
 	
 }
