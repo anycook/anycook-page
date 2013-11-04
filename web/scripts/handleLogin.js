@@ -12,15 +12,15 @@ function buildLogin(){
 
 function toggleLoginMenu(){
 		var $loginMenu = $("#login_menu");
-		var $this = $(this);
+		var $loginBtn = $("#signin_btn");
 		if($loginMenu.hasClass("visible")){
 			$loginMenu.removeClass("visible");
-			$this.removeClass("focus");
+			$loginBtn.removeClass("focus");
 		}else{
-			var buttonOffset = $this.offset();
+			var buttonOffset = $loginBtn.offset();
 			$loginMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
 			$loginMenu.addClass("visible");
-			$this.addClass("focus");
+			$loginBtn.addClass("focus");
 		}
 }
 

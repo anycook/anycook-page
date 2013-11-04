@@ -84,7 +84,11 @@ function loadRecipe(recipeName, versionid) {
 				$("#schmecktmir").addClass("on");
 				$("#schmecktmir").click(schmecktmirnicht);
 			}
-		});		
+		});	
+		$("#tags").click(showaddTags);	
+	} else {
+		$("#schmecktmir").click(toggleLoginMenu);
+		$("#tags").click(toggleLoginMenu);
 	}
 
 	
@@ -115,7 +119,6 @@ function loadRecipe(recipeName, versionid) {
 
 	//icons
 	$("#share").click(showShare);
-	$("#tags").click(showaddTags);
 
 	$("#print").click(function() {
 		window.print();
@@ -295,13 +298,6 @@ function showShare() {
 }
 
 function showaddTags() {
-
-	//TODO show signin
-	if(!user.checkLogin())
-		return;
-
-	
-
 	var $lightbox = getAddTagsLightbox();
 
 	var top = $("#tags").offset().top - 113;
