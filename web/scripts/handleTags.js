@@ -81,6 +81,12 @@ function keyNewTag(event) {
 	}
 	else if(event.keyCode == 8 && text ==""){
 		event.preventDefault();
+		
+		if($tagsbox.is(".tags_list")){
+			var tagName = $this.prev().find(".tag_text").text();
+			search.removeTag(tagName);
+			search.flush();
+		}
 		$tagsbox.children(".tag").last().remove();
 		removeNewInput();
 		draftTags();
