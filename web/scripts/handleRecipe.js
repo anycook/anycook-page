@@ -258,7 +258,8 @@ function showShare() {
 	$this.children(".img").hide();
 	var $left = $this.children(".left").empty();
 
-	$left.append("<div id=\"fb\"><fb:like colorscheme=\"dark\" width=\"80\" font=\"verdana\" action=\"like\" layout=\"button_count\"></fb:like></div>");
+	$left.append("<div class='fb-like' data-href='"+"http://anycook.de/" + recipeURI+"' data-colorscheme='light' data-layout='button_count' data-action='recommend'"+
+		"data-show-faces='false' data-send='false'></div>");
 
 	var anycookuricomponent = encodeURIComponent("http://anycook.de/" + recipeURI);
 	var twittertarget = "https://twitter.com/share?url=" + anycookuricomponent + "";
