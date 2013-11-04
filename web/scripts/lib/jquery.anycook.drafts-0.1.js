@@ -30,7 +30,7 @@
 		if(lastnum === undefined) lastnum = -1;
 
 		if(user.checkLogin()){
-			$.anycook.graph._getJSON("/drafts/num", {lastnum:lastnum}, function(num){
+			$.anycook.graph._get("/drafts/num", {lastNum:lastnum}, function(num){
 				$("#drafts #draftnum").text(num);
 				var $messageBubble = $("#settings_btn_container .new_messages_bubble");
 				if(num>0)			
