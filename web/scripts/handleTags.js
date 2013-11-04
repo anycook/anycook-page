@@ -163,7 +163,7 @@ function submitSuggestTags(event){
 	var userid = -1;
 	if(user.checkLogin())
 		userid = user.id;
-	$.anycook.graph.suggestTags(recipe, tags, userid);
+	$.anycook.graph.tag.suggest(recipe, tags);
 	hideLightbox();
 	$(".tagsbox").empty();
 	/*$("#recipe_tags").empty();
