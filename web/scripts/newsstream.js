@@ -325,8 +325,10 @@ function getMessageContainer(message){
 	
 	
 	$headline.append("<span> und </span><a href=\""+user.getProfileURI()+"\">Ich</a>");
-	
-	var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
+
+	var lastMessage = message.messages[message.messages.length-1];
+
+	var $p = $("<p></p>").html(lastMessage.text.replace(/\n/g,"<br/>"));
 	
 	var $messageright = $("<div></div>").addClass("message_right")
 		.append($headline)
