@@ -31,7 +31,8 @@
     	});
 
     //anycookgraph
-	$.when($.anycook.graph.init({appid:2, baseUrl: "http://10.1.0.200"})).then(function(){
+    baseUrl = "http://10.1.0.200";
+	$.when($.anycook.graph.init({appid:2, baseUrl: baseUrl})).then(function(){
     	loadAllKategories($("#kategorie_filter ul"));
     	
     	var xmlErrorFunction = function(event){

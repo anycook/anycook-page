@@ -77,7 +77,7 @@
 		
 		var $frame_big_left = $("<div></div>").addClass("frame_big_left");
 		
-		var $img = $("<img/>").attr("src", "http://images.anycook.de/gerichtebilder/small/"+image);
+		var $img = $("<img/>").attr("src", baseUrl+"/images/recipe/small/"+image);
 		var $recipe_img = $("<div></div>").addClass("recipe_img")
 			.append($img);
 		

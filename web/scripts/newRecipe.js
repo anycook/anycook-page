@@ -43,7 +43,7 @@ function loadNewRecipe(){
 	    onProgress:nrProgress,
 	    onComplete:completeUpload,
 	    // path to server-side upload script
-	    action: 'http://graph.anycook.de/upload/image/recipe'
+	    action: baseUrl+'/upload/image/recipe'
 	});
 	
 	
@@ -1086,14 +1086,14 @@ function showNRImage(filename){
 	$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
 	$recipeImageContainer.children(".image_upload").show();
 	
-	var $img = $("<img/>").addClass("recipe_image").attr("src", "http://images.anycook.de/gerichtebilder/big/"+filename);
+	var $img = $("<img/>").addClass("recipe_image").attr("src", baseUrl+"/images/recipe/big/"+filename);
 	$recipeImageContainer.append($img);
 	$img.load(function(){$("#step1").trigger($.Event('resize'))});
 }
 
 function loadPreview(data){
 	var image = data.image || "category/sonstiges.png";
-	$("#step4 .recipe_image_container img").attr("src", "http://images.anycook.de/gerichtebilder/big/"+image)
+	$("#step4 .recipe_image_container img").attr("src", baseUrl+"/images/recipe/big/"+image)
 	.load(function(){
 		$("#step4").trigger($.Event('resize'));
 	});
