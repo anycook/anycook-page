@@ -23,6 +23,7 @@
 @import "notfound";
 @import "register";
 @import "print";
+@import "login";
 
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
@@ -958,29 +959,6 @@ header{
     position:absolute;
     bottom:-4px;
   }
-}
-
-#login_menu{
-	opacity: 0;
-	position: absolute;
-	z-index: 20;
-	$width: 190px;
-	width: $width;
-	visibility: hidden;
-
-	&.visible{
-		visibility: visible;
-		opacity: 1;
-		@include transition(opacity, .3s, ease-in-out);
-	}
-
-	.peak{
-		height:11px;
-		width: 18px;
-		position: absolute;
-		left: 153px;
-		background-image: url("/img/bubble_peak_top.png");
-	}
 }
 
 #user_menu{

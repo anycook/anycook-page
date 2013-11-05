@@ -1,11 +1,26 @@
 <div id="login_menu">
-	<div class="peak"></div>
+	<!-- <div class="peak"></div> -->
+	<div class="blackOverlay"></div>
 	<div class="menu">
-		<h1>Login</h1>
-		<form id="loginForm">
-			<input type="text" id="username" placeholder="Email/Username" />
-			<input type="password" id="password" placeholder="Passwort" />
-			<input type="submit" value="login" />
-		</form>
+		<div class="loginContainer">
+			<h1>Melde dich an:</h1>
+			<form id="loginForm">
+				<input type="text" id="username" placeholder="Email" />
+				<input type="password" id="password" placeholder="Passwort" />
+				<div class="subcontainer">
+					<label class="remember">
+						<input id="SaveCookie" name="SaveCookie" type="checkbox" value="yes" checked="checked" >
+						<span>Angemeldet bleiben!</span>
+						</input>
+					</label>
+					<input type="submit" value="Anmelden" />
+				</div>
+				<p class="errorMsg">Nutzername / Passwort sind falsch. <a>Passwort vergessen?</a></p>
+			</form>
+		</div>
+		<div class="registerContainer">
+			<p>Du hast noch keinen Account?<a href="/#!/registration">Hier Registrieren!</a></p>
+		</div>
 	</div>
+		
 </div>

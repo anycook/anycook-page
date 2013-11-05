@@ -17,8 +17,8 @@ function toggleLoginMenu(){
 			$loginMenu.removeClass("visible");
 			$loginBtn.removeClass("focus");
 		}else{
-			var buttonOffset = $loginBtn.offset();
-			$loginMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
+			//var buttonOffset = $loginBtn.offset();
+			//$loginMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
 			$loginMenu.addClass("visible");
 			$loginBtn.addClass("focus");
 		}
