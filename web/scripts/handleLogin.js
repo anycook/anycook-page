@@ -5,7 +5,7 @@ function buildLogin(){
 	$("#login_container form").submit(submitForm);*/
 	$.get("/templates/login.erb", function(template){
 		$("body").append(template);
-		$("#signin_btn").click(toggleLoginMenu);
+		$("#signin_btn, #login_menu .blackOverlay").click(toggleLoginMenu);
 		$("#login_menu form").submit(submitForm);
 	});		
 };
@@ -90,37 +90,6 @@ function hideUserMenu(event){
 	
 }
 
-
-function showLoginErrorPopups(event){
-	var target = $(event.target);
-	var text = "";
-	if(!$("#register_btn").hasClass("on")){
-		text = "Mail/Passwort falsch!";
-	}
-	else{
-		if(target.attr("id")=="email_end")
-			text = loginerrors["mail"];
-		if(target.attr("id")=="password_end")
-			text = loginerrors["password"];
-		if(target.attr("id")=="username_end")
-			text = loginerrors["username"];
-		
-	}
-	var position = target.prev().offset();
-	target.prev().before("<div id='error_login'><div id='error_login_left'>"+text+"</div><div id='error_login_right'></div></div>");
-	var errorcontainer = target.prev().prev();
-	errorcontainer.css("top", position.top);
-	errorcontainer.css("left", position.left);
-	errorcontainer.hide();
-	errorcontainer.fadeIn(500);
-}
-
-function hideLoginErrorPopups(event){
-	var target = $(event.target);
-	var errorcontainer = target.prev().prev();
-	errorcontainer.fadeOut(500, function(){errorcontainer.remove();});
-}
-
 //called if #signin_btn is clicked
 function clickSignin(event){
 	var $main = $("#main");
@@ -181,6 +150,9 @@ function submitForm(event){
 		user = User.init();
 		//TODO code Login behavior
 		location.reload();
+	},
+	function(error){
+		$("#login_menu .errorMsg").addClass("visible");
 	});
 }
 
