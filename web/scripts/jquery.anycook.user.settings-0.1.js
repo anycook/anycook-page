@@ -19,6 +19,8 @@
 			$.extend(settings, json);
 			$.anycook.user.settings.loadMail();
 		});
+
+		var conf = $.anycook.graph._settings();
 		
 		new qq.FileUploader({
 		    // pass the dom node (ex. $(selector)[0] for jQuery users)
@@ -28,7 +30,7 @@
 		    onProgress:nrProgress,
 		    onComplete:$.anycook.user.settings.completeUpload,
 		    // path to server-side upload script
-		    action: 'http://graph.anycook.de/upload/image/user'
+		    action: conf.baseUrl+'/upload/image/user'
 		});
 
 		if(user.facebook_id <= 0){

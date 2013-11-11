@@ -68,7 +68,7 @@
 		var date = new Date(draft.timestamp);
 		var dateString = $.anycook.drafts.parseDraftDate(date);
 		// var percent = draft.percentage+"%";
-		var percent = 0+"%";
+		var percent = Math.round(draft.percentage*100)+"%";
 		var name = !draft.name ? "Noch kein Titel" : draft.name;
 		var description = !draft.description ? "Noch keine Beschreibung" : draft.description;
 		var image = !draft.image ? "category/sonstiges.png" : draft.image;
