@@ -1194,9 +1194,11 @@ function saveLightbox(){
 	}
 
 	$("#step2").data("ingredients", ingredients);
+	$.anycook.drafts.save("ingredients", ingredients);
 
 	var numPersons = $("#new_num_persons").val();
 	$("#step2").data("numPersons", numPersons);
+
 }
 
 function newPersonsUp(){
