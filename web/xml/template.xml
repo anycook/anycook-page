@@ -148,7 +148,7 @@
 	    		</div>
 	    		<div id="category_error" class="error">Bitte wähle eine Kategorie ein</div>
 	    		<div id="new_time">
-	    			<img src="/icons/uhr.png"/>
+	    			<img src="/img/clock.png"/>
 	    			<h2>Dauer:</h2>
 	    			<div class="time_container">
 						<div class="time numberinput">
