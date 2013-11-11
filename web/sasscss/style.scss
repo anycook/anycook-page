@@ -25,6 +25,8 @@
 @import "print";
 @import "login";
 
+html {overflow-y: scroll;}
+
 body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 	margin:0;
 	padding:0;
@@ -907,7 +909,7 @@ header{
 			
 			#content_main{
 				width:100%;
-				padding-bottom:60px;
+				padding: 23px 0 60px 0;
 			}
 		}
 		
