@@ -1,3 +1,55 @@
+.login_or_register{
+  width: 283px;
+  height: 50px;
+  margin: 10px auto;
+  display: block;
+
+
+  a{
+    float: left;
+    display: block;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    padding: 0 20px;
+    text-decoration: none;
+    width:100px;
+    font-size:12pt;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .login_btn{
+    background-color:$stepcolor;
+    text-shadow: 1px 1px 0px #fff;
+    border-top-right-radius:0px;
+    border-top-left-radius:8px;
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:8px;
+    border: 1px solid $inactivebuttonoutline;
+    @include box-shadow-inset(0, 1px, 1px, rgba(255,255,255, 0.75));
+    @include gradient-vertical3($background-right,93%,#d2cfca);
+    @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.1));
+    color: $buttonfontcolor;
+  }
+  .register_btn{
+    background-color: $green; 
+    text-shadow: 1px 1px 0px #92bd4f;
+    color: white;
+    border-top-right-radius:8px;
+    border-top-left-radius:0px;
+    border-bottom-right-radius:8px;
+    border-bottom-left-radius:0px;
+    border: 1px solid $inactivebuttonoutline;
+    border-left: 0px;
+    @include box-shadow-inset(0, 1px, 1px, rgba(255,255,255, 0.75));
+    @include gradient-vertical3($green,93%,#8ab34d);
+    @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.1));
+  }
+
+}
+
 #login_menu{
   position: absolute;
   height: 100%;

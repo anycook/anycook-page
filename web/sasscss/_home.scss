@@ -51,7 +51,7 @@
 			display:block;
 			width:100%;
 			height: 34px;
-			margin:6px auto 25px;
+			margin:6px auto 0px;
 			font-style: italic;
 			text-shadow: 1px 2px 0px white;
 		}
@@ -86,76 +86,7 @@
 		   }
 		}
 		
-		#news{
-			$width: 323px;
-			width:$width;
-			margin: 0px auto;
-			
-			h2{
-				margin: 0 0;
-			}
-	
-			.content{
-				$height:300px;
-				height:$height;
-				width:$width - 2;
-				position:relative;
-			
-				.top{
-					background-image: url("/img/news_top.png");
-				}
-				ul{
-					margin-top:5px;
-					border-top:1px solid $lightgrey;
-					background-image: url("/img/news_redstripes.png");
-					background-repeat:repeat-y;
-					background-position:27px 0;
-					width:100%;
-					height:$height - 15px;
-					overflow:hidden;
-					list-style: none;
-					font:$standardfont;
-					text-align: left;
-					
-					&:focus{
-						outline:none;
-					}
-					
-					li{
-						border-bottom: 1px solid $lightgrey;
-						width:100%;
-						color:$darkfontcolor;
-						
-						&.following{
-						  background-color: grey;
-						}
-						
-						.left{
-							float:left;
-							width:25px;
-							height:100%;
-							margin: 0 4px 0 0;
-						}
-						.right{
-							margin-left:32px;
-							padding: 7px;
 
-						}
-					}
-				}
-				
-				.bottom{
-					position: absolute;
-					bottom:0;
-					width:100%;
-					height:10px;
-					background-color:none;
-					@include gradient-vertical(rgba(249,248,246,0), rgba(249,248,246,1));
-					border-bottom-left-radius: 4px;
-					border-bottom-right-radius: 4px;
-				}
-			}
-		}
 		
 	}
 	
@@ -166,6 +97,7 @@
 	}
 	
 	.bottom_container{
+		display: block;
 		border-top: 1px solid $lightgrey;
 		margin:0px auto;
 		padding:12px $borderpadding 0;

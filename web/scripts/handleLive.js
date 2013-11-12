@@ -82,7 +82,7 @@ function parseLife(life){
 		pos = text.search(regex);
 	}
 	
-	var $li = $("<li></li>").append("<div class=\"left\"></div><div class=\"right\"></div>").data("id", life.id);
+	var $li = $("<li></li>").append("<div class=\"left\"><img src=\"http://10.1.0.200/user/8/image?type=small&amp;appid=2+&amp;0.4227593978866935\"></div><div class=\"right\"></div>").data("id", life.id);
 	if(user.checkLogin() && user.isFollowing(userid))
 		$li.addClass("following");
 	

@@ -124,6 +124,16 @@
 
   }
 
+ @mixin gradient-vertical3 ($startColor, $gradientPercent, $endColor) {
+
+    background-image: -webkit-gradient(linear, center top, center bottom, from($startColor 90%), to($endColor));
+    background-image: -webkit-linear-gradient(top, $startColor 90%, $endColor);
+    background-image: -moz-linear-gradient(top, $startColor 90%, $endColor);
+    background-image: -o-linear-gradient(top, $startColor 90%, $endColor);
+    background-image: -ms-linear-gradient(top, $startColor 90%, $endColor);
+    background-image: linear-gradient(to bottom, $startColor 90%, $endColor);
+
+  }
 
 //markierbare und nicht markierbare Container
 @mixin userselectnone
