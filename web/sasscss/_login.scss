@@ -31,7 +31,24 @@
     @include box-shadow-inset(0, 1px, 1px, rgba(255,255,255, 0.75));
     @include gradient-vertical3($background-right,93%,#d2cfca);
     @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.1));
+    @include transition(all, 0.1s, ease-out);
     color: $buttonfontcolor;
+
+    &:hover{
+      background: $stepcolor;
+      color: $darkfontcolor;
+      @include gradient-vertical3(#dbd8d3,93%,$background-right);
+      @include transition(all, 0.1s, ease-in);
+    }
+
+    &:active{
+      background: $stepcolor;
+      color: $darkfontcolor;
+      @include gradient-vertical3(#dbd8d3,93%,$background-right);
+      @include box-shadow-inset(0, 1px, 5px, rgba(0,0,0, 0.4));
+      @include transition(all, 0.1s, ease-in);
+      border-color: $activebuttonoutline;
+    }
   }
   .register_btn{
     background-color: $green; 
@@ -46,6 +63,25 @@
     @include box-shadow-inset(0, 1px, 1px, rgba(255,255,255, 0.75));
     @include gradient-vertical3($green,93%,#8ab34d);
     @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.1));
+    @include transition(all, 0.1s, ease-out);
+
+    &:hover{
+        background: $green;
+        @include transition(all, 0.1s, ease-in);
+        color: #556e2e;
+        text-shadow: 1px 1px 0px #b7e76c;
+        @include gradient-vertical3(#9bc754,93%,$green);
+
+    }
+    &:active{
+        background: $green;
+        @include transition(all, 0.1s, ease-in);
+        color: #556e2e;
+        text-shadow: 1px 1px 0px #b7e76c;
+        @include gradient-vertical3(#9bc754,93%,$green);
+        @include box-shadow-inset(0, 1px, 5px, rgba(0,0,0, 0.4));
+        border-color: $activebuttonoutline;
+    }
   }
 
 }
