@@ -47,7 +47,7 @@
       @include gradient-vertical3(#dbd8d3,93%,$background-right);
       @include box-shadow-inset(0, 1px, 5px, rgba(0,0,0, 0.4));
       @include transition(all, 0.1s, ease-in);
-      border-color: $activebuttonoutline;
+      border-color: $inactivebuttonoutline;
     }
   }
   .register_btn{
@@ -124,9 +124,7 @@
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.3));
     
     .loginContainer{
       padding: 0 40px;

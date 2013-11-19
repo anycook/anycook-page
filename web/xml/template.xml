@@ -396,40 +396,42 @@
 	</template>
 	<template id="profile">
 		<div class="profile_container">
-			<img class="profile_image" src=""/>					
-			<div class="profile_info">
-				<div class="profile_title">
-					<h1></h1>
-					<div id="stamp"></div>
+			<div class="profile_data">
+				<img class="profile_image" src=""/>					
+				<div class="profile_info">
+					<div class="profile_title">
+						<h1></h1>
+						<div id="stamp"></div>
+					</div>
+					<div class="profile_date"><div></div> <span></span></div>
+					<div class="profile_place"><div></div>aus <span></span></div>
+					<div class="profile_text"></div>
+					<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
 				</div>
-				<div class="profile_date"><div></div> <span></span></div>
-				<div class="profile_place"><div></div>aus <span></span></div>
-				<div class="profile_text"></div>
-				<!--<a class="writemassage"><div class="massageicon"></div>Nachricht schreiben</a>-->
+				<div class="profile_achievements">
+					<div class="recipes achievement">
+						<div class="count"></div>
+						<div class="title">Rezepte</div>
+					</div>
+					<div class="likes achievement">
+						<div class="count"></div>
+						<div class="title">Lieblingsrezepte</div>
+					</div>
+					<div class="discussions achievement">
+						<div class="count"></div>
+						<div class="title">Kommentare</div>
+					</div>
+					<div class="follower achievement">
+						<div class="count"></div>
+						<div class="title">Follower</div>
+					</div>
+				</div>
 			</div>
-			<div class="profile_achievements">
-				<div class="recipes achievement">
-					<div class="count"></div>
-					<div class="title">Rezepte</div>
-				</div>
-				<div class="likes achievement">
-					<div class="count"></div>
-					<div class="title">Lieblingsrezepte</div>
-				</div>
-				<div class="discussions achievement">
-					<div class="count"></div>
-					<div class="title">Kommentare</div>
-				</div>
-				<div class="follower achievement">
-					<div class="count"></div>
-					<div class="title">Follower</div>
-				</div>
+			<div class="profile_buttons">
+				<!--<a id="search_profile" class="button"><img src="/img/loupe.png"/> Rezepte</a>-->
+				<a id="follow" class="button">+ Folgen</a>
+				<a id="sendmessage" class="button">Nachricht schreiben</a>
 			</div>
-		</div>
-		<div class="profile_buttons">
-			<!--<a id="search_profile" class="button"><img src="/img/loupe.png"/> Rezepte</a>-->
-			<a id="follow" class="button">+ Folgen</a>
-			<a id="sendmessage" class="button">Nachricht schreiben</a>
 		</div>
 		<div id="profile_recipes" class="profile_recipes"></div>
 		<div id="profile_schmeckt" class="profile_recipes"></div>

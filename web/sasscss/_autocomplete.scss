@@ -135,11 +135,12 @@
 	
 	&.recipient-autocomplete{
 	  $width: 164px;
-    width:auto !important;
+    min-width:$width !important;
     background-color: $stepcolor;
     border: 1px solid $kategorieborder;
     border-radius: 5px;
     color:$smalllightfontcolor;
+    @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.3));
     
     &.ui-menu{
       padding: 0 2px;
