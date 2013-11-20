@@ -153,6 +153,11 @@ function clickRecipients(){
 	    		minLength:1,
 	    		// selectFirst:true,
 	    		autoFocus:true,
+	    		position : {
+	    			of : ".recipients",
+					at : "left bottom",
+					my : "left top-1"
+	    		},
 				select:function(event, ui){
 					var id = ui.item.data;
 					var name = ui.item.value;

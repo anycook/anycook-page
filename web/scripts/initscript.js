@@ -145,7 +145,9 @@
 					
 				},
 				position:{
-					offset:"-31 0"
+					of : "#searchbar",
+					my : "right top-1", 
+					at: "right bottom"
 				}
 				}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 					return $( "<li></li>" )
