@@ -9,7 +9,7 @@ function loadHome()
 // 	
 	// //new stuff
 	
-	$("#content_header").empty()
+	$("#subnav").empty()
 		.append(getHeaderLink("Startseite", "/#", "startpage_button").addClass("active"))
 		.append(getHeaderLink("Entdecken", "/#?page=discover", "discover_button").addClass("active"));
 		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
@@ -44,7 +44,7 @@ function loadHome()
 
 function clearContent(){
 	$("#content_main > *").remove();
-	$("#content_header > *").remove();
+	$("#subnav").empty();
 	$("#btn_container").find(".user_btn").removeClass("active");
 	$("#main").find(".lightbox").remove();
 }
@@ -144,7 +144,7 @@ function handleChange(event){
 			case 2:
 				switch(path[0]){
 				case "recipe":
-					$("#content_header")
+					$("#subnav")
 						.append(getHeaderLink("Rezept", "", "recipe_btn"))
 						.append(getHeaderLink("Diskussion", "", "discussion_btn"));
 					loadRecipe(path[1]);
@@ -171,7 +171,7 @@ function handleChange(event){
 			case 3:
 				switch(path[0]){
 				case "recipe":
-					$("#content_header")
+					$("#subnav")
 							.append(getHeaderLink("Rezept", "", "recipe_btn"))
 							.append(getHeaderLink("Diskussion", "", "discussion_btn"));
 					loadRecipe(path[1], path[2]);
@@ -192,7 +192,7 @@ function handleChange(event){
 			}
 		});		
 	}
-	$("#content_header *").removeClass("active");
+	$("#subnav *").removeClass("active");
 	
 	if(event.pathNames[0]=="recipeediting"){
 		newRecipeAdressChange(event);
