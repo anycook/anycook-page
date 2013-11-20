@@ -29,14 +29,23 @@ function parseAndAddLiveAtHome(json){
 		var empty = false;
 		if($ul.children().length == 0)
 			empty = true;
+
+		var newestRecipes = [];
 		
 		for(var i in json){
 			
 			var $li = parseLife(json[i]);
-			if(Number(json[i].id) > newestid)				
+			if(Number(json[i].id) > newestid){				
 				$container.prepend($li);
-			else
+				if(json[i].recipe){
+					newestRecipes.unshift(json[i].recipe);
+				}
+			} else{
 				$container.append($li);
+				if(json[i].recipe){
+					newestRecipes.push(json[i].recipe);
+				}
+			}
 				
 			/*if(!empty){
 				var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
@@ -49,6 +58,22 @@ function parseAndAddLiveAtHome(json){
 		$ul.jScrollPane();
 		if(active)
 			$("#news .jspDrag").addClass("jspActive");
+
+		var $p = $("#newestRecipes p");
+
+		for(var i = 0; i<3 && i < newestRecipes.length; i++){
+			//see jquery.recipeoverview.js
+			var recipe = newestRecipes[i];
+      		var img = $.anycook.graph.recipe.image(recipe);
+
+      		var $img = $("<img src=\""+img+"\"/>");
+
+      		var href = Recipe.getURI(recipe);
+      		var $a = $("<a></a>").attr("href", href)
+      			.append($img).append("<div><span>"+recipe+"</span></div>");
+
+      		$p.append($a);
+		}
 	}
 }
 
@@ -63,6 +88,7 @@ function parseLife(life){
 			text = "";
 			for(var j = 0; j<array.length-1;++j){
 				var uri = User.getProfileURI(life.user.id);
+				userid = life.user.id;
 				var link = "<a href=\""+uri+"\">"+life.user.name+"</a>";
 				text+=array[j]+link;
 			}
@@ -81,8 +107,10 @@ function parseLife(life){
 			
 		pos = text.search(regex);
 	}
+
+	var imagePath = User.getUserImagePath(userid, "small");
 	
-	var $li = $("<li></li>").append("<div class=\"left\"><img src=\"http://10.1.0.200/user/8/image?type=small&amp;appid=2+&amp;0.4227593978866935\"></div><div class=\"right\"></div>").data("id", life.id);
+	var $li = $("<li></li>").append("<div class=\"left\"><img src=\""+imagePath+"\"></div><div class=\"right\"></div>").data("id", life.id);
 	if(user.checkLogin() && user.isFollowing(userid))
 		$li.addClass("following");
 	
