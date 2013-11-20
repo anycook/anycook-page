@@ -15,8 +15,8 @@ function loadRecipe(recipeName, versionid) {
 	recipeName = decodeURIComponent(recipeName);
 
 	var rezepturi = "#!/recipe/"+recipeName;
-	$("#content_header #recipe_btn").attr("href", rezepturi);
-	$("#content_header #discussion_btn").attr("href", rezepturi + "?page=discussion");
+	$("#subnav #recipe_btn").attr("href", rezepturi);
+	$("#subnav #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
 	$.anycook.graph.recipe(recipeName, versionid, function(recipe){
 		$.address.title(recipe.name + " | anycook");
