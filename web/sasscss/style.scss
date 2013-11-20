@@ -296,10 +296,20 @@ header{
 			top: -9px;
 	}
 
+	#buchmitte_top{
+			width:11px;
+			height:40px;
+			position: relative;
+			left:285px;
+			top: 26px;
+			background: url("/img/buchmitte_top.png") no-repeat $background;
+			z-index: 22;
+	}
+
 	#subnav{
 		float: right;
 		position: relative;
-		top: -7px;
+		top: -47px;
 		
 		a{
 			float:left;
@@ -386,7 +396,8 @@ header{
 	background-color:$background;
 	min-height: 600px;
 	margin: 0 0 30px;
-	box-shadow: 0px 3px 21px black;
+	//box-shadow: 0px 3px 21px black;
+	box-shadow: 0px 4px 19px black;
 	
 	#right{
 		position: absolute;
@@ -439,13 +450,6 @@ header{
 		background: url("/img/buchmitte.png") repeat-y $background;
 		background-position: 285px 0;
 		
-		#buchmitte_top{
-			width:11px;
-			height:40px;
-			position: absolute;
-			left:285px;
-			background: url("/img/buchmitte_top.png") no-repeat $background;
-		}
 		
 		#filter_container{
 			float: left;
