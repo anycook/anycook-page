@@ -410,13 +410,14 @@ header{
 	}
 
 	#peak_bottom{
-		background:url("/img/peak_bottom.png") no-repeat $background;
-		width: 108px;
+		background: url("/img/peak_bottom.png") no-repeat;
 		height: 46px;
-		position:absolute;
-		top:100%;
-		margin-top:-12px;
-		left:234px;
+		position: absolute;
+		width: 1016px;
+		left: 50%;
+		bottom: -7px;
+		margin-left: -508px;
+		background-position-x: 234px;
 	}
 	
 	#container_bottom{
