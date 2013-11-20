@@ -14,14 +14,20 @@
 		    		<a href="#" title="Melde dich mit deinem Benutzerzugang an" class="login_btn">einloggen</a>
 		    		<a href="#" title="Lege einen neuen Benutzerzugang an" class="register_btn">registrieren</a>
 		    	</div>
-		    	<div id="news">
-					
-					<div class="content news">
-						<div class="top"><h2>Küchengeflüster:</h2></div>
-						<ul></ul>
-						<!--<div class="bottom"></div>-->
+
+		    	<div id="newsContainer">
+			    	<div id="news">
+						<div class="content news">
+							<div class="top"><h2>Küchengeflüster:</h2></div>
+							<ul></ul>
+							<!--<div class="bottom"></div>-->
+						</div>
+					</div>
+					<div id="newestRecipes" class="recipeoverview">
+						<p></p>
 					</div>
 				</div>
+
 			</div>
 	    		    	
 	    	<div class="bottom_container">

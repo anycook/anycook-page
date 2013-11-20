@@ -29,14 +29,23 @@ function parseAndAddLiveAtHome(json){
 		var empty = false;
 		if($ul.children().length == 0)
 			empty = true;
+
+		var newestRecipes = [];
 		
 		for(var i in json){
 			
 			var $li = parseLife(json[i]);
-			if(Number(json[i].id) > newestid)				
+			if(Number(json[i].id) > newestid){				
 				$container.prepend($li);
-			else
+				if(json[i].recipe){
+					newestRecipes.unshift(json[i].recipe);
+				}
+			} else{
 				$container.append($li);
+				if(json[i].recipe){
+					newestRecipes.push(json[i].recipe);
+				}
+			}
 				
 			/*if(!empty){
 				var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
@@ -49,6 +58,22 @@ function parseAndAddLiveAtHome(json){
 		$ul.jScrollPane();
 		if(active)
 			$("#news .jspDrag").addClass("jspActive");
+
+		var $p = $("#newestRecipes p");
+
+		for(var i = 0; i<3 && i < newestRecipes.length; i++){
+			//see jquery.recipeoverview.js
+			var recipe = newestRecipes[i];
+      		var img = $.anycook.graph.recipe.image(recipe);
+
+      		var $img = $("<img src=\""+img+"\"/>");
+
+      		var href = Recipe.getURI(recipe);
+      		var $a = $("<a></a>").attr("href", href)
+      			.append($img).append("<div><span>"+recipe+"</span></div>");
+
+      		$p.append($a);
+		}
 	}
 }
 
