@@ -31,6 +31,12 @@ function loadHome()
 	$.anycook.graph.ingredient.number(function(num){
 		$("#num_ingredients").text(num);
 	});
+
+	if(user.checkLogin()){
+		$(".login_or_register").hide();
+	} else {
+		$(".login_btn").click(toggleLoginMenu);
+	}
 	
 	
 	//liveupdatestuff
