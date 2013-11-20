@@ -63,6 +63,7 @@ function parseLife(life){
 			text = "";
 			for(var j = 0; j<array.length-1;++j){
 				var uri = User.getProfileURI(life.user.id);
+				userid = life.user.id;
 				var link = "<a href=\""+uri+"\">"+life.user.name+"</a>";
 				text+=array[j]+link;
 			}
@@ -81,8 +82,10 @@ function parseLife(life){
 			
 		pos = text.search(regex);
 	}
+
+	var imagePath = User.getUserImagePath(userid, "small");
 	
-	var $li = $("<li></li>").append("<div class=\"left\"><img src=\"http://10.1.0.200/user/8/image?type=small&amp;appid=2+&amp;0.4227593978866935\"></div><div class=\"right\"></div>").data("id", life.id);
+	var $li = $("<li></li>").append("<div class=\"left\"><img src=\""+imagePath+"\"></div><div class=\"right\"></div>").data("id", life.id);
 	if(user.checkLogin() && user.isFollowing(userid))
 		$li.addClass("following");
 	
