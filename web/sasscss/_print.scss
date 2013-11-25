@@ -60,6 +60,7 @@
       background: none !important;
       #filter_main_box, #ingredient_list{
         font: 15pt Georgia !important;
+        line-height: 18pt !important;
       }
     }
   }
@@ -73,7 +74,7 @@
   #zutat_head{float: left; width: 100%; padding-bottom: 0.5cm !important; border: 0!important;}
   #zutat_head span, #zutat_head div{float: left; border: 0!important;}
   #zutat_head div .up,#zutat_head div .down,{display: none;}
-  #zutat_head input{ height: 100%; width: auto; margin: 0cm 0 0 -0.3cm !important; border: 0!important; font: 14pt Georgia!important; text-align: center !important; background: none; }
+  #zutat_head input{ height: 100%; width: auto; margin: 0cm 0 0 -0.3cm !important; border: 0!important; font: 14pt Georgia!important; line-height: 20pt !important; text-align: center !important; background: none; }
   
   /*Zutaten*/
   #ingredient_list { float: left; list-style: none; width: 100% !important;}
