@@ -3,15 +3,27 @@
 @media print {
 
   #header, #right, .button, #schmecktmir, .recipe_image_container, .option, #autoren, #introduction, #container_head, #buchmitte_top, #filter_head, #filter_bottom, #filter_headline, #kategorie_list, .kategorie_filter, #kategorie_head, 
-  .tags_head, .tags_list, #user_menu, #loadpoints, #kategorie_filter, #background, #peak_bottom, #filter_devider, #right, #content_header, #container_bottom, #bookskin, footer {
+  .tags_head, .tags_list, #user_menu, #loadpoints, #kategorie_filter, #background, #peak_bottom, #filter_devider, #right, #content_header, #container_bottom, #bookskin, #searchbar, #btn_container, footer {
       display: none !important; }
       
   *{
       margin: 0 0 !important;
       padding: 0 0 !important;
-    
+      border: 0px !important;
+      outline: none !important;
+      overflow:visible !important;
   }    
-  
+
+  #logo img {
+        display:none;
+    }
+  #logo:after { 
+        content:url(/img/logoPrint.png);
+        height: 2cm !important;
+        width: 2cm !important;
+  }
+
+
   #backtothetop{
     left: -6000px !important; 
   }
@@ -23,12 +35,13 @@
       margin-bottom:1.5cm !important;
       margin-left:2.5cm !important;
       margin-right:0.5cm !important;
-      font: 13pt "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+      font: 15pt "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
   }
   
   #main{
       background: none !important;
       top: inherit !important;
+      box-shadow: inherit !important;
   }
   
   #container{
@@ -36,21 +49,17 @@
       width: auto !important;
       left: inherit !important;
       margin: 0 0 !important;
+
   }
   
-  #filter_main{
-      float: left;
-      width: 100% !important;
-  }
-  
-  #filter_container{ float: right!important; margin: 2.5cm 0 0 0 !important; height: auto !important; min-height: inherit !important; font: 18pt Georgia !important; text-align: left !important; 
-                     border-left: 1px solid black; padding-left: 0.5cm !important;}
+  #filter_container{ /*width: 35%;*/ float: right!important; margin: 2.5cm 2cm 0 0 !important; height: auto !important; min-height: inherit !important; font: 18pt Georgia !important; text-align: left !important; 
+                     border-left: 1px solid grey !important; padding-left: 1cm !important;}
   #filter_box{
     float: left; background: none !important; width: 7cm !important;
     #filter_main{
       background: none !important;
       #filter_main_box, #ingredient_list{
-        font: 13pt Georgia !important;
+        font: 15pt Georgia !important;
       }
     }
   }
@@ -64,17 +73,16 @@
   #zutat_head{float: left; width: 100%; padding-bottom: 0.5cm !important; border: 0!important;}
   #zutat_head span, #zutat_head div{float: left; border: 0!important;}
   #zutat_head div .up,#zutat_head div .down,{display: none;}
-  #zutat_head input{ height: 100%; width: auto; margin: -0.09cm 0 0 0 !important; border: 0!important; font: 14pt Georgia!important; text-align: center; }
+  #zutat_head input{ height: 100%; width: auto; margin: 0cm 0 0 -0.3cm !important; border: 0!important; font: 14pt Georgia!important; text-align: center !important; background: none; }
   
   /*Zutaten*/
   #ingredient_list { float: left; list-style: none; width: 100% !important;}
-  #ingredient_list li { float: left; width: 100% !important; border: 0!important; }
+  #ingredient_list li { float: left; width: 100% !important; border: 0!important; padding: 0.25cm 0 !important;}
   
-  .ingredient {float:right; max-width:75%;}
+  .ingredient {float:right; max-width:60%;}
   .amount{float: left; min-width: 20%; text-align: right;}
-  
-  
-  #recipe_info {width: 100%;}
+
+  //#recipe_info {width: 100%;}
   
   #recipe_headline{
       float: left;    
@@ -113,22 +121,22 @@
   .ingredient_step .step .mid {
       float: left; 
       background: none !important;
-      width: 15.5cm !important;
+      width: 30cm !important;
   }
     
   .ingredient_step .step .mid .number {
       border-right: 0 !important;
-      
+      padding-top: 0.1cm !important;
       height: auto !important;
-      line-height: 25px !important;
+      line-height: 37px !important;
       text-align: left;
-      font: 22pt Georgia !important; 
+      font: 25pt Georgia !important; 
       width: 1cm !important; 
       float: left !important; 
   }
   .ingredient_step .step .mid .text {
       margin: 0.17cm 0 0 0 !important;
-      width: 14cm !important;
+      width: 15.5cm !important;
       float: left;
   }
 

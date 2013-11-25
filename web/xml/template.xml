@@ -12,7 +12,7 @@
 		    	<h2 class="welcome_subheadline">Das Rezeptesuchnetzwerk für Köche und alle, die es werden wollen.</h2>
 		    	<div class="login_or_register">
 		    		<div title="Melde dich mit deinem Benutzerzugang an" class="login_btn btn">einloggen</div>
-		    		<a href="#" title="Lege einen neuen Benutzerzugang an" class="register_btn">registrieren</a>
+		    		<a href="/#!/registration" title="Lege einen neuen Benutzerzugang an" class="register_btn">registrieren</a>
 		    	</div>
 
 		    	<div id="newsContainer">
