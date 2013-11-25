@@ -69,7 +69,7 @@ function loadDiscussion(recipename, lastid) {
 
 function getDiscussionElement(children, login, json) {
 	var id = json.id;
-	var text = json.text;
+	var text = json.text == null ? "" : json.text;
 	var user = json.user;
 	var likes = json.likes;
 
@@ -97,6 +97,7 @@ function getDiscussionElement(children, login, json) {
 
 	var $date = $("<span></span>").addClass("comment_date").text(datetime);
 	$comment_headline.append($date);
+
 	var $text = $("<div></div>").addClass("comment_text").text(text);
 	var $footer = $("<div></div>").addClass("comment_footer");
 
@@ -132,7 +133,7 @@ function getDiscussionElement(children, login, json) {
 function getDiscussionEvent(recipename, login, json) {
 	var syntax = json.syntax;
 	var versions_id = json.versions_id;
-	var text = json.text;
+	var text = json.text == null ? "" : json.text;
 	var user = json.user;
 	var likes = json.likes;
 	var id = json.id;
