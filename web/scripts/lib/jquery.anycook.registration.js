@@ -6,7 +6,7 @@
 	$.anycook.registration = function(mail, username, password,callback){
 		var graph = "/user";
 		var data = {username:username, mail:mail, password:password};
-		return $.anycook.graph._put(graph,data,callback);
+		return $.anycook.graph._post(graph,data,callback);
 	}
 		
 	$.anycook.registration.checkMail =function(mail, callback){
