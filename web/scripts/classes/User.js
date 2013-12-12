@@ -119,7 +119,7 @@ User.prototype.onlyUserAccess = function(){
 
 User.prototype.isFollowing = function(userid){
 	for(var i in this.following)
-		if(this.following[i].id == userid) return true;
+		if(this.following[i] == userid) return true;
 	return false;
 }
 
