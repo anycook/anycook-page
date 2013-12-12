@@ -124,8 +124,8 @@ User.prototype.isFollowing = function(userid){
 }
 
 User.prototype.isFollowedBy = function(userid){
-	for(var i in this.follower)
-		if(this.follower[i].id == userid) return true;
+	for(var i in this.followers)
+		if(this.followers[i] == userid) return true;
 	return false;
 }
 
