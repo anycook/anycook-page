@@ -143,10 +143,6 @@ function submitForm(event){
 	var pwd = $pwd.val();
 	var stayloggedin =$("#stayloggedin input").is(":checked");
 	$.anycook.graph.session.login(mail, pwd, stayloggedin, function(json){
-		if(!json){
-			console.log("login failed");
-			return;
-		}
 		user = User.init();
 		//TODO code Login behavior
 		location.reload();

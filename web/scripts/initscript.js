@@ -32,7 +32,7 @@
 
     //anycookgraph
     baseUrl = "http://10.1.0.200";
-	$.when($.anycook.graph.init({appid:2, baseUrl: baseUrl})).then(function(){
+	$.when($.anycook.graph.init({appId:2, baseUrl: baseUrl})).then(function(){
     	loadAllKategories($("#kategorie_filter ul"));
     	
     	var xmlErrorFunction = function(event){
