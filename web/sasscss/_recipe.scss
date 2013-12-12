@@ -236,21 +236,19 @@
 	}
 	
 	#introductionposition{
-	left: -50%;
 	margin: 0 auto;
-	text-align: left;
 	position: relative;
+	text-align: center;
 	@include userselectnone;
 	
 	
 	#introduction{
-			position: relative;
-			left: 50%;
-			/*width:$width - 10;*/
-			margin: 5px 0 0;
 			padding: 0 5px;
 			color: $smalllightfontcolor;
 			@include userselecttext;
+			margin:0px auto;
+		    text-align:left;
+		    display: inline-block;
 		}
 	}
 }

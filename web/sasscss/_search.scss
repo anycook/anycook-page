@@ -7,7 +7,7 @@
 	color:$darkfontcolor;
 	height:$height;
 	display:block;
-	border-top:1px solid $shadowbeige;
+	border-top:1px solid $kategorieborder;
 	//border-bottom: 1px solid $lightgrey;
   @include transition(border-top-color, .1s, ease-out);
 	
