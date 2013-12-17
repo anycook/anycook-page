@@ -116,7 +116,6 @@ function handleChange(event){
 					break;
 				case "about_us":
 					setTitle("Über uns");
-					loadAboutUs();
 					break;
 				case "impressum":
 					setTitle("Impressum");

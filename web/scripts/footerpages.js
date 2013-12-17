@@ -1,11 +1,6 @@
 function loadAboutUs(){
 	setTimeSinceStart();
 	setWebsiteData();
-	loadPeople();
-}
-
-function loadPeople(){
-	$("#team").appendGitHub("anycook/anycook-content/contents/people.md");
 }
 
 function setWebsiteData(){

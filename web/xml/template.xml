@@ -343,7 +343,7 @@
 				<div class="column left">
 					<h2>Die Idee</h2>
 					<p>
-						"anycook ist die schnellste und intuitivste Rezeptesuche" Das ist die zentrale Idee von anycook. 
+						anycook ist die schnellste und intuitivste Rezeptesuche" Das ist die zentrale Idee von anycook. 
 						Um dies zu ermöglichen verfolgen wir zwei Ansätze: Zum einen entwickeln wir eine effektive Suche, 
 						die möglichst alle denkbaren Suchansätze von Usern beinhaltet und zum anderen begrenzen wir die Auswahl an Rezepten.
 						Jedes Rezept existiert nur einmal. Es können aber alle User auf anycook zusammen an Rezepten arbeiten. 
@@ -397,7 +397,29 @@
 					<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahr </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
 				</div>
 			</div>
-			<div id="team"></div>
+			<div id="team">
+				<h1>Team</h1>
+				<li>
+					<img src="http://10.1.0.200/user/8/image?type=large" alt="Jan Graßegger"/>
+					<div class="teamMember">
+						<h2>Jan Graßegger</h2>
+						<h3>Entwicklung</h3>
+						<p>
+							Jan ist das nerdige Herz anycook`s. Unzufrieden mit den Rezepteplattformen dieser Welt nahm er die Herausforderung an etwas zu schaffen, das alles zuvor dagewesene in den Schatten stellen sollte. Mit viel Energie und Ehrgeiz widmet er sich seitdem seinen Aufgaben bei anycook und leistet unmenschliches. Auch wenn man bei Jan manchmal etwas länger warten muss, das Ergebnis wird perfekt. Egal ob beim programmieren oder kochen.
+						</p>
+					</div>
+				</li>
+				<li>
+					<img src="http://10.1.0.200/user/2/image?type=large" alt="Daniel Plath"/>
+					<div class="teamMember">
+						<h2>Daniel Plath</h2>
+						<h3>Design</h3>
+						<p>
+							Als Daniel, jung, aufstrebend, männlich, vom Hunger geplagt in seinem mager gefüllten Kühlschrank nach etwas brauchbaren zu Essen suchte, ereilte ihn die Idee etwas Leckeres aus verbliebenen Zutaten zu kochen. Hoch motiviert öffnete er das Internet und suchte nach passenden Rezepten. Doch die widerlichen Angebote deutscher Kochcommunities verursachten bei ihn binnen einer Eieruhrumdrehung eine übele Magenverstimmung. Diese Nahtoderfahrung veranlasste Daniel gemeinsam mit Jan Grassegger eine Selbsthilfegruppe zu eröffnen, um die grauenvollen Geschehnisse zu verarbeiten. Seitdem beschäftigt sich Daniel nur noch mit schönen Sachen, wie Interfaces, Design &amp; Konzeption. Das Ergebnis: Das Auge isst wieder mit.
+						</p>
+					</div>
+				</li>
+			</div>
 		</div>
 	</template>
 	<template id="profile">
