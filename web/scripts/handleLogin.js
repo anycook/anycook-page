@@ -134,7 +134,7 @@ function focusoutInputs(event){
 
 
 function submitForm(event){
-	event.preventDefault();
+	//event.preventDefault();
 	var $this = $(this);
 	var $mail = $this.find("input[type=\"text\"]");
 	var $pwd = $this.find("input[type=\"password\"]");
