@@ -13,27 +13,34 @@ function loadProfile(userid){
 		
 
 
-		if(user.checkLogin() && user.id != userid){
-			$(".profile_buttons").show();
-			$("#follow").click(follow);
+		if(user.checkLogin()){
+			if(user.id != userid){
+				$(".profile_buttons #preferences").hide();
+				$("#follow").click(follow);
 
-			if(profileData.isFollowedBy(user.id)){
-				$("#stamp").show();
-				$("#follow").text("- Entfolgen").addClass("on");
+				if(profileData.isFollowedBy(user.id)){
+					$("#stamp").show();
+					$("#follow").text("- Entfolgen").addClass("on");
+				}
+
+				//lightbox	
+				$("#sendmessage").click(function(){
+					var $lightbox = getNewMessageLightbox();
+					var top = $(this).offset().top-313;
+					showLightbox($lightbox, top, function(){
+						this.find("textarea").focus();
+					});
+					addRecipient(profileData.name, profileData.id);
+
+
+					return false;
+				});	
+			} else{
+				$(".profile_buttons #follow, .profile_buttons #sendmessage").hide();
 			}
 
-			//lightbox	
-			$("#sendmessage").click(function(){
-				var $lightbox = getNewMessageLightbox();
-				var top = $(this).offset().top-313;
-				showLightbox($lightbox, top, function(){
-					this.find("textarea").focus();
-				});
-				addRecipient(profileData.name, profileData.id);
-
-
-				return false;
-			});
+			$(".profile_buttons").show();
+			
 		}		
 		
 		if(profileData.place != null)
