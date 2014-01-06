@@ -458,6 +458,7 @@
 			<div class="profile_buttons">
 				<!--<a id="search_profile" class="button"><img src="/img/loupe.png"/> Rezepte</a>-->
 				<a id="follow" class="button">+ Folgen</a>
+				<a id="showRecipes" class="button">Rezepte durchsuchen</a>
 				<a id="sendmessage" class="button">Nachricht schreiben</a>
 				<a id="preferences" class="button" href="#/settings">Profil bearbeiten</a>
 			</div>

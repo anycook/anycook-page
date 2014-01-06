@@ -11,7 +11,7 @@ function loadProfile(userid){
 		var date = getDateString(profileData.date);
 		$(".profile_date span").text(date);
 		
-
+		$(".profile_buttons #showRecipes").attr("href", "#/search?user="+userid);
 
 		if(user.checkLogin()){
 			if(user.id != userid){
@@ -39,9 +39,11 @@ function loadProfile(userid){
 				$(".profile_buttons #follow, .profile_buttons #sendmessage").hide();
 			}
 
-			$(".profile_buttons").show();
+			//$(".profile_buttons").show();
 			
-		}		
+		}	
+
+
 		
 		if(profileData.place != null)
 			$(".profile_place").show().children("span").text(profileData.place);
