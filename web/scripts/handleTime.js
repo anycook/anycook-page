@@ -5,7 +5,7 @@ function timeFormSubmit(event){
 	if(std == 0 && min ==0)
 		search.setTime(null);
 	else
-		search.setTime({std : fillStd(std), min : fillMin(min)};
+		search.setTime({std : fillStd(std), min : fillMin(min)});
 		
 	search.flush();
 	return false;
