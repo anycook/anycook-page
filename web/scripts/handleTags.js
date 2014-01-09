@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 //NEW
 function makeNewTagInput(event){
 	var $this = $(this);
@@ -21,7 +41,7 @@ function makeNewTagInput(event){
 	    		source:function(req,resp){
         			//var array = [];
         		var term = req.term;
-        		$.anycook.graph.autocomplete.tag(term,function(data){
+        		$.anycook.api.autocomplete.tag(term,function(data){
         				resp($.map(data, function(item){
         					return{
         						label:item
@@ -139,7 +159,7 @@ function makeTagCloud(){
 	if(recipe != null)
 		data+="recipe="+recipe;
 	
-	$.anycook.graph.tag.popular(recipe, function(response){
+	$.anycook.api.tag.popular(recipe, function(response){
 			for(tag in response){
 				$("#tagcloud").append(getTag(tag, "number", response[tag]));
 			}
@@ -168,7 +188,7 @@ function submitSuggestTags(event){
 	var userid = -1;
 	if(user.checkLogin())
 		userid = user.id;
-	$.anycook.graph.tag.suggest(recipe, tags);
+	$.anycook.api.tag.suggest(recipe, tags);
 	hideLightbox();
 	$(".tagsbox").empty();
 	/*$("#recipe_tags").empty();

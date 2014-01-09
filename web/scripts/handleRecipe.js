@@ -1,7 +1,27 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 function profileRecipe(recipe){
 	var uri = "#!/recipe/"+encodeURIComponent(recipe);
 	
-	var $img = $("<img/>").attr("src", $.anycook.graph.recipe.image(recipe));
+	var $img = $("<img/>").attr("src", $.anycook.api.recipe.image(recipe));
 	var $div =$("<div></div>").append("<span>"+recipe+"</span>");
 	
 	var $link = $("<a></a>").addClass("profile_rezept_bild").attr("href", uri)
@@ -18,7 +38,7 @@ function loadRecipe(recipeName, versionid) {
 	$("#subnav #recipe_btn").attr("href", rezepturi);
 	$("#subnav #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
-	$.anycook.graph.recipe(recipeName, versionid, function(recipe){
+	$.anycook.api.recipe(recipeName, versionid, function(recipe){
 		$.address.title(recipe.name + " | anycook");
 		$("#recipe_headline").append(recipe.name);
 		$("#introduction").append(recipe.description);
@@ -28,19 +48,19 @@ function loadRecipe(recipeName, versionid) {
 		loadFilter(recipe);
 	});
 	
-	$(".recipe_image").attr("src", $.anycook.graph.recipe.image(recipeName, "large"));
+	$(".recipe_image").attr("src", $.anycook.api.recipe.image(recipeName, "large"));
 
-	$.anycook.graph.recipe.ingredients(recipeName, versionid, function(ingredients){
+	$.anycook.api.recipe.ingredients(recipeName, versionid, function(ingredients){
 		if(decodeURIComponent($.address.pathNames()[1]) != recipeName) return;
 		loadIngredients(ingredients);
 	});
 
-	$.anycook.graph.recipe.tags(recipeName, function(tags){
+	$.anycook.api.recipe.tags(recipeName, function(tags){
 		if(decodeURIComponent($.address.pathNames()[1]) != recipeName) return;
 		loadTags(tags);
 	});
 
-	$.anycook.graph.recipe.steps(recipeName, versionid, loadSteps);
+	$.anycook.api.recipe.steps(recipeName, versionid, loadSteps);
 
 	//recipe_image
 	
@@ -52,7 +72,7 @@ function loadRecipe(recipeName, versionid) {
 
 	//schmeckt-button
 	if(user.checkLogin()) {
-		$.anycook.graph.recipe.schmeckt(recipeName, function(schmeckt){
+		$.anycook.api.recipe.schmeckt(recipeName, function(schmeckt){
 			if(!schmeckt) {
 				$("#schmecktmir").click(schmecktmir);
 			} else {
@@ -460,7 +480,7 @@ function postProcessString(string, factor) {
 function schmecktmir(){
 		var gericht = $.address.pathNames()[1];
 		$("#schmecktmir").unbind("click");
-		$.anycook.graph.recipe.makeSchmeckt(gericht, function(response){
+		$.anycook.api.recipe.makeSchmeckt(gericht, function(response){
 				if(response != "false"){
 					$("#schmecktmir").addClass("on");
 					$("#schmecktmir").click(schmecktmirnicht);
@@ -471,7 +491,7 @@ function schmecktmir(){
 function schmecktmirnicht(){
 	var gericht = $.address.pathNames()[1];
 	$("#schmecktmir").unbind("click");
-	$.anycook.graph.recipe.unmakeSchmeckt(gericht,function(response){
+	$.anycook.api.recipe.unmakeSchmeckt(gericht,function(response){
 			if(response != "false"){
 				$("#schmecktmir").removeClass("on");
 				$("#schmecktmir").click(schmecktmir);

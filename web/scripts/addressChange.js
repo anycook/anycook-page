@@ -1,4 +1,22 @@
-
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
 
 function loadHome()
 {
@@ -14,21 +32,21 @@ function loadHome()
 		.append(getHeaderLink("Entdecken", "/#?page=discover", "discover_button").addClass("active"));
 		//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 	
-	$.anycook.graph.recipe.ofTheDay(function(recipeOfTheDay){
+	$.anycook.api.recipe.ofTheDay(function(recipeOfTheDay){
 		var recipeName = recipeOfTheDay.name;
 		$("#recipe_of_the_day").attr("href", Recipe.getURI(recipeName))
 	  		.text(recipeName);
 	});
 	
-	$.anycook.graph.recipe.number(function(num){
+	$.anycook.api.recipe.number(function(num){
 		$("#num_recipes").text(num);
 	});
 	
-	$.anycook.graph.tag.number(function(num){
+	$.anycook.api.tag.number(function(num){
 		$("#num_tags").text(num);
 	});
 	
-	$.anycook.graph.ingredient.number(function(num){
+	$.anycook.api.ingredient.number(function(num){
 		$("#num_ingredients").text(num);
 	});
 

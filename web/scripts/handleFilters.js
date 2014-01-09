@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 // alle Filter
 function setFiltersfromSession(){
 	resetFilter();
@@ -89,7 +109,7 @@ function loadAllKategories(target){
 			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 		}
 		
-		$.anycook.graph.category.sorted(function(json){
+		$.anycook.api.category.sorted(function(json){
 			var totalrecipes = 0;
 				for(var k in json){
 					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
@@ -273,7 +293,7 @@ function ingredientListClick(){
         			excludedIngredients.push($(this).text());
         		});
         		
-        		$.anycook.graph.autocomplete.ingredient(term,excludedIngredients,function(data){
+        		$.anycook.api.autocomplete.ingredient(term,excludedIngredients,function(data){
         				resp($.map(data, function(item){
         					return{
         						label:item,

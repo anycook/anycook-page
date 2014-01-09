@@ -1,7 +1,24 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 function loadNewsstream(){
-	
-	
-	
 	$("#newMessageBtn").click(function(){
 		var $lightbox = getNewMessageLightbox();
 		var top = $(this).offset().top-113;
@@ -34,7 +51,7 @@ function getNewsstream(lastDatetime){
 	var timeout = 0;
 	if(lastDatetime)
 		timeout = 500;
-	setTimeout(function(){$.anycook.graph.message(lastDatetime,function(json){
+	setTimeout(function(){$.anycook.api.message(lastDatetime,function(json){
 			var datamap = {};
 			var oldDatamap = $ul.data("map") || {};
 
@@ -97,7 +114,7 @@ function checkNewMessageNum(num){
 	
 	
 	if(user.checkLogin())
-		$.anycook.graph.message.number(num, checkNewMessageNum);
+		$.anycook.api.message.number(num, checkNewMessageNum);
 }
 
 function setTitlePrefix(newNum){
@@ -141,7 +158,7 @@ function clickRecipients(){
 	    		var term = req.term;
 	    		var exclude = getRecipientIds();
 	    		exclude.push(user.id);
-	    		$.anycook.graph.autocomplete.user(term, exclude, function(json){
+	    		$.anycook.api.autocomplete.user(term, exclude, function(json){
 						var ids = getRecipientIds();
 						for(var i = 0; i<json.length; i++){
 							if($.inArray(json[i].id, ids) == -1)
@@ -286,7 +303,7 @@ function submitNewMessage(event){
 	if(recipientIds === undefined || recipientIds.length == 0 || message.length == 0)
 		return;
 	
-	$.anycook.graph.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
+	$.anycook.api.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
 		console.log(xhr);
 	});
 	

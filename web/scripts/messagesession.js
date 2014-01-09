@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 function getMessages(sessionid, startid){
 	var timeout = 500;
 	if(startid === undefined){
@@ -5,7 +25,7 @@ function getMessages(sessionid, startid){
 		timeout = 0;
 	}
 	
-	setTimeout(function(){$.anycook.graph.message.session(sessionid, startid,
+	setTimeout(function(){$.anycook.api.message.session(sessionid, startid,
 		function(json){
 			var messages = json.messages;
 			
@@ -58,7 +78,7 @@ function getMessages(sessionid, startid){
 					
 					
 					if(messages[i].unread)
-						$.anycook.graph.message.read(sessionid, messages[i].id);
+						$.anycook.api.message.read(sessionid, messages[i].id);
 						
 					$.extend(oldDataMap, datamap);
 					$messagestream.data("messages", oldDataMap);
@@ -119,7 +139,7 @@ function submitAnswerMessage(event){
 	if(message.length == 0)
 		return;
 	
-	$.anycook.graph.message.answer(sessionid, message);
+	$.anycook.api.message.answer(sessionid, message);
 	
 	//console.log(encodeURIComponent(message));
 	$textarea.val("");

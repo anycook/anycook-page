@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 function addResults(json){
 	$("#more_results").remove();
 	var recipes = json.results;
@@ -15,7 +35,7 @@ function addResults(json){
 		$frame_big = $frame_big.appendTo("#result_container");
 		// $("#result_container").append($frame_big);
 
-		$.anycook.graph.recipe(recipe, function(recipe){
+		$.anycook.api.recipe(recipe, function(recipe){
 			if($.inArray(currentRecipes, recipes[0]) > -1)	return;
 
 			fillBigFrame($frame_big, recipe);
@@ -49,7 +69,7 @@ function autocompleteIngredients(term, resp){
 }
 
 function autocompleteExcludedIngredients(term, resp){
-	$.anycook.graph.autocomplete.ingredient(term, function(data){
+	$.anycook.api.autocomplete.ingredient(term, function(data){
 		var array = [];
 	 	for(var i=0;i<data.length;i++){
 	 		if(i==0)
@@ -67,7 +87,7 @@ function autocomplete(term, resp){
 	var tags = search.tags;
 	var user = search.user;
 	
-	$.anycook.graph.autocomplete(term, categorie, ingredients, tags, user, function(data){
+	$.anycook.api.autocomplete(term, categorie, ingredients, tags, user, function(data){
 		var array = [];
 		if(data.gerichte!=undefined){
 			for(var i=0;i<data.gerichte.length;i++){

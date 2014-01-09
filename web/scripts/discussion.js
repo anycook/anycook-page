@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+ 
 function loadDiscussion(recipename, lastid) {
 	if(lastid === undefined){
 		lastid = -1;
@@ -17,7 +37,7 @@ function loadDiscussion(recipename, lastid) {
 		$("#no_comment").hide();
 	else
 		$("#yes_commit").hide();
-	$.anycook.graph.discussion(recipename, lastid, function(json){
+	$.anycook.api.discussion(recipename, lastid, function(json){
 		var pathNames = $.address.pathNames();
 		if(pathNames[0] != "recipe" || decodeURI(pathNames[1]) != recipename)
 			return;
@@ -244,7 +264,7 @@ function comment(event) {
 	if(text != "") {
 		var parameterNames = $.address.pathNames();
 		var recipeName = parameterNames[1];
-		$.anycook.graph.discussion.answer(recipeName, text, function(){
+		$.anycook.api.discussion.answer(recipeName, text, function(){
 			$textarea.val("");
 		});
 	}
@@ -258,7 +278,7 @@ function childComment(event) {
 		if(text != "") {
 			var parameterNames = $.address.pathNames();
 			var recipeName = parameterNames[1];
-			$.anycook.graph.discussion.answer(recipeName, text, pid, function(){
+			$.anycook.api.discussion.answer(recipeName, text, pid, function(){
 				$this.parents(".child_comment").fadeOut(200, function(){
 					$(this).remove();
 				});
@@ -278,14 +298,14 @@ function discussionLike(event) {
 	var recipeName = parameterNames[1];
 
 	if(!$this.hasClass("liked_by_user")){
-		$.anycook.graph.discussion.like(recipeName, id, function(){
+		$.anycook.api.discussion.like(recipeName, id, function(){
 			var $like_nr = $this.siblings(".like_nr");
 			var oldNum = Number($like_nr.text());
 			$like_nr.text(++oldNum);
 			$this.addClass("liked_by_user");
 		});
 	}else{
-		$.anycook.graph.discussion.unlike(recipeName, id, function(){
+		$.anycook.api.discussion.unlike(recipeName, id, function(){
 			var $like_nr = $this.siblings(".like_nr");
 			var oldNum = Number($like_nr.text());
 			$like_nr.text(--oldNum);

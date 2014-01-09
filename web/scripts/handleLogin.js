@@ -1,3 +1,22 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
 
 function buildLogin(){
 	/*initMenus();
@@ -142,7 +161,7 @@ function submitForm(event){
 	var mail = $mail.val();
 	var pwd = $pwd.val();
 	var stayloggedin =$("#stayloggedin input").is(":checked");
-	$.anycook.graph.session.login(mail, pwd, stayloggedin, function(json){
+	$.anycook.api.session.login(mail, pwd, stayloggedin, function(json){
 		user = User.init();
 		//TODO code Login behavior
 		location.reload();
@@ -259,7 +278,7 @@ function submitRegistration(event){
 function showRegistrationStep2(username, mail){
 	$("#reg_step2 h1").text("Hey "+username+"!");
 	var domain = mail.split("@")[1];
-	$.anycook.graph.session.getMailProvider(domain, function(json){
+	$.anycook.api.session.getMailProvider(domain, function(json){
 		if(json!=null){
 			var image = json.image;
 			var shortname = json.shortname;

@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 (function($){
 	if(!$.anycook)
 		$.anycook = {};
@@ -15,12 +35,12 @@
 
 		$.anycook.user.settings.loadAccount();
 		
-		$.anycook.graph.session.settings(function(json){
+		$.anycook.api.session.settings(function(json){
 			$.extend(settings, json);
 			$.anycook.user.settings.loadMail();
 		});
 
-		var conf = $.anycook.graph._settings();
+		var conf = $.anycook.api._settings();
 		
 		new qq.FileUploader({
 		    // pass the dom node (ex. $(selector)[0] for jQuery users)
@@ -143,7 +163,7 @@
 				break;
 		}
 
-		$.anycook.graph.session.setAccount(type, value, function(){
+		$.anycook.api.session.setAccount(type, value, function(){
 			user[type] = value;
 			var $container = $("#profile_saved");		
 			$.anycook.user.settings.saved($container);
@@ -167,7 +187,7 @@
 	// 	if(newText != user.text)
 	// 		newSettings.text = newText;
 			
-	// 	$.anycook.graph.session.setAccount(newSettings,function(){
+	// 	$.anycook.api.session.setAccount(newSettings,function(){
 	// 		user = User.init();
 	// 		var $container = $("#profile_saved");		
 	// 		$.anycook.user.settings.saved($container);
@@ -178,16 +198,16 @@
 	$.anycook.user.settings.changeMail = function(event){
 		var $this = $(this);
 		if($this.is(":checked"))
-			$.anycook.graph.session.addMailSettings($this.val());
+			$.anycook.api.session.addMailSettings($this.val());
 		else
-			$.anycook.graph.session.removeMailSettings($this.val());
+			$.anycook.api.session.removeMailSettings($this.val());
 		var $container = $("#notification_saved");		
 		$.anycook.user.settings.saved($container);
 		
 	};
 	
 	$.anycook.user.settings.changeAllMail = function(value){
-		$.anycook.graph.session.setMail("all", value);
+		$.anycook.api.session.setMail("all", value);
 	};
 	
 	$.anycook.user.settings.saved = function($container){

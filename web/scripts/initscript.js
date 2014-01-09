@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
  $(document).ready(function(){
 	 //setup
 	 // if($.browser.msie){
@@ -30,9 +50,9 @@
     		$("#loadpoints span").removeClass("loading");
     	});
 
-    //anycookgraph
+    //anycookapi
     baseUrl = "http://10.1.0.200";
-	$.when($.anycook.graph.init({appId:2, baseUrl: baseUrl})).then(function(){
+	$.when($.anycook.api.init({appId:2, baseUrl: baseUrl})).then(function(){
     	loadAllKategories($("#kategorie_filter ul"));
     	
     	var xmlErrorFunction = function(event){
@@ -167,7 +187,7 @@
 				
             	$("#search_form").submit(function(){
                 	var data = $("input:first").val();
-                	$.anycook.graph.search.validate(data, function(result){
+                	$.anycook.api.search.validate(data, function(result){
             			  handleSearchResults(result, data);
             		 });
                 	return false;

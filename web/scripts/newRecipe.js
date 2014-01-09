@@ -1,5 +1,21 @@
 /**
- * @author Jan Grassegger
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
  */
 
 function loadNewRecipe(){
@@ -82,7 +98,7 @@ function loadNewRecipe(){
 	
 	//step3
 	
-	$.anycook.graph.category.sorted(function(json){
+	$.anycook.api.category.sorted(function(json){
 		var $category_select = $("#category_select");
 		for(var category in json)
 			$category_select.append("<option>"+category+"</option>");
@@ -249,7 +265,7 @@ function checkStep2(event){
 			if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
 				continue;
 				
-			$.anycook.graph.ingredient.extract(currentSentences[i], function(json){
+			$.anycook.api.ingredient.extract(currentSentences[i], function(json){
 				var $stepIngredients = $step.find(".new_ingredient");
 				var $stepQuestions = $step.find(".new_ingredient_question .ingredient");
 				var ingredients = [];
@@ -447,7 +463,7 @@ function saveRecipe(){
 			recipe.mongoid = id;
 		
 
-		$.anycook.graph.recipe.save(recipe, function(response){
+		$.anycook.api.recipe.save(recipe, function(response){
 			$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
 			$("body").on("click", function(){
 				$.address.path("");
@@ -557,6 +573,8 @@ function newRecipeAdressChange(event){
 
 //drafts
 function fillNewRecipe(json){
+	var data = json.data;
+
 	if(json.name)
 		$("#new_recipe_name").val(json.name);
 	if(json.description)
@@ -877,7 +895,7 @@ function getNewIngredientLine(name, menge){
         			excludedIngredients.push($(this).val());
         		});
         		
-        		$.anycook.graph.autocomplete.ingredient(term,excludedIngredients,function(data){
+        		$.anycook.api.autocomplete.ingredient(term,excludedIngredients,function(data){
         				resp($.map(data, function(item){
         					return{
         						label:item,

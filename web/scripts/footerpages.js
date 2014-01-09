@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 function loadAboutUs(){
 	setTimeSinceStart();
 	setWebsiteData();
@@ -5,10 +25,10 @@ function loadAboutUs(){
 
 function setWebsiteData(){
 	if($.address.pathNames()[0] == "about_us"){
-		$.when($.anycook.graph.user.number(),
-			$.anycook.graph.tag.number(),
-			$.anycook.graph.ingredient.number(),
-			$.anycook.graph.recipe.number())
+		$.when($.anycook.api.user.number(),
+			$.anycook.api.tag.number(),
+			$.anycook.api.ingredient.number(),
+			$.anycook.api.recipe.number())
 		.then(function(numUsers, numTags, numIngredients, numRecipes){
 			$(".usercounter").text(numUsers[0]);
 		  	$(".tagcounter").text(numTags[0]);

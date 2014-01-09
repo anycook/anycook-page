@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 (function( $ ){
 	
 	if(!$.anycook)
@@ -9,11 +29,11 @@
 	var queue = [];
 	
 	$.anycook.drafts.newDraft = function(callback){
-		$.anycook.graph._put("/drafts",{}, callback);
+		$.anycook.api._put("/drafts",{}, callback);
 	}
 	
 	$.anycook.drafts.load = function(){
-		$.anycook.graph._get("/drafts", {}, function(drafts){
+		$.anycook.api._get("/drafts", {}, function(drafts){
 			if(drafts.length == 0){
 				$("#nodrafts").show();
 				return;
@@ -21,7 +41,7 @@
 			var $list = $("#draft_list");
 			for(var i in drafts){
 				var draft = drafts[i];
-				$list.append($.anycook.drafts.getBigFrameDraft(draft._id.$oid,draft.value));
+				$list.append($.anycook.drafts.getBigFrameDraft(draft.id,draft.data));
 			}
 		});
 	}
@@ -30,7 +50,7 @@
 		if(lastnum === undefined) lastnum = -1;
 
 		if(user.checkLogin()){
-			$.anycook.graph._get("/drafts/num", {lastNum:lastnum}, function(num){
+			$.anycook.api._get("/drafts/num", {lastNum:lastnum}, function(num){
 				$("#drafts #draftnum").text(num);
 				var $messageBubble = $("#settings_btn_container .new_messages_bubble");
 				if(num>0)			
@@ -45,14 +65,14 @@
 	};
 	
 	$.anycook.drafts.open = function(id, callback){
-		return $.anycook.graph._get("/drafts/"+id, {}, callback);
+		return $.anycook.api._get("/drafts/"+id, {}, callback);
 	}
 	
 	
 	$.anycook.drafts.remove = function(event){
 		var $this = $(this);
 		var $li = $this.parent("li");
-		$.anycook.graph._delete("/drafts/"+event.data._id,{}, function(){
+		$.anycook.api._delete("/drafts/"+event.data._id,{}, function(){
 			$li.animate({height:0, opacity:0},{duration:500, complete:function(){
 				$(this).remove();
 				if($("#draft_list").children().length == 0){
@@ -182,8 +202,7 @@
 	$.anycook.drafts.saveDoc = function(){
 		if(queue.length > 0){
 			var data = queue[0];
-			var newData = JSON.stringify(data.data);
-			$.anycook.graph._post("/drafts/"+data.id,{data:newData}, function(){
+			$.anycook.api._postJSON("/drafts/"+data.id,data.data, function(){
 				queue.shift();
 					$.anycook.drafts.saveDoc();
 			});
@@ -191,10 +210,10 @@
 	};
 
 	$.anycook.drafts.getDraftFromRecipe = function(recipename){
-		var graph = "/drafts/"+encodeURIComponent(recipename);
+		var path = "/drafts/"+encodeURIComponent(recipename);
 		var data = {};
 
-		$.anycook.graph._put(graph, {}, function(draft_id){
+		$.anycook.api._put(path, {}, function(draft_id){
 			if(draft_id != null)
 				$.address.value("/recipeediting?step=4&id="+draft_id);
 		})

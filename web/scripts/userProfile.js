@@ -1,3 +1,23 @@
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+
 function loadProfile(userid){
 	if(userid == "me" && user.onlyUserAccess()){
 		userid = user.id;
@@ -75,7 +95,7 @@ function loadProfile(userid){
 			}
 		});
 		
-		$.anycook.graph.user.schmeckt(userid, function(schmeckt){
+		$.anycook.api.user.schmeckt(userid, function(schmeckt){
 			$(".profile_achievements .likes .count").text(schmeckt.length);
 			if(schmeckt.length > 0){
 				var headline;
@@ -96,7 +116,7 @@ function loadProfile(userid){
 	});
 		
 	if(userid == user.id){
-		$.anycook.graph.user.recommendations (function(json){
+		$.anycook.api.user.recommendations (function(json){
         	if(json.length>0){
         		var headline = "Diese Rezepte könnten dir auch schmecken";
         		$("#profile_recommendation").recipeoverview(headline, json).show();
@@ -116,12 +136,12 @@ function follow(){
 	var $follower = $(".follower .count");
 	var numFollowers = Number($follower.text());
 	if(!$this.hasClass("on")){
-		$.anycook.graph.user.follow(userid);
+		$.anycook.api.user.follow(userid);
 		$this.addClass("on").text("- Entfolgen");
 		$("#stamp").fadeIn(500);
 		$follower.text(numFollowers+1);
 	}else{
-		$.anycook.graph.user.unfollow(userid);
+		$.anycook.api.user.unfollow(userid);
 		$this.removeClass("on").text("+ Folgen");
 		$("#stamp").fadeOut(500);
 
