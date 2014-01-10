@@ -156,15 +156,15 @@ Search.prototype.setUsername = function(username){
 Search.prototype.getData = function(){
 	var data = {};
 	if(this.tags.length > 0)
-		data.tags = this.tags.toString();
+		data.tags = this.tags;
 	if(this.kategorie != null)
 		data.category = this.kategorie;
 	if(this.zutaten.length > 0)
-		data.ingredients = this.zutaten.toString();
+		data.ingredients = this.zutaten;
 	if(this.excludedingredients.length > 0)
-		data.excludedingredients = this.excludedingredients.toString();
+		data.excludedingredients = this.excludedingredients;
 	if(this.terms.length > 0)
-		data.terms = this.terms.toString();
+		data.terms = this.terms;
 	if(this.kalorien != null)
 		data.calorie = this.kalorien;
 	if(this.skill != null)
@@ -193,7 +193,7 @@ Search.prototype.search = function(start, num){
 	if(start === 0)
 		$("#result_container").empty();
 	// $.when($.anycook.graph.search(data),user.getSchmecktRecipes()).then(function(json, schmeckt){
-	$.anycook.graph.search(data,function(json){
+	$.anycook.api.search(data,function(json){
 		if(json && json.size > 0){
 			// $("#result_container").data("results", json);
 			// addResults();
