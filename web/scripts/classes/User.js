@@ -19,7 +19,7 @@ User.init = function(){
 	var user = new User();
 
 	var dfd = $.Deferred();
-	$.anycook.graph.session(function(response){
+	$.anycook.api.session(function(response){
 			user.id = response.id;
 			user.name = response.name;
 			// user.schmeckt = response.schmeckt;
@@ -48,7 +48,7 @@ User.initProfileInfo = function(id){
 	var dfd = $.Deferred();
 	
 	
-	$.when($.anycook.graph.user(id)).then(function(json){
+	$.when($.anycook.api.user(id)).then(function(json){
 		var profileUser = new User();
 		profileUser.id = json.id;
 		profileUser.name = json.name;
@@ -87,7 +87,7 @@ User.prototype.getRecipes = function(callback){
 
 User.getRecipes = function(userId, callback){
 	var data = {userId:userId};
-	return $.anycook.graph.recipe(data,callback);
+	return $.anycook.api.recipe(data,callback);
 }
 
 User.prototype.getSchmecktRecipes = function(callback){
@@ -95,11 +95,11 @@ User.prototype.getSchmecktRecipes = function(callback){
 }
 
 User.getSchmecktRecipes = function(userid, callback){
-	return $.anycook.graph.user.schmeckt(userid,callback);
+	return $.anycook.api.user.schmeckt(userid,callback);
 }
 
 User.getDiscussionNum = function(userid, callback){
-	return $.anycook.graph.user.discussionNum(userid, callback);
+	return $.anycook.api.user.discussionNum(userid, callback);
 }
 
 
@@ -130,16 +130,16 @@ User.prototype.isFollowedBy = function(userid){
 }
 
 User.getUserImagePath = function(userid, type){
-	return $.anycook.graph.user.image(userid, type);
+	return $.anycook.api.user.image(userid, type);
 }
 
 User.prototype.getUserImagePath = function(type){
-	return $.anycook.graph.user.image(this.id, type);
+	return $.anycook.api.user.image(this.id, type);
 };
 
 User.login = function(mail, pwd, stayloggedin){
 	var callback = false;
-	$.anycook.graph.session.login(mail, pwd, stayloggedin, function(response){
+	$.anycook.api.session.login(mail, pwd, stayloggedin, function(response){
 			callback = response!="false";
 			// checkNewMessageNum();
 	});
@@ -154,7 +154,7 @@ User.prototype.logout = function(){
 		this.mail = null;
 		this.facebook_id = null;
 		this.image = null;
-		$.anycook.graph.session.logout(function(){
+		$.anycook.api.session.logout(function(){
 			FB.getLoginStatus(function(response){
 				if(response.status == "connected"){
 					FB.logout(function() {

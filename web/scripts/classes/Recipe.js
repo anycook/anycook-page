@@ -61,11 +61,11 @@ Recipe.prototype.checkRecipe = function(){
 };
 
 Recipe.prototype.getImageURL = function(type){
-	return $.anycook.graph.recipe.image(this.name, type);
+	return $.anycook.api.recipe.image(this.name, type);
 };
 
 Recipe.getImageURL = function(recipename, type){
-	return $.anycook.graph.recipe.image(recipename, type);
+	return $.anycook.api.recipe.image(recipename, type);
 };
 
 Recipe.prototype.getURI = function(){
