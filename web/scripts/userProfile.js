@@ -35,8 +35,7 @@ function loadProfile(userid){
 
 		if(user.checkLogin()){
 			if(user.id != userid){
-				$(".profile_buttons #preferences").hide();
-				$("#follow").click(follow);
+				$("#follow").click(follow).show();
 
 				if(profileData.isFollowedBy(user.id)){
 					$("#stamp").show();
@@ -44,7 +43,7 @@ function loadProfile(userid){
 				}
 
 				//lightbox	
-				$("#sendmessage").click(function(){
+				$("#sendmessage").show().click(function(){
 					var $lightbox = getNewMessageLightbox();
 					var top = $(this).offset().top-313;
 					showLightbox($lightbox, top, function(){
@@ -56,7 +55,8 @@ function loadProfile(userid){
 					return false;
 				});	
 			} else{
-				$(".profile_buttons #follow, .profile_buttons #sendmessage").hide();
+				$(".profile_buttons #preferences").show();
+				
 			}
 
 			//$(".profile_buttons").show();
