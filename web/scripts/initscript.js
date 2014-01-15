@@ -185,12 +185,11 @@
 				
 				$(".ui-autocomplete").addClass("search-autocomplete");
 				
-            	$("#search_form").submit(function(){
-                	var data = $("input:first").val();
-                	$.anycook.api.search.validate(data, function(result){
-            			  handleSearchResults(result, data);
-            		 });
-                	return false;
+            	$("#search_form").submit(function(event){
+            		event.preventDefault();
+                	var data = $("#search").val();
+                	search.setTerms(data);
+                	search.flush();
             	});
 				$("#search_reset").click(function(){
 					var val = $("#search").val();

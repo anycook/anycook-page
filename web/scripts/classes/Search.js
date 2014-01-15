@@ -6,7 +6,7 @@ function Search(){
 	this.zutaten = new Array();
 	this.excludedingredients = new Array();
 	this.tags = new Array();
-	this.terms = new Array();
+	this.terms = null;
 	this.user = null;
 }
 
@@ -49,7 +49,7 @@ Search.init = function(){
 			break;
 			
 		case "terms":
-			temp.terms = value.split(",");
+			temp.terms = value;
 			break;
 		}
 		
@@ -110,22 +110,18 @@ Search.prototype.removeExcludedingredient = function(zutat){
 	}
 };
 
-Search.prototype.addTerm = function(term){
-	for(var i in this.terms){
-		if(this.terms[i] == term) return;
-	}
-	
-	this.terms[this.terms.length] = term;
+Search.prototype.setTerms = function(terms){
+	this.terms = terms;
 };
 
-Search.prototype.removeTerm = function(term){
+/*Search.prototype.removeTerm = function(term){
 	for(var i = 0; i<this.terms.length; i++){
 		if(this.terms[i]==term){
 			this.terms.splice(i, 1);
 			break;
 		}
 	}
-};
+};*/
 
 Search.prototype.setKategorie = function(kategorie){
 	this.kategorie = kategorie;
@@ -163,7 +159,7 @@ Search.prototype.getData = function(){
 		data.ingredients = this.zutaten;
 	if(this.excludedingredients.length > 0)
 		data.excludedingredients = this.excludedingredients;
-	if(this.terms.length > 0)
+	if(this.terms != null)
 		data.terms = this.terms;
 	if(this.kalorien != null)
 		data.calorie = this.kalorien;
@@ -236,7 +232,7 @@ Search.prototype.flush = function(){
 Search.prototype.hasData = function(){
 	var check = this.skill != null || this.kalorien != null || this.kategorie != null 
 		|| this.time != null || this.zutaten.length > 0 || this.excludedingredients.length > 0
-		 || this.tags.length > 0 || this.terms.length > 0 || this.user != null;
+		 || this.tags.length > 0 || this.terms != null || this.user != null;
 	return check;
 };
 

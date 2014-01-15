@@ -55,11 +55,8 @@ function setFiltersfromSession(){
 		for(num in search.tags)
 			$(".tags_list").append(getTag(search.tags[num], "remove"));
 		
-		if(search.terms!=undefined){
-			$("#search_terms").show();
-			for(i in search.terms){
-				addTerms(search.terms[i], false);
-			}
+		if(search.terms!=null){
+			addTerms(search.terms);
 		}
 	}
 

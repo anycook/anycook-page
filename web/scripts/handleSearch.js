@@ -219,10 +219,7 @@ function handleSearchResults(result, terms){
 		gotoProfile(result.user[0]);
 	}
 	else if(terms!= ""){
-		var split = terms.split(" ");
-		for(var i in split){
-			search.addTerm(split[i]);
-		}
+		search.addTerm(terms);
 		search.flush();
 	}
 	return false;
@@ -230,7 +227,7 @@ function handleSearchResults(result, terms){
 }
 
 function addTerms(terms){
-	if($(".search_term").length == 0){ 
+	/*if($(".search_term").length == 0){ 
 		$("#terms_text").show();
 		$(".close_term").live("click", removeTerm);
 	}
@@ -240,15 +237,13 @@ function addTerms(terms){
 		if(search.terms[i]!= ""){
 			$("#search_terms").append("<div class=\"search_term\"><span>"+search.terms[i]+"</span><div class=\"close_term\">x</div></div>");
 		}
-	}	
+	}*/
+	$("#search").val(terms);	
 }
 
 function removeTerm(event){
-	var target = $(event.target);
-	var term = target.prev().text();
-	search.removeTerm(term);
+	search.setTerms(null);
 	search.flush();
-	
 }
 
 function gotoGericht(gericht){
