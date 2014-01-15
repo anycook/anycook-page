@@ -22,11 +22,11 @@ User.init = function(){
 	$.anycook.api.session(function(response){
 			user.id = response.id;
 			user.name = response.name;
-			// user.schmeckt = response.schmeckt;
 			user.level = Number(response.level);
 			user.mail = response.mail;
 			user.facebook_id = response.facebookID;
 			user.text = response.text;
+			user.followers = response.followers;
 			user.following = response.following;
 			user.place = response.place;
 			$.when(user.getSchmecktRecipes()).then(function(schmeckt){
