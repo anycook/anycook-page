@@ -100,19 +100,19 @@ function resetFilter(){
 
 //kategorie
 
-function loadAllKategories(target){
-	if(!target.children().size() > 0){
-		if(target.parents(".step_1_right").length == 0){
-			target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
+function loadAllKategories($target){
+	if(!$target.children().size() > 0){
+		if($target.parents(".step_1_right").length == 0){
+			$target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 		}
 		
 		$.anycook.api.category.sorted(function(json){
 			var totalrecipes = 0;
 				for(var k in json){
-					target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
+					$target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
 					totalrecipes+=Number(json[k])
 				}
-				$(target.find(".right")[0]).text(totalrecipes);
+				$($target.find(".right")[0]).text(totalrecipes);
 		});
 	}
 }

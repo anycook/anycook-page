@@ -207,7 +207,7 @@
             	
             	//Kategoriefilter
             	$("#kategorie_head").click(handleKategories);
-            	// loadAllKategories($("#kategorie_filter ul"));
+            	//loadAllKategories($("#kategorie_filter ul"));
             	
             	removeChecked();
             	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){
