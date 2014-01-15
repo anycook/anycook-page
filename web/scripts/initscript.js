@@ -19,36 +19,34 @@
  */
 
  $(document).ready(function(){
-	 //setup
-	 // if($.browser.msie){
-		 // var version = Number($.browser.version);		
-		 // if(version<9)
-			 // document.location.href="http://news.anycook.de/tagged/internet_explorer";
-	 // }
+	//setup
+	// if($.browser.msie){
+		// var version = Number($.browser.version);		
+		// if(version<9)
+			// document.location.href="http://news.anycook.de/tagged/internet_explorer";
+	// }
 	 
-	 //CORS
-	 //source: http://api.jquery.com/jQuery.support/	 
-	 $.support.cors = true;
+	//CORS
+	//source: http://api.jquery.com/jQuery.support/	 
+	$.support.cors = true;
 	 
 	 
-	 //makeWidth
+	//makeWidth
 	updateWidth();
 	$(window).resize(updateWidth);	 
 	 	
+	$.ajaxSetup({
+    	global:true,
+        scriptCharset: "utf8" , 
+        contentType: "application/x-www-form-urlencoded; charset=utf8"
+    });
 
-	 
-    	$.ajaxSetup({
-        	global:true,
-            scriptCharset: "utf8" , 
-            contentType: "application/x-www-form-urlencoded; charset=utf8"
-        });
-
-        $(document).ajaxStart(function(){
-    		$("#loadpoints span").addClass("loading");
-    	})
-    	.ajaxStop(function(){
-    		$("#loadpoints span").removeClass("loading");
-    	});
+    $(document).ajaxStart(function(){
+		$("#loadpoints span").addClass("loading");
+	})
+	.ajaxStop(function(){
+		$("#loadpoints span").removeClass("loading");
+	});
 
     //anycookapi
     baseUrl = "http://10.1.0.200";

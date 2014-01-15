@@ -25,8 +25,8 @@ function updateLiveAtHome(){
 	if(path == "/"){
 		var data = {newestid:newestid};
 		$.anycook.api.life(data,function(response){
-				parseAndAddLiveAtHome(response);
-				window.setTimeout(updateLiveAtHome, 5000);
+			parseAndAddLiveAtHome(response);
+			window.setTimeout(updateLiveAtHome, 5000);
 		});
 	}
 }
