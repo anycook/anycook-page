@@ -567,27 +567,27 @@
 				<div class="headbox" id="mail_notification"><h2>E-Mail-Benachrichtigungen</h2><input type="checkbox" name="mailnotification" value="MAILACTIVATION" /><label class="bigcheckbox"></label></div>
 				<div id="settings_notification_content" class="settings_content">
 				<table>
-				<tr id="recipeactivation">
+				<tr id="recipeActivation">
 					<td>...wenn mein Rezept aktiviert wird.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_activation" value="recipeactivation" /><label></label></div></td>
 				</tr>
-				<tr id="tagaccepted">
+				<tr id="tagAccepted">
 					<td>...wenn meine Stichwörter aktiviert werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="tagactivation" /><label></label></div></td>
 				</tr>
-				<tr id="tagdenied">
+				<tr id="tagDenied">
 					<td>...wenn meine Stichwörter abgelehnt werden.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_tag" value="tagdenied" /><label></label></div></td>
 				</tr>
-				<tr id="recipediscussion">
+				<tr id="recipeDiscussion">
 					<td>...bei Diskussionsbeiträgen zu meinem Rezept.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_discussion" value="recipediscussion" /><label></label></div></td>
 				</tr>
-				<tr id="discussionanswer">
+				<tr id="discussionAnswer">
 					<td>...bei Antworten auf meine Diskussionsbeiträge.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_reply" value="discussionanswer" /><label></label></div></td>
 				</tr>
-				<tr id="schmeckt">
+				<tr id="tastes">
 					<td>...wenn jemandem dein Rezept schmeckt.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="schmeckt" /><label></label></div></td>
 				</tr>

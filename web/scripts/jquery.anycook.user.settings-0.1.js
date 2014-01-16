@@ -34,11 +34,7 @@
 			$("#account_aboutme").inputdecorator("maxlength", data);
 
 		$.anycook.user.settings.loadAccount();
-		
-		$.anycook.api.session.settings(function(json){
-			$.extend(settings, json);
-			$.anycook.user.settings.loadMail();
-		});
+		$.anycook.user.settings.loadNotifaction();
 
 		var conf = $.anycook.api._settings();
 		
@@ -54,8 +50,6 @@
 		});
 
 		if(user.facebook_id <= 0){
-			
-
 			$("#showpassword").click(function() {		
 				var $container = $("#new_password_container");
 				var $password = $container.children("#password_new");
@@ -87,25 +81,25 @@
 		// $("#account_form").submit($.anycook.user.settings.changeAccount);
 	};
 	
-	$.anycook.user.settings.loadMail = function(){
-		if(!settings.mail) return;
-		
-		var mailsettings = settings.mail;	
-		var checker = false;
-		for(var type in mailsettings){
-			if(mailsettings[type]){
-				checker=true;
-				$("#"+type.toLowerCase()+" input[type=\"checkbox\"]").attr("checked", "checked");
+	$.anycook.user.settings.loadNotifaction = function(){
+		$.anycook.api.setting.notification(function(json){
+			var checker = false;
+			for(var type in json){
+				if(json[type]){
+					checker=true;
+					$("#"+type+" input[type=\"checkbox\"]").attr("checked", "checked");
+				}
 			}
-		}
+			
+			var $bigCheckbox = $("#mail_notification input").change($.anycook.user.settings.toggleMail);
+			if(checker){
+				$bigCheckbox.attr("checked", "checked");
+				$("#settings_notification_content").show();
+			}
+			
+			$("#settings_notification_content input").change($.anycook.user.settings.changeMail);	
+		});
 		
-		var $bigCheckbox = $("#mail_notification input").change($.anycook.user.settings.toggleMail);
-		if(checker){
-			$bigCheckbox.attr("checked", "checked");
-			$("#settings_notification_content").show();
-		}
-		
-		$("#settings_notification_content input").change($.anycook.user.settings.changeMail);
 	};
 	
 	$.anycook.user.settings.toggleMail = function(){
