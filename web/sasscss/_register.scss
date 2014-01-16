@@ -6,6 +6,7 @@
   
   #reg_step1{
     position: absolute;
+    width: 655px;
     
     p{
       text-align: center;
@@ -39,7 +40,8 @@
                 font: Georgia, serif;
                 font-style: italic;
                 text-align: inherit;
-            }
+            }
+
 
             #reg_submit{
               float: right;
