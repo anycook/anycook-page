@@ -24,23 +24,14 @@ function buildLogin(){
 	$("#login_container form").submit(submitForm);*/
 	$.get("/templates/login.erb", function(template){
 		$("body").append(template);
-		$("#signin_btn, #login_menu .blackOverlay").click(toggleLoginMenu);
+		$("#signin_btn, #login_menu .blackOverlay, #registrationBtn").click(toggleLoginMenu);
 		$("#login_menu form").submit(submitForm);
 	});		
 };
 
 function toggleLoginMenu(){
-		var $loginMenu = $("#login_menu");
-		var $loginBtn = $("#signin_btn");
-		if($loginMenu.hasClass("visible")){
-			$loginMenu.removeClass("visible");
-			$loginBtn.removeClass("focus");
-		}else{
-			//var buttonOffset = $loginBtn.offset();
-			//$loginMenu.css({top:buttonOffset.top+27,left:buttonOffset.left-150});
-			$loginMenu.addClass("visible");
-			$loginBtn.addClass("focus");
-		}
+	$("#login_menu").toggleClass("visible");
+	$("#signin_btn").toggleClass("focus");
 }
 
 function initMenus(){
