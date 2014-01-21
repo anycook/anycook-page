@@ -419,24 +419,24 @@ header{
 		}
 		
 	}
-
-	#peak_bottom{
-		background: url("/img/peak_bottom.png") no-repeat;
-		height: 46px;
-		position: absolute;
-		width: 1016px;
-		left: 50%;
-		bottom: -7px;
-		margin-left: -508px;
-		background-position-x: 234px;
-		z-index: 1;
-	}
 	
 	#container_bottom{
 			width:100%;
 			//overflow: visible;
 			background:url("/img/pages_bottom.png") repeat-x;
 			height:27px;
+
+			#peak_bottom{
+				background: url("/img/peak_bottom.png") no-repeat;
+				height: 46px;
+				position: absolute;
+				width: 1016px;
+				left: 50%;
+				bottom: -7px;
+				margin-left: -508px;
+				background-position-x: 234px;
+				z-index: 1;
+			}
 	}
 	
 	#container{	
