@@ -130,12 +130,13 @@
 }
 
 
-//MassageDialog
-ul#messagestream{
+//MessageDialog
+ul#newsstream, ul#messagestream{
 	position: relative;
 	overflow:auto;
 	height:500px;
 	list-style: none;
+	clear: both;
 	
 	.timeline_stripe{
 	  width: 1px;
