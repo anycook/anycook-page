@@ -20,6 +20,7 @@
 
 define(['jquery', 
 	'classes/Search', 
+	'activation',
 	'filters', 
 	'header',
 	'home', 
@@ -29,7 +30,7 @@ define(['jquery',
 	'registration',
 	'title',
 	'userProfile'
-], function($, Search, filters, header, home, messages, messageStream, recipeView, registration, title, userProfile){
+], function($, Search, activation, filters, header, home, messages, messageStream, recipeView, registration, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -130,7 +131,7 @@ define(['jquery',
 							break;		
 				
 						case "activate":
-							activateUser(path[1]);
+							activation.activate(path[1]);
 							break;
 							
 						case "profile":
