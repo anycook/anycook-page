@@ -1,0 +1,166 @@
+#registration_container{
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+  width: 655px;
+  
+  #reg_step1{
+    position: absolute;
+    width: 655px;
+    
+    p{
+      text-align: center;
+      color: $darkfontcolor;
+    }
+    
+    #reg_form{
+      width: 100%;
+      table{
+        width: 100%;
+        margin-top: 10px;
+        
+          td{
+            padding: 0 4px;
+            width: 32%;
+            float: left;
+            
+            #reg_email,#reg_pass,#reg_username{
+              height: 25px;
+              width: 95%;
+              text-align: left;
+            }
+            
+            input::-webkit-input-placeholder{
+                font: Georgia, serif;
+                font-style: italic;
+                text-align: inherit;
+            }
+            
+            input:-moz-placeholder{
+                font: Georgia, serif;
+                font-style: italic;
+                text-align: inherit;
+            }
+
+
+            #reg_submit{
+              float: right;
+              margin: 20px 0px 50px 0px; 
+            }
+            
+            #showpassword{
+              float: left;
+              color: $smalllightfontcolor;
+              font-size: 8pt;
+              margin: 4px 0 2px;
+              cursor: pointer;
+              
+              &:hover{
+                color: $darkfontcolor;
+              }
+            }
+            
+            .reg_error{
+              float: left;
+              color: #878787;
+              font-size: 8pt;
+              margin: 4px 2px 2px;
+              
+              &.wrong{
+                color: $error;
+              }
+              &.right{
+                color: $linkcolor;
+              }
+              
+              &#reg_error_pass{
+                float: right;
+              }
+            }
+          }
+      }
+    }
+    
+    .social{
+            width:150px;
+            height:24px;
+            margin: 0 auto;
+            margin-top: 5px;
+            cursor:pointer;
+            
+            background-repeat: no-repeat;
+            &:hover{
+              background-position-y: -24px;
+            }
+            
+            &:active{
+              background-position-y: -48px;
+            }
+            
+            &#facebook_login{
+              background-image: url("/img/facebook_signin.png");
+            }
+            
+            &#twitter_login{
+              background-image: url("/img/twitter_signin.png");
+            }
+            
+            &#openid_login{
+              background-image: url("/img/openid_signin.png");
+            }
+          } 
+    
+  }
+  #reg_step2{
+    position: absolute;
+    left: 700px;
+    width: 655px;
+        
+       h1{
+            position: relative;
+            left: 0;
+            text-align: center;
+            font-size: 32pt;
+            
+       }
+       p{
+            margin-top: 19px;
+            position: relative;
+            left: 22.9%;
+            width: 60%;
+       }
+       
+       #register_forward{
+            left: 0;
+            width: 100%;
+            text-align: center;  
+       }
+       
+       #register_mailprovider{
+            margin-top: 19px;
+            position: relative;
+            margin: 19px 0;
+            width: 100%;
+            
+            a{          
+            margin: 0px auto;
+            width: 250px;
+            display: block;
+            position: relative;
+            
+              img{
+                margin: auto;
+                display: block;
+              }
+            }
+            #register_copyright{
+              text-align: center;
+            }
+         
+       }
+    
+  }
+	
+	
+	
+}
