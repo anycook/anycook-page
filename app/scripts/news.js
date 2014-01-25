@@ -123,7 +123,7 @@ function($, Recipe, User){
 					var array = text.split("#g");
 					text = "";
 					for(var j = 0; j<array.length-1;++j){
-						var uri = encodeURI("/#!/recipe/"+life.recipe);
+						var uri = encodeURI("/#/recipe/"+life.recipe);
 						var link = "<a href=\""+uri+"\">"+life.recipe+"</a>";
 						text+=array[j]+link;
 					}

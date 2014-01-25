@@ -80,6 +80,8 @@ define([
 			//$("#search").attr("value", recipe.name);
 
 			//schmeckt-button
+			var user = User.get();
+
 			if(user.checkLogin()) {
 				$.anycook.api.recipe.schmeckt(recipeName, function(schmeckt){
 					if(!schmeckt) {
@@ -89,10 +91,10 @@ define([
 						$("#schmecktmir").click(schmecktmirnicht);
 					}
 				});	
-				$("#tags").click(showaddTags);	
+				$("#tags").click($.proxy(this.showaddTags, this));	
 			} else {
-				$("#schmecktmir").click(loginMenu.toggle);
-				$("#tags").click(loginMenu.toggle);
+				$("#schmecktmir").click($.proxy(loginMenu.toggle, loginMenu));
+				$("#tags").click($.proxy(loginMenu.toggle, loginMenu));
 			}
 
 			
@@ -252,7 +254,7 @@ define([
 			});
 			// $(".connect_widget_summary").remove();
 		},
-		showaddTags : function() {
+		showAddTags : function() {
 			var $lightbox = getAddTagsLightbox();
 
 			var top = $("#tags").offset().top - 113;
