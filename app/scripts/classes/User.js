@@ -32,6 +32,7 @@ define(['jquery'], function($){
 				user.place = response.place;
 				$.when(user.getSchmecktRecipes()).then(function(schmeckt){
 					user.schmeckt = schmeckt;
+					$("html").data("user", user);
 					dfd.resolve(user);
 				});
 		},
@@ -68,13 +69,17 @@ define(['jquery'], function($){
 		return dfd.promise();
 	};
 
+	User.get = function(){
+		return $("html").data("user") || new User();
+	}
+
 	User.getProfileURI = function(id){
-		var uri = "#!/profile/"+id;
+		var uri = "#/profile/"+id;
 		return uri;
 	};
 
 	User.prototype.getProfileURI = function(){
-		var uri = "#!/profile/"+this.id;
+		var uri = "#/profile/"+this.id;
 		return uri;
 	};
 

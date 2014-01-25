@@ -23,10 +23,12 @@ define(['jquery',
 	'filters', 
 	'header',
 	'home', 
-	'messages', 
+	'messages',
+	'messageStream', 
 	'recipeView',
-	'title'], 
-function($, Search, filters, header, home, message, recipeView, title){
+	'title',
+	'userProfile'
+], function($, Search, filters, header, home, messages, messageStream, recipeView, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -99,7 +101,7 @@ function($, Search, filters, header, home, message, recipeView, title){
 							loadResetPasswordStep1();
 							break;
 						case "registration":
-							setTitle("Registrierung");
+							title.set("Registrierung");
 							showRegistration();
 							break;
 						case "settings":
@@ -110,7 +112,7 @@ function($, Search, filters, header, home, message, recipeView, title){
 							break;
 						case "newsstream":
 							$("#user_messages").addClass("active");
-							loadNewsstream();
+							messageStream.loadNewsstream();
 							break;
 						case "drafts":
 							$.anycook.drafts.load();
@@ -132,7 +134,7 @@ function($, Search, filters, header, home, message, recipeView, title){
 							
 						case "profile":
 							$("#user_profile").addClass("active");
-							loadProfile(path[1]);
+							userProfile.load(path[1]);
 							break;
 							
 						case "resetpassword":
@@ -140,7 +142,7 @@ function($, Search, filters, header, home, message, recipeView, title){
 							break;
 						
 						case "messagesession":
-							getMessages(path[1]);
+							messages.show(path[1]);
 							break;
 						}
 						break;

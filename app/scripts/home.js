@@ -2,11 +2,12 @@ define([
 	'jquery.recipeoverview', 
 	'jscrollpane', 
 	'classes/Recipe', 
+	'classes/User',
 	'header', 
 	'loginMenu', 
 	'news'
 ], 
-function($, $, Recipe, header, loginMenu, news){
+function($, $, Recipe, User, header, loginMenu, news){
 	return {
 		load : function(){
 			// var headertext = "<a href=\"/#!\" id='home_button' class='small_button'><div></div></a>" +
@@ -36,6 +37,8 @@ function($, $, Recipe, header, loginMenu, news){
 			$.anycook.api.ingredient.number(function(num){
 				$("#num_ingredients").text(num);
 			});
+
+			var user = User.get();
 
 			if(user.checkLogin()){
 				$(".login_or_register").hide();

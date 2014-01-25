@@ -24,15 +24,20 @@ require.config({
 		'FB' : '//connect.facebook.net/de_DE/all',
 		'jquery' : '../bower_components/jquery/jquery',
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
+		'jquery.autogrowtextarea' : '../bower_components/autogrow-textarea/jquery.autogrowtextarea',
 		'jquery.mousewheel' : '../bower_components/jscrollpane/script/jquery.mousewheel',
 		'jquery.recipeoverview' : 'lib/jquery.recipeoverview',
 		'jquery.ui.core' : '../bower_components/jquery.ui/ui/jquery.ui.core',
+		'jquery.ui.effect' : '../bower_components/jquery.ui/ui/jquery.ui.effect',
 		'jquery.ui.menu' : '../bower_components/jquery.ui/ui/jquery.ui.menu',
 		'jquery.ui.widget' : '../bower_components/jquery.ui/ui/jquery.ui.widget',
 		'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
 		'jquery.xml' : 'lib/jquery.xml-0.4.1.min',
 		'jscrollpane' : '../bower_components/jscrollpane/script/jquery.jscrollpane',
-		'plusone' : '//apis.google.com/js/plusone'
+		'plusone' : '//apis.google.com/js/plusone',
+		'text' : '../bower_components/requirejs-text/text',
+		'templates' : '../templates',
+		'underscore' : '../bower_components/underscore/underscore'
 	},
 	shim : {
 		'anycook.api' : {
@@ -46,11 +51,19 @@ require.config({
 			deps : ['jquery'],
 			exports : '$'
 		},
+		'jquery.autogrowtextarea' : {
+			deps : ['jquery'],
+			exports : '$'
+		},
 		'jquery.recipeoverview' : {
 			deps : ['jquery'],
 			exports : '$'
 		},
 		'jquery.ui.core' : {
+			deps : ['jquery'],
+			exports : '$'
+		},
+		'jquery.ui.effect' : {
 			deps : ['jquery'],
 			exports : '$'
 		},
@@ -76,6 +89,9 @@ require.config({
 		},
 		'plusone' : {
 			exports : 'gapi'
+		},
+		'underscore' : {
+			exports : '_'
 		}
 	}
 });
@@ -83,19 +99,24 @@ require.config({
 require([
 	'anycook.api',
 	'FB',
-	'jquery.address',
-	'jquery.ui.autocomplete',
-	'jquery.xml', 
 	'classes/Search',
 	'classes/User',
 	'addressChange',
+	'drafts',
 	'loginMenu',
 	'search',
+	'scroll',
 	'facebook',
 	'filters',
+	'messageStream',
 	'tags',
-	'time'
-], function($, FB, $, $, $, Search, User, addressChange, loginMenu, search, facebook, filters, tags, time){
+	'time',
+	'userMenu',
+	'jquery.address',
+	'jquery.ui.autocomplete',
+	'jquery.xml', 
+], function($, FB, Search, User, addressChange, drafts, loginMenu, search, scroll, facebook, filters, messageStream, tags, time, userMenu){
+	'use strict';
 	//setup
 	// if($.browser.msie){
 		// var version = Number($.browser.version);		
@@ -117,7 +138,7 @@ require([
 		var left = $headerRight.offset().left;
 		$headerRight.width(width-left);*/
 		var $right  = $("#right");
-		left = $right.offset().left;
+		var left = $right.offset().left;
 		$right.width(width-left);
 	}
 
@@ -138,13 +159,14 @@ require([
 	});
 
     //anycookapi
-    baseUrl = "http://10.1.0.200";
+    var baseUrl = "http://10.1.0.200";
 	$.when($.anycook.api.init({appId:2, baseUrl: baseUrl})).then(function(){
     	filters.loadAllCategories($("#kategorie_filter ul"));
     	
     	var xmlErrorFunction = function(event){
 		 	switch(event.type){
 		 		case 403:
+		 			var user = User.get();
 		 			if(!user.checkLogin()){
 		 				console.log("access only for logged-in users");
 		 				$.address.path("");
@@ -163,7 +185,7 @@ require([
     	
     	$.when($("#content_main").xml(xmlOptions)).then(function(){
 	    	$.when(User.init()).then(function(userinit){
-	    		user = userinit;
+	    		var user = userinit;
 
 	    		loginMenu.buildLogin();
 	    		    		 
@@ -173,14 +195,14 @@ require([
 	    		
 	    		//drafts
 		    	if(user.checkLogin()){
-		    		makeUsermenuText();
+		    		userMenu.makeText();
 		    		
 		    		// wait ressources to complete loading and the wait another 500ms.
 		    		// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-		    		onReady(function(){
-		    			setTimeout(checkNewMessageNum,500);
-		    			setTimeout($.anycook.drafts.num,500);
-		    		});
+		    		//onReady(function(){
+		    			setTimeout(messageStream.checkNewMessageNum,500);
+		    			setTimeout($.proxy(drafts.num, drafts),500);
+		    		//});
 				}
 	 	 	});
 				
@@ -201,7 +223,7 @@ require([
 	    }
 	});
 	
-	searchObject = new Search();
+	var searchObject = new Search();
 
     //searchbar 
 	$("#search").autocomplete({
@@ -290,7 +312,7 @@ require([
 	filters.removeChecked();
 	$("#filter_table .label_chefhats, #filter_table .label_muffins").click(function(){
     	if(!$("#filter_main").is(".blocked")){
-        	checkOnOff(this);
+        	filters.checkOnOff(this);
         	// handleRadios(this);
     	}
     	
@@ -298,12 +320,12 @@ require([
     	return false;
     }).mouseover(function(){
     	if(!$("#filter_main").is(".blocked"))
-    		mouseoverRadio(this);
+    		filters.mouseoverRadio(this);
 	})
 	
 	$(".filter_table_right").mouseleave(function(){
 		if(!$("#filter_main").is(".blocked"))
-			handleRadios($(this).children());
+			filters.handleRadios($(this).children());
 	});
 
 	//zutatentabelle
@@ -335,7 +357,7 @@ require([
 	//$("#userfilterremove").click(removeUserfilter);
 	
 	//scrollListener
-	//$(document).scroll(scrollListener);
+	$(document).scroll($.proxy(scroll.listen, scroll));
     	
     	
     	//ellipsis for .big_rezept p

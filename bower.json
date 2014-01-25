@@ -7,7 +7,9 @@
     "jquery.ui": "~1.10.4",
     "underscore": "~1.5.2",
     "jquery-address": "*",
-    "jscrollpane": "~2.0.14"
+    "jscrollpane": "~2.0.14",
+    "autogrow-textarea": "*",
+    "requirejs-text": "~2.0.10"
   },
   "devDependencies": {}
 }

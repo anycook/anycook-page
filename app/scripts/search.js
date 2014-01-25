@@ -18,7 +18,7 @@
  * @author Jan Graßegger <jan@anycook.de>
  */
 
-define([], function(){
+define(['jquery'], function($){
 
 	return {
 		addResults : function(json){

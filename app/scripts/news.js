@@ -22,6 +22,8 @@ define(['jquery',
 	'classes/Recipe',
 	'classes/User'], 
 function($, Recipe, User){
+	'use strict';
+
 	return {
 		updateLiveAtHome : function(){
 			var path = $.address.path();
@@ -134,6 +136,8 @@ function($, Recipe, User){
 			var imagePath = User.getUserImagePath(userid, "small");
 			
 			var $li = $("<li></li>").append("<div class=\"left\"><img src=\""+imagePath+"\"></div><div class=\"right\"></div>").data("id", life.id);
+			
+			var user = User.get();
 			if(user.checkLogin() && user.isFollowing(userid))
 				$li.addClass("following");
 			
