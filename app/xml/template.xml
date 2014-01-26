@@ -257,7 +257,20 @@
 		<ul id="draft_list"></ul>
 	</template>
 	<template id="activate">
-		<div id='new_activation' class="content_message"><h5></h5><p></p></div>
+		<div id='new_activation_success' class="content_message invisible">
+			<img src="/img/success_icon.png" />
+				<div class="content">
+					<h1>Account aktiviert!</h1>
+					<p>Glückwunsch! Jetzt bist offiziell Teil von anycook-Community. Absofort kannst du dich mit deinen Zugangsdaten einloggen, Rezepte liken, Tags hinzufügen und vieles mehr. Viel Spaß beim entdecken. Wir freuen uns auf dich.<br/><br/>Dein anycook-Team</p>
+				</div>
+		</div>
+		<div id='new_activation_false' class="content_message invisible">
+			<img src="/img/false_icon.png" />
+				<div class="content">
+					<h1>Account wurde nicht aktiviert!</h1>
+					<p>Schade! Da ist wohl etwas schief gelaufen Teil. Versuche es bitte noch einmal.<br/><br/>Dein anycook-Team</p>
+				</div>
+		</div>
 	</template>
 	<template id="feedback">
 		<div id='kontakt' class="footerpages">

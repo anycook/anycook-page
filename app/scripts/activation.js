@@ -27,11 +27,9 @@ define([
                 },
                 addActivationStuff : function(response){
                         if(response!="false"){
-                                $("#new_activation h5").text("Account aktiviert!");
-                                $("#new_activation p").text("Du kannst dich nun einloggen");
+                                $('#new_activation_success').removeClass('invisible');
                         }else{
-                                $("#new_activation h5").text("Aktivierung fehlgeschlagen!");
-                                $("#new_activation p").text("Versuch es doch noch einmal");
+                                $('#new_activation_false').removeClass('invisible');
                         }
                         window.setTimeout(this.fadeActivationOut, 3000);
                         $("#content").click(this.fadeActivationOut);
