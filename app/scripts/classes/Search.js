@@ -183,6 +183,8 @@ define(function(){
 			num = 10;
 		
 		//setFiltersfromSession();
+		$('html').trigger('startSearch');
+
 		var data = this.getData();
 		data.num = num;
 		data.start = start;
@@ -192,13 +194,14 @@ define(function(){
 		// $.when($.anycook.graph.search(data),user.getSchmecktRecipes()).then(function(json, schmeckt){
 		$.anycook.api.search(data,function(json){
 			if(json && json.size > 0){
+				$('html').trigger('searchResults', json);
 				// $("#result_container").data("results", json);
 				// addResults();
 				// $(".frame_big:focus").live("keydown", searchKeyDown);
 				// $(".frame_big").live("mouseenter", function(){
 					// $(".frame_big:focus").blur();
 				// });
-				addResults(json);
+				//addResults(json);
 			}else
 		  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
 		});

@@ -17,15 +17,17 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
+'use strict';
 define([
 	'jquery',
 	'plusone',
 	'classes/Recipe',
 	'classes/User',
 	'filters',
+	'lightbox',
 	'loginMenu',
 	'tags'
-], function($, gapi, Recipe, User, filters, loginMenu, tags){
+], function($, gapi, Recipe, User, filters, lightbox, loginMenu, tags){
 	return { 
 		profileRecipe : function(recipe){
 			var uri = "#!/recipe/"+encodeURIComponent(recipe);
@@ -91,7 +93,7 @@ define([
 						$("#schmecktmir").click(schmecktmirnicht);
 					}
 				});	
-				$("#tags").click($.proxy(this.showaddTags, this));	
+				$("#tags").click($.proxy(this.showAddTags, this));	
 			} else {
 				$("#schmecktmir").click($.proxy(loginMenu.toggle, loginMenu));
 				$("#tags").click($.proxy(loginMenu.toggle, loginMenu));
@@ -255,22 +257,22 @@ define([
 			// $(".connect_widget_summary").remove();
 		},
 		showAddTags : function() {
-			var $lightbox = getAddTagsLightbox();
+			var $lightbox = this.getAddTagsLightbox();
 
 			var top = $("#tags").offset().top - 113;
-			showLightbox($lightbox, top);
+			lightbox.show($lightbox, top);
 
-			$lightbox.find(".tagsbox").click(makeNewTagInput);
+			$lightbox.find(".tagsbox").click($.proxy(tags.makeNewTagInput, tags));
 
-			$lightbox.find("form").submit(submitSuggestTags);
+			$lightbox.find("form").submit($.proxy(tags.submitSuggestTags, tags));
 
 			return false;
 		},
 		getAddTagsLightbox : function() {
-			var $content = $("<div class=\"tagsbox\"></div>" + "<p>Die bekanntesten Tags:</p>" + "<div id=\"tagcloud\"></div>")
+			var content = '<div class="tagsbox"></div><p>Die bekanntesten Tags:</p><div id="tagcloud"></div>';
 
-			var $lightbox = getLightbox("Tags hinzufügen:", "Hilf den anderen beim finden, in dem du neue Tags vorschlägst.", $content, "einreichen");
-			makeTagCloud();
+			var $lightbox = lightbox.get("Tags hinzufügen:", "Hilf den anderen beim finden, in dem du neue Tags vorschlägst.", content, "einreichen");
+			tags.makeTagCloud();
 			$("#main").append($lightbox);
 
 			return $lightbox;

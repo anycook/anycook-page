@@ -17,6 +17,7 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
+'use strict';
 // Require.js allows us to configure shortcut alias
 require.config({
 	paths : {
@@ -24,6 +25,7 @@ require.config({
 		'FB' : '//connect.facebook.net/de_DE/all',
 		'jquery' : '../bower_components/jquery/jquery',
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
+		'jquery.autoellipsis' : '../bower_components/jquery.autoellipsis/src/jquery.autoellipsis',
 		'jquery.autogrowtextarea' : '../bower_components/autogrow-textarea/jquery.autogrowtextarea',
 		'jquery.mousewheel' : '../bower_components/jscrollpane/script/jquery.mousewheel',
 		'jquery.recipeoverview' : 'lib/jquery.recipeoverview',
@@ -48,6 +50,10 @@ require.config({
 			exports : 'FB'
 		},
 		'jquery.address' : {
+			deps : ['jquery'],
+			exports : '$'
+		},
+		'jquery.autoellipsis' : {
 			deps : ['jquery'],
 			exports : '$'
 		},
@@ -104,7 +110,7 @@ require([
 	'addressChange',
 	'drafts',
 	'loginMenu',
-	'search',
+	'searchView',
 	'scroll',
 	'facebook',
 	'filters',
@@ -115,8 +121,7 @@ require([
 	'jquery.address',
 	'jquery.ui.autocomplete',
 	'jquery.xml', 
-], function($, FB, Search, User, addressChange, drafts, loginMenu, search, scroll, facebook, filters, messageStream, tags, time, userMenu){
-	'use strict';
+], function($, FB, Search, User, addressChange, drafts, loginMenu, searchView, scroll, facebook, filters, messageStream, tags, time, userMenu){
 	//setup
 	// if($.browser.msie){
 		// var version = Number($.browser.version);		
@@ -362,6 +367,12 @@ require([
     	
     	//ellipsis for .big_rezept p
     	// $(".big_rezept p").ellipsis({live:true});
+
+    // search events
+    $('html').on('startSearch', $.proxy(filters.setFromSession, filters))
+    	.on('searchResults', $.proxy(searchView.addResults, searchView));
+
+
     	
     	
 	//Facebook

@@ -19,35 +19,18 @@
  */
 
 define([
-	'jquery'
-], function($){
+	'jquery',
+	'text!templates/lightbox.erb'
+], function($, lightboxTemplate){
 	return {
-		get : function(headline, subhead, $content, inputvalue){
-			var $h2 = $("<h2></h2>").html(headline);
-			var $subhead = $("<p></p>").html(subhead);
-			var $lightboxcontent = $("<div></div>").addClass("ligthbox_content")
-				.append($content);
-				
-			var $submit = $("<input type=\"submit\"/>").val(inputvalue);
-			
-			var $form = $("<form></form>")
-				.append($lightboxcontent)
-				.append($submit);
-			
-			var $contentbox = $("<div></div>").addClass("contentbox")
-				.append($h2)
-				.append($subhead)
-				.append($form);
-				
-			var $dogear = $("<div></div>").addClass("dogear")
-				.append("<div class=\"top\"></div>")
-				.append("<div class=\"middle\"></div>")
-				.append("<div class=\"bottom\"></div>");
-			var $lightbox = $("<div></div>").addClass("lightbox")
-				.append($dogear)
-				.append("<div class=\"mask\"></div>")
-				.append($contentbox);
-			
+		get : function(headline, subhead, content, inputValue){
+			var data = {
+				headline : headline,
+				subhead : subhead,
+				content : content,
+				inputValue : inputValue
+			}
+			var $lightbox = $(_.template(lightboxTemplate, data));			
 			$("#main").append($lightbox);
 			
 			$lightbox.css('left', this.getLeft()).hide();
@@ -96,25 +79,27 @@ define([
 				$(this).unbind("click");
 			});
 		},
-		showFromBottom : function($lightbox, bottom){
-			
+		showFromBottom : function($lightbox, bottom){			
 			$lightbox.show();
 			resizeLightbox();
 			var top = bottom - $lightbox.outerHeight();
-			$lightbox.css({top:top, left:getLightBoxLeft()})	
-				.find(".dogear").animate({
-					right:0,
-					top:0
-				},
-				{
-					duration:150,
-					easing: "swing",
-					complete:function(){
-						$(".contentbox").animate({
-							left: 3
-						}, {duration: 500});
-					}
-				});
+			$lightbox.css({
+				top : top, 
+				left : getLightBoxLeft()
+			})	
+			.find(".dogear").animate({
+				right:0,
+				top:0
+			},
+			{
+				duration:150,
+				easing: "swing",
+				complete:function(){
+					$(".contentbox").animate({
+						left: 3
+					}, {duration: 500});
+				}
+			});
 				
 			$("body").click(function(event){
 				var $target = $(event.target);
@@ -128,8 +113,11 @@ define([
 			});
 		},
 		hide : function(){
+			var self = this;
 			$(".lightbox").fadeOut(200, function(){
-					$(this).css({left:getLightBoxLeft()}).remove();
+					$(this).css({
+						left : self.getLeft()
+					}).remove();
 			});
 		},
 		resize : function(){

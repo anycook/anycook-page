@@ -17,56 +17,58 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-
+'use strict';
  define([
  	'jquery', 
  	'classes/Search', 
- 	'search',
+ 	'searchView',
  	'time'
- ], function($, Search, search, time){
+ ], function($, Search, searchView, time){
 	// alle Filter
 	return {
-		setFiltersfromSession : function(){
-			resetFilter();
+		setFromSession : function(){
+			this.reset();
 			
-			if(search != null){
-				if(search.kategorie!=null){
-					$("#kategorie_head").text(search.kategorie);
-					$("#kategorie_filter_hidden").val(search.kategorie);
-				}
-				if(search.skill!=null){
-					$(".chefhats").removeAttr("checked");
-					checkOn($("#chef_"+search.skill));
-					// handleRadios($("#filter_table .label_chefhats"));
-				}
-				if(search.kalorien!=null){
-					$(".muffins").removeAttr("checked");
-					checkOn($("#muffin_"+search.kalorien));
-					// handleRadios($("#filter_table .label_muffins"));
-				}
-				if(search.time != null){
-					var time = search.time.split(":");
-					$("#time_std").val(time[0]);
-					$("#time_min").val(time[1]);
-				}
-				if(search.user !=null){
-					setUserfilter(search.user);
-				}
-				
-				for(num in search.zutaten)
-					addIngredientRow(search.zutaten[num]);
-					
-				for(num in search.excludedingredients)
-					addExcludedIngredientRow(search.excludedingredients[num]);
-				
-				for(num in search.tags)
-					$(".tags_list").append(getTag(search.tags[num], "remove"));
-				
-				if(search.terms!=null){
-					addTerms(search.terms);
-				}
-			}
+			var search = Search.init();
 
+			if(search.kategorie!=null){
+				$('#kategorie_head').text(search.kategorie);
+				$('#kategorie_filter_hidden').val(search.kategorie);
+			}
+			if(search.skill!=null){
+				$('.chefhats').removeAttr('checked');
+				this.checkOn($('#chef_'+search.skill));
+				// handleRadios($("#filter_table .label_chefhats"));
+			}
+			if(search.kalorien!=null){
+				$('.muffins').removeAttr('checked');
+				this.checkOn($('#muffin_'+search.kalorien));
+				// handleRadios($("#filter_table .label_muffins"));
+			}
+			if(search.time != null){
+				var time = search.time.split(":");
+				$('#time_std').val(time[0]);
+				$('#time_min').val(time[1]);
+			}
+			if(search.user !=null){
+				this.setUserfilter(search.user);
+			}
+			
+			for(var num in search.zutaten) {
+				this.addIngredientRow(search.zutaten[num]);
+			}
+				
+			for(var num in search.excludedingredients) {
+				addExcludedIngredientRow(search.excludedingredients[num]);
+			}
+			
+			for(var num in search.tags) {
+				$(".tags_list").append(getTag(search.tags[num], "remove"));
+			}
+			
+			if(search.terms!=null){
+				addTerms(search.terms);
+			}
 		},
 		reset : function(){
 			$("#filter_main").removeClass("blocked");
@@ -202,17 +204,19 @@
 			$(obj).prevAll().andSelf().addClass('on');
 		},
 		removeChecked : function(){
-			$('#filter_table label input[checked]').removeAttr("checked");
+			$('#filter_table label input[checked]').removeAttr('checked');
 		},
 		checkOnOff : function(obj){
-			$obj=$(obj).children("input").first();
+			var $obj=$(obj).children("input").first();
 			var value = $obj.val();
+
+			var search = Search.init();
 				
-			switch($obj.attr("class")){
-			case "chefhats":
+			switch($obj.attr('class')){
+			case 'chefhats':
 				search.setSkill(value);
 				break;
-			case "muffins":
+			case 'muffins':
 				search.setKalorien(value);
 				break;
 			}
@@ -252,7 +256,7 @@
 						$this.append($li);
 					}
 					
-					$li.append("<input type=\"text\" /><div class=\"close\"></div>");			
+					$li.append('<input type="text" /><div class="close"></div>');			
 					
 					$input = $li.children("input");
 					$li.children(".close").hide();
