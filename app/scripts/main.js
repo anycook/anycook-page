@@ -370,7 +370,8 @@ require([
 
     // search events
     $('html').on('startSearch', $.proxy(filters.setFromSession, filters))
-    	.on('searchResults', $.proxy(searchView.addResults, searchView));
+    	.on('searchResults', $.proxy(searchView.addResults, searchView))
+    	.on('emptySearchResult', $.proxy(searchView.showEmptyResult, searchView));
 
 
     	

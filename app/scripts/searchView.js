@@ -23,9 +23,10 @@ define([
 	'classes/Recipe',
 	'classes/Search',
 	'classes/User',
+	'text!templates/emptySearchResult.erb',
 	'text!templates/searchResult.erb',
 	'jquery.autoellipsis'
-], function($, Recipe, Search, User, searchResultTemplate){
+], function($, Recipe, Search, User, emptySearchResultTemplate, searchResultTemplate){
 
 	return {
 		addResults : function(event, json){
@@ -278,6 +279,9 @@ define([
 		},
 		getBigFrame : function() {
 			return $("<a></a>").addClass("frame_big");
+		},
+		showEmptyResult : function(){
+			$('#result_container').html(emptySearchResultTemplate);
 		}
 	}
 });
