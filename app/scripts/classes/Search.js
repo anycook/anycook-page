@@ -115,15 +115,6 @@ define(function(){
 		this.terms = terms;
 	};
 
-	/*Search.prototype.removeTerm = function(term){
-		for(var i = 0; i<this.terms.length; i++){
-			if(this.terms[i]==term){
-				this.terms.splice(i, 1);
-				break;
-			}
-		}
-	};*/
-
 	Search.prototype.setKategorie = function(kategorie){
 		this.kategorie = kategorie;
 	};

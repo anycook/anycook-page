@@ -121,7 +121,7 @@
 		handleCategories : function(obj){
 			if(!$("#filter_main").is(".blocked")){
 				
-				$kategorieList = $("#kategorie_list");
+				var $kategorieList = $("#kategorie_list");
 				this.animateCategory($kategorieList);
 				$("#kategorie_filter").toggleClass("on");
 				if($("#kategorie_filter").hasClass("on")){
