@@ -18,10 +18,18 @@
  * @author Jan Graßegger <jan@anycook.de>
  */
 
-define(['jquery'], function($){
+define([
+	'jquery',
+	'classes/Recipe',
+	'classes/Search',
+	'classes/User',
+	'text!templates/emptySearchResult.erb',
+	'text!templates/searchResult.erb',
+	'jquery.autoellipsis'
+], function($, Recipe, Search, User, emptySearchResultTemplate, searchResultTemplate){
 
 	return {
-		addResults : function(json){
+		addResults : function(event, json){
 			$("#more_results").remove();
 			var recipes = json.results;
 
@@ -32,16 +40,16 @@ define(['jquery'], function($){
 
 
 			// var start = $(".frame_big").length;
-
+			var self = this;
 			$.each(recipes, function(i, recipe){
-				var $frame_big = getBigFrame();
+				var $frame_big = self.getBigFrame();
 				$frame_big = $frame_big.appendTo("#result_container");
 				// $("#result_container").append($frame_big);
 
 				$.anycook.api.recipe(recipe, function(recipe){
 					if($.inArray(currentRecipes, recipes[0]) > -1)	return;
 
-					fillBigFrame($frame_big, recipe);
+					self.fillBigFrame($frame_big, recipe);
 					var $text = $frame_big.find(".recipe_text");
 					var $p = $text.children("p");
 					var $h3 = $text.children("h3");
@@ -54,7 +62,7 @@ define(['jquery'], function($){
 			$("#result_container").data("recipes", currentRecipes);
 				
 			if(json.size> $(".frame_big").length)
-				addMoreResultsButton();
+				self.addMoreResultsButton();
 		},
 		searchAutocomplete: function(req,resp){
 			var term = req.term;
@@ -150,20 +158,21 @@ define(['jquery'], function($){
 		addMoreResultsButton : function(){
 			$("#result_container").append("<div id=\"more_results\">Mehr Rezepte laden</div><div id=\"more_results_right\"></div>");
 			$("#more_results").click(search.searchMore);
-			$(document).scroll(moreresultsScrollListener);
+			$(document).scroll($.proxy(this.moreResultsScrollListener, this));
 		},
-		moreresultsScrollListener : function(){
+		moreResultsScrollListener : function(){
 			if($.address.pathNames()[0] != "search" || $("#more_results").length == 0){
-				$(document).unbind("scroll", moreresultsScrollListener);
+				$(document).unbind("scroll", $.proxy(this.moreResultsScrollListener, this));
 				return;
 			}
 			
 			var scrollTop = $(window).scrollTop() + $(window).height();
 			var top = $("#more_results").position().top;
 			if(scrollTop > top +100){
-				$(document).unbind("scroll", moreresultsScrollListener);
+				$(document).unbind("scroll", $.proxy(this.moreResultsScrollListener, this));
 				// addResults();
 				var start = $(".frame_big").length;
+				var search = Search.init();
 				search.search(start);
 			}
 				
@@ -234,51 +243,45 @@ define(['jquery'], function($){
 			$.address.path("recipe/"+gericht);
 		},
 		focusoutSearch : function(){
-			$("#search").val("");	
+			$("#search").val('');	
 		},
 		fillBigFrame : function($frame_big, json){
-			var beschreibung = json.description;
-
-			var uri = encodeURI("/#!/recipe/" + json.name);
+			var uri = encodeURI("/#/recipe/" + json.name);
 			$frame_big.attr("href", uri).append("<div></div>");
 
-			$frame_big.append("<div></div>").children("div").last().addClass("frame_big_left");
+			var imageURL = Recipe.getImageURL(json.name);
 
-			var frame_big_main = $frame_big.append("<div></div>").children("div").last().addClass("frame_big_main");
+			var std = json.time.std.toString();
+			if(std.length == 1)
+				std = "0" + std;
+		
+			var min = json.time.min.toString();
+			if(min.length == 1)
+				min = "0" + min;
+		
+			var user = User.get();
+			var schmeckt = $.inArray(json.name, user.schmeckt)>=0;
 
-			var recipe_img = frame_big_main.append("<div></div>").children("div").last().addClass("recipe_img").append("<img/>").append("<div></div>");
+			$.extend(json, {
+				imageURL : imageURL,
+				time : {
+					std : std,
+					min : min
+				},
+				schmeckt : schmeckt,
+				//TODO
+				schmecktNum : 0
+			});
 
-			recipe_img.children("img").attr("src", Recipe.getImageURL(json.name));
+			var template = _.template(searchResultTemplate, json);
+			$frame_big.html(template);
 
-			if(json.timemin !== undefined && json.timestd !== undefined){
-				var std = json.timestd.toString();
-				if(std.length == 1)
-					std = "0" + std;
-			
-				var min = json.timemin.toString();
-				if(min.length == 1)
-					min = "0" + min;
-			
-				recipe_img.children("div").addClass("recipe_time").text(std + ":" + min + " h");
-			
-			}
-
-			var recipe_text = frame_big_main.append("<div></div>").children("div").last().addClass("recipe_text");
-
-			recipe_text.append("<h3></h3>").children("h3").text(json.name);
-			recipe_text.append("<p></p>").children("p").text(beschreibung);
-
-			var heart = frame_big_main.append("<div></div>").children("div").last().addClass("heart");
-
-			if($.inArray(json.name, user.schmeckt)>=0)
-				heart.addClass("schmeckt");
-
-			frame_big_main.append("<div></div>").children("div").last().addClass("schmeckt_num").text(json.schmecktNum);
-
-			$frame_big.append("<div></div>").children("div").last().addClass("frame_big_right");
 		},
 		getBigFrame : function() {
 			return $("<a></a>").addClass("frame_big");
+		},
+		showEmptyResult : function(){
+			$('#result_container').html(emptySearchResultTemplate);
 		}
 	}
 });

@@ -46,7 +46,12 @@ define(function(){
 				break;
 				
 			case "time":
-				temp.time = value;
+				var splits =  value.split(":");
+
+				temp.time = {
+					std : Number(splits[0]),
+					min : Number(splits[1])
+				};
 				break;
 				
 			case "terms":
@@ -115,15 +120,6 @@ define(function(){
 		this.terms = terms;
 	};
 
-	/*Search.prototype.removeTerm = function(term){
-		for(var i = 0; i<this.terms.length; i++){
-			if(this.terms[i]==term){
-				this.terms.splice(i, 1);
-				break;
-			}
-		}
-	};*/
-
 	Search.prototype.setKategorie = function(kategorie){
 		this.kategorie = kategorie;
 	};
@@ -183,6 +179,8 @@ define(function(){
 			num = 10;
 		
 		//setFiltersfromSession();
+		$('html').trigger('startSearch');
+
 		var data = this.getData();
 		data.num = num;
 		data.start = start;
@@ -192,15 +190,10 @@ define(function(){
 		// $.when($.anycook.graph.search(data),user.getSchmecktRecipes()).then(function(json, schmeckt){
 		$.anycook.api.search(data,function(json){
 			if(json && json.size > 0){
-				// $("#result_container").data("results", json);
-				// addResults();
-				// $(".frame_big:focus").live("keydown", searchKeyDown);
-				// $(".frame_big").live("mouseenter", function(){
-					// $(".frame_big:focus").blur();
-				// });
-				addResults(json);
-			}else
-		  		$("#result_container").html("<div id='noresult_headline'>Uups! Nichts gefunden...</div><div id='noresult_subline'>Passe deine aktuelle Suche an oder schmier dir ein Brot.</div><a href='#/' id='noresult_reset'>Suche zurücksetzen</a>");
+				$('html').trigger('searchResults', json);
+			}else {
+				$('html').trigger('emptySearchResult');
+			}
 		});
 	};
 
@@ -225,7 +218,7 @@ define(function(){
 		$.address.parameter("skill", this.skill);
 		$.address.parameter("kalorien", this.kalorien);
 		$.address.parameter("user", this.user);
-		$.address.parameter("time", this.time);
+		$.address.parameter("time", this.time != null ? this.time.std+':'+this.time.min : null);
 		$.address.autoUpdate(true);
 		$.address.update();
 	};

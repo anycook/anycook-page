@@ -9,7 +9,8 @@
     "jquery-address": "*",
     "jscrollpane": "~2.0.14",
     "autogrow-textarea": "*",
-    "requirejs-text": "~2.0.10"
+    "requirejs-text": "~2.0.10",
+    "jquery.autoellipsis": "~1.0.10"
   },
   "devDependencies": {}
 }

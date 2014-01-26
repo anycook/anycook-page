@@ -6,7 +6,7 @@ On OS X
 - brew
 	- brew install node
 		- npm install -g yo
-		- npm install -g generator-webapp
+		- npm install
 	- brew install ruby
 		- gem install compass
 

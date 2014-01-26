@@ -1,0 +1,15 @@
+<div></div>
+<div class="frame_big_left"></div>
+<div class="frame_big_main">
+	<div class="recipe_img">
+		<img src="<%= imageURL %>" alt="">
+		<div class="recipe_time"><%= time.std %>:<%= time.min %> h</div>
+	</div>
+	<div class="recipe_text">
+		<h3><%= name %></h3>
+		<p><%= description %></p>
+	</div>
+	<div class="heart <% if(schmeckt) print('schmeckt') %>"></div>
+	<div class="schmeckt_num"><%= schmecktNum %></div>
+</div>
+<div class="frame_big_right"></div>
