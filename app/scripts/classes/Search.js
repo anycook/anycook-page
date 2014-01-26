@@ -46,7 +46,12 @@ define(function(){
 				break;
 				
 			case "time":
-				temp.time = value;
+				var splits =  value.split(":");
+
+				temp.time = {
+					std : Number(splits[0]),
+					min : Number(splits[1])
+				};
 				break;
 				
 			case "terms":
@@ -213,7 +218,7 @@ define(function(){
 		$.address.parameter("skill", this.skill);
 		$.address.parameter("kalorien", this.kalorien);
 		$.address.parameter("user", this.user);
-		$.address.parameter("time", this.time);
+		$.address.parameter("time", this.time != null ? this.time.std+':'+this.time.min : null);
 		$.address.autoUpdate(true);
 		$.address.update();
 	};

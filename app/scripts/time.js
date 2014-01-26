@@ -18,17 +18,25 @@
  * @author Jan Graßegger <jan@anycook.de>
  */
 
-define(['jquery'], 
-function($){
+define([
+	'jquery',
+	'classes/Search'
+], function($, Search){
 	return {
 		formSubmit : function(event){
 			var std = Number($("#time_std").val());
 			var min = Number($("#time_min").val());
 			
-			if(std == 0 && min ==0)
+			var search = Search.init();
+			if(std == 0 && min ==0) {
 				search.setTime(null);
-			else
-				search.setTime({std : fillStd(std), min : fillMin(min)});
+			}
+			else {
+				search.setTime({
+					std : this.fillStd(std), 
+					min : this.fillMin(min)
+				});
+			}
 				
 			search.flush();
 			return false;
@@ -57,13 +65,13 @@ function($){
 			
 		},
 		upDownListener : function(event){
-			var $this = $(this);
-			var $input = $this.siblings("input").first();
-			var submit = $this.parents("#time_form").length > 0;
-			if($this.hasClass("up"))
-				timeUp($input,submit);
+			var $target = $(event.target);
+			var $input = $target.siblings("input").first();
+			var submit = $target.parents("#time_form").length > 0;
+			if($target.hasClass("up"))
+				this.up($input, submit);
 			else
-				timeDown($input,submit);
+				this.down($input, submit);
 		},
 		up : function($input, submit){
 			var value = Number($input.val());
@@ -73,7 +81,9 @@ function($){
 				value = (value +5)%60;
 			}
 			$input.val(value);
-			if(submit)timeFormSubmit();
+			if(submit) {
+				this.formSubmit();
+			}
 		},
 		down : function($input, submit){
 			var value = Number($input.val());
@@ -84,7 +94,9 @@ function($){
 				value = (60+(value - 5))%60;
 			}
 			$input.val(value);
-			if(submit)timeFormSubmit();
+			if(submit) {
+				this.formSubmit();
+			}
 		},
 		fillStd : function(std){
 			std = Number(std);

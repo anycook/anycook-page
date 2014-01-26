@@ -46,9 +46,8 @@
 				// handleRadios($("#filter_table .label_muffins"));
 			}
 			if(search.time != null){
-				var time = search.time.split(":");
-				$('#time_std').val(time[0]);
-				$('#time_min').val(time[1]);
+				$('#time_std').val(search.time.std);
+				$('#time_min').val(search.time.min);
 			}
 			if(search.user !=null){
 				this.setUserfilter(search.user);
