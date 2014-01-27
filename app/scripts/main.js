@@ -32,6 +32,7 @@ require.config({
 		'jquery.ui.core' : '../bower_components/jquery.ui/ui/jquery.ui.core',
 		'jquery.ui.effect' : '../bower_components/jquery.ui/ui/jquery.ui.effect',
 		'jquery.ui.menu' : '../bower_components/jquery.ui/ui/jquery.ui.menu',
+		'jquery.ui.position' : '../bower_components/jquery.ui/ui/jquery.ui.position',
 		'jquery.ui.widget' : '../bower_components/jquery.ui/ui/jquery.ui.widget',
 		'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
 		'jquery.xml' : 'lib/jquery.xml-0.4.1.min',
@@ -81,8 +82,12 @@ require.config({
 			deps : ['jquery', 'jquery.ui.widget'],
 			exports : '$'
 		},
+		'jquery.ui.position' : {
+			deps : ['jquery', 'jquery.ui.core'],
+			exports : '$'
+		},
 		'jquery.ui.autocomplete' : {
-			deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.menu'],
+			deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.menu', 'jquery.ui.position'],
 			exports : '$'
 		},
 		'jquery.xml' : {

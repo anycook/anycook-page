@@ -58,7 +58,7 @@
 			}
 				
 			for(var num in search.excludedingredients) {
-				addExcludedIngredientRow(search.excludedingredients[num]);
+				this.addExcludedIngredientRow(search.excludedingredients[num]);
 			}
 			
 			for(var num in search.tags) {
@@ -237,22 +237,22 @@
 		//zutaten
 		ingredientListClick : function(){	
 			if(!$("#filter_main").is(".blocked")){
-				var $this = $(this);
-				var $input = $this.find("input");
+				var $target = $(event.target);
+				var $input = $target.find("input");
 				
 				if($input.length > 0)
 					$input.focus();
 				else{
 					var $li = null;
-					$this.children("li").each(function(i){
+					$target.children("li").each(function(i){
 						if($li!=null) return;
 						if($(this).children().length == 0)
 							$li = $(this);
 					});
 					
 					if($li == null){
-						$li = $("<li></li>");
-						$this.append($li);
+						$li = $("<div></div>");
+						$target.append($li);
 					}
 					
 					$li.append('<input type="text" /><div class="close"></div>');			
@@ -261,42 +261,45 @@
 					$li.children(".close").hide();
 					$input
 						.focus()
-						.keypress(addCloseBtn)
+						.keypress($.proxy(this.addCloseBtn, this))
 						.autocomplete({
-			    		source:function(req,resp){
-		        			//var array = [];
-		        		var term = req.term;
-		        		var excluded = false;
-		        		if(term.charAt(0)=== "-"){
-		        			excluded = true;
-		        			term = term.substr(1);
-		        			if(term.length == 0) return;
-		        		}
+				    		source : function(req,resp){
+			        			//var array = [];
+				        		var term = req.term;
+				        		var excluded = false;
+				        		if(term.charAt(0) === '-'){
+				        			excluded = true;
+				        			term = term.substr(1);
+				        			if(term.length == 0) return;
+				        		}
 
-		        		var excludedIngredients = [];
-		        		$("#ingredient_list .ingredient").each(function() {
-		        			excludedIngredients.push($(this).text());
-		        		});
-		        		
-		        		$.anycook.api.autocomplete.ingredient(term,excludedIngredients,function(data){
-		        				resp($.map(data, function(item){
-		        					return{
-		        						label:item,
-		        						data:item,
-		        						value:excluded?"-"+item:item,
-		        						excluded:excluded
+				        		var excludedIngredients = [];
+				        		$('#ingredient_list .ingredient').each(function() {
+				        			excludedIngredients.push($(this).text());
+				        		});
+				        		
+				        		$.anycook.api.autocomplete.ingredient(term,excludedIngredients,function(data){
+			        				resp($.map(data, function(item){
+			        					return{
+			        						label:item,
+			        						data:item,
+			        						value:excluded?"-"+item:item,
+			        						excluded:excluded
 		        						};
 		        					}));        			
 		        				});
 		        			},
-		        			minlength:1,
-		        			autoFocus:true,
-		        			position:{
-		        				offset:"-5 1"
-		        			}, 
+		        			minlength : 1,
+		        			autoFocus : true,
+		        			position : {
+		        				my : 'left top',
+		        				at : 'left-5 bottom'
+		        			},
 		        			select:function(event, ui){
 		        				var text = ui.item.data;
-		        				$("#ingredient_list input").autocomplete("destroy");
+		        				$('#ingredient_list input').autocomplete('destroy');
+
+		        				var search = Search.init();
 		        				if(ui.item.excluded)
 		        					search.excludeIngredient(text);
 		        				else
@@ -305,32 +308,33 @@
 		        				return false;
 		        			}
 			    	});
-			    	$(".ui-autocomplete").last().addClass("ingredient-autocomplete");
+			    	$('.ui-autocomplete').last().addClass('ingredient-autocomplete');
 			    	
 			    	
 				}
 			}
 		},
-		addCloseBtn : function(e){
-			var $this = $(this);
+		addCloseBtn : function(event){
+			var $target = $(event.target);
 			
-			var val = $this.val();
-			if(e.which == 13){
-				$this.autocomplete("destroy");
+			var val = $target.val();
+			if(event.which === 13){
+				$target.autocomplete('destroy');
 				search.addZutat(val);
 				search.flush();
-			}else if((val+String.fromCharCode(e.which)).length>0){
-				$this.siblings().first().fadeIn(500);
+			}else if((val + String.fromCharCode(event.which)).length > 0){
+				$target.siblings().first().fadeIn(500);
 			}
 		},
 		removeIngredientField : function(event){
-			var $this = $(this);
-			var  $input = $this.siblings("input");
+			var $target = $(event.target);
+			var  $input = $target.siblings("input");
 			if($input.length == 1){
 				$input.remove();
-				$this.remove();
+				$target.remove();
 			}else{
-				var ingredient = $this.siblings();
+				var ingredient = $target.siblings();
+				var search = Search.init();
 				if(ingredient.hasClass("excluded"))
 					search.removeExcludedingredient(ingredient.text());
 				else
