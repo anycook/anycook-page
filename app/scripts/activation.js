@@ -23,7 +23,7 @@ define([
 ], function($){
         return {
                 activate : function(id){
-                        $.anycook.api.registration.activate(id, $.proxy(this.addActivationStuff, this));
+                        AnycookAPI.registration.activate(id, $.proxy(this.addActivationStuff, this));
                 },
                 addActivationStuff : function(response){
                         if(response!="false"){

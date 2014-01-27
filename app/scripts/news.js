@@ -32,7 +32,7 @@ function($, Recipe, User){
 			if(path == "/"){
 				var data = {newestid:newestid};
 				var self = this;
-				$.anycook.api.life(data,function(response){
+				AnycookAPI.life(data,function(response){
 					self.parseAndAddLiveAtHome(response);
 					window.setTimeout(function(){self.updateLiveAtHome}, 5000);
 				});
@@ -90,7 +90,7 @@ function($, Recipe, User){
 				for(var i = 0; i<3 && i < newestRecipes.length; i++){
 					//see jquery.recipeoverview.js
 					var recipe = newestRecipes[i];
-		      		var img = $.anycook.api.recipe.image(recipe);
+		      		var img = AnycookAPI.recipe.image(recipe);
 
 		      		var $img = $("<img src=\""+img+"\"/>");
 
@@ -154,7 +154,7 @@ function($, Recipe, User){
 				var data = {oldestid:oldestid};
 				var self = this;
 
-				$.anycook.api.life(data,function(response){
+				AnycookAPI.life(data,function(response){
 						self.parseAndAddLiveAtHome(response);
 						$target.scroll(function(e){self.scrollListener});
 				});

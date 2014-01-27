@@ -31,12 +31,12 @@ define([
 			var $follower = $('.follower .count');
 			var numFollowers = Number($follower.text());
 			if(!$(this).hasClass('on')){
-				$.anycook.api.user.follow(userid);
+				AnycookAPI.user.follow(userid);
 				$(this).addClass('on').text('- Entfolgen');
 				$('#stamp').fadeIn(500);
 				$follower.text(numFollowers+1);
 			}else{
-				$.anycook.api.user.unfollow(userid);
+				AnycookAPI.user.unfollow(userid);
 				$(this).removeClass('on').text('+ Folgen');
 				$('#stamp').fadeOut(500);
 
@@ -125,7 +125,7 @@ define([
 					}
 				});
 				
-				$.anycook.api.user.schmeckt(userid, function(schmeckt){
+				AnycookAPI.user.schmeckt(userid, function(schmeckt){
 					$('.profile_achievements .likes .count').text(schmeckt.length);
 					if(schmeckt.length > 0){
 						var headline;
@@ -148,7 +148,7 @@ define([
 			});
 				
 			if(userid === user.id){
-				$.anycook.api.user.recommendations (function(json){
+				AnycookAPI.user.recommendations (function(json){
 					if(json.length>0){
 						var headline = 'Diese Rezepte könnten dir auch schmecken';
 						$('#profile_recommendation').recipeoverview(headline, json).show();

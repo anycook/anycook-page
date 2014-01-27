@@ -107,7 +107,7 @@
 					$target.append("<li><span class=\"left\">alle Kategorien</span><span class=\"right\"></span></li>");
 				}
 				
-				$.anycook.api.category.sorted(function(json){
+				AnycookAPI.category.sorted(function(json){
 					var totalrecipes = 0;
 						for(var k in json){
 							$target.append("<li><span class=\"left\">"+k+"</span><span class=\"right\">"+json[k]+"</span></li>");
@@ -278,7 +278,7 @@
 				        			excludedIngredients.push($(this).text());
 				        		});
 				        		
-				        		$.anycook.api.autocomplete.ingredient(term,excludedIngredients,function(data){
+				        		AnycookAPI.autocomplete.ingredient(term,excludedIngredients,function(data){
 			        				resp($.map(data, function(item){
 			        					return{
 			        						label:item,

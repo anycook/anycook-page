@@ -28,7 +28,7 @@
 
       	for(var i in recipes){
       		var recipe = recipes[i];
-      		var img = $.anycook.api.recipe.image(recipe);
+      		var img = AnycookAPI.recipe.image(recipe);
 
       		var $img = $("<img src=\""+img+"\"/>");
 

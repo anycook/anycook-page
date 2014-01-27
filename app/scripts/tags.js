@@ -45,7 +45,7 @@ define([
 					.autocomplete({
 						source:function(req,resp){
 							var term = req.term;
-							$.anycook.api.autocomplete.tag(term,function(data){
+							AnycookAPI.autocomplete.tag(term,function(data){
 								resp($.map(data, function(item){
 									return{
 										label:item
@@ -161,7 +161,7 @@ define([
 				data += 'recipe='+recipe;
 			}
 			
-			$.anycook.api.tag.popular(recipe, function(response){
+			AnycookAPI.tag.popular(recipe, function(response){
 				for(var tag in response){
 					$('#tagcloud').append(self.get(tag, 'number', response[tag]));
 				}
@@ -187,7 +187,7 @@ define([
 			if(user.checkLogin()) {
 				userid = user.id;
 			}
-			$.anycook.api.tag.suggest(recipe, tags);
+			AnycookAPI.tag.suggest(recipe, tags);
 			lightbox.hide();
 			$('.tagsbox').empty();
 			/*$("#recipe_tags").empty();

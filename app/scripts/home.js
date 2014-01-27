@@ -20,21 +20,21 @@ function($, $, Recipe, User, header, loginMenu, news){
 				.append(header.buildLink("Entdecken", "/#?page=discover", "discover_button").addClass("active"));
 				//.append(getHeaderLink("Küchengeplapper", "/#!/?page=stream", "discussion_btn"));
 			
-			$.anycook.api.recipe.ofTheDay(function(recipeOfTheDay){
+			AnycookAPI.recipe.ofTheDay(function(recipeOfTheDay){
 				var recipeName = recipeOfTheDay.name;
 				$("#recipe_of_the_day").attr("href", Recipe.getURI(recipeName))
 			  		.text(recipeName);
 			});
 			
-			$.anycook.api.recipe.number(function(num){
+			AnycookAPI.recipe.number(function(num){
 				$("#num_recipes").text(num);
 			});
 			
-			$.anycook.api.tag.number(function(num){
+			AnycookAPI.tag.number(function(num){
 				$("#num_tags").text(num);
 			});
 			
-			$.anycook.api.ingredient.number(function(num){
+			AnycookAPI.ingredient.number(function(num){
 				$("#num_ingredients").text(num);
 			});
 
@@ -54,16 +54,16 @@ function($, $, Recipe, User, header, loginMenu, news){
 			news.updateLiveAtHome();
 		},
 		discover : function(){
-			$.anycook.api.discover.recommended(function(json){
+			AnycookAPI.discover.recommended(function(json){
 				$("#discover_recommended").recipeoverview("diese Rezepte könnten dir auch schmecken...", json);
 			});
 			
-			$.anycook.api.discover.tasty(function(json){
+			AnycookAPI.discover.tasty(function(json){
 				$("#discover_tasty").recipeoverview("leckerste Rezepte", json);
 			});
 			
 			
-			$.anycook.api.discover.new(function(json){
+			AnycookAPI.discover.new(function(json){
 				$("#discover_new").recipeoverview("neueste Rezepte", json);
 			});	
 		}

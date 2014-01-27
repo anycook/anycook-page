@@ -27,7 +27,7 @@ define([
 			var checker = false;
 			var dfd = $.Deferred();
 			if (filter.test(mail)){
-				$.anycook.api.registration.checkMail(mail, function(response){
+				AnycookAPI.registration.checkMail(mail, function(response){
 					if(response === true){
 						$("#reg_error_mail").addClass("wrong").text("schon vorhanden");
 					}
@@ -63,7 +63,7 @@ define([
 			var checker = false;
 			var dfd = $.Deferred();
 			if(username.length >2){
-				$.anycook.api.registration.checkUsername(username, function(response){
+				AnycookAPI.registration.checkUsername(username, function(response){
 					if(response === true)
 						$("#reg_error_user").addClass("wrong").text("schon vorhanden");
 					else{
@@ -94,7 +94,7 @@ define([
 					var mail = $("#reg_email").val();
 					var username = $("#reg_username").val();
 					var password = $("#reg_pass").val();
-					$.anycook.api.registration(mail, username, password, function(response){
+					AnycookAPI.registration(mail, username, password, function(response){
 						self.showStep2(username,mail);
 					});
 					
@@ -104,7 +104,7 @@ define([
 		showStep2 : function(username, mail){
 			$("#reg_step2 h1").text("Hey "+username+"!");
 			var domain = mail.split("@")[1];
-			$.anycook.api.session.getMailProvider(domain, function(json){
+			AnycookAPI.session.getMailProvider(domain, function(json){
 				if(json!=null){
 					var image = json.image;
 					var shortname = json.shortname;

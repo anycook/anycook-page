@@ -97,7 +97,7 @@ define([
 			var mail = $mail.val();
 			var pwd = $pwd.val();
 			var stayloggedin =$("#stayloggedin input").is(":checked");
-			$.anycook.api.session.login(mail, pwd, stayloggedin, function(json){
+			AnycookAPI.session.login(mail, pwd, stayloggedin, function(json){
 				User.init();
 				//TODO code Login behavior
 				location.reload();

@@ -37,7 +37,7 @@ function loadDiscussion(recipename, lastid) {
 		$("#no_comment").hide();
 	else
 		$("#yes_commit").hide();
-	$.anycook.api.discussion(recipename, lastid, function(json){
+	AnycookAPI.discussion(recipename, lastid, function(json){
 		var pathNames = $.address.pathNames();
 		if(pathNames[0] != "recipe" || decodeURI(pathNames[1]) != recipename)
 			return;
@@ -264,7 +264,7 @@ function comment(event) {
 	if(text != "") {
 		var parameterNames = $.address.pathNames();
 		var recipeName = parameterNames[1];
-		$.anycook.api.discussion.answer(recipeName, text, function(){
+		AnycookAPI.discussion.answer(recipeName, text, function(){
 			$textarea.val("");
 		});
 	}
@@ -278,7 +278,7 @@ function childComment(event) {
 		if(text != "") {
 			var parameterNames = $.address.pathNames();
 			var recipeName = parameterNames[1];
-			$.anycook.api.discussion.answer(recipeName, text, pid, function(){
+			AnycookAPI.discussion.answer(recipeName, text, pid, function(){
 				$this.parents(".child_comment").fadeOut(200, function(){
 					$(this).remove();
 				});
@@ -298,14 +298,14 @@ function discussionLike(event) {
 	var recipeName = parameterNames[1];
 
 	if(!$this.hasClass("liked_by_user")){
-		$.anycook.api.discussion.like(recipeName, id, function(){
+		AnycookAPI.discussion.like(recipeName, id, function(){
 			var $like_nr = $this.siblings(".like_nr");
 			var oldNum = Number($like_nr.text());
 			$like_nr.text(++oldNum);
 			$this.addClass("liked_by_user");
 		});
 	}else{
-		$.anycook.api.discussion.unlike(recipeName, id, function(){
+		AnycookAPI.discussion.unlike(recipeName, id, function(){
 			var $like_nr = $this.siblings(".like_nr");
 			var oldNum = Number($like_nr.text());
 			$like_nr.text(--oldNum);

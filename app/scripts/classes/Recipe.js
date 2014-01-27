@@ -62,11 +62,11 @@ define(['jquery'], function($){
 	};
 
 	Recipe.prototype.getImageURL = function(type){
-		return $.anycook.api.recipe.image(this.name, type);
+		return AnycookAPI.recipe.image(this.name, type);
 	};
 
 	Recipe.getImageURL = function(recipename, type){
-		return $.anycook.api.recipe.image(recipename, type);
+		return AnycookAPI.recipe.image(recipename, type);
 	};
 
 	Recipe.prototype.getURI = function(){

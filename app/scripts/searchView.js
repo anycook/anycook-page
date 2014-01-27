@@ -46,7 +46,7 @@ define([
 				$frame_big = $frame_big.appendTo("#result_container");
 				// $("#result_container").append($frame_big);
 
-				$.anycook.api.recipe(recipe, function(recipe){
+				AnycookAPI.recipe(recipe, function(recipe){
 					if($.inArray(currentRecipes, recipes[0]) > -1)	return;
 
 					self.fillBigFrame($frame_big, recipe);
@@ -74,7 +74,7 @@ define([
 				autocomplete(term,resp);
 		},
 		autocompleteExcludedIngredients : function(term, resp){
-			$.anycook.api.autocomplete.ingredient(term, function(data){
+			AnycookAPI.autocomplete.ingredient(term, function(data){
 				var array = [];
 			 	for(var i=0;i<data.length;i++){
 			 		if(i==0)
@@ -91,7 +91,7 @@ define([
 			var tags = search.tags;
 			var user = search.user;
 			
-			$.anycook.api.autocomplete(term, categorie, ingredients, tags, user, function(data){
+			AnycookAPI.autocomplete(term, categorie, ingredients, tags, user, function(data){
 				var array = [];
 				if(data.gerichte!=undefined){
 					for(var i=0;i<data.gerichte.length;i++){

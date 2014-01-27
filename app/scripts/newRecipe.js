@@ -102,7 +102,7 @@ define([
 			
 			//step3
 			
-			$.anycook.api.category.sorted(function(json){
+			AnycookAPI.category.sorted(function(json){
 				var $category_select = $("#category_select");
 				for(var category in json)
 					$category_select.append("<option>"+category+"</option>");
@@ -261,7 +261,7 @@ define([
 					if(lastSentences.length > i && currentSentences[i] == lastSentences[i] || currentSentences[i].length == 0)
 						continue;
 						
-					$.anycook.api.ingredient.extract(currentSentences[i], function(json){
+					AnycookAPI.ingredient.extract(currentSentences[i], function(json){
 						var $stepIngredients = $step.find(".new_ingredient");
 						var $stepQuestions = $step.find(".new_ingredient_question .ingredient");
 						var ingredients = [];
@@ -446,7 +446,7 @@ define([
 					recipe.mongoid = id;
 				
 
-				$.anycook.api.recipe.save(recipe, function(response){
+				AnycookAPI.recipe.save(recipe, function(response){
 					$.anycook.popup("Vielen Dank!", "Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team");
 					$("body").on("click", function(){
 						$.address.path("");
@@ -836,7 +836,7 @@ define([
 		        			excludedIngredients.push($(this).val());
 		        		});
 		        		
-		        		$.anycook.api.autocomplete.ingredient(term,excludedIngredients,function(data){
+		        		AnycookAPI.autocomplete.ingredient(term,excludedIngredients,function(data){
 		        				resp($.map(data, function(item){
 		        					return{
 		        						label:item,

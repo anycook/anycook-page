@@ -20,7 +20,7 @@ define(['jquery'], function($){
 		var user = new User();
 
 		var dfd = $.Deferred();
-		$.anycook.api.session(function(response){
+		AnycookAPI.session(function(response){
 				user.id = response.id;
 				user.name = response.name;
 				user.level = Number(response.level);
@@ -50,7 +50,7 @@ define(['jquery'], function($){
 		var dfd = $.Deferred();
 		
 		
-		$.when($.anycook.api.user(id)).then(function(json){
+		$.when(AnycookAPI.user(id)).then(function(json){
 			var profileUser = new User();
 			profileUser.id = json.id;
 			profileUser.name = json.name;
@@ -93,7 +93,7 @@ define(['jquery'], function($){
 
 	User.getRecipes = function(userId, callback){
 		var data = {userId:userId};
-		return $.anycook.api.recipe(data,callback);
+		return AnycookAPI.recipe(data,callback);
 	}
 
 	User.prototype.getSchmecktRecipes = function(callback){
@@ -101,11 +101,11 @@ define(['jquery'], function($){
 	}
 
 	User.getSchmecktRecipes = function(userid, callback){
-		return $.anycook.api.user.schmeckt(userid,callback);
+		return AnycookAPI.user.schmeckt(userid,callback);
 	}
 
 	User.getDiscussionNum = function(userid, callback){
-		return $.anycook.api.user.discussionNum(userid, callback);
+		return AnycookAPI.user.discussionNum(userid, callback);
 	}
 
 
@@ -136,16 +136,16 @@ define(['jquery'], function($){
 	}
 
 	User.getUserImagePath = function(userid, type){
-		return $.anycook.api.user.image(userid, type);
+		return AnycookAPI.user.image(userid, type);
 	}
 
 	User.prototype.getUserImagePath = function(type){
-		return $.anycook.api.user.image(this.id, type);
+		return AnycookAPI.user.image(this.id, type);
 	};
 
 	User.login = function(mail, pwd, stayloggedin){
 		var callback = false;
-		$.anycook.api.session.login(mail, pwd, stayloggedin, function(response){
+		AnycookAPI.session.login(mail, pwd, stayloggedin, function(response){
 				callback = response!="false";
 				// checkNewMessageNum();
 		});
@@ -160,7 +160,7 @@ define(['jquery'], function($){
 			this.mail = null;
 			this.facebook_id = null;
 			this.image = null;
-			$.anycook.api.session.logout(function(){
+			AnycookAPI.session.logout(function(){
 				FB.getLoginStatus(function(response){
 					if(response.status == "connected"){
 						FB.logout(function() {

@@ -21,7 +21,7 @@
 // Require.js allows us to configure shortcut alias
 require.config({
 	paths : {
-		'anycook.api' : ['//10.1.0.200/js/jquery.anycook.api','//api.anycook.de/js/jquery.anycook.api'],
+		'AnycookAPI' : ['//10.1.0.200/js/anycookapi','//api.anycook.de/js/anycookapi'],
 		'FB' : '//connect.facebook.net/de_DE/all',
 		'jquery' : '../bower_components/jquery/jquery',
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
@@ -43,9 +43,9 @@ require.config({
 		'underscore' : '../bower_components/underscore/underscore'
 	},
 	shim : {
-		'anycook.api' : {
+		'AnycookAPI' : {
 			deps : ['jquery'],
-			exports : '$'
+			exports : 'AnycookAPI'
 		},
 		'FB' : {
 			exports : 'FB'
@@ -108,7 +108,8 @@ require.config({
 });
 
 require([
-	'anycook.api',
+	'jquery',
+	'AnycookAPI',
 	'FB',
 	'classes/Search',
 	'classes/User',
@@ -126,7 +127,7 @@ require([
 	'jquery.address',
 	'jquery.ui.autocomplete',
 	'jquery.xml', 
-], function($, FB, Search, User, addressChange, drafts, loginMenu, searchView, scroll, facebook, filters, messageStream, tags, time, userMenu){
+], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView, scroll, facebook, filters, messageStream, tags, time, userMenu){
 	//setup
 	// if($.browser.msie){
 		// var version = Number($.browser.version);		
@@ -170,7 +171,7 @@ require([
 
     //anycookapi
     var baseUrl = "http://10.1.0.200";
-	$.when($.anycook.api.init({appId:2, baseUrl: baseUrl})).then(function(){
+	$.when(AnycookAPI.init({appId:2, baseUrl: baseUrl})).then(function(){
     	filters.loadAllCategories($("#kategorie_filter ul"));
     	
     	var xmlErrorFunction = function(event){

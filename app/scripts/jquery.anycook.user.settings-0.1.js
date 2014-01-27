@@ -36,7 +36,7 @@
 		$.anycook.user.settings.loadAccount();
 		$.anycook.user.settings.loadNotifaction();
 
-		var conf = $.anycook.api._settings();
+		var conf = AnycookAPI._settings();
 		
 		new qq.FileUploader({
 		    // pass the dom node (ex. $(selector)[0] for jQuery users)
@@ -82,7 +82,7 @@
 	};
 	
 	$.anycook.user.settings.loadNotifaction = function(){
-		$.anycook.api.setting.notification(function(json){
+		AnycookAPI.setting.notification(function(json){
 			var checker = false;
 			for(var type in json){
 				if(json[type]){
@@ -157,7 +157,7 @@
 				break;
 		}
 
-		$.anycook.api.session.setAccount(type, value, function(){
+		AnycookAPI.session.setAccount(type, value, function(){
 			user[type] = value;
 			var $container = $("#profile_saved");		
 			$.anycook.user.settings.saved($container);
@@ -181,7 +181,7 @@
 	// 	if(newText != user.text)
 	// 		newSettings.text = newText;
 			
-	// 	$.anycook.api.session.setAccount(newSettings,function(){
+	// 	AnycookAPI.session.setAccount(newSettings,function(){
 	// 		user = User.init();
 	// 		var $container = $("#profile_saved");		
 	// 		$.anycook.user.settings.saved($container);
@@ -192,16 +192,16 @@
 	$.anycook.user.settings.changeMail = function(event){
 		var $this = $(this);
 		if($this.is(":checked"))
-			$.anycook.api.session.addMailSettings($this.val());
+			AnycookAPI.session.addMailSettings($this.val());
 		else
-			$.anycook.api.session.removeMailSettings($this.val());
+			AnycookAPI.session.removeMailSettings($this.val());
 		var $container = $("#notification_saved");		
 		$.anycook.user.settings.saved($container);
 		
 	};
 	
 	$.anycook.user.settings.changeAllMail = function(value){
-		$.anycook.api.session.setMail("all", value);
+		AnycookAPI.session.setMail("all", value);
 	};
 	
 	$.anycook.user.settings.saved = function($container){

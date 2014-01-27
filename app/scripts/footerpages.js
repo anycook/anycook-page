@@ -25,10 +25,10 @@ function loadAboutUs(){
 
 function setWebsiteData(){
 	if($.address.pathNames()[0] == "about_us"){
-		$.when($.anycook.api.user.number(),
-			$.anycook.api.tag.number(),
-			$.anycook.api.ingredient.number(),
-			$.anycook.api.recipe.number())
+		$.when(AnycookAPI.user.number(),
+			AnycookAPI.tag.number(),
+			AnycookAPI.ingredient.number(),
+			AnycookAPI.recipe.number())
 		.then(function(numUsers, numTags, numIngredients, numRecipes){
 			$(".usercounter").text(numUsers[0]);
 		  	$(".tagcounter").text(numTags[0]);

@@ -34,7 +34,7 @@ define([
 
 			var self = this;
 			
-			setTimeout(function(){$.anycook.api.message.session(sessionid, startid,
+			setTimeout(function(){AnycookAPI.message.session(sessionid, startid,
 				function(json){
 					var messages = json.messages;
 					
@@ -89,7 +89,7 @@ define([
 							
 							
 							if(messages[i].unread)
-								$.anycook.api.message.read(sessionid, messages[i].id);
+								AnycookAPI.message.read(sessionid, messages[i].id);
 								
 							$.extend(oldDataMap, datamap);
 							$messagestream.data("messages", oldDataMap);
@@ -148,7 +148,7 @@ define([
 			if(message.length == 0)
 				return;
 			
-			$.anycook.api.message.answer(sessionid, message);
+			AnycookAPI.message.answer(sessionid, message);
 			
 			//console.log(encodeURIComponent(message));
 			$textarea.val("");

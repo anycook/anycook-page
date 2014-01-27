@@ -32,7 +32,7 @@ define([
 		profileRecipe : function(recipe){
 			var uri = "#!/recipe/"+encodeURIComponent(recipe);
 			
-			var $img = $("<img/>").attr("src", $.anycook.api.recipe.image(recipe));
+			var $img = $("<img/>").attr("src", AnycookAPI.recipe.image(recipe));
 			var $div =$("<div></div>").append("<span>"+recipe+"</span>");
 			
 			var $link = $("<a></a>").addClass("profile_rezept_bild").attr("href", uri)
@@ -49,7 +49,7 @@ define([
 			$("#subnav #recipe_btn").attr("href", rezepturi);
 			$("#subnav #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
-			$.anycook.api.recipe(recipeName, versionid, function(recipe){
+			AnycookAPI.recipe(recipeName, versionid, function(recipe){
 				$.address.title(recipe.name + " | anycook");
 				$("#recipe_headline").append(recipe.name);
 				$("#introduction").append(recipe.description);
@@ -59,19 +59,19 @@ define([
 				filters.setFromRecipe(recipe);
 			});
 			
-			$(".recipe_image").attr("src", $.anycook.api.recipe.image(recipeName, "large"));
+			$(".recipe_image").attr("src", AnycookAPI.recipe.image(recipeName, "large"));
 
-			$.anycook.api.recipe.ingredients(recipeName, versionid, function(ingredients){
+			AnycookAPI.recipe.ingredients(recipeName, versionid, function(ingredients){
 				if(decodeURIComponent($.address.pathNames()[1]) != recipeName) return;
 				self.loadIngredients(ingredients);
 			});
 
-			$.anycook.api.recipe.tags(recipeName, function(tags){
+			AnycookAPI.recipe.tags(recipeName, function(tags){
 				if(decodeURIComponent($.address.pathNames()[1]) != recipeName) return;
 				self.loadTags(tags);
 			});
 
-			$.anycook.api.recipe.steps(recipeName, versionid, $.proxy(this.loadSteps, this));
+			AnycookAPI.recipe.steps(recipeName, versionid, $.proxy(this.loadSteps, this));
 
 			//recipe_image
 			
@@ -85,7 +85,7 @@ define([
 			var user = User.get();
 
 			if(user.checkLogin()) {
-				$.anycook.api.recipe.schmeckt(recipeName, function(schmeckt){
+				AnycookAPI.recipe.schmeckt(recipeName, function(schmeckt){
 					if(!schmeckt) {
 						$("#schmecktmir").click(schmecktmir);
 					} else {
@@ -403,7 +403,7 @@ define([
 		schmecktmir : function(){
 				var gericht = $.address.pathNames()[1];
 				$("#schmecktmir").unbind("click");
-				$.anycook.api.recipe.makeSchmeckt(gericht, function(response){
+				AnycookAPI.recipe.makeSchmeckt(gericht, function(response){
 						if(response != "false"){
 							$("#schmecktmir").addClass("on");
 							$("#schmecktmir").click(schmecktmirnicht);
@@ -413,7 +413,7 @@ define([
 		schmecktmirnicht : function(){
 			var gericht = $.address.pathNames()[1];
 			$("#schmecktmir").unbind("click");
-			$.anycook.api.recipe.unmakeSchmeckt(gericht,function(response){
+			AnycookAPI.recipe.unmakeSchmeckt(gericht,function(response){
 					if(response != "false"){
 						$("#schmecktmir").removeClass("on");
 						$("#schmecktmir").click(schmecktmir);

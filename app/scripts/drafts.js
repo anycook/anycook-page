@@ -28,10 +28,10 @@ define([
 
 	return {	
 		newDraft : function(callback){
-			$.anycook.api._put("/drafts",{}, callback);
+			AnycookAPI._put("/drafts",{}, callback);
 		},		
 		load : function(){
-			$.anycook.api._get("/drafts", {}, function(drafts){
+			AnycookAPI._get("/drafts", {}, function(drafts){
 				if(drafts.length == 0){
 					$("#nodrafts").show();
 					return;
@@ -50,7 +50,7 @@ define([
 			if(user.checkLogin()){
 				var self = this;
 
-				$.anycook.api._get("/drafts/num", {lastNum:lastnum}, function(num){
+				AnycookAPI._get("/drafts/num", {lastNum:lastnum}, function(num){
 					$("#drafts #draftnum").text(num);
 					var $messageBubble = $("#settings_btn_container .new_messages_bubble");
 					if(num>0)			
@@ -64,12 +64,12 @@ define([
 			}
 		},
 		open : function(id, callback){
-			return $.anycook.api._get("/drafts/"+id, {}, callback);
+			return AnycookAPI._get("/drafts/"+id, {}, callback);
 		},		
 		remove : function(event){
 			var $this = $(this);
 			var $li = $this.parent("li");
-			$.anycook.api._delete("/drafts/"+event.data._id,{}, function(){
+			AnycookAPI._delete("/drafts/"+event.data._id,{}, function(){
 				$li.animate({height:0, opacity:0},{duration:500, complete:function(){
 					$(this).remove();
 					if($("#draft_list").children().length == 0){
@@ -195,7 +195,7 @@ define([
 		saveDoc : function(){
 			if(queue.length > 0){
 				var data = queue[0];
-				$.anycook.api._postJSON("/drafts/"+data.id,data.data, function(){
+				AnycookAPI._postJSON("/drafts/"+data.id,data.data, function(){
 					queue.shift();
 						$.anycook.drafts.saveDoc();
 				});
@@ -205,7 +205,7 @@ define([
 			var path = "/drafts/"+encodeURIComponent(recipename);
 			var data = {};
 
-			$.anycook.api._put(path, {}, function(draft_id){
+			AnycookAPI._put(path, {}, function(draft_id){
 				if(draft_id != null)
 					$.address.value("/recipeediting?step=4&id="+draft_id);
 			})

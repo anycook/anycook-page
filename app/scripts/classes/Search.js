@@ -188,7 +188,7 @@ define(function(){
 		if(start === 0)
 			$("#result_container").empty();
 		// $.when($.anycook.graph.search(data),user.getSchmecktRecipes()).then(function(json, schmeckt){
-		$.anycook.api.search(data,function(json){
+		AnycookAPI.search(data,function(json){
 			if(json && json.size > 0){
 				$('html').trigger('searchResults', json);
 			}else {

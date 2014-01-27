@@ -67,7 +67,7 @@ define([
 				timeout = 500;
 
 			var self = this;
-			setTimeout(function(){$.anycook.api.message(lastDatetime,function(json){
+			setTimeout(function(){AnycookAPI.message(lastDatetime,function(json){
 					var datamap = {};
 					var oldDatamap = $ul.data("map") || {};
 
@@ -129,7 +129,7 @@ define([
 			
 			var user = User.get();
 			if(user.checkLogin())
-				$.anycook.api.message.number(num, $.proxy(this.checkNewMessageNum, this));
+				AnycookAPI.message.number(num, $.proxy(this.checkNewMessageNum, this));
 		},
 		clickRecipients : function(){
 			var $this = $(this);
@@ -159,7 +159,7 @@ define([
 			    		var term = req.term;
 			    		var exclude = getRecipientIds();
 			    		exclude.push(user.id);
-			    		$.anycook.api.autocomplete.user(term, exclude, function(json){
+			    		AnycookAPI.autocomplete.user(term, exclude, function(json){
 								var ids = getRecipientIds();
 								for(var i = 0; i<json.length; i++){
 									if($.inArray(json[i].id, ids) == -1)
@@ -279,7 +279,7 @@ define([
 			if(recipientIds === undefined || recipientIds.length == 0 || message.length == 0)
 				return;
 			
-			$.anycook.api.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
+			AnycookAPI.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
 				console.log(xhr);
 			});
 			
