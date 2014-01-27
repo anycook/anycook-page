@@ -17,7 +17,7 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-
+'use strict';
 define([
 	'jquery',
 	'classes/Recipe',
