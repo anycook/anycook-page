@@ -268,9 +268,7 @@ define([
 					std : std,
 					min : min
 				},
-				schmeckt : schmeckt,
-				//TODO
-				schmecktNum : 0
+				schmeckt : schmeckt
 			});
 
 			var template = _.template(searchResultTemplate, json);
