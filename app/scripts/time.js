@@ -43,17 +43,17 @@ define([
 		},
 		key : function(event){
 			var target = $(event.target);
-			var val = $(this).val();
+			var val = $(target).val();
 			
 			var $timeform = $("#time_form");
 			if(event.which == 13){
 				if($timeform.length > 0)$timeform.submit();
 				
 			}else if(event.which == 38){
-				timeUp(target);
+				this.up(target);
 				return false;
 			}else if(event.which == 40){
-				timeDown(target);
+				this.down(target);
 				return false;	
 			}else{
 				if((target.hasClass("std") && val.length==2) || target.hasClass("min") && val.length==2)
