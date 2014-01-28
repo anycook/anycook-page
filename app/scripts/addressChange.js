@@ -19,8 +19,9 @@
  */
 
 define(['jquery', 
-	'classes/Search', 
+	'classes/Search',
 	'activation',
+	'discussion',
 	'filters', 
 	'header',
 	'home', 
@@ -30,7 +31,7 @@ define(['jquery',
 	'registration',
 	'title',
 	'userProfile'
-], function($, Search, activation, filters, header, home, messages, messageStream, recipeView, registration, title, userProfile){
+], function($, Search, activation, discussion, filters, header, home, messages, messageStream, recipeView, registration, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -239,27 +240,15 @@ define(['jquery',
 				switch(firstpath){
 				case "recipe":
 					switch(page){
-					case "discussion":
-						$("#recipe_container").hide();
+					case 'discussion':
+						$('#recipe_container').hide();
 						var $discussionContainer = $("#discussion_container");
-						if($discussionContainer.length==0){
-							$.xml.append("recipe_discussion");
-							//discussion
-							$(".center_headline").html("Diskussion zum Rezept<br/>" + decodeURIComponent(event.pathNames[1]));
-							var login = user.checkLogin();
-							if(login) {
-								$("#discussion_footer .nologin").hide();
-								$("#discussion_footer img").attr("src", user.getUserImagePath());
-								$(".comment_btn").click(comment);
-							} else {
-								$("#discussion_footer .login").hide();
-								$("#no_comment").click(clickSignin);
-							}
-							loadDiscussion(decodeURI(event.pathNames[1]));
-							
+						if($discussionContainer.length==0){						
+							discussion.load(decodeURI(event.pathNames[1]));
 						}
-						else
+						else{
 							$discussionContainer.show();
+						}
 						
 						$("#discussion_btn").addClass("active");
 						break;

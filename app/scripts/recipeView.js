@@ -45,7 +45,7 @@ define([
 			filters.reset();
 			recipeName = decodeURIComponent(recipeName);
 
-			var rezepturi = "#!/recipe/"+recipeName;
+			var rezepturi = "#/recipe/"+recipeName;
 			$("#subnav #recipe_btn").attr("href", rezepturi);
 			$("#subnav #discussion_btn").attr("href", rezepturi + "?page=discussion");
 
