@@ -68,10 +68,10 @@ define([
 			var term = req.term;
 			if(term.charAt(0) === "-"){
 				if(term.length > 1)
-					autocompleteExcludedIngredients(term.substr(1), resp);
+					this.autocompleteExcludedIngredients(term.substr(1), resp);
 			}
 			else
-				autocomplete(term,resp);
+				this.autocomplete(term,resp);
 		},
 		autocompleteExcludedIngredients : function(term, resp){
 			AnycookAPI.autocomplete.ingredient(term, function(data){
@@ -238,9 +238,6 @@ define([
 		removeTerm: function(event){
 			search.setTerms(null);
 			search.flush();
-		},
-		gotoGericht : function(gericht){
-			$.address.path("recipe/"+gericht);
 		},
 		focusoutSearch : function(){
 			$("#search").val('');	

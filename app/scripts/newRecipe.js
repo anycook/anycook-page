@@ -20,10 +20,13 @@
 'use strict';
 
 define([
-	'jquery'
-], function($){
+	'jquery.inputdecorator',
+	'classes/User',
+	'filters',
+	'jquery.ui.sortable'
+], function($, User, filters){
 	return {
-		loadNewRecipe : function(){			
+		load : function(){			
 			//navigation
 			var path = $.address.path();
 			for(var i = 1; i<=4; i++)
@@ -46,16 +49,27 @@ define([
 			
 			
 			//step1	
-			var decoratorSettings = {color:"#878787", change:validateStep1};
+			var decoratorSettings = {
+				color : "#878787", 
+				change : $.proxy(this.validateStep1, this)
+			};
 			$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
 				$.anycook.drafts.save("name", $(this).val());
 			});
 			$("#step1 textarea").inputdecorator("required", decoratorSettings).focusout(function(){
 				$.anycook.drafts.save("description", $(this).val());
 			});
-			$("#step1 form").submit(submitStep1);
+			$("#step1 form").submit($.proxy(this.submitStep1, this));
+
+			$("#file_upload").click($.proxy(this.uploadImage, this));
 			
-			new qq.FileUploader({
+			var self = this;
+			$("#upload_button").click(function(event){
+				event.preventDefault();
+				$('#file_upload').trigger('click');
+			})
+			
+			/*new qq.FileUploader({
 			    // pass the dom node (ex. $(selector)[0] for jQuery users)
 			    element: $("#upload_button")[0],
 			    multiple:false,
@@ -64,11 +78,11 @@ define([
 			    onComplete:completeUpload,
 			    // path to server-side upload script
 			    action: baseUrl+'/upload/image/recipe'
-			});
+			});*/
 			
 			
 			//step2
-			var $firstStep = getNewIngredientStep(1);
+			var $firstStep = this.getNewIngredientStep(1);
 			$("#new_step_container").append($firstStep)
 				.sortable({
 					placeholder:"step-placeholder",
@@ -80,10 +94,14 @@ define([
 					opacity:0.75,
 					scroll:true,
 					tolerance:"pointer",
-					update:updateStepNumbers
+					update: $.proxy(this.updateStepNumbers, this)
 				});
 				//.disableSelection();
-			$firstStep.find("textarea").inputdecorator("maxlength", {color:"#878787", decoratorFontSize:"8pt", change:checkStep2});
+			$firstStep.find("textarea").inputdecorator("maxlength", {
+				color : '#878787',
+				decoratorFontSize: '8pt', 
+				change : $.proxy(this.checkStep2, this)
+			});
 			$("#add_new_step").click(function(){
 				var $newStep = getNewIngredientStep($(".new_ingredient_step").length+1);
 				
@@ -95,10 +113,10 @@ define([
 				// 	resetNewRecipeHeight($("#step2"));
 			});
 
-			$("#ingredient_overview").click(makeIngredientLightBox);
+			$("#ingredient_overview").click($.proxy(this.makeIngredientLightBox, this));
 			// watchSteps();
 			
-			$("#step2").on("focusout", "input, textarea", draftSteps);
+			$("#step2").on("focusout", "input, textarea", $.proxy(this.draftSteps, this));
 			
 			//step3
 			
@@ -144,27 +162,27 @@ define([
 					handleRadios($(this).children());
 			});
 			$("#step3 .std,#step3 .min")
-				.keydown(keyTime)
-				.change(draftTime)
-				.keyup(draftTime)
+				.keydown($.proxy(this.keyTime, this))
+				.change($.proxy(this.draftTime, this))
+				.keyup($.proxy(this.draftTime, this))
 				.focus(function(){
 					checkValidateStep3();
 					$("#time_error").fadeOut(300);
 				})
 				.siblings(".up, .down")
-				.click(timeUpDownListener)
-				.click(draftTime)
+				.click($.proxy(this.timeUpDownListener, this))
+				.click($.proxy(this.draftTime, this))
 				.click(function(){
 					checkValidateStep3();
 					$("#time_error").fadeOut(300);
 				});
 				
-			$(".tagsbox").click(makeNewTagInput);
-			makeTagCloud();
-			$("#open_preview").click(submitStep3);
+			$(".tagsbox").click($.proxy(this.makeNewTagInput, this));
+			//this.makeTagCloud();
+			$("#open_preview").click($.proxy(this.submitStep3, this));
 			
 			
-			$("#submit_recipe").click(saveRecipe);
+			$("#submit_recipe").click($.proxy(this.saveRecipe, this));
 			
 			
 			//preview (step4)
@@ -172,6 +190,7 @@ define([
 			
 			
 			//draft
+			var user = User.get();
 			if(user.checkLogin()){
 				 var id = $.address.parameter("id");
 				if(id == undefined){
@@ -189,7 +208,59 @@ define([
 					$("#cancel_recipe").show();
 				}
 			}
-		}
+		},
+		uploadImage : function(file){
+			// Uploading - for Firefox, Google Chrome and Safari
+			var xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange=function()
+			{	
+				//if document has been created
+				if(xhr.readyState==4 && xhr.status == 201){
+					var location = this.getResponseHeader("Location");
+					self.model.setDocument(location);
+				}
+				
+			}
+
+			xhr.open("post", "/document", true);
+
+			// Update progress bar
+			xhr.upload.addEventListener("progress", function (evt) {
+				if (evt.lengthComputable){
+					var percent = Math.round((evt.loaded/evt.total)* 100)+"%";
+					$progressBar.attr("value", evt.loaded);
+					$progressPercent.html(percent);
+				}
+
+				
+			}, false);
+
+			// File uploaded
+			xhr.addEventListener("load", function () {
+
+				$fileName.fadeOut(250);
+				$progressBar.fadeOut(250);
+				$progressPercent.fadeOut(250);
+
+				$li.delay(500).queue(function(){$(this).append("<span class=\"finished animated fadeIn\">Ihr Dokument wurde erfolgreich hochgeladen!</span>")});
+				$("#upload-step3").removeClass("cursor-not-allowed");
+				//$(".topbar").addClass("animated fadeInDownBig");
+			}, false);
+
+			// Set appropriate headers
+			//xhr.setRequestHeader("Content-Type", "multipart/form-data");
+			//xhr.setRequestHeader("X-File-Name", file.name);
+			//xhr.setRequestHeader("X-File-Size", file.size);
+			//xhr.setRequestHeader("X-File-Type", file.type);
+
+			//Create FormData object
+			var formData = new FormData();
+			formData.append("file", file);
+
+			// Send the file (doh)
+			xhr.send(formData);
+		},
 		//step1
 		validateStep1 : function(event){
 			var $this = $(this);
@@ -468,8 +539,8 @@ define([
 				return false;
 			}
 		},
-		newRecipeAdressChange : function(event){
-			resetFilter();
+		addressChange : function(event){
+			filters.reset();
 			var checkedinput = $("#step3 .label_muffins input:checked, #step3 .label_chefhats input:checked");
 			var $editingContainer = $("#recipe_editing_container");	
 			$editingContainer.removeClass("step2 step3");
@@ -761,7 +832,7 @@ define([
 			//remove step
 			var $remove = $("<div></div>").addClass("remove_new_step")
 				.append("<span></span>")
-				.click(removeNewStep);
+				.click($.proxy(this.removeNewStep, this));
 			
 			//ingredient part
 			var $zutaten = $("<h4></h4>").addClass("zutaten_headline").text("Zutatenname");
@@ -776,11 +847,11 @@ define([
 					opacity:0.75,
 					placeholder: "ingredient-placeholder",
 					tolerance:"pointer",
-					update: updateIngredients			
+					update: $.proxy(this.updateIngredients, this)			
 				});
 				
 			if(ingredients === undefined || ingredients.length == 0)
-				$newIngredientList.append(getNewIngredientLine());
+				$newIngredientList.append(this.getNewIngredientLine());
 			else{
 				for(var i in ingredients)
 					$newIngredientList.append(getNewIngredientLine(ingredients[i].name, ingredients[i].menge));
@@ -788,7 +859,7 @@ define([
 				//.disableSelection();
 			var $addingredientLine = $("<div></div>").addClass("add_new_ingredient_line")
 				.append("<span></span>")
-				.click(addNewIngredientLine);
+				.click($.proxy(this.addNewIngredientLine, this));
 			var $newIngredients  = $("<div></div>").addClass("ingredients new_ingredients")
 				.append($zutaten)
 				.append($menge)
@@ -811,12 +882,12 @@ define([
 			if(name !== undefined)
 				$ingredient.val(name);
 			var $menge = $("<input type=\"text\">").addClass("new_ingredient_menge")
-				.focusout(formatMenge);
+				.focusout($.proxy(this.formatMenge, this));
 			if(menge !== undefined)
 				$menge.val(menge);
 			var $remove = $("<div></div>").addClass("remove_new_ingredient_line")
 				.append("<span></span>")
-				.click(removeNewIngredientLine);
+				.click($.proxy(this.removeNewIngredientLine, this));
 			
 			var $newIngredientLine = $("<li></li>").addClass("new_ingredient_line")
 				.append($dragdrop)

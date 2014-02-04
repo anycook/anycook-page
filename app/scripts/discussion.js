@@ -37,7 +37,7 @@ define([
 			if(login) {
 				$("#discussion_footer .nologin").hide();
 				$("#discussion_footer img").attr("src", user.getUserImagePath());
-				$(".comment_btn").click(comment);
+				$(".comment_btn").click($.proxy(this.comment, this));
 			} else {
 				$("#discussion_footer .login").hide();
 				$("#no_comment").click($.proxy(loginMenu.toggle, loginMenu));
@@ -149,7 +149,7 @@ define([
 
 			if(login){
 				var $answer_btn = $("<a></a>").addClass("answer_btn").text("antworten");
-				$answer_btn.on("click", answerBtnClick);
+				$answer_btn.on("click", $.proxy(this.answerBtnClick, this));
 				$footer.append($answer_btn);
 			}
 			var $like = $("<div class=\"like\"></div>");
@@ -163,7 +163,7 @@ define([
 
 			$footer.append($comment_like);
 			if(login){
-				$like.on("click", discussionLike);
+				$like.click($.proxy(this.discussionLike, this));
 			}
 			
 			$comment.append($comment_headline).append($text).append($footer);

@@ -66,7 +66,7 @@
 			}
 			
 			if(search.terms!=null){
-				addTerms(search.terms);
+				searchView.addTerms(search.terms);
 			}
 		},
 		reset : function(){

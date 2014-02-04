@@ -87,10 +87,10 @@ define([
 			if(user.checkLogin()) {
 				AnycookAPI.recipe.schmeckt(recipeName, function(schmeckt){
 					if(!schmeckt) {
-						$("#schmecktmir").click(schmecktmir);
+						$("#schmecktmir").click($.proxy(self.schmecktmir, self));
 					} else {
 						$("#schmecktmir").addClass("on");
-						$("#schmecktmir").click(schmecktmirnicht);
+						$("#schmecktmir").click($.proxy(self.schmecktmirnicht, self));
 					}
 				});	
 				$("#tags").click($.proxy(this.showAddTags, this));	

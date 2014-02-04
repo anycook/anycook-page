@@ -24,14 +24,15 @@ define(['jquery',
 	'discussion',
 	'filters', 
 	'header',
-	'home', 
+	'home',
 	'messages',
-	'messageStream', 
+	'messageStream',
+	'newRecipe',
 	'recipeView',
 	'registration',
 	'title',
 	'userProfile'
-], function($, Search, activation, discussion, filters, header, home, messages, messageStream, recipeView, registration, title, userProfile){
+], function($, Search, activation, discussion, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -79,9 +80,9 @@ define(['jquery',
 					case 1:
 						switch(path[0]){
 						case "recipeediting":
-							setTitle("Neues Rezept erstellen");
+							title.set("Neues Rezept erstellen");
 							$("#new_recipe").addClass("active");
-							loadNewRecipe();
+							newRecipe.load();
 							break;
 						case "feedback":
 							setTitle("Feedback");
@@ -109,9 +110,6 @@ define(['jquery',
 							break;
 						case "settings":
 							$.anycook.user.settings.load();
-							break;
-						case "developer":
-							setTitle("Entwickler");
 							break;
 						case "newsstream":
 							$("#user_messages").addClass("active");
@@ -153,9 +151,9 @@ define(['jquery',
 						switch(path[0]){
 						case "recipe":
 							$("#subnav")
-									.append(getHeaderLink("Rezept", "", "recipe_btn"))
-									.append(getHeaderLink("Diskussion", "", "discussion_btn"));
-							loadRecipe(path[1], path[2]);
+									.append(header.buildLink("Rezept", "", "recipe_btn"))
+									.append(header.buildLink("Diskussion", "", "discussion_btn"));
+							recipeView.load(path[1], path[2]);
 							break;
 							
 						case "search":
@@ -176,7 +174,7 @@ define(['jquery',
 			$("#subnav *").removeClass("active");
 			
 			if(event.pathNames[0]=="recipeediting"){
-				newRecipeAdressChange(event);
+				newRecipe.addressChange(event);
 			}
 			else if(event.parameters["page"]!=undefined){
 				this.changePage(event);

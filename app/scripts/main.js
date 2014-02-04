@@ -27,12 +27,15 @@ require.config({
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
 		'jquery.autoellipsis' : '../bower_components/jquery.autoellipsis/src/jquery.autoellipsis',
 		'jquery.autogrowtextarea' : '../bower_components/autogrow-textarea/jquery.autogrowtextarea',
+		'jquery.inputdecorator' : 'lib/jquery.inputdecorator-0.1',
 		'jquery.mousewheel' : '../bower_components/jscrollpane/script/jquery.mousewheel',
 		'jquery.recipeoverview' : 'lib/jquery.recipeoverview',
 		'jquery.ui.core' : '../bower_components/jquery.ui/ui/jquery.ui.core',
 		'jquery.ui.effect' : '../bower_components/jquery.ui/ui/jquery.ui.effect',
 		'jquery.ui.menu' : '../bower_components/jquery.ui/ui/jquery.ui.menu',
+		'jquery.ui.mouse' : '../bower_components/jquery.ui/ui/jquery.ui.mouse',
 		'jquery.ui.position' : '../bower_components/jquery.ui/ui/jquery.ui.position',
+		'jquery.ui.sortable' : '../bower_components/jquery.ui/ui/jquery.ui.sortable',
 		'jquery.ui.widget' : '../bower_components/jquery.ui/ui/jquery.ui.widget',
 		'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
 		'jquery.xml' : 'lib/jquery.xml-0.4.1.min',
@@ -62,6 +65,10 @@ require.config({
 			deps : ['jquery'],
 			exports : '$'
 		},
+		'jquery.inputdecorator' : {
+			deps : ['jquery'],
+			exports : '$'
+		},
 		'jquery.recipeoverview' : {
 			deps : ['jquery'],
 			exports : '$'
@@ -74,11 +81,19 @@ require.config({
 			deps : ['jquery'],
 			exports : '$'
 		},
+		'jquery.ui.sortable' : {
+			deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.mouse'],
+			exports : '$'
+		},
 		'jquery.ui.widget' : {
 			deps : ['jquery', 'jquery.ui.core'],
 			exports : '$'
 		},
 		'jquery.ui.menu' : {
+			deps : ['jquery', 'jquery.ui.widget'],
+			exports : '$'
+		},
+		'jquery.ui.mouse' : {
 			deps : ['jquery', 'jquery.ui.widget'],
 			exports : '$'
 		},
@@ -238,7 +253,7 @@ require([
 
     //searchbar 
 	$("#search").autocomplete({
-		source		: search.searchAutocomplete,
+		source		: $.proxy(searchView.searchAutocomplete, searchView),
 		minLength 	: 1,
 		autoFocus 	: true,
 		select 		: function(event, ui){
@@ -246,7 +261,7 @@ require([
 			var type = ui.item.data;
 			$("#search").val("");
 			if(type == "gericht"){
-				gotoGericht(text);
+				$.address.path("recipe/"+text);
 			}
 			else if(type == "zutaten"){
 				searchObject.addZutat(text);
@@ -298,6 +313,7 @@ require([
 	$("#search_form").submit(function(event){
 		event.preventDefault();
     	var data = $("#search").val();
+    	var search = Search.init();
     	search.setTerms(data);
     	search.flush();
 	});

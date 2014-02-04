@@ -108,6 +108,7 @@
     						<p>Bild hochladen:</p>
     					</div>
     					<div id="upload_button" class="button">durchsuchen</div>
+    					<input id="file_upload" type="file"/>
     				</div>
     				<div id="progressbar"></div>
     			</div>
