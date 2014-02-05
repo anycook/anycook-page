@@ -27,7 +27,7 @@ define([
 	var queue = [];
 
 	return {	
-		newDraft : function(callback){
+		init : function(callback){
 			AnycookAPI._put("/drafts",{}, callback);
 		},		
 		load : function(){
@@ -190,15 +190,17 @@ define([
 			var newData = {id:id, data:{}};
 			newData.data[type] = data;
 			queue.push(newData);
-			if(queue.length == 1)
-				$.anycook.drafts.saveDoc();
+			if(queue.length === 1){
+				this.saveDoc();
+			}
 		},
 		saveDoc : function(){
+			var self = this;
 			if(queue.length > 0){
 				var data = queue[0];
 				AnycookAPI._postJSON("/drafts/"+data.id,data.data, function(){
 					queue.shift();
-						$.anycook.drafts.saveDoc();
+						self.saveDoc();
 				});
 			}
 		},

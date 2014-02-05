@@ -24,9 +24,10 @@ define([
 	'classes/User',
 	'drafts',
 	'filters',
+	'scroll',
 	'jquery.ui.sortable',
 	'jquery.ui.progressbar'
-], function($, User, drafts, filters){
+], function($, User, drafts, filters, scroll){
 	return {
 		load : function(){			
 			//navigation
@@ -56,10 +57,10 @@ define([
 				change : $.proxy(this.validateStep1, this)
 			};
 			$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
-				$.anycook.drafts.save("name", $(this).val());
+				drafts.save("name", $(this).val());
 			});
 			$("#step1 textarea").inputdecorator("required", decoratorSettings).focusout(function(){
-				$.anycook.drafts.save("description", $(this).val());
+				drafts.save("description", $(this).val());
 			});
 			$("#step1 form").submit($.proxy(this.submitStep1, this));
 
@@ -184,13 +185,13 @@ define([
 			if(user.checkLogin()){
 				 var id = $.address.parameter("id");
 				if(id == undefined){
-					$.anycook.drafts.newDraft(function(id){
+					drafts.init(function(id){
 						$.address.parameter("id", id);
 					});
 					return;
 				}else{
 					//link
-					$.anycook.drafts.open(id, fillNewRecipe);
+					drafts.open(id, $.proxy(this.fillNewRecipe, this));
 					$(".nav_button, #step4 a").not("#cancel_recipe").attr("href", function(i, attr){
 							return attr+"&id="+id;
 					});
@@ -209,28 +210,29 @@ define([
 			}  
 			
 		},
-		submitStep1 : function(){
-			var $this = $(this);
+		submitStep1 : function(event){
+			event.preventDefault();
 			var check = true;
-			var $name = $this.find("#new_recipe_name");
+			var $target = $(event.target);
+			var $name = $target.find("#new_recipe_name");
 			if($name.val().length == 0){
-				$this.find("#new_recipe_name_error").fadeIn(300);
+				$target.find("#new_recipe_name_error").fadeIn(300);
 				check=false;
 			}
 			
-			var $introduction = $this.find("#new_recipe_introduction");
+			var $introduction = $target.find("#new_recipe_introduction");
 			if($introduction.val().length == 0){
-				$this.find("#new_recipe_introduction_error").fadeIn(300);
+				$target.find("#new_recipe_introduction_error").fadeIn(300);
 				check=false;
 			}
 			
-			if(check)
+			if(check){
 				$.address.parameter("step", "2");
+			}
 			else{
-				$this.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
+				$target.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
 				//watchIntroduction();
 			}
-			return false;
 		},
 		//step2
 		checkStep2 : function(event){
@@ -532,9 +534,12 @@ define([
 				};
 
 				var scrollTop = $(document).scrollTop();
-				if(scrollTop > 10)
-					backtothetop(1000, animate); 
-				else animate();
+				if(scrollTop > 10){
+					scroll.backToTheTop(1000, animate); 
+				}
+				else { 
+					animate();
+				}
 				
 				
 			}
@@ -581,7 +586,7 @@ define([
 			}
 			
 			if(json.image){
-				showNRImage(json.image);
+				this.showImage(AnycookAPI.upload.imagePath(json.image));
 			}
 			
 			
@@ -1013,10 +1018,10 @@ define([
 				var splits = location.split("/");
 				var filename = splits[splits.length-1];
 				drafts.save("image", filename);
-				this.showNRImage(location);
+				this.showImage(location);
 			}
 		},
-		showNRImage : function(location){
+		showImage : function(location){
 			var $recipeImageContainer = $(".recipe_image_container");
 			$recipeImageContainer.children("img").remove();
 			$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
