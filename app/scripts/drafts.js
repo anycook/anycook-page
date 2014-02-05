@@ -20,8 +20,10 @@
 
 define([
 	'jquery',
-	'classes/User'
-], function( $, User){
+	'underscore',
+	'classes/User',
+	'text!templates/draftFrame.erb'
+], function( $, _, User, draftFrameTemplate){
 	'use strict';
 	
 	var queue = [];
@@ -31,6 +33,7 @@ define([
 			AnycookAPI._put("/drafts",{}, callback);
 		},		
 		load : function(){
+			var self = this;
 			AnycookAPI._get("/drafts", {}, function(drafts){
 				if(drafts.length == 0){
 					$("#nodrafts").show();
@@ -39,7 +42,7 @@ define([
 				var $list = $("#draft_list");
 				for(var i in drafts){
 					var draft = drafts[i];
-					$list.append($.anycook.drafts.getBigFrameDraft(draft.id,draft.data));
+					$list.append(self.getBigFrameDraft(draft.id,draft.data));
 				}
 			});
 		},	
@@ -80,58 +83,21 @@ define([
 			
 		},
 		getBigFrameDraft : function(id,draft){
-			
-			var date = new Date(draft.timestamp);
-			var dateString = $.anycook.drafts.parseDraftDate(date);
-			// var percent = draft.percentage+"%";
-			var percent = Math.round(draft.percentage*100)+"%";
-			var name = !draft.name ? "Noch kein Titel" : draft.name;
-			var description = !draft.description ? "Noch keine Beschreibung" : draft.description;
 			var image = !draft.image ? "category/sonstiges.png" : draft.image;
-		
-			var uri = encodeURI("/#!/recipeediting?id="+id);
-			
-			var $frame_big_left = $("<div></div>").addClass("frame_big_left");
-			
-			var $img = $("<img/>").attr("src", baseUrl+"/images/recipe/small/"+image);
-			var $recipe_img = $("<div></div>").addClass("recipe_img")
-				.append($img);
-			
-			
-				
-			var $recipe_text = $("<div></div>").addClass("recipe_text")
-				.append("<h3>"+name+"</h3>")
-				.append("<p>"+description+"</p>");
-		
-		
-			var $date = $("<div>"+dateString+"</div>").addClass("date");
-			var $year = $("<div>"+date.getFullYear()+"</div>").addClass("year");
-			var $percent = $("<div>"+percent+"</div>").addClass("percent");
-			var $datecontainer = $("<div></div>").addClass("date_container")
-				.append($date)
-				.append($year)
-				.append($percent);
-			
-		
-			var $frame_big_main = $("<div></div>").addClass("frame_big_main")
-				.append($datecontainer)
-				.append($recipe_img)
-				.append($recipe_text);
-		
-			var $frame_big_right = $("<div></div>").addClass("frame_big_right");
-			
-			var $frame_big = $("<a></a>").addClass("frame_big draft").attr("href", uri)
-				.append($frame_big_left)
-				.append($frame_big_main)
-				.append($frame_big_right);
-				
-				
-			var $deletebtn =  $("<div><span></span></div>").attr("title", "Entwurf löschen").addClass("delete").on("click", {_id:id}, $.anycook.drafts.remove);
-			var $li = $("<li></li>")
-				.append($frame_big)
-				.append($deletebtn);
-		
-			return $li;
+			var date = new Date(draft.timestamp);
+			var dateString = this.parseDraftDate(date);
+
+			var data = {
+				uri : encodeURI("#/recipeediting?id="+id),
+				name : !draft.name ? "Noch kein Titel" : draft.name,
+				description : !draft.description ? "Noch keine Beschreibung" : draft.description,
+				imagePath : AnycookAPI.upload.imagePath(image, 'recipe', 'small'),
+				date : dateString,
+				percent : Math.round(draft.percentage*100)+"%",
+				year : date.getFullYear()
+			}
+
+			return _.template(draftFrameTemplate, data);
 		},
 		parseDraftDate : function(date){
 			
