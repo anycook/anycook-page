@@ -182,6 +182,7 @@ define([
 			
 		},
 		save : function(type, data){
+			var user = User.get();
 			var id = $.address.parameter("id");
 			if(!user.checkLogin || id === undefined) return;
 			

@@ -100,7 +100,7 @@
     			<h2>Schön, dass Du ein Rezept erstellen möchtest.</h2>
     			<p>In nur drei Schritten ist dein Rezept fertig. Fangen wir an!</p>
     			<div class="recipe_image_container image_container visible">
-    				<img class="recipe_image" src="http://images.anycook.de/gerichtebilder/big/category/sonstiges.png"/>
+    				<img class="recipe_image" src="/img/sonstiges.png"/>
     				<div class="image_layer"></div>
     				<div class="image_upload">
     					<div>

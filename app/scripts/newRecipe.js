@@ -22,9 +22,11 @@
 define([
 	'jquery.inputdecorator',
 	'classes/User',
+	'drafts',
 	'filters',
-	'jquery.ui.sortable'
-], function($, User, filters){
+	'jquery.ui.sortable',
+	'jquery.ui.progressbar'
+], function($, User, drafts, filters){
 	return {
 		load : function(){			
 			//navigation
@@ -61,26 +63,14 @@ define([
 			});
 			$("#step1 form").submit($.proxy(this.submitStep1, this));
 
-			$("#file_upload").click($.proxy(this.uploadImage, this));
+			$("#file_upload").change($.proxy(this.uploadImage, this));
 			
 			var self = this;
 			$("#upload_button").click(function(event){
 				event.preventDefault();
 				$('#file_upload').trigger('click');
 			})
-			
-			/*new qq.FileUploader({
-			    // pass the dom node (ex. $(selector)[0] for jQuery users)
-			    element: $("#upload_button")[0],
-			    multiple:false,
-			    onSubmit:addProgressBar,
-			    onProgress:nrProgress,
-			    onComplete:completeUpload,
-			    // path to server-side upload script
-			    action: baseUrl+'/upload/image/recipe'
-			});*/
-			
-			
+						
 			//step2
 			var $firstStep = this.getNewIngredientStep(1);
 			$("#new_step_container").append($firstStep)
@@ -209,86 +199,15 @@ define([
 				}
 			}
 		},
-		uploadImage : function(file){
-			// Uploading - for Firefox, Google Chrome and Safari
-			var xhr = new XMLHttpRequest();
-
-			xhr.onreadystatechange=function()
-			{	
-				//if document has been created
-				if(xhr.readyState==4 && xhr.status == 201){
-					var location = this.getResponseHeader("Location");
-					self.model.setDocument(location);
-				}
-				
-			}
-
-			xhr.open("post", "/document", true);
-
-			// Update progress bar
-			xhr.upload.addEventListener("progress", function (evt) {
-				if (evt.lengthComputable){
-					var percent = Math.round((evt.loaded/evt.total)* 100)+"%";
-					$progressBar.attr("value", evt.loaded);
-					$progressPercent.html(percent);
-				}
-
-				
-			}, false);
-
-			// File uploaded
-			xhr.addEventListener("load", function () {
-
-				$fileName.fadeOut(250);
-				$progressBar.fadeOut(250);
-				$progressPercent.fadeOut(250);
-
-				$li.delay(500).queue(function(){$(this).append("<span class=\"finished animated fadeIn\">Ihr Dokument wurde erfolgreich hochgeladen!</span>")});
-				$("#upload-step3").removeClass("cursor-not-allowed");
-				//$(".topbar").addClass("animated fadeInDownBig");
-			}, false);
-
-			// Set appropriate headers
-			//xhr.setRequestHeader("Content-Type", "multipart/form-data");
-			//xhr.setRequestHeader("X-File-Name", file.name);
-			//xhr.setRequestHeader("X-File-Size", file.size);
-			//xhr.setRequestHeader("X-File-Type", file.type);
-
-			//Create FormData object
-			var formData = new FormData();
-			formData.append("file", file);
-
-			// Send the file (doh)
-			xhr.send(formData);
-		},
-		//step1
-		validateStep1 : function(event){
-			var $this = $(this);
-			var $container = event.container;
-			var $step1 = $("#step1");
-			var check = true;
-			//var $name = $step1.find("#new_recipe_name");
-			if(!event.empty){
-				$container.next(".error").fadeOut(300);
-				if(checkValidationStep1())
-					$("#nav_step1").next().removeClass("inactive");
-					
-			}else{
-				$("#nav_step1").nextAll().addClass("inactive");
-			}
-		},
-		checkValidationStep1 : function(){
-			var check = true;
-			var $name = $("#new_recipe_name");
-			if($name.val().length == 0){
-				check=false;
-			}
+		uploadImage : function(event){
+			var files = event.target.files;
+			if (typeof files !== "undefined") {
+				this.addProgressBar();
+				AnycookAPI.upload.recipeImage(files[0], this.nrProgress, $.proxy(this.completeUpload, this));
+			} else {
+				alert("No support for the File API in this web browser");
+			}  
 			
-			var $introduction = $("#new_recipe_introduction");
-			if($introduction.val().length == 0){
-				check=false;
-			}
-			return check;
 		},
 		submitStep1 : function(){
 			var $this = $(this);
@@ -1086,23 +1005,24 @@ define([
 			$(".image_upload").hide();
 			$("#progressbar").fadeIn(200).progressbar();
 		},
-		nrProgress : function(id, filename, loaded, total){
-			$("#progressbar").progressbar({value:(loaded/total*100)});
+		nrProgress : function(event){
+			$("#progressbar").progressbar({value:(event.loaded/event.total*100)});
 		},
-		completeUpload : function(id, fileName, responseJSON){
-			if(responseJSON.success){
-				var filename = responseJSON.success;
-				$.anycook.drafts.save("image", filename);
-				showNRImage(filename);
+		completeUpload : function(location, xhr){
+			if(location){
+				var splits = location.split("/");
+				var filename = splits[splits.length-1];
+				drafts.save("image", filename);
+				this.showNRImage(location);
 			}
 		},
-		showNRImage : function(filename){
+		showNRImage : function(location){
 			var $recipeImageContainer = $(".recipe_image_container");
 			$recipeImageContainer.children("img").remove();
 			$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
 			$recipeImageContainer.children(".image_upload").show();
 			
-			var $img = $("<img/>").addClass("recipe_image").attr("src", baseUrl+"/images/recipe/big/"+filename);
+			var $img = $("<img/>").addClass("recipe_image").attr("src", location);
 			$recipeImageContainer.append($img);
 			$img.load(function(){$("#step1").trigger($.Event('resize'))});
 		},

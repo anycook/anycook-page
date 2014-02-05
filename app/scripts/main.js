@@ -35,6 +35,7 @@ require.config({
 		'jquery.ui.menu' : '../bower_components/jquery.ui/ui/jquery.ui.menu',
 		'jquery.ui.mouse' : '../bower_components/jquery.ui/ui/jquery.ui.mouse',
 		'jquery.ui.position' : '../bower_components/jquery.ui/ui/jquery.ui.position',
+		'jquery.ui.progressbar' : '../bower_components/jquery.ui/ui/jquery.ui.progressbar',
 		'jquery.ui.sortable' : '../bower_components/jquery.ui/ui/jquery.ui.sortable',
 		'jquery.ui.widget' : '../bower_components/jquery.ui/ui/jquery.ui.widget',
 		'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
@@ -99,6 +100,10 @@ require.config({
 		},
 		'jquery.ui.position' : {
 			deps : ['jquery', 'jquery.ui.core'],
+			exports : '$'
+		},
+		'jquery.ui.progressbar' : {
+			deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget'],
 			exports : '$'
 		},
 		'jquery.ui.autocomplete' : {
