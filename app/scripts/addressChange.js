@@ -22,6 +22,7 @@ define(['jquery',
 	'classes/Search',
 	'activation',
 	'discussion',
+	'drafts',
 	'filters', 
 	'header',
 	'home',
@@ -32,7 +33,7 @@ define(['jquery',
 	'registration',
 	'title',
 	'userProfile'
-], function($, Search, activation, discussion, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, title, userProfile){
+], function($, Search, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -85,17 +86,17 @@ define(['jquery',
 							newRecipe.load();
 							break;
 						case "feedback":
-							setTitle("Feedback");
+							title.set("Feedback");
 							loadContact();
 							break;
 						case "preview":
 							loadPreview();
 							break;
 						case "about_us":
-							setTitle("Über uns");
+							title.set("Über uns");
 							break;
 						case "impressum":
-							setTitle("Impressum");
+							title.set("Impressum");
 							loadImpressum();
 							break;
 						case "fbregistration":
@@ -116,7 +117,7 @@ define(['jquery',
 							messageStream.loadNewsstream();
 							break;
 						case "drafts":
-							$.anycook.drafts.load();
+							drafts.load();
 							break;
 						}
 						break;

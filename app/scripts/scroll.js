@@ -40,7 +40,7 @@ define([
 		backToTheTop : function(time, callback){
 			if(time  === undefined) time = 1000;
 		 	callback = callback || function(){};
-			$("html, body").animate({scrollTop:0}, {duration:time, easing:"easeInOutQuart", complete: callback});
+			$("html").animate({scrollTop:0}, {duration:time, easing:"easeInOutQuart", complete: callback});
 		}
 	};
 });

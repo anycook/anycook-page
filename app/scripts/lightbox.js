@@ -81,18 +81,18 @@ define([
 		},
 		showFromBottom : function($lightbox, bottom){			
 			$lightbox.show();
-			resizeLightbox();
+			this.resize();
 			var top = bottom - $lightbox.outerHeight();
 			$lightbox.css({
 				top : top, 
-				left : getLightBoxLeft()
+				left : this.getLeft()
 			})	
 			.find(".dogear").animate({
 				right:0,
 				top:0
 			},
 			{
-				duration:150,
+				duration: 150,
 				easing: "swing",
 				complete:function(){
 					$(".contentbox").animate({
@@ -100,6 +100,8 @@ define([
 					}, {duration: 500});
 				}
 			});
+
+			var self = this;
 				
 			$("body").click(function(event){
 				var $target = $(event.target);
@@ -107,7 +109,7 @@ define([
 					$target.parents().andSelf().is(".lightbox-autocomplete"))
 					return;
 					
-				hideLightbox($lightbox);
+				self.hide($lightbox);
 				
 				$(this).unbind("click");
 			});

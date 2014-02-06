@@ -2,13 +2,16 @@
  * jQuery Input Decorator Plugin v0.1
  * http://anycook.de
  *
- * Copyright (c) 2011 Jan Grassegger
+ * Copyright (c) 2014 Jan Grassegger
  * Dual licensed under the MIT license.
  * http://jquery.org/license
  * 
  * Changes:
- * --------- v0.1 -----------------
+ * v0.1.1
+ * - renamed container to $target and added target to event object
+ * v0.1
  * - first alpha
+ * 
  * 
  */
 
@@ -202,10 +205,20 @@
 		var $decorator =  $parent.children().first();
 		if(!$decorator.is(":visible") && $this.val().length == 0){
 			$decorator.fadeIn(settings.transitiontime);
-			event = jQuery.Event("change", {visible:true, empty:true, container:data.$container});
+			event = jQuery.Event("change", {
+				visible : true,
+				empty : true, 
+				$container : data.$container,
+				target : data.target
+			});
 		}else if($decorator.is(":visible") && $this.val().length > 0){
 			$decorator.fadeOut(settings.transitiontime);
-			event = jQuery.Event("change", {visible:false, empty:false, container:data.$container});
+			event = jQuery.Event("change", {
+				visible : false,
+				empty : false,
+				$container : data.$container,
+				target : data.target
+			});
 		}
 		if(event !== undefined)
 			settings.change.apply(data.target, [event]);
@@ -226,7 +239,11 @@
 		var newVal = Number($this.attr("maxlength")) - $this.val().length;
 		
 		if(newVal != currentVal){
-			var event = jQuery.Event("change", {empty:$this.val().length == 0, container:data.$container});			
+			var event = jQuery.Event("change", {
+				empty : $this.val().length == 0,
+				$container : data.$container,
+				target : data.target
+			});			
 			$decoratorSpan.text(newVal);
 			settings.change.apply(data.target, [event]);
 		}

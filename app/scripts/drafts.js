@@ -39,7 +39,7 @@ define([
 					$("#nodrafts").show();
 					return;
 				}			
-				var $list = $("#draft_list");
+				var $list = $("#draft_list").on('click', '.delete', self.remove);
 				for(var i in drafts){
 					var draft = drafts[i];
 					$list.append(self.getBigFrameDraft(draft.id,draft.data));
@@ -70,9 +70,8 @@ define([
 			return AnycookAPI._get("/drafts/"+id, {}, callback);
 		},		
 		remove : function(event){
-			var $this = $(this);
-			var $li = $this.parent("li");
-			AnycookAPI._delete("/drafts/"+event.data._id,{}, function(){
+			var $li = $(event.target).parents("li");
+			AnycookAPI._delete("/drafts/"+$li.data('id'),{}, function(){
 				$li.animate({height:0, opacity:0},{duration:500, complete:function(){
 					$(this).remove();
 					if($("#draft_list").children().length == 0){
@@ -97,7 +96,7 @@ define([
 				year : date.getFullYear()
 			}
 
-			return _.template(draftFrameTemplate, data);
+			return $(_.template(draftFrameTemplate, data)).data('id', id);
 		},
 		parseDraftDate : function(date){
 			

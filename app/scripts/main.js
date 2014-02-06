@@ -27,7 +27,7 @@ require.config({
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
 		'jquery.autoellipsis' : '../bower_components/jquery.autoellipsis/src/jquery.autoellipsis',
 		'jquery.autogrowtextarea' : '../bower_components/autogrow-textarea/jquery.autogrowtextarea',
-		'jquery.inputdecorator' : 'lib/jquery.inputdecorator-0.1',
+		'jquery.inputdecorator' : 'lib/jquery.inputdecorator-0.1.2',
 		'jquery.mousewheel' : '../bower_components/jscrollpane/script/jquery.mousewheel',
 		'jquery.recipeoverview' : 'lib/jquery.recipeoverview',
 		'jquery.ui.core' : '../bower_components/jquery.ui/ui/jquery.ui.core',

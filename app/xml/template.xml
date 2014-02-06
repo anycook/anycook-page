@@ -231,7 +231,7 @@
     		</div>
     		<div id="step4" class="sliding_container">
     			<div id="recipe_container">
-    				<a href="#!/recipeediting?step=1" title="Einleitung und Bild bearbeiten">
+    				<a href="#/recipeediting?step=1" title="Einleitung und Bild bearbeiten">
 						<div id="recipe_main">
 				    		<div class="recipe_image_container"><img class="recipe_image"/></div>
 				    	</div>
@@ -240,7 +240,7 @@
 							<div id="introduction"></div>
 						</div>
 					</a>
-					<a href="#!/recipeediting?step=2" title="Schritte bearbeiten">
+					<a href="#/recipeediting?step=2" title="Schritte bearbeiten">
 						<ul id="step_container"></ul>
 					</a>
 					
@@ -253,7 +253,7 @@
 	<template id="drafts" access="restricted">
 		<div id="nodrafts">
 			<h1>Keine Entwürfe vorhanden</h1>
-			<p>Zur Zeit hast du keine unvollendeten Rezepte. Du kannst aber gerne ein <a href="/#!/recipeediting">neues Rezept beginnen</a> und jederzeit unterbrechen.</p>
+			<p>Zur Zeit hast du keine unvollendeten Rezepte. Du kannst aber gerne ein <a href="/#/recipeediting">neues Rezept beginnen</a> und jederzeit unterbrechen.</p>
 		</div>
 		<ul id="draft_list"></ul>
 	</template>
