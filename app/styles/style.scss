@@ -753,6 +753,7 @@ header{
 								width:$width - 10px;
 								border-bottom: 1px solid $lightgrey;
 								padding: 3px 4px 0;
+								position: relative;
 
 								.plus, .minus{
 									float: left;
@@ -781,8 +782,7 @@ header{
 
 								
 								.ingredient{
-									float:left;
-									margin: 2px 0 -2px 0;
+									margin: 1px 0 -2px 0;
 								}
 								
 								.amount{
@@ -812,8 +812,9 @@ header{
 									background-image:url("/img/icons20x20.png");
 									background-repeat:no-repeat;
 									background-position: -20px -41px;
-									
-									float:right;
+									position: absolute;
+									right: 0px;
+									top: 2px;
 									cursor:pointer;
 									
 									&:hover{
