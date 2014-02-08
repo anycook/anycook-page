@@ -98,7 +98,6 @@ define(['jquery',
 							break;
 						case "impressum":
 							title.set("Impressum");
-							loadImpressum();
 							break;
 						case "fbregistration":
 							loadFBRegistrationMessage();

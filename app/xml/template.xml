@@ -36,6 +36,9 @@
 	    </div>
     </template>
     <template id="impressum">
+    	<h1>Impressum</h1>
+    	<h2>TODO</h2>
+    	<p>u.a. open source</p>
     </template>
     <template id="search">
     	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div>   		
