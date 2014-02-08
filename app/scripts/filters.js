@@ -22,9 +22,10 @@
  	'jquery', 
  	'classes/Search', 
  	'searchView',
+ 	'stringTools',
  	'time',
  	'text!templates/filters/ingredientRow.erb'
- ], function($, Search, searchView, time, ingredientRowTemplate){
+ ], function($, Search, searchView, stringTools, time, ingredientRowTemplate){
 	// alle Filter
 	return {
 		setFromSession : function(){
@@ -58,8 +59,8 @@
 				this.addIngredientRow(search.zutaten[num]);
 			}
 				
-			for(var num in search.excludedingredients) {
-				this.addExcludedIngredientRow(search.excludedingredients[num]);
+			for(var num in search.excludedIngredients) {
+				this.addExcludedIngredientRow(search.excludedIngredients[num]);
 			}
 			
 			for(var num in search.tags) {
@@ -483,15 +484,38 @@
 			var currentNum = Number($input.val());
 			var newNum = ((currentNum) % 99) + 1;
 			$input.val(newNum);
-			multiZutaten(newNum);
+			this.multiplyIngredients(newNum);
 		},
 		personsDown : function() {
 			var $input = $("#persons_num");
 			var currentNum = Number($input.val());
 			var newNum = ((99 - 2 + currentNum) % 99) + 1;
 			$input.val(newNum);
-			multiZutaten(newNum);
+			this.multiplyIngredients(newNum);
 		},
+		multiplyIngredients : function(perscount, recipe) {
+
+			$("#ingredient_list .amount").each(function(i) {
+				var amount = $(this).data("amount");
+				if(amount === undefined){
+					amount = $(this).text();
+					$(this).data("amount", amount);
+				}
+				var newValue = stringTools.getNumbersFromString(amount, perscount);
+				
+				if(recipe!=null){
+					var zutat = recipe.ingredients[i];
+					//var currentzutattext = $(this).prev().text();
+					if(zutat.singular != null) {
+						if(getValuefromString(newValue) == 1) {
+							$(this).prev().text(zutat.singular);
+						} else
+							$(this).prev().text(zutat.name);
+					}
+				}
+				$(this).text(newValue);
+			});
+		}
 	};
 });
 

@@ -26,8 +26,9 @@ define([
 	'filters',
 	'lightbox',
 	'loginMenu',
+	'stringTools',
 	'tags'
-], function($, gapi, Recipe, User, filters, lightbox, loginMenu, tags){
+], function($, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags){
 	return { 
 		profileRecipe : function(recipe){
 			var uri = "#!/recipe/"+encodeURIComponent(recipe);
@@ -190,7 +191,7 @@ define([
 				var zutat = ingredients[i].name;
 				var menge = ingredients[i].menge;
 				var singular = ingredients[i].singular;
-				if(singular !== undefined && singular != null && this.getValuefromString(menge) == 1)
+				if(singular !== undefined && singular != null && stringTools.getValuefromString(menge) == 1)
 					zutat = singular;
 
 				var $li = $("<li></li>").append("<div></div>").append("<div></div>");
@@ -276,129 +277,6 @@ define([
 			$("#main").append($lightbox);
 
 			return $lightbox;
-		},
-		multiZutaten : function(perscount, recipe) {
-
-			$("#ingredient_list .amount").each(function(i) {
-				var amount = $(this).data("amount");
-				if(amount === undefined){
-					amount = $(this).text();
-					$(this).data("amount", amount);
-				}
-				var newValue = getNumbersFromString(amount, perscount);
-				
-				if(recipe!=null){
-					var zutat = recipe.ingredients[i];
-					//var currentzutattext = $(this).prev().text();
-					if(zutat.singular != null) {
-						if(getValuefromString(newValue) == 1) {
-							$(this).prev().text(zutat.singular);
-						} else
-							$(this).prev().text(zutat.name);
-					}
-				}
-				$(this).text(newValue);
-			});
-		},
-		getNumbersFromString : function(inputstring, factor) {
-			var beginString = "";
-			var valueFromString = "";
-			var restString = "";
-
-			var postProc = false;
-			var i = null;
-
-			for(var n = 0; n < inputstring.length; n++) {
-				i = inputstring.substring(n, n + 1);
-				if(i.match(/\d/)) {
-					valueFromString += i;
-					for(var m = n + 1; m < inputstring.length; m++) {
-						i = inputstring.substring(m, m + 1);
-						if(i.match(/\d/))
-							valueFromString += i;
-						else if(i == "," || i == ".") {
-							valueFromString += ".";
-						} else if(i == "-" || i == "/") {
-							valueFromString += i;
-							postProc = true;
-						} else {
-							restString += inputstring.substring(m, inputstring.length);
-							break;
-						}
-					}
-					break;
-				} else
-					beginString += i;
-			}
-			factor = factor / $("#persons_num").data("persons");
-			if(beginString.length == inputstring.length)
-				return beginString;
-			if(postProc)
-				return beginString + postProcessString(valueFromString, factor).toString().replace(".", ",") + restString;
-			var finalValue = parseFloat(valueFromString) * factor;
-			return beginString + handleTrailingNumbers(finalValue).toString().replace(".", ",") + restString;
-
-		},
-		getValuefromString : function(inputstring) {
-			var valueFromString = "";
-			for(var n = 0; n < inputstring.length; n++) {
-				var i = inputstring.substring(n, n + 1);
-				if(i == "1" || i == "2" || i == "3" || i == "4" || i == "5" || i == "6" || i == "7" || i == "8" || i == "9" || i == "0") {
-					valueFromString += i;
-					for(var m = n + 1; m < inputstring.length; m++) {
-						var i = inputstring.substring(m, m + 1);
-						if(i == "1" || i == "2" || i == "3" || i == "4" || i == "5" || i == "6" || i == "7" || i == "8" || i == "9" || i == "0")
-							valueFromString += i;
-						else if(i == "," || i == ".") {
-							valueFromString += ".";
-						} else if(i == "-" || i == "/") {
-							valueFromString += i;
-						} else {
-							break;
-						}
-					}
-					break;
-				}
-			}
-			return Number(valueFromString);
-		},
-		handleTrailingNumbers : function(string) {
-			var count = 0;
-			string = string.toString();
-			for(var n = 0; n < string.length; n++) {
-				var i = string.substring(n, n + 1);
-				if(i == ".")
-					count = string.substring(n + 1, string.length).length;
-			}
-			if(count < 2)
-				return parseFloat(string);
-			return parseFloat(string).toFixed(2);
-		},
-		postProcessString : function(string, factor) {
-			var first = "";
-			var delimiter = "";
-			var second = "";
-			var trail = false;
-			for(var n = 0; n < string.length; n++) {
-				var i = string.substring(n, n + 1);
-
-				if(i == "-" || i == "/") {
-					delimiter = i;
-					trail = true;
-				} else if(trail)
-					second += i;
-				else
-					first += i;
-			}
-			if(delimiter == "-") {
-				var mean = (parseInt(first) + parseInt(second)) / 2;
-				return handleTrailingNumbers((mean * factor).toString());
-			}
-			if(delimiter == "/") {
-				var quotient = parseInt(first) / parseInt(second);
-				return handleTrailingNumbers((quotient * factor).toString());
-			}
-
 		},
 		schmecktmir : function(){
 				var gericht = $.address.pathNames()[1];
