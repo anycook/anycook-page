@@ -753,14 +753,36 @@ header{
 								width:$width - 10px;
 								border-bottom: 1px solid $lightgrey;
 								padding: 3px 4px 0;
+
+								.plus, .minus{
+									float: left;
+									color: green;
+									cursor: pointer;
+									font-weight: bold;
+									width: 14px;
+								}
+
+								.minus{
+									color: red;
+									display: none;
+									width: 12px;
+									padding-left: 2px;
+								}
+
+								&.excluded{
+									.plus{
+										display: none;
+									}
+									.minus{
+										display: block;
+									}
+								}
+
+
 								
 								.ingredient{
 									float:left;
 									margin: 2px 0 -2px 0;
-									
-									&.excluded{
-									  color:red;
-									}
 								}
 								
 								.amount{

@@ -22,8 +22,9 @@
  	'jquery', 
  	'classes/Search', 
  	'searchView',
- 	'time'
- ], function($, Search, searchView, time){
+ 	'time',
+ 	'text!templates/filters/ingredientRow.erb'
+ ], function($, Search, searchView, time, ingredientRowTemplate){
 	// alle Filter
 	return {
 		setFromSession : function(){
@@ -400,24 +401,26 @@
 				$ingredientList.append($li);
 			}
 			
-			$li.append("<div class=\"ingredient\">"+ingredient+"</div><div class=\"close\"></div>");
+			var template = _.template(ingredientRowTemplate, {name : ingredient});
+			$li.append(template);
+			return $li;
 		},
 		addExcludedIngredientRow : function(ingredient){	
-			var $ingredientList = $("#ingredient_list");
-			var $li = null;
-			$ingredientList.children("li").each(function(i){
-				var $this = $(this);
-				if($li!=null) return;
-				if($this.children().length == 0)
-					$li = $this;
-			});
-			
-			if($li == null){
-				$li = $("<li></li>");
-				$ingredientList.append($li);
-			}
-			
-			$li.append("<div class=\"ingredient excluded\">"+ingredient+"</div><div class=\"close\"></div>");
+			return this.addIngredientRow(ingredient).addClass('excluded');
+		},
+		clickExcludeIngredient : function(event){
+			var ingredient = $(event.target).siblings('.ingredient').text();
+			var search = Search.init();
+			search.removeZutat(ingredient);
+			search.excludeIngredient(ingredient);
+			search.flush();
+		},
+		clickAddIngredient : function(event){
+			var ingredient = $(event.target).siblings('.ingredient').text();
+			var search = Search.init();
+			search.addZutat(ingredient);
+			search.removeExcludedingredient(ingredient);
+			search.flush();
 		},
 		//recipe
 		setFromRecipe : function(recipe){

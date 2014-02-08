@@ -363,7 +363,9 @@ require([
 	//zutatentabelle
 	
 	$("#ingredient_list").click($.proxy(filters.ingredientListClick, filters))
-		.on('click', ".close", $.proxy(filters.removeIngredientField, filters));
+		.on('click', ".close", $.proxy(filters.removeIngredientField, filters))
+		.on('click', '.plus', $.proxy(filters.clickExcludeIngredient, filters))
+		.on('click', '.minus', $.proxy(filters.clickAddIngredient, filters));
 	
 	
 	//tagsfilter
