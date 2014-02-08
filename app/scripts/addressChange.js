@@ -20,6 +20,7 @@
 
 define(['jquery', 
 	'classes/Search',
+	'aboutus',
 	'activation',
 	'discussion',
 	'drafts',
@@ -33,7 +34,7 @@ define(['jquery',
 	'registration',
 	'title',
 	'userProfile'
-], function($, Search, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, title, userProfile){
+], function($, Search, aboutus, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -93,7 +94,7 @@ define(['jquery',
 							loadPreview();
 							break;
 						case "about_us":
-							title.set("Über uns");
+							aboutus.load();
 							break;
 						case "impressum":
 							title.set("Impressum");

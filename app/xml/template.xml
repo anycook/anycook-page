@@ -405,7 +405,7 @@
 							<td class="tagcounter">70</td>
 						</tr>
 					</table>
-					<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahr </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
+					<div id="online_since">online seit:<div id="online_time"><span class="years"><span></span> Jahre </span><span class="days"></span> Tage <span class="hours"></span> Std. <span class="minutes"></span> Min. <span class="seconds"></span> Sek.</div></div>
 				</div>
 			</div>
 			<div id="team">
