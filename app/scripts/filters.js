@@ -334,12 +334,13 @@
 				$input.remove();
 				$target.remove();
 			}else{
-				var ingredient = $target.siblings();
+				var $li = $target.parent();
+				var ingredient = $target.siblings('.ingredient').text();
 				var search = Search.init();
-				if(ingredient.hasClass("excluded"))
-					search.removeExcludedingredient(ingredient.text());
+				if($li.hasClass("excluded"))
+					search.removeExcludedingredient(ingredient);
 				else
-					search.removeZutat(ingredient.text());
+					search.removeZutat(ingredient);
 				search.flush();
 			}
 		},
