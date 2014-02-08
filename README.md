@@ -20,6 +20,8 @@ Webclient for [anycook-api](https://github.com/anycook/anycook-api).
 	```sudo gem install compass```
 4. Install yeoman
 	```npm install -g yeoman```
+4. Install grunt-cli
+	```npm install -g grunt-cli```
 
 ## Test environment
 You can test the whole anycook platform localy. To also test the API locally you need to checkout and run [anycook-api](https://github.com/anycook/anycook-api). The instructions can be found [here](https://github.com/anycook/anycook-api#test-environment).
