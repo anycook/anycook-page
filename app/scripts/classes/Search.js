@@ -5,7 +5,7 @@ define(function(){
 		this.kategorie = null;
 		this.time = null;
 		this.zutaten = new Array();
-		this.excludedingredients = new Array();
+		this.excludedIngredients = new Array();
 		this.tags = new Array();
 		this.terms = null;
 		this.user = null;
@@ -25,8 +25,8 @@ define(function(){
 				temp.kategorie = value;
 				break;
 				
-			case "excludedingredients":
-				temp.excludedingredients = value.split(",");
+			case "excludedIngredients":
+				temp.excludedIngredients = value.split(",");
 				break;
 			
 			case "zutaten":
@@ -100,17 +100,17 @@ define(function(){
 	};
 
 	Search.prototype.excludeIngredient = function(excludedIngredient){
-		for(var i in this.excludedingredients){
-			if(this.excludedingredients[i] == excludedIngredient) return;
+		for(var i in this.excludedIngredients){
+			if(this.excludedIngredients[i] == excludedIngredient) return;
 		}
 		
-		this.excludedingredients[this.excludedingredients.length] = excludedIngredient;
+		this.excludedIngredients[this.excludedIngredients.length] = excludedIngredient;
 	};
 
 	Search.prototype.removeExcludedingredient = function(zutat){
-		for(var i = 0; i<this.excludedingredients.length; i++){
-			if(this.excludedingredients[i]==zutat){
-				this.excludedingredients.splice(i, 1);
+		for(var i = 0; i<this.excludedIngredients.length; i++){
+			if(this.excludedIngredients[i]==zutat){
+				this.excludedIngredients.splice(i, 1);
 				break;
 			}
 		}
@@ -154,8 +154,8 @@ define(function(){
 			data.category = this.kategorie;
 		if(this.zutaten.length > 0)
 			data.ingredients = this.zutaten;
-		if(this.excludedingredients.length > 0)
-			data.excludedingredients = this.excludedingredients;
+		if(this.excludedIngredients.length > 0)
+			data.excludedIngredients = this.excludedIngredients;
 		if(this.terms != null)
 			data.terms = this.terms;
 		if(this.kalorien != null)
@@ -212,7 +212,7 @@ define(function(){
 		
 		$.address.parameter("tags" , this.tags);
 		$.address.parameter("zutaten", this.zutaten);
-		$.address.parameter("excludedingredients", this.excludedingredients);
+		$.address.parameter("excludedIngredients", this.excludedIngredients);
 		$.address.parameter("terms", this.terms);
 		$.address.parameter("kategorie", this.kategorie);
 		$.address.parameter("skill", this.skill);
@@ -225,7 +225,7 @@ define(function(){
 
 	Search.prototype.hasData = function(){
 		var check = this.skill != null || this.kalorien != null || this.kategorie != null 
-			|| this.time != null || this.zutaten.length > 0 || this.excludedingredients.length > 0
+			|| this.time != null || this.zutaten.length > 0 || this.excludedIngredients.length > 0
 			 || this.tags.length > 0 || this.terms != null || this.user != null;
 		return check;
 	};
