@@ -1,5 +1,8 @@
-anycook-page
+anycook page
 ============
+[![Dependency Status](https://david-dm.org/anycook/anycook-page/dev-status.png?theme=shields.io)](https://david-dm.org/anycook/anycook-page#info=devDependencies&view=table)
+
+
 
 Webclient for [anycook-api](https://github.com/anycook/anycook-api).
 
