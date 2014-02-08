@@ -41,7 +41,7 @@ require.config({
 		'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
 		'jquery.xml' : 'lib/jquery.xml-0.4.1.min',
 		'jscrollpane' : '../bower_components/jscrollpane/script/jquery.jscrollpane',
-		'plusone' : 'https://apis.google.com/js/plusone',
+		'plusone' : ['https://apis.google.com/js/plusone', 'lib/plusone'],
 		'text' : '../bower_components/requirejs-text/text',
 		'templates' : '../templates',
 		'underscore' : '../bower_components/underscore/underscore'
