@@ -277,6 +277,9 @@ define([
 		},
 		showEmptyResult : function(){
 			$('#result_container').html(emptySearchResultTemplate);
+			AnycookAPI.discover.recommended(function(json){
+				$("#discover_recommended").recipeoverview("diese Rezepte könnten dir auch schmecken...", json);
+			});
 		}
 	}
 });
