@@ -20,9 +20,10 @@
 define([
 	'jquery',
 	'drafts',
+	'imageUpload',
 	'jquery.ui.progressbar',
 	'jquery.inputdecorator'
-], function($, drafts){
+], function($, drafts, imageUpload){
 	return {
 		load : function(){
 			var decoratorSettings = {
@@ -37,7 +38,11 @@ define([
 			});
 			$("#step1 form").submit($.proxy(this.submit, this));
 
-			$("#file_upload").change($.proxy(this.uploadImage, this));
+			var data = {
+				complete : this.completeUpload,
+				this : this
+			}
+			$("#file_upload").change(data, $.proxy(imageUpload.recipe, imageUpload));
 			
 			
 			$("#upload_button").click(function(event){
@@ -73,16 +78,6 @@ define([
 			}else{
 				$("#nav_step1").nextAll().addClass("inactive");
 			}
-		},
-		uploadImage : function(event){
-			var files = event.target.files;
-			if (typeof files !== "undefined") {
-				this.addProgressBar();
-				AnycookAPI.upload.recipeImage(files[0], this.nrProgress, $.proxy(this.completeUpload, this));
-			} else {
-				alert("No support for the File API in this web browser");
-			}  
-			
 		},
 		submit : function(event){
 			event.preventDefault();
@@ -120,13 +115,6 @@ define([
 		getDescription : function(){
 			var description = $("#new_recipe_introduction").val();
 			return description;
-		},
-		addProgressBar : function(){
-			$(".image_upload").hide();
-			$("#progressbar").fadeIn(200).progressbar();
-		},
-		nrProgress : function(event){
-			$("#progressbar").progressbar({value:(event.loaded/event.total*100)});
 		},
 		completeUpload : function(location, xhr){
 			if(location){

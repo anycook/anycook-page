@@ -26,6 +26,10 @@
 		position:relative;
 		.image_upload{
 			margin-left:25px;
+
+			#file_upload{
+				display: none;
+			}
 		}
 		
 		img{

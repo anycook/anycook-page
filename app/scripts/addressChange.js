@@ -32,9 +32,10 @@ define(['jquery',
 	'newRecipe',
 	'recipeView',
 	'registration',
+	'settings',
 	'title',
 	'userProfile'
-], function($, Search, aboutus, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, title, userProfile){
+], function($, Search, aboutus, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, settings, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -110,7 +111,7 @@ define(['jquery',
 							registration.show();
 							break;
 						case "settings":
-							$.anycook.user.settings.load();
+							settings.load();
 							break;
 						case "newsstream":
 							$("#user_messages").addClass("active");
