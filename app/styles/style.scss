@@ -289,21 +289,38 @@ header{
 	height:$height;
 
 	#container_head_peak{
-			position:relative;	
+			position:absolute;	
 			float: left;	
 			background: url("/img/bg_texture.png");		
+			overflow: hidden;
 			
-			height:$height;
-			width:94px;
-			left:241px;
-			top: -9px;
+			height:60px;
+			width:130px;
+			left:226px;
+			top: -19px;
 
 			div{
-				width: 100%;
+				width: 50%;
 				height: 100%;
-				background:url("/img/peak.png") no-repeat;
+				margin-top: 19px; 
+				position:absolute;
+				background-color:$background;
+				
+				//background:url("/img/peak.png") no-repeat;
+
+				&.left{
+					left: 0;
+					border-top-right-radius: 45px;
+					box-shadow: -7px 4px 19px black;
+				}
+
+				&.right{
+					right: 0;
+					border-top-left-radius: 45px;
+					box-shadow: 7px 4px 19px black;
+				}
 			}
-	}
+	}		
 
 	#buchmitte_top{
 			width:11px;
