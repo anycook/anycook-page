@@ -142,7 +142,7 @@ define(['jquery',
 							break;
 							
 						case "resetpassword":
-							loadResetPasswordStep2();
+							resetPassword.loadStep2();
 							break;
 						
 						case "messagesession":

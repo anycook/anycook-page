@@ -19,68 +19,54 @@
  */
  'use strict';
  define([
- 	'jquery'
- ], function($){
+ 	'jquery',
+ 	'title'
+ ], function($, title){
  	return {
  		loadStep1 : function(){
 			$.address.title("Passwort zurücksetzen | anycook");
 			$("#resetpwstep2").hide();
 			
-			$("#resetpwform1").submit($.proxy(this.submitResetForm1, this));
+			$("#resetpwform1").submit($.proxy(this.submitForm1, this));
 				
 		},
-		submitForm1 : function(){
-			var errorfield = $("#resetpwmail").parent("td").siblings(".error");
-			errorfield.text("");
+		submitForm1 : function(event){
+			event.preventDefault();
+
+			var $errorfield = $("#resetpwmail").parent("td").siblings(".error");
+			$errorfield.text("");
 			
 			var mailorname = $("#resetpwmail").val();
-			if(mailorname == "" || mailorname == " "){
-				//fehler
-			}else{
-				$.ajax({
-					url: "/anycook/ResetPassword",
-					data:"mail="+mailorname,
-					success: function(response){
-						if(response == "true"){
-							$("#content_main>*").fadeOut(500, function(){
-								$("#content_main").append("<div id=\"new_activation\" class=\"content_message\">" +
-										"<h5>Email verschickt</h5>"+
-										"<p>Wir haben dir eine Mail mit geschickt. Folge dem dort enthaltenen Link, um dein Passwort zurückzusetzen.");
-								window.setTimeout(fadeActivationOut, 3000);
-								$("#content").click(fadeActivationOut);
-							});
-							
-						}else{
-							var errortext = null;
-							if(response=="wrong")
-								errortext = "Falscher Username/Mail";
-							else if(response == "fbuser")
-								errortext = "Passwort eines FB-Users kann nicht geändert werden";							
-							errorfield.text(errortext);
-						}
-						
-					}
-				});
+			if(mailorname === '' || mailorname === ' ') {
+				//TODO show error message
+				return;
 			}
-			return false;
-		},
-		loadStep2: function(){
-			$.address.title("Passwort zurücksetzen | anycook");	
-			$("#resetpwstep1").hide();
-			$("#resetpwform2").submit(submitResetForm2);
-			
-			var id = $.address.pathNames()[1];
-			$.ajax({
-				url: "/anycook/ResetPassword",
-				data:"resetpwid="+id,
-				success:function(response){
-					if(response=="false"){
-						$.address.value("/resetpassword");
-					}
-				}
+
+			AnycookAPI.session.resetPasswordRequest(mailorname, function(response){
+				$("#content_main>*").fadeOut(500, function(){
+					$("#content_main").append("<div id=\"new_activation\" class=\"content_message\">" +
+							"<h5>Email verschickt</h5>"+
+							"<p>Wir haben dir eine Mail mit geschickt. Folge dem dort enthaltenen Link, um dein Passwort zurückzusetzen.");
+					//window.setTimeout(fadeActivationOut, 3000);
+					//$("#content").click(fadeActivationOut);
+				});
+			}, function(response){
+				var errortext = null;
+				if(response=="wrong")
+					errortext = "Falscher Username/Mail";
+				else if(response == "fbuser")
+					errortext = "Passwort eines FB-Users kann nicht geändert werden";							
+				$errorfield.text(errortext);
 			});
 		},
+		loadStep2: function(){
+			title.set('Passwort zurücksetzen');	
+			$("#resetpwstep1").hide();
+			$("#resetpwform2").submit($.proxy(this.submitForm2, this));
+		},
 		submitForm2 : function(){
+			event.preventDefault();
+
 			var errorfield = $("#resetpw1").parent("td").siblings(".error");
 			errorfield.text("");
 			var pw1 = $("#resetpw1").val();
@@ -96,25 +82,13 @@
 			}
 			
 			var id = $.address.pathNames()[1];
-			$.ajax({
-				url: "/anycook/ResetPassword",
-				data:"resetpwid="+id+"&newpw="+pw1,
-				success:function(response){
-					if(response == "true"){
-						$("#content_main>*").fadeOut(500, function(){
-							$("#content_main").append("<div id=\"new_activation\" class=\"content_message\">" +
-									"<h5>Passwort wurde geändert</h5>"+
-									"<p>Dein Passwort wurde geändert. Weiterhin viel Spass!");
-							window.setTimeout(fadeActivationOut, 3000);
-							$("#content").click(fadeActivationOut);
-						});
-						
-					}else{
-						errorfield.text("Fehler! Bitte versuche es nocheinmal");
-					}
-				}
+			AnycookAPI.session.resetPassword(id, pw1, function(){
+				$("#content_main").html("<div id=\"new_activation\" class=\"content_message\">" +
+					"<h5>Passwort wurde geändert</h5>"+
+					"<p>Dein Passwort wurde geändert. Weiterhin viel Spass!");
+			}, function(){
+				errorfield.text("Fehler! Bitte versuche es nocheinmal");
 			});
-			return false;
 		}
  	};
  });
