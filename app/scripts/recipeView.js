@@ -20,6 +20,7 @@
 'use strict';
 define([
 	'jquery',
+	'underscore',
 	'plusone',
 	'classes/Recipe',
 	'classes/User',
@@ -27,8 +28,9 @@ define([
 	'lightbox',
 	'loginMenu',
 	'stringTools',
-	'tags'
-], function($, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags){
+	'tags',
+	'text!templates/share.erb'
+], function($, _, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags, shareTemplate){
 	return { 
 		profileRecipe : function(recipe){
 			var uri = "#!/recipe/"+encodeURIComponent(recipe);
@@ -127,7 +129,7 @@ define([
 			//$("#addtags").click(showaddTags);
 
 			//icons
-			$("#share").click(this.showShare);
+			$("#share").click($.proxy(this.showShare, this));
 
 			$("#print").click(function() {
 				window.print();
@@ -218,44 +220,37 @@ define([
 		},
 		showShare : function() {
 			var recipeURI = Recipe.getURI($.address.pathNames()[1]);
-			var $this = $(this).unbind("click");
-			$this.children(".img").hide();
-			var $left = $this.children(".left").empty();
+			var $share = $('#share').unbind('click').addClass('on');
+			$share.children('.img').hide();
 
-			$left.append("<div class='fb-like' data-href='"+"http://anycook.de/" + recipeURI+"' data-colorscheme='light' data-layout='button_count' data-action='recommend'"+
-				"data-show-faces='false' data-send='false'></div>");
-
-			var anycookuricomponent = encodeURIComponent("http://anycook.de/" + recipeURI);
-			var twittertarget = "https://twitter.com/share?url=" + anycookuricomponent + "";
-			$left.append("<div id=\"twitter\"></div>").children("div").last().append("<a href=\"" + twittertarget + "\" target=\"_blank\"><span></span></a>");
-
-			$left.append("<div id=\"gplus\"></div>").children("div").last().append("<g:plusone size=\"small\" count=\"false\" href=\"http://anycook.de/" + recipeURI + "\"></g:plusone>");
-
-			$left.children("div").addClass("share_container");
-
-			$("#twitter").click(function() {
-				window.open(twittertarget, 'child', 'height=420,width=550');
-				return false;
+			var twitterTarget = 'https://twitter.com/share?url=' + 
+				encodeURIComponent('http://anycook.de/' + recipeURI)
+			var template = _.template(shareTemplate, {
+				url : recipeURI,
+				twitterTarget : twitterTarget
 			});
+			var $left = $share.children('.left').html(template);
 
+			$('#twitter').click(function(event) {
+				event.preventDefault();
+				window.open(twitterTarget, 'child', 'height=420,width=550');
+			});
 			FB.XFBML.parse(document.getElementById('share'));
 			gapi.plusone.go();
 
-			$this.addClass("on");
+			var self = this;
+			$('body').click(function(event) {
 
-			$("body").click(function(event) {
-
-				if($(event.target).parents().andSelf().is("#share"))
+				if($(event.target).parents().andSelf().is('#share'))
 					return;
 
-				$this.removeClass("on").children(".img").show();
+				$share.removeClass('on').children('.img').show();
 
-				$left.empty().text("teilen");
+				$left.empty().text('teilen');
 
-				$(this).unbind("click");
-				$this.click(showShare);
+				$(this).unbind('click');
+				$share.click($.proxy(self.showShare, self));
 			});
-			// $(".connect_widget_summary").remove();
 		},
 		showAddTags : function() {
 			var $lightbox = this.getAddTagsLightbox();
