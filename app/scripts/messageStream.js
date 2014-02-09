@@ -216,7 +216,7 @@ define([
 				.append($name)
 				.append("<div class=\"close\">x</div>")
 				.data("id", id)
-				.click(closeRecipient);
+				.click($.proxy(this.closeRecipient, this));
 			ids[ids.length] = id;
 			
 			$recipients.data("ids", ids);
@@ -231,7 +231,7 @@ define([
 
 				
 			
-			resizeMessageTextarea();
+			this.resizeMessageTextarea();
 			
 		},
 		removeRecipient : function(id){

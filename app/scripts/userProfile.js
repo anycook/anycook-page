@@ -17,13 +17,14 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-
 define([
 	'jquery',
 	'classes/User',
 	'date',
+	'lightbox',
+	'messageStream',
 	'title'
-], function($, User, date, title){
+], function($, User, date, lightbox, messageStream, title){
 	'use strict';
 	return {
 		follow : function(){
@@ -70,15 +71,13 @@ define([
 						}
 
 						//lightbox	
-						$('#sendmessage').show().click(function(){
-							var $lightbox = getNewMessageLightbox();
+						$('#sendmessage').show().click(function(event){
+							var $lightbox = messageStream.getNewMessageLightbox();
 							var top = $(this).offset().top-313;
-							showLightbox($lightbox, top, function(){
+							lightbox.show($lightbox, top, function(){
 								this.find('textarea').focus();
 							});
-							addRecipient(profileData.name, profileData.id);
-
-
+							messageStream.addRecipient(profileData.name, profileData.id);
 							return false;
 						});
 					} else{
