@@ -301,22 +301,20 @@ header{
 
 			div{
 				width: 50%;
-				height: 100%;
+				height: 36px;
 				margin-top: 19px; 
 				position:absolute;
 				background-color:$background;
 				
-				//background:url("/img/peak.png") no-repeat;
-
 				&.left{
 					left: 0;
-					border-top-right-radius: 45px;
+					border-top-right-radius: 40px;
 					box-shadow: -7px 4px 19px black;
 				}
 
 				&.right{
 					right: 0;
-					border-top-left-radius: 45px;
+					border-top-left-radius: 40px;
 					box-shadow: 7px 4px 19px black;
 				}
 			}
