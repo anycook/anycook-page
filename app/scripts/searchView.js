@@ -78,9 +78,9 @@ define([
 				var array = [];
 			 	for(var i=0;i<data.length;i++){
 			 		if(i==0)
-			 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedingredients"};
+			 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedIngredients"};
 			 		else
-			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedingredients"};
+			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedIngredients"};
 		        }
 				resp(array);
 			});
@@ -93,23 +93,23 @@ define([
 			
 			AnycookAPI.autocomplete(term, categorie, ingredients, tags, user, function(data){
 				var array = [];
-				if(data.gerichte!=undefined){
-					for(var i=0;i<data.gerichte.length;i++){
+				if(data.recipes){
+					for(var i=0;i<data.recipes.length;i++){
 			            if(i==0)
-				 			array[array.length] = { label: "<div class='autocomplete-h1'>Gerichte</div><div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
+				 			array[array.length] = { label: "<div class='autocomplete-h1'>Gerichte</div><div class='autocomplete-p'>"+data.recipes[i]+"</div>", value: data.recipes[i],data:"recipes"};
 				 		else
-				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.gerichte[i]+"</div>", value: data.gerichte[i],data:"gericht"};
+				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.recipes[i]+"</div>", value: data.recipes[i],data:"recipes"};
 			        }
 				}
-				if(data.zutaten!=undefined){
-				 	for(var i=0;i<data.zutaten.length;i++){
+				if(data.ingredients){
+				 	for(var i=0;i<data.ingredients.length;i++){
 				 		if(i==0)
-				 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
+				 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data.ingredients[i]+"</div>", value: data.ingredients[i],data:"ingredients"};
 				 		else
-				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.zutaten[i]+"</div>", value: data.zutaten[i],data:"zutaten"};
+				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.ingredients[i]+"</div>", value: data.ingredients[i],data:"ingredients"};
 			        }
 				}
-			 	if(data.kategorien!=undefined){        			 		
+			 	if(data.kategorien){        			 		
 				 	for(var i=0;i<data.kategorien.length;i++){
 			                if(i==0)
 					 			array[array.length] = { label: "<div class='autocomplete-h1'>Kategorien</div><div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
@@ -117,7 +117,7 @@ define([
 					 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
 			        }
 			 	}
-			 	if(data.tags!=undefined){
+			 	if(data.tags){
 			        for(var i=0; i<data.tags.length; i++)
 			        {
 			        	if(i==0)
@@ -126,7 +126,7 @@ define([
 				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
 			        }
 			 	}
-			 	if(data.user!=undefined){
+			 	if(data.user){
 			        for(var i=0; i<data.user.length; i++)
 			        {
 			        	if(i==0)

@@ -262,36 +262,33 @@ require([
 		minLength 	: 1,
 		autoFocus 	: true,
 		select 		: function(event, ui){
+			event.preventDefault();
 			var text = ui.item.value;
 			var type = ui.item.data;
 			$("#search").val("");
-			if(type == "gericht"){
-				$.address.path("recipe/"+text);
-			}
-			else if(type == "zutaten"){
+			switch(type){
+			case 'recipes':
+				$.address.path('recipe/'+text);
+				break;
+			case 'ingredients':
 				searchObject.addZutat(text);
 				searchObject.flush();
-			}
-			else if(type == "excludedingredients"){
+				break;
+			case 'excludeIngredients':
 				searchObject.excludeIngredient(text.substr(1));
 				searchObject.flush();
-			}
-			else if(type == "kategorie"){
+				break;
+			case 'categories':
 				searchObject.setKategorie(text);
 				searchObject.flush();
-			}
-			else if(type == "tag"){
-				//saveTag(text);
+				break;
+			case 'tag':
 				searchObject.addTag(text);
 				searchObject.flush();
-			}
-			else if(type == "user"){
-				/*search.setUsername(text);
-				search.flush();*/
+				break;
+			case 'user':
 				gotoProfile(ui.item.id);
-			}
-			
-			return false;
+			}			
 		},
 		position:{
 			of : "#searchbar",
@@ -317,7 +314,9 @@ require([
 	
 	$("#search_form").submit(function(event){
 		event.preventDefault();
-    	var data = $("#search").val();
+    	var data = $('#search').val();
+
+    	if(data === '') return;
     	var search = Search.init();
     	search.setTerms(data);
     	search.flush();

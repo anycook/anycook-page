@@ -218,6 +218,27 @@ define([
 			for(var i = 0; i < tagsList.length; i++)
 				$tags_list.append(tags.get(tagsList[i], "link"));
 		},
+		showAddTags : function() {
+			var $lightbox = this.getAddTagsLightbox();
+
+			var top = $("#tags").offset().top - 113;
+			lightbox.show($lightbox, top);
+
+			$lightbox.find(".tagsbox").click($.proxy(tags.makeNewTagInput, tags));
+
+			$lightbox.find("form").submit($.proxy(tags.submitSuggestTags, tags));
+
+			return false;
+		},
+		getAddTagsLightbox : function() {
+			var content = '<div class="tagsbox"></div><p>Die bekanntesten Tags:</p><div id="tagcloud"></div>';
+
+			var $lightbox = lightbox.get("Tags hinzufügen:", "Hilf den anderen beim finden, in dem du neue Tags vorschlägst.", content, "einreichen");
+			tags.makeTagCloud();
+			$("#main").append($lightbox);
+
+			return $lightbox;
+		},
 		showShare : function() {
 			var recipeURI = Recipe.getURI($.address.pathNames()[1]);
 			var $share = $('#share').unbind('click').addClass('on');
@@ -251,27 +272,6 @@ define([
 				$(this).unbind('click');
 				$share.click($.proxy(self.showShare, self));
 			});
-		},
-		showAddTags : function() {
-			var $lightbox = this.getAddTagsLightbox();
-
-			var top = $("#tags").offset().top - 113;
-			lightbox.show($lightbox, top);
-
-			$lightbox.find(".tagsbox").click($.proxy(tags.makeNewTagInput, tags));
-
-			$lightbox.find("form").submit($.proxy(tags.submitSuggestTags, tags));
-
-			return false;
-		},
-		getAddTagsLightbox : function() {
-			var content = '<div class="tagsbox"></div><p>Die bekanntesten Tags:</p><div id="tagcloud"></div>';
-
-			var $lightbox = lightbox.get("Tags hinzufügen:", "Hilf den anderen beim finden, in dem du neue Tags vorschlägst.", content, "einreichen");
-			tags.makeTagCloud();
-			$("#main").append($lightbox);
-
-			return $lightbox;
 		},
 		schmecktmir : function(){
 				var gericht = $.address.pathNames()[1];
