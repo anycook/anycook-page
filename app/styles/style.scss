@@ -787,7 +787,7 @@ header{
 								
 								.amount{
 									float:right;
-									margin: 2px 0 -2px 5px;
+									margin-left: 5px;
 								}
 								
 								input{
@@ -875,12 +875,15 @@ header{
 						}
 						
 						#filter_main_box #ingredient_list{
-							
 							border:0;
 							@include transition(all, .2s, ease-in-out);
 							background:none;
 							@include no-box-shadow();
 							cursor: default;
+
+							.ingredient{
+								float: left;
+							}
 						}
 						
 						#filter_main_box .tags_list{

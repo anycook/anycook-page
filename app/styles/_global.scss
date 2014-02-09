@@ -180,6 +180,51 @@ a{
 	}
 }
 
+.btn{
+	display: inline-block;
+	position: relative;
+	padding: 0 10px;
+	border: 1px solid $inactivebuttonoutline;
+	color:$buttonfontcolor;
+	background-color:$stepcolor;
+	font-size: 9pt;
+	line-height: 30px;
+	min-width:100px;
+	width: auto;
+	text-align: center;
+	text-decoration: none;
+	font-style: normal;
+	cursor: pointer;
+	vertical-align: bottom;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	$btn-border-radius: 5px;
+	-webkit-border-radius: $btn-border-radius;
+	-moz-border-radius: $btn-border-radius;
+	border-radius: $btn-border-radius;
+	@include transition(all, .1s, ease);
+
+	&:hover, &:focus{
+		color:$smalllightfontcolor;
+		text-decoration:none;
+	}
+	
+	&:active{
+      background-color:$pushedbuttonbackground;
+      @include box-shadow-inset2(0, 1px, 3px, 0px, rgba(90,90,90,0.6));
+	}
+}
+
 input{
 	outline:none;
 	

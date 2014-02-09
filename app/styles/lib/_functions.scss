@@ -3,6 +3,7 @@
 	transition: $type  $duration $ease;
 	-webkit-transition: $type  $duration $ease;
 	-moz-transition: $type  $duration $ease;
+	-ms-transition: $type  $duration $ease;
 	-o-transition: $type  $duration $ease;
 }
 
