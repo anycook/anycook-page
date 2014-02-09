@@ -120,52 +120,40 @@
 			}
 		},
 		handleCategories : function(obj){
-			if(!$("#filter_main").is(".blocked")){
-				
-				var $kategorieList = $("#kategorie_list");
-				this.animateCategory($kategorieList);
-				$("#kategorie_filter").toggleClass("on");
-				if($("#kategorie_filter").hasClass("on")){
-					var self = this;
-					var $ul = $("#kategorie_list ul");
-					$ul.children("li").mouseenter(this.kategorieOver)
-						.mouseleave(this.kategorieOut)
-						.click(function(e){self.kategorieClick(e)});
-			    	$(document).click(function(e){self.closeKategorien(e)});
-			    	
-				}
-				else{
-					$("#kategorie_list ul li").unbind("mouseenter")
-						.unbind("mouseleave")
-						.unbind("click");
-			    	//$(document).unbind("click", this.closeKategorien);
-				}
-				return false;
+			if(!$("#filter_main").is('.blocked')){				
+				this.animateCategory($('#kategorie_list'));
+				$('#kategorie_filter').toggleClass('on');
 			}
 		},
 		animateCategory : function($kategorieList){
-				var newHeight = 9;
-				if($kategorieList.height()==newHeight)
-					newHeight += $kategorieList.children("ul").height()+6;
-				
-				$kategorieList.animate({
-					height:newHeight
-				}, {
-					duration: 600,
-					easing: "swing"
-				});
+			var newHeight = 9;
+			if($kategorieList.height()==newHeight)
+				newHeight += $kategorieList.children("ul").height()+6;
+			
+			$kategorieList.animate({
+				height:newHeight
+			}, {
+				duration: 600,
+				easing: "swing"
+			});
 		},
-		kategorieOver : function(event){
-			var $this = $(this);	
-			var text = $this.children(".left").text();
-			$("#kategorie_head").text(text);
+		mouseoverCategory : function(event){
+			var $target = $(event.target);	
+			if(!$target.is('.left')){
+				$target = $target.children('.left');
+			}
+			$("#kategorie_head").text($target.text());
 		},
-		kategorieOut : function(event){
+		mouseleaveCategory : function(event){
 			var oldtext = $("#kategorie_filter_hidden").val();
 			$("#kategorie_head").text(oldtext);
 		},
-		kategorieClick : function(event){
-			var text = $(event.target).children(".left").text();
+		clickCategory : function(event){
+			var $target = $(event.target);
+			if(!$target.is('.left')){
+				$target = $target.children('.left');
+			}
+			var text = $target.text();
 			
 			this.setKategorie(text);
 			this.handleCategories(event);
@@ -181,13 +169,11 @@
 				searchObject.flush();
 			}
 		},
-		closeKategorien : function(event){
+		closeCategories : function(event){
 			var $target = $(event.target);
-			var $kategorieList = $("#kategorie_list");
 			
-			if($target.parents().andSelf().not($kategorieList) && $("#kategorie_filter").hasClass("on")){
-				$("#kategorie_filter").removeClass("on");
-				this.animateCategory($kategorieList);
+			if(!$target.parents().andSelf().is('#kategorie_filter') && $('#kategorie_filter').hasClass('on')){
+				this.handleCategories();
 			}
 		},
 		//radiobuttons

@@ -337,7 +337,11 @@ require([
 	
 	
 	//Kategoriefilter
-	$("#kategorie_head").click(function(e){filters.handleCategories(e)});
+	$("#kategorie_head").click($.proxy(filters.handleCategories, filters));
+	$('#kategorie_list').on('click', 'li', $.proxy(filters.clickCategory, filters))
+		.on('mouseenter', 'li', $.proxy(filters.mouseoverCategory, filters))
+		.on('mouseleave', 'li', $.proxy(filters.mouseleaveCategory, filters));
+	$(document).click($.proxy(filters.closeCategories, filters));
 	//loadAllKategories($("#kategorie_filter ul"));
 	
 	filters.removeChecked();

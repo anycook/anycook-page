@@ -34,7 +34,7 @@ define([
 			var recipes = json.results;
 
 			var currentRecipes = $("#result_container").data("recipes");
-			if(currentRecipes == undefined || $(".frame_big").length == 0) currentRecipes = [];
+			if(!currentRecipes || $(".frame_big").length == 0) currentRecipes = [];
 
 			
 
