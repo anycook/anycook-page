@@ -39,7 +39,7 @@
       		$p.append($a);
       	}
 
-      	var $show_more = $("<div></div>").addClass("button show_more").text("mehr anzeigen")
+      	var $show_more = $("<div></div>").addClass("btn show_more").text("mehr anzeigen")
                   .click($.recipeoverview.showMore);
 
       	$this.addClass("recipeoverview").append($h2).append($p)

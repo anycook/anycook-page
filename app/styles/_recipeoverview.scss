@@ -5,6 +5,7 @@
 	width: $pwidth + 10px;
 	margin: 0 auto 20px ;
 	padding: 20px 0;
+	text-align: center;
 	
 	h2{
 		border-bottom: 1px solid #D7D3C7;
@@ -68,7 +69,7 @@
 	}
 
 	.show_more{
-		width:110px;
+		width:auto;
 		margin:10px auto;
 		float:none;
 	}

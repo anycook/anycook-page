@@ -73,8 +73,8 @@
     		<div id="comment_container">
     			<div id="comment_discussion"><ul></ul></div>
     			<div id="discussion_buttons">
-    				<div id="hide_discussion" class="button">Diskussion ausblenden</div>
-    				<a class="button" id="edit_recipe">Rezept bearbeiten</a>
+    				<div id="hide_discussion" class="btn">Diskussion ausblenden</div>
+    				<a class="btn" id="edit_recipe">Rezept bearbeiten</a>
     			</div>
     			<div id="discussion_footer">
     				<div class="login">
