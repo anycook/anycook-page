@@ -37,19 +37,6 @@ define([
 			this.loadAccount(user);
 			this.loadNotifaction();
 
-			var conf = AnycookAPI._settings();
-			
-			/*new qq.FileUploader({
-			    // pass the dom node (ex. $(selector)[0] for jQuery users)
-			    element: $("#upload_button")[0],
-			    multiple:false,
-			    onSubmit:addProgressBar,
-			    onProgress:nrProgress,
-			    onComplete:$.anycook.user.settings.completeUpload,
-			    // path to server-side upload script
-			    action: conf.baseUrl+'/upload/image/user'
-			});*/
-
 			var data = {
 				complete : this.completeUpload,
 				this : this
@@ -170,15 +157,6 @@ define([
 					AnycookAPI.setting.setText(value, callback);
 					break;
 			}
-
-			
-			
-
-			/*AnycookAPI.session.setAccount(type, value, function(){
-				user[type] = value;
-				var $container = $("#profile_saved");		
-				self.saved($container);
-			});*/
 		},		
 		changeMail : function(event){
 			var $this = $(this);

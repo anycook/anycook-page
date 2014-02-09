@@ -32,10 +32,11 @@ define(['jquery',
 	'newRecipe',
 	'recipeView',
 	'registration',
+	'resetPassword',
 	'settings',
 	'title',
 	'userProfile'
-], function($, Search, aboutus, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, settings, title, userProfile){
+], function($, Search, aboutus, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, resetPassword, settings, title, userProfile){
 	return {
 		clearContent : function(){
 			$("#content_main > *").remove();
@@ -104,7 +105,7 @@ define(['jquery',
 							loadFBRegistrationMessage();
 							break;
 						case "resetpassword":
-							loadResetPasswordStep1();
+							resetPassword.loadStep1();
 							break;
 						case "registration":
 							title.set("Registrierung");
