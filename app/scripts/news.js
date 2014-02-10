@@ -143,7 +143,7 @@ define([
 
 			var imagePath = User.getUserImagePath(userid, 'small');
 			
-			var $li = $('<li></li>').append('<div class="lef"><img src="'+imagePath+'"></div><div class="right"></div>').data('id', life.id);
+			var $li = $('<li></li>').append('<div class="left"><img src="'+imagePath+'"></div><div class="right"></div>').data('id', life.id);
 			
 			var user = User.get();
 			if(user.checkLogin() && user.isFollowing(userid)){
