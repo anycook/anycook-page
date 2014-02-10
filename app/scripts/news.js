@@ -41,7 +41,7 @@ define([
 		},
 		getNewestId : function(){
 			var newestid = $('#news li').first().data('id');
-			if(newestid === undefined){
+			if(!newestid){
 				newestid = 0;
 			}
 			return Number(newestid);

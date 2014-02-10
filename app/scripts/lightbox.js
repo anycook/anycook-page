@@ -17,11 +17,12 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-
 define([
 	'jquery',
+	'underscore',
 	'text!templates/lightbox.erb'
-], function($, lightboxTemplate){
+], function($, _, lightboxTemplate){
+	'use strict';
 	return {
 		get : function(headline, subhead, content, inputValue){
 			var data = {
@@ -29,34 +30,33 @@ define([
 				subhead : subhead,
 				content : content,
 				inputValue : inputValue
-			}
-			var $lightbox = $(_.template(lightboxTemplate, data));			
-			$("#main").append($lightbox);
+			};
+			var $lightbox = $(_.template(lightboxTemplate, data));
+			$('#main').append($lightbox);
 			
 			$lightbox.css('left', this.getLeft()).hide();
 			return $lightbox;
 		},
 		show : function($lightbox, top, callback){
-
-			var callback = callback || function(){};
+			callback = callback || function(){};
 			
 			$lightbox.show();
 			this.resize();
 			
 			
 			$lightbox.css({
-				top : top, 
+				top : top,
 				left : this.getLeft()
-			})	
-			.find(".dogear").animate({
+			})
+			.find('.dogear').animate({
 				right:0,
 				top:0
 			},
 			{
 				duration:150,
-				easing: "swing",
+				easing: 'swing',
 				complete:function(){
-					$(".contentbox").animate({
+					$('.contentbox').animate({
 						left: 3
 					}, {
 						duration: 500,
@@ -68,34 +68,34 @@ define([
 			});
 				
 			var self = this;
-			$("body").click(function(event){
+			$('body').click(function(event){
 				var $target = $(event.target);
-				if($target.parents().andSelf().is(".lightbox")||
-					$target.parents().andSelf().is(".lightbox-autocomplete"))
+				if($target.parents().andSelf().is('.lightbox') || $target.parents().andSelf().is('.lightbox-autocomplete')) {
 					return;
+				}
 					
 				self.hide($lightbox);
 				
-				$(this).unbind("click");
+				$(this).unbind('click');
 			});
 		},
-		showFromBottom : function($lightbox, bottom){			
+		showFromBottom : function($lightbox, bottom) {
 			$lightbox.show();
 			this.resize();
 			var top = bottom - $lightbox.outerHeight();
 			$lightbox.css({
-				top : top, 
+				top : top,
 				left : this.getLeft()
-			})	
-			.find(".dogear").animate({
+			})
+			.find('.dogear').animate({
 				right:0,
 				top:0
 			},
 			{
 				duration: 150,
-				easing: "swing",
+				easing: 'swing',
 				complete:function(){
-					$(".contentbox").animate({
+					$('.contentbox').animate({
 						left: 3
 					}, {duration: 500});
 				}
@@ -103,34 +103,34 @@ define([
 
 			var self = this;
 				
-			$("body").click(function(event){
+			$('body').click(function(event){
 				var $target = $(event.target);
-				if($target.parents().andSelf().is(".lightbox")||
-					$target.parents().andSelf().is(".lightbox-autocomplete"))
+				if($target.parents().andSelf().is('.lightbox') || $target.parents().andSelf().is('.lightbox-autocomplete')){
 					return;
+				}
 					
 				self.hide($lightbox);
 				
-				$(this).unbind("click");
+				$(this).unbind('click');
 			});
 		},
 		hide : function(){
 			var self = this;
-			$(".lightbox").fadeOut(200, function(){
-					$(this).css({
-						left : self.getLeft()
-					}).remove();
+			$('.lightbox').fadeOut(200, function(){
+				$(this).css({
+					left : self.getLeft()
+				}).remove();
 			});
 		},
 		resize : function(){
-			var $lightbox = $(".lightbox");
-			var $contentBox = $lightbox.children(".contentbox");
+			var $lightbox = $('.lightbox');
+			var $contentBox = $lightbox.children('.contentbox');
 			var contentHeight = $contentBox.outerHeight();
 			$lightbox.height(contentHeight + $contentBox.position().top);
 		},
 		getLeft : function(){
-			var $container = $("#container");
-			var $lightbox = $(".lightbox");
+			var $container = $('#container');
+			var $lightbox = $('.lightbox');
 			var containerposition = $container.offset();
 			// var left = containerposition.left + $container.innerWidth() + 9 - $lightbox.innerWidth();
 			var left = containerposition.left + $container.innerWidth() + 9 - $lightbox.innerWidth();

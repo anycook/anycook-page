@@ -17,68 +17,67 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-'use strict';
-
 define([
 	'jquery',
+	'AnycookAPI',
 	'title'
-], function($, title){
+], function($, AnycookAPI, title){
+	'use strict';
 	return {
 		load : function(){
-			title.set("Über uns");
+			title.set('Über uns');
 			this.setTimeSinceStart();
 			this.setWebsiteData();
 		},
 		setWebsiteData : function(){
 			var self = this;
-			if($.address.pathNames()[0] == "about_us"){
+			if($.address.pathNames()[0] === 'about_us'){
 				$.when(AnycookAPI.user.number(),
 					AnycookAPI.tag.number(),
 					AnycookAPI.ingredient.number(),
 					AnycookAPI.recipe.number())
 				.then(function(numUsers, numTags, numIngredients, numRecipes){
-					$(".usercounter").text(numUsers[0]);
-				  	$(".tagcounter").text(numTags[0]);
-				  	$(".ingredientcounter").text(numIngredients[0]);
-				  	$(".recipecounter").text(numRecipes[0]);
-				  	setTimeout($.proxy(self.setWebsiteData, self), 5000);
+					$('.usercounter').text(numUsers[0]);
+					$('.tagcounter').text(numTags[0]);
+					$('.ingredientcounter').text(numIngredients[0]);
+					$('.recipecounter').text(numRecipes[0]);
+					setTimeout($.proxy(self.setWebsiteData, self), 5000);
 				});
-				  	
 			}
 		},
-		setTimeSinceStart : function(){			
-			if($.address.pathNames()[0] == "about_us"){
+		setTimeSinceStart : function(){
+			if($.address.pathNames()[0] === 'about_us'){
 				var now = new Date();
 				var startDate = new Date(2011, 1, 20, 13,14);
 				var difference = now - startDate;
-				var one_year=1000*60*60*24*365;
-				var one_day=1000*60*60*24;
-				var one_hour=1000*60*60;
-				var one_min= 1000*60;
-				var one_sec= 1000;
+				var oneYear = 1000*60*60*24*365;
+				var oneDay = 1000*60*60*24;
+				var oneHour = 1000*60*60;
+				var oneMin = 1000*60;
+				var oneSec = 1000;
 				
-				var years = Math.floor(difference/one_year);
-				difference = difference % one_year;		
-				var days = Math.floor(difference/one_day);
-				difference = difference % one_day;
-				var hours = Math.floor(difference/one_hour);
-				difference = difference % one_hour;
-				var min = Math.floor(difference/one_min);
-				difference = difference % one_min;
-				var sec = Math.floor(difference/one_sec);
+				var years = Math.floor(difference/oneYear);
+				difference = difference % oneYear;
+				var days = Math.floor(difference/oneDay ) ;
+				difference = difference % oneDay;
+				var hours = Math.floor(difference/oneHour ) ;
+				difference = difference % oneHour;
+				var min = Math.floor(difference/oneMin );
+				difference = difference % oneMin;
+				var sec = Math.floor(difference/oneSec);
 				
-				var $onlinetime = $("#online_time");
+				var $onlinetime = $('#online_time');
 				
 				if(years>0){
-					$onlinetime.children(".years").show().children("span").text(years);			
+					$onlinetime.children('.years').show().children('span').text(years);
 				}
-				$onlinetime.children(".days").text(days);
-				$onlinetime.children(".hours").text(hours);
-				$onlinetime.children(".minutes").text(min);
-				$onlinetime.children(".seconds").text(sec);
+				$onlinetime.children('.days').text(days);
+				$onlinetime.children('.hours').text(hours);
+				$onlinetime.children('.minutes').text(min);
+				$onlinetime.children('.seconds').text(sec);
 				
 				setTimeout($.proxy(this.setTimeSinceStart, this), 1000);
 			}
 		}
- 	};
+	};
 });

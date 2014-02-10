@@ -19,6 +19,8 @@
  */
 define([
 	'jquery',
+	'underscore',
+	'AnycookAPI',
 	'drafts',
 	'lightbox',
 	'text!templates/newRecipe/ingredientStep.erb',
@@ -27,7 +29,7 @@ define([
 	'text!templates/lightboxContent/newIngredientsHeadline.erb',
 	'jquery.inputdecorator',
 	'jquery.ui.sortable'
-], function($, drafts, lightbox, ingredientStepTemplate, ingredientLineTemplate, newIngredientsContentTemplate, newIngredientsHeadlineTemplate){
+], function($, _, AnycookAPI, drafts, lightbox, ingredientStepTemplate, ingredientLineTemplate, newIngredientsContentTemplate, newIngredientsHeadlineTemplate){
 	'use strict';
 	return {
 		load : function(){
@@ -102,12 +104,41 @@ define([
 				var currentIngredients = this.getCurrentStepIngredients();
 				$target.data('sentences', currentSentences);
 				//console.log(currentSentences);
+				var addIngredients = function(json){
+					var $stepIngredients = $step.find('.new_ingredient');
+					var $stepQuestions = $step.find('.new_ingredient_question .ingredient');
+					var ingredients = [];
+					for(var i = 0; i < $stepIngredients.length; i++){
+						ingredients[i] = $stepIngredients.eq(i).val();
+					}
+					
+					for(var j = 0; j < $stepQuestions.length; j++){
+						var text = $stepQuestions.eq(j).text();
+						ingredients.push(text);
+					}
+					
+					for(var k in json){
+						if($.inArray(json[k], ingredients) > -1){
+							continue;
+						}
+							
+						if($.inArray(json[k], currentIngredients) > -1){
+							var $ingredientQuestion = self.getIngredientQuestion(json[k]);
+							$step.find('.new_ingredient_list').append($ingredientQuestion);
+							continue;
+						}
+						
+						self.addStepIngredient($step, json[i]);
+					}
+					self.draftSteps();
+				};
+
 				for(var i = 0; i < currentSentences.length; i++){
 					if(lastSentences.length > i && currentSentences[i] === lastSentences[i] || currentSentences[i].length === 0){
 						continue;
 					}
 						
-					AnycookAPI.ingredient.extract(currentSentences[i], $.proxy(this.addIngredients, this));
+					AnycookAPI.ingredient.extract(currentSentences[i], addIngredients);
 				}
 				
 			}else{
@@ -204,7 +235,7 @@ define([
 					//var array = [];
 					var term = req.term;
 
-					var $list = $newIngredientLine.parent('ul');
+					var $list = $template.parent('ul');
 
 					var excludedIngredients = [];
 					$list.find('.new_ingredient').not($ingredient).each(function() {
@@ -280,7 +311,7 @@ define([
 		removeIngredientQuestion : function(event){
 			$(event.target).parent().fadeOut(300);
 		},
-		draftSteps : function(){	
+		draftSteps : function(){
 			drafts.save('steps', this.getSteps());
 		},
 		getSteps : function(){
@@ -321,34 +352,6 @@ define([
 				$(this).text(i+1);
 			});
 		},
-		addIngredients : function(json){
-			var $stepIngredients = $step.find('.new_ingredient');
-			var $stepQuestions = $step.find('.new_ingredient_question .ingredient');
-			var ingredients = [];
-			for(var i = 0; i < $stepIngredients.length; i++){
-				ingredients[i] = $stepIngredients.eq(i).val();
-			}
-			
-			for(var j = 0; j < $stepQuestions.length; j++){
-				var text = $stepQuestions.eq(j).text();
-				ingredients.push(text);
-			}
-			
-			for(var k in json){
-				if($.inArray(json[k], ingredients) > -1){
-					continue;
-				}
-					
-				if($.inArray(json[k], currentIngredients) > -1){
-					var $ingredientQuestion = self.getIngredientQuestion(json[k]);
-					$step.find('.new_ingredient_list').append($ingredientQuestion);
-					continue;
-				}
-				
-				self.addStepIngredient($step, json[i]);
-			}
-			self.draftSteps();
-		},
 		addIngredientLine : function(event){
 			var $list = $(event.target).parents('.ingredients').children('ul');
 			var $newIngredientLine = this.getIngredientLine();
@@ -356,10 +359,8 @@ define([
 			// if($.address.parameter('step') == 2)
 			// 	resetNewRecipeHeight($('#step2'));
 
-			var $input = $newIngredientLine.children('.new_ingredient');
+			$newIngredientLine.children('.new_ingredient');
 			$('#step2').trigger($.Event('resize'));
-			
-
 		},
 		removeIngredientLine : function(event){
 			var $li = $(event.target).parents('li.new_ingredient_line');
@@ -368,7 +369,7 @@ define([
 				// resetNewRecipeHeight($('#step2'));
 				this.draftSteps();
 				this.draftIngredients();
-				$('#step2').trigger($.Event('resize'))
+				$('#step2').trigger($.Event('resize'));
 			}
 		},
 		draftIngredients : function(){
@@ -382,11 +383,12 @@ define([
 			var $ingredientLine = null;
 			for(var j = 0; j < $stepIngredients.length; j++){
 				var $stepIngredient = $($stepIngredients[j]);
-				if($stepIngredient.val().length == 0)
+				if($stepIngredient.val().length === 0){
 					$ingredientLine = $stepIngredient.parent();
+				}
 			}
 			
-			if($ingredientLine == null){
+			if($ingredientLine === null){
 				$ingredientLine = this.getIngredientLine().hide();
 				$step.find('.new_ingredient_line').last().after($ingredientLine.fadeIn(300));
 			}
@@ -397,16 +399,21 @@ define([
 		formatMenge : function(event){
 			var $target = $(event.target);
 			var text = $target.val();
-			if(text.length == 0) return;
+			if(text.length === 0){
+				return;
+			}
 			var textArr = $target.val().split('');
 			var newText = textArr[0];
 			for(var i = 0; i<textArr.length -1; i++){
-				if(textArr[i].match(/\d/) && textArr[i+1].match(/[a-z]/i))
-					newText+= ' ';
-				if(textArr[i+1].match(/\./))
-					newText+=',';
-				else
-					newText+=textArr[i+1];
+				if(textArr[i].match(/\d/) && textArr[i+1].match(/[a-z]/i)){
+					newText += ' ';
+				}
+				if(textArr[i+1].match(/\./)){
+					newText +=',';
+				}
+				else{
+					newText += textArr[i+1];
+				}
 			}
 			$target.val(newText);
 		},
@@ -415,15 +422,15 @@ define([
 			//ingredientOverview
 			var numPersons = $('#step2').data('numPersons');
 
-			var headline = _.template(newIngredientsHeadlineTemplate, 
+			var headline = _.template(newIngredientsHeadlineTemplate,
 				{numPersons : !numPersons ? 0 : numPersons});
 				
-			var $ul = $('<ul></ul>').addClass('new_ingredient_list');
+			$('<ul></ul>').addClass('new_ingredient_list');
 
 			var content = newIngredientsContentTemplate;
 				
-			var $lightbox = lightbox.get(headline, 
-			'Dies sind alle Zutaten, die du in den Schritten angegeben hast. '+ 
+			var $lightbox = lightbox.get(headline,
+			'Dies sind alle Zutaten, die du in den Schritten angegeben hast. '+
 			'Falls Zutaten fehlen, füge diese bitte noch zu den entsprechenden Schritten hinzu.', content, 'Rezept abschließen')
 				.addClass('ingredient_overview');
 			$('#main').append($lightbox);
@@ -433,19 +440,23 @@ define([
 			var self = this;
 			$lightbox.find('.numberinput input').keydown(function(e){
 				var $this = $(this);
-				if(e.which==13){
-					persCount = $this.val();
+				if(e.which === 13){
+					//persCount = $this.val();
 					$this.blur();
-				}else if(e.which == 38){ //up{
+				}else if(e.which === 38){ //up{
 					self.personsUp();
 					return false;
-				}else if(e.which == 40){ //down
+				}else if(e.which === 40){ //down
 					self.personsDown();
 					return false;
-				}else if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
+				}else if(!(event.which >= 48 &&  event.which <= 57) && !(event.which >= 96 &&  event.which <= 105) &&
+					event.which !== 8 && event.which !== 46){
 					return false;
+				}
 				
-				if($this.val()!='' && $this.val() != '0') $('#numberinput_error').fadeOut(300);
+				if($this.val() !== '' && $this.val() !== '0'){
+					$('#numberinput_error').fadeOut(300);
+				}
 				drafts.save('persons', $this.val());
 			});
 			
@@ -464,7 +475,7 @@ define([
 				var name = $li.children('.new_ingredient').val();
 				var menge = $li.children('.new_ingredient_menge').val();
 				var ingredient =  {name:name, menge:menge};
-				ingredients[ingredients.length] = ingredient;		
+				ingredients[ingredients.length] = ingredient;
 			}
 
 			$('#step2').data('ingredients', ingredients);
@@ -474,7 +485,7 @@ define([
 			$('#step2').data('numPersons', numPersons);
 
 		},
-		personsUp : function(event){
+		personsUp : function(){
 			var $input = $('#newRecipePersonsNumber');
 			var currentNum = Number($input.val());
 			var newNum = ((currentNum)%99)+1;
@@ -504,26 +515,30 @@ define([
 			}else{
 				$('#no_ingredients_error').fadeIn(300);
 				$this.effect('shake', {distance:5, times:2}, 50);
-				watchForIngredients();
+				//TODO watchForIngredients();
 			}
 			return false;
 		},
 		getIngrededientsForOverview : function(){
 			var ingredients = {};
-			if(!this.isValid())
+			if(!this.isValid()){
 				return false;
+			}
 			
 			var self = this;
 			$('#step2 .new_ingredient_line').each(function(){
 				var $this = $(this);
 				var ingredient = $this.children('.new_ingredient').val();
-				if(ingredient.length == 0)
+				if(ingredient.length === 0){
 					return;
+				}
 				var menge = $this.children('.new_ingredient_menge').val();
-				if(ingredients[ingredient] !== undefined)
+				if(ingredients[ingredient] !== undefined){
 					ingredients[ingredient] = self.mergeMenge(ingredients[ingredient], menge);
-				else
+				}
+				else{
 					ingredients[ingredient] = menge;
+				}
 				
 			});
 			
@@ -545,8 +560,9 @@ define([
 			var personcheck = false;
 			var $lightbox = $('.lightbox');
 			var persons = $lightbox.find('#newRecipePersonsNumber').val();
-			if(persons != ''  && Number(persons) > 0)
+			if(persons !== ''  && Number(persons) > 0){
 				personcheck = true;
+			}
 			
 			return personcheck;
 		},
@@ -554,16 +570,18 @@ define([
 			var $lightbox = $('.lightbox');
 			var ingredienttexts = $lightbox.find('.new_ingredient').val();
 			for(var i in ingredienttexts){
-				if(ingredienttexts[i].length > 0)
+				if(ingredienttexts[i].length > 0){
 					return true;
+				}
 			}
 			return false;
 		},
 		mergeMenge : function(menge1, menge2){
 			//TODO falls z.B. kg und g zusammen auftreten etc...
 			
-			if(menge2.length == 0)
+			if(menge2.length === 0){
 				return menge1;
+			}
 			var newMenge;
 			menge1 = menge1.replace(/,/, '.');
 			menge2 = menge2.replace(/,/, '.');
@@ -575,16 +593,17 @@ define([
 				var menge1Einheit = menge1.substring(menge1EinheitPos);
 				var menge2Einheit = menge2.substring(menge2EinheitPos);
 				
-				if(menge1Einheit == menge2Einheit){
-					newMenge =  (Number(menge1.substring(0, menge1EinheitPos-1)) + 
-						Number(menge2.substring(0, menge1EinheitPos-1)))+' '+menge1Einheit;			
+				if(menge1Einheit === menge2Einheit){
+					newMenge =  (Number(menge1.substring(0, menge1EinheitPos-1)) +
+						Number(menge2.substring(0, menge1EinheitPos-1)))+' '+menge1Einheit;
 				}
 					
 			}else if(menge1.match(confirmRegex2) && menge2.match(confirmRegex2)){
 				newMenge = Number(menge1) + Number(menge2);
 			}
-			if(newMenge === undefined)
+			if(newMenge === undefined){
 				newMenge = menge1+' + '+menge2;
+			}
 			newMenge = newMenge.replace('.', ',');
 			return newMenge;
 		},

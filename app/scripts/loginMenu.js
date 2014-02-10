@@ -18,93 +18,82 @@
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
-	'jquery', 
+	'jquery',
+	'AnycookAPI',
 	'classes/User'
-], function($, User){
+], function($, AnycookAPI, User){
 	'use strict';
-
 	return {
 		buildLogin : function(){
 			/*initMenus();
-			$("#signin_btn").click(clickSignin);
-			$("#login_container form").submit(submitForm);*/
+			$('#signin_btn').click(clickSignin);
+			$('#login_container form').submit(submitForm);*/
 			var self = this;
 
-			$.get("/templates/login.erb", function(template){
-				$("body").append(template);
-				$("#signin_btn, #login_menu .blackOverlay, #registrationBtn").click(self.toggle);
-				$("#login_menu form").submit(self.submitForm);
-			});		
-		},
-		toggle : function(){
-			$("#login_menu").toggleClass("visible");
-			$("#signin_btn").toggleClass("focus");
-		},
-		initMenus : function(){
-			//loginmenu
-			$("#login_container form").submit(submitForm);	
-			$("#facebook_login").click(fbLogin);
-			$(".social").click(clickSignin);
-			$("#stayloggedin div").click(function(){
-				var checkbox = $("#stayloggedin input");
-				checkbox.attr('checked', !checkbox.attr('checked'));
+			$.get('/templates/login.erb', function(template){
+				$('body').append(template);
+				$('#signin_btn, #login_menu .blackOverlay, #registrationBtn').click(self.toggle);
+				$('#login_menu form').submit(self.submitForm);
 			});
 		},
+		toggle : function(){
+			$('#login_menu').toggleClass('visible');
+			$('#signin_btn').toggleClass('focus');
+		},
+		/*initMenus : function(){
+			//loginmenu
+			$('#login_container form').submit(submitForm);
+			$('#facebook_login').click(fbLogin);
+			$('.social').click(clickSignin);
+			$('#stayloggedin div').click(function(){
+				var checkbox = $('#stayloggedin input');
+				checkbox.attr('checked', !checkbox.attr('checked'));
+			});
+		},*/
 		//called if #signin_btn is clicked
-		clickSignin : function(event){
-			var $main = $("#main");
-			if($main.hasClass("down")){
-				$(document).unbind("click",clickOthers).unbind("scroll", clickOthers);
-			}else{
-				$(document).click(clickOthers).scroll(clickOthers);
-			}
-			
-			$main.toggleClass("down");
-			
-		},
-		clickOthers : function(event){
-			var $target = $(event.target);
-			if (event.type == "scroll" || !$target.parents().andSelf().is("#login_container, #signin_btn")|| $target.is("a")){
-				clickSignin();
-			}
-		},
 		focusInputs : function(event){
 			var target = $(event.target);
-			$("#login_mail").removeClass("wrong").removeClass("right"); // von Max
-			$("#login_pwd").removeClass("wrong").removeClass("right");
-			if(target.attr("id") == "login_mail" && $("#login_mail").val() == "E-mail" || target.attr("id") == "login_pwd" && $("#login_pwd").val() == "Passwort" || target.attr("id") == "login_username" && $("#login_username").val() == "Username"){
-				target.val("").css("color", "#5a5a5a");
+			$('#login_mail').removeClass('wrong').removeClass('right'); // von Max
+			$('#login_pwd').removeClass('wrong').removeClass('right');
+			if(target.attr('id') === 'login_mail' &&
+				$('#login_mail').val() === 'E-mail' ||
+				target.attr('id') === 'login_pwd' &&
+				$('#login_pwd').val() === 'Passwort' ||
+				target.attr('id') === 'login_username' &&
+				$('#login_username').val() === 'Username'){
+
+				target.val('').css('color', '#5a5a5a');
 			}
 		},
 		focusoutInputs : function(event){
 			var target = $(event.target);
-			if(target.attr("id") == "login_mail" && target.val() == ""){
-				target.val("E-mail").css("color", "#b5b5b5");
+			if(target.attr('id') === 'login_mail' && target.val() === ''){
+				target.val('E-mail').css('color', '#b5b5b5');
 			}
-			if(target.attr("id") == "login_pwd" && target.val() == ""){
-				target.val("Passwort").css("color", "#b5b5b5");
+			if(target.attr('id') === 'login_pwd' && target.val() === ''){
+				target.val('Passwort').css('color', '#b5b5b5');
 			}
-			if(target.attr("id") == "login_username" && target.val() == ""){
-				target.val("Username").css("color", "#b5b5b5");
+			if(target.attr('id') === 'login_username' && target.val() === ''){
+				target.val('Username').css('color', '#b5b5b5');
 			}
 		},
-		submitForm : function(event){
+		submitForm : function(){
 			//event.preventDefault();
 			var $this = $(this);
-			var $mail = $this.find("input[type=\"text\"]");
-			var $pwd = $this.find("input[type=\"password\"]");
+			var $mail = $this.find('input[type="text"]');
+			var $pwd = $this.find('input[type="password"]');
 			
 			var mail = $mail.val();
 			var pwd = $pwd.val();
-			var stayloggedin =$("#stayloggedin input").is(":checked");
-			AnycookAPI.session.login(mail, pwd, stayloggedin, function(json){
+			var stayloggedin =$('#stayloggedin input').is(':checked');
+			AnycookAPI.session.login(mail, pwd, stayloggedin, function(){
 				User.init();
 				//TODO code Login behavior
 				location.reload();
 			},
-			function(error){
-				$("#login_menu .errorMsg").addClass("visible");
+			function(){
+				$('#login_menu .errorMsg').addClass('visible');
 			});
 		}
-	}
+	};
 });

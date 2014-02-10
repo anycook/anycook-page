@@ -17,11 +17,10 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-'use strict';
-
 define([
 	'jquery',
 	'underscore',
+	'AnycookAPI',
 	'classes/User',
 	'drafts',
 	'filters',
@@ -30,30 +29,35 @@ define([
 	'scroll',
 	'newRecipe/step1',
 	'newRecipe/step2',
-	'newRecipe/step3'
-], function($, _, User, drafts, filters, popup, recipeView, scroll, step1, step2, step3){
+	'newRecipe/step3',
+	'tags'
+], function($, _, AnycookAPI, User, drafts, filters, popup, recipeView, scroll, step1, step2, step3, tags){
+	'use strict';
 	return {
-		load : function(){		
-			var self = this;	
+		load : function(){
 			//navigation
 			var path = $.address.path();
-			for(var i = 1; i<=4; i++)
-				$("#nav_step"+i).attr("href", "#"+path+"?step="+i);
-			$(".nav_button").click(function(){
-				if($(this).hasClass("inactive"))
+			for(var i = 1; i<=4; i++){
+				$('#nav_step'+i).attr('href', '#'+path+'?step='+i);
+			}
+			$('.nav_button').click(function(){
+				if($(this).hasClass('inactive')){
 					return false;
+				}
 			});
 
 			//if resizing
-			$(".sliding_container").resize(function(){
-				var id = $(this).attr("id");
+			$('.sliding_container').resize(function(){
+				var id = $(this).attr('id');
 				var stepNum = id.substring(4);
-				var currentStep = $.address.parameter("step") || 1;
-				if(stepNum != currentStep) return;
+				var currentStep = $.address.parameter('step') || 1;
+				if(stepNum !== currentStep){
+					return;
+				}
 
 				var height = $(this).height();
-				$("#recipe_editing_container").height(height);
-			})
+				$('#recipe_editing_container').height(height);
+			});
 			
 			
 			//step1	
@@ -66,25 +70,25 @@ define([
 			step3.load();
 			
 			//preview (step4)
-			$("#submit_recipe").click($.proxy(this.saveRecipe, this));
+			$('#submit_recipe').click($.proxy(this.saveRecipe, this));
 			
 			//draft
 			var user = User.get();
 			if(user.checkLogin()){
-				 var id = $.address.parameter("id");
-				if(id == undefined){
+				var id = $.address.parameter('id');
+				if(!id){
 					drafts.init(function(id){
-						$.address.parameter("id", id);
+						$.address.parameter('id', id);
 					});
 					return;
 				}else{
 					//link
 					drafts.open(id, $.proxy(this.fillNewRecipe, this));
-					$(".nav_button, #step4 a").not("#cancel_recipe").attr("href", function(i, attr){
-							return attr+"&id="+id;
+					$('.nav_button, #step4 a').not('#cancel_recipe').attr('href', function(i, attr){
+						return attr+'&id='+id;
 					});
 
-					$("#cancel_recipe").show();
+					$('#cancel_recipe').show();
 				}
 			}
 		},
@@ -96,7 +100,7 @@ define([
 			var personCheck = persons !== undefined && persons > 0;
 
 
-			if(step1.isValid() && step2.isValid() && 
+			if(step1.isValid() && step2.isValid() &&
 				ingredientsCheck && personCheck && step3.isValid()){
 				
 				var recipe = {
@@ -116,8 +120,9 @@ define([
 				var userid = -1;
 
 				var user = User.get();
-				if(user.checkLogin())
+				if(user.checkLogin()){
 					userid = user.id;
+				}
 				
 				var id =  $.address.parameter('id');
 				if(id) {
@@ -125,51 +130,49 @@ define([
 				}
 				
 
-				AnycookAPI.recipe.save(recipe, function(response){
-					popup.show('Vielen Dank!', 'Dein Rezept wurde eingereicht und wird überprüft.<br\>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br\><br\>Dein anycook-Team');
-					$("body").on("click", function(){
-						$.address.path("");
-						$(".fixedpopup").remove();
+				AnycookAPI.recipe.save(recipe, function(){
+					popup.show('Vielen Dank!', 'Dein Rezept wurde eingereicht und wird überprüft.<br/>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br/><br/>Dein anycook-Team');
+					$('body').on('click', function(){
+						$.address.path('');
+						$('.fixedpopup').remove();
 					});
 					
-					$(".fixedpopup").show(1).delay(5000).fadeOut(500, function(){
+					$('.fixedpopup').show(1).delay(5000).fadeOut(500, function(){
 						$(this).remove();
 						var pathNames = $.address.pathNames();
-						if(pathNames.length > 0 && pathNames[0] == "recipeediting"){
-							$.address.path("");
+						if(pathNames.length > 0 && pathNames[0] === 'recipeediting'){
+							$.address.path('');
 						}
 					});
 				});
-				
-				
-				
-				
+								
 				return false;
 			}
 		},
 		addressChange : function(event){
 			filters.reset();
-			var checkedinput = $("#step3 .label_muffins input:checked, #step3 .label_chefhats input:checked");
-			var $editingContainer = $("#recipe_editing_container");	
-			$editingContainer.removeClass("step2 step3");
-			var $navigation = $(".navigation");
-			$navigation.children().removeClass("active");
+			var $editingContainer = $('#recipe_editing_container');
+			$editingContainer.removeClass('step2 step3');
+			var $navigation = $('.navigation');
+			$navigation.children().removeClass('active');
 			
-			var stepNum = Number(event.parameters["step"]);
-			if(!stepNum)
+			var stepNum = Number(event.parameters.step);
+			if(!stepNum){
 				stepNum = 1;
+			}
 			
 			
 			var step1Left = 0;
 			switch(stepNum){
 			case 4:
-				$navigation.children("#nav_step4").removeClass("inactive");
-				var id = $.address.parameter("id");
+				$navigation.children('#nav_step4').removeClass('inactive');
+				var id = $.address.parameter('id');
 				//draft
 				var user = User.get();
 
-				if(user.checkLogin() && id !== undefined)
+				if(user.checkLogin() && id){
 					drafts.open(id, $.proxy(this.loadPreview, this));
+				}
 				else{
 					var data = {
 						time : step3.getTime(),
@@ -182,190 +185,188 @@ define([
 						name : step1.getRecipeName(),
 						image : step1.getImageName(),
 						tags : step1.getTags()
-					}
+					};
 					this.loadPreview(data);
 				}
-					
-
 				step1Left -= 655;
-				
+				/* falls through */
 			case 3:
-				$navigation.children("#nav_step3").removeClass("inactive");
+				$navigation.children('#nav_step3').removeClass('inactive');
 				step1Left -= 655;
-							
+				/* falls through */
 			case 2:
-				$navigation.children("#nav_step2").removeClass("inactive");
+				$navigation.children('#nav_step2').removeClass('inactive');
 				step1Left -= 655;
-				
+				/* falls through */
 			default:
-				$navigation.children("#nav_step"+stepNum).addClass("active");
-				var $step1 = $("#step1");
-				var $step2 = $("#step2");
-				var $step3 = $("#step3");
-				var $step4 = $("#step4");
+				$navigation.children('#nav_step'+stepNum).addClass('active');
+				var $step1 = $('#step1');
+				var $step2 = $('#step2');
+				var $step3 = $('#step3');
+				var $step4 = $('#step4');
 
 				var animate = function(){
-					$step1.animate({left:step1Left}, 
-					{
+					$step1.animate({left:step1Left}, {
 						duration: 800,
-						easing: "easeInOutCirc",
-						step:function(now, fx){
-							$step2.css("left",now+655);
-							$step3.css("left",now+2*655);
-							$step4.css("left",now+3*655);
+						easing: 'easeInOutCirc',
+						step:function(now){
+							$step2.css('left',now+655);
+							$step3.css('left',now+2*655);
+							$step4.css('left',now+3*655);
 						},
 						complete:function(){
-							if(stepNum == 1) $step1.trigger($.Event('resize'));;
-							if(stepNum == 2) $step2.trigger($.Event('resize'));
-							if(stepNum == 4) $step4.trigger($.Event('resize'));
+							if(stepNum === 1) { $step1.trigger($.Event('resize')); }
+							if(stepNum === 2) { $step2.trigger($.Event('resize')); }
+							if(stepNum === 4) { $step4.trigger($.Event('resize')); }
 						}
 					});
 				};
 
 				var scrollTop = $(document).scrollTop();
 				if(scrollTop > 10){
-					scroll.backToTheTop(1000, animate); 
+					scroll.backToTheTop(1000, animate);
 				}
-				else { 
+				else {
 					animate();
 				}
 				
 				
 			}
-			
 			return false;
 		},
 		//drafts
 		fillNewRecipe : function(json){
-			var data = json.data;
-
 			//step1
 			if(json.image){
 				step1.showImage(AnycookAPI.upload.imagePath(json.image));
 			}
-			if(json.name)
-				$("#new_recipe_name").val(json.name);
-			if(json.description)
-				$("#new_recipe_introduction").val(json.description);
+			if(json.name) {
+				$('#new_recipe_name').val(json.name);
+			}
+			if(json.description) {
+				$('#new_recipe_introduction').val(json.description);
+			}
 
 			//step2
-			if(json.steps)
+			if(json.steps){
 				step2.fillSteps(json.steps);
-			if(json.ingredients)
-				$("#step2").data("ingredients", json.ingredients);
-			if(json.persons)
-				$("#step2").data("numPersons", json.persons);
+			}
+			if(json.ingredients){
+				$('#step2').data('ingredients', json.ingredients);
+			}
+			if(json.persons){
+				$('#step2').data('numPersons', json.persons);
+			}
 
 			//step3
 			if(json.category){
-				var $container = $("#select_container");
-				$container.find("span").text(json.category);
-				$container.find("option").each(function(){
+				var $container = $('#select_container');
+				$container.find('span').text(json.category);
+				$container.find('option').each(function(){
 					var $this = $(this);
-					if($this.val() == json.category)
-						$this.attr("selected", "selected");
+					if($this.val() === json.category){
+						$this.attr('selected', 'selected');
+					}
 				});
 			}
 			if(json.time){
-				$("#step3 .std").val(json.time.std);
-				$("#step3 .min").val(json.time.min);
+				$('#step3 .std').val(json.time.std);
+				$('#step3 .min').val(json.time.min);
 			}
 			
 			if(json.skill){
-				$("#step3 .label_chefhats input[value=\""+json.skill+"\"]").attr("checked", "checked");
-				filters.handleRadios($("#step3 .label_chefhats"));
+				$('#step3 .label_chefhats input[value=\''+json.skill+'\']').attr('checked', 'checked');
+				filters.handleRadios($('#step3 .label_chefhats'));
 			}
 			
 			if(json.calorie){
-				$("#step3 .label_muffins input[value=\""+json.calorie+"\"]").attr("checked", "checked");
-				filters.handleRadios($("#step3 .label_muffins"));
+				$('#step3 .label_muffins input[value=\''+json.calorie+'\']').attr('checked', 'checked');
+				filters.handleRadios($('#step3 .label_muffins'));
 			}
 			
 			
 			if(json.tags){
-				var $tagsbox = $(".tagsbox");
+				var $tagsbox = $('.tagsbox');
 				for(var i  in json.tags){
-					$tagsbox.append(getTag(json.tags[i], "remove"));
+					$tagsbox.append(tags.get(json.tags[i], 'remove'));
 				}
 			}
 				
 		},
-		updateIngredients : function(){
-			draftSteps();
-		},
 		resetNewRecipeHeight : function($container){
 			var height = $container.height()+20;
-			$("#recipe_editing_container").animate({height:height}, {duration:500});
+			$('#recipe_editing_container').animate({height:height}, {duration:500});
 		},
 		watchForIngredients : function(){
-			var id = $(document).data("watchForIngredients");
-			var $newIngredients = $(".new_ingredient");
-			if($newIngredients.length == 0){
-				$(document).removeData("watchForIngredients");
+			var id = $(document).data('watchForIngredients');
+			var $newIngredients = $('.new_ingredient');
+			if($newIngredients.length === 0){
+				$(document).removeData('watchForIngredients');
 				window.clearInterval(id);
 				return;
 			}
-			if(id == undefined){
-				id = window.setInterval("watchForIngredients()", 1000);
-				$(document).data("watchForIngredients", id);
+			if(!id){
+				id = window.setInterval($.proxy(this.watchForIngredients, this), 1000);
+				$(document).data('watchForIngredients', id);
 			}
 			
 			for(var i = 0; i < $newIngredients.length; i++){
-				if(checkValidationStep2()){
-					$(document).removeData("watchForIngredients");
+				if(step2.isValid()){
+					$(document).removeData('watchForIngredients');
 					window.clearInterval(id);
-					$("#no_ingredients_error").fadeOut(300);
+					$('#no_ingredients_error').fadeOut(300);
 					break;
 				}
 			}
 			
 		},
-		watchForLightboxIngredients : function(){
-			var id = $(document).data("watchForLightboxIngredients");
-			var $newIngredients = $(".lightbox .new_ingredient");
-			if($newIngredients.length == 0){
-				$(document).removeData("watchForLightboxIngredients");
+		/*watchForLightboxIngredients : function(){
+			var id = $(document).data('watchForLightboxIngredients');
+			var $newIngredients = $('.lightbox .new_ingredient');
+			if($newIngredients.length === 0){
+				$(document).removeData('watchForLightboxIngredients');
 				window.clearInterval(id);
 				return;
 			}
-			if(id == undefined){
-				id = window.setInterval("watchForLightboxIngredients()", 1000);
-				$(document).data("watchForLightboxIngredients", id);
+			if(!id){
+				id = window.setInterval('watchForLightboxIngredients()', 1000);
+				$(document).data('watchForLightboxIngredients', id);
 			}
 			
 			if(checkValidateLightboxIngredients()){
-				$(document).removeData("watchForLightboxIngredients");
+				$(document).removeData('watchForLightboxIngredients');
 				window.clearInterval(id);
-				$("#ingredientoverview_error").fadeOut(300);
+				$('#ingredientoverview_error').fadeOut(300);
 			}
 			
-		},
+		},*/
 		loadPreview : function(data){
-			var image = data.image || "category/sonstiges.png";
-			$("#step4 .recipe_image_container img").attr("src", AnycookAPI.upload.imagePath(image))
+			var image = data.image || 'category/sonstiges.png';
+			$('#step4 .recipe_image_container img').attr('src', AnycookAPI.upload.imagePath(image))
 			.load(function(){
-				$("#step4").trigger($.Event('resize'));
+				$('#step4').trigger($.Event('resize'));
 			});
-			$("#recipe_headline").text(step1.getRecipeName());
-			$("#introduction").text(step1.getDescription());
+			$('#recipe_headline').text(step1.getRecipeName());
+			$('#introduction').text(step1.getDescription());
 
 			recipeView.loadSteps(data.steps);
 			filters.setFromRecipe(data);
 			recipeView.loadIngredients(data.ingredients);
 			recipeView.loadTags(data.tags);
-			var id = $.address.parameter("id");
-			$(".tags_list a").attr("href", function(i, attr){
-				if(id)
-					return "#/recipeediting?step=3&id="+id;
-				return "#/recipeediting?step=3";
+			var id = $.address.parameter('id');
+			$('.tags_list a').attr('href', function(){
+				if(id){
+					return '#/recipeediting?step=3&id='+id;
+				}
+				return '#/recipeediting?step=3';
 			});
-			$("#filter_main.blocked").one("click", function(){$.address.parameter("step", 3)});
+			$('#filter_main.blocked').one('click', function(){ $.address.parameter('step', 3); });
 			
-			$("#step4").trigger($.Event('resize'));
-			// if($.address.parameter("step") == 4)
-			// 	resetNewRecipeHeight($("#step4"));
-			//var height = $("#step4").height()
-			//$("#recipe_editing_container").css("height", height+20);
+			$('#step4').trigger($.Event('resize'));
+			// if($.address.parameter('step') == 4)
+			// 	resetNewRecipeHeight($('#step4'));
+			//var height = $('#step4').height()
+			//$('#recipe_editing_container').css('height', height+20);
 		}
 	};
 });

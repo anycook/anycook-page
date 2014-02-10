@@ -17,14 +17,15 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-
-define(['jquery', 
+define([
+	'jquery',
 	'classes/Search',
 	'aboutus',
 	'activation',
 	'discussion',
 	'drafts',
-	'filters', 
+	'facebook',
+	'filters',
 	'header',
 	'home',
 	'messages',
@@ -36,174 +37,160 @@ define(['jquery',
 	'settings',
 	'title',
 	'userProfile'
-], function($, Search, aboutus, activation, discussion, drafts, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, resetPassword, settings, title, userProfile){
+], function($, Search, aboutus, activation, discussion, drafts, facebook, filters, header, home, messages, messageStream, newRecipe, recipeView, registration, resetPassword, settings, title, userProfile){
+	'use strict';
 	return {
 		clearContent : function(){
-			$("#content_main > *").remove();
-			$("#subnav").empty();
-			$("#btn_container").find(".user_btn").removeClass("active");
-			$("#main").find(".lightbox").remove();
+			$('#content_main > *').remove();
+			$('#subnav').empty();
+			$('#btn_container').find('.user_btn').removeClass('active');
+			$('#main').find('.lightbox').remove();
 		},
 		// behandelt change bei $.address.path
 		handleChange : function(event){
-			var lastAddress = $(document).data("lastAddress");
-			if(lastAddress == undefined || lastAddress.path != event.path){
-				$(document).data("lastAddress", event);
+			var lastAddress = $(document).data('lastAddress');
+			if(!lastAddress || lastAddress.path !== event.path){
+				$(document).data('lastAddress', event);
 					
-				var search = new Search();
+				var search;
 				
-				title.set("anycook");
+				title.set('anycook');
 				
 				//resetSearchBar();
 				filters.reset();
 				
 				$(document).scrollTop(0);
 				
-				$("#wertung_filter").show();
-				$("#content_footer").show();		
+				$('#wertung_filter').show();
+				$('#content_footer').show();
 				this.clearContent();
 				
 				
 				var path = event.pathNames;
 				//blockFilter(false);
 				if(path.length > 0){
-					$("#search_reset, #filter_reset").addClass("on");
+					$('#search_reset, #filter_reset').addClass('on');
 				}
 				else{
-					$("#search_reset, #filter_reset").removeClass("on");
+					$('#search_reset, #filter_reset').removeClass('on');
 				}
 				
 				
-				//$.xml.append(path.length == 0 ? "home" : path[0]);
+				//$.xml.append(path.length == 0 ? 'home' : path[0]);
 				$.xml.append(path[0], function(){
 					switch(path.length){
 					case 0:
-						$("#user_home").addClass("active");
+						$('#user_home').addClass('active');
 						home.load();
 						break;
 					case 1:
 						switch(path[0]){
-						case "recipeediting":
-							title.set("Neues Rezept erstellen");
-							$("#new_recipe").addClass("active");
+						case 'recipeediting':
+							title.set('Neues Rezept erstellen');
+							$('#new_recipe').addClass('active');
 							newRecipe.load();
 							break;
-						case "feedback":
-							title.set("Feedback");
-							loadContact();
-							break;
-						case "preview":
-							loadPreview();
-							break;
-						case "about_us":
+						case 'about_us':
 							aboutus.load();
 							break;
-						case "impressum":
-							title.set("Impressum");
+						case 'impressum':
+							title.set('Impressum');
 							break;
-						case "fbregistration":
-							loadFBRegistrationMessage();
+						case 'fbregistration':
+							facebook.loadRegistrationMessage();
 							break;
-						case "resetpassword":
+						case 'resetpassword':
 							resetPassword.loadStep1();
 							break;
-						case "registration":
-							title.set("Registrierung");
+						case 'registration':
+							title.set('Registrierung');
 							registration.show();
 							break;
-						case "settings":
+						case 'settings':
 							settings.load();
 							break;
-						case "newsstream":
-							$("#user_messages").addClass("active");
+						case 'newsstream':
+							$('#user_messages').addClass('active');
 							messageStream.loadNewsstream();
 							break;
-						case "drafts":
+						case 'drafts':
 							drafts.load();
 							break;
 						}
 						break;
 					case 2:
 						switch(path[0]){
-						case "recipe":
-							$("#subnav")
-								.append(header.buildLink("Rezept", "", "recipe_btn"))
-								.append(header.buildLink("Diskussion", "", "discussion_btn"));
+						case 'recipe':
+							$('#subnav')
+								.append(header.buildLink('Rezept', '', 'recipe_btn'))
+								.append(header.buildLink('Diskussion', '', 'discussion_btn'));
 							recipeView.load(path[1]);
-							break;		
-				
-						case "activate":
+							break;
+						case 'activate':
 							activation.activate(path[1]);
 							break;
-							
-						case "profile":
-							$("#user_profile").addClass("active");
+						case 'profile':
+							$('#user_profile').addClass('active');
 							userProfile.load(path[1]);
 							break;
-							
-						case "resetpassword":
+						case 'resetpassword':
 							resetPassword.loadStep2();
 							break;
-						
-						case "messagesession":
+						case 'messagesession':
 							messages.show(path[1]);
 							break;
 						}
 						break;
 					case 3:
 						switch(path[0]){
-						case "recipe":
-							$("#subnav")
-									.append(header.buildLink("Rezept", "", "recipe_btn"))
-									.append(header.buildLink("Diskussion", "", "discussion_btn"));
+						case 'recipe':
+							$('#subnav')
+									.append(header.buildLink('Rezept', '', 'recipe_btn'))
+									.append(header.buildLink('Diskussion', '', 'discussion_btn'));
 							recipeView.load(path[1], path[2]);
 							break;
-							
-						case "search":
-							search = new Search();
+						case 'search':
+							search = Search.init();
 							switch(path[1]){
-							case "tagged":				
-								search.addTag(decodeURIComponent(path[2]));					
+							case 'tagged':
+								search.addTag(decodeURIComponent(path[2]));
 								break;
-								
-							case "user":
+							case 'user':
 								search.setUsername(decodeURIComponent(path[2]));
 							}
 							search.flush();
-						};
+						}
 					}
-				});		
+				});
 			}
-			$("#subnav *").removeClass("active");
+			$('#subnav *').removeClass('active');
 			
-			if(event.pathNames[0]=="recipeediting"){
+			if(event.pathNames[0] === 'recipeediting'){
 				newRecipe.addressChange(event);
 			}
-			else if(event.parameters["page"]!=undefined){
+			else if(event.parameters.page){
 				this.changePage(event);
 			}
 			else{
-				//wird aufgerufen wenn page=""
-				if(event.pathNames.length == 0){
-					$("#content_main > div").hide();
-					$("#site1").show();
-					$("#home_button").addClass("on");
-					$("#startpage_button").addClass("active");
+				//wird aufgerufen wenn page=''
+				if(event.pathNames.length === 0){
+					$('#content_main > div').hide();
+					$('#site1').show();
+					$('#home_button').addClass('on');
+					$('#startpage_button').addClass('active');
 				}else{
 					switch(event.pathNames[0]){
-						case "newrecipe":
-							$("#nr_general_btn").addClass("active");
-							animateNewRecipe(0);
+						case 'newrecipe':
+							$('#nr_general_btn').addClass('active');
+							//animateNewRecipe(0);
 							break;
-							
-						case "recipe":
-							$("#recipe_btn").addClass("active");
-							$("#discussion_container").hide();
-							$("#recipe_container").show();
+						case 'recipe':
+							$('#recipe_btn').addClass('active');
+							$('#discussion_container').hide();
+							$('#recipe_container').show();
 							break;
-						case "search":
-							search = Search.init();
-							search.search();
+						case 'search':
+							Search.init().search();
 							break;
 					}
 				}
@@ -215,74 +202,63 @@ define(['jquery',
 		},
 		// behandelt change bei $.address.parameters
 		changePage : function(event){
-			var page = event.parameters["page"];
+			var page = event.parameters.page;
 			var firstpath = event.pathNames[0];
 			switch(event.pathNames.length){
 			case 0:
 				switch(page){
-				case "discover":
-					$("#site1").hide();
-					$("#discover_button").addClass("active");
-					if($("#discover").length==0){
-						$.xml.append("home_discover");
+				case 'discover':
+					$('#site1').hide();
+					$('#discover_button').addClass('active');
+					if($('#discover').length === 0){
+						$.xml.append('home_discover');
 						home.discover();
 					}
-					else
-						$("#discover").show();
-					$("#discover_button").addClass("on");
+					else { $('#discover').show(); }
+					$('#discover_button').addClass('on');
 					break;
-					
-					default:
-						$.address.queryString("");
+				default:
+					$.address.queryString('');
 				}
 				break;
 				
 			default:
 				switch(firstpath){
-				case "recipe":
+				case 'recipe':
 					switch(page){
 					case 'discussion':
 						$('#recipe_container').hide();
-						var $discussionContainer = $("#discussion_container");
-						if($discussionContainer.length==0){						
+						var $discussionContainer = $('#discussion_container');
+						if($discussionContainer.length === 0){
 							discussion.load(decodeURI(event.pathNames[1]));
 						}
 						else{
 							$discussionContainer.show();
 						}
 						
-						$("#discussion_btn").addClass("active");
+						$('#discussion_btn').addClass('active');
 						break;
-					
-					case "edit":
-						loadRecipeEditing();
-						break;
-					
 					default:
-						$.address.queryString("");
+						$.address.queryString('');
 					}
 					break;
-						
-				case "fbregistration":
+				case 'fbregistration':
 					//nothing
 					break;
-					
-				case "search":
-					search = Search.init();
-					search.search();
+				case 'search':
+					Search.init().search();
 					break;
-					
 				default:
-					$.address.queryString("");
+					$.address.queryString('');
 				}
 			}
 		},
 		resetSearchBar : function(){
-			$("#search").blur();
-			$("#search").val("Gerichte, Zutaten, Tags, ...").css({color : "#b5b5b5" , fontStyle : "italic"}).removeAttr("readonly");
+			$('#search').blur();
+			$('#search').val('Gerichte, Zutaten, Tags, ...').css({color : '#b5b5b5' , fontStyle : 'italic'}).removeAttr('readonly');
 		},
 		checkBrowser : function(){
 			return navigator.appName;
 		}
-	}
+	};
 });

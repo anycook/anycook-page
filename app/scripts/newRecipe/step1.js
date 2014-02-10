@@ -24,28 +24,29 @@ define([
 	'jquery.ui.progressbar',
 	'jquery.inputdecorator'
 ], function($, drafts, imageUpload){
+	'use strict';
 	return {
 		load : function(){
 			var decoratorSettings = {
-				color : "#878787", 
+				color : '#878787',
 				change : $.proxy(this.validate, this)
 			};
-			$("#step1 input[type=\"text\"]").inputdecorator("required", decoratorSettings).focusout(function(){
-				drafts.save("name", $(this).val());
+			$('#step1 input[type=\'text\']').inputdecorator('required', decoratorSettings).focusout(function(){
+				drafts.save('name', $(this).val());
 			});
-			$("#step1 textarea").inputdecorator("required", decoratorSettings).focusout(function(){
-				drafts.save("description", $(this).val());
+			$('#step1 textarea').inputdecorator('required', decoratorSettings).focusout(function(){
+				drafts.save('description', $(this).val());
 			});
-			$("#step1 form").submit($.proxy(this.submit, this));
+			$('#step1 form').submit($.proxy(this.submit, this));
 
 			var data = {
 				complete : this.completeUpload,
 				this : this
-			}
-			$("#file_upload").change(data, $.proxy(imageUpload.recipe, imageUpload));
+			};
+			$('#file_upload').change(data, $.proxy(imageUpload.recipe, imageUpload));
 			
 			
-			$("#upload_button").click(function(event){
+			$('#upload_button').click(function(event){
 				event.preventDefault();
 				$('#file_upload').trigger('click');
 			});
@@ -53,87 +54,86 @@ define([
 		//checks if current state is valid. if returns true, else false
 		isValid : function(){
 			var check = true;
-			var $name = $("#new_recipe_name");
-			if($name.val().length == 0){
+			var $name = $('#new_recipe_name');
+			if($name.val().length === 0){
 				check=false;
 			}
 
-			var $introduction = $("#new_recipe_introduction");
-			if($introduction.val().length == 0){
+			var $introduction = $('#new_recipe_introduction');
+			if($introduction.val().length === 0){
 				check=false;
 			}
 			return check;
 		},
 		validate : function(event){
-			var $this = $(this);
 			var $container = event.$container;
-			var $step1 = $("#step1");
-			var check = true;
-			//var $name = $step1.find("#new_recipe_name");
+			//var $name = $step1.find('#new_recipe_name');
 			if(!event.empty){
-				$container.next(".error").fadeOut(300);
-				if(this.isValid())
-					$("#nav_step1").next().removeClass("inactive");
+				$container.next('.error').fadeOut(300);
+				if(this.isValid()){
+					$('#nav_step1').next().removeClass('inactive');
+				}
 
 			}else{
-				$("#nav_step1").nextAll().addClass("inactive");
+				$('#nav_step1').nextAll().addClass('inactive');
 			}
 		},
 		submit : function(event){
 			event.preventDefault();
 			var check = true;
 			var $target = $(event.target);
-			var $name = $target.find("#new_recipe_name");
-			if($name.val().length == 0){
-				$target.find("#new_recipe_name_error").fadeIn(300);
+			var $name = $target.find('#new_recipe_name');
+			if($name.val().length === 0){
+				$target.find('#new_recipe_name_error').fadeIn(300);
 				check=false;
 			}
 			
-			var $introduction = $target.find("#new_recipe_introduction");
-			if($introduction.val().length == 0){
-				$target.find("#new_recipe_introduction_error").fadeIn(300);
+			var $introduction = $target.find('#new_recipe_introduction');
+			if($introduction.val().length === 0){
+				$target.find('#new_recipe_introduction_error').fadeIn(300);
 				check=false;
 			}
 			
 			if(check){
-				$.address.parameter("step", "2");
+				$.address.parameter('step', '2');
 			}
 			else{
-				$target.find("input[type=\"submit\"]").effect("shake", {distance:5, times:2}, 50);
+				$target.find('input[type="submit"]').effect('shake', {distance:5, times:2}, 50);
 				//watchIntroduction();
 			}
 		},
 		getImageName : function(){
-			var image = $("#step1 .recipe_image_container img").attr("src").split("/");
+			var image = $('#step1 .recipe_image_container img').attr('src').split('/');
 			var imageName = image[image.length-1];
-			return imageName == "sonstiges.png" ? undefined : imageName;
+			return imageName === 'sonstiges.png' ? undefined : imageName;
 		},
 		getRecipeName : function(){
-			var name = $("#new_recipe_name").val();
+			var name = $('#new_recipe_name').val();
 			return name;
 		},
 		getDescription : function(){
-			var description = $("#new_recipe_introduction").val();
+			var description = $('#new_recipe_introduction').val();
 			return description;
 		},
-		completeUpload : function(location, xhr){
+		completeUpload : function(location){
 			if(location){
-				var splits = location.split("/");
+				var splits = location.split('/');
 				var filename = splits[splits.length-1];
-				drafts.save("image", filename);
+				drafts.save('image', filename);
 				this.showImage(location);
 			}
 		},
 		showImage : function(location){
-			var $recipeImageContainer = $(".recipe_image_container");
-			$recipeImageContainer.children("img").remove();
-			$recipeImageContainer.removeClass("visible").children("#progressbar").hide();
-			$recipeImageContainer.children(".image_upload").show();
+			var $recipeImageContainer = $('.recipe_image_container');
+			$recipeImageContainer.children('img').remove();
+			$recipeImageContainer.removeClass('visible').children('#progressbar').hide();
+			$recipeImageContainer.children('.image_upload').show();
 			
-			var $img = $("<img/>").addClass("recipe_image").attr("src", location);
+			var $img = $('<img/>').addClass('recipe_image').attr('src', location);
 			$recipeImageContainer.append($img);
-			$img.load(function(){$("#step1").trigger($.Event('resize'))});
+			$img.load(function(){
+				$('#step1').trigger($.Event('resize'));
+			});
 		}
-	}
-	
+	};
 });

@@ -19,82 +19,88 @@
  */
 define([
 	'jquery',
+	'AnycookAPI',
 	'classes/User',
 	'date',
 	'jquery.autogrowtextarea'
-], function($, User, date){
+], function($, AnycookAPI, User, date){
 	'use strict';
 	return {
 		show : function(sessionid, startid){
 			var timeout = 500;
-			if(startid === undefined){
+			if(!startid){
 				startid = -1;
 				timeout = 0;
 			}
 
 			var self = this;
 			
-			setTimeout(function(){AnycookAPI.message.session(sessionid, startid,
-				function(json){
+			setTimeout(function(){
+				AnycookAPI.message.session(sessionid, startid, function(json){
 					var messages = json.messages;
 					
-					if(startid == -1){
+					if(startid === -1){
 						var user = User.get();
 
-						var $messageAnswer = $("#message_answer").submit($.proxy(self.submitAnswer, self));
-						$messageAnswer.find(".messageimageborder").append("<img src=\""+user.getUserImagePath()+"\"/>");
-						$messageAnswer.find("textarea").autoGrow();
+						var $messageAnswer = $('#message_answer').submit($.proxy(self.submitAnswer, self));
+						$messageAnswer.find('.messageimageborder').append('<img src=\''+user.getUserImagePath()+'\'/>');
+						$messageAnswer.find('textarea').autoGrow();
 						var recipients = json.recipients;
-						var $recipientSpan = $("h1 span").last();
+						var $recipientSpan = $('h1 span').last();
 						for(var i = 0; i<recipients.length; i++){
 							var recipient = recipients[i];
 							
-							if(recipient.id == user.id)
+							if(recipient.id === user.id){
 								continue;
+							}
 							
-							if($recipientSpan.children("a").length == recipients.length -2 && 
-								$recipientSpan.children("a").length != 0)
-								$recipientSpan.append("<span> und </span>");
-							else if($recipientSpan.children().length > 0)
-								$recipientSpan.append("<span>, </span>");
+							if($recipientSpan.children('a').length === recipients.length -2 &&
+								$recipientSpan.children('a').length !== 0) {
+								$recipientSpan.append('<span> und </span>');
+							}
+							else if($recipientSpan.children().length > 0){
+								$recipientSpan.append('<span>, </span>');
+							}
 							
-							var $a = $("<a></a>").attr("href", User.getProfileURI(recipient.id))
+							var $a = $('<a></a>').attr('href', User.getProfileURI(recipient.id))
 								.text(recipient.name);
 								
 							$recipientSpan.append($a);
 							
 						}
-						$("#messagestream").jScrollPane();
+						$('#messagestream').jScrollPane();
 					}
 					
 					// gettingMessages[sessionid] = false;
 					var path = $.address.pathNames();
 					var $lastli;
 					var lastid = startid;
-					if(path[0] == "messagesession" && path[1] == sessionid){
+					if(path[0] === 'messagesession' && path[1] === sessionid){
 						//if(json === undefined) return;			
-						var $messagestream = $("#messagestream");
-						var oldDataMap = $messagestream.data("messages") || {};
+						var $messagestream = $('#messagestream');
+						var oldDataMap = $messagestream.data('messages') || {};
 						var datamap = {};
 						
-						var $jspPane = $messagestream.find(".jspPane");
-						for(var i in messages){
-							lastid = messages[i].id;
+						var $jspPane = $messagestream.find('.jspPane');
+						for(var j in messages){
+							lastid = messages[j].id;
 							var oldData = oldDataMap[lastid];
-							if(oldData)
+							if(oldData){
 								continue;
-							$lastli = self.getContainerforSession(messages[i]);
+							}
+							$lastli = self.getContainerforSession(messages[j]);
 							$jspPane.append($lastli);
-							datamap[lastid] = messages[i];
+							datamap[lastid] = messages[j];
 							
 							
-							if(messages[i].unread)
-								AnycookAPI.message.read(sessionid, messages[i].id);
+							if(messages[j].unread){
+								AnycookAPI.message.read(sessionid, messages[j].id);
+							}
 								
 							$.extend(oldDataMap, datamap);
-							$messagestream.data("messages", oldDataMap);
+							$messagestream.data('messages', oldDataMap);
 						}
-						if(messages!= null && messages.length>0){
+						if(messages!== null && messages.length > 0){
 							
 							$messagestream.jScrollPane();
 							
@@ -107,27 +113,28 @@ define([
 							// var lastheight = $lastli.outerHeight(true);
 							// var oldtop = $messagestream.innerHeight() -(lasttop);
 							// var newtop = $messagestream.innerHeight() -(lasttop+lastheight);					
-							var $jspContainer = $messagestream.children(".jspContainer");
 							
-							
-							
-							if(startid == -1){
-								if(newtop<0)
-									$jspPane.css({top:newtop});
+							if(startid === -1){
+								if(newtop < 0) { $jspPane.css({top:newtop}); }
 							}else{
-								var $messageContainer = $lastli.children(".messagecontainer");
-								$messageContainer.css({backgroundColor:"#D7E8B5"});
-								if(newtop<0){								
-									$jspPane.css({top:oldtop}).animate({top:newtop}, {duration:"slow", complete:function(){
-											$messageContainer.animate({backgroundColor:"#F7F4F1"},
-												{duration:2000, complete:function(){
-													$messageContainer.css("backgroundColor", "");
-												}});							
-									}});
+								var $messageContainer = $lastli.children('.messagecontainer');
+								$messageContainer.css({backgroundColor:'#D7E8B5'});
+								if(newtop < 0) {
+									$jspPane.css({top:oldtop}).animate({top:newtop}, {
+										duration:'slow',
+										complete:function(){
+											$messageContainer.animate({backgroundColor:'#F7F4F1'}, {
+												duration:2000,
+												complete:function(){
+													$messageContainer.css('backgroundColor', '');
+												}
+											});
+										}
+									});
 								}else{
-									$messageContainer.hide().fadeIn(1000).animate({backgroundColor:"#E6E2D7", borderColor:"#C2C0BE"},
+									$messageContainer.hide().fadeIn(1000).animate({backgroundColor:'#E6E2D7', borderColor:'#C2C0BE'},
 										{duration:2000, complete:function(){
-											$messageContainer.css("backgroundColor", "");
+											$messageContainer.css('backgroundColor', '');
 										}});
 								}
 							}
@@ -137,57 +144,57 @@ define([
 						}
 						self.show(sessionid, lastid);
 					}
-				});},timeout);
+				});
+			},timeout);
 		},
 		submitAnswer : function(event){
 			event.preventDefault();
-			var $textarea = $(event.target).find("textarea")
+			var $textarea = $(event.target).find('textarea');
 			var message = $textarea.val();
 			var sessionid = $.address.pathNames()[1];
 			
-			if(message.length == 0)
-				return;
+			if(message.length === 0) { return; }
 			
 			AnycookAPI.message.answer(sessionid, message);
 			
 			//console.log(encodeURIComponent(message));
-			$textarea.val("");
+			$textarea.val('');
 		},
 		getContainerforSession : function(message){
 			var sender = message.sender;
-			var $sender = $("<a></a>").attr("href", User.getProfileURI(sender.id))
+			var $sender = $('<a></a>').attr('href', User.getProfileURI(sender.id))
 				.text(sender.name);
-			var $image = $("<img />").attr("src", User.getUserImagePath(sender.id));
+			var $image = $('<img />').attr('src', User.getUserImagePath(sender.id));
 
-			var $headline = $("<div></div>").addClass("message_headline")
+			var $headline = $('<div></div>').addClass('message_headline')
 				.append($sender);
 				
 			
 			
 			
-			var $p = $("<p></p>").html(message.text.replace(/\n/g,"<br/>"));
+			var $p = $('<p></p>').html(message.text.replace(/\n/g,'<br/>'));
 			
-			var $messageright = $("<div></div>").addClass("message_content")
+			var $messageright = $('<div></div>').addClass('message_content')
 				.append($headline)
 				.append($p);
 			
-			var $clockicon = $("<div></div>").addClass("clock");
-			var $datetimeline = $("<div></div>").addClass("timeline_container");
+			var $clockicon = $('<div></div>').addClass('clock');
+			var $datetimeline = $('<div></div>').addClass('timeline_container');
 				
-			var $dates = $(".messagedialog .datetime");
+			var $dates = $('.messagedialog .datetime');
 			var lastDate = $dates.last().text();
 			var newDate = date.getDateTimeString(message.datetime);
 			if(lastDate !== newDate){
-				var $datetime = $("<div></div>").addClass("datetime").text(newDate);
+				var $datetime = $('<div></div>').addClass('datetime').text(newDate);
 				$datetimeline.append($clockicon);
 				$datetimeline.append($datetime);
 			}
 			
-			var $massagecontainer = $("<div></div>").addClass("messagecontainer")
+			var $massagecontainer = $('<div></div>').addClass('messagecontainer')
 				.append($image)
-				.append($messageright);	
+				.append($messageright);
 			
-			var $li = $("<li></li>").addClass("messagedialog")
+			var $li = $('<li></li>').addClass('messagedialog')
 				.append($massagecontainer)
 				.append($datetimeline);
 				

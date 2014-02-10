@@ -18,34 +18,35 @@
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
-	'jquery'
-], function($){
+	'jquery',
+	'AnycookAPI'
+], function($, AnycookAPI){
 	'use strict';
 	return {
 		recipe : function(event){
 			var files = event.target.files;
-			if (typeof files !== "undefined") {
+			if (typeof files !== 'undefined') {
 				this.addProgressBar();
 				AnycookAPI.upload.recipeImage(files[0], this.nrProgress, $.proxy(event.data.complete, event.data.this));
 			} else {
-				alert("No support for the File API in this web browser");
-			}  
+				window.alert('No support for the File API in this web browser');
+			}
 		},
 		user : function(event){
 			var files = event.target.files;
-			if (typeof files !== "undefined") {
+			if (typeof files !== 'undefined') {
 				this.addProgressBar();
 				AnycookAPI.upload.userImage(files[0], this.nrProgress, event.data.complete);
 			} else {
-				alert("No support for the File API in this web browser");
-			}  
+				window.alert('No support for the File API in this web browser');
+			}
 		},
 		addProgressBar : function(){
-			$(".image_upload").hide();
-			$("#progressbar").fadeIn(200).progressbar();
+			$('.image_upload').hide();
+			$('#progressbar').fadeIn(200).progressbar();
 		},
 		nrProgress : function(event){
-			$("#progressbar").progressbar({value:(event.loaded/event.total*100)});
+			$('#progressbar').progressbar({value:(event.loaded/event.total*100)});
 		}
 	};
 });

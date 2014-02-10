@@ -19,25 +19,25 @@
  */
 'use strict';
 define([
-        'jquery'
-], function($){
-        return {
-                activate : function(id){
-                        AnycookAPI.registration.activate(id, $.proxy(this.addActivationStuff, this));
-                },
-                addActivationStuff : function(response){
-                        if(response!="false"){
-                                $('#new_activation_success').removeClass('invisible');
-                        }else{
-                                $('#new_activation_false').removeClass('invisible');
-                        }
-                        window.setTimeout(this.fadeActivationOut, 3000);
-                        $("#content").click(this.fadeActivationOut);
-                        
-                },
-                fadeActivationOut : function(){
-                        $("#content").unbind('click');
-                        $("#new_activation").animate({opacity:0.2},{duration:300, complete:function(){$.address.value("");}});
-                }
-        };
+	'jquery',
+	'AnycookAPI'
+], function($, AnycookAPI){
+	return {
+		activate : function(id){
+			AnycookAPI.registration.activate(id, $.proxy(this.addActivationStuff, this));
+		},
+		addActivationStuff : function(response){
+			if(response !== 'false'){
+				$('#new_activation_success').removeClass('invisible');
+			}else{
+				$('#new_activation_false').removeClass('invisible');
+			}
+			window.setTimeout(this.fadeActivationOut, 3000);
+			$('#content').click(this.fadeActivationOut);
+		},
+		fadeActivationOut : function(){
+			$('#content').unbind('click');
+			$('#new_activation').animate({opacity:0.2},{duration:300, complete:function(){$.address.value('');}});
+		}
+	};
 });

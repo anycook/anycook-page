@@ -1,4 +1,8 @@
-define(['jquery'], function($){
+define([
+	'jquery',
+	'AnycookAPI'
+], function($, AnycookAPI){
+	'use strict';
 	//class Recipe
 
 	//c'tor
@@ -10,10 +14,10 @@ define(['jquery'], function($){
 		this.calorie = null;
 		this.time = {};
 		this.persons = null;
-		this.steps = new Array();
+		this.steps = [];
 		this.ingredients = null;
-		this.tags = new Array();
-		this.authors = new Array();
+		this.tags = [];
+		this.authors = [];
 		this.id = -1;
 		this.created = null;
 		this.active = false;
@@ -22,8 +26,9 @@ define(['jquery'], function($){
 	Recipe.getRecipeName = function(){
 		var pathNames = $.address.pathNames();
 		
-		if(pathNames.length < 2 || pathNames[0] != "recipe")
+		if(pathNames.length < 2 || pathNames[0] !== 'recipe'){
 			return null;
+		}
 			
 		return pathNames[1];
 	};
@@ -51,11 +56,12 @@ define(['jquery'], function($){
 	Recipe.prototype.checkRecipe = function(){
 		var checker = false;
 		$.ajax({
-			url:"/anycook/CheckRecipe",
+			url:'/anycook/CheckRecipe',
 			async:false,
 			success:function(response){
-				if(response != "false")
+				if(response !== 'false'){
 					checker = true;
+				}
 			}
 		});
 		return checker;
@@ -70,12 +76,12 @@ define(['jquery'], function($){
 	};
 
 	Recipe.prototype.getURI = function(){
-		var uri = "#/recipe/"+encodeURIComponent(this.name);
+		var uri = '#/recipe/'+encodeURIComponent(this.name);
 		return uri;
 	};
 
 	Recipe.getURI = function(name){
-		var uri = "#/recipe/"+encodeURIComponent(name);
+		var uri = '#/recipe/'+encodeURIComponent(name);
 		return uri;
 	};
 

@@ -1,4 +1,29 @@
-define(['jquery'], function($){
+/**
+ * @license This file is part of anycook. The new internet cookbook
+ * Copyright (C) 2014 Jan Graßegger
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see [http://www.gnu.org/licenses/].
+ * 
+ * @author Jan Graßegger <jan@anycook.de>
+ */
+define([
+	'jquery',
+	'AnycookAPI',
+	'FB'
+], function($, AnycookAPI, FB){
+	'use strict';
+
 	//class User
 	function User(){
 		this.level = -1;
@@ -19,22 +44,21 @@ define(['jquery'], function($){
 		var dfd = $.Deferred();
 		var user = new User();
 
-		var dfd = $.Deferred();
 		AnycookAPI.session(function(response){
-				user.id = response.id;
-				user.name = response.name;
-				user.level = Number(response.level);
-				user.mail = response.mail;
-				user.facebookID = response.facebookID;
-				user.text = response.text;
-				user.followers = response.followers;
-				user.following = response.following;
-				user.place = response.place;
-				$.when(user.getSchmecktRecipes()).then(function(schmeckt){
-					user.schmeckt = schmeckt;
-					$("html").data("user", user);
-					dfd.resolve(user);
-				});
+			user.id = response.id;
+			user.name = response.name;
+			user.level = Number(response.level);
+			user.mail = response.mail;
+			user.facebookID = response.facebookID;
+			user.text = response.text;
+			user.followers = response.followers;
+			user.following = response.following;
+			user.place = response.place;
+			$.when(user.getSchmecktRecipes()).then(function(schmeckt){
+				user.schmeckt = schmeckt;
+				$('html').data('user', user);
+				dfd.resolve(user);
+			});
 		},
 		function(response){
 			console.log(response);
@@ -70,74 +94,71 @@ define(['jquery'], function($){
 	};
 
 	User.get = function(){
-		return $("html").data("user") || new User();
-	}
+		return $('html').data('user') || new User();
+	};
 
 	User.getProfileURI = function(id){
-		var uri = "#/profile/"+id;
+		var uri = '#/profile/'+id;
 		return uri;
 	};
 
 	User.prototype.getProfileURI = function(){
-		var uri = "#/profile/"+this.id;
+		var uri = '#/profile/'+this.id;
 		return uri;
 	};
 
 	User.prototype.getFacebookProfileLink = function(){
-		return "http://www.facebook.com/people/@/"+this.facebookID;
+		return 'http://www.facebook.com/people/@/'+this.facebookID;
 	};
 
 	User.prototype.getRecipes = function(callback){
 		return User.getRecipes(this.id, callback);
-	}
+	};
 
 	User.getRecipes = function(userId, callback){
 		var data = {userId:userId};
 		return AnycookAPI.recipe(data,callback);
-	}
+	};
 
 	User.prototype.getSchmecktRecipes = function(callback){
 		return User.getSchmecktRecipes(this.id, callback);
-	}
+	};
 
 	User.getSchmecktRecipes = function(userid, callback){
 		return AnycookAPI.user.schmeckt(userid,callback);
-	}
+	};
 
 	User.getDiscussionNum = function(userid, callback){
 		return AnycookAPI.user.discussionNum(userid, callback);
-	}
-
-
+	};
 
 	User.prototype.checkLogin = function(){
-		return this.id != null;
+		return this.id !== null;
 	};
 
 	User.prototype.onlyUserAccess = function(){
-		if(!this.checkLogin())
-			$.address.value("");
-		else
-			return true;
+		if(!this.checkLogin()) { $.address.value(''); }
+		else { return true; }
 		return false;
 	};
 
-
 	User.prototype.isFollowing = function(userid){
-		for(var i in this.following)
-			if(this.following[i] == userid) return true;
+		for(var i in this.following) {
+			if(this.following[i] === userid) { return true; }
+		}
 		return false;
-	}
+	};
 
 	User.prototype.isFollowedBy = function(userid){
-		for(var i in this.followers)
-			if(this.followers[i] == userid) return true;
+		for(var i in this.followers) {
+			if(this.followers[i] === userid) { return true; }
+		}
 		return false;
-	}
+	};
 
 	User.getUserImagePath = function(userid, type){
 		return AnycookAPI.user.image(userid, type);
-	}
+	};
 
 	User.prototype.getUserImagePath = function(type){
 		return AnycookAPI.user.image(this.id, type);
@@ -146,10 +167,9 @@ define(['jquery'], function($){
 	User.login = function(mail, pwd, stayloggedin){
 		var callback = false;
 		AnycookAPI.session.login(mail, pwd, stayloggedin, function(response){
-				callback = response!="false";
-				// checkNewMessageNum();
+			callback = response !== 'false';
+			// checkNewMessageNum();
 		});
-		
 		return callback;
 	};
 
@@ -162,12 +182,11 @@ define(['jquery'], function($){
 			this.image = null;
 			AnycookAPI.session.logout(function(){
 				FB.getLoginStatus(function(response){
-					if(response.status == "connected"){
+					if(response.status === 'connected'){
 						FB.logout(function() {
-							  window.location.reload();
-							});
-					}else
-						window.location.reload();
+							window.location.reload();
+						});
+					} else { window.location.reload(); }
 				});
 			});
 		}
@@ -177,10 +196,10 @@ define(['jquery'], function($){
 // 	
 // 	
 	 // $.ajax({
-		// url:"/anycook/NewUser",
-		// data:"mail="+mail+"&pwd="+pwd+"&username="+username,
+		// url:'/anycook/NewUser',
+		// data:'mail='+mail+'&pwd='+pwd+'&username='+username,
 		// success:function(response){
-			// if(response=="true"){
+			// if(response=='true'){
 				// showRegistrationStep2(username,mail);
 			// }
 	// }});
