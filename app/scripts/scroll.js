@@ -19,28 +19,31 @@
  */
 
 define([
- 	'jquery',
- 	'jquery.ui.effect'
- ], function($, $){
- 	return {
+	'jquery',
+	'jquery.ui.effect'
+], function($){
+	'use strict';
+	return {
 		listen : function(){
-			var filterheight = $("#filter_box").css("height");
+			var filterheight = $('#filter_box').css('height');
 			filterheight = Number(filterheight.substr(0, filterheight.length-2))+50;
 			var scrollTop = $(document).scrollTop();
-			if(scrollTop > filterheight && $("#backtothetop").length == 0){
-				$("<div id='backtothetop'><div></div><label>zurück nach oben</label></div>").appendTo("body").hide();;
-				var containerleft = $("#container").offset().left;
-				$("#backtothetop").css("left", containerleft+20).fadeIn(1000).click(this.backToTheTop);
+			if(scrollTop > filterheight && $('#backtothetop').length === 0){
+				$('<div id="backtothetop"><div></div><label>zurück nach oben</label></div>').appendTo('body').hide();
+				var containerleft = $('#container').offset().left;
+				$('#backtothetop').css('left', containerleft+20).fadeIn(1000).click(this.backToTheTop);
 			}
-			else if(scrollTop < filterheight && $("#backtothetop").length > 0){
-				$("#backtothetop").fadeOut(700,function(){$("#backtothetop").remove();});
+			else if(scrollTop < filterheight && $('#backtothetop').length > 0){
+				$('#backtothetop').fadeOut(700,function(){$('#backtothetop').remove();});
 			}
 			
 		},
 		backToTheTop : function(time, callback){
-			if(time  === undefined) time = 1000;
-		 	callback = callback || function(){};
-			$("html").animate({scrollTop:0}, {duration:time, easing:"easeInOutQuart", complete: callback});
+			if(time  === undefined){
+				time = 1000;
+			}
+			callback = callback || function(){};
+			$('html').animate({scrollTop:0}, {duration:time, easing:'easeInOutQuart', complete: callback});
 		}
 	};
 });

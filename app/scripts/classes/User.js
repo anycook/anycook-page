@@ -4,7 +4,7 @@ define(['jquery'], function($){
 		this.level = -1;
 		this.name = null;
 		this.mail = null;
-		this.facebook_id = null;
+		this.facebookID = null;
 		this.schmeckt = null;
 		this.recipes = null;
 		this.text = null;
@@ -25,7 +25,7 @@ define(['jquery'], function($){
 				user.name = response.name;
 				user.level = Number(response.level);
 				user.mail = response.mail;
-				user.facebook_id = response.facebookID;
+				user.facebookID = response.facebookID;
 				user.text = response.text;
 				user.followers = response.followers;
 				user.following = response.following;
@@ -54,7 +54,7 @@ define(['jquery'], function($){
 			var profileUser = new User();
 			profileUser.id = json.id;
 			profileUser.name = json.name;
-			profileUser.facebook_id = json.facebookID;
+			profileUser.facebookID = json.facebookID;
 			profileUser.schmeckt = json.schmeckt;
 			profileUser.text = json.text;
 			profileUser.date = json.createdate;
@@ -84,7 +84,7 @@ define(['jquery'], function($){
 	};
 
 	User.prototype.getFacebookProfileLink = function(){
-		return "http://www.facebook.com/people/@/"+this.facebook_id;
+		return "http://www.facebook.com/people/@/"+this.facebookID;
 	};
 
 	User.prototype.getRecipes = function(callback){
@@ -158,7 +158,7 @@ define(['jquery'], function($){
 			this.level = -1;
 			this.name = null;
 			this.mail = null;
-			this.facebook_id = null;
+			this.facebookID = null;
 			this.image = null;
 			AnycookAPI.session.logout(function(){
 				FB.getLoginStatus(function(response){

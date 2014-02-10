@@ -17,116 +17,125 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
- define([
- 	'jquery',
- 	'drafts',
- 	'filters',
- 	'time',
- ], function($, drafts, filters, time){
- 	return {
- 		load : function(){
- 			var self = this;
- 			AnycookAPI.category.sorted(function(json){
-				var $category_select = $("#category_select");
-				for(var category in json)
-					$category_select.append("<option>"+category+"</option>");
+define([
+	'jquery',
+	'AnycookAPI',
+	'drafts',
+	'filters',
+	'time',
+], function($, AnycookAPI, drafts, filters, time){
+	'use strict';
+	return {
+		load : function(){
+			var self = this;
+			AnycookAPI.category.sorted(function(json){
+				var $categorySelect = $('#category_select');
+				for(var category in json){
+					$categorySelect.append('<option>'+category+'</option>');
+				}
 			});
-			$("#category_select").change(function(event){
+			$('#category_select').change(function(){
 				var $this = $(this);
 				var text = $this.val();
-				var span = $("#select_container span").text(text);
-				drafts.save("category", text);
+				$('#select_container span').text(text);
+				drafts.save('category', text);
 				self.isValid();
-				$("#category_error").fadeOut(300);
+				$('#category_error').fadeOut(300);
 			});
 			
-			$("#step3 .label_chefhats, #step3 .label_muffins").click(function(event){
+			$('#step3 .label_chefhats, #step3 .label_muffins').click(function(event){
 				event.preventDefault();
-				var $inputs = $(this).children("input");
-				$inputs.attr("checked") ? $inputs.removeAttr("checked") : $inputs.attr("checked", "checked");
-		        
-		        var $this = $(this);
-		        filters.handleRadios($this);
-		        var name = $inputs.attr("name") == "new_muffins" ? "calorie" : "skill";
-		        
-		        if($inputs.attr('checked')){
-		        	drafts.save(name, $inputs.val());
-		        }
-		        else {
-		        	drafts.save(name, '0');
-		        }
-		    	
-		    	self.isValid();
-		    	if(name === 'calorie'){
+				var $inputs = $(this).children('input');
+				if($inputs.attr('checked')){
+					$inputs.removeAttr('checked');
+				} else {
+					$inputs.attr('checked', 'checked');
+				}
+
+				var $this = $(this);
+				filters.handleRadios($this);
+				var name = $inputs.attr('name') === 'new_muffins' ? 'calorie' : 'skill';
+
+				if($inputs.attr('checked')){
+					drafts.save(name, $inputs.val());
+				}
+				else {
+					drafts.save(name, '0');
+				}
+
+				self.isValid();
+				if(name === 'calorie'){
 					$('#muffin_error').fadeOut(300);
-		    	}
+				}
 				else{
 					$('#skill_error').fadeOut(300);
 				}
-		    }).mouseover(function(){
-		    		filters.mouseoverRadio(this);
+			}).mouseover(function(){
+				filters.mouseoverRadio(this);
 			});
-			$("#step3 .label_container").mouseleave(function(){
-					filters.handleRadios($(this).children());
+
+			$('#step3 .label_container').mouseleave(function(){
+				filters.handleRadios($(this).children());
 			});
-			$("#step3 .std,#step3 .min")
-				.keydown($.proxy(this.keyTime, this))
-				.change($.proxy(this.draftTime, this))
-				.keyup($.proxy(this.draftTime, this))
-				.focus(function(){
-					isValid();
-					$("#time_error").fadeOut(300);
-				})
-				.siblings(".up, .down")
-				.click($.proxy(time.upDownListener, time))
-				.click($.proxy(this.draftTime, this))
-				.click(function(){
-					self.isValid();
-					$("#time_error").fadeOut(300);
-				});
+
+			$('#step3 .std,#step3 .min')
+			.keydown($.proxy(this.keyTime, this))
+			.change($.proxy(this.draftTime, this))
+			.keyup($.proxy(this.draftTime, this))
+			.focus(function(){
+				self.isValid();
+				$('#time_error').fadeOut(300);
+			})
+			.siblings('.up, .down')
+			.click($.proxy(time.upDownListener, time))
+			.click($.proxy(this.draftTime, this))
+			.click(function(){
+				self.isValid();
+				$('#time_error').fadeOut(300);
+			});
 				
-			$(".tagsbox").click($.proxy(this.makeNewTagInput, this));
+			$('.tagsbox').click($.proxy(this.makeNewTagInput, this));
 			//this.makeTagCloud();
-			$("#open_preview").click($.proxy(this.submit, this));
- 		},
- 		checkCategory : function(){
-			var category = $("#select_container span").text();
-			return category != "" && category != "Kategorie auswählen";
+			$('#open_preview').click($.proxy(this.submit, this));
+		},
+		checkCategory : function(){
+			var category = $('#select_container span').text();
+			return category !== '' && category !== 'Kategorie auswählen';
 		},
 		checkTime : function(){
 			var time = this.getTime();
-			return time.std != "0" || time.min != "0"; 
+			return time.std !== '0' || time.min !== '0';
 		},
 		checkSkill : function(){
 			var skill = this.getSkill();
-			return skill!==undefined;
+			return skill !== undefined;
 		},
 		checkCalorie : function(){
 			return this.getCalorie() !== undefined;
 		},
 		getCategory : function(){
-			return $("#select_container span").text();
+			return $('#select_container span').text();
 		},
 		getSkill : function(){
-			return $("#step3 .chefhats:checked").val()
+			return $('#step3 .chefhats:checked').val();
 		},
 		getCalorie : function(){
-			return $("#step3 .muffins:checked").val()
+			return $('#step3 .muffins:checked').val();
 		},
 		getTime : function(){
-			var std = $("#step3 .std").val();
-			var min = $("#step3 .min").val();
+			var std = $('#step3 .std').val();
+			var min = $('#step3 .min').val();
 			var time = {std:std, min:min};
 			return time;
 		},
-		draftTags : function(){			
-			drafts.save("tags", this.getTags());
+		draftTags : function(){
+			drafts.save('tags', this.getTags());
 		},
-		draftTime : function(){			
-			drafts.save("time", this.getTime());
+		draftTime : function(){
+			drafts.save('time', this.getTime());
 		},
 		getTags : function(){
-			var $tags =  $(".tagsbox .tag_text");
+			var $tags =  $('.tagsbox .tag_text');
 			var tags = [];
 			for(var i = 0; i<$tags.length; i++){
 				var tag = $tags.eq(i).text();
@@ -136,42 +145,40 @@
 		},
 		isValid: function(){
 			if(this.checkCategory() && this.checkTime() && this.checkSkill() && this.checkCalorie()){
-				$("#nav_step3").nextAll().removeClass("inactive");
+				$('#nav_step3').nextAll().removeClass('inactive');
 				return true;
 			}else{
-				$("#nav_step3").nextAll().addClass("inactive");
+				$('#nav_step3').nextAll().addClass('inactive');
 				return false;
 			}
 		},
 		submit : function(){
 			var check = true;
 			if(!this.checkCategory()){
-				$("#category_error").fadeIn(300);
+				$('#category_error').fadeIn(300);
 				check = false;
 			}
 			
 			if(!this.checkTime()){
-				$("#time_error").fadeIn(300);
+				$('#time_error').fadeIn(300);
 				check = false;
 			}
 			
 			if(!this.checkSkill()){
-				$("#skill_error").fadeIn(300);
+				$('#skill_error').fadeIn(300);
 				check = false;
 			}
 			
 			if(!this.checkCalorie()){
-				$("#muffin_error").fadeIn(300);
+				$('#muffin_error').fadeIn(300);
 				check = false;
 			}
 			
 			if(!check){
-				$("#open_preview").effect("shake", {distance:5, times:2}, 50);	
+				$('#open_preview').effect('shake', {distance:5, times:2}, 50);
 			}else{
-				$.address.parameter("step", "4");
+				$.address.parameter('step', '4');
 			}
-			
-			
-		},
- 	};
- });
+		}
+	};
+});

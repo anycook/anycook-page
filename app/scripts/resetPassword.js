@@ -17,78 +17,80 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
- 'use strict';
- define([
- 	'jquery',
- 	'title'
- ], function($, title){
- 	return {
- 		loadStep1 : function(){
-			$.address.title("Passwort zurücksetzen | anycook");
-			$("#resetpwstep2").hide();
-			
-			$("#resetpwform1").submit($.proxy(this.submitForm1, this));
-				
+
+define([
+	'jquery',
+	'AnycookAPI',
+	'title'
+], function($, AnycookAPI, title){
+	'use strict';
+	return {
+		loadStep1 : function(){
+			$.address.title('Passwort zurücksetzen | anycook');
+			$('#resetpwstep2').hide();
+			$('#resetpwform1').submit($.proxy(this.submitForm1, this));
 		},
 		submitForm1 : function(event){
 			event.preventDefault();
 
-			var $errorfield = $("#resetpwmail").parent("td").siblings(".error");
-			$errorfield.text("");
+			var $errorfield = $('#resetpwmail').parent('td').siblings('.error');
+			$errorfield.text('');
 			
-			var mailorname = $("#resetpwmail").val();
+			var mailorname = $('#resetpwmail').val();
 			if(mailorname === '' || mailorname === ' ') {
 				//TODO show error message
 				return;
 			}
 
-			AnycookAPI.session.resetPasswordRequest(mailorname, function(response){
-				$("#content_main>*").fadeOut(500, function(){
-					$("#content_main").append("<div id=\"new_activation\" class=\"content_message\">" +
-							"<h5>Email verschickt</h5>"+
-							"<p>Wir haben dir eine Mail mit geschickt. Folge dem dort enthaltenen Link, um dein Passwort zurückzusetzen.");
+			AnycookAPI.session.resetPasswordRequest(mailorname, function(){
+				$('#content_main>*').fadeOut(500, function(){
+					$('#content_main').append('<div id="new_activation" class="content_message">' +
+							'<h5>Email verschickt</h5>'+
+							'<p>Wir haben dir eine Mail mit geschickt. Folge dem dort enthaltenen Link, um dein Passwort zurückzusetzen.');
 					//window.setTimeout(fadeActivationOut, 3000);
-					//$("#content").click(fadeActivationOut);
+					//$('#content').click(fadeActivationOut);
 				});
 			}, function(response){
 				var errortext = null;
-				if(response=="wrong")
-					errortext = "Falscher Username/Mail";
-				else if(response == "fbuser")
-					errortext = "Passwort eines FB-Users kann nicht geändert werden";							
+				if(response === 'wrong'){
+					errortext = 'Falscher Username/Mail';
+				}
+				else if(response === 'fbuser'){
+					errortext = 'Passwort eines FB-Users kann nicht geändert werden';
+				}
 				$errorfield.text(errortext);
 			});
 		},
 		loadStep2: function(){
-			title.set('Passwort zurücksetzen');	
-			$("#resetpwstep1").hide();
-			$("#resetpwform2").submit($.proxy(this.submitForm2, this));
+			title.set('Passwort zurücksetzen');
+			$('#resetpwstep1').hide();
+			$('#resetpwform2').submit($.proxy(this.submitForm2, this));
 		},
 		submitForm2 : function(){
 			event.preventDefault();
 
-			var errorfield = $("#resetpw1").parent("td").siblings(".error");
-			errorfield.text("");
-			var pw1 = $("#resetpw1").val();
-			var pw2 = $("#resetpw2").val();
+			var errorfield = $('#resetpw1').parent('td').siblings('.error');
+			errorfield.text('');
+			var pw1 = $('#resetpw1').val();
+			var pw2 = $('#resetpw2').val();
 			
 			
 			if(pw1.length<5){
-				errorfield.text("Passwort zu kurz! Min. 5 Stellen.");
+				errorfield.text('Passwort zu kurz! Min. 5 Stellen.');
 				return false;
 			}
-			if(pw1!=pw2){
-				errorfield.text("Passwörter nicht gleich!");
+			if(pw1 !== pw2){
+				errorfield.text('Passwörter nicht gleich!');
 			}
 			
 			var id = $.address.pathNames()[1];
 			AnycookAPI.session.resetPassword(id, pw1, function(){
-				$("#content_main").html("<div id=\"new_activation\" class=\"content_message\">" +
-					"<h5>Passwort wurde geändert</h5>"+
-					"<p>Dein Passwort wurde geändert. Weiterhin viel Spass!");
+				$('#content_main').html('<div id="new_activation" class="content_message">' +
+					'<h5>Passwort wurde geändert</h5>'+
+					'<p>Dein Passwort wurde geändert. Weiterhin viel Spass!');
 			}, function(){
-				errorfield.text("Fehler! Bitte versuche es nocheinmal");
+				errorfield.text('Fehler! Bitte versuche es nocheinmal');
 			});
 		}
- 	};
- });
+	};
+});

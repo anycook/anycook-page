@@ -28,7 +28,6 @@ define([
 	'text!templates/newMessageDialog.erb'
 ], function($, _, User, date, lightbox, title, newMessageDialogTemplate){
 	'use strict';
-
 	return {
 		loadNewsstream : function(){
 			var self = this;

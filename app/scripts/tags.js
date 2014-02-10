@@ -67,11 +67,11 @@ define([
 			}
 			if(!event.data || !event.data.add || typeof event.data.add !== 'function'){
 				console.error('no add function defined');
-				$.extend(event.data, {add : function(text) {console.log('with callback '+text+' would be added')}});
+				$.extend(event.data, {add : function(text) {console.log('with callback '+text+' would be added');}});
 			}
 			if(!event.data.remove || typeof event.data.remove !== 'function'){
 				console.error('no remove function defined');
-				$.extend(event.data, {remove : function(text) {console.log('with callback '+text+' would be removed')}});
+				$.extend(event.data, {remove : function(text) {console.log('with callback '+text+' would be removed');}});
 			}
 			
 			if(event !== undefined){

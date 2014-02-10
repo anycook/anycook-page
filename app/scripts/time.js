@@ -22,18 +22,19 @@ define([
 	'jquery',
 	'classes/Search'
 ], function($, Search){
+	'use strict';
 	return {
-		formSubmit : function(event){
-			var std = Number($("#time_std").val());
-			var min = Number($("#time_min").val());
+		formSubmit : function(){
+			var std = Number($('#time_std').val());
+			var min = Number($('#time_min').val());
 			
 			var search = Search.init();
-			if(std == 0 && min ==0) {
+			if(std === 0 && min === 0) {
 				search.setTime(null);
 			}
 			else {
 				search.setTime({
-					std : this.fillStd(std), 
+					std : this.fillStd(std),
 					min : this.fillMin(min)
 				});
 			}
@@ -45,37 +46,43 @@ define([
 			var target = $(event.target);
 			var val = $(target).val();
 			
-			var $timeform = $("#time_form");
-			if(event.which == 13){
-				if($timeform.length > 0)$timeform.submit();
-				
-			}else if(event.which == 38){
+			var $timeform = $('#time_form');
+
+			switch(event.which){
+			case 13:
+				if($timeform.length > 0) {
+					$timeform.submit();
+				}
+				break;
+			case 38:
 				this.up(target);
 				return false;
-			}else if(event.which == 40){
+			case 40:
 				this.down(target);
-				return false;	
-			}else{
-				if((target.hasClass("std") && val.length==2) || target.hasClass("min") && val.length==2)
+				return false;
+			default:
+				if((target.hasClass('std') && val.length === 2) || target.hasClass('min') && val.length === 2){
 					return false;
-				if(!(event.which>=48 &&  event.which<=57) && !(event.which>=96 &&  event.which<=105) && event.which != 8 && event.which != 46)
+				}
+				if(!(event.which >= 48 &&  event.which <= 57) && !(event.which >= 96 &&  event.which <= 105) && event.which !== 8 && event.which !== 46){
 					return false;
-			
+				}
 			}
-			
 		},
 		upDownListener : function(event){
 			var $target = $(event.target);
-			var $input = $target.siblings("input").first();
-			var submit = $target.parents("#time_form").length > 0;
-			if($target.hasClass("up"))
+			var $input = $target.siblings('input').first();
+			var submit = $target.parents('#time_form').length > 0;
+			if($target.hasClass('up')){
 				this.up($input, submit);
-			else
+			}
+			else{
 				this.down($input, submit);
+			}
 		},
 		up : function($input, submit){
 			var value = Number($input.val());
-			if($input.hasClass("std")){
+			if($input.hasClass('std')){
 				value = (value +1)%100;
 			}else{
 				value = (value +5)%60;
@@ -87,8 +94,7 @@ define([
 		},
 		down : function($input, submit){
 			var value = Number($input.val());
-			if($input.hasClass("std")){
-				
+			if($input.hasClass('std')){
 				value = (100+(value -1))%100;
 			}else{
 				value = (60+(value - 5))%60;
@@ -100,24 +106,26 @@ define([
 		},
 		fillStd : function(std){
 			std = Number(std);
-			if(std==0 || std>99)
+			if(std === 0 || std > 99){
 				std = 0;
+			}
 			std = String(std);
-			if(std.length == 1)
-				std = "0"+std;
+			if(std.length === 1){
+				std = '0'+std;
+			}
 			return std;
 		},
 		fillMin : function(min){
 			min = Number(min);
-			if(min==0 || min>59)
+			if(min === 0 || min > 59){
 				min = 0;
+			}
 			
 			min = String(min);
-			if(min.length == 1)
-				min = "0"+min;	
-			
-			
+			if(min.length === 1){
+				min = '0'+min;
+			}
 			return min;
 		}
-	}
+	};
 });

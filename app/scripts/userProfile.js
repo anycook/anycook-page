@@ -19,32 +19,35 @@
  */
 define([
 	'jquery',
+	'AnycookAPI',
 	'classes/User',
 	'date',
 	'lightbox',
 	'messageStream',
 	'title'
-], function($, User, date, lightbox, messageStream, title){
+], function($, AnycookAPI, User, date, lightbox, messageStream, title){
 	'use strict';
 	return {
-		follow : function(){
+		follow : function(event){
+			var $target = $(event.target);
 			var userid = $.address.pathNames()[1];
 			var $follower = $('.follower .count');
 			var numFollowers = Number($follower.text());
-			if(!$(this).hasClass('on')){
+			if(!$target.hasClass('on')){
 				AnycookAPI.user.follow(userid);
-				$(this).addClass('on').text('- Entfolgen');
+				$target.addClass('on').text('- Entfolgen');
 				$('#stamp').fadeIn(500);
 				$follower.text(numFollowers+1);
 			}else{
 				AnycookAPI.user.unfollow(userid);
-				$(this).removeClass('on').text('+ Folgen');
+				$target.removeClass('on').text('+ Folgen');
 				$('#stamp').fadeOut(500);
 
 				$follower.text(numFollowers-1);
 			}
 		},
 		load : function(userid){
+			var self = this;
 			var user = User.get();
 
 			if(userid === 'me' && user.onlyUserAccess()){
@@ -63,7 +66,7 @@ define([
 
 				if(user.checkLogin()){
 					if(user.id !== userid){
-						$('#follow').click(follow).show();
+						$('#follow').click($.proxy(self.follow, self)).show();
 
 						if(profileData.isFollowedBy(user.id)){
 							$('#stamp').show();
@@ -71,7 +74,7 @@ define([
 						}
 
 						//lightbox	
-						$('#sendmessage').show().click(function(event){
+						$('#sendmessage').show().click(function(){
 							var $lightbox = messageStream.getNewMessageLightbox();
 							var top = $(this).offset().top-313;
 							lightbox.show($lightbox, top, function(){

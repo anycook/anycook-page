@@ -17,75 +17,83 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-'use strict';
 define([
 	'jquery',
+	'underscore',
+	'AnycookAPI',
 	'classes/Recipe',
 	'classes/Search',
 	'classes/User',
 	'text!templates/emptySearchResult.erb',
 	'text!templates/searchResult.erb',
 	'jquery.autoellipsis'
-], function($, Recipe, Search, User, emptySearchResultTemplate, searchResultTemplate){
-
+], function($, _, AnycookAPI, Recipe, Search, User, emptySearchResultTemplate, searchResultTemplate){
+	'use strict';
 	return {
 		addResults : function(event, json){
-			$("#more_results").remove();
+			$('#more_results').remove();
 			var recipes = json.results;
 
-			var currentRecipes = $("#result_container").data("recipes");
-			if(!currentRecipes || $(".frame_big").length == 0) currentRecipes = [];
+			var currentRecipes = $('#result_container').data('recipes');
+			if(!currentRecipes || $('.frame_big').length === 0){
+				currentRecipes = [];
+			}
 
-			
-
-
-			// var start = $(".frame_big").length;
+			// var start = $('.frame_big').length;
 			var self = this;
 			$.each(recipes, function(i, recipe){
-				var $frame_big = self.getBigFrame();
-				$frame_big = $frame_big.appendTo("#result_container");
-				// $("#result_container").append($frame_big);
+				var $frameBig = self.getBigFrame();
+				$frameBig = $frameBig.appendTo('#result_container');
+				// $('#result_container').append($frameBig);
 
 				AnycookAPI.recipe(recipe, function(recipe){
-					if($.inArray(currentRecipes, recipes[0]) > -1)	return;
+					if($.inArray(currentRecipes, recipes[0]) > -1){
+						return;
+					}
 
-					self.fillBigFrame($frame_big, recipe);
-					var $text = $frame_big.find(".recipe_text");
-					var $p = $text.children("p");
-					var $h3 = $text.children("h3");
+					self.fillBigFrame($frameBig, recipe);
+					var $text = $frameBig.find('.recipe_text');
+					var $p = $text.children('p');
+					var $h3 = $text.children('h3');
 					var height = $text.innerHeight()-($h3.outerHeight(true)+($p.outerHeight(true)-$p.innerHeight()));
-					$p.css("height",height).ellipsis();
+					$p.css('height',height).ellipsis();
 				});
 			});
 
 			currentRecipes = currentRecipes.concat(recipes);
-			$("#result_container").data("recipes", currentRecipes);
+			$('#result_container').data('recipes', currentRecipes);
 				
-			if(json.size> $(".frame_big").length)
+			if(json.size> $('.frame_big').length){
 				self.addMoreResultsButton();
+			}
 		},
 		searchAutocomplete: function(req,resp){
 			var term = req.term;
-			if(term.charAt(0) === "-"){
-				if(term.length > 1)
+			if(term.charAt(0) === '-'){
+				if(term.length > 1){
 					this.autocompleteExcludedIngredients(term.substr(1), resp);
+				}
 			}
-			else
+			else{
 				this.autocomplete(term,resp);
+			}
 		},
 		autocompleteExcludedIngredients : function(term, resp){
 			AnycookAPI.autocomplete.ingredient(term, function(data){
 				var array = [];
-			 	for(var i=0;i<data.length;i++){
-			 		if(i==0)
-			 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedIngredients"};
-			 		else
-			 			array[array.length] = { label: "<div class='autocomplete-p'>"+data[i]+"</div>", value: "-"+data[i],data:"excludedIngredients"};
-		        }
+				for(var i=0;i<data.length;i++){
+					if(i === 0){
+						array[array.length] = {label: '<div class="autocomplete-h1">Zutaten</div><div class="autocomplete-p">'+data[i]+'</div>', value: '-'+data[i],data:'excludedIngredients'};
+					}
+					else{
+						array[array.length] = { label: '<div class="autocomplete-p">'+data[i]+'</div>', value: '-'+data[i],data:'excludedIngredients'};
+					}
+				}
 				resp(array);
 			});
 		},
 		autocomplete : function(term, resp){
+			var search = Search.init();
 			var categorie = search.kategorie;
 			var ingredients = search.zutaten;
 			var tags = search.tags;
@@ -94,52 +102,60 @@ define([
 			AnycookAPI.autocomplete(term, categorie, ingredients, tags, user, function(data){
 				var array = [];
 				if(data.recipes){
-					for(var i=0;i<data.recipes.length;i++){
-			            if(i==0)
-				 			array[array.length] = { label: "<div class='autocomplete-h1'>Gerichte</div><div class='autocomplete-p'>"+data.recipes[i]+"</div>", value: data.recipes[i],data:"recipes"};
-				 		else
-				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.recipes[i]+"</div>", value: data.recipes[i],data:"recipes"};
-			        }
+					for(var i=0; i < data.recipes.length; i++){
+						if(i === 0){
+							array[array.length] = { label: '<div class="autocomplete-h1">Gerichte</div><div class="autocomplete-p">'+data.recipes[i]+'</div>', value: data.recipes[i],data:'recipes'};
+						}
+						else{
+							array[array.length] = { label: '<div class="autocomplete-p">'+data.recipes[i]+'</div>', value: data.recipes[i],data:'recipes'};
+						}
+					}
 				}
 				if(data.ingredients){
-				 	for(var i=0;i<data.ingredients.length;i++){
-				 		if(i==0)
-				 			array[array.length] = { label: "<div class='autocomplete-h1'>Zutaten</div><div class='autocomplete-p'>"+data.ingredients[i]+"</div>", value: data.ingredients[i],data:"ingredients"};
-				 		else
-				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.ingredients[i]+"</div>", value: data.ingredients[i],data:"ingredients"};
-			        }
+					for(var j=0; j<data.ingredients.length; j++){
+						if(j === 0){
+							array[array.length] = { label: '<div class="autocomplete-h1">Zutaten</div><div class="autocomplete-p">'+data.ingredients[j]+'</div>', value: data.ingredients[j],data:'ingredients'};
+						}
+						else{
+							array[array.length] = { label: '<div class="autocomplete-p">'+data.ingredients[j]+'</div>', value: data.ingredients[j],data:'ingredients'};
+						}
+					}
 				}
-			 	if(data.kategorien){        			 		
-				 	for(var i=0;i<data.kategorien.length;i++){
-			                if(i==0)
-					 			array[array.length] = { label: "<div class='autocomplete-h1'>Kategorien</div><div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
-					 		else
-					 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.kategorien[i]+"</div>", value: data.kategorien[i],data:"kategorie"};
-			        }
-			 	}
-			 	if(data.tags){
-			        for(var i=0; i<data.tags.length; i++)
-			        {
-			        	if(i==0)
-				 			array[array.length] = { label: "<div class='autocomplete-h1'>Tags</div><div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
-				 		else
-				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.tags[i]+"</div>", value: data.tags[i], data:"tag"};
-			        }
-			 	}
-			 	if(data.user){
-			        for(var i=0; i<data.user.length; i++)
-			        {
-			        	if(i==0)
-				 			array[array.length] = { label: "<div class='autocomplete-h1'>User</div><div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
-				 		else
-				 			array[array.length] = { label: "<div class='autocomplete-p'>"+data.user[i].name+"</div>", value: data.user[i].name, data:"user", id :data.user[i].id};
-			        }
-			 	}
-			 	resp(array);
+				if(data.kategorien){
+					for(var k=0; k<data.kategorien.length; k++){
+						if(k === 0){
+							array[array.length] = { label: '<div class="autocomplete-h1">Kategorien</div><div class="autocomplete-p">'+data.kategorien[k]+'</div>', value: data.kategorien[k],data:'kategorie'};
+						}
+						else{
+							array[array.length] = { label: '<div class="autocomplete-p">'+data.kategorien[k]+'</div>', value: data.kategorien[k],data:'kategorie'};
+						}
+					}
+				}
+				if(data.tags){
+					for(var l=0; l<data.tags.length; l++){
+						if(l===0){
+							array[array.length] = { label: '<div class="autocomplete-h1">Tags</div><div class="autocomplete-p">'+data.tags[l]+'</div>', value: data.tags[l], data:'tag'};
+						}
+						else{
+							array[array.length] = { label: '<div class="autocomplete-p">'+data.tags[l]+'</div>', value: data.tags[l], data:'tag'};
+						}
+					}
+				}
+				if(data.user){
+					for(var m=0; m<data.user.length; m++){
+						if(m===0){
+							array[array.length] = { label: '<div class="autocomplete-h1">User</div><div class="autocomplete-p">'+data.user[m].name+'</div>', value: data.user[m].name, data:'user', id :data.user[m].id};
+						}
+						else{
+							array[array.length] = { label: '<div class="autocomplete-p">'+data.user[m].name+'</div>', value: data.user[m].name, data:'user', id :data.user[m].id};
+						}
+					}
+				}
+				resp(array);
 			});
 		},
 		searchKeyDown : function(event){
-			var newFocus = undefined;
+			var newFocus;
 			switch(event.keyCode){
 				case 40: // down
 					newFocus = $(this).next();
@@ -155,106 +171,106 @@ define([
 			}
 			
 		},
-		addMoreResultsButton : function(){
-			$("#result_container").append("<div id=\"more_results\">Mehr Rezepte laden</div><div id=\"more_results_right\"></div>");
-			$("#more_results").click(search.searchMore);
+		/*addMoreResultsButton : function(){
+			$('#result_container').append('<div id=\'more_results\'>Mehr Rezepte laden</div><div id=\'more_results_right\'></div>');
+			$('#more_results').click(search.searchMore);
 			$(document).scroll($.proxy(this.moreResultsScrollListener, this));
-		},
+		},*/
 		moreResultsScrollListener : function(){
-			if($.address.pathNames()[0] != "search" || $("#more_results").length == 0){
-				$(document).unbind("scroll", $.proxy(this.moreResultsScrollListener, this));
+			if($.address.pathNames()[0] !== 'search' || $('#more_results').length === 0){
+				$(document).unbind('scroll', $.proxy(this.moreResultsScrollListener, this));
 				return;
 			}
 			
 			var scrollTop = $(window).scrollTop() + $(window).height();
-			var top = $("#more_results").position().top;
+			var top = $('#more_results').position().top;
 			if(scrollTop > top +100){
-				$(document).unbind("scroll", $.proxy(this.moreResultsScrollListener, this));
+				$(document).unbind('scroll', $.proxy(this.moreResultsScrollListener, this));
 				// addResults();
-				var start = $(".frame_big").length;
+				var start = $('.frame_big').length;
 				var search = Search.init();
 				search.search(start);
 			}
 				
 		},
 		makeSearchHeader : function(){
-			if($("#first_search_layout").length == 0){
-				var headertext = "<div class='float_right_header'>" +
-						"<div id='first_search_layout' class='small_button'><div></div></div>" +
-						//"<div id='second_search_layout' class='small_button'><div></div></div>" +
-						//"<div id='third_search_layout' class='small_button'><div></div></div>" +
-						"</div>";
-				$("#content_header").html(headertext);
-				$("#recipe_general_btn").click(function(event){$.address.parameter("page", "");});
+			if($('#first_search_layout').length === 0){
+				var headertext = '<div class="float_right_header">' +
+						'<div id="first_search_layout" class="small_button"><div></div></div>' +
+						//'<div id='second_search_layout' class='small_button'><div></div></div>' +
+						//'<div id='third_search_layout' class='small_button'><div></div></div>' +
+						'</div>';
+				$('#content_header').html(headertext);
+				$('#recipe_general_btn').click(function(){
+					$.address.parameter('page', '');
+				});
 			}
 		},
-		handleSearchResults : function(result, terms){
-			$("#search").val("");
-			if(terms == "Gerichte, Zutaten, Tags, ...")
+		/*handleSearchResults : function(result, terms){
+			$('#search').val('');
+			if(terms === 'Gerichte, Zutaten, Tags, ...')
 				return;
 			
-			if(result.gerichte!=null){
+			if(result.gerichte){
 				gotoGericht(result.gerichte);
 			}	
-			else if(result.kategorien!=null){
+			else if(result.kategorien){
 				search.setKategorie(result.kategorien[0]);
 				search.flush();
 			}	
-			else if(result.tags!= null){
+			else if(result.tags!){
 				search.addTag(result.tags[0]);
 				search.flush();
 			}	
-			else if(result.zutaten!=null){
+			else if(result.zutaten){
 				search.addZutat(result.zutaten[0]);
 				search.flush();
 			}
-			else if(result.excludedingredients != null){
+			else if(result.excludedingredients){
 				search.excludeIngredient(result.excludedingredients[0]);
 				search.flush();
 			}
-			else if(result.user!=null){
+			else if(result.user){
 				gotoProfile(result.user[0]);
 			}
-			else if(terms!= ""){
+			else if(terms !== ''){
 				search.addTerm(terms);
 				search.flush();
 			}
 			return false;
-		},
+		},*/
 		addTerms : function(terms){
-			/*if($(".search_term").length == 0){ 
-				$("#terms_text").show();
-				$(".close_term").live("click", removeTerm);
+			/*if($('.search_term').length === 0){ 
+				$('#terms_text').show();
+				$('.close_term').live('click', removeTerm);
 			}
 			
 			
 			for(var i in search.terms){
-				if(search.terms[i]!= ""){
-					$("#search_terms").append("<div class=\"search_term\"><span>"+search.terms[i]+"</span><div class=\"close_term\">x</div></div>");
+				if(search.terms[i]!= ''){
+					$('#search_terms').append('<div class=\'search_term\'><span>'+search.terms[i]+'</span><div class=\'close_term\'>x</div></div>');
 				}
 			}*/
-			$("#search").val(terms);	
-		},
-		removeTerm: function(event){
-			search.setTerms(null);
-			search.flush();
+			$('#search').val(terms);
 		},
 		focusoutSearch : function(){
-			$("#search").val('');	
+			$('#search').val('');
 		},
-		fillBigFrame : function($frame_big, json){
-			var uri = encodeURI("/#/recipe/" + json.name);
-			$frame_big.attr("href", uri).append("<div></div>");
+		fillBigFrame : function($frameBig, json){
+			var uri = encodeURI('/#/recipe/' + json.name);
+			$frameBig.attr('href', uri).append('<div></div>');
 
 			var imageURL = Recipe.getImageURL(json.name);
 
 			var std = json.time.std.toString();
-			if(std.length == 1)
-				std = "0" + std;
+			if(std.length === 1){
+				std = '0' + std;
+			}
 		
 			var min = json.time.min.toString();
-			if(min.length == 1)
-				min = "0" + min;
+			if(min.length === 1){
+				min = '0' + min;
+			}
 		
 			var user = User.get();
 			var schmeckt = $.inArray(json.name, user.schmeckt)>=0;
@@ -269,17 +285,17 @@ define([
 			});
 
 			var template = _.template(searchResultTemplate, json);
-			$frame_big.html(template);
+			$frameBig.html(template);
 
 		},
 		getBigFrame : function() {
-			return $("<a></a>").addClass("frame_big");
+			return $('<a></a>').addClass('frame_big');
 		},
 		showEmptyResult : function(){
 			$('#result_container').html(emptySearchResultTemplate);
 			AnycookAPI.discover.recommended(function(json){
-				$("#discover_recommended").recipeoverview("diese Rezepte könnten dir auch schmecken...", json);
+				$('#discover_recommended').recipeoverview('diese Rezepte könnten dir auch schmecken...', json);
 			});
 		}
-	}
+	};
 });
