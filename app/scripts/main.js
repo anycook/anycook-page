@@ -144,10 +144,11 @@ require([
 	'tags',
 	'time',
 	'userMenu',
+	'userProfile',
 	'jquery.address',
 	'jquery.ui.autocomplete',
 	'jquery.xml', 
-], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView, scroll, facebook, filters, messageStream, tags, time, userMenu){
+], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView, scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
 	//setup
 	// if($.browser.msie){
 		// var version = Number($.browser.version);		
@@ -287,13 +288,13 @@ require([
 				searchObject.flush();
 				break;
 			case 'user':
-				gotoProfile(ui.item.id);
+				userProfile.gotoProfile(ui.item.id);
 			}			
 		},
 		position:{
 			of : "#searchbar",
 			my : "right top-1", 
-			at: "right bottom"
+			at : "right bottom"
 		}
 	}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 		return $( "<li></li>" )
@@ -372,21 +373,19 @@ require([
 	
 	
 	//tagsfilter
+	var tagData = {
+		add : $.proxy(tags.searchTag, tags),
+		remove : $.proxy(tags.searchRemoveTag, tags)
+	};
 	$(".tags_list").submit($.proxy(tags.submitTags, tags))
-		.click($.proxy(tags.makeNewTagInput, tags));
+		.click(tagData, $.proxy(tags.makeInput, tags))
+		.on('click', '.tag_remove', tagData, $.proxy(tags.remove, tags));
 	// $(".tags_table_right").click(makeNewTagInput);
-	
-	//$(".tags_table_right .tag_remove").live('click', function(event){removeTag(event.target.parentNode);});
-	
 	
 	//timefilter
 	$("#time_form").submit($.proxy(time.formSubmit, time));
 	$("#time_std,#time_min").keydown($.proxy(time.key, time));
 	$(".time .up, .time .down").click($.proxy(time.upDownListener, time));
-	
-	//loginform
-	//$("#login_mail.wrong + #email_end, #login_pwd.wrong + #password_end, #login_username.wrong + #username_end").live("mouseenter", showLoginErrorPopups);
-	//$("#login_mail.wrong + #email_end, #login_pwd.wrong + #password_end, #login_username.wrong + #username_end").live("mouseleave", hideLoginErrorPopups);
 	
 	//userfilter
 	//$("#userfilter").mouseenter(showUserfilterremove);

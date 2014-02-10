@@ -23,9 +23,10 @@
  	'classes/Search', 
  	'searchView',
  	'stringTools',
+ 	'tags',
  	'time',
  	'text!templates/filters/ingredientRow.erb'
- ], function($, Search, searchView, stringTools, time, ingredientRowTemplate){
+ ], function($, Search, searchView, stringTools, tags, time, ingredientRowTemplate){
 	// alle Filter
 	return {
 		setFromSession : function(){
@@ -64,7 +65,7 @@
 			}
 			
 			for(var num in search.tags) {
-				$(".tags_list").append(getTag(search.tags[num], "remove"));
+				$(".tags_list").append(tags.get(search.tags[num], "remove"));
 			}
 			
 			if(search.terms!=null){

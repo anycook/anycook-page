@@ -17,16 +17,62 @@
  * 
  * @author Jan Graßegger <jan@anycook.de>
  */
-'use strict';
+
 define([
 	'jquery',
-	'classes/Recipe'
-], function($, Recipe){
+	'AnycookAPI',
+	'classes/Recipe',
+	'classes/Search'
+], function($, AnycookAPI, Recipe, Search){
+	'use strict';
 	return {
-		//NEW
-		makeNewTagInput : function(event){
-			var $target = $(event.target);
+		get : function(name, type, number){
+			var $tag;
 			
+			if(type === 'link' || type === 'linknumber') {
+				$tag = $('<a href="#/search/tagged/'+name+'"></a>');
+			}
+			else {
+				$tag = $('<div></div>');
+			}
+				
+			var $right = $tag.addClass('tag').append('<div class="right"></div>').children()
+				.append('<div class="tag_text">'+name+'</div>');
+			
+			if(type === 'remove'){
+				var $remove = $('<div>x</div>').addClass('tag_remove')
+					.click($.proxy(this.removeNewTag, this));
+				$right.append($remove);
+			}
+			else if(type === 'number' || type === 'linknumber') {
+				$right.append('<div class="tag_num">'+number+'</div>');
+			}
+				
+			return $tag;
+		},
+		remove : function(event){
+			var $tag = $(event.target).parents('.tag');
+			var text = $tag.find('.tag_text').text();
+			$tag.remove();
+			//this.removeInput();
+			event.data.remove(text);
+		},
+		//add fields 'add' and 'remove' for callbacks
+		makeInput : function(event){
+			var self = this;
+			var $target = $(event.target);
+
+			if(!event.data){
+				event.data = {};
+			}
+			if(!event.data || !event.data.add || typeof event.data.add !== 'function'){
+				console.error('no add function defined');
+				$.extend(event.data, {add : function(text) {console.log('with callback '+text+' would be added')}});
+			}
+			if(!event.data.remove || typeof event.data.remove !== 'function'){
+				console.error('no remove function defined');
+				$.extend(event.data, {remove : function(text) {console.log('with callback '+text+' would be removed')}});
+			}
 			
 			if(event !== undefined){
 				if($target.parents().andSelf().is('.tag')) {
@@ -35,12 +81,11 @@ define([
 			}
 				
 			if($target.children('input').length === 0 && $target.parents('.blocked').length === 0){
-					//var divlength = getDivLength();
-					//make new input field
+				//make new input field
 				$target.append('<input type="text"/>')
 					.addClass('active')
 					.children('input')
-					.keydown($.proxy(this.keyNewTag, this))
+					.keydown(event.data, $.proxy(this.inputKeyListener, this))
 					.focus()
 					.autocomplete({
 						source:function(req,resp){
@@ -58,18 +103,20 @@ define([
 						position:{
 							offset : '-1 1'
 						},
-						select:function(event, ui){
+						select:function(e, ui){
 							if(!ui.item) { return false; }
 							var text = ui.item.label;
 							$(this).autocomplete('destroy');
 
-							if($target.hasClass('tags_list')){
+							event.data.add(text);
+
+							/*if($target.hasClass('tags_list')){
 								search.addTag(text);
 								search.flush();
 							}else {
 								this.saveNewTag(text);
-							}
-							this.makeNewTagInput(e);
+							}*/
+							self.makeInput(event);
 							return false;
 						}
 					});
@@ -85,44 +132,58 @@ define([
 					$target
 						.removeClass('active')
 						.children('input').remove();
-						
 				});
 			}
 				
 			$target.children('input').focus();
-					
 		},
-		keyNewTag : function(event) {
+		removeInput : function(event){
+			/*var $tagsbox = $('.tagsbox');
+			$tagsbox.children('input').remove();*/
+			var $target = $(event.target);
+			$target.remove();
+		},
+		inputKeyListener : function(event) {
 			var $target = $(event.target);
 			var text = $target.val();
 			var $tagsbox = $target.parent();
 
 			if((event.keyCode === 13 || event.keyCode === 188 || event.keyCode === 32) && text !== '' ){
 				event.preventDefault();
-				this.saveNewTag(text);
-				this.removeNewInput();
-				this.makeNewTagInput({target : $tagsbox[0]});
+				//this.saveNewTag(text);
+				event.data.add(text);
+				this.removeInput(event);
+				this.makeInput({
+					target : $tagsbox[0],
+					data : event.data
+				});
 			}
 			else if(event.keyCode === 8 && text === ''){
 				event.preventDefault();
-				
-				if($tagsbox.is('.tags_list')){
-					var tagName = $this.prev().find('.tag_text').text();
-					search.removeTag(tagName);
-					search.flush();
-				}
+				var tagName = $target.prevAll('.tag').last().find('.tag_text').text();
+				event.data.remove(tagName);
 				$tagsbox.children('.tag').last().remove();
-				removeNewInput();
-				draftTags();
-				makeNewTagInput.call($tagsbox[0]);
+				this.removeInput(event);
+				this.makeInput({
+					target : $tagsbox[0],
+					data : event.data
+				});
 			}
 			
 		},
-		removeNewInput : function(){
-			var $tagsbox = $('.tagsbox');
-			$tagsbox.children('input').remove();
+		//search
+		searchTag : function(tag){
+			var search = Search.init();
+			search.addTag(tag);
+			search.flush();
 		},
-		removeNewTag : function(event){
+		searchRemoveTag : function(tag){
+			var search = Search.init();
+			search.removeTag(tag);
+			search.flush();
+		},
+		//OLD NEW
+		/*removeNewTag : function(event){
 			var $this = $(this);
 			if($this.parents().is('.tags_list')){
 				search.removeTag($this.prev().text());
@@ -190,38 +251,6 @@ define([
 			AnycookAPI.tag.suggest(recipe, tags);
 			lightbox.hide();
 			$('.tagsbox').empty();
-			/*$("#recipe_tags").empty();
-			$("#addtags_container").fadeOut(200, function(){
-				$("#bezeichner_container").append("<div id='suggestedtags_message' class='content_message'>" +
-						"<h5>Danke!</h5><p>Wir schauen uns deine Vorschläge gleich einmal an.<br /> " +
-						"Wir benachrichtigen dich!</p></div>");
-				$("#content").click(addTagreadyClick);
-				window.setTimeout(addTagreadyClick, 3000);
-			});*/
-		},
-		get : function(name, type, number){
-			var $tag;
-			
-			if(type === 'link' || type === 'linknumber') {
-				$tag = $('<a href="#/search/tagged/'+name+'"></a>');
-			}
-			else {
-				$tag = $('<div></div>');
-			}
-				
-			var $right = $tag.addClass('tag').append('<div class="right"></div>').children()
-				.append('<div class="tag_text">'+name+'</div>');
-			
-			if(type === 'remove'){
-				var $remove = $('<div>x</div>').addClass('tag_remove')
-					.click($.proxy(this.removeNewTag, this));
-				$right.append($remove);
-			}
-			else if(type === 'number' || type === 'linknumber') {
-				$right.append('<div class="tag_num">'+number+'</div>');
-			}
-				
-			return $tag;
 		},
 		saveNewTag : function(text){
 			if(text[0] === ',' || text[0] === ' ') {
@@ -284,15 +313,6 @@ define([
 			search.flush();
 			return false;
 		},
-		removeInput : function(){
-			$('.tags_table_right input').remove();
-		},
-		removeTag : function(tag){
-			var text = $(tag).children('.tag_text').text();
-			removeTagfromSession(text);
-			$(tag).remove();
-			removeInput();
-		},
 		removeTagfromSession : function(tag){
 			search.removeTag(tag);
 			search.flush();
@@ -310,7 +330,7 @@ define([
 		},
 		handleNewTagClick : function(event){
 			makeNewRInput();
-		}
+		}*/
 	};
 });
 
