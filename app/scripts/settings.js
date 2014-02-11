@@ -30,6 +30,8 @@ define([
 				change:function(){}
 			});
 
+			$('#mail_form').submit($.proxy(this.setNewMail, this));
+
 			var user = User.get();
 			this.loadAccount(user);
 			this.loadNotifaction();
@@ -161,6 +163,15 @@ define([
 					break;
 			}
 		},
+		setNewMail : function(event){
+			event.preventDefault();
+			var newMail = $('#account_mail').val();
+			if(this.checkMail(newMail)){
+				AnycookAPI.setting.setMail(newMail, function(){
+					window.alert('changed mail');
+				})
+			}
+		},
 		changeMail : function(event){
 			var $target = $(event.target);
 			if($target.is(':checked')) {
@@ -181,7 +192,7 @@ define([
 				$container.delay(2000).fadeOut(500);
 			});
 		},
-		changeMailPwd : function(event){
+		/*changeMailPwd : function(event){
 			event.preventDefault();
 			var mailPwd = {};
 			
@@ -216,7 +227,7 @@ define([
 				var $container = $('#mail_pwd_saved');
 				$.anycook.user.settings.saved($container);
 			});
-		},
+		},*/
 		checkMail : function(mail){
 			var regex = /^(([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+)?$/;
 			return regex.test(mail);
