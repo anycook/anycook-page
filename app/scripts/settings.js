@@ -169,7 +169,7 @@ define([
 			if(this.checkMail(newMail)){
 				AnycookAPI.setting.setMail(newMail, function(){
 					window.alert('changed mail');
-				})
+				});
 			}
 		},
 		changeMail : function(event){
