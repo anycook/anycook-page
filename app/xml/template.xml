@@ -708,4 +708,7 @@
 			<p><a href="/#!/?page=discover">Entdecke</a> weitere Rezepte oder erfahre mehr <a href="/#!/about_us">über uns</a>.</p>
 		</div>
 	</template>		
+	<template id="confirmMail" access="restricted">
+		<p>Deine EMailaddresse wurde efolgreich zu <span id="newMail"></span> geändert.</p>
+	</template>
 </templates>

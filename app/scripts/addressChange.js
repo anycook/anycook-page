@@ -120,6 +120,9 @@ define([
 						break;
 					case 2:
 						switch(path[0]){
+						case 'confirmMail':
+							settings.confirmMail(path[1]);
+							break;
 						case 'recipe':
 							$('#subnav')
 								.append(header.buildLink('Rezept', '', 'recipe_btn'))

@@ -21,8 +21,9 @@ define([
 	'jquery',
 	'AnycookAPI',
 	'classes/User',
-	'imageUpload'
-], function($, AnycookAPI, User, imageUpload){
+	'imageUpload',
+	'loginMenu'
+], function($, AnycookAPI, User, imageUpload, loginMenu){
 	'use strict';
 	return {
 		load : function(){
@@ -183,6 +184,21 @@ define([
 			var $container = $('#notification_saved');
 			$.anycook.user.settings.saved($container);
 			
+		},
+		confirmMail : function(code){
+			var user = User.get();
+			if(!user.checkLogin()){
+				loginMenu.toggle();
+				return;
+			}
+
+			AnycookAPI.setting.confirmMail(code, function(newMail){
+				$('#newMail').text(newMail);
+				user.mail = newMail;
+			},
+			function(){
+				window.alert('Deine Emailaddresse konnte nicht geändert werden');
+			});
 		},
 		changeAllMail : function(value){
 			AnycookAPI.session.setMail('all', value);
