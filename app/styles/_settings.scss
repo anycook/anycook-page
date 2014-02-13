@@ -14,16 +14,14 @@
 
 #settings_content{
 	margin: 10px 0 0;
-		
-	/*account_image{
-		float: left;
-		border: 8px solid $stepcolor;
-		outline: 1px solid $lightgrey;
-		width: 200px;	
-	}*/
 	
 	.profile_image{
 		position:relative;
+		float: left;
+		border: 8px solid $stepcolor;
+		outline: 1px solid $lightgrey;
+		width: 200px;
+
 		.image_upload{
 			margin-left:25px;
 
