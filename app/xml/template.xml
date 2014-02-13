@@ -609,6 +609,10 @@
 					<td>...wenn jemandem dein Rezept schmeckt.</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_schmeckt" value="schmeckt" /><label></label></div></td>
 				</tr>
+				<tr id="newMessage">
+					<td>...wenn jemandem dir eine neue Nachricht schreibt.</td>
+					<td><div class="checkbox"><input type="checkbox" name="notification_new_message" value="newmessage" /><label></label></div></td>
+				</tr>
 				<tr id="newsletter">
 					<td>Newsletter</td>
 					<td><div class="checkbox"><input type="checkbox" name="notification_newsletter" value="newsletter" /><label></label></div></td>
