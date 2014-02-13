@@ -75,44 +75,66 @@ define([
 			// $('#account_form').submit($.anycook.user.settings.changeAccount);
 		},
 		loadNotifaction : function(){
+			var self = this;
+
 			AnycookAPI.setting.notification(function(json){
 				var checker = false;
 				for(var type in json){
 					if(json[type]){
 						checker=true;
-						$('#'+type+' input[type=\'checkbox\']').attr('checked', 'checked');
+						$('#'+type+' input[type="checkbox"]').attr('checked', 'checked');
 					}
 				}
 				
-				var $bigCheckbox = $('#mail_notification input').change($.proxy(this.toggleMail, this));
+				var $bigCheckbox = $('#mail_notification input').change($.proxy(self.toggleNotifications, self));
 				if(checker){
 					$bigCheckbox.attr('checked', 'checked');
 					$('#settings_notification_content').show();
 				}
 				
-				$('#settings_notification_content input').change($.proxy(this.changeMail, this));
+				$('#settings_notification_content input').change($.proxy(self.saveNotifications, self));
 			});
 		},
-		toggleMail : function(){
-			var $this = $(this);
+		toggleNotifications : function(event){
+			var self = this;
 			var $content = $('#settings_notification_content');
-			var checked = $this.attr('checked');
 			var $smallCheckboxes = $('#settings_notification_content input');
-			if(!checked){
-				$content.animate({height:0}, {duration:700,easing:'easeInQuad', complete:function(){
-					$(this).hide().css('height', '');
-					$smallCheckboxes.attr('checked', '');
-					$.anycook.user.settings.changeAllMail(false);
-				}});
+			if(!$(event.target).is(':checked')){
+				$content.animate({height:0}, {
+					duration:700, 
+					easing:'easeInQuad', 
+					complete:function(){
+						$(this).hide().css('height', '');
+						var notificationSettings = {};
+						$smallCheckboxes.attr('checked', '');
+						self.saveNotifications();
+					}
+				});
 			}else{
 				var oldHeight = $content.height();
 				$content.css('height', 0).show();
-				$content.animate({height:oldHeight}, {duration:700,easing:'easeOutQuad', complete:function(){
-					$(this).show().css('height', '');
-					$smallCheckboxes.attr('checked', 'checked');
-					$.anycook.user.settings.changeAllMail(true);
-				}});
+				$content.animate({height:oldHeight}, {
+					duration:700,
+					easing:'easeOutQuad',
+					complete:function(){
+						$(this).show().css('height', '');
+						var notificationSettings = {};
+						$smallCheckboxes.attr('checked', 'checked');
+						self.saveNotifications();
+					}
+				});
 			}
+		},
+		saveNotifications : function(){
+			var notificationSettings = {};
+
+			$('#settings_notification_content input').each(function(){
+				var $this = $(this);
+				var key = $this.val();
+				notificationSettings[key] = $this.is(':checked');
+			});
+
+			AnycookAPI.setting.saveNotifications(notificationSettings);
 		},
 		completeUpload : function(){
 			var $recipeImageContainer = $('.profile_image');
@@ -173,18 +195,6 @@ define([
 				});
 			}
 		},
-		changeMail : function(event){
-			var $target = $(event.target);
-			if($target.is(':checked')) {
-				AnycookAPI.session.addMailSettings($target.val());
-			}
-			else {
-				AnycookAPI.session.removeMailSettings($target.val());
-			}
-			var $container = $('#notification_saved');
-			$.anycook.user.settings.saved($container);
-			
-		},
 		confirmMail : function(code){
 			var user = User.get();
 			if(!user.checkLogin()){
@@ -200,50 +210,11 @@ define([
 				window.alert('Deine Emailaddresse konnte nicht geändert werden');
 			});
 		},
-		changeAllMail : function(value){
-			AnycookAPI.session.setMail('all', value);
-		},
 		saved : function($container){
 			$container.stop(true).fadeIn(500, function(){
 				$container.delay(2000).fadeOut(500);
 			});
 		},
-		/*changeMailPwd : function(event){
-			event.preventDefault();
-			var mailPwd = {};
-			
-			
-			var mail = $('#account_mail').val();
-			if(!$.anycook.user.settings.checkMail(mail)){
-				$('#mail_validation').animate({opacity:1}, {duration:500, complete:function(){
-					$(this).delay(2000).animate({opacity:0}, 500);
-				}});
-			}else{
-				var user = User.get();
-				if(user.mail !== mail){
-					mailPwd.mail = mail;
-				}
-			}
-			
-			var oldPw = $('#password_old').val();
-			var newPw = $('#password_new').val();
-			
-			if(oldPw.length > 0 || newPw.length > 0){
-				if(!$.anycook.user.settings.checkPwd(newPw)){
-					$('#pwd_validation').animate({opacity:1}, {duration:500, complete:function(){
-						$(this).delay(2000).animate({opacity:0}, 500);
-					}});
-				}else{
-					mailPwd.oldpw = oldPw;
-					mailPwd.newpw = newPw;
-				}
-			}
-			
-			$.post('/anycook/ChangeAccountSettings', mailPwd, function(){
-				var $container = $('#mail_pwd_saved');
-				$.anycook.user.settings.saved($container);
-			});
-		},*/
 		checkMail : function(mail){
 			var regex = /^(([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+)?$/;
 			return regex.test(mail);

@@ -167,11 +167,6 @@ define([
 			}
 			
 		},
-		/*addMoreResultsButton : function(){
-			$('#result_container').append('<div id=\'more_results\'>Mehr Rezepte laden</div><div id=\'more_results_right\'></div>');
-			$('#more_results').click(search.searchMore);
-			$(document).scroll($.proxy(this.moreResultsScrollListener, this));
-		},*/
 		moreResultsScrollListener : function(){
 			var $bigFrames = $('.frame_big');
 			if($.address.pathNames()[0] !== 'search' || $bigFrames.length === $('#result_container').data('size')){
