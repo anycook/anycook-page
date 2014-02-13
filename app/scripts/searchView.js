@@ -31,12 +31,12 @@ define([
 	'use strict';
 	return {
 		addResults : function(event, json){
-			$('#more_results').remove();
 			var recipes = json.results;
 
 			var currentRecipes = $('#result_container').data('recipes');
 			if(!currentRecipes || $('.frame_big').length === 0){
 				currentRecipes = [];
+				$(document).scroll($.proxy(this.moreResultsScrollListener, this));
 			}
 
 			// var start = $('.frame_big').length;
@@ -61,11 +61,7 @@ define([
 			});
 
 			currentRecipes = currentRecipes.concat(recipes);
-			$('#result_container').data('recipes', currentRecipes);
-				
-			if(json.size> $('.frame_big').length){
-				self.addMoreResultsButton();
-			}
+			$('#result_container').data('recipes', currentRecipes).data('size', json.size);
 		},
 		searchAutocomplete: function(req,resp){
 			var term = req.term;
@@ -177,15 +173,15 @@ define([
 			$(document).scroll($.proxy(this.moreResultsScrollListener, this));
 		},*/
 		moreResultsScrollListener : function(){
-			if($.address.pathNames()[0] !== 'search' || $('#more_results').length === 0){
+			var $bigFrames = $('.frame_big');
+			if($.address.pathNames()[0] !== 'search' || $bigFrames.length === $('#result_container').data('size')){
 				$(document).unbind('scroll', $.proxy(this.moreResultsScrollListener, this));
 				return;
 			}
 			
 			var scrollTop = $(window).scrollTop() + $(window).height();
-			var top = $('#more_results').position().top;
+			var top = $bigFrames.last().position().top;
 			if(scrollTop > top +100){
-				$(document).unbind('scroll', $.proxy(this.moreResultsScrollListener, this));
 				// addResults();
 				var start = $('.frame_big').length;
 				var search = Search.init();
