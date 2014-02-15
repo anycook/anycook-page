@@ -564,44 +564,81 @@ header{
 					$width:$width - 10;
 					width:$width;
 					@include userselecttext;
+
+					.filter_devider {
+						float: left;
+						width: 100%;
+						height: 4px;
+						background: url("/img/dot.png") repeat-x;
+					}
 					
 					#userfilter{
-						background-color: #ECE9E3;
-						border: 1pt solid #D5D6D2;
 						padding: 5px;
 						display: none;
-						margin-top: 10px;
-						height: 50px;
+						margin: 5px 0 25px 0;
+						height: 55px;
 						
 						#userfilterremove {
-							margin: 2px 6px 0;
-							background-image: url(/img/delete_off.png);
-							height: 9px;
-							width: 8px;
-							cursor: pointer;
+							width: 20px;
+							height: 20px;
 							float: right;
-							display: none;
+							cursor: pointer;
+							background-image: url("/img/icons20x20.png");
+							background-position: 0 -80px;
+							position: relative;
+							@include vertical-align;
+
+							span{
+								background-image: url("/img/icons20x20.png");
+								position: absolute;
+								top:0;
+								left:0;
+								bottom:0;
+								right:0;
+								opacity: 0;
+								background-position: 0 -100px;
+								@include transition(opacity, .1s, ease-out);
+							}
+							
+							&:hover{
+								span{
+									opacity: 1;
+									@include transition(opacity, .1s, ease-out);
+								}
+							}
 						}
-						
-						div{
-							a{
-								float: left;
-								text-decoration: none;
-								color: #859F5E;
+
+						#userfiltercontent{
+							height: 100%;
+
+							.filter_devider{
+								margin: 10px 0;
 							}
 						}
 						
-						img{
-							height: 50px;
-							width: 50px;
+						div{
+							#userfilterpic{
+								float: left;
+								text-decoration: none;
+								color: #859F5E;
+								margin-left: 10px;
+
+								img{
+									height: 50px;
+									width: 50px;
+								}
+							}
 						}
-						
+												
 						#userfiltertext {
-							padding: 0 2px;
-							margin: 0 24px 0 55px;
 							font: 9pt "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+							color: $darkfontcolor;
 							line-height: 16px;
-							height: 50px;
+							float: left;
+							padding: 0 3px 0 10px;
+							width: 152px;
+
+							@include vertical-align;
 						}
 					}
 					
@@ -729,14 +766,10 @@ header{
 								
 							}
 						}
-						
-						#filter_devider {
-							float: left;
-							margin: 14px 0 10px 0;
-							width: 100%;
-							height: 4px;
-							background: url("/img/dot.png") repeat-x;
+						.filter_devider{
+								margin: 14px 0 10px 0;
 						}
+						
 						
 						#zutat_head{
 							float:left;
