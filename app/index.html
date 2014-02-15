@@ -17,12 +17,12 @@
 		<link rel="apple-touch-startup-image" href="/icons/logo-iPhone-startup.png" />
 		
 		<!-- CSS -->
+		<!-- build:css(app, .tmp) styles.main.css -->
 		<link rel="stylesheet" type="text/css" href="/styles/jquery.inputdecorator.css"/>
 		<link rel="stylesheet" type="text/css" href="/styles/style.css"/>
-		
-		<!-- build:js({app,.tmp}) scripts/main.js -->
-		<script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
 		<!-- end build -->
+		
+		<script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
 	</head>
 	<body>
 		<div id="fb-root"></div>
@@ -82,8 +82,12 @@
 						<div id="filter_main">
 						<div id="userfilter">
 		    				<div id="userfilterremove"></div>
-		    				<div><a href=""><img src=""/></a>
-		    				<div id="userfiltertext"></div>
+		    				<div>
+		    					<a href=""><img src=""/></a>
+		    					<div id="userfiltertext">
+		    						Nur Rezepte von <br>
+									<a id="userfilter_name"></a>
+		    					</div>
 		    				</div>      		
 		       			</div>
 						<div id="kategorie_filter">

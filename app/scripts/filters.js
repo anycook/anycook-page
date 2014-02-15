@@ -22,12 +22,13 @@ define([
 	'underscore',
 	'AnycookAPI',
 	'classes/Search',
+	'classes/User',
 	'searchView',
 	'stringTools',
 	'tags',
 	'time',
 	'text!templates/filters/ingredientRow.erb'
-], function($, _, AnycookAPI, Search, searchView, stringTools, tags, time, ingredientRowTemplate){
+], function($, _, AnycookAPI, Search, User, searchView, stringTools, tags, time, ingredientRowTemplate){
 	'use strict';
 	// alle Filter
 	return {
@@ -338,30 +339,23 @@ define([
 			}
 		},
 		//userfilter
-		setUserfilter : function(){
-			//TODO show filtered user in filterbar
-			// if($('#userfilter span>a').text() == username){
-				// $('#userfilter').css({display:'block', opacity:1, height:50});
-			// }else{
-		// 	
-				// $.ajax({
-					  // url: '/anycook/GetUserInformation',
-					  // data:'username='+username,
-					  // success: function(imagepath){
-						  // var uri = User.getProfileURI(username);
-						  // $('#userfilter a').attr('href', uri);
-						  // $('#userfilter img').attr('src', imagepath);
-						  // var text = '<span><a href=\'/'+uri+'\'>'+username+'</a>'s<br/>Rezepte</span>';
-						  // $('#userfiltertext').html(text);
-		// 				  
-						  // if($('#userfilter').css('display')=='none'){
-							  // $('#userfilter').css({display:'block', opacity:0, height:0}).animate({height:50}, {duration:300, complete:function(){
-								  // $(this).animate({opacity:1}, 400);
-							  // }});
-						  // }
-					  // }
-				// });
-			// }
+		setUserfilter : function(userId){
+			AnycookAPI.user(userId, function(user){
+				var uri = User.getProfileURI(userId);
+				var imagePath = AnycookAPI.user.image(userId);
+				$('#userfilter a').attr('href', uri);
+				$('#userfilter img').attr('src', imagePath);
+				$('#userfilter_name').text(user.name);
+
+				if($('#userfilter').css('display')=='none'){
+					$('#userfilter').css({display:'block', opacity:0, height:0}).animate({height:50}, {
+						duration:300, 
+						complete:function(){
+							$(this).animate({opacity:1}, 400);
+						}
+					});
+				}
+			});
 		},
 		showUserfilterremove : function(){
 			$('#userfilterremove').fadeIn(300);
