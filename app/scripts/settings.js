@@ -72,6 +72,11 @@ define([
 			$('#account_mail').val(user.mail).blur($.proxy(this.saveMail, this));
 			$('#account_aboutme').val(user.text).blur($.proxy(this.saveAccount, this));
 			$('#account_place').val(user.place).blur($.proxy(this.saveAccount, this));
+
+			if(user.emailCandidate){
+				$('#new_mail').text(user.emailCandidate);
+				$('#mail_candidate').addClass('on');
+			}
 			// $('#account_form').submit($.anycook.user.settings.changeAccount);
 		},
 		loadNotifaction : function(){
@@ -188,10 +193,22 @@ define([
 		},
 		setNewMail : function(event){
 			event.preventDefault();
+			var self = this;
 			var newMail = $('#account_mail').val();
-			if(this.checkMail(newMail)){
+			$('#settings_mail .error_message').removeClass('on');
+
+			var user = User.get();
+			if(!this.checkMail(newMail)){
+				$('#mail_validation').addClass('on');
+			} 
+			else if(newMail === user.mail){
+				$('#identical_mail').addClass('on');
+			}
+			else {
 				AnycookAPI.setting.setMail(newMail, function(){
-					window.alert('changed mail');
+					self.saved($('#mail_saved'));
+					$('#new_mail').text(newMail);
+					$('#mail_candidate').addClass('on');
 				});
 			}
 		},
