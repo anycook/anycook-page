@@ -54,6 +54,7 @@ define([
 			user.followers = response.followers;
 			user.following = response.following;
 			user.place = response.place;
+			user.emailCandidate = response.emailCandidate;
 			$.when(user.getSchmecktRecipes()).then(function(schmeckt){
 				user.schmeckt = schmeckt;
 				$('html').data('user', user);

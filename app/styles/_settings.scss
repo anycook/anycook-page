@@ -8,7 +8,6 @@
 }
 
 .settings{
-	float:left;
 	margin-top:25px;
 }
 
@@ -91,23 +90,50 @@
 	}
 
 	#mail_form{
-		float: left;
+		//float: left;
+		height: 110px;
+		position: relative;
 	}
 	
 	#account_mail{
 		width: 380px;
-		float:left;
+		float: left;
 	}
 	
-	#mail_validation{
+	.error_message, .info_message{
+		display: none;
 		float: left;
 		width: 230px;
 		height: 65px;
 		opacity: 0;
+		color: $smalllightfontcolor;
+		font-size: 8pt;
+
+		&.error_message{
+			color: $error;
+		}
+
+		&#mail_candidate{
+			width: 400px;
+			padding: 5px 0;
+		}
+
+		&.on{
+			display: block;
+			opacity: 1;
+			@include transition-property(opacity);
+			@include transition-duration(.5s);
+		}
 	}
 	
 	.tagsbox, #tagcloud{
 		width:390px;
+	}
+
+	input[type="submit"]{
+		position: absolute;
+		top: 80px;
+		margin: 0;
 	}
 	
 }
