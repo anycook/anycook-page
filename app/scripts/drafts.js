@@ -60,7 +60,7 @@ define([
 					else { $messageBubble.fadeOut(200); }
 					
 					// $.anycook.drafts.num(num);	
-					setTimeout($.proxy(self.num(num), self), 2000);
+					self.num(num);
 				});
 			}
 		},
