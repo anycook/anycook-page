@@ -24,11 +24,13 @@ define([
 	'classes/User',
 	'date',
 	'loginMenu',
-	'text!templates/discussionEvent.erb'
-], function($, _, AnycookAPI, User, date, loginMenu, discussionEventTemplate){
+	'text!templates/discussionEvent.erb',
+	'text!templates/discussionAnswerSmall.erb',
+	'jquery-autosize'
+], function($, _, AnycookAPI, User, date, loginMenu, discussionEventTemplate, discussionAnswerSmallTemplate){
 	'use strict';
 	return {
-		load : function(recipeName, lastid) {
+		load : function(recipeName) {
 			$.xml.append('recipe_discussion');
 			
 			//discussion
@@ -44,15 +46,11 @@ define([
 				$('#no_comment').click($.proxy(loginMenu.toggle, loginMenu));
 			}
 
-			if(lastid === undefined){
-				lastid = -1;
+			$('#edit_recipe').click(function(){
+				$.anycook.drafts.getDraftFromRecipe(recipeName);
+			});
 
-				$('#edit_recipe').click(function(){
-					$.anycook.drafts.getDraftFromRecipe(recipeName);
-				});
-
-				$('#hide_discussion').click($.proxy(this.toggle, this));
-			}
+			$('#hide_discussion').click($.proxy(this.toggle, this));
 
 			
 				
@@ -60,7 +58,11 @@ define([
 			if(login) { $('#no_comment').hide(); }
 			else { $('#yes_commit').hide(); }
 
+			this.loadContent(recipeName, -1);
+		},
+		loadContent : function(recipeName, lastid){
 			var self = this;
+			var $commentDiscussion = $('#comment_discussion');
 
 			AnycookAPI.discussion(recipeName, lastid, function(json){
 				var pathNames = $.address.pathNames();
@@ -68,6 +70,8 @@ define([
 					return;
 				}
 				
+				var user = User.get();
+				var login = user.checkLogin();
 				var newLastid = lastid;
 				if(json) {
 					var discussion = $commentDiscussion.data('discussion') || {};
@@ -113,7 +117,7 @@ define([
 					$commentDiscussion.data('discussion', discussion);
 				}
 				//setTimeout('loadDiscussion(\''+recipeName+'\', '+newLastid+')', 2000);
-				// loadDiscussion(recipeName, newLastid);
+				self.loadContent(recipeName, newLastid);
 			});
 		},
 		getElement : function(children, login, json) {
@@ -260,20 +264,14 @@ define([
 			return false;
 		},
 		getChildComment : function(user){
-			var $li = $('<li></li>').addClass('child_comment');
-			var $a = $('<a></a>').attr('href', user.getProfileURI());
-			var $img = $('<img />').attr('src', user.getUserImagePath('small'));
-			$a.append($img);
-			
-			var $arrow = $('<div></div>').addClass('comment_arrow_answer');
-			
-			var $answer = $('<div></div>').addClass('recipe_comment_answer');
-			var $textarea = $('<textarea></textarea>').attr({cols: 200, rows:1}).addClass('light');
-			$textarea.autoGrow().keydown($.proxy(this.childComment, this));
-			var $info = $('<div></div>').addClass('answer_info').text('mit Enter abschicken');
-			$answer.append($textarea).append($info);
-			$li.append($a).append($arrow).append($answer);
-			return $li;
+			var $template = $(_.template(discussionAnswerSmallTemplate, {
+				profileUri : user.getProfileURI(),
+				userImage : user.getUserImagePath('small')
+			}));
+
+			$template.find('textarea').autosize().keydown($.proxy(this.childComment, this));
+
+			return $template;
 		},
 		comment : function() {
 			var $textarea = $(this).prev().children();
@@ -288,14 +286,14 @@ define([
 		},
 		childComment : function(event) {
 			if(event.which === 13){
-				var $this = $(this);
-				var pid = $this.parents('.comment').data('comment_id');
-				var text = $this.val();
+				var $target = $(event.target);
+				var pid = $target.parents('.comment').data('comment_id');
+				var text = $target.val();
 				if(text !== '') {
 					var parameterNames = $.address.pathNames();
 					var recipeName = parameterNames[1];
 					AnycookAPI.discussion.answer(recipeName, text, pid, function(){
-						$this.parents('.child_comment').fadeOut(200, function(){
+						$target.parents('.child_comment').fadeOut(200, function(){
 							$(this).remove();
 						});
 					});

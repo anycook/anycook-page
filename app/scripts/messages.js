@@ -24,7 +24,7 @@ define([
 	'classes/User',
 	'date',
 	'text!templates/dialogBox.erb',
-	'jquery.autogrowtextarea'
+	'jquery-autosize'
 ], function($, _, AnycookAPI, User, date, dialogBoxTemplate){
 	'use strict';
 	return {
@@ -46,7 +46,7 @@ define([
 
 						var $messageAnswer = $('#message_answer').submit($.proxy(self.submitAnswer, self));
 						$messageAnswer.find('.messageimageborder').append('<img src=\''+user.getUserImagePath()+'\'/>');
-						$messageAnswer.find('textarea').autoGrow();
+						$messageAnswer.find('textarea').autosize();
 						var recipients = json.recipients;
 						var $recipientSpan = $('h1 span').last();
 						for(var i = 0; i<recipients.length; i++){

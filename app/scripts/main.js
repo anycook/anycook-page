@@ -26,7 +26,7 @@ require.config({
 		'jquery' : '../bower_components/jquery/jquery',
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
 		'jquery.autoellipsis' : '../bower_components/jquery.autoellipsis/src/jquery.autoellipsis',
-		'jquery.autogrowtextarea' : '../bower_components/autogrow-textarea/jquery.autogrowtextarea',
+		'jquery-autosize' : '../bower_components/jquery-autosize/jquery.autosize',
 		'jquery.inputdecorator' : 'lib/jquery.inputdecorator-0.1.2',
 		'jquery.mousewheel' : '../bower_components/jscrollpane/script/jquery.mousewheel',
 		'jquery.recipeoverview' : 'lib/jquery.recipeoverview',
@@ -62,7 +62,7 @@ require.config({
 			deps : ['jquery'],
 			exports : '$'
 		},
-		'jquery.autogrowtextarea' : {
+		'jquery-autosize' : {
 			deps : ['jquery'],
 			exports : '$'
 		},
