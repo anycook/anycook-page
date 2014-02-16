@@ -547,12 +547,16 @@
 				<form id="mail_form">
 					<p>Deine E-Mail Adresse, unter der wir dich erreichen können.</p>
 					<input type="email" id="account_mail"/>
-					<div id="mail_validation" class="error_message">Dies ist keine gültige Emailaddresse</div>
-					<div id="identical_mail" class="error_message">Das ist doch deine alte Emailaddresse</div>
-					<div id="mail_candidate" class="info_message">
-						<span>Wir haben dir eine Email an deine neue Addresse "</span><span id="new_mail"></span><span>" geschickt. Klicke auf den darin enthalten Link um sie zu bestätigen.</span>
+					<div id="status_messages">
+						<div id="mail_validation" class="error_message">Dies ist keine gültige Emailaddresse</div>
+						<div id="identical_mail" class="error_message">Das ist doch deine alte Emailaddresse</div>
+						<div id="mail_candidate" class="info_message">
+							<span>Wir haben dir eine Email an deine neue Addresse "</span><span id="new_mail"></span><span>" geschickt. Klicke auf den darin enthalten Link um sie zu bestätigen.</span>
+						</div>
 					</div>
-					<input type="submit" value="Speichern"/>
+					<div id="save_btn">
+						<input type="submit" value="Speichern"/>
+					</div>
 					<!-- <h2>Standart Stichwörter hinzufügen:</h2>
 					<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
 					<div class="tagsbox"></div>
@@ -643,14 +647,19 @@
 	</template>
 	<template id="resetpassword">
 		<div class="footerpages">
-			<h1>Passwort zurücksetzen</h1>
+			<h2 class="border_headline">Passwort zurücksetzen</h2>
 			<div id="resetpwstep1">
 				<form id="resetpwform1">
-				<p>Bitte gibt deine Emailadresse oder deinen Usernamen ein:</p>
-					<table>
-					<tr><td>Email/Username:</td><td><input id="resetpwmail" type="text"/></td><td class="error"></td></tr>
-					<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
-					</table>
+					<h2>Email / Username eingeben:</h2>
+					<p>Bitte gib deine Emailadresse oder deinen Usernamen ein um dein Passwort zurücksetzen:</p>
+					<input id="resetpwmail" type="text"/>
+					<div class="error"></div>
+
+					<input type="submit" value="abschicken"/>
+						<!-- <table>
+						<tr><td>Email/Username:</td><td><input id="resetpwmail" type="text"/></td><td class="error"></td></tr>
+						<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
+						</table> -->
 				</form>
 			</div>
 			<div id="resetpwstep2">
@@ -660,7 +669,7 @@
 					<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
 					<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
 					<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
-					</table>
+					</table> 
 				</form>
 			</div>				
 		</div>
