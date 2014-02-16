@@ -173,9 +173,9 @@ define([
 				sender : sender.name,
 				text : message.text.replace(/\n/g,'<br/>'),
 				date : lastDate === newDate ? null : newDate
-			}
+			};
 				
-			return _.template(dialogBoxTemplate, data);
+			return $(_.template(dialogBoxTemplate, data));
 
 		}
 	};
