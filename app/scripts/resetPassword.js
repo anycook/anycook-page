@@ -43,22 +43,16 @@ define([
 			}
 
 			AnycookAPI.session.resetPasswordRequest(mailorname, function(){
-				$('#content_main>*').fadeOut(500, function(){
-					$('#content_main').append('<div id="new_activation" class="content_message">' +
-							'<h5>Email verschickt</h5>'+
-							'<p>Wir haben dir eine Mail mit geschickt. Folge dem dort enthaltenen Link, um dein Passwort zurückzusetzen.');
-					//window.setTimeout(fadeActivationOut, 3000);
-					//$('#content').click(fadeActivationOut);
-				});
+				$('.error_message').removeClass('on');
+				$('#send_mail').addClass('on');
 			}, function(response){
-				var errortext = null;
-				if(response === 'wrong'){
-					errortext = 'Falscher Username/Mail';
+				if(response.status === 400){
+					$('#send_mail').removeClass('on');
+					$('#no_user').addClass('on');
 				}
-				else if(response === 'fbuser'){
+				/*else if(response === 'fbuser'){
 					errortext = 'Passwort eines FB-Users kann nicht geändert werden';
-				}
-				$errorfield.text(errortext);
+				}*/
 			});
 		},
 		loadStep2: function(){

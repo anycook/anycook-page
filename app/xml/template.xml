@@ -655,7 +655,7 @@
 					<input id="resetpwmail" type="text"/>
 					<div class="status_messages">
 						<div id="no_user" class="error_message">Diesen Nutzer gibt es nicht in unserer Datenbank.</div>
-						<div id="send_message" class="success_message">Wir haben dir eine E-Mail geschickt.</div>
+						<div id="send_mail" class="success_message">Wir haben dir eine E-Mail geschickt.</div>
 					</div>
 					
 
