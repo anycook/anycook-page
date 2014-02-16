@@ -128,6 +128,11 @@ define([
 				$newMessageBubble.children().text(newNum);
 				if(newNum <= 0) { $newMessageBubble.fadeOut(); }
 				else { $newMessageBubble.fadeIn(); }
+
+				if(newNum > num){
+					var audio = new Audio('sounds/newMessage.mp3');
+					audio.play();
+				}
 				
 				self.checkNewMessageNum(newNum);
 			});
