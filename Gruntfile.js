@@ -271,7 +271,7 @@ module.exports = function (grunt) {
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
         // to use the Usemin blocks.
-        // cssmin: {
+        //cssmin: {
         //     dist: {
         //         files: {
         //             '<%= yeoman.dist %>/styles/main.css': [
@@ -337,6 +337,31 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+
+        requirejs: {
+            dist: {
+                options: {
+                    almond: true,
+
+                    replaceRequireScript: [{
+                        files: ['<%= yeoman.dist %>/index.html'],
+                        module: 'main'
+                    }],
+
+                    modules: [{name: 'main'}],
+
+                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js', // contains path specifications and nothing else important with respect to config
+                    dir: '<%= yeoman.dist %>/scripts',
+                    baseUrl: '<%= yeoman.app %>/scripts',
+                    useStrict: true,
+                    paths : {
+                        'AnycookAPI' : 'empty:',
+                        'FB' : 'empty:'
+                    },
+                    exclude : ['FB']
+                }
+            }
         }
     });
 
@@ -375,7 +400,7 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('build', [
+    /*grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
@@ -387,6 +412,19 @@ module.exports = function (grunt) {
         'rev',
         'usemin',
         'htmlmin'
+    ]);*/
+
+    grunt.registerTask('build', [
+        'clean:dist',
+        //'useminPrepare',
+        'concurrent:dist',
+        'autoprefixer',
+        //'concat',
+        //'cssmin',
+        'copy:dist',
+        //'modernizr',
+        'requirejs:dist', // AFTER copy:dist!
+        'usemin'
     ]);
 
     grunt.registerTask('default', [
