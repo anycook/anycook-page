@@ -274,7 +274,7 @@ define([
 			return $template;
 		},
 		comment : function() {
-			var $textarea = $(this).prev().children();
+			var $textarea = $('#discussion_footer textarea');
 			var text = $textarea.val();
 			if(text !== '') {
 				var parameterNames = $.address.pathNames();
