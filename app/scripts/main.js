@@ -41,7 +41,7 @@ require.config({
 		'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
 		'jquery.xml' : 'lib/jquery.xml-0.4.1.min',
 		'jscrollpane' : '../bower_components/jscrollpane/script/jquery.jscrollpane',
-		'plusone' : ['https://apis.google.com/js/plusone', 'lib/plusone'],
+		'plusone' : 'lib/plusone',
 		'text' : '../bower_components/requirejs-text/text',
 		'templates' : '../templates',
 		'underscore' : '../bower_components/underscore/underscore'
@@ -231,7 +231,7 @@ require([
 					// wait ressources to complete loading and the wait another 500ms.
 					// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
 					//onReady(function(){
-					setTimeout(messageStream.checkNewMessageNum,500);
+					setTimeout($.proxy(messageStream.checkNewMessageNum, messageStream),500);
 					setTimeout($.proxy(drafts.num, drafts),500);
 					//});
 				}

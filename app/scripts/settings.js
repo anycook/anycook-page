@@ -106,11 +106,10 @@ define([
 			var $smallCheckboxes = $('#settings_notification_content input');
 			if(!$(event.target).is(':checked')){
 				$content.animate({height:0}, {
-					duration:700, 
-					easing:'easeInQuad', 
+					duration:700,
+					easing:'easeInQuad',
 					complete:function(){
 						$(this).hide().css('height', '');
-						var notificationSettings = {};
 						$smallCheckboxes.attr('checked', '');
 						self.saveNotifications();
 					}
@@ -123,7 +122,6 @@ define([
 					easing:'easeOutQuad',
 					complete:function(){
 						$(this).show().css('height', '');
-						var notificationSettings = {};
 						$smallCheckboxes.attr('checked', 'checked');
 						self.saveNotifications();
 					}
@@ -198,12 +196,8 @@ define([
 			$('#settings_mail .error_message').removeClass('on');
 
 			var user = User.get();
-			if(!this.checkMail(newMail)){
-				$('#mail_validation').addClass('on');
-			} 
-			else if(newMail === user.mail){
-				$('#identical_mail').addClass('on');
-			}
+			if(!this.checkMail(newMail)){ $('#mail_validation').addClass('on');	}
+			else if(newMail === user.mail){	$('#identical_mail').addClass('on'); }
 			else {
 				AnycookAPI.setting.setMail(newMail, function(){
 					self.saved($('#mail_saved'));

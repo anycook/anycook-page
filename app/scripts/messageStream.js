@@ -116,21 +116,21 @@ define([
 		},
 		checkNewMessageNum : function(num){
 			num = num || 0;
-			title.setPrefix(num);
-			
-			var $newMessageBubble = $('#message_btn_container .new_messages_bubble');
-			$newMessageBubble.children().text(num);
-			if(num <= 0) {
-				$newMessageBubble.fadeOut();
-			}
-			else {
-				$newMessageBubble.fadeIn();
-			}
-			
+
 			var user = User.get();
-			if(user.checkLogin()){
-				AnycookAPI.message.number(num, $.proxy(this.checkNewMessageNum, this));
-			}
+			if(!user.checkLogin()) { return; }
+
+			var self = this;
+			AnycookAPI.message.number(num, function(newNum){
+				title.setPrefix(num);
+			
+				var $newMessageBubble = $('#message_btn_container .new_messages_bubble');
+				$newMessageBubble.children().text(newNum);
+				if(newNum <= 0) { $newMessageBubble.fadeOut(); }
+				else { $newMessageBubble.fadeIn(); }
+				
+				self.checkNewMessageNum(newNum);
+			});
 		},
 		clickRecipients : function(event){
 			var self = this;
