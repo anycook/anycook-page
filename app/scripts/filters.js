@@ -347,9 +347,9 @@ define([
 				$('#userfilter img').attr('src', imagePath);
 				$('#userfilter_name').text(user.name);
 
-				if($('#userfilter').css('display')=='none'){
+				if($('#userfilter').css('display') === 'none'){
 					$('#userfilter').css({display:'block', opacity:0, height:0}).animate({height:50}, {
-						duration:300, 
+						duration:300,
 						complete:function(){
 							$(this).animate({opacity:1}, 400);
 						}
