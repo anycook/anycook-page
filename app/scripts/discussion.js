@@ -131,7 +131,7 @@ define([
 			var linktext = '/#!/profile/' + user.id;
 			var image = User.getUserImagePath(user.id);
 			var $li = $('<li></li>').addClass('comment').append('<a></a>');
-			$li.children('a').attr('href', linktext).append('<img src=\'' + image + '\'/>');
+			$li.children('a').attr('href', linktext).append('<img src="' + image + '"/>');
 
 			if(Number(likes) > 0) {
 				likes = '+' + likes;

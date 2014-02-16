@@ -148,7 +148,8 @@ require([
 	'jquery.address',
 	'jquery.ui.autocomplete',
 	'jquery.xml'
-], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView, scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
+], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView, 
+	scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
 	//setup
 	// if($.browser.msie){
 		// var version = Number($.browser.version);		
