@@ -164,13 +164,15 @@ define([
 		},
 		getContainerforSession : function(message){
 			var sender = message.sender;
+			var user = User.get();
 
 			var data = {
 				imagePath : User.getUserImagePath(sender.id),
 				senderPath : User.getProfileURI(sender.id),
 				sender : sender.name,
 				text : message.text.replace(/\n/g,'<br/>'),
-				date : date.getDateTimeString(message.datetime)
+				date : date.getDateTimeString(message.datetime),
+				self : sender.id === user.id
 			};
 				
 			return $(_.template(dialogBoxTemplate, data));
