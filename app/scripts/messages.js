@@ -164,15 +164,13 @@ define([
 		},
 		getContainerforSession : function(message){
 			var sender = message.sender;
-			var lastDate = $('.messagedialog .datetime').last().text();
-			var newDate = date.getDateTimeString(message.datetime);
 
 			var data = {
 				imagePath : User.getUserImagePath(sender.id),
 				senderPath : User.getProfileURI(sender.id),
 				sender : sender.name,
 				text : message.text.replace(/\n/g,'<br/>'),
-				date : lastDate === newDate ? null : newDate
+				date : date.getDateTimeString(message.datetime)
 			};
 				
 			return $(_.template(dialogBoxTemplate, data));
