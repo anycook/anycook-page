@@ -230,7 +230,7 @@ define([
 			var $lightbox = this.getAddTagsLightbox();
 			tags.makeCloud('#recipe_tagcloud', function(event){
 				var $clickedTag = $(event.target).parents('.tag');
-				var tag = $clickedTag.find('.tag_text').text()
+				var tag = $clickedTag.find('.tag_text').text();
 				self.addTag(tag);
 
 				$clickedTag.animate({
@@ -258,7 +258,7 @@ define([
 				add : $.proxy(this.addTag, this),
 				remove : $.proxy(this.removeTag, this)
 			}, $.proxy(tags.makeInput, tags))
-				.on('click', '.tag_remove', function(event){
+				.on('click', '.tag_remove', function(){
 					var tag = $(this).prev().text();
 					self.removeTag(tag);
 					return false;
@@ -275,7 +275,7 @@ define([
 		},
 		removeTag : function(tag){
 			$('#recipe_tagsbox .tag_text').each(function(){
-				if($(this).text() === tag) $(this).parents('.tag').remove();
+				if($(this).text() === tag) { $(this).parents('.tag').remove(); }
 			});
 		},
 		getAddTagsLightbox : function() {

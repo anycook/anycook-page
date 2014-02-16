@@ -52,9 +52,6 @@ define([
 
 			$('#hide_discussion').click($.proxy(this.toggle, this));
 
-			
-				
-			var $commentDiscussion = $('#comment_discussion');
 			if(login) { $('#no_comment').hide(); }
 			else { $('#yes_commit').hide(); }
 
