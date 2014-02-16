@@ -57,6 +57,25 @@ define([
 			//this.removeInput();
 			event.data.remove(text);
 		},
+		makeCloud : function(target, addTag){
+			var $tagcloud = $(target).empty();
+			var data ='';
+
+			var self = this;
+			
+			var recipe = Recipe.getRecipeName();
+			if(recipe !== null) {
+				data += 'recipe='+recipe;
+			}
+
+			$tagcloud.on('click', '.tag', addTag);
+			
+			AnycookAPI.tag.popular(recipe, function(response){
+				for(var tag in response){
+					$tagcloud.append(self.get(tag, 'number', response[tag]));
+				}
+			});
+		},
 		//add fields 'add' and 'remove' for callbacks
 		makeInput : function(event){
 			var self = this;
@@ -211,25 +230,7 @@ define([
 				}
 			});
 		},
-		makeTagCloud : function(){
-			$('#tagcloud').empty();
-			var data ='';
-
-			var self = this;
-			
-			var recipe = Recipe.getRecipeName();
-			if(recipe !== null) {
-				data += 'recipe='+recipe;
-			}
-			
-			AnycookAPI.tag.popular(recipe, function(response){
-				for(var tag in response){
-					$('#tagcloud').append(self.get(tag, 'number', response[tag]));
-				}
-				
-				$('#tagcloud .tag').click($.proxy(self.addNewTag, self));
-			});
-		},
+		
 		submitTags : function(event){
 			event.preventDefault();
 			var tagtext = $(this).children('input').val();

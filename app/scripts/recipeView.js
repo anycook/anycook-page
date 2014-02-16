@@ -219,34 +219,85 @@ define([
 		loadTags : function(tagsList){
 			var $tagsList = $('.tags_list').empty();
 				
-			if(tagsList === undefined){
-				return;
-			}
+			if(!tagsList){ return; }
 			
 			for(var i = 0; i < tagsList.length; i++){
 				$tagsList.append(tags.get(tagsList[i], 'link'));
 			}
 		},
 		showAddTags : function() {
+			var self = this;
 			var $lightbox = this.getAddTagsLightbox();
+			tags.makeCloud('#recipe_tagcloud', function(event){
+				var $clickedTag = $(event.target).parents('.tag');
+				var tag = $clickedTag.find('.tag_text').text()
+				self.addTag(tag);
+
+				$clickedTag.animate({
+					opacity:0
+				}, {
+					duration:150,
+					complete:function(){
+						$(this).animate({
+							width:0,
+							margin: 0,
+							padding:0
+						}, {
+							duration:300,
+							easing: 'swing',
+							complete:function(){ $(this).remove(); }
+						});
+					}
+				});
+			});
 
 			var top = $('#tags').offset().top - 113;
 			lightbox.show($lightbox, top);
 
-			$lightbox.find('.tagsbox').click($.proxy(tags.makeNewTagInput, tags));
+			$lightbox.find('.tagsbox').click({
+				add : $.proxy(this.addTag, this),
+				remove : $.proxy(this.removeTag, this)
+			}, $.proxy(tags.makeInput, tags))
+				.on('click', '.tag_remove', function(event){
+					var tag = $(this).prev().text();
+					self.removeTag(tag);
+					return false;
+				});
 
-			$lightbox.find('form').submit($.proxy(tags.submitSuggestTags, tags));
+			$lightbox.find('form').submit($.proxy(self.submitSuggestTags, self));
 
 			return false;
 		},
+		addTag : function(tag){
+			var $tag = tags.get(tag, 'remove');
+			$('#recipe_tagsbox input').remove();
+			$('#recipe_tagsbox').append($tag);
+		},
+		removeTag : function(tag){
+			$('#recipe_tagsbox .tag_text').each(function(){
+				if($(this).text() === tag) $(this).parents('.tag').remove();
+			});
+		},
 		getAddTagsLightbox : function() {
-			var content = '<div class="tagsbox"></div><p>Die bekanntesten Tags:</p><div id="tagcloud"></div>';
+			var content = '<div id="recipe_tagsbox" class="tagsbox"></div><p>Die bekanntesten Tags:</p><div id="recipe_tagcloud" class="tagcloud"></div>';
 
 			var $lightbox = lightbox.get('Tags hinzufügen:', 'Hilf den anderen beim finden, in dem du neue Tags vorschlägst.', content, 'einreichen');
-			tags.makeTagCloud();
 			$('#main').append($lightbox);
 
 			return $lightbox;
+		},
+		submitSuggestTags : function(event){
+			event.preventDefault();
+			var pathNames = $.address.pathNames();
+			var tags = [];
+			var recipe = pathNames[1];
+			$('.tagsbox .tag_text').each(function(){
+				tags.push($(this).text());
+			});
+
+			AnycookAPI.tag.suggest(recipe, tags);
+			lightbox.hide();
+			$('.tagsbox').empty();
 		},
 		showShare : function() {
 			var recipeURI = Recipe.getURI($.address.pathNames()[1]);
