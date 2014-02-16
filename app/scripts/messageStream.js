@@ -122,7 +122,7 @@ define([
 
 			var self = this;
 			AnycookAPI.message.number(num, function(newNum){
-				title.setPrefix(num);
+				title.setPrefix(newNum);
 			
 				var $newMessageBubble = $('#message_btn_container .new_messages_bubble');
 				$newMessageBubble.children().text(newNum);
