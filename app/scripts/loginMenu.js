@@ -32,7 +32,7 @@ define([
 
 			$.get('/templates/login.erb', function(template){
 				$('body').append(template);
-				$('#signin_btn, #login_menu .blackOverlay, #registrationBtn').click(self.toggle);
+				$('#signin_btn, #login_menu .blackOverlay, #login_menu a').click(self.toggle);
 				$('#login_menu form').submit(self.submitForm);
 			});
 		},
