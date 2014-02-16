@@ -101,6 +101,15 @@ form{
 	display:none;
 }
 
+.error_message{
+	color: $error;
+}
+
+.success_message{
+	color: $success;
+}
+
+
 
 
 a{ 
