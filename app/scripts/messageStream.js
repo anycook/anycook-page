@@ -279,10 +279,9 @@ define([
 		},
 		submitNewMessage : function(event){
 			event.preventDefault();
-			var $this = $(this);
-			var $recipients = $('.recipients');
-			var recipientIds = $recipients.data('ids');
-			var $textarea = $this.find('textarea');
+			var $recipients = $('.new_message .recipients');
+			var recipientIds = $recipients.data('ids') || [];
+			var $textarea = $('.new_message textarea');
 			var message = $textarea.val();
 			
 			if(!recipientIds || recipientIds.length === 0 || message.length === 0){
@@ -297,7 +296,7 @@ define([
 			$recipients.empty().data('ids', []);
 			$textarea.val('');
 			
-			this.hideLightbox($this.parents('.lightbox'));
+			lightbox.hide();
 			
 		},
 		getMessageContainer : function(message){
