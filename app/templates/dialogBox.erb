@@ -1,0 +1,17 @@
+<li class="messagedialog">
+	<div class="messagecontainer">
+		<img src="<%= imagePath %>" alt="">
+		<div class="message_content">
+			<div class="message_headline">
+				<a href="<%= senderPath %>"><%= sender %></a>
+			</div>
+			<p><%= text %></p>
+		</div>
+	</div>
+	<div class="timeline_container">
+		<% if(date){ %>
+			<div class="clock"></div>
+			<div class="datetime"><%= date %></div>
+		<% } %>
+	</div>
+</li>

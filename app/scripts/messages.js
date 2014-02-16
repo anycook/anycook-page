@@ -19,11 +19,13 @@
  */
 define([
 	'jquery',
+	'underscore',
 	'AnycookAPI',
 	'classes/User',
 	'date',
+	'text!templates/dialogBox.erb',
 	'jquery.autogrowtextarea'
-], function($, AnycookAPI, User, date){
+], function($, _, AnycookAPI, User, date, dialogBoxTemplate){
 	'use strict';
 	return {
 		show : function(sessionid, startid){
@@ -162,44 +164,18 @@ define([
 		},
 		getContainerforSession : function(message){
 			var sender = message.sender;
-			var $sender = $('<a></a>').attr('href', User.getProfileURI(sender.id))
-				.text(sender.name);
-			var $image = $('<img />').attr('src', User.getUserImagePath(sender.id));
-
-			var $headline = $('<div></div>').addClass('message_headline')
-				.append($sender);
-				
-			
-			
-			
-			var $p = $('<p></p>').html(message.text.replace(/\n/g,'<br/>'));
-			
-			var $messageright = $('<div></div>').addClass('message_content')
-				.append($headline)
-				.append($p);
-			
-			var $clockicon = $('<div></div>').addClass('clock');
-			var $datetimeline = $('<div></div>').addClass('timeline_container');
-				
-			var $dates = $('.messagedialog .datetime');
-			var lastDate = $dates.last().text();
+			var lastDate = $('.messagedialog .datetime').last().text();
 			var newDate = date.getDateTimeString(message.datetime);
-			if(lastDate !== newDate){
-				var $datetime = $('<div></div>').addClass('datetime').text(newDate);
-				$datetimeline.append($clockicon);
-				$datetimeline.append($datetime);
+
+			var data = {
+				imagePath : User.getUserImagePath(sender.id),
+				senderPath : User.getProfileURI(sender.id),
+				sender : sender.name,
+				text : message.text.replace(/\n/g,'<br/>'),
+				date : lastDate === newDate ? null : newDate
 			}
-			
-			var $massagecontainer = $('<div></div>').addClass('messagecontainer')
-				.append($image)
-				.append($messageright);
-			
-			var $li = $('<li></li>').addClass('messagedialog')
-				.append($massagecontainer)
-				.append($datetimeline);
 				
-			
-			return $li;
+			return _.template(dialogBoxTemplate, data);
 
 		}
 	};
