@@ -108,8 +108,9 @@
 	}
 
 	.error_message, .info_message{
-		display: none;
 		float: left;
+		height: 0;
+		overflow: hidden;
 		width: 400px;
 		//height: 65px;
 		padding: 5px 0;
@@ -127,7 +128,7 @@
 		}
 
 		&.on{
-			display: block;
+			height: auto;
 			opacity: 1;
 			@include transition-property(opacity);
 			@include transition-duration(.5s);
@@ -308,15 +309,16 @@
 			font-size:8pt;
 
 			div{
-				display: none;
 				opacity: 0;
+				height: 0;
+				overflow: hidden;
 				@include vertical-align;
-				@include transition(opacity, 0.1s, ease-out);
 
 				&.on{
-					display: block;
 					opacity: 1;
-					@include transition(opacity, 0.1s, ease-in);
+					height: auto;
+					@include transition-property(opacity);
+					@include transition-duration(.5s);
 				}
 			}
 		}
