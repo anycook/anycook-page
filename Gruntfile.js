@@ -274,10 +274,8 @@ module.exports = function (grunt) {
         cssmin: {
             dist: {
                 files: {
-                    '<%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/{,*/}*.css',
-                        '<%= yeoman.app %>/styles/{,*/}*.css'
-                    ]
+                    '<%= yeoman.dist %>/styles/style.css':
+                        '.tmp/styles/{,*/}*.css'
                 }
             }
         },
@@ -349,17 +347,18 @@ module.exports = function (grunt) {
                         module: 'main'
                     }],
 
-                    modules: [{name: 'main'}],
+                    //modules: [{name: 'main'}],
 
                     mainConfigFile: '<%= yeoman.app %>/scripts/main.js', // contains path specifications and nothing else important with respect to config
-                    dir: '<%= yeoman.dist %>/scripts',
+                    //dir: '<%= yeoman.dist %>/scripts',
                     baseUrl: '<%= yeoman.app %>/scripts',
+                    name : 'main',
+                    out : '<%= yeoman.dist %>/scripts/main.min.js',
                     useStrict: true,
                     paths : {
                         'AnycookAPI' : 'empty:',
                         'FB' : 'empty:'
-                    },
-                    exclude : ['FB']
+                    }
                 }
             }
         }
@@ -424,6 +423,7 @@ module.exports = function (grunt) {
         'copy:dist',
         //'modernizr',
         'requirejs:dist', // AFTER copy:dist!
+        'htmlmin'
         //'usemin'
     ]);
 
