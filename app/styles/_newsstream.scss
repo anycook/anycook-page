@@ -137,66 +137,114 @@ ul#newsstream, ul#messagestream{
 	height:500px;
 	list-style: none;
 	clear: both;
+	outline: none;
 	
-	.timeline_stripe{
-	  width: 1px;
-	  height: 100%;
-	  background-color: $lightgrey;
-	  position: absolute;
-	  right: 99px;
-	  z-index: -1;
-	}
-	
+
 	li{
+		$bigpicturewidth:50px + 18px;
+		$bigcommentwidth: 655px - 2*($bigpicturewidth) - 26px;
+
+		list-style-type: none;
+		float: left;
 		width:100%;
 		margin: 0 0;
-		margin-bottom: 10px;
-		min-height:91px;
+		padding: 0 0 15px 0;
+
+		a{
+			float: left;
+
+			img{
+				width: 50px;
+				height: 50px;	
+				@include box-shadow-spread(0px, 1px, 2px, 0px, rgba(0, 0, 0, 0.2));
+				border-radius: 5px;		
+			}
+		}
+
+		.comment_arrow{
+			position:relative;
+			float: left;
+			width: 16px;
+			height: 21px;
+			background: url("/img/comment_arrow16x21.png") no-repeat;
+			margin: 16px -1px 0 3px;	
+		}
+
 		
 		.messagecontainer{
-		  float: left;
-      width: 480px;
-      margin-left: 30px;
-      padding: 20px 0;
-      border-bottom: 1px solid $lightgrey;
-		  
-          img{
-            float: left;
-          }
+			float: left;
+			width: $bigcommentwidth;
+			min-height: 40px;
+			border:1px solid $lightgrey;
+			border-radius: 5px;  
+			background-color: $stepcolor;
+			padding: 7px 12px 5px 12px;
+			//margin: 0 0 15px 0;
+			color: $darkfontcolor;
+			@include box-shadow-spread(0px, 1px, 1px, 0px, rgba(127,127,127,0.1));
+			@include transition(background-color, .8s, ease-out);
+		  	
+  			.message_headline{
+				height: 17px;	
+				width:100%;
+				
+				.datetime{
+					margin-left:4px;
+					@include transition(opacity, .4s, ease-out);
+					opacity:0;
+					color: $smalllightfontcolor;
+				}
+			}
           
-          .message_content{
-            float: left;
-            margin-left: 15px;
+          	.message_content{
+	            margin: 2px 0;
             
-            p{
-              color: $darkfontcolor;
-            }
-          }
-     }
-     
-     .timeline_container{
-        float: right;
-        padding-top: 15px;
-        width: 105px;
-        
-        .clock{
-          float: left;
-          width: 12px;
-          height: 11px;
-          background: url("/img/icons20x20.png") no-repeat;
-          background-position: -104px -23px;;
-          margin: 3px 8px 0 0;
-        }
-        
-        .datetime{
-          float: left;
-          color: $smalllightfontcolor;
-          width: 85px;
-        }
-      }
+	            p{
+	              color: $darkfontcolor;
+	            }
+          	}
+
+          	&:hover{	
+				.datetime{
+					@include transition(opacity, .2s, ease-in);
+					opacity:1;
+				}
+			}
+
+			&.new{
+				background-color: $activebuttonbackground;
+			}
+    	 }
      
 	}
-	
+	//Eigene Nachrichten rechtsbündig
+	li.self{
+		.messagecontainer{
+			float: right;
+		}
+
+		.comment_arrow, a{
+			float:right;
+		}
+		
+		.comment_arrow{
+			background-position: 0 -21px;	
+			margin: 16px 3px 0 -1px;	
+		}
+		
+		.messagecontainer a{
+			float: left;
+			text-align: left;
+		}
+		
+		li{
+			img{
+					float: right;
+				}
+
+		}
+
+	}
 }
 
 .messageimageborder{
@@ -214,11 +262,12 @@ ul#newsstream, ul#messagestream{
 	}
 }
 
-
+//Inbox
 .message{
 	display: block;
 	min-height:80px;
-	background-color:#e6e2d7;
+	width: 493px;
+	background-color:$background-right;
 	border: 1px solid $tagborder;
 	border-radius: 5px;
 	padding:12px;

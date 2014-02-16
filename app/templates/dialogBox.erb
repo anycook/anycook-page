@@ -1,17 +1,13 @@
-<li class="messagedialog">
+<li class="messagedialog <% if(self) { print("self"); } %>">
+	<a href="<%= senderPath %>"><img src="<%= imagePath %>" alt=""></a>
+	<div class="comment_arrow"></div>
 	<div class="messagecontainer">
-		<img src="<%= imagePath %>" alt="">
+		<div class="message_headline">
+			<a href="<%= senderPath %>"><%= sender %></a>
+			<span class="datetime"><%= date %></span>
+		</div>
 		<div class="message_content">
-			<div class="message_headline">
-				<a href="<%= senderPath %>"><%= sender %></a>
-			</div>
 			<p><%= text %></p>
 		</div>
-	</div>
-	<div class="timeline_container">
-		<% if(date){ %>
-			<div class="clock"></div>
-			<div class="datetime"><%= date %></div>
-		<% } %>
 	</div>
 </li>

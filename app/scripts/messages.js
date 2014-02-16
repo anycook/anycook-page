@@ -119,18 +119,12 @@ define([
 							if(startid === -1){
 								if(newtop < 0) { $jspPane.css({top:newtop}); }
 							}else{
-								var $messageContainer = $lastli.children('.messagecontainer');
-								$messageContainer.css({backgroundColor:'#D7E8B5'});
+								var $messageContainer = $lastli.children('.messagecontainer').addClass('new');
 								if(newtop < 0) {
 									$jspPane.css({top:oldtop}).animate({top:newtop}, {
 										duration:'slow',
 										complete:function(){
-											$messageContainer.animate({backgroundColor:'#F7F4F1'}, {
-												duration:2000,
-												complete:function(){
-													$messageContainer.css('backgroundColor', '');
-												}
-											});
+											$messageContainer.removeClass('new');
 										}
 									});
 								}else{

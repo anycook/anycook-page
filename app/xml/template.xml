@@ -493,7 +493,6 @@
 	<template id="messagesession" access="restricted">
 		<h1 class="center_headline"><span>Meine Nachrichten mit</span><br/><span></span></h1>
 		<ul id="messagestream">
-			<div class="timeline_stripe"></div>
 		</ul>
 		<form id="message_answer">
 			<div class="new_message">
