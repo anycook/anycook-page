@@ -101,7 +101,7 @@
 		float: left;
 	}
 
-	#status_messages{
+	.status_messages{
 		min-height: 36px;
 		width: 100%;
 		float: left;
@@ -120,6 +120,10 @@
 
 		&.error_message{
 			color: $error;
+		}
+
+		&.success_message{
+			color: $success;
 		}
 
 		&.on{
@@ -286,7 +290,7 @@
 		p{
 			margin: 2px 0 5px;
 			clear: both;
-			width: 510px;
+			width: 360px;
 		}
 
 		input[type=text]{
@@ -294,11 +298,31 @@
 			width: 340px;
 		}
 
-		.error{
-			width: 200px;
+		.status_messages{
+			width: 235px;
 			height: 30px;
 			float: left;
 			display: inherit;
+			margin-left: 5px;
+			font:$standardfont;
+			font-size:8pt;
+
+			div{
+				display: none;
+				opacity: 0;
+				@include vertical-align;
+				@include transition(all, 0.1s, ease-out);
+
+				&.on{
+					display: block;
+					opacity: 1;
+					@include transition(all, 0.1s, ease-out);
+				}
+			}
+		}
+
+		input[type=submit]{
+			margin: 20px 0 0 0;
 		}
 
 
