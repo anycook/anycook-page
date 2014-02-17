@@ -95,9 +95,7 @@ define([
 			var $step = $target.parents('.ingredient_step');
 			if(!event.empty){
 				var lastSentences = $target.data('sentences');
-				if(lastSentences){
-					lastSentences = [];
-				}
+				if(!lastSentences){ lastSentences = [];	}
 				
 				var currentSentences = text.split(/[!.?:;]+/g);
 				
@@ -128,7 +126,7 @@ define([
 							continue;
 						}
 						
-						self.addStepIngredient($step, json[i]);
+						self.addStepIngredient($step, json[k]);
 					}
 					self.draftSteps();
 				};
