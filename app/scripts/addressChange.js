@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -48,126 +48,125 @@ define([
 		},
 		// behandelt change bei $.address.path
 		handleChange : function(event){
-			var lastAddress = $(document).data('lastAddress');
-			if(!lastAddress || lastAddress.path !== event.path){
-				$(document).data('lastAddress', event);
-					
-				var search;
-				
-				title.set('anycook');
-				
-				//resetSearchBar();
-				filters.reset();
-				
-				$(document).scrollTop(0);
-				
-				$('#wertung_filter').show();
-				$('#content_footer').show();
-				this.clearContent();
-				
-				
-				var path = event.pathNames;
-				//blockFilter(false);
-				if(path.length > 0){
-					$('#search_reset, #filter_reset').addClass('on');
-				}
-				else{
-					$('#search_reset, #filter_reset').removeClass('on');
-				}
-				
-				
-				//$.xml.append(path.length == 0 ? 'home' : path[0]);
-				$.xml.append(path[0], function(){
-					switch(path.length){
-					case 0:
-						$('#user_home').addClass('active');
-						home.load();
+			//var lastAddress = $(document).data('lastAddress');
+			//if(!lastAddress || lastAddress.path !== event.path){
+			$(document).data('lastAddress', event);
+
+			var search;
+
+			title.set('anycook');
+
+			//resetSearchBar();
+			filters.reset();
+
+			$(document).scrollTop(0);
+
+			$('#wertung_filter').show();
+			$('#content_footer').show();
+			this.clearContent();
+
+
+			var path = event.pathNames;
+			//blockFilter(false);
+			if(path.length > 0){
+				$('#search_reset, #filter_reset').addClass('on');
+			}
+			else{
+				$('#search_reset, #filter_reset').removeClass('on');
+			}
+
+
+			//$.xml.append(path.length == 0 ? 'home' : path[0]);
+			$.xml.append(path[0], function(){
+				switch(path.length){
+				case 0:
+					$('#user_home').addClass('active');
+					home.load();
+					break;
+				case 1:
+					switch(path[0]){
+					case 'recipeediting':
+						title.set('Neues Rezept erstellen');
+						$('#new_recipe').addClass('active');
+						newRecipe.load();
 						break;
-					case 1:
-						switch(path[0]){
-						case 'recipeediting':
-							title.set('Neues Rezept erstellen');
-							$('#new_recipe').addClass('active');
-							newRecipe.load();
-							break;
-						case 'about_us':
-							aboutus.load();
-							break;
-						case 'impressum':
-							title.set('Impressum');
-							break;
-						case 'fbregistration':
-							facebook.loadRegistrationMessage();
-							break;
-						case 'resetpassword':
-							resetPassword.loadStep1();
-							break;
-						case 'registration':
-							title.set('Registrierung');
-							registration.show();
-							break;
-						case 'settings':
-							settings.load();
-							break;
-						case 'newsstream':
-							$('#user_messages').addClass('active');
-							messageStream.loadNewsstream();
-							break;
-						case 'drafts':
-							drafts.load();
-							break;
-						}
+					case 'about_us':
+						aboutus.load();
 						break;
-					case 2:
-						switch(path[0]){
-						case 'confirmMail':
-							settings.confirmMail(path[1]);
-							break;
-						case 'recipe':
-							$('#subnav')
+					case 'impressum':
+						title.set('Impressum');
+						break;
+					case 'fbregistration':
+						facebook.loadRegistrationMessage();
+						break;
+					case 'resetpassword':
+						resetPassword.loadStep1();
+						break;
+					case 'registration':
+						title.set('Registrierung');
+						registration.show();
+						break;
+					case 'settings':
+						settings.load();
+						break;
+					case 'newsstream':
+						$('#user_messages').addClass('active');
+						messageStream.loadNewsstream();
+						break;
+					case 'drafts':
+						drafts.load();
+						break;
+					}
+					break;
+				case 2:
+					switch(path[0]){
+					case 'confirmMail':
+						settings.confirmMail(path[1]);
+						break;
+					case 'recipe':
+						$('#subnav')
+							.append(header.buildLink('Rezept', '', 'recipe_btn'))
+							.append(header.buildLink('Diskussion', '', 'discussion_btn'));
+						recipeView.load(path[1]);
+						break;
+					case 'activate':
+						activation.activate(path[1]);
+						break;
+					case 'profile':
+						$('#user_profile').addClass('active');
+						userProfile.load(path[1]);
+						break;
+					case 'resetpassword':
+						resetPassword.loadStep2();
+						break;
+					case 'messagesession':
+						messages.show(path[1]);
+						break;
+					}
+					break;
+				case 3:
+					switch(path[0]){
+					case 'recipe':
+						$('#subnav')
 								.append(header.buildLink('Rezept', '', 'recipe_btn'))
 								.append(header.buildLink('Diskussion', '', 'discussion_btn'));
-							recipeView.load(path[1]);
-							break;
-						case 'activate':
-							activation.activate(path[1]);
-							break;
-						case 'profile':
-							$('#user_profile').addClass('active');
-							userProfile.load(path[1]);
-							break;
-						case 'resetpassword':
-							resetPassword.loadStep2();
-							break;
-						case 'messagesession':
-							messages.show(path[1]);
-							break;
-						}
+						recipeView.load(path[1], path[2]);
 						break;
-					case 3:
-						switch(path[0]){
-						case 'recipe':
-							$('#subnav')
-									.append(header.buildLink('Rezept', '', 'recipe_btn'))
-									.append(header.buildLink('Diskussion', '', 'discussion_btn'));
-							recipeView.load(path[1], path[2]);
+					case 'search':
+						search = Search.init();
+						switch(path[1]){
+						case 'tagged':
+							search.addTag(decodeURIComponent(path[2]));
 							break;
-						case 'search':
-							search = Search.init();
-							switch(path[1]){
-							case 'tagged':
-								search.addTag(decodeURIComponent(path[2]));
-								break;
-							case 'user':
-								search.setUsername(decodeURIComponent(path[2]));
-							}
-							search.flush();
+						case 'user':
+							search.setUsername(decodeURIComponent(path[2]));
 						}
+						search.flush();
 					}
-				});
-			}
+				}
+			});
 			$('#subnav *').removeClass('active');
-			
+
 			if(event.pathNames[0] === 'recipeediting'){
 				newRecipe.addressChange(event);
 			}
@@ -198,10 +197,10 @@ define([
 					}
 				}
 			}
-			
+
 			title.setPrefix();
-					
-			
+
+
 		},
 		// behandelt change bei $.address.parameters
 		changePage : function(event){
@@ -224,7 +223,7 @@ define([
 					$.address.queryString('');
 				}
 				break;
-				
+
 			default:
 				switch(firstpath){
 				case 'recipe':
@@ -238,7 +237,7 @@ define([
 						else{
 							$discussionContainer.show();
 						}
-						
+
 						$('#discussion_btn').addClass('active');
 						break;
 					default:

@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 'use strict';
@@ -152,16 +152,16 @@ require([
 	scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
 	//setup
 	// if($.browser.msie){
-		// var version = Number($.browser.version);		
+		// var version = Number($.browser.version);
 		// if(version<9)
 			// document.location.href='http://news.anycook.de/tagged/internet_explorer';
 	// }
-	 
+
 	//CORS
-	//source: http://api.jquery.com/jQuery.support/	 
+	//source: http://api.jquery.com/jQuery.support/
 	$.support.cors = true;
-	 
-	 
+
+
 	//makeWidth
 	var updateWidth = function(){
 		var minWidth = 1024;
@@ -195,7 +195,7 @@ require([
 	var baseUrl = 'http://10.1.0.200';
 	$.when(AnycookAPI.init({appId:2, baseUrl: baseUrl})).then(function(){
 		filters.loadAllCategories($('#kategorie_filter ul'));
-		
+
 		var xmlErrorFunction = function(event){
 			switch(event.type){
 				case 403:
@@ -211,36 +211,26 @@ require([
 			}
 			return true;
 		};
-		
+
 		var xmlOptions = {
 			error:xmlErrorFunction
 		};
-		
+
 		$.when($('#content_main').xml(xmlOptions)).then(function(){
 			$.when(User.init()).then(function(userinit){
 				var user = userinit;
 
 				loginMenu.buildLogin();
-				
+
 				$.address.bind('change', $.proxy(addressChange.handleChange, addressChange));
 				$.address.update();
-				
-				//drafts
-				if(user.checkLogin()){
-					userMenu.makeText();
-					
-					// wait ressources to complete loading and the wait another 500ms.
-					// CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-					//onReady(function(){
-					setTimeout($.proxy(messageStream.checkNewMessageNum, messageStream),500);
-					setTimeout($.proxy(drafts.num, drafts),500);
-					//});
-				}
+
+				if(user.checkLogin()){ userMenu.load(); }
 			});
 		});
 	});
-	
-    
+
+
 	//startfadeIn
 	if($.address.pathNames().length === 0){
 		$('#filter_container').delay(1000).animate({opacity:1},1500);
@@ -248,14 +238,14 @@ require([
 	else {
 		$('#filter_container').css('opacity', 1);
 	}
-	
+
 	jQuery.extend(jQuery.expr[':'], {
 	    focus: function(element) { return element === document.activeElement; }
 	});
-	
+
 	var searchObject = new Search();
 
-    //searchbar 
+    //searchbar
 	$('#search').autocomplete({
 		source		: $.proxy(searchView.searchAutocomplete, searchView),
 		minLength	: 1,
@@ -307,10 +297,10 @@ require([
 			$('#search_form').submit();
 		}
 	});
-			
-			
+
+
 	$('.ui-autocomplete').addClass('search-autocomplete');
-	
+
 	$('#search_form').submit(function(event){
 		event.preventDefault();
 		var data = $('#search').val();
@@ -325,12 +315,12 @@ require([
 		if($.address.pathNames().length > 0) { $.address.path(''); }
 		else { filters.reset(); }
 	});
-	
+
 	$('#filter_reset').click(function(){history.back();});
-	
+
 	$('#search').focusout(searchView.focusoutSearch);
-	
-	
+
+
 	//Kategoriefilter
 	$('#kategorie_head').click($.proxy(filters.handleCategories, filters));
 	$('#kategorie_list').on('click', 'li', $.proxy(filters.clickCategory, filters))
@@ -338,14 +328,14 @@ require([
 		.on('mouseleave', 'li', $.proxy(filters.mouseleaveCategory, filters));
 	$(document).click($.proxy(filters.closeCategories, filters));
 	//loadAllKategories($('#kategorie_filter ul'));
-	
+
 	filters.removeChecked();
 	$('#filter_table .label_chefhats, #filter_table .label_muffins').click(function(){
 		if(!$('#filter_main').is('.blocked')){
 			filters.checkOnOff(this);
 			// handleRadios(this);
 		}
-		
+
 		// must return false or function is sometimes called twice
 		return false;
 	}).mouseover(function(){
@@ -357,13 +347,13 @@ require([
 	});
 
 	//zutatentabelle
-	
+
 	$('#ingredient_list').click($.proxy(filters.ingredientListClick, filters))
 		.on('click', '.close', $.proxy(filters.removeIngredientField, filters))
 		.on('click', '.plus', $.proxy(filters.clickExcludeIngredient, filters))
 		.on('click', '.minus', $.proxy(filters.clickAddIngredient, filters));
-	
-	
+
+
 	//tagsfilter
 	var tagData = {
 		add : $.proxy(tags.searchTag, tags),
@@ -373,17 +363,17 @@ require([
 		.click(tagData, $.proxy(tags.makeInput, tags))
 		.on('click', '.tag_remove', tagData, $.proxy(tags.remove, tags));
 	// $('.tags_table_right').click(makeNewTagInput);
-	
+
 	//timefilter
 	$('#time_form').submit($.proxy(time.formSubmit, time));
 	$('#time_std,#time_min').keydown($.proxy(time.key, time));
 	$('.time .up, .time .down').click($.proxy(time.upDownListener, time));
-	
+
 	//userfilter
 	//$('#userfilter').mouseenter(showUserfilterremove);
 	//$('#userfilter').mouseleave(hideUserfilterremove);
 	//$('#userfilterremove').click(removeUserfilter);
-	
+
 	//scrollListener
 	$(document).scroll($.proxy(scroll.listen, scroll));
 

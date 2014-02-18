@@ -1,16 +1,18 @@
 define([
 	'jquery',
-	'classes/User'
-], function($, User){
+	'classes/User',
+    'drafts',
+    'messageStream'
+], function($, User, drafts, messageStream){
 	'use strict';
 
 	return {
-		makeText : function(){
+		load : function(){
 			$('#signin_btn').hide();
 			$('.user_btn').show();
-			
+
 			$('#user_settings').click($.proxy(this.toggle, this));
-			
+
 			var $userMenu = $('#user_menu');
 			var user = User.get();
 
@@ -21,13 +23,21 @@ define([
 				var user = User.get();
 				user.logout();
 			});
-			
+
 			if(user.level === 2){
 				$userMenu.find('.admin').show();
 			}
-			
+
 			$(document).click($.proxy(this.hide, this))
 				.scroll($.proxy(this.hide, this));
+
+            // wait ressources to complete loading and the wait another 500ms.
+            // CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
+            //onReady(function(){
+
+            //});
+            setTimeout($.proxy(messageStream.checkNewMessageNum, messageStream),500);
+            setTimeout($.proxy(drafts.num, drafts),500);
 		},
 		toggle : function(event){
 			var $userMenu = $('#user_menu');

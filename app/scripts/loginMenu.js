@@ -1,27 +1,28 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
 	'jquery',
 	'AnycookAPI',
-	'classes/User'
-], function($, AnycookAPI, User){
+	'classes/User',
+    'userMenu'
+], function($, AnycookAPI, User, userMenu){
 	'use strict';
 	return {
 		buildLogin : function(){
@@ -33,7 +34,7 @@ define([
 			$.get('/templates/login.erb', function(template){
 				$('body').append(template);
 				$('#signin_btn, #login_menu .blackOverlay, #login_menu a').click(self.toggle);
-				$('#login_menu form').submit(self.submitForm);
+				$('#login_menu form').submit($.proxy(self.submitForm, self));
 			});
 		},
 		toggle : function(){
@@ -79,17 +80,20 @@ define([
 		},
 		submitForm : function(){
 			//event.preventDefault();
-			var $this = $(this);
-			var $mail = $this.find('input[type="text"]');
-			var $pwd = $this.find('input[type="password"]');
-			
-			var mail = $mail.val();
-			var pwd = $pwd.val();
+			var self = this;
+            var $form = $('#login_menu form');
+
+			var mail = $form.find('input[type="text"]').val();
+			var pwd = $form.find('input[type="password"]').val();
 			var stayloggedin =$('#stayloggedin input').is(':checked');
 			AnycookAPI.session.login(mail, pwd, stayloggedin, function(){
-				User.init();
-				//TODO code Login behavior
-				location.reload();
+				$.when(User.init()).then(function(user){
+                    if(user.checkLogin()){
+                        self.toggle();
+                        userMenu.load();
+                        $.address.update();
+                    }
+                });
 			},
 			function(){
 				$('#login_menu .errorMsg').addClass('visible');
