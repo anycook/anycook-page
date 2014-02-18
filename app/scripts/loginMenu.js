@@ -79,7 +79,7 @@ define([
 			}
 		},
 		submitForm : function(){
-			//event.preventDefault();
+			event.preventDefault();
 			var self = this;
             var $form = $('#login_menu form');
 
