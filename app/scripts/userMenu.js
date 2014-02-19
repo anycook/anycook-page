@@ -8,6 +8,7 @@ define([
 
 	return {
 		load : function(){
+            var self = this;
 			$('#signin_btn').hide();
 			$('.user_btn').show();
 
@@ -17,11 +18,13 @@ define([
 			var user = User.get();
 
 			$userMenu.find('img').attr('src', User.getUserImagePath(user.id));
-			var $profileLink = $('<a></a>').text(user.name).attr('href', user.getProfileURI());
-			$userMenu.find('.username').append($profileLink);
+			$userMenu.find('.username').attr('href', user.getProfileURI()).text(user.name);
 			$userMenu.find('#logout').click(function(){
 				var user = User.get();
-				user.logout();
+				$.when(user.logout()).then(function(){
+                    self.remove();
+                    $.address.update();
+                });
 			});
 
 			if(user.level === 2){
@@ -33,12 +36,17 @@ define([
 
             // wait ressources to complete loading and the wait another 500ms.
             // CHROME HACK: http://stackoverflow.com/questions/6287736/chrome-ajax-on-page-load-causes-busy-cursor-to-remain
-            //onReady(function(){
+            $(function(){
+                setTimeout($.proxy(messageStream.checkNewMessageNum, messageStream),500);
+                setTimeout($.proxy(drafts.num, drafts),500);
+            });
 
-            //});
-            setTimeout($.proxy(messageStream.checkNewMessageNum, messageStream),500);
-            setTimeout($.proxy(drafts.num, drafts),500);
 		},
+        remove : function(){
+            $('#signin_btn').show();
+            $('.user_btn, .admin').not('#user_home, #new_recipe').hide();
+            $('#user_settings, #logout').unbind();
+        },
 		toggle : function(event){
 			var $userMenu = $('#user_menu');
 			var $target = $(event.target);

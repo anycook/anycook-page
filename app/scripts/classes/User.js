@@ -175,22 +175,21 @@ define([
 	};
 
 	User.prototype.logout = function(){
-		if(this.checkLogin()){
-			this.level = -1;
-			this.name = null;
-			this.mail = null;
-			this.facebookID = null;
-			this.image = null;
-			AnycookAPI.session.logout(function(){
-				FB.getLoginStatus(function(response){
-					if(response.status === 'connected'){
-						FB.logout(function() {
-							window.location.reload();
-						});
-					} else { window.location.reload(); }
-				});
+        var dfd = $.Deferred();
+		this.level = -1;
+		this.name = null;
+		this.mail = null;
+		this.facebookID = null;
+		this.image = null;
+		AnycookAPI.session.logout(function(){
+			FB.getLoginStatus(function(response){
+				if(response.status === 'connected'){
+					FB.logout(function() { dfd.resolve(); });
+				} else { dfd.resolve(); }
 			});
-		}
+		});
+
+        return dfd.promise();
 	};
 
 // User.register = function(mail, pwd, username){
