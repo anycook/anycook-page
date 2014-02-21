@@ -10,11 +10,11 @@
 	border-top:1px solid $kategorieborder;
 	//border-bottom: 1px solid $lightgrey;
   @include transition(border-top-color, .1s, ease-out);
-	
+
 	&:last-child{
 		border-bottom:1px solid $shadowbeige;
 	}
-	
+
 	&:hover, &:focus{
 		outline:none;
 		text-decoration:none;
@@ -22,67 +22,67 @@
 		@include transition(border-top-color, .14s, ease-in);
 		@include box-shadow-spread(0, 3px, 2px, -2px, $shadowbeige);
 		@include transition(box-shadow, .15s, ease-in);
-		
+
 		.frame_big_main{
 			background-color:$stepcolor;
 			@include transition(background-color, .15s, ease-in);
 		}
-		
+
 		.frame_big_left, .frame_big_right{
 			opacity:1.0;
 			@include transition(opacity, .15s, ease-in);
 		}
-		
+
 	}
-	
-	
+
+
 	.frame_big_left, .frame_big_right{
-		opacity:.0;
+		opacity:0;
 		width:12px;
 		height:100%;
 		@include transition(opacity, .1s, ease-out);
 	}
 	.frame_big_left{
-		float:left;			
+		float:left;
 		background:url("/img/frame_big_left.png") no-repeat;
 	}
-	
+
 	.frame_big_right{
 		background:url("/img/frame_big_right.png") no-repeat;
 		float:right;
 	}
-	
+
 	.frame_big_main{
 		$width: $width - 32px;
-		
+
 		float:left;
 		width:$width;
 		height:$innerheight;
 		$verticalpadding: $height / 2 - $innerheight / 2;
 		padding: $verticalpadding 4px;
 		@include transition(background-color, .1s, ease-out);
-		
-		
+
+
 		.recipe_img{
 			$width: 100px;
 			$height: 100px;
-			
+
 			height:$height;
 			width:$width;
-			
+
 			float:left;
-			
+
 			margin: 1px;
-			
+
 			position:relative;
 			border:3pt solid $imginnerbordercolor;
 			outline: 1px solid $lightgrey;
-			
+
 			img{
 				height:$height;
 				width:$width;
 			}
-			
+
 			.recipe_time{
 				background-color: white;
 				font: 7pt Lucida Grande;
@@ -96,14 +96,14 @@
 				border-top-right-radius: 6px 11px;
 			}
 		}
-		
+
 		.recipe_text{
 			margin: 5px 10px;
 			float:left;
 			width:340px;
 			height:$innerheight - 10px;
 			overflow:hidden;
-			
+
 			h3{
 				font:$headlinefont;
 				font-size:14pt;
@@ -114,7 +114,7 @@
 				color:$smalllightfontcolor;
 			}
 		}
-		
+
 		.heart{
 			position: absolute;
 			top:0;
@@ -124,9 +124,9 @@
 			background:url("/img/icons20x20.png");
 			background-position: -20px * 2 0;
 			margin: 14px 8px;
-			
+
 			&.schmeckt{
-				
+
 				height:49px;
 				width:36px;
 				margin: -2px 0 0 0;
@@ -134,14 +134,14 @@
 				background-position: 0;
 			}
 		}
-		
+
 		.schmeckt_num{
 			float:left;
 			font:$headlinefont;
 			font-size:16pt;
 			margin: -2px 0 0 54px;
 		}
-	}	
+	}
 }
 
 
@@ -165,7 +165,7 @@
 
 #noresults{
 	padding-left: 23px;
-	
+
 	h1{
 		text-align: center;
 		font-size: 23pt;
@@ -184,5 +184,5 @@
 	.recipeoverview{
 		margin-top: 40px;
 	}
-	
+
 }
