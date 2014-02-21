@@ -20,7 +20,7 @@ Webclient for [anycook-api](https://github.com/anycook/anycook-api).
 	```sudo gem install compass```
 4. Install yeoman
 	```npm install -g yeoman```
-4. Install grunt-cli
+5. Install grunt-cli
 	```npm install -g grunt-cli```
 
 ## Test environment
@@ -32,6 +32,9 @@ To start the anycook-page test environment follow these steps:
 2. Run ```npm install``` in the project folder to install project specific node dependencies.
 3. Run ```bower install``` to install thirdparty JavaScript libraries.
 4. Execute ```grunt serve``` to start the test server. Your browser should open the page automatically.
+
+## Credentials
+The Javascript API client supports json credential files. The credentials for the test environment are placed in the app folder. The credentials for the production environment in the projects root folder. Grunt replaces test with production when building dist folder. 
 
 ## Compiling
 To compile and minify the scripts run ```grunt```.
