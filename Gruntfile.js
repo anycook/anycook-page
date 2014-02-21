@@ -346,32 +346,6 @@ module.exports = function (grunt) {
                 'svgmin'
             ]
         },
-
-        /*requirejs: {
-            dist: {
-                options: {
-                    almond: true,
-
-                    replaceRequireScript: [{
-                        files: ['<%= yeoman.dist %>/index.html'],
-                        module: 'main'
-                    }],
-
-                    //modules: [{name: 'main'}],
-
-                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js', // contains path specifications and nothing else important with respect to config
-                    //dir: '<%= yeoman.dist %>/scripts',
-                    baseUrl: '<%= yeoman.app %>/scripts',
-                    name : 'main',
-                    out : '<%= yeoman.dist %>/scripts/main.min.js',
-                    useStrict: true,
-                    paths : {
-                        'AnycookAPI' : 'empty:',
-                        'FB' : 'empty:'
-                    }
-                }
-            }
-        },*/
         requirejs: {
             dist: {
                 options: {
@@ -452,21 +426,6 @@ module.exports = function (grunt) {
         'usemin',
         'htmlmin',
     ]);
-
-    /*grunt.registerTask('build', [
-        'clean:dist',
-        //'useminPrepare',
-        'concurrent:dist',
-        'autoprefixer',
-        //'concat',
-        'cssmin',
-        'copy:dist',
-        'copy:requirejs',
-        //'modernizr',
-        'requirejs:dist', // AFTER copy:dist!
-        'htmlmin'
-        //'usemin'
-    ]);*/
 
     grunt.registerTask('default', [
         'newer:jshint',
