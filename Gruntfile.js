@@ -322,9 +322,9 @@ module.exports = function (grunt) {
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             },
-            requirejs : {
-                src: '<%= yeoman.app %>/bower_components/requirejs/require.js',
-                dest: '<%= yeoman.dist %>/scripts/require.js'
+            credentials : {
+                src: 'anycook-credentials.json',
+                dest: '<%= yeoman.dist %>/anycook-credentials.json'
             }
         },
 
@@ -354,7 +354,6 @@ module.exports = function (grunt) {
                     mainConfigFile : '<%= yeoman.app %>/scripts/main.js',
                     out            : '.tmp/concat/scripts/main.js',
                     paths : {
-                        'AnycookAPI' : 'empty:',
                         'FB' : 'empty:'
                     }
                 }
@@ -421,6 +420,7 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'copy:dist',
+        'copy:credentials',
         //'modernizr',
         'rev',
         'usemin',

@@ -10,7 +10,8 @@
     "jscrollpane": "~2.0.14",
     "requirejs-text": "~2.0.10",
     "jquery.autoellipsis": "~1.0.10",
-    "jquery-autosize": "~1.18.4"
+    "jquery-autosize": "~1.18.4",
+    "anycook-api-js": "anycook/anycook-api-js"
   },
   "devDependencies": {}
 }

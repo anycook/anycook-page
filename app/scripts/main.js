@@ -22,7 +22,22 @@
 require.config({
     baseUrl : 'scripts',
 	paths : {
-		'AnycookAPI' : ['//10.1.0.200/js/anycookapi','//api.anycook.de/js/anycookapi'],
+		'AnycookAPI': '../bower_components/anycook-api-js/src/anycookapi',
+        'AnycookAPI.autocomplete': '../bower_components/anycook-api-js/src/anycookapi.autocomplete',
+        'AnycookAPI.category': '../bower_components/anycook-api-js/src/anycookapi.category',
+        'AnycookAPI.discover': '../bower_components/anycook-api-js/src/anycookapi.discover',
+        'AnycookAPI.discussion': '../bower_components/anycook-api-js/src/anycookapi.discussion',
+        'AnycookAPI.ingredient': '../bower_components/anycook-api-js/src/anycookapi.ingredient',
+        'AnycookAPI.life': '../bower_components/anycook-api-js/src/anycookapi.life',
+        'AnycookAPI.message': '../bower_components/anycook-api-js/src/anycookapi.message',
+        'AnycookAPI.recipe': '../bower_components/anycook-api-js/src/anycookapi.recipe',
+        'AnycookAPI.registration': '../bower_components/anycook-api-js/src/anycookapi.registration',
+        'AnycookAPI.search': '../bower_components/anycook-api-js/src/anycookapi.search',
+        'AnycookAPI.session': '../bower_components/anycook-api-js/src/anycookapi.session',
+        'AnycookAPI.setting': '../bower_components/anycook-api-js/src/anycookapi.setting',
+        'AnycookAPI.tag': '../bower_components/anycook-api-js/src/anycookapi.tag',
+        'AnycookAPI.upload': '../bower_components/anycook-api-js/src/anycookapi.upload',
+        'AnycookAPI.user': '../bower_components/anycook-api-js/src/anycookapi.user',
 		'FB' : '//connect.facebook.net/de_DE/all',
 		'jquery' : '../bower_components/jquery/jquery',
 		'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
@@ -52,6 +67,66 @@ require.config({
 			deps : ['jquery'],
 			exports : 'AnycookAPI'
 		},
+        'AnycookAPI.autocomplete' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.category' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.discover' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.discussion' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.ingredient' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.life' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.message' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.recipe' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.registration' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.search' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.session' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.setting' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.tag' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.upload' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.user' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
 		'FB' : {
 			exports : 'FB'
 		},
@@ -148,7 +223,22 @@ require([
 	'userProfile',
 	'jquery.address',
 	'jquery.ui.autocomplete',
-	'jquery.xml'
+	'jquery.xml',
+    'AnycookAPI.autocomplete',
+    'AnycookAPI.category',
+    'AnycookAPI.discover',
+    'AnycookAPI.discussion',
+    'AnycookAPI.ingredient',
+    'AnycookAPI.life',
+    'AnycookAPI.message',
+    'AnycookAPI.recipe',
+    'AnycookAPI.registration',
+    'AnycookAPI.search',
+    'AnycookAPI.session',
+    'AnycookAPI.setting',
+    'AnycookAPI.tag',
+    'AnycookAPI.upload',
+    'AnycookAPI.user'
 ], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView,
 	scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
 	//setup
@@ -193,8 +283,7 @@ require([
 	});
 
 	//anycookapi
-	var baseUrl = 'http://10.1.0.200';
-	$.when(AnycookAPI.init({appId:2, baseUrl: baseUrl})).then(function(){
+	$.when(AnycookAPI.init()).then(function(){
 		filters.loadAllCategories($('#kategorie_filter ul'));
 
 		var xmlErrorFunction = function(event){
