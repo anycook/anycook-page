@@ -35,3 +35,19 @@ To start the anycook-page test environment follow these steps:
 
 ## Compiling
 To compile and minify the scripts run ```grunt```.
+
+## Uploading to S3
+The build scripts supports uploading to Amazons S3. Add your AWS credentials to a file named ```aws-credentials.json``` in your project root. Its content has to look like this: 
+
+```json
+{
+  "accessKeyId": "...",
+  "secretAccessKey": "...",
+  "bucket": "anycook.de",
+  "region": "eu-west-1"
+}
+```
+
+To upload, run ```grunt upload```.
+
+
