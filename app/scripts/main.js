@@ -20,6 +20,7 @@
 'use strict';
 // Require.js allows us to configure shortcut alias
 require.config({
+    baseUrl : 'scripts',
 	paths : {
 		'AnycookAPI' : ['//10.1.0.200/js/anycookapi','//api.anycook.de/js/anycookapi'],
 		'FB' : '//connect.facebook.net/de_DE/all',
@@ -134,7 +135,7 @@ require([
 	'classes/Search',
 	'classes/User',
 	'addressChange',
-	'drafts',
+	'./drafts',
 	'loginMenu',
 	'searchView',
 	'scroll',

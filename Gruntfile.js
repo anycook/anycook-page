@@ -231,9 +231,12 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/images',
-                    src: '{,*/}*.{gif,jpeg,jpg,png}',
-                    dest: '<%= yeoman.dist %>/images'
+                    cwd: '<%= yeoman.app %>',
+                    src: [
+                        'img/{,*/}*.{gif,jpeg,jpg,png}',
+                        'icons/{,*/}*.{gif,jpeg,jpg,png}'
+                    ],
+                    dest: '<%= yeoman.dist %>'
                 }]
             }
         },
@@ -271,14 +274,14 @@ module.exports = function (grunt) {
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
         // to use the Usemin blocks.
-        cssmin: {
-            dist: {
-                files: {
-                    '<%= yeoman.dist %>/styles/style.css':
-                        '.tmp/styles/{,*/}*.css'
-                }
-            }
-        },
+        //cssmin: {
+        //    dist: {
+        //        files: {
+        //            '<%= yeoman.dist %>/styles/style.css':
+        //                '.tmp/styles/{,*/}*.css'
+        //        }
+        //    }
+        //},
         // uglify: {
         //     dist: {
         //         files: {
@@ -305,7 +308,9 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'
+                        'styles/fonts/{,*/}*.*',
+                        'xml/template.xml',
+                        'templates/{,*/}*.erb'
                     ]
                 }]
             },
@@ -315,6 +320,10 @@ module.exports = function (grunt) {
                 cwd: '<%= yeoman.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
+            },
+            requirejs : {
+                src: '<%= yeoman.app %>/bower_components/requirejs/require.js',
+                dest: '<%= yeoman.dist %>/scripts/require.js'
             }
         },
 
@@ -337,7 +346,7 @@ module.exports = function (grunt) {
             ]
         },
 
-        requirejs: {
+        /*requirejs: {
             dist: {
                 options: {
                     almond: true,
@@ -360,6 +369,34 @@ module.exports = function (grunt) {
                         'FB' : 'empty:'
                     }
                 }
+            }
+        },*/
+        requirejs: {
+            dist: {
+                options: {
+                    baseUrl        : '<%= yeoman.app %>/scripts/',
+                    name           : 'main',
+                    mainConfigFile : '<%= yeoman.app %>/scripts/main.js',
+                    out            : '.tmp/concat/scripts/main.js',
+                    paths : {
+                        'AnycookAPI' : 'empty:',
+                        'FB' : 'empty:'
+                    }
+                }
+            }
+        },
+
+        aws: grunt.file.readJSON('aws-credentials.json'),
+        s3: {
+            options: {
+                accessKeyId: '<%= aws.accessKeyId %>',
+                secretAccessKey: '<%= aws.secretAccessKey %>',
+                bucket: '<%= aws.bucket %>',
+                region: '<%= aws.region %>'
+            },
+            build: {
+                cwd: 'dist/',
+                src: '**'
             }
         }
     });
@@ -399,21 +436,23 @@ module.exports = function (grunt) {
         ]);
     });
 
-    /*grunt.registerTask('build', [
+    grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
         'concat',
+        'requirejs:dist',
         'cssmin',
         'uglify',
         'copy:dist',
+        //'modernizr',
         'rev',
         'usemin',
-        'htmlmin'
-    ]);*/
+        'htmlmin',
+    ]);
 
-    grunt.registerTask('build', [
+    /*grunt.registerTask('build', [
         'clean:dist',
         //'useminPrepare',
         'concurrent:dist',
@@ -421,15 +460,21 @@ module.exports = function (grunt) {
         //'concat',
         'cssmin',
         'copy:dist',
+        'copy:requirejs',
         //'modernizr',
         'requirejs:dist', // AFTER copy:dist!
         'htmlmin'
         //'usemin'
-    ]);
+    ]);*/
 
     grunt.registerTask('default', [
         'newer:jshint',
         'test',
         'build'
+    ]);
+
+    grunt.registerTask('upload', [
+        'default',
+        's3'
     ]);
 };

@@ -17,12 +17,10 @@
 		<link rel="apple-touch-startup-image" href="/icons/logo-iPhone-startup.png" />
 
 		<!-- CSS -->
-		<!-- build:css(app, .tmp) styles.main.css -->
+		<!-- build:css(.tmp) styles/main.css -->
 		<link rel="stylesheet" type="text/css" href="/styles/jquery.inputdecorator.css"/>
 		<link rel="stylesheet" type="text/css" href="/styles/style.css"/>
-		<!-- end build -->
-
-		<script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+		<!-- endbuild -->
 	</head>
 	<body>
 		<div id="fb-root"></div>
@@ -235,5 +233,13 @@
 				</p>
 			</div>
 		</div>
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="bower_components/requirejs/require.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
 	</body>
 </html>
