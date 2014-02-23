@@ -9,6 +9,7 @@
 
 .settings{
 	margin-top:25px;
+	float: left;
 
     .error_message, .info_message{
         float: left;
@@ -159,6 +160,8 @@
 
 	#pass_form{
 		float: left;
+		padding: 5px 0;
+		margin-left: 10px;
 
         .error_message, .info_message{
             width: 100%;
@@ -335,6 +338,15 @@
 		input[type=submit]{
 			margin: 20px 0 0 0;
 		}
+	}
 
+	#resetpwstep2{
+		padding: 4px 0 0 10px;
 
+		table{
+			td{
+				color: $darkfontcolor;
+				padding: 5px 10px 5px 0;
+			}
+		}
 	}

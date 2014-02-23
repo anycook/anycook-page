@@ -50,6 +50,7 @@
 				opacity: 0;
 				position: absolute;
 				text-decoration: none;
+				-webkit-transform: translateZ(0);
 				@include transition(opacity, .4s, ease-out);
 				
 				span{

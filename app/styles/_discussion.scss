@@ -42,7 +42,7 @@
 						background-position: -60px 0;
 
 						&.liked_by_user{
-							outline: 1px solid green;
+							background-position: -60px -20px;
 						}
 					}
 					
@@ -381,6 +381,7 @@
 		
 		h6{
 			margin: 10px 0;
+			cursor: pointer;
 		}
 		
 		img{
