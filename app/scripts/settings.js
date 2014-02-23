@@ -224,8 +224,8 @@ define([
 		},
         changePassword : function(event){
             event.preventDefault();
-            var oldPw = $("#password_old").val();
-            var newPw = $("#password_new").val();
+            var oldPw = $('#password_old').val();
+            var newPw = $('#password_new').val();
 
             $('#pass_form .error_message').removeClass('on');
 
