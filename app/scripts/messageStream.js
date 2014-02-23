@@ -293,7 +293,7 @@ define([
 				return;
 			}
 
-			AnycookAPI.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
+			AnycookAPI.message.writeNew(recipientIds, message,function(xhr){
 				console.log(xhr);
 			});
 
