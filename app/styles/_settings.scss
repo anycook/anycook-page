@@ -9,11 +9,41 @@
 
 .settings{
 	margin-top:25px;
+
+    .error_message, .info_message{
+        float: left;
+        height: 0;
+        overflow: hidden;
+        width: 400px;
+        //height: 65px;
+        padding: 5px 0;
+        opacity: 0;
+        color: $smalllightfontcolor;
+        font-size: 8pt;
+
+
+        &.error_message{
+            color: $error;
+        }
+
+        &.success_message{
+            color: $success;
+        }
+
+        &.on{
+            height: auto;
+            opacity: 1;
+            @include transition-property(opacity);
+            @include transition-duration(.5s);
+        }
+    }
 }
+
+
 
 #settings_content{
 	margin: 10px 0 0 10px;
-	
+
 	.profile_image{
 		position:relative;
 		float: left;
@@ -28,54 +58,54 @@
 				display: none;
 			}
 		}
-		
+
 		img{
 			float:left;
 			width:200px;
 		}
-		
+
 		#progressbar{
 			width: 180px;
 			margin-left: 10px;
 		}
 	}
-	
+
 	#account_data{
 		list-style: none;
 		float: left;
 		width: 350px;
 		padding-left: 30px;
-		
-		
-		
+
+
+
 		li{
 			float: left;
 			margin-bottom: 15px;
-			
+
 			h2, input{
 				float: left;
 			}
-					
+
 			h2{
 				width: 85px;
 				padding-top: 3px;
 			}
-			
+
 			input{
 				width: 250px;
 			}
-			
+
 			#about_me{
 				width: 100%;
 				margin-bottom: 7px;
 			}
-		
+
 			textarea{
 				float: left;
 				width: 335px;
 				height: 110px;
 				margin: 0;
-				
+
 			}
 		}
 	}
@@ -83,10 +113,10 @@
 
 #settings_mail{
 	padding: 0 0 0 10px;
-	
+
 	h2{
 		margin-top: 10px;
-		
+
 	}
 
 	#mail_form{
@@ -95,7 +125,7 @@
 		position: relative;
 		margin-left: 10px;
 	}
-	
+
 	#account_mail{
 		width: 380px;
 		float: left;
@@ -107,34 +137,6 @@
 		float: left;
 	}
 
-	.error_message, .info_message{
-		float: left;
-		height: 0;
-		overflow: hidden;
-		width: 400px;
-		//height: 65px;
-		padding: 5px 0;
-		opacity: 0;
-		color: $smalllightfontcolor;
-		font-size: 8pt;
-
-
-		&.error_message{
-			color: $error;
-		}
-
-		&.success_message{
-			color: $success;
-		}
-
-		&.on{
-			height: auto;
-			opacity: 1;
-			@include transition-property(opacity);
-			@include transition-duration(.5s);
-		}
-	}
-	
 	.tagsbox, #tagcloud{
 		width:390px;
 	}
@@ -149,26 +151,33 @@
 	input[type="submit"]{
 		@include vertical-align;
 	}
-	
+
 }
 
 #settings_pass{
-	display:none;
 	padding: 0 0 0 10px;
 
 	#pass_form{
 		float: left;
+
+        .error_message, .info_message{
+            width: 100%;
+        }
 	}
+
+    .passwords{
+        overflow: hidden;
+    }
 
 	#old_password_container, #new_password_container{
 		float: left;
-		
+
 		input{
 			width:179px;
 			margin-right: 10px;
 		}
 	}
-	
+
 	#password_secure{
 		float: left;
 		width: 230px;
@@ -184,15 +193,15 @@
 		margin-top: 15px;
 		border-radius: 5px;
 		position: relative;
-		
+
 		h2{
 			font: 12pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
 			float: left;
 		}
-				
+
 		/*var for position*/
-		$bigcheckboxposition: 17px; 
-		
+		$bigcheckboxposition: 17px;
+
 		input{
 				position:absolute;
 				right: $bigcheckboxposition;
@@ -201,16 +210,16 @@
 				height: 16px;
 				cursor: pointer;
 				z-index: 11;
-				
+
 				&:hover + .bigcheckbox, &:active + .bigcheckbox{
-				background-position: 0px -22px;	
+				background-position: 0px -22px;
 				}
-				
+
 				&:checked + .bigcheckbox {
-					background-position: 0px -44px;	
+					background-position: 0px -44px;
 				}
 			}
-		
+
 		input + .bigcheckbox{
 			position:absolute;
 			right: $bigcheckboxposition;
@@ -221,15 +230,15 @@
 			background-repeat: no-repeat;
 			z-index: 10;
 		}
-		
-		
+
+
 
 }
 
 #settings_notification{
 		padding: 0 0 0 10px;
 }
-	
+
 #mail_notification{
 		background-color:$stepcolor;
 		border: 1px solid $lightbrown;
@@ -253,25 +262,25 @@
 		border:1px solid $lightbrown;
 		border-top: 0;
 		@include border-radius(0px, 0px, 5px, 5px);
-		
+
 		table{
 			width: 100%;
 			color: $darkfontcolor;
 			border-collapse: collapse;
-			
+
 			tr{
 				border-bottom:1px solid $lightbrown;
 				line-height: 37px;
-									
+
 				td{
 					padding-left: 10px;
 				}
 				td+td{
 					padding: 0 10px 0 0;
 				}
-				
-				
-				
+
+
+
 			}
 			tr:last-child{
 				border-bottom:0px;
@@ -279,8 +288,8 @@
 
 
 		}
-		
-		
+
+
 	}
 
 

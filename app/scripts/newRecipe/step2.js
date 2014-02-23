@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -56,7 +56,7 @@ define([
 			var self = this;
 			$('#add_new_step').click(function(){
 				var $newStep = self.getIngredientStep($('.new_ingredient_step').length+1);
-				
+
 				$('#new_step_container')
 				.append($newStep);
 				$newStep.find('textarea').inputdecorator('maxlength', {
@@ -69,7 +69,7 @@ define([
 
 			$('#ingredient_overview').click($.proxy(this.makeIngredientLightBox, this));
 			// watchSteps();
-			
+
 			$('#step2').on('focusout', 'input, textarea', $.proxy(this.draftSteps, this));
 		},
 		isValid : function(){
@@ -79,7 +79,7 @@ define([
 					stepcheck = true;
 				}
 			});
-			
+
 			var ingredientcheck = false;
 			$('#step2 .new_ingredient').each(function(){
 				if($(this).val().length > 0){
@@ -96,9 +96,9 @@ define([
 			if(!event.empty){
 				var lastSentences = $target.data('sentences');
 				if(!lastSentences){ lastSentences = [];	}
-				
+
 				var currentSentences = text.split(/[!.?:;]+/g);
-				
+
 				var currentIngredients = this.getCurrentStepIngredients();
 				$target.data('sentences', currentSentences);
 				//console.log(currentSentences);
@@ -109,23 +109,23 @@ define([
 					for(var i = 0; i < $stepIngredients.length; i++){
 						ingredients[i] = $stepIngredients.eq(i).val();
 					}
-					
+
 					for(var j = 0; j < $stepQuestions.length; j++){
 						var text = $stepQuestions.eq(j).text();
 						ingredients.push(text);
 					}
-					
+
 					for(var k in json){
 						if($.inArray(json[k], ingredients) > -1){
 							continue;
 						}
-							
+
 						if($.inArray(json[k], currentIngredients) > -1){
 							var $ingredientQuestion = self.getIngredientQuestion(json[k]);
 							$step.find('.new_ingredient_list').append($ingredientQuestion);
 							continue;
 						}
-						
+
 						self.addStepIngredient($step, json[k]);
 					}
 					self.draftSteps();
@@ -135,10 +135,10 @@ define([
 					if(lastSentences.length > i && currentSentences[i] === lastSentences[i] || currentSentences[i].length === 0){
 						continue;
 					}
-						
+
 					AnycookAPI.ingredient.extract(currentSentences[i], addIngredients);
 				}
-				
+
 			}else{
 				if(!this.isValid()){
 					$('#nav_step2').nextAll().addClass('inactive');
@@ -147,19 +147,19 @@ define([
 		},
 		submit : function(event){
 			event.preventDefault();
-			
+
 			var check = true;
 			if(!this.checkValidateLightboxPersons()){
 				check = false;
 				$('#numberinput_error').fadeIn(300);
 			}
-			
+
 			if(!this.checkValidateLightboxIngredients()){
 				check = false;
 				$('#ingredientoverview_error').fadeIn(300);
 				this.watchForLightboxIngredients();
 			}
-			
+
 			if(!check){
 				$(event.target).find('input[type=\'submit\']').effect('shake', {distance:5, times:2}, 50);
 				return;
@@ -260,7 +260,13 @@ define([
 					$ingredient.val(text);
 					return false;
 				}
-			});
+			}).data('ui-autocomplete')._renderMenu = function( ul, items ) {
+              var that = this;
+              $.each( items, function( index, item ) {
+                that._renderItemData( ul, item );
+              });
+              $( ul ).addClass('ingredient-autocomplete new-ingredient-autocomplete');
+            };
 
 			return $template;
 		},
@@ -272,7 +278,7 @@ define([
 		},
 		updateStepNumbers : function(){
 			this.draftSteps();
-			
+
 			$('.new_ingredient_step .number').each(function(i){
 				$(this).text(i+1);
 			});
@@ -298,12 +304,12 @@ define([
 				});
 			var $spanNein =  $('<a></a>').text('Nein').addClass('no')
 				.click($.proxy(this.removeIngredientQuestion, this));
-			
+
 			var $li = $('<li></li>').addClass('ingredient_question')
 				.append($span)
 				.append($spanJa)
 				.append($spanNein);
-				
+
 			return $li;
 		},
 		removeIngredientQuestion : function(event){
@@ -335,7 +341,7 @@ define([
 		},
 		removeStep : function(event){
 			var $step = $(event.target).parents('.ingredient_step');
-			
+
 			if($step.siblings().length > 0){
 				$step.remove();
 				this.makeStepNumbers();
@@ -343,7 +349,7 @@ define([
 				this.draftSteps();
 				$('#step2').trigger($.Event('resize'));
 			}
-			
+
 		},
 		makeStepNumbers : function(){
 			$('.new_ingredient_step .number').each(function(i){
@@ -385,12 +391,12 @@ define([
 					$ingredientLine = $stepIngredient.parent();
 				}
 			}
-			
+
 			if($ingredientLine === null){
 				$ingredientLine = this.getIngredientLine().hide();
 				$step.find('.new_ingredient_line').last().after($ingredientLine.fadeIn(300));
 			}
-			
+
 			$ingredientLine.children('.new_ingredient').val(ingredient);
 			$('#step2').trigger($.Event('resize'));
 		},
@@ -422,19 +428,19 @@ define([
 
 			var headline = _.template(newIngredientsHeadlineTemplate,
 				{numPersons : !numPersons ? 0 : numPersons});
-				
+
 			$('<ul></ul>').addClass('new_ingredient_list');
 
 			var content = newIngredientsContentTemplate;
-				
+
 			var $lightbox = lightbox.get(headline,
 			'Dies sind alle Zutaten, die du in den Schritten angegeben hast. '+
 			'Falls Zutaten fehlen, füge diese bitte noch zu den entsprechenden Schritten hinzu.', content, 'Rezept abschließen')
 				.addClass('ingredient_overview');
 			$('#main').append($lightbox);
-			
+
 			$lightbox.find('form').submit($.proxy(this.submit, this));
-			
+
 			var self = this;
 			$lightbox.find('.numberinput input').keydown(function(e){
 				var $this = $(this);
@@ -451,13 +457,13 @@ define([
 					event.which !== 8 && event.which !== 46){
 					return false;
 				}
-				
+
 				if($this.val() !== '' && $this.val() !== '0'){
 					$('#numberinput_error').fadeOut(300);
 				}
 				drafts.save('persons', $this.val());
 			});
-			
+
 			$lightbox.find('.numberinput .up').click($.proxy(this.personsUp, this));
 			$lightbox.find('.numberinput .down').click($.proxy(this.personsDown, this));
 
@@ -522,7 +528,7 @@ define([
 			if(!this.isValid()){
 				return false;
 			}
-			
+
 			var self = this;
 			$('#step2 .new_ingredient_line').each(function(){
 				var $this = $(this);
@@ -537,21 +543,21 @@ define([
 				else{
 					ingredients[ingredient] = menge;
 				}
-				
+
 			});
-			
-			
+
+
 			var $ul = $('.lightbox ul').empty();
-			
+
 			for(var ingredient in ingredients){
 				var $ingredientLine = this.getIngredientLine();
 				$ingredientLine.children('.new_ingredient').val(ingredient);
 				$ingredientLine.children('.new_ingredient_menge').val(ingredients[ingredient]);
 				$ul.append($ingredientLine);
 			}
-			
-			
-			
+
+
+
 			return true;
 		},
 		checkValidateLightboxPersons : function(){
@@ -561,7 +567,7 @@ define([
 			if(persons !== ''  && Number(persons) > 0){
 				personcheck = true;
 			}
-			
+
 			return personcheck;
 		},
 		checkValidateLightboxIngredients : function(){
@@ -576,7 +582,7 @@ define([
 		},
 		mergeMenge : function(menge1, menge2){
 			//TODO falls z.B. kg und g zusammen auftreten etc...
-			
+
 			if(menge2.length === 0){
 				return menge1;
 			}
@@ -590,12 +596,12 @@ define([
 				var menge2EinheitPos = menge2.search(/[a-z]+/i);
 				var menge1Einheit = menge1.substring(menge1EinheitPos);
 				var menge2Einheit = menge2.substring(menge2EinheitPos);
-				
+
 				if(menge1Einheit === menge2Einheit){
 					newMenge =  (Number(menge1.substring(0, menge1EinheitPos-1)) +
 						Number(menge2.substring(0, menge1EinheitPos-1)))+' '+menge1Einheit;
 				}
-					
+
 			}else if(menge1.match(confirmRegex2) && menge2.match(confirmRegex2)){
 				newMenge = Number(menge1) + Number(menge2);
 			}
