@@ -261,11 +261,11 @@ define([
 					return false;
 				}
 			}).data('ui-autocomplete')._renderMenu = function( ul, items ) {
-              var that = this;
-              $.each( items, function( index, item ) {
-                that._renderItemData( ul, item );
-              });
-              $( ul ).addClass('ingredient-autocomplete new-ingredient-autocomplete');
+                var that = this;
+                $.each( items, function( index, item ) {
+                    that._renderItemData( ul, item );
+                });
+                $( ul ).addClass('ingredient-autocomplete new-ingredient-autocomplete');
             };
 
 			return $template;
