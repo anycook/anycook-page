@@ -672,7 +672,7 @@
 			</div>
 			<div id="resetpwstep2">
 				<form id="resetpwform2">
-				<p>Bitte gib dein neues Passwort ein:</p>
+				<p>Fast geschafft! Bitte gib dein neues Passwort ein:</p>
 					<table>
 					<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
 					<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
