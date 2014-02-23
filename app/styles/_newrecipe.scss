@@ -3,7 +3,7 @@
 	/*width:655px;*/
 	margin-left: (655px - 572px) / 2;
 	margin-bottom: 15px;
-	
+
 	.nav_button{
 		float:left;
 		background-color: $stepcolor;
@@ -14,15 +14,15 @@
 		margin: -16px 8px 0;
 		padding: 6px 0;
 		@include transition(all, 200ms, ease-in-out);
-		
+
 		font-size: 10pt;
 		color: $buttonfontcolor;
 		text-align: center;
-		
+
 		&:hover{
 			text-decoration: none;
 		}
-		
+
 		&.inactive{
 			background-color: $background;
 			border-color:$lightgrey;
@@ -30,7 +30,7 @@
 			cursor: default;
 			@include transition(all, 200ms, ease-out);
 		}
-		
+
 		&.active{
 			background-color: $activebuttonbackground;
 			border-color:$linkcolor;
@@ -38,7 +38,7 @@
 			@include transition(all, 200ms, ease-in);
 		}
 	}
-	
+
 }
 
 #recipe_editing_container{
@@ -51,24 +51,24 @@
 		width:655px;
 		top:0;
 		left:0;
-		
+
 		h2+p{
 			width:510px;
 		}
-		
+
 		&#step1{
 			.recipe_image_container{
 				margin: 10px 1px;
-				
+
 				#progressbar{
 					background-color: #5a5a5a;
 					height: 22px;
 					margin-top: -30px;
 					padding-bottom: 2px;
 					border-radius: 5px;
-					
+
 					box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.3);
-					
+
 					.ui-progressbar-value, .ui-progressbar{
 						border-radius: 5px;
 						margin: 0;
@@ -78,17 +78,17 @@
 
 				#file_upload{
 					display: none;
-				}	
-			}		
+				}
+			}
 		}
-		
+
 		&#step2{
 			left:655px;
-			
+
 			ul#new_step_container{
 				list-style: none;
 				margin: 0 0 5px;
-				
+
 				.step-placeholder{
               background:#ece9e3;
               border-radius: 10px;
@@ -96,11 +96,11 @@
               opacity:75%;
               width:503px;
         }
-				
+
 				.new_ingredient_step{
 					position: relative;
 					padding:10px 0;
-					
+
 					.new_step{
 						position:relative;
 						z-index: 2;
@@ -113,7 +113,7 @@
 								width: 110px;
 								height: 123px;
 								cursor: move;
-								
+
 								float:left;
 								.step_dragdrop{
 									height: 12px;
@@ -122,7 +122,7 @@
 									float:left;
 									background: url("/img/dragdrop.png") repeat;
 								}
-								
+
 								.number{
 									height: 99px;
 									margin:0;
@@ -130,13 +130,13 @@
 									border: 0;
 								}
 							}
-							
+
 							textarea{
 								float:left;
 								width: 350px;
 								height:113px;
 								margin: 8px 0;
-								
+
 							}
 						}
 					}
@@ -150,31 +150,31 @@
 						border-top: 0;
 						margin: 0 12px;
 						padding: 7px 10px 5px;
-						
+
 						h4{
 							margin-bottom: 2px;
-							
+
 							&.zutaten_headline{
 								float:left;
 								margin-left:150px;
 							}
-							
+
 							&.menge_headline{
 								margin-left:371px;
 							}
 						}
-						
+
 						.new_ingredient_question{
 							padding-left: 21px;
-							
+
 						}
-						
+
 						.yes, .no{
 							padding: 0 0 0 5px;
-							cursor: pointer;	
+							cursor: pointer;
 						}
-						
-						
+
+
 						.add_new_ingredient_line{
 							width: 20px;
 							height: 20px;
@@ -194,7 +194,7 @@
 								background-position: -20px -100px;
 								@include transition(opacity, .1s, ease-out);
 							}
-							
+
 							&:hover{
 								span{
 									opacity: 1;
@@ -203,7 +203,7 @@
 							}
 						}
 					}
-					
+
 					.remove_new_step{
 						position:absolute;
 						//margin: 20px 0 0 500px;
@@ -226,24 +226,24 @@
 							background-position: 0 -27px;
 							@include transition(opacity, .1s, ease-out);
 						}
-						
+
 						&:hover{
 							span{
 								opacity: 1;
 								@include transition(opacity, .1s, ease-out);
 							}
 						}
-						
+
 					}
-					
+
 				}
-				
+
 			}
-			#add_new_step{				
+			#add_new_step{
 				cursor:pointer;
 				height:27px;
 				float:left;
-				
+
 				.img{
 					float:left;
 					width:27px;
@@ -251,7 +251,7 @@
 					background-image: url("/img/stepbtn27x27.png");
 					background-position: -27px 0;
 					position: relative;
-					
+
 					span{
 						background-image: url("/img/stepbtn27x27.png");
 						position: absolute;
@@ -262,7 +262,7 @@
 						opacity: 0;
 						background-position: -27px -27px;
 						@include transition(opacity, .1s, ease-out);
-						
+
 					}
 				}
 				&:hover{
@@ -273,26 +273,26 @@
 						}
 					}
 				}
-				
+
 				.text{
 					color:$smalllightfontcolor;
 					padding: 4px 0 0 30px;
 				}
 			}
-			
+
 			#no_ingredients_error{
 				float:right;
 			}
-			
+
 			#ingredient_overview{
 				float:right;
 				margin-right:5px;
 			}
 		}
-		
+
 		&#step3{
 			left:1310px;
-			
+
 			p{
 				margin: 2px 0 5px;
 			}
@@ -308,12 +308,12 @@
 				font:$standardfont;
 				padding: 4px 6px 1px;
 				position: relative;
-				text-align: center;	
-				
+				text-align: center;
+
 				span{
-						
+
 				}
-				
+
 				div{
 					float:right;
 					background: url("/img/small_arrow8x8.png") no-repeat;
@@ -322,32 +322,32 @@
 					margin: 5px 3px;
 					height:8px;
 				}
-				
+
 				&.open{
 					div{
 						background-position: 0 0;
 					}
 				}
-				
-				
+
+
 				#category_select{
 					width:230px;
-					height:22px;					
+					height:22px;
 					opacity:0;
 					position: absolute;
 					left:0;
-					
+
 					&:focus{
 						outline:none;
 					}
-					
+
 					option{
 						opacity:1;
 					}
 				}
-				
+
 			}
-			
+
 			#new_muffins, #new_skill, #new_time{
 				font: 13pt Georgia;
 				color: #5A5A5A;
@@ -364,31 +364,28 @@
 				.time_container{
 					float:right;
 					margin-right: 4px;
-				}				
+				}
 				.label_container{
 					float:right;
 					padding-top: 2px;
 				}
 			}
-			
+
 			#new_time img{
 				margin-right: 4px;
 			}
-			
+
 			#new_muffins, #new_skill{
 				margin-top: 8px;
 			}
-			
+
 			#new_tags_container{
 				clear:both;
 				margin:20px 280px 0 0;
 				width:400px;
 				float:left;
-				h2, p{
-					float:left;
-				}
 			}
-			
+
 			#tagcloud{
 				float:left;
 			}
@@ -398,7 +395,7 @@
 				float: right;
 				margin-top: 10px;
 			}
-			
+
 			#submit_recipe{
 				margin-left: 10px;
 			}
@@ -406,32 +403,32 @@
 			#cancel_recipe{
 				display: none;
 			}
-			
+
 			a{
 				text-decoration: none;
 			}
-		}	
+		}
 	}
 }
 
 
 form.recipeediting{
 	clear:both;
-	
+
 	$inputwidth: 340px;
-	
+
 	h2{
 		//margin-top: 10px;
 		clear:both;
 	}
-	
-	
+
+
 	p{
 		margin: 2px 0 5px;
 		clear:both;
 		width:510px;
 	}
-	
+
 	input[type="text"]{
 		width: $inputwidth;
 		float:left;
@@ -443,20 +440,20 @@ form.recipeediting{
 		padding: 4px 5px;
 		float:left;
 	}
-	
+
 	.error{
 		margin: 7px 0 0 ($inputwidth + 12px);
 	}
-	
+
 	input[type="submit"]{
 		float:right;
-		
+
 	}
 }
 
 ul.new_ingredient_list{
 	list-style: none;
-	 
+
 	li{
 		height:30px;
 		margin-bottom: 6px;
@@ -469,20 +466,20 @@ ul.new_ingredient_list{
 			background-image: url("/img/dragdrop.png");
 			background-repeat: repeat;
 		}
-		
-		
+
+
 		.new_ingredient{
 			float:left;
 			width: 300px;
 			margin-right: 8px;
 		}
-		
+
 		.new_ingredient_menge{
 			float:left;
 			width: 80px;
 			margin-right: 4px;
 		}
-		
+
 		.remove_new_ingredient_line{
 			width: 20px;
 			height: 20px;
@@ -503,7 +500,7 @@ ul.new_ingredient_list{
 				background-position: 0 -100px;
 				@include transition(opacity, .1s, ease-out);
 			}
-			
+
 			&:hover{
 				span{
 					opacity: 1;
@@ -533,7 +530,7 @@ ul.new_ingredient_list{
 		background-position: -20px -100px;
 		@include transition(opacity, .1s, ease-out);
 	}
-	
+
 	&:hover{
 		span{
 			opacity: 1;
@@ -542,21 +539,21 @@ ul.new_ingredient_list{
 	}
 }
 
-.ingredient_overview{	
+.ingredient_overview{
 	width:516px;
 	min-height:360px;
-	
+
 	.contentbox{
 		width:462px;
 		min-height:360px;
 		height:auto;
-		
+
 		.numberinput{
 			float:none;
 			display: inline-block;
 		}
 	}
-	
+
 }
 
 

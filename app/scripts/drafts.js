@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 
@@ -58,10 +58,14 @@ define([
 					var $messageBubble = $('#settings_btn_container .new_messages_bubble');
 					if(num>0) { $messageBubble.fadeIn(200).children().text(num); }
 					else { $messageBubble.fadeOut(200); }
-					
-					// $.anycook.drafts.num(num);	
+
+					// $.anycook.drafts.num(num);
 					self.num(num);
-				});
+				}, function(){
+                    //error function
+                    console.log('failed to get last draft num. Trying again in 5 sec');
+                    setTimeout($.proxy(self.num, self), 5000);
+                });
 			}
 		},
 		open : function(id, callback){
@@ -96,7 +100,7 @@ define([
 			return $(_.template(draftFrameTemplate, data)).data('id', id);
 		},
 		parseDraftDate : function(date){
-			
+
 			var month = date.getMonth();
 			var day = date.getDate();
 			switch(month){
@@ -137,18 +141,18 @@ define([
 					month = 'Dez';
 					break;
 			}
-			
+
 			//console.log(year, month, day);
 			return day+'. '+month;
-			
-			
+
+
 		},
 		save : function(type, data){
 			var user = User.get();
 			var id = $.address.parameter('id');
 			if(!user.checkLogin || id === undefined) { return; }
-			
-			
+
+
 			var newData = {id:id, data:{}};
 			newData.data[type] = data;
 			queue.push(newData);

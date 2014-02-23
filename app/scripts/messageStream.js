@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 
@@ -39,7 +39,7 @@ define([
 				lightbox.show($lightbox, top);
 				return false;
 			});
-			
+
 			this.getNewsstream();
 		},
 		getNewMessageLightbox : function(){
@@ -57,7 +57,7 @@ define([
 		getNewsstream : function(lastDatetime){
 			var pathNames = $.address.pathNames();
 			if(pathNames.length !== 1 || pathNames[0] !== 'newsstream'){ return; }
-			
+
 			var $ul = $('#newsstream');
 			var timeout = 0;
 			if(lastDatetime) { timeout = 500; }
@@ -74,7 +74,7 @@ define([
 					}
 
 					var onComplete = function(){ $(this).remove(); };
-					
+
 					for(var i = 0; i<json.length; i++){
 						var $appendTo = $ul;
 						var $li;
@@ -84,7 +84,7 @@ define([
 							if(oldData.datetime !== data.datetime){
 								var $target = oldData.target;
 								$target.animate({height:0, opacity:0}, {duration: 800, complete: onComplete});
-								
+
 							}
 							else{ continue; }
 						}
@@ -94,12 +94,12 @@ define([
 							var oldHeight = $li.css('height');
 							$li.css({height:0, opacity:0}).animate({height:oldHeight, opacity:1}, {duration:800});
 						}
-						
+
 						json[i].target = $li;
 						datamap[json[i].id] = json[i];
-						//$li.data('data', json[i]);				
+						//$li.data('data', json[i]);
 					}
-					
+
 					$.extend(oldDatamap, datamap);
 					$ul.data('map', oldDatamap);
 					if(json.length >0) {
@@ -109,7 +109,7 @@ define([
 						var now = new Date();
 						lastDatetime = now.getTime();
 					}
-					
+
 					self.getNewsstream(lastDatetime);
 				});
 			}, timeout);
@@ -123,7 +123,7 @@ define([
 			var self = this;
 			AnycookAPI.message.number(num, function(newNum){
 				title.setPrefix(newNum);
-			
+
 				var $newMessageBubble = $('#message_btn_container .new_messages_bubble');
 				$newMessageBubble.children().text(newNum);
 				if(newNum <= 0) { $newMessageBubble.fadeOut(); }
@@ -133,19 +133,24 @@ define([
 					var audio = new Audio('sounds/newMessage.mp3');
 					audio.play();
 				}
-				
+
 				self.checkNewMessageNum(newNum);
-			});
+			},
+            //error
+            function(){
+                console.log('failed to get message num. Trying again in 5 seconds.');
+                setTimeout($.proxy(self.checkNewMessageNum, self), 5000);
+            });
 		},
 		clickRecipients : function(event){
 			var self = this;
 			var $target = $(event.target);
-			
+
 			var ids = this.getRecipientIds();
 			if(ids.length === 7){
 				return;
 			}
-			
+
 			var $input = $target.children('input');
 			if($input.length === 1){
 				$input.focus();
@@ -191,17 +196,17 @@ define([
 						var id = ui.item.data;
 						var name = ui.item.value;
 						self.addRecipient(name, id);
-						
+
 						return false;
 					}
 				});
-					
+
 				$('.ui-autocomplete').last().addClass('recipient-autocomplete')
 				.addClass('lightbox-autocomplete');
 				this.resizeMessageTextarea();
-					
+
 			}
-			
+
 		},
 		getRecipientIds : function(){
 			var ids = $('.recipients').data('ids');
@@ -212,24 +217,24 @@ define([
 			var $recipients = $('.recipients');
 			var ids = $('.recipients').data('ids');
 			if(!ids){ ids = []; }
-			
+
 			var $input = $recipients.children('input');
 			if($.inArray(id, ids) > -1){
 				$input.val('');
 				return;
 			}
-			
+
 			var $name = $('<div></div>').addClass('name').text(name);
-			
+
 			var $recipient = $('<div></div>').addClass('recipient')
 				.append($name)
 				.append('<div class=\'close\'>x</div>')
 				.data('id', id)
 				.click($.proxy(this.closeRecipient, this));
 			ids[ids.length] = id;
-			
+
 			$recipients.data('ids', ids);
-			
+
 			if($input.length > 0){
 				$input.before($recipient).val('').focus();
 				if($('.recipient').length === 7) {
@@ -239,10 +244,10 @@ define([
 				$recipients.append($recipient);
 			}
 
-				
-			
+
+
 			this.resizeMessageTextarea();
-			
+
 		},
 		removeRecipient : function(id){
 			var ids = $('.recipients').data('ids');
@@ -283,25 +288,25 @@ define([
 			var recipientIds = $recipients.data('ids') || [];
 			var $textarea = $('.new_message textarea');
 			var message = $textarea.val();
-			
+
 			if(!recipientIds || recipientIds.length === 0 || message.length === 0){
 				return;
 			}
-			
-			AnycookAPI.message.writeNew(recipientIds, encodeURIComponent(message),function(xhr){
+
+			AnycookAPI.message.writeNew(recipientIds, message,function(xhr){
 				console.log(xhr);
 			});
-			
+
 			//console.log(encodeURIComponent(message));
 			$recipients.empty().data('ids', []);
 			$textarea.val('');
-			
+
 			lightbox.hide();
-			
+
 		},
 		getMessageContainer : function(message){
 			var recipients = message.recipients;
-			
+
 			var $imageborder = $('<div></div>').addClass('messageimageborder');
 			var $headline = $('<div></div>').addClass('message_headline');
 			var $datetime = $('<div></div>').addClass('datetime').text(date.getDateTimeString(message.datetime));
@@ -310,13 +315,13 @@ define([
 			for(var i = 0; i<recipients.length; i++){
 				var recipient = recipients[i];
 				var $image = $('<img />').attr('src', User.getUserImagePath(recipient.id));
-				
+
 				if(recipient.id === message.sender) { $imageborder.prepend($image); }
 				else { $imageborder.append($image); }
-				
+
 				if(recipient.id === user.id) { continue; }
-				
-				
+
+
 				var $recipientlink = $('<a></a>')
 					.attr('href', User.getProfileURI(recipient.id))
 					.text(recipient.name);
@@ -324,47 +329,47 @@ define([
 					$headline.append('<span>, </span>');
 				}
 				$headline.append($recipientlink);
-				
+
 			}
-			
+
 			$imageborder.children().each(function(i){
 				$(this).css('left', i*60);
 			});
-			
-			
+
+
 			$headline.append('<span> und </span><a href=\''+user.getProfileURI()+'\'>Ich</a>');
 
 			var lastMessage = message.messages[message.messages.length-1];
 
 			var $p = $('<p></p>').html(lastMessage.text.replace(/\n/g,'<br/>'));
-			
+
 			var $messageright = $('<div></div>').addClass('message_right')
 				.append($headline)
 				.append($p)
 				.append($datetime);
-			
+
 			var $a = $('<a></a>').addClass('message').attr('href', '#/messagesession/'+message.id)
 				.append($imageborder)
 				.append($messageright);
-			
+
 			if(message.unread) {
 				$a.addClass('unread');
 			}
-			
+
 			var numImages = $imageborder.children().length;
 			if(numImages > 1){
-				
+
 				$a.mouseover(function(){
 					$imageborder.children().stop();
 					// var i = 0;
 					var $children = [];
-					
+
 					var $imgs = $imageborder.children();
-					
+
 					for(var i = 1; i < $imageborder.children().length; i++){
 						$children.push($imgs.eq(i));
 					}
-					
+
 					var animation = function(){
 						if($children.length>0){
 							$children.shift().animate({left:0}, {duration:500, easing:'easeInOutExpo', complete:animation});
@@ -375,11 +380,11 @@ define([
 					$imageborder.children().stop();
 					var $children = [];
 					var $imgs = $imageborder.children();
-					
+
 					for(var i = 0; i < $imageborder.children().length; i++){
 						$children.push($imgs.eq(i));
 					}
-					
+
 					var animation = function(){
 						if($children.length>0){
 							var $element = $children.pop();
