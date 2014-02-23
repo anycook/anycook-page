@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -34,7 +34,7 @@ define([
 	return {
 		setFromSession : function(){
 			this.reset();
-			
+
 			var search = Search.init();
 
 			if(search.kategorie){
@@ -58,19 +58,19 @@ define([
 			if(search.user){
 				this.setUserfilter(search.user);
 			}
-			
+
 			for(var num in search.zutaten) {
 				this.addIngredientRow(search.zutaten[num]);
 			}
-				
+
 			for(var num2 in search.excludedIngredients) {
 				this.addExcludedIngredientRow(search.excludedIngredients[num2]);
 			}
-			
+
 			for(var num3 in search.tags) {
 				$('.tags_list').append(tags.get(search.tags[num3], 'remove'));
 			}
-			
+
 			if(search.terms){
 				searchView.addTerms(search.terms);
 			}
@@ -82,10 +82,10 @@ define([
 			$('#filter_main').show().css({paddingBottom: '20px', height: 'auto'});
 			$('#filter_main *').not('ul.kategorie_filter, #userfilter, #userfilter *, label .active').show().css('opacity', 1);
 			$('#filter_headline').text('Filter');
-			
+
 			$('#time_form > *').show();
 			$('#time_form .time_text_end').text('h');
-			
+
 			$('#time_std, #time_min').val('0');
 			this.removeChecked();
 			//blockFilter(false);
@@ -95,14 +95,14 @@ define([
 			for(var i= 0; i<6; i++){
 				$ingredientList.append('<li></li>');
 			}
-			
+
 			$('.tags_list').empty();
-			
+
 			$('#kategorie_head').text('keine Kategorie');
 			$('#kategorie_filter_hidden').val('keine Kategorie');
-			
+
 			$('#userfilter').hide();
-			
+
 			$('.search_term').remove();
 			$('#terms_text').hide();
 			$('.close_term').off('click', searchView.removeTerm);
@@ -113,7 +113,7 @@ define([
 				if($target.parents('.step_1_right').length === 0){
 					$target.append('<li><span class="left">alle Kategorien</span><span class="right"></span></li>');
 				}
-				
+
 				AnycookAPI.category.sorted(function(json){
 					var totalrecipes = 0;
 					for(var k in json){
@@ -135,7 +135,7 @@ define([
 			if($kategorieList.height() === newHeight) {
 				newHeight += $kategorieList.children('ul').height()+6;
 			}
-			
+
 			$kategorieList.animate({
 				height:newHeight
 			}, {
@@ -160,7 +160,7 @@ define([
 				$target = $target.children('.left');
 			}
 			var text = $target.text();
-			
+
 			this.setKategorie(text);
 			this.handleCategories(event);
 		},
@@ -178,7 +178,7 @@ define([
 		},
 		closeCategories : function(event){
 			var $target = $(event.target);
-			
+
 			if(!$target.parents().andSelf().is('#kategorie_filter') && $('#kategorie_filter').hasClass('on')){
 				this.handleCategories();
 			}
@@ -206,7 +206,7 @@ define([
 			var value = $obj.val();
 
 			var search = Search.init();
-				
+
 			switch($obj.attr('class')){
 			case 'chefhats':
 				search.setSkill(value);
@@ -235,7 +235,7 @@ define([
 			if(!$('#filter_main').is('.blocked')){
 				var $target = $(event.target);
 				var $input = $target.find('input');
-				
+
 				if($input.length > 0) {
 					$input.focus();
 				}
@@ -245,14 +245,14 @@ define([
 						if($li) { return; }
 						if($(this).children().length === 0) { $li = $(this); }
 					});
-					
+
 					if(!$li){
 						$li = $('<div></div>');
 						$target.append($li);
 					}
-					
+
 					$li.append('<input type="text" /><div class="close"></div>');
-					
+
 					$input = $li.children('input');
 					$li.children('.close').hide();
 					$input
@@ -340,12 +340,14 @@ define([
 		},
 		//userfilter
 		setUserfilter : function(userId){
+            var self = this;
 			AnycookAPI.user(userId, function(user){
 				var uri = User.getProfileURI(userId);
 				var imagePath = AnycookAPI.user.image(userId);
 				$('#userfilter a').attr('href', uri);
 				$('#userfilter img').attr('src', imagePath);
 				$('#userfilter_name').text(user.name);
+                $('#userfilterremove').click(self.removeUserfilter);
 
 				if($('#userfilter').css('display') === 'none'){
 					$('#userfilter').css({display:'block', opacity:0, height:0}).animate({height:50}, {
@@ -356,12 +358,6 @@ define([
 					});
 				}
 			});
-		},
-		showUserfilterremove : function(){
-			$('#userfilterremove').fadeIn(300);
-		},
-		hideUserfilterremove : function(){
-			$('#userfilterremove').fadeOut(300);
 		},
 		removeUserfilter : function(){
 			$('#userfilter').animate({opacity:0}, {duration:400, complete:function(){
@@ -383,12 +379,12 @@ define([
 				if($li) { return; }
 				if($this.children().length === 0) { $li = $this; }
 			});
-			
+
 			if(!$li){
 				$li = $('<li></li>');
 				$ingredientList.append($li);
 			}
-			
+
 			var template = _.template(ingredientRowTemplate, {name : ingredient});
 			$li.append(template);
 			return $li;
@@ -415,10 +411,10 @@ define([
 			$('#filter_headline').text('Legende');
 			$('#filter_main').addClass('blocked');
 			$('#kategorie_head').text(recipe.category);
-			
+
 			$('#time_form > *').not('.time_text_end').hide();
 			$('#time_form .time_text_end').text(time.fillStd(recipe.time.std)+' : '+time.fillMin(recipe.time.min)+' h');
-			
+
 			var persons = Number(recipe.persons);
 
 			this.makeIngredientHeaderForRecipe(persons);
@@ -489,7 +485,7 @@ define([
 					$(this).data('amount', amount);
 				}
 				var newValue = stringTools.getNumbersFromString(amount, perscount);
-				
+
 				if(recipe){
 					var zutat = recipe.ingredients[i];
 					//var currentzutattext = $(this).prev().text();
