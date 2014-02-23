@@ -127,7 +127,7 @@ define([
 							}else{
 								$messageContainer.hide().fadeIn(1000).animate({backgroundColor:'#E6E2D7', borderColor:'#C2C0BE'},
 									{duration:2000, complete:function(){
-										$messageContainer.css('backgroundColor', '');
+										$messageContainer.removeClass('new');
 									}});
 							}
 						}
