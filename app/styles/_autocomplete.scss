@@ -81,7 +81,6 @@
 		color:$smalllightfontcolor;
 		@include box-shadow(0, 2px, 2px, rgba(0,0,0,0.3));
 		
-		
 		&.ui-menu{
 			padding: 0 2px;
 			$width:$width - 4;
@@ -111,6 +110,10 @@
 	  		margin: 0px;
 		}
 		
+	}
+
+	&.new-ingredient-autocomplete{
+		width: 306px !important;
 	}
 	
 	&.newtag-autocomplete{
