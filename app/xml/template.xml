@@ -226,9 +226,9 @@
 	    		<div id="new_tags_container">
 		    		<h2>Stichwörter:</h2>
 		    		<p>Hilf den anderen beim finden indem du viele Stichwörter hinzufügst</p>
-		    		<div class="tagsbox"></div>
+		    		<div id="new_recipe_tagsbox" class="tagsbox"></div>
 		    		<p>Die bekanntesten Stichwörter:</p>
-		    		<div id="tagcloud"></div>
+		    		<div id="new_recipe_tagcloud" class="tagcloud"></div>
 	    		</div>
 	    		<div class="button" id="open_preview">zur Vorschau</div>
     		</div>

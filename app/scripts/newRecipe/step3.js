@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -22,8 +22,9 @@ define([
 	'AnycookAPI',
 	'drafts',
 	'filters',
-	'time',
-], function($, AnycookAPI, drafts, filters, time){
+    'tags',
+	'time'
+], function($, AnycookAPI, drafts, filters, tags, time){
 	'use strict';
 	return {
 		load : function(){
@@ -42,7 +43,7 @@ define([
 				self.isValid();
 				$('#category_error').fadeOut(300);
 			});
-			
+
 			$('#step3 .label_chefhats, #step3 .label_muffins').click(function(event){
 				event.preventDefault();
 				var $inputs = $(this).children('input');
@@ -93,11 +94,56 @@ define([
 				self.isValid();
 				$('#time_error').fadeOut(300);
 			});
-				
-			$('.tagsbox').click($.proxy(this.makeNewTagInput, this));
+
+			$('#new_recipe_tagsbox').click({
+                add : $.proxy(this.addTag, this),
+                remove : $.proxy(this.removeTag, this)
+            }, $.proxy(tags.makeInput, tags))
+                .on('click', '.tag_remove', function(){
+                    var tag = $(this).prev().text();
+                    self.removeTag(tag);
+                    return false;
+                });
+            tags.makeCloud('#new_recipe_tagcloud', function(event){
+                var $clickedTag = $(event.target).parents('.tag');
+                var tag = $clickedTag.find('.tag_text').text();
+                self.addTag(tag);
+
+                $clickedTag.animate({
+                    opacity:0
+                }, {
+                    duration:150,
+                    complete:function(){
+                        $(this).animate({
+                            width:0,
+                            margin: 0,
+                            padding:0
+                        }, {
+                            duration:300,
+                            easing: 'swing',
+                            complete:function(){ $(this).remove(); }
+                        });
+                    }
+                });
+            });
+
+
+
 			//this.makeTagCloud();
 			$('#open_preview').click($.proxy(this.submit, this));
 		},
+        addTag : function(tag){
+            var $tag = tags.get(tag, 'remove');
+            $('#new_recipe_tagsbox input').remove();
+            $('#new_recipe_tagsbox').append($tag);
+            this.draftTags();
+        },
+        removeTag : function(tag){
+            $('#new_recipe_tagsbox .tag_text').each(function(){
+                if($(this).text() === tag) { $(this).parents('.tag').remove(); }
+            });
+            this.draftTags();
+        },
 		checkCategory : function(){
 			var category = $('#select_container span').text();
 			return category !== '' && category !== 'Kategorie auswählen';
@@ -158,22 +204,22 @@ define([
 				$('#category_error').fadeIn(300);
 				check = false;
 			}
-			
+
 			if(!this.checkTime()){
 				$('#time_error').fadeIn(300);
 				check = false;
 			}
-			
+
 			if(!this.checkSkill()){
 				$('#skill_error').fadeIn(300);
 				check = false;
 			}
-			
+
 			if(!this.checkCalorie()){
 				$('#muffin_error').fadeIn(300);
 				check = false;
 			}
-			
+
 			if(!check){
 				$('#open_preview').effect('shake', {distance:5, times:2}, 50);
 			}else{
