@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 
@@ -28,17 +28,17 @@ define([
 	return {
 		get : function(name, type, number){
 			var $tag;
-			
+
 			if(type === 'link' || type === 'linknumber') {
 				$tag = $('<a href="#/search/tagged/'+name+'"></a>');
 			}
 			else {
 				$tag = $('<div></div>');
 			}
-				
+
 			var $right = $tag.addClass('tag').append('<div class="right"></div>').children()
 				.append('<div class="tag_text">'+name+'</div>');
-			
+
 			if(type === 'remove'){
 				var $remove = $('<div>x</div>').addClass('tag_remove')
 					.click($.proxy(this.removeNewTag, this));
@@ -47,7 +47,7 @@ define([
 			else if(type === 'number' || type === 'linknumber') {
 				$right.append('<div class="tag_num">'+number+'</div>');
 			}
-				
+
 			return $tag;
 		},
 		remove : function(event){
@@ -62,14 +62,14 @@ define([
 			var data ='';
 
 			var self = this;
-			
+
 			var recipe = Recipe.getRecipeName();
 			if(recipe !== null) {
 				data += 'recipe='+recipe;
 			}
 
 			$tagcloud.on('click', '.tag', addTag);
-			
+
 			AnycookAPI.tag.popular(recipe, function(response){
 				for(var tag in response){
 					$tagcloud.append(self.get(tag, 'number', response[tag]));
@@ -92,13 +92,13 @@ define([
 				console.error('no remove function defined');
 				$.extend(event.data, {remove : function(text) {console.log('with callback '+text+' would be removed');}});
 			}
-			
+
 			if(event !== undefined){
 				if($target.parents().andSelf().is('.tag')) {
 					return;
 				}
 			}
-				
+
 			if($target.children('input').length === 0 && $target.parents('.blocked').length === 0){
 				//make new input field
 				$target.append('<input type="text"/>')
@@ -138,22 +138,27 @@ define([
 							self.makeInput(event);
 							return false;
 						}
-					});
+					}).data('ui-autocomplete')._renderMenu = function( ul, items ) {
+                        var that = this;
+                        $.each( items, function( index, item ) {
+                            that._renderItemData( ul, item );
+                        });
+                        $( ul ).addClass('newtag-autocomplete lightbox-autocomplete');
+                    };
 
-				$('.ui-autocomplete').last().addClass('newtag-autocomplete');
 				// if($this.hasClass("tags_list"))
-					
+
 				$('body').click(function(event){
 					if($(event.target).parents().andSelf().is($($target))) {
 						return;
 					}
-						
+
 					$target
 						.removeClass('active')
 						.children('input').remove();
 				});
 			}
-				
+
 			$target.children('input').focus();
 		},
 		removeInput : function(event){
@@ -188,7 +193,7 @@ define([
 					data : event.data
 				});
 			}
-			
+
 		},
 		//search
 		searchTag : function(tag){
