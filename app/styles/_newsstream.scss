@@ -15,8 +15,8 @@
 		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 		-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 	    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	    
-		
+
+
 		.top{
 			$news-top-height: 50px;
 			//height: $news-top-height;
@@ -24,7 +24,7 @@
 			float: left;
 			background-color: $stepcolor;
 			border-bottom:1px solid $lightgrey;
-			
+
 			h2{
 				font-size: 13pt;
 				letter-spacing: 0.02em;
@@ -36,8 +36,8 @@
 				font-style: italic;
 			}
 		}
-		
-		
+
+
 		ul{
 			$height:350px;
 			margin-top:5px;
@@ -49,12 +49,12 @@
 			list-style: none;
 			font:$standardfont;
 			text-align: left;
-			
+
 			&:focus{
 				outline:none;
 			}
-			
-			
+
+
 			li{
 				border-bottom: 1px solid $lightgrey;
 				width:100%;
@@ -62,11 +62,11 @@
 				height: 49px;
 				color:$darkfontcolor;
 				background-color: $imginnerbordercolor;
-				
+
 				&.following{
 				  background-color: $background-right;
 				}
-				
+
 				.left{
 					float:left;
 					width:32px;
@@ -87,7 +87,7 @@
 				}
 			}
 		}
-	}	
+	}
 
 	#newestRecipes{
 		float: right;
@@ -103,7 +103,7 @@
 	}
 }
 
-		
+
 
 #newMessageBtn{
 	float: right;
@@ -113,7 +113,7 @@
 #nomessages{
   padding-left: 23px;
 
-  
+
   h1{
     text-align: center;
     font-size: 23pt;
@@ -126,7 +126,7 @@
     margin: auto;
     text-align: center;
     margin-top: 10px;
-  }  
+  }
 }
 
 
@@ -138,7 +138,7 @@ ul#newsstream, ul#messagestream{
 	list-style: none;
 	clear: both;
 	outline: none;
-	
+
 
 	li{
 		$bigpicturewidth:50px + 18px;
@@ -151,13 +151,11 @@ ul#newsstream, ul#messagestream{
 		padding: 0 0 15px 0;
 
 		a{
-			float: left;
-
 			img{
 				width: 50px;
-				height: 50px;	
+				height: 50px;
 				@include box-shadow-spread(0px, 1px, 2px, 0px, rgba(0, 0, 0, 0.2));
-				border-radius: 5px;		
+				border-radius: 5px;
 			}
 		}
 
@@ -167,27 +165,27 @@ ul#newsstream, ul#messagestream{
 			width: 16px;
 			height: 21px;
 			background: url("/img/comment_arrow16x21.png") no-repeat;
-			margin: 16px -1px 0 3px;	
+			margin: 16px -1px 0 3px;
 		}
 
-		
+
 		.messagecontainer{
 			float: left;
 			width: $bigcommentwidth;
 			min-height: 40px;
 			border:1px solid $lightgrey;
-			border-radius: 5px;  
+			border-radius: 5px;
 			background-color: $stepcolor;
 			padding: 7px 12px 5px 12px;
 			//margin: 0 0 15px 0;
 			color: $darkfontcolor;
 			@include box-shadow-spread(0px, 1px, 1px, 0px, rgba(127,127,127,0.1));
 			@include transition(background-color, .8s, ease-out);
-		  	
+
   			.message_headline{
-				height: 17px;	
+				height: 17px;
 				width:100%;
-				
+
 				.datetime{
 					margin-left:4px;
 					@include transition(opacity, .4s, ease-out);
@@ -195,16 +193,16 @@ ul#newsstream, ul#messagestream{
 					color: $smalllightfontcolor;
 				}
 			}
-          
+
           	.message_content{
 	            margin: 2px 0;
-            
+
 	            p{
 	              color: $darkfontcolor;
 	            }
           	}
 
-          	&:hover{	
+          	&:hover{
 				.datetime{
 					@include transition(opacity, .2s, ease-in);
 					opacity:1;
@@ -215,7 +213,7 @@ ul#newsstream, ul#messagestream{
 				background-color: $activebuttonbackground;
 			}
     	 }
-     
+
 	}
 	//Eigene Nachrichten rechtsbündig
 	li.self{
@@ -226,17 +224,17 @@ ul#newsstream, ul#messagestream{
 		.comment_arrow, a{
 			float:right;
 		}
-		
+
 		.comment_arrow{
-			background-position: 0 -21px;	
-			margin: 16px 3px 0 -1px;	
+			background-position: 0 -21px;
+			margin: 16px 3px 0 -1px;
 		}
-		
+
 		.messagecontainer a{
 			float: left;
 			text-align: left;
 		}
-		
+
 		li{
 			img{
 					float: right;
@@ -255,7 +253,7 @@ ul#newsstream, ul#messagestream{
 	height:60px;
 	position:relative;
 	overflow: hidden;
-	
+
 	img{
 		position:absolute;
 		margin:5px;
@@ -273,10 +271,10 @@ ul#newsstream, ul#messagestream{
 	padding:12px;
 	color:$darkfontcolor;
 	@include transition(border-color, .2s, ease-in-out);
-	
+
 	.message_right{
 		margin-left:72px;
-		
+
 		.message_headline{
 			color: $activebuttonfontcolor;
 		}
@@ -286,7 +284,7 @@ ul#newsstream, ul#messagestream{
 			font-size:10pt;
 			color:$darkfontcolor;
 		}
-		
+
 		.datetime{
 		  float: left;
 			margin-top:5px;
@@ -295,19 +293,19 @@ ul#newsstream, ul#messagestream{
 			@include transition(opacity, .2s, ease-in-out);
 		}
 	}
-	
+
 	&.unread{
 		background-color: $activebuttonbackground;
 		border-color: $activebuttonoutline;
 		@include transition(background-color, .2s, ease-in-out);
-		@include transition(border-color, .2s, ease-in-out);		
+		@include transition(border-color, .2s, ease-in-out);
 	}
-	
+
 	&:hover{
 		text-decoration: none;
 		@include box-shadow-spread(0, 3px, 2px, -2px, $shadowbeige);
 		@include transition(box-shadow, .15s, ease-in);
-		
+
 		.message_right{
 			.datetime{
 				opacity:1;
@@ -327,17 +325,17 @@ ul#newsstream, ul#messagestream{
 
 	.right{
 		margin-left:12px;
-		float:right;		
+		float:right;
 		$width:348px;
 		width:$width;
-		
+
 		p{
 			font-size: 10pt;
 			margin-top:2px;
 			color:$smalllightfontcolor;
-			
+
 		}
-		
+
 		.recipients{
 			cursor: text;
 			float:left;
@@ -352,7 +350,7 @@ ul#newsstream, ul#messagestream{
 			border: 1px solid #C2C0BE;
 			border-radius: 3px;
 			@include box-shadow2-spread(0, 2px, 0px, -1px, #ddd9d2,0, 2px, 0, 0, #c2c0be);
-			
+
 			input{
 				float: left;
 				font: 10pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
@@ -362,7 +360,7 @@ ul#newsstream, ul#messagestream{
 				border:0;
 				@include no-box-shadow();
 			}
-			
+
 			.recipient{
 				float:left;
 				background-color: $tags;
@@ -372,7 +370,7 @@ ul#newsstream, ul#messagestream{
 				font-size: 8pt;
 				padding: 1px 1px;
 				margin: 1px 5px 2px 0;
-				
+
 				.name{
 					float:left;
 					padding:0 2px;
@@ -388,7 +386,7 @@ ul#newsstream, ul#messagestream{
 		}
 		textarea{
 			width:$width - 16;
-			
+
 			height:95px;
 			margin-bottom:5px;
 		}
@@ -398,13 +396,13 @@ ul#newsstream, ul#messagestream{
 #message_answer{
 	padding:12px 0;
 	border-top:1px solid $lightgrey;
-	
+
 	.new_message{
 		background-color:#e6e2d7;
 		width: 510px - 26px;
 		margin: 0 72px;
-		
-			
+
+
 		textarea{
 			float:left;
 			//min-height:95px;
@@ -414,7 +412,7 @@ ul#newsstream, ul#messagestream{
 			overflow: hidden;
 		}
 	}
-	
+
 	input[type="submit"]{
 		float:right;
 		margin: 12px 72px 0 0;
