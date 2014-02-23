@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -32,6 +32,7 @@ define([
 			});
 
 			$('#mail_form').submit($.proxy(this.setNewMail, this));
+            $('#pass_form').submit($.proxy(this.changePassword, this));
 
 			var user = User.get();
 			this.loadAccount(user);
@@ -41,14 +42,14 @@ define([
 				complete : $.proxy(this.completeUpload, this)
 			};
 			$('#file_upload').change(data, $.proxy(imageUpload.user, imageUpload));
-			
-			
+
+
 			$('#upload_button').click(function(event){
 				event.preventDefault();
 				$('#file_upload').trigger('click');
 			});
 
-			
+
 			if(user.facebookID <= 0){
 				$('#showpassword').click(function() {
 					var $container = $('#new_password_container');
@@ -60,7 +61,7 @@ define([
 					else{
 						$newPassword.attr('type', 'password');
 					}
-					
+
 					$password.remove();
 					$(this).before($newPassword);
 				});
@@ -69,7 +70,7 @@ define([
 		loadAccount : function(user){
 			$('.profile_image img').attr('src', user.getUserImagePath('large'));
 			$('#account_name').val(user.name).blur($.proxy(this.saveAccount, this));
-			$('#account_mail').val(user.mail).blur($.proxy(this.saveMail, this));
+			$('#account_mail').val(user.mail);
 			$('#account_aboutme').val(user.text).blur($.proxy(this.saveAccount, this));
 			$('#account_place').val(user.place).blur($.proxy(this.saveAccount, this));
 
@@ -90,13 +91,13 @@ define([
 						$('#'+type+' input[type="checkbox"]').attr('checked', 'checked');
 					}
 				}
-				
+
 				var $bigCheckbox = $('#mail_notification input').change($.proxy(self.toggleNotifications, self));
 				if(checker){
 					$bigCheckbox.attr('checked', 'checked');
 					$('#settings_notification_content').show();
 				}
-				
+
 				$('#settings_notification_content input').change($.proxy(self.saveNotifications, self));
 			});
 		},
@@ -221,6 +222,29 @@ define([
 				window.alert('Deine Emailaddresse konnte nicht geändert werden');
 			});
 		},
+        changePassword : function(event){
+            event.preventDefault();
+            var oldPw = $("#password_old").val();
+            var newPw = $("#password_new").val();
+
+            $('#pass_form .error_message').removeClass('on');
+
+            if(oldPw.length > 0 || newPw.length > 0){
+                var self = this;
+                if(!this.checkPwd(newPw)){ $('#failed_regex').addClass('on'); }
+                else{
+                    AnycookAPI.setting.changePassword(oldPw, newPw,
+                    //success
+                    function(){
+                        self.saved($('#pwd_saved'));
+                    },
+                    //error
+                    function(){
+                        $('#wrong_password').addClass('on');
+                    });
+                }
+            }
+        },
 		saved : function($container){
 			$container.stop(true).fadeIn(500, function(){
 				$container.delay(2000).fadeOut(500);
@@ -231,9 +255,9 @@ define([
 			return regex.test(mail);
 		},
 		checkPwd : function(pwd){
-			var regex = /((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/;
+			var regex = /((?=.*\d)(?=.*[a-zA-Z@#$%]).{6,20})/;
 			return regex.test(pwd);
 		}
 	};
-	
+
 });

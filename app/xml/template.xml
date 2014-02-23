@@ -26,7 +26,7 @@
 				</div>
 
 			</div>
-	    		    	
+
 	    	<div class="bottom_container">
 	    		<div>
 	    			<span id="num_recipes"></span> Rezepte, <span id="num_ingredients"></span> Zutaten, <span id="num_tags"></span> Tags
@@ -41,7 +41,7 @@
     	<p>u.a. open source</p>
     </template>
     <template id="search">
-    	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div>   		
+    	<div id="search_terms"><div id="terms_text">verwendete Suchbegriffe:</div></div>
        	<div id="result_container"></div>
     </template>
     <template id="recipe">
@@ -168,7 +168,7 @@
 							<div class="down"></div>
 						</div>
 						<div class="time_text_end">h</div>
-					</div>			
+					</div>
 	    		</div>
 	    		<div id="time_error" class="error">Du hast noch keine Zeit eingetragen</div>
 	    		<div id="new_skill">
@@ -246,7 +246,7 @@
 					<a href="#/recipeediting?step=2" title="Schritte bearbeiten">
 						<ul id="step_container"></ul>
 					</a>
-					
+
 				</div>
 				<div class="button" id="submit_recipe">Rezept einreichen</div>
 				<a class="button" id="cancel_recipe" href="#/drafts">später weiterbearbeiten</a>
@@ -280,7 +280,7 @@
 		<div id='kontakt' class="footerpages">
 			<h1>Feedback</h1>
 				<form id='contactform'>
-				
+
 				<table>
 				<tr>
 					<td class="formdescription">
@@ -312,7 +312,7 @@
 						</div>
 						<ul id="formSubjectChoice">
 							<li>Ich will meine Meinung loswerden</li>
-							<li>Ich habe einen Fehler gefunden!</li>									
+							<li>Ich habe einen Fehler gefunden!</li>
 							<li>Ich habe ein Problem mit der Anmeldung</li>
 							<li>Ich habe ein Problem mit einem Rezept</li>
 							<li>Ich habe ein Problem mit einem User</li>
@@ -343,12 +343,12 @@
 					<div id="SendButton">Senden</div>
 				</td>
 				</tr>
-				
+
 				</table>
-				
+
 				</form>
 			</div>
-		
+
 	</template>
 	<template id="about_us">
 		<div id="about_us" class="footerpages">
@@ -357,14 +357,14 @@
 				<div class="column left">
 					<h2>Die Idee</h2>
 					<p>
-						anycook ist die schnellste und intuitivste Rezeptesuche" Das ist die zentrale Idee von anycook. 
-						Um dies zu ermöglichen verfolgen wir zwei Ansätze: Zum einen entwickeln wir eine effektive Suche, 
+						anycook ist die schnellste und intuitivste Rezeptesuche" Das ist die zentrale Idee von anycook.
+						Um dies zu ermöglichen verfolgen wir zwei Ansätze: Zum einen entwickeln wir eine effektive Suche,
 						die möglichst alle denkbaren Suchansätze von Usern beinhaltet und zum anderen begrenzen wir die Auswahl an Rezepten.
-						Jedes Rezept existiert nur einmal. Es können aber alle User auf anycook zusammen an Rezepten arbeiten. 
+						Jedes Rezept existiert nur einmal. Es können aber alle User auf anycook zusammen an Rezepten arbeiten.
 						Die User kontrollieren sich gegenseitig und die Qualität der Rezepte wird besser.
-						Auf anycook findest du nicht nur sehr schnell das Rezept, das du suchst, 
-						sondern kannst auch davon ausgehen, dass die Qualität stimmt. 
-						Um die User, die gerne Rezepte eintragen, zu unterstützen nimmt auch unser Editor 
+						Auf anycook findest du nicht nur sehr schnell das Rezept, das du suchst,
+						sondern kannst auch davon ausgehen, dass die Qualität stimmt.
+						Um die User, die gerne Rezepte eintragen, zu unterstützen nimmt auch unser Editor
 						bei der Erstellung von Rezepten möglichst viel Arbeit ab.
 					</p>
 				</div>
@@ -379,7 +379,7 @@
 						Rezepten und Mitgliedern aufgebaut. Doch können diese Webseiten mit den klassischen
 						Kochbüchern konkurrieren? Zu Beginn des Sommersemesters 2010 setzten wir uns mit
 						dieser Frage auseinander und entwickelten nach einer intensiven Recherche ein eigenes
-						Konzept einer Rezepte-Suchmaschine. Aus diesem Konzept entstand letztendlich anycook in 
+						Konzept einer Rezepte-Suchmaschine. Aus diesem Konzept entstand letztendlich anycook in
 						seiner aktuellen Form.
 					</p>
 				</div>
@@ -439,7 +439,7 @@
 	<template id="profile">
 		<div class="profile_container">
 			<div class="profile_data">
-				<img class="profile_image" src=""/>					
+				<img class="profile_image" src=""/>
 				<div class="profile_info">
 					<div class="profile_title">
 						<h1></h1>
@@ -516,9 +516,9 @@
 	    					</div>
 	    					<div id="upload_button" class="button">durchsuchen</div>
 	    					<input id="file_upload" type="file"/>
-	    				</div>	
-	    				<div id="progressbar"></div>		
-						<img src=""/>								
+	    				</div>
+	    				<div id="progressbar"></div>
+						<img src=""/>
 					</div>
 					<ul id="account_data">
 						<li>
@@ -539,7 +539,7 @@
 
 					</ul>
 			</div>
-			
+
 			<div id="settings_mail" class="settings">
 				<h2 class="border_headline">Email-Adresse ändern</h2>
 				<div id="mail_saved" class="settings_saved">gespeichert</div>
@@ -560,32 +560,37 @@
 					<p>Bist du vegetarier oder nutzt andere Tags bei jeder Suche?</p>
 					<div class="tagsbox"></div>
 					<p>Die bekanntesten Tags als Inspiration:</p>
-					<div id="tagcloud"></div> -->					
+					<div id="tagcloud"></div> -->
 				</form>
 			</div>
 
 
-			
-			
+
+
 			<div id="settings_pass" class="settings">
 				<h2 class="border_headline">Passwort ändern</h2>
 				<div id="pwd_saved" class="settings_saved">gespeichert</div>
 				<form id="pass_form">
-					<div id="old_password_container">
-						<p class="password_label">Gib dein altes Passwort ein.</p>
-						<input type="password" id="password_old"/>
-					</div>
-					<div id="new_password_container">
-						<p class="password_label">Gib dein neues Passwort ein.</p>
-						<input type="password" id="password_new"/>
-						<div id="showpassword">Passwort anzeigen</div>
-					</div>
-					<div id="password_secure"></div>
-					<input type="submit" value="speichern"/>
+                    <div class="passwords">
+    					<div id="old_password_container">
+    						<p class="password_label">Gib dein altes Passwort ein.</p>
+    						<input type="password" id="password_old"/>
+    					</div>
+    					<div id="new_password_container">
+    						<p class="password_label">Gib dein neues Passwort ein.</p>
+    						<input type="password" id="password_new"/>
+    						<div id="showpassword">Passwort anzeigen</div>
+    					</div>
+    					<div id="password_secure">
+                            <div id="failed_regex" class="error_message">Dein neues Passwort muss mindestens 6 Zeichen lang sein und Zahlen und Buchstaben enthalten.</div>
+                            <div id="wrong_password" class="error_message">Das war nicht dein altes Passwort.</div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Speichern"/>
 				</form>
 			</div>
-			
-			
+
+
 			<div id="settings_notification" class="settings">
 				<h2 class="border_headline">Erweiterte Einstellungen</h2>
 				<div id="notification_saved" class="settings_saved">gespeichert</div>
@@ -624,7 +629,7 @@
 						<td>Newsletter</td>
 						<td><div class="checkbox"><input type="checkbox" name="notification_newsletter" value="newsletter" /><label></label></div></td>
 					</tr>
-					</table>						
+					</table>
 				</div>
 
 				<div class="headbox" id="fb_notification"><h2>Facebook Funktionen</h2><input type="checkbox" name="fbnotification" value="FBACTIVATION" /><label class="bigcheckbox"></label></div>
@@ -639,10 +644,10 @@
 				<div id="no_facebook">Verbinde dich jetzt mit deinem Facebook-Account nutze weitere Funktionen<div id="facebook_login"></div></div>
 			</div>
 		</div>
-		
+
 	</template>
 	<template id="fbregistration">
-			<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>				
+			<div id="fbregister_message" class='content_message'><h5></h5><p></p></div>
 	</template>
 	<template id="resetpassword">
 		<div class="footerpages">
@@ -656,7 +661,7 @@
 						<div id="no_user" class="error_message">Diesen Nutzer gibt es nicht in unserer Datenbank.</div>
 						<div id="send_mail" class="success_message">Wir haben dir eine E-Mail geschickt.</div>
 					</div>
-					
+
 
 					<input type="submit" value="abschicken"/>
 						<!-- <table>
@@ -672,9 +677,9 @@
 					<tr><td>Passwort:</td><td><input id="resetpw1" type="password"/></td><td class="error"></td></tr>
 					<tr><td>Passwort wiederholen:</td><td><input id="resetpw2" type="password"/></td><td class="error"></td></tr>
 					<tr><td></td><td><input type="submit" value="abschicken"/></td><td class="error"></td></tr>
-					</table> 
+					</table>
 				</form>
-			</div>				
+			</div>
 		</div>
 	</template>
 	<template id="registration">
@@ -717,7 +722,7 @@
 			<div id="discover_tasty"></div>
 			<div id="discover_recommended" class="discover_recipes"></div>
 		</div>
-	</template>	
+	</template>
 	<template id="notfound">
 		<div class="paperrip"></div>
 		<div class="notfound_content">
@@ -727,7 +732,7 @@
 			<div class="404recipes"></div>
 			<p><a href="/#!/?page=discover">Entdecke</a> weitere Rezepte oder erfahre mehr <a href="/#!/about_us">über uns</a>.</p>
 		</div>
-	</template>		
+	</template>
 	<template id="confirmMail" access="restricted">
 		<p>Deine EMailaddresse wurde efolgreich zu <span id="newMail"></span> geändert.</p>
 	</template>
