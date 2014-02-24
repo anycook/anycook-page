@@ -18,7 +18,7 @@
     display: inline-block;
     position: relative;
   }
-  
+
   .login_btn{
     background-color:$stepcolor;
     text-shadow: 1px 1px 0px #fff;
@@ -50,7 +50,7 @@
     }
   }
   .register_btn{
-    background-color: $green; 
+    background-color: $green;
     text-shadow: 1px 1px 0px #92bd4f;
     color: white;
     border-top-right-radius:8px;
@@ -86,110 +86,113 @@
 }
 
 #login_menu{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  top: 0;
-  visibility: hidden;
-  z-index: 95;
+    position: absolute;
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+    opacity: 0;
+    top: 0;
+    z-index: 95;
 
-  &.visible{
-    visibility: visible;
-    opacity: 1;
-    @include transition(opacity, .3s, ease-in-out);
-  }
-  .blackOverlay{
-      background: rgba(0,0,0,.4);
-      position:fixed; 
-      width:100%; 
-      height:100%; 
-      z-index:99;
-  }
-  .menu{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -175px;
-    margin-left: -168px;
-    width: 416px;
-    height: 330px;
-    z-index: 100;
-    background-color: $background;
-    padding: 40px 0px 0px 0px;
-    overflow: hidden;
-    
+    &.visible{
+        opacity: 1;
+        height: 100%;
+        width: 100%;
+        visibility: visible;
 
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.3));
-    
-    .loginContainer{
-      padding: 0 40px;
-      background-color: $background;
-      h1{
-        text-align: center;
-        font-size: 22pt;
-        padding: 20px 0;
+        @include transition(opacity, .3s, ease-in-out);
+    }
+      .blackOverlay{
+          background: rgba(0,0,0,.4);
+          position:fixed;
+          width:100%;
+          height:100%;
+          z-index:99;
       }
+      .menu{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -175px;
+        margin-left: -168px;
+        width: 416px;
+        height: 330px;
+        z-index: 100;
+        background-color: $background;
+        padding: 40px 0px 0px 0px;
+        overflow: hidden;
 
-      input[type=text],input[type=password]{
-        width: 90%;
-        height: 34px;
-        margin: 0 auto 20px auto;
-        display: block;
 
-      }
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        @include box-shadow(0, 2px, 2px, rgba(0,0,0,0.3));
 
-      .errorMsg{
-        color: $error;
-        width: 310px;
-        position: absolute;
-        margin: -28px 0 0 12px;
-        visibility: hidden;
-        opacity: 0;
-
-        a{
-          color: $error;
-          text-decoration: underline;
-          cursor: pointer;
-
-          &:hover{
-            color: #9e3131;
-            text-decoration: underline;
+        .loginContainer{
+          padding: 0 40px;
+          background-color: $background;
+          h1{
+            text-align: center;
+            font-size: 22pt;
+            padding: 20px 0;
           }
-        }
 
-        &.visible{
-          visibility: visible;
-          opacity: 1;
-          @include transition(opacity, .1s, ease-in-out);
-        }
-      }
-      
-      .subcontainer{
-          width: 94%;
-          margin: 0 auto 20px auto;
-          display: block;
-          height: 50px;
-
-          .remember{
+          input[type=text],input[type=password]{
+            width: 90%;
+            height: 34px;
+            margin: 0 auto 20px auto;
             display: block;
-            width: 175px;
-            float: left;
-            padding: 10px 0;
+
           }
 
-          input[type=submit]{
-            float: right;
-            height: 36px;
-            line-height: 36px;
-            padding: 0 30px;
-            background-color: $headergreen;
-            color: white;
+          .errorMsg{
+            color: $error;
+            width: 310px;
+            position: absolute;
+            margin: -28px 0 0 12px;
+            visibility: hidden;
+            opacity: 0;
+
+            a{
+              color: $error;
+              text-decoration: underline;
+              cursor: pointer;
+
+              &:hover{
+                color: #9e3131;
+                text-decoration: underline;
+              }
+            }
+
+            &.visible{
+              visibility: visible;
+              opacity: 1;
+              @include transition(opacity, .1s, ease-in-out);
+            }
           }
-      }
+
+          .subcontainer{
+              width: 94%;
+              margin: 0 auto 20px auto;
+              display: block;
+              height: 50px;
+
+              .remember{
+                display: block;
+                width: 175px;
+                float: left;
+                padding: 10px 0;
+              }
+
+              input[type=submit]{
+                float: right;
+                height: 36px;
+                line-height: 36px;
+                padding: 0 30px;
+                background-color: $headergreen;
+                color: white;
+              }
+          }
     }
     .registerContainer{
       background-color: $background-right;

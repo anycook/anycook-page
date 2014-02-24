@@ -41,16 +41,6 @@ define([
 			$('#login_menu').toggleClass('visible');
 			$('#signin_btn').toggleClass('focus');
 		},
-		/*initMenus : function(){
-			//loginmenu
-			$('#login_container form').submit(submitForm);
-			$('#facebook_login').click(fbLogin);
-			$('.social').click(clickSignin);
-			$('#stayloggedin div').click(function(){
-				var checkbox = $('#stayloggedin input');
-				checkbox.attr('checked', !checkbox.attr('checked'));
-			});
-		},*/
 		//called if #signin_btn is clicked
 		focusInputs : function(event){
 			var target = $(event.target);
