@@ -101,6 +101,11 @@
         visibility: visible;
 
         @include transition(opacity, .3s, ease-in-out);
+
+        .menu{
+            width: 416px;
+            height: 330px;
+        }
     }
       .blackOverlay{
           background: rgba(0,0,0,.4);
@@ -115,8 +120,8 @@
         left: 50%;
         margin-top: -175px;
         margin-left: -168px;
-        width: 416px;
-        height: 330px;
+        width: 0px;
+        height: 0px;
         z-index: 100;
         background-color: $background;
         padding: 40px 0px 0px 0px;
