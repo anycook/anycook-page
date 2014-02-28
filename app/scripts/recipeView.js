@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -36,10 +36,10 @@ define([
 	return {
 		profileRecipe : function(recipe){
 			var uri = '#!/recipe/'+encodeURIComponent(recipe);
-			
+
 			var $img = $('<img/>').attr('src', AnycookAPI.recipe.image(recipe));
 			var $div =$('<div></div>').append('<span>'+recipe+'</span>');
-			
+
 			var $link = $('<a></a>').addClass('profile_rezept_bild').attr('href', uri)
 				.append($img)
 				.append($div);
@@ -62,9 +62,10 @@ define([
 					.text(recipe.author.name);
 				$('#autoren').append($author);
 				filters.setFromRecipe(recipe);
+                $('.recipe_image').attr('src', recipe.image.big);
 			});
-			
-			$('.recipe_image').attr('src', AnycookAPI.recipe.image(recipeName, 'large'));
+
+
 
 			AnycookAPI.recipe.ingredients(recipeName, versionid, function(ingredients){
 				if(decodeURIComponent($.address.pathNames()[1]) !== recipeName){
@@ -83,7 +84,7 @@ define([
 			AnycookAPI.recipe.steps(recipeName, versionid, $.proxy(this.loadSteps, this));
 
 			//recipe_image
-			
+
 
 			// var steps = recipe.steps;
 			// loadSteps(steps);
@@ -108,7 +109,7 @@ define([
 				$('#tags').click($.proxy(loginMenu.toggle, loginMenu));
 			}
 
-			
+
 
 			// if($.address.pathNames().length == 3 && user.level > 0){
 			// addEditingHandler();
@@ -117,7 +118,7 @@ define([
 			//Autoren
 			// var num_autoren = recipe.authors.length;
 			// var $autoren = $('#autoren span');
-		// 
+		//
 			// for(var i in recipe.authors) {
 				// var author = recipe.authors[i];
 				// $autoren.append('<a href='#!/profile/' + author.id + ''>' + author.name + '</a>');
@@ -208,7 +209,7 @@ define([
 				$li.children().last().addClass('amount').text(menge);
 				$ingredientList.append($li);
 			}
-			
+
 			if($ingredientList.children().length <6){
 				var length = $ingredientList.children().length;
 				for(var j = 0; j<= 6-length; j++){
@@ -218,9 +219,9 @@ define([
 		},
 		loadTags : function(tagsList){
 			var $tagsList = $('.tags_list').empty();
-				
+
 			if(!tagsList){ return; }
-			
+
 			for(var i = 0; i < tagsList.length; i++){
 				$tagsList.append(tags.get(tagsList[i], 'link'));
 			}

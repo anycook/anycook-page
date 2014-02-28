@@ -8,6 +8,7 @@ define([
 	//c'tor
 	function Recipe(){
 		this.name =null;
+        this.image = null;
 		this.category = null;
 		this.beschreibung = null;
 		this.skill = null;
@@ -25,11 +26,11 @@ define([
 
 	Recipe.getRecipeName = function(){
 		var pathNames = $.address.pathNames();
-		
+
 		if(pathNames.length < 2 || pathNames[0] !== 'recipe'){
 			return null;
 		}
-			
+
 		return pathNames[1];
 	};
 
@@ -50,6 +51,7 @@ define([
 		recipe.id = json.id;
 		recipe.created = json.created;
 		recipe.active = json.active;
+        recipe.image = json.image;
 		return recipe;
 	};
 
@@ -68,7 +70,7 @@ define([
 	};
 
 	Recipe.prototype.getImageURL = function(type){
-		return AnycookAPI.recipe.image(this.name, type);
+		return this.image[type];
 	};
 
 	Recipe.getImageURL = function(recipename, type){
