@@ -1,17 +1,10 @@
-//common functions 
+//common functions
 @mixin transition($type, $duration, $ease){
 	transition: $type  $duration $ease;
 	-webkit-transition: $type  $duration $ease;
 	-moz-transition: $type  $duration $ease;
 	-ms-transition: $type  $duration $ease;
 	-o-transition: $type  $duration $ease;
-}
-
-@mixin border-radius($topLeft, $topRight, $bottomRight, $bottomLeft){
-	border-top-left-radius: $topLeft;
-	border-top-right-radius: $topRight;
-	border-bottom-right-radius: $bottomRight;
-	border-bottom-left-radius: $bottomLeft;
 }
 
 @mixin no-box-shadow(){
@@ -25,14 +18,14 @@
 	box-shadow: $right $bottom $blur $color;
 	-moz-box-shadow: $right $bottom $blur $color;
 	-webkit-box-shadow: $right $bottom $blur $color;
-	-o-box-shadow: $right $bottom $blur $color;	
+	-o-box-shadow: $right $bottom $blur $color;
 }
 
 @mixin box-shadow-spread($right, $bottom, $blur, $spread, $color){
 	box-shadow: $right $bottom $blur $spread $color;
 	-moz-box-shadow: $right $bottom $blur $spread $color;
 	-webkit-box-shadow: $right $bottom $blur $spread $color;
-	-o-box-shadow: $right $bottom $blur $color;	
+	-o-box-shadow: $right $bottom $blur $color;
 }
 
 @mixin box-shadow2($right, $bottom, $blur, $color, $right2, $bottom2, $blur2, $color2){
@@ -68,21 +61,21 @@
   box-shadow: inset $right $bottom $blur $color;
   -moz-box-shadow: inset $right $bottom $blur $color;
   -webkit-box-shadow:inset $right $bottom $blur $color;
-  -o-box-shadow: inset $right $bottom $blur $color; 
+  -o-box-shadow: inset $right $bottom $blur $color;
 }
 
 @mixin box-shadow-inset2($right, $bottom, $blur, $size, $color){
   box-shadow: inset $right $bottom $blur $size $color;
   -moz-box-shadow: inset $right $bottom $blur $size $color;
   -webkit-box-shadow:inset $right $bottom $blur $size $color;
-  -o-box-shadow: inset $right $bottom $blur $size $color; 
+  -o-box-shadow: inset $right $bottom $blur $size $color;
 }
 
 @mixin box-shadow-inset-spread($right, $bottom, $blur, $spread, $color){
 	box-shadow: inset $right $bottom $blur $spread $color;
 	-moz-box-shadow: inset $right $bottom $blur $spread $color;
 	-webkit-box-shadow:inset $right $bottom $blur $spread $color;
-	-o-box-shadow: inset $right $bottom $blur $spread $color;	
+	-o-box-shadow: inset $right $bottom $blur $spread $color;
 }
 
 @mixin border-bottom-image($url, $top, $right, $vert){
@@ -113,7 +106,7 @@
     // -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$startColor,$endColor); /* IE8+ */
     background-image: linear-gradient($startColor, $endColor); /* the standard */
   }
-  
+
  @mixin gradient-vertical2 ($startColor, $endColor) {
 
     background-image: -webkit-gradient(linear, center top, center bottom, from($startColor 90%), to($endColor));

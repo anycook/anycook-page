@@ -264,7 +264,6 @@
 		background-color:$imginnerbordercolor;
 		border:1px solid $lightbrown;
 		border-top: 0;
-		@include border-radius(0px, 0px, 5px, 5px);
 
 		table{
 			width: 100%;

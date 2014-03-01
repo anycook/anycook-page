@@ -1,4 +1,4 @@
-.profile_container{	
+.profile_container{
 	$width: 600px;
 	width: $width;
 	display: inline-block;
@@ -12,27 +12,27 @@
 		padding: 20px;
 		position: relative;
 		min-height: 155px;
-		
+
 		.profile_image{
 			float:left;
 			border: 8px solid $stepcolor;
 			outline: 1px solid $lightgrey;
 			width:200px;
 		}
-		
+
 		.profile_info{
 			float:left;
 			width: $width - 245px;
 			margin: 8px 0 0 25px;
 			color: $smalllightfontcolor;
-			
+
 			.profile_title{
 				position: relative;
-				
+
 				h1{
 					width: 325px;
 				}
-				
+
 				#stamp{
 					background: url("/img/following.png") no-repeat;
 					z-index: 20;
@@ -43,11 +43,11 @@
 					right: -38px;
 					top: -17px;
 				}
-				
 
-				
+
+
 			}
-			
+
 			.profile_date, .profile_place{
 				div{
 					float: left;
@@ -58,7 +58,7 @@
 					background-position: -100px -20px;
 				}
 			}
-			
+
 			.profile_place{
 				margin-top:4px;
 				display:none;
@@ -66,7 +66,7 @@
 					background-position: -120px -20px;
 				}
 			}
-			
+
 			.profile_date, .profile_text, .profile_position{
 				margin-top: 8px;
 				width: 325px;
@@ -76,13 +76,13 @@
 				font: 11pt Georgia serif;
 				font-style: italic;
 			}
-			
+
 			// .writemassage{
 				// width: 180px;
 				// float: left;
 				// margin-right: 5px;
 				// cursor: pointer;
-	// 			
+	//
 				// .massageicon{
 						// width: 20px;
 						// height: 13px;
@@ -92,7 +92,7 @@
 						// background: url("/img/icons20x20.png") no-repeat;
 						// background-position: -40px -100px;
 				// }
-	// 			
+	//
 				// &:hover{
 						// .massageicon{
 								// background-position: -40px -120px;
@@ -101,18 +101,18 @@
 			// }
 
 		}
-		
+
 		.profile_achievements{
 			float:right;
 			position: absolute;
 			bottom: 28px;
 			left: 250px;
-			
-			
+
+
 			.achievement{
 				float:left;
 				margin:0 10px;
-				
+
 				.count{
 					font: $headlinefont;
 					font-size: 13pt;
@@ -125,21 +125,21 @@
 				}
 			}
 		}
-		
+
 	}
 
 	.profile_buttons{
-	    
+
 	    width: $width+40px;
 	    float: left;
 	    height: 50px;
-	    border: 1px solid $lightgrey; 
+	    border: 1px solid $lightgrey;
 	    border-top: 0px;
-	    @include border-radius(0px,0px,5px,5px);
+	    @include border-radius(0px 0px 5px 5px);
 	    background: $stepcolor url("/img/diagonal_texture.png");
 
 
-	    
+
 	    .button{
 	      float: right;
 	      margin: 11px 10px 0 0;
