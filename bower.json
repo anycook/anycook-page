@@ -11,7 +11,8 @@
     "requirejs-text": "~2.0.10",
     "jquery.autoellipsis": "~1.0.10",
     "jquery-autosize": "~1.18.4",
-    "anycook-api-js": "anycook/anycook-api-js"
+    "anycook-api-js": "anycook/anycook-api-js",
+    "requirejs-tpl-jfparadis": "*"
   },
   "devDependencies": {}
 }

@@ -23,7 +23,7 @@ define([
 	'AnycookAPI',
 	'classes/User',
 	'date',
-	'text!templates/dialogBox.erb',
+	'tpl!templates/dialogBox',
 	'jquery-autosize'
 ], function($, _, AnycookAPI, User, date, dialogBoxTemplate){
 	'use strict';
@@ -165,7 +165,7 @@ define([
 				self : sender.id === user.id
 			};
 
-			return $(_.template(dialogBoxTemplate, data));
+			return $(dialogBoxTemplate(data));
 
 		}
 	};

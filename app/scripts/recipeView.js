@@ -30,7 +30,7 @@ define([
 	'loginMenu',
 	'stringTools',
 	'tags',
-	'text!templates/share.erb'
+	'tpl!templates/share'
 ], function($, _, AnycookAPI, FB, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags, shareTemplate){
 	'use strict';
 	return {
@@ -306,7 +306,7 @@ define([
 			$share.children('.img').hide();
 
 			var twitterTarget = 'https://twitter.com/share?url=' + encodeURIComponent('http://anycook.de/' + recipeURI);
-			var template = _.template(shareTemplate, {
+			var template = shareTemplate({
 				url : recipeURI,
 				twitterTarget : twitterTarget
 			});

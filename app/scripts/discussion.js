@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -24,15 +24,15 @@ define([
 	'classes/User',
 	'date',
 	'loginMenu',
-	'text!templates/discussionEvent.erb',
-	'text!templates/discussionAnswerSmall.erb',
+	'tpl!templates/discussionEvent',
+	'tpl!templates/discussionAnswerSmall',
 	'jquery-autosize'
 ], function($, _, AnycookAPI, User, date, loginMenu, discussionEventTemplate, discussionAnswerSmallTemplate){
 	'use strict';
 	return {
 		load : function(recipeName) {
 			$.xml.append('recipe_discussion');
-			
+
 			//discussion
 			$('.center_headline').html('Diskussion zum Rezept<br/>' + decodeURIComponent(recipeName));
 			var user = User.get();
@@ -66,15 +66,15 @@ define([
 				if(pathNames[0] !== 'recipe' || decodeURI(pathNames[1]) !== recipeName){
 					return;
 				}
-				
+
 				var user = User.get();
 				var login = user.checkLogin();
 				var newLastid = lastid;
 				if(json) {
 					var discussion = $commentDiscussion.data('discussion') || {};
-					
+
 					var $ul = $commentDiscussion.children('ul');
-					
+
 					var elements = json.elements;
 
 					var onComplete = function(){
@@ -102,7 +102,7 @@ define([
 							$li.data('comment_id', parentId);
 						}
 						$li.data('id', elements[i].id);
-						
+
 						if(lastid>-1){
 							var height = $li.height();
 							$li.css({'height': 0, 'opacity': 0});
@@ -167,7 +167,7 @@ define([
 			if(login){
 				$like.click($.proxy(this.discussionLike, this));
 			}
-			
+
 			$comment.append($commentHeadline).append($text).append($footer);
 			$li.append($arrow).append($comment);
 
@@ -184,7 +184,7 @@ define([
 
 			var $li = $('<li></li>').addClass('event');
 
-			var discussionEvent = _.template(discussionEventTemplate, json);
+			var discussionEvent = discussionEventTemplate(json);
 			$li.html(discussionEvent);
 
 			return $li;
@@ -257,11 +257,11 @@ define([
 			}else{
 				$childComment.remove();
 			}
-			
+
 			return false;
 		},
 		getChildComment : function(user){
-			var $template = $(_.template(discussionAnswerSmallTemplate, {
+			var $template = $(discussionAnswerSmallTemplate({
 				profileUri : user.getProfileURI(),
 				userImage : user.getUserImagePath('small')
 			}));
@@ -294,7 +294,7 @@ define([
 							$(this).remove();
 						});
 					});
-					
+
 				}
 				return false;
 			}

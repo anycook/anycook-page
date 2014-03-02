@@ -310,8 +310,7 @@ module.exports = function (grunt) {
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         'xml/template.xml',
-                        'sounds/*.mp3',
-                        'templates/{,*/}*.erb'
+                        'sounds/*.mp3'
                     ]
                 }]
             },
@@ -355,7 +354,9 @@ module.exports = function (grunt) {
                     out            : '.tmp/concat/scripts/main.js',
                     paths : {
                         'FB' : 'empty:'
-                    }
+                    },
+                    stubModules: ['text', 'tpl'],
+                    removeCombined: true
                 }
             }
         },

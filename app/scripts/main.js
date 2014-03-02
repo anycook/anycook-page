@@ -60,6 +60,7 @@ require.config({
 		'plusone' : 'lib/plusone',
 		'text' : '../bower_components/requirejs-text/text',
 		'templates' : '../templates',
+        'tpl': '../bower_components/requirejs-tpl-jfparadis/tpl',
 		'underscore' : '../bower_components/underscore/underscore'
 	},
 	shim : {
@@ -200,7 +201,10 @@ require.config({
 		'underscore' : {
 			exports : '_'
 		}
-	}
+	},
+    tpl: {
+        extension: '.erb' // default = '.html'
+    }
 });
 
 require([

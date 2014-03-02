@@ -26,7 +26,7 @@ define([
 	'date',
 	'lightbox',
 	'title',
-	'text!templates/newMessageDialog.erb'
+	'tpl!templates/newMessageDialog'
 ], function($, _, AnycookAPI, User, date, lightbox, title, newMessageDialogTemplate){
 	'use strict';
 	return {
@@ -44,7 +44,7 @@ define([
 		},
 		getNewMessageLightbox : function(){
 			var user = User.get();
-			var content = _.template(newMessageDialogTemplate, {userImagePath : user.getUserImagePath()});
+			var content = newMessageDialogTemplate({userImagePath : user.getUserImagePath()});
 			var $lightbox = lightbox.get('Neue Nachricht',
 				'Schreibe einem oder mehreren Usern eine Nachricht', content, 'abschicken');
 			$lightbox.find('form').submit($.proxy(this.submitNewMessage, this));

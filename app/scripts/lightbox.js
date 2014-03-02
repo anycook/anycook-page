@@ -1,26 +1,26 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
 	'jquery',
 	'underscore',
-	'text!templates/lightbox.erb'
+	'tpl!templates/lightbox'
 ], function($, _, lightboxTemplate){
 	'use strict';
 	return {
@@ -31,19 +31,19 @@ define([
 				content : content,
 				inputValue : inputValue
 			};
-			var $lightbox = $(_.template(lightboxTemplate, data));
+			var $lightbox = $(lightboxTemplate(data));
 			$('#main').append($lightbox);
-			
+
 			$lightbox.css('left', this.getLeft()).hide();
 			return $lightbox;
 		},
 		show : function($lightbox, top, callback){
 			callback = callback || function(){};
-			
+
 			$lightbox.show();
 			this.resize();
-			
-			
+
+
 			$lightbox.css({
 				top : top,
 				left : this.getLeft()
@@ -66,16 +66,16 @@ define([
 					});
 				}
 			});
-				
+
 			var self = this;
 			$('body').click(function(event){
 				var $target = $(event.target);
 				if($target.parents().andSelf().is('.lightbox') || $target.parents().andSelf().is('.lightbox-autocomplete')) {
 					return;
 				}
-					
+
 				self.hide($lightbox);
-				
+
 				$(this).unbind('click');
 			});
 		},
@@ -102,15 +102,15 @@ define([
 			});
 
 			var self = this;
-				
+
 			$('body').click(function(event){
 				var $target = $(event.target);
 				if($target.parents().andSelf().is('.lightbox') || $target.parents().andSelf().is('.lightbox-autocomplete')){
 					return;
 				}
-					
+
 				self.hide($lightbox);
-				
+
 				$(this).unbind('click');
 			});
 		},

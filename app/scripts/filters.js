@@ -27,7 +27,7 @@ define([
 	'stringTools',
 	'tags',
 	'time',
-	'text!templates/filters/ingredientRow.erb'
+	'tpl!templates/filters/ingredientRow'
 ], function($, _, AnycookAPI, Search, User, searchView, stringTools, tags, time, ingredientRowTemplate){
 	'use strict';
 	// alle Filter
@@ -385,7 +385,7 @@ define([
 				$ingredientList.append($li);
 			}
 
-			var template = _.template(ingredientRowTemplate, {name : ingredient});
+			var template = ingredientRowTemplate({name : ingredient});
 			$li.append(template);
 			return $li;
 		},

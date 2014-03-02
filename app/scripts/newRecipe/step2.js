@@ -23,10 +23,10 @@ define([
 	'AnycookAPI',
 	'drafts',
 	'lightbox',
-	'text!templates/newRecipe/ingredientStep.erb',
-	'text!templates/newRecipe/ingredientLine.erb',
-	'text!templates/lightboxContent/newIngredientsContent.erb',
-	'text!templates/lightboxContent/newIngredientsHeadline.erb',
+	'tpl!templates/newRecipe/ingredientStep',
+	'tpl!templates/newRecipe/ingredientLine',
+	'tpl!templates/lightboxContent/newIngredientsContent',
+	'tpl!templates/lightboxContent/newIngredientsHeadline',
 	'jquery.inputdecorator',
 	'jquery.ui.sortable'
 ], function($, _, AnycookAPI, drafts, lightbox, ingredientStepTemplate, ingredientLineTemplate, newIngredientsContentTemplate, newIngredientsHeadlineTemplate){
@@ -189,7 +189,7 @@ define([
 				text : text
 			};
 
-			var $template = $(_.template(ingredientStepTemplate, data));
+			var $template = $(ingredientStepTemplate(data));
 			$template.find('.remove_new_step span').click($.proxy(this.removeStep, this));
 			$template.find('.add_new_ingredient_line span').click($.proxy(this.addIngredientLine, this));
 			$template.find('.new_ingredient_list').sortable({
@@ -222,7 +222,7 @@ define([
 				menge : menge || ''
 			};
 
-			var $template = $(_.template(ingredientLineTemplate, data));
+			var $template = $(ingredientLineTemplate(data));
 			$template.find('.new_ingredient_menge').focusout($.proxy(this.formatMenge, this));
 			$template.find('.remove_new_ingredient_line').click($.proxy(this.removeIngredientLine, this));
 
@@ -426,12 +426,11 @@ define([
 			//ingredientOverview
 			var numPersons = $('#step2').data('numPersons');
 
-			var headline = _.template(newIngredientsHeadlineTemplate,
-				{numPersons : !numPersons ? 0 : numPersons});
+			var headline = newIngredientsHeadlineTemplate({numPersons : !numPersons ? 0 : numPersons});
 
 			$('<ul></ul>').addClass('new_ingredient_list');
 
-			var content = newIngredientsContentTemplate;
+			var content = newIngredientsContentTemplate();
 
 			var $lightbox = lightbox.get(headline,
 			'Dies sind alle Zutaten, die du in den Schritten angegeben hast. '+

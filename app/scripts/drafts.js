@@ -23,7 +23,7 @@ define([
 	'underscore',
 	'AnycookAPI',
 	'classes/User',
-	'text!templates/draftFrame.erb'
+	'tpl!templates/draftFrame'
 ], function( $, _, AnycookAPI, User, draftFrameTemplate){
 	'use strict';
 
@@ -97,7 +97,7 @@ define([
 				year : date.getFullYear()
 			};
 
-			return $(_.template(draftFrameTemplate, data)).data('id', id);
+			return $(draftFrameTemplate(data)).data('id', id);
 		},
 		parseDraftDate : function(date){
 

@@ -24,8 +24,8 @@ define([
 	'classes/Recipe',
 	'classes/Search',
 	'classes/User',
-	'text!templates/emptySearchResult.erb',
-	'text!templates/searchResult.erb',
+	'tpl!templates/emptySearchResult',
+	'tpl!templates/searchResult',
 	'jquery.autoellipsis'
 ], function($, _, AnycookAPI, Recipe, Search, User, emptySearchResultTemplate, searchResultTemplate){
 	'use strict';
@@ -263,12 +263,12 @@ define([
 				schmeckt : schmeckt
 			});
 
-			var template = _.template(searchResultTemplate, json);
+			var template = searchResultTemplate(json);
 			return template;
 
 		},
 		showEmptyResult : function(){
-			$('#result_container').html(emptySearchResultTemplate);
+			$('#result_container').html(emptySearchResultTemplate());
 			AnycookAPI.discover.recommended(function(json){
 				$('#discover_recommended').recipeoverview('diese Rezepte könnten dir auch schmecken...', json);
 			});
