@@ -480,11 +480,13 @@ require([
 		appId  : '143100952399957',
 		status : true, // check login status
 		cookie : true, // enable cookies to allow the server to access the session
-		xfbml  : true //, // parse XFBML
+		xfbml  : false //, // parse XFBML
 		//oauth  : true // enable OAuth 2.0
 	});
 
-	FB.Event.subscribe('auth.sessionChange', $.proxy(facebook.sessionChange, facebook));
-	//FB.Event.subscribe('auth.authResponseChange', fbSessionChange);
-	//FB.getLoginStatus(fbSessionChange);
+	//FB.Event.subscribe('auth.sessionChange', $.proxy(facebook.sessionChange, facebook));
+	FB.Event.subscribe('auth.authResponseChange', $.proxy(facebook.sessionChange, facebook));
+	//FB.getLoginStatus($.proxy(facebook.sessionChange, facebook));
+    //facebook.login();
+    $('body').on('click', '.facebookLogin', $.proxy(facebook.login, facebook));
 });

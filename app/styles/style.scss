@@ -6,6 +6,7 @@
 @import "lib/lengths";
 @import "recipeoverview";
 @import "global";
+@import "facebook";
 @import "lightbox";
 @import "search";
 @import "recipe";
@@ -1205,6 +1206,12 @@ header{
 	padding: 40px 12px 13px 12px;
 	margin-left: -99px;
 	margin-top: -120px;
+
+    &#facebookpopup{
+        width: 500px;
+        height: auto;
+        margin-left: -250px;
+    }
 
 	img{
 		position: absolute;

@@ -85,10 +85,6 @@
               background-position-y: -48px;
             }
 
-            &#facebook_login{
-              background-image: url("/img/facebook_signin.png");
-            }
-
             &#twitter_login{
               background-image: url("/img/twitter_signin.png");
             }
@@ -98,7 +94,13 @@
             }
           }
 
-  }
+    }
+
+    .facebookLogin{
+        display: block;
+        margin: 10px auto;
+    }
+
   #reg_step2{
     position: absolute;
     left: 700px;

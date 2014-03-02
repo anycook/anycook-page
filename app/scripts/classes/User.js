@@ -174,6 +174,15 @@ define([
 		return callback;
 	};
 
+    User.facebookLogin = function(signedRequest){
+        var callback = false;
+        AnycookAPI.session.login.facebook(signedRequest, function(response){
+            callback = response !== 'false';
+            // checkNewMessageNum();
+        });
+        return callback;
+    };
+
 	User.prototype.logout = function(){
         var dfd = $.Deferred();
 		this.level = -1;
