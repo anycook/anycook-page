@@ -21,8 +21,9 @@ define([
 	'jquery',
 	'AnycookAPI',
 	'classes/User',
-    'userMenu'
-], function($, AnycookAPI, User, userMenu){
+    'userMenu',
+    'tpl!templates/login'
+], function($, AnycookAPI, User, userMenu, loginTemplate){
 	'use strict';
 	return {
 		buildLogin : function(){
@@ -31,11 +32,9 @@ define([
 			$('#login_container form').submit(submitForm);*/
 			var self = this;
 
-			$.get('/templates/login.erb', function(template){
-				$('body').append(template);
-				$('#signin_btn, #login_menu .blackOverlay, #login_menu a, #login_menu .facebookLogin').click(self.toggle);
-				$('#login_menu form').submit($.proxy(self.submitForm, self));
-			});
+			$('body').append(loginTemplate());
+			$('#signin_btn, #login_menu .blackOverlay, #login_menu a, #login_menu .facebookLogin').click(self.toggle);
+			$('#login_menu form').submit($.proxy(self.submitForm, self));
 		},
 		toggle : function(){
 			$('#login_menu').toggleClass('visible');
