@@ -23,11 +23,12 @@ define([
 	'AnycookAPI',
 	'classes/User',
 	'date',
+    'drafts',
 	'loginMenu',
 	'tpl!templates/discussionEvent',
 	'tpl!templates/discussionAnswerSmall',
 	'jquery-autosize'
-], function($, _, AnycookAPI, User, date, loginMenu, discussionEventTemplate, discussionAnswerSmallTemplate){
+], function($, _, AnycookAPI, User, date, drafts, loginMenu, discussionEventTemplate, discussionAnswerSmallTemplate){
 	'use strict';
 	return {
 		load : function(recipeName) {
@@ -46,9 +47,7 @@ define([
 				$('#no_comment').click($.proxy(loginMenu.toggle, loginMenu));
 			}
 
-			$('#edit_recipe').click(function(){
-				$.anycook.drafts.getDraftFromRecipe(recipeName);
-			});
+			$('#edit_recipe').click(function(){ drafts.getDraftFromRecipe(recipeName); });
 
 			$('#hide_discussion').click($.proxy(this.toggle, this));
 
