@@ -74,7 +74,7 @@ define([
 
 			var mail = $form.find('input[type="text"]').val();
 			var pwd = $form.find('input[type="password"]').val();
-			var stayloggedin =$('#stayloggedin input').is(':checked');
+			var stayloggedin =$('#stayLoggenIn').is(':checked');
 			AnycookAPI.session.login(mail, pwd, stayloggedin, function(){
 				$.when(User.init()).then(function(user){
                     if(user.checkLogin()){
