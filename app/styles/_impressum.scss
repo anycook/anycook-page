@@ -1,24 +1,10 @@
-#impressum{
-	#websiteinfo{
-		float: left;
-		width: 287px;
-		margin: 0 0 20px 10px;
-		
-		p{
-			padding: 0 0;
-		}
-	}
+.site_notice{
 
-	.border_headline{
-		margin-bottom: 15px;
-	}
-	
-	h3{
-		padding: 0 0 5px 10px;
-	}
-	
-	p{
-		width: 470px;
-		padding: 0 0 20px 10px;
-	}
+    h1{
+        margin: 20px 0 10px;
+    }
+
+    h2{
+        margin: 10px 0 5px;
+    }
 }
