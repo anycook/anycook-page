@@ -298,26 +298,28 @@ define([
 				return false;
 			}
 		},
-		discussionLike : function() {
-			var $this = $(this);
-			var id = $this.parents('.comment').data('id');
+		discussionLike : function(event) {
+			var $target = $(event.target);
+			var id = $target.parents('.comment').data('id');
 
 			var parameterNames = $.address.pathNames();
 			var recipeName = parameterNames[1];
 
-			if(!$this.hasClass('liked_by_user')){
+			if(!$target.hasClass('liked_by_user')){
 				AnycookAPI.discussion.like(recipeName, id, function(){
-					var $likeNr = $this.siblings('.like_nr');
+					var $likeNr = $target.siblings('.like_nr');
 					var oldNum = Number($likeNr.text());
-					$likeNr.text(++oldNum);
-					$this.addClass('liked_by_user');
+                    var newNum = oldNum +1;
+					$likeNr.text(newNum > 0 ? '+'+newNum : 0);
+					$target.addClass('liked_by_user');
 				});
 			}else{
 				AnycookAPI.discussion.unlike(recipeName, id, function(){
-					var $likeNr = $this.siblings('.like_nr');
+					var $likeNr = $target.siblings('.like_nr');
 					var oldNum = Number($likeNr.text());
-					$likeNr.text(--oldNum);
-					$this.removeClass('liked_by_user');
+                    var newNum = oldNum - 1;
+					$likeNr.text(newNum > 0 ? '+'+newNum : 0);
+					$target.removeClass('liked_by_user');
 				});
 			}
 		},
