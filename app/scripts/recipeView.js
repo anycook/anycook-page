@@ -21,7 +21,6 @@ define([
 	'jquery',
 	'underscore',
 	'AnycookAPI',
-	'FB',
 	'plusone',
 	'classes/Recipe',
 	'classes/User',
@@ -31,7 +30,7 @@ define([
 	'stringTools',
 	'tags',
 	'tpl!templates/share'
-], function($, _, AnycookAPI, FB, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags, shareTemplate){
+], function($, _, AnycookAPI, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags, shareTemplate){
 	'use strict';
 	return {
 		profileRecipe : function(recipe){
@@ -316,7 +315,10 @@ define([
 				event.preventDefault();
 				window.open(twitterTarget, 'child', 'height=420,width=550');
 			});
-			FB.XFBML.parse(document.getElementById('share'));
+            require(['FB'], function(FB){
+                FB.XFBML.parse(document.getElementById('share'));
+            });
+
 			gapi.plusone.go();
 
 			var self = this;

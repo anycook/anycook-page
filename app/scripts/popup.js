@@ -20,9 +20,8 @@
 define([
 	'jquery',
     'underscore',
-	'FB',
     'tpl!templates/facebookRegistration'
-], function($, _, FB, facebookRegistrationTemplate){
+], function($, _, facebookRegistrationTemplate){
 	'use strict';
 	return {
 		show : function(headline, content){
@@ -42,17 +41,15 @@ define([
 			$('.fixedpopup, .background_popup').fadeOut(800, function(){ $('.fixedpopup, .background_popup').remove(); });
 		},
 		makeFBkRegistration : function(){
-			//$('#content_main').append('<div id='new_recipe_ready' class='content_message'><h5>Danke!</h5><p>Dein Rezept wird geprüft und anschließend veröffentlicht.<br /> Wir benachrichtigen dich!</p></div>');
-			$('body').append(facebookRegistrationTemplate({
-                registrationLink : 'https://api.anycook.de/user/facebook'
-            }));
+            require(['FB'], function(FB){
+                $('body').append(facebookRegistrationTemplate({
+                    registrationLink : 'https://api.anycook.de/user/facebook'
+                }));
 
-			FB.XFBML.parse(document.getElementById('registerpopup'));
-			//this.center();
-			$('.popup, .background_popup').fadeIn(800);
-			$('body').not('#facebookpopup').click($.proxy(this.close, this));
-			//$('#registerpopup a').click(function(){$('#registerpopup').fadeOut(700, function(){$('#registerpopup').remove();});});
-
+                FB.XFBML.parse(document.getElementById('registerpopup'));
+                $('.popup, .background_popup').fadeIn(800);
+                $('body').not('#facebookpopup').click($.proxy(this.close, this));
+            });
 		}
 	};
 });

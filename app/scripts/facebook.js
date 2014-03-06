@@ -21,38 +21,39 @@
 define([
 	'jquery',
     'AnycookAPI',
-	'FB',
 	'classes/User',
 	'popup',
 	'userMenu'
-], function($, AnycookAPI, FB, User, popup, userMenu){
+], function($, AnycookAPI, User, popup, userMenu){
 	'use strict';
 	return {
 		login : function(){
-			FB.login(function(response) {
-				if (response.authResponse) {
-					$.when(User.init()).then(function(user){
-						if(user.checkLogin()){
-							// if($.address.pathNames().length == 0 || $.address.pathNames()[0] == 'home'){
-							// 	user = User.init();
-							// 	makeUsermenuText();
-							// 	$('#login_dropdown').hide();
-							// }
-							// else
-                            console.log(user.name + ' logged in');
-							//window.location.reload();
-						}
-						else{
-							$('#login_dropdown').hide();
-							$('#signin_btn').removeClass('on');
-							popup.makeFBkRegistration();
-						}
-					});
-				} else {
-					// TODO The user has logged out, and the cookie has been cleared
-					//alert('false');
-				}
-			}, {scope: 'email,publish_stream,offline_access'});
+            require(['FB'], function(FB){
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        $.when(User.init()).then(function(user){
+                            if(user.checkLogin()){
+                                // if($.address.pathNames().length == 0 || $.address.pathNames()[0] == 'home'){
+                                //  user = User.init();
+                                //  makeUsermenuText();
+                                //  $('#login_dropdown').hide();
+                                // }
+                                // else
+                                console.log(user.name + ' logged in');
+                                //window.location.reload();
+                            }
+                            else{
+                                $('#login_dropdown').hide();
+                                $('#signin_btn').removeClass('on');
+                                popup.makeFBkRegistration();
+                            }
+                        });
+                    } else {
+                        // TODO The user has logged out, and the cookie has been cleared
+                        //alert('false');
+                    }
+                }, {scope: 'email,publish_stream,offline_access'});
+            });
 		},
 		sessionChange : function(event){
 			var user = User.get();

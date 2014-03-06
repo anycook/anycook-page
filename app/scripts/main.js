@@ -210,7 +210,6 @@ require.config({
 require([
 	'jquery',
 	'AnycookAPI',
-	'FB',
 	'classes/Search',
 	'classes/User',
 	'addressChange',
@@ -243,7 +242,7 @@ require([
     'AnycookAPI.tag',
     'AnycookAPI.upload',
     'AnycookAPI.user'
-], function($, AnycookAPI, FB, Search, User, addressChange, drafts, loginMenu, searchView,
+], function($, AnycookAPI, Search, User, addressChange, drafts, loginMenu, searchView,
 	scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
 	//setup
 	// if($.browser.msie){
@@ -479,18 +478,21 @@ require([
 		.on('searchResults', $.proxy(searchView.addResults, searchView))
 		.on('emptySearchResult', $.proxy(searchView.showEmptyResult, searchView));
 
-	//Facebook
-	FB.init({
-		appId  : '143100952399957',
-		status : true, // check login status
-		cookie : true, // enable cookies to allow the server to access the session
-		xfbml  : false //, // parse XFBML
-		//oauth  : true // enable OAuth 2.0
-	});
+    require(['FB'], function(FB){
+        //Facebook
+        FB.init({
+            appId  : '143100952399957',
+            status : true, // check login status
+            cookie : true, // enable cookies to allow the server to access the session
+            xfbml  : false //, // parse XFBML
+            //oauth  : true // enable OAuth 2.0
+        });
 
-	//FB.Event.subscribe('auth.sessionChange', $.proxy(facebook.sessionChange, facebook));
-	FB.Event.subscribe('auth.authResponseChange', $.proxy(facebook.sessionChange, facebook));
-	//FB.getLoginStatus($.proxy(facebook.sessionChange, facebook));
-    //facebook.login();
-    $('body').on('click', '.facebookLogin', $.proxy(facebook.login, facebook));
+        //FB.Event.subscribe('auth.sessionChange', $.proxy(facebook.sessionChange, facebook));
+        FB.Event.subscribe('auth.authResponseChange', $.proxy(facebook.sessionChange, facebook));
+        //FB.getLoginStatus($.proxy(facebook.sessionChange, facebook));
+        //facebook.login();
+        $('body').on('click', '.facebookLogin', $.proxy(facebook.login, facebook));
+    });
+
 });

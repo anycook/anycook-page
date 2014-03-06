@@ -19,9 +19,8 @@
  */
 define([
 	'jquery',
-	'AnycookAPI',
-	'FB'
-], function($, AnycookAPI, FB){
+	'AnycookAPI'
+], function($, AnycookAPI){
 	'use strict';
 
 	//class User
@@ -191,28 +190,16 @@ define([
 		this.facebookID = null;
 		this.image = null;
 		AnycookAPI.session.logout(function(){
-			FB.getLoginStatus(function(response){
-				if(response.status === 'connected'){
-					FB.logout(function() { dfd.resolve(); });
-				} else { dfd.resolve(); }
-			});
+            require(['FB'], function(FB){
+                FB.getLoginStatus(function(response){
+                    if(response.status === 'connected'){
+                        FB.logout(function() { dfd.resolve(); });
+                    } else { dfd.resolve(); }
+                });
+            });
 		});
-
         return dfd.promise();
 	};
-
-// User.register = function(mail, pwd, username){
-//
-//
-	 // $.ajax({
-		// url:'/anycook/NewUser',
-		// data:'mail='+mail+'&pwd='+pwd+'&username='+username,
-		// success:function(response){
-			// if(response=='true'){
-				// showRegistrationStep2(username,mail);
-			// }
-	// }});
-// };
 	return User;
 });
 
