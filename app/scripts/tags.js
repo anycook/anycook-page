@@ -104,7 +104,6 @@ define([
 				$target.append('<input type="text"/>')
 					.addClass('active')
 					.children('input')
-					.keydown(event.data, $.proxy(this.inputKeyListener, this))
 					.focus()
 					.autocomplete({
 						source:function(req,resp){
@@ -123,6 +122,7 @@ define([
 							offset : '-1 1'
 						},
 						select:function(e, ui){
+                            e.preventDefault();
 							if(!ui.item) { return false; }
 							var text = ui.item.label;
 							$(this).autocomplete('destroy');
@@ -136,7 +136,6 @@ define([
 								this.saveNewTag(text);
 							}*/
 							self.makeInput(event);
-							return false;
 						}
 					}).data('ui-autocomplete')._renderMenu = function( ul, items ) {
                         var that = this;
@@ -146,7 +145,7 @@ define([
                         $( ul ).addClass('newtag-autocomplete lightbox-autocomplete');
                     };
 
-				// if($this.hasClass("tags_list"))
+                $target.children('input').keydown(event.data, $.proxy(this.inputKeyListener, this));
 
 				$('body').click(function(event){
 					if($(event.target).parents().andSelf().is($($target))) {
@@ -162,8 +161,6 @@ define([
 			$target.children('input').focus();
 		},
 		removeInput : function(event){
-			/*var $tagsbox = $('.tagsbox');
-			$tagsbox.children('input').remove();*/
 			var $target = $(event.target);
 			$target.remove();
 		},
@@ -172,21 +169,10 @@ define([
 			var text = $target.val();
 			var $tagsbox = $target.parent();
 
-			if((event.keyCode === 13 || event.keyCode === 188 || event.keyCode === 32) && text !== '' ){
+			if(event.keyCode === 8 && text === ''){
 				event.preventDefault();
-				//this.saveNewTag(text);
-				event.data.add(text);
-				this.removeInput(event);
-				this.makeInput({
-					target : $tagsbox[0],
-					data : event.data
-				});
-			}
-			else if(event.keyCode === 8 && text === ''){
-				event.preventDefault();
-				var tagName = $target.prevAll('.tag').last().find('.tag_text').text();
+				var tagName = $target.prev().prev().find('.tag_text').text();
 				event.data.remove(tagName);
-				$tagsbox.children('.tag').last().remove();
 				this.removeInput(event);
 				this.makeInput({
 					target : $tagsbox[0],
