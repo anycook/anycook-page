@@ -1,6 +1,9 @@
 define(['jquery'], function($){
 	'use strict';
 	return {
+        get : function(){
+            return $(document).data('title') || 'anycook';
+        },
 		getPrefix : function(){
 			var messageNum = $(document).data('messageNum') || 0;
 			if(messageNum <= 0){

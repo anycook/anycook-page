@@ -316,6 +316,17 @@ require([
 				loginMenu.buildLogin();
 
 				$.address.bind('change', $.proxy(addressChange.handleChange, addressChange));
+                $.address.tracker(function(path){
+                    //require(['title'], function(title){
+                         /* global _paq */
+                        //_paq.push(['setDocumentTitle', title.get(), 'visit']);
+                    _paq.push(['setCustomUrl', 'http://anycook.de/#'+path, 'visit']);
+                    //var titleString = title.get();
+                    _paq.push(['trackPageView', path]);
+                    //});
+                });
+
+
 				$.address.update();
 
 				if(user.checkLogin()){ userMenu.load(); }

@@ -199,8 +199,6 @@ define([
 			}
 
 			title.setPrefix();
-
-
 		},
 		// behandelt change bei $.address.parameters
 		changePage : function(event){
