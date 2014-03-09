@@ -19,156 +19,163 @@
  */
 
 define([
-	'jquery',
-	'AnycookAPI',
-	'classes/Recipe',
-	'classes/User'
+    'jquery',
+    'AnycookAPI',
+    'classes/Recipe',
+    'classes/User'
 ], function($, AnycookAPI, Recipe, User){
-	'use strict';
-	return {
-		updateLiveAtHome : function(){
-			var path = $.address.path();
-			var newestid = this.getNewestId();
+    'use strict';
+    return {
+        updateLiveAtHome : function(){
+            var path = $.address.path();
+            var newestid = this.getNewestId();
 
-			if(path === '/'){
-				var data = {newestid:newestid};
-				var self = this;
-				AnycookAPI.life(data,function(response){
-					self.parseAndAddLiveAtHome(response);
-					window.setTimeout($.proxy(self.updateLiveAtHome, self), 5000);
-				});
-			}
-		},
-		getNewestId : function(){
-			var newestid = $('#news li').first().data('id');
-			if(!newestid){
-				newestid = 0;
-			}
-			return Number(newestid);
-		},
-		parseAndAddLiveAtHome : function(json){
-			var $ul = $('#news ul');
-			if(json.length>0)
-			{
-				var newestid = this.getNewestId();
-				var $container = $ul.find('.jspPane');
-				if($container.length === 0){
-					$container = $ul;
-				}
+            if(path === '/'){
+                var data = {newestid:newestid};
+                var self = this;
+                AnycookAPI.life(data,function(response){
+                    self.parseAndAddLiveAtHome(response);
+                    window.setTimeout($.proxy(self.updateLiveAtHome, self), 5000);
+                });
+            }
+        },
+        getNewestId : function(){
+            var newestid = $('#news li').first().data('id');
+            if(!newestid){
+                newestid = 0;
+            }
+            return Number(newestid);
+        },
+        parseAndAddLiveAtHome : function(json){
+            var $ul = $('#news ul');
+            if(json.length>0)
+            {
+                var newestid = this.getNewestId();
+                var $container = $ul.find('.jspPane');
+                if($container.length === 0){
+                    $container = $ul;
+                }
 
-				var empty = false;
-				if($ul.children().length === 0){
-					empty = true;
-				}
+                var empty = false;
+                if($ul.find('li').length === 0){
+                    empty = true;
+                }
 
-				var newestRecipes = [];
+                var newestRecipes = [];
 
-				for(var i in json){
-					var $li = this.parseLife(json[i]);
-					if(Number(json[i].id) > newestid){
-						$container.prepend($li);
-						if(json[i].recipe){
-							newestRecipes.unshift(json[i].recipe);
-						}
-					} else{
-						$container.append($li);
-						if(json[i].recipe){
-							newestRecipes.push(json[i].recipe);
-						}
-					}
+                for(var i in json){
+                    var $li = this.parseLife(json[i]);
+                    if(Number(json[i].id) > newestid){
 
-					/*if(!empty){
-						var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
-						var newMarginTop = 0 - $('#news_inhalt div:first').outerHeight();
-						$ul.find('li').first().css({'margin-top': newMarginTop, 'opacity': 0})
-							.animate({marginTop: oldMarginTop, opacity: 1});
-					}*/
-				}
-				var active = $('#news .jspDrag').hasClass('jspActive');
-				$ul.jScrollPane();
-				if(active){
-					$('#news .jspDrag').addClass('jspActive');
-				}
+                        $container.prepend($li);
+                        /*if(!empty){
+                            $li.css('height', 0).hide();
+                            $li.animate({height : '49px'}, {duration : 200, complete : function() {
+                                $li.fadeIn(500);
+                            }});
+                        }*/
+                        if(json[i].recipe){
+                            newestRecipes.unshift(json[i].recipe);
+                        }
+                    } else{
+                        $container.append($li);
+                        if(json[i].recipe){
+                            newestRecipes.push(json[i].recipe);
+                        }
+                    }
 
-				var $p = $('#newestRecipes p');
+                    /*if(!empty){
+                        var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
+                        var newMarginTop = 0 - $('#news_inhalt div:first').outerHeight();
+                        $ul.find('li').first().css({'margin-top': newMarginTop, 'opacity': 0})
+                            .animate({marginTop: oldMarginTop, opacity: 1});
+                    }*/
+                }
+                var active = $('#news .jspDrag').hasClass('jspActive');
+                $ul.jScrollPane();
+                if(active){
+                    $('#news .jspDrag').addClass('jspActive');
+                }
 
-				for(var j = 0; j<3 && j < newestRecipes.length; j++){
-					//see jquery.recipeoverview.js
-					var recipe = newestRecipes[j];
-					var img = AnycookAPI.recipe.image(recipe);
+                var $p = $('#newestRecipes p');
 
-					var $img = $('<img src="'+img+'"/>');
+                for(var j = 0; j<3 && j < newestRecipes.length; j++){
+                    //see jquery.recipeoverview.js
+                    var recipe = newestRecipes[j];
+                    var img = AnycookAPI.recipe.image(recipe);
 
-					var href = Recipe.getURI(recipe);
-					var $a = $('<a></a>').attr('href', href)
-						.append($img).append('<div><span>'+recipe+'</span></div>');
+                    var $img = $('<img src="'+img+'"/>');
 
-					$p.append($a);
-				}
-			}
-		},
-		parseLife : function(life){
-			var text = life.syntax;
-			var regex = /#[ug]/;
-			var pos = text.search(regex);
-			var userid = -1;
-			while(pos>=0){
-				var array;
-				var uri;
-				var link;
-				if(text[pos+1] === 'u'){
-					array = text.split('#u');
-					text = '';
-					for(var i = 0; i<array.length-1; ++i){
-						uri = User.getProfileURI(life.user.id);
-						userid = life.user.id;
-						link = '<a href="'+uri+'">'+life.user.name+'</a>';
-						text+=array[i]+link;
-					}
-					text+=array[array.length-1];
-				}
-				else if(text[pos+1] === 'g'){
-					array = text.split('#g');
-					text = '';
-					for(var j = 0; j<array.length-1; ++j){
-						uri = encodeURI('/#/recipe/'+life.recipe);
-						link = '<a href="'+uri+'">'+life.recipe+'</a>';
-						text+=array[j]+link;
-					}
-					text+=array[array.length-1];
-				}
+                    var href = Recipe.getURI(recipe);
+                    var $a = $('<a></a>').attr('href', href)
+                        .append($img).append('<div><span>'+recipe+'</span></div>');
 
-				pos = text.search(regex);
-			}
+                    $p.append($a);
+                }
+            }
+        },
+        parseLife : function(life){
+            var text = life.syntax;
+            var regex = /#[ug]/;
+            var pos = text.search(regex);
+            var userid = -1;
+            while(pos>=0){
+                var array;
+                var uri;
+                var link;
+                if(text[pos+1] === 'u'){
+                    array = text.split('#u');
+                    text = '';
+                    for(var i = 0; i<array.length-1; ++i){
+                        uri = User.getProfileURI(life.user.id);
+                        userid = life.user.id;
+                        link = '<a href="'+uri+'">'+life.user.name+'</a>';
+                        text+=array[i]+link;
+                    }
+                    text+=array[array.length-1];
+                }
+                else if(text[pos+1] === 'g'){
+                    array = text.split('#g');
+                    text = '';
+                    for(var j = 0; j<array.length-1; ++j){
+                        uri = encodeURI('/#/recipe/'+life.recipe);
+                        link = '<a href="'+uri+'">'+life.recipe+'</a>';
+                        text+=array[j]+link;
+                    }
+                    text+=array[array.length-1];
+                }
 
-			var imagePath = life.user.image.small;
+                pos = text.search(regex);
+            }
 
-			var $li = $('<li></li>').append('<div class="left"><img src="'+imagePath+'"></div><div class="right"></div>').data('id', life.id);
+            var imagePath = life.user.image.small;
 
-			var user = User.get();
-			if(user.checkLogin() && user.isFollowing(userid)){
-				$li.addClass('following');
-			}
+            var $li = $('<li></li>').append('<div class="left"><img src="'+imagePath+'"></div><div class="right"></div>').data('id', life.id);
 
-			$li.children('.right').html(text);
-			return $li;
-		},
-		scrollListener : function(e){
-			var $target = $(e.target);
-			var $last = $target.find('li').last();
-			var delta = $last.offset().top-($target.offset().top+ $target.height());
-			if(delta < 40){
-				$target.unbind('scroll', this.scrollListener);
-				var oldestid = $last.data('id');
-				var data = {oldestid:oldestid};
-				var self = this;
+            var user = User.get();
+            if(user.checkLogin() && user.isFollowing(userid)){
+                $li.addClass('following');
+            }
 
-				AnycookAPI.life(data,function(response){
-					self.parseAndAddLiveAtHome(response);
-					$target.scroll($.proxy(self.scrollListener, self));
-				});
-			}
-			return false;
-		}
-	};
+            $li.children('.right').html(text);
+            return $li;
+        },
+        scrollListener : function(e){
+            var $target = $(e.target);
+            var $last = $target.find('li').last();
+            var delta = $last.offset().top-($target.offset().top+ $target.height());
+            if(delta < 40){
+                $target.unbind('scroll');
+                var oldestid = $last.data('id');
+                var data = {oldestid:oldestid};
+                var self = this;
+
+                AnycookAPI.life(data,function(response){
+                    self.parseAndAddLiveAtHome(response);
+                    $target.scroll($.proxy(self.scrollListener, self));
+                });
+            }
+            return false;
+        }
+    };
 });
