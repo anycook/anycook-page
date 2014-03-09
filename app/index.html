@@ -1,249 +1,242 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="fragment" content="!" />
-		<meta property="og:title" content="anycook.de"/>
-		<meta property="og:type" content="food"/>
-		<meta property="og:url" content="http://anycook.de"/>
-		<meta property="og:image" content="http://anycook.de/icons/facebook_big.png"/>
-		<meta name="description" content="Die übersichtliche Suche nach leckeren Rezepten. Suche nach Zutaten, Tags, Personenanzahl, Zeit oder gleich nach Gerichten, alles ist möglich. Na dann guten Hunger!" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="fragment" content="!" />
+        <meta property="og:title" content="anycook.de"/>
+        <meta property="og:type" content="food"/>
+        <meta property="og:url" content="http://anycook.de"/>
+        <meta property="og:image" content="http://anycook.de/icons/facebook_big.png"/>
+        <meta name="description" content="Die übersichtliche Suche nach leckeren Rezepten. Suche nach Zutaten, Tags, Personenanzahl, Zeit oder gleich nach Gerichten, alles ist möglich. Na dann guten Hunger!" />
 
-		<title>anycook</title>
-		<link rel="SHORTCUT ICON" href="/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="/icons/touch-icon-ipad.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="/icons/touch-icon-iphone4.png" />
-		<link rel="apple-touch-startup-image" href="/icons/logo-iPhone-startup.png" />
+        <title>anycook</title>
+        <link rel="SHORTCUT ICON" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/icons/touch-icon-ipad.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/icons/touch-icon-iphone4.png" />
+        <link rel="apple-touch-startup-image" href="/icons/logo-iPhone-startup.png" />
 
-		<!-- CSS -->
-		<!-- build:css({app,.tmp}) styles/main.css -->
+        <!-- CSS -->
+        <!-- build:css({app,.tmp}) styles/main.css -->
         <link rel="stylesheet" type="text/css" href="/bower_components/jquery.ui/themes/base/jquery.ui.core.css">
         <link rel="stylesheet" type="text/css" href="/bower_components/jquery.ui/themes/base/jquery.ui.autocomplete.css">
-		<link rel="stylesheet" type="text/css" href="/styles/jquery.inputdecorator.css"/>
-		<link rel="stylesheet" type="text/css" href="/styles/style.css"/>
-		<!-- endbuild -->
-	</head>
-	<body>
-		<div id="fb-root"></div>
-		<header>
-			<a href="/#" id="logo"><img src="/img/logo.png" alt="anycook.de" /></a>
-			<div id="searchbar">
-				<div id="loupe"></div>
-				<form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
-				<div id="search_reset"></div>
-			</div>
-			<div id="btn_container">
-				<a id="user_home" class="user_btn" href="/#/" title="Startseite"><span></span></a>
-				<a id="new_recipe" class="user_btn" href="/#/recipeediting" title="Neues Rezept erstellen"><span></span></a>
-				<a id="user_profile" class="user_btn" href="/#/profile/me" title="Mein Profil"><span></span></a>
-				<!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
-				<div id="message_btn_container" class="btn_container">
-					<a id="user_messages" class="user_btn" href="/#/newsstream" title="Benachrichtigungen"><span></span></a>
-					<div class="new_messages_bubble"><span>0</span></div>
-				</div>
-				<div id="settings_btn_container" class="btn_container">
-					<div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>
-					<div class="new_messages_bubble"><span>0</span></div>
-				</div>
-				<div id='signin_btn'>
-					<div id='login_pin'></div><div id="login_text">anmelden</div>
-				</div>
-				<!--<p><div class="fb-login-button"></div></p>-->
+        <link rel="stylesheet" type="text/css" href="/styles/jquery.inputdecorator.css"/>
+        <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <header>
+            <a href="/#" id="logo"><img src="/img/logo.png" alt="anycook.de" /></a>
+            <div id="searchbar">
+                <div id="loupe"></div>
+                <form id="search_form" action=""><input type="text" id="search" placeholder="Gerichte, Zutaten, Tags, ..."/></form>
+                <div id="search_reset"></div>
+            </div>
+            <div id="btn_container">
+                <a id="user_home" class="user_btn" href="/#/" title="Startseite"><span></span></a>
+                <a id="new_recipe" class="user_btn" href="/#/recipeediting" title="Neues Rezept erstellen"><span></span></a>
+                <a id="user_profile" class="user_btn" href="/#/profile/me" title="Mein Profil"><span></span></a>
+                <!--<a id="user_cooktogether" class="user_btn"><span></span></a>-->
+                <div id="message_btn_container" class="btn_container">
+                    <a id="user_messages" class="user_btn" href="/#/newsstream" title="Benachrichtigungen"><span></span></a>
+                    <div class="new_messages_bubble"><span>0</span></div>
+                </div>
+                <div id="settings_btn_container" class="btn_container">
+                    <div id="user_settings" class="user_btn" href="/#/" title="Einstellungen"><span></span></div>
+                    <div class="new_messages_bubble"><span>0</span></div>
+                </div>
+                <div id='signin_btn'>
+                    <div id='login_pin'></div><div id="login_text">anmelden</div>
+                </div>
+                <!--<p><div class="fb-login-button"></div></p>-->
 
-			</div>
-		</header>
-		<div id="main">
-			<div id="right">
-				<div id="right_edge"></div>
-			</div>
-			<div id="container_head">
-				<div id="container_head_peak">
-					<div class="left"></div>
-					<div class="right"></div>
-				</div>
-				<div id="subnav"></div>
-				<div id="buchmitte_top"></div>
-			</div>
-			<div id="container">
+            </div>
+        </header>
+        <div id="main">
+            <div id="right">
+                <div id="right_edge"></div>
+            </div>
+            <div id="container_head">
+                <div id="container_head_peak">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+                <div id="subnav"></div>
+                <div id="buchmitte_top"></div>
+            </div>
+            <div id="container">
 
-				<!--<div id="container_head">
-					<div id="container_head_peak"></div>
-					<div id="subnav"></div>
-				</div>-->
-				<div id="filter_container">
-					<div id="loadpoints"><span></span></div>
-					<div id="filter_box">
-						<div id="filter_head">
-							<div id="filter_head_top"></div>
-							<div id="filter_head_main"><h3 id="filter_headline"></h3><div id="filter_reset"></div></div>
-							<div id="filter_head_bottom"></div>
-						</div>
-						<div id="filter_main">
-						<div id="userfilter">
-		    				<div id="userfilterremove"><span></span></div>
-		    				<div id="userfiltercontent">
-		    					<a id="userfilterpic" href=""><img src=""/></a>
-		    					<div id="userfiltertext">
-		    						Nur Rezepte von <br>
-									<a id="userfilter_name"></a>
-		    					</div>
-		    					<div class="filter_devider"></div>
-		    				</div>
+                <!--<div id="container_head">
+                    <div id="container_head_peak"></div>
+                    <div id="subnav"></div>
+                </div>-->
+                <div id="filter_container">
+                    <div id="loadpoints"><span></span></div>
+                    <div id="filter_box">
+                        <div id="filter_head">
+                            <div id="filter_head_top"></div>
+                            <div id="filter_head_main"><h3 id="filter_headline"></h3><div id="filter_reset"></div></div>
+                            <div id="filter_head_bottom"></div>
+                        </div>
+                        <div id="filter_main">
+                        <div id="userfilter">
+                            <div id="userfilterremove"><span></span></div>
+                            <div id="userfiltercontent">
+                                <a id="userfilterpic" href=""><img src=""/></a>
+                                <div id="userfiltertext">
+                                    Nur Rezepte von <br>
+                                    <a id="userfilter_name"></a>
+                                </div>
+                                <div class="filter_devider"></div>
+                            </div>
 
-		       			</div>
-						<div id="kategorie_filter">
-							<div id="kategorie_head">keine Kategorie</div>
-							<div id="kategorie_peak"></div>
-							<div id="kategorie_list">
-								<ul></ul>
-								<div id="kategorie_bottom"></div>
-							</div>
+                        </div>
+                        <div id="kategorie_filter">
+                            <div id="kategorie_head">keine Kategorie</div>
+                            <div id="kategorie_peak"></div>
+                            <div id="kategorie_list">
+                                <ul></ul>
+                                <div id="kategorie_bottom"></div>
+                            </div>
 
-							<input type="hidden" id="kategorie_filter_hidden" value="alle Kategorien"/>
-						</div>
-						<ul class="kategorie_filter"></ul>
-						<div id="filter_main_box">
-								<table id="filter_table">
-									<tr id="time_filter">
-										<td class="filter_table_left">Dauer: </td>
-										<td class="filter_table_right"><form id="time_form" action="">
-											<div class="time numberinput">
-												<input type="text" id="time_std" class="std" placeholder="00" size="2" maxlength="2" />
-												<div class="up"></div>
-												<div class="down"></div>
-											</div>
-											<div class="time_text">:</div>
-											<div class="time numberinput">
-												<input type="text" id="time_min" class="min" placeholder="00" size="2" maxlength="2" />
-												<div class="up"></div>
-												<div class="down"></div>
-											</div>
-											<div class="time_text_end">h</div></form>
-										</td>
+                            <input type="hidden" id="kategorie_filter_hidden" value="alle Kategorien"/>
+                        </div>
+                        <ul class="kategorie_filter"></ul>
+                        <div id="filter_main_box">
+                                <table id="filter_table">
+                                    <tr id="time_filter">
+                                        <td class="filter_table_left">Dauer: </td>
+                                        <td class="filter_table_right"><form id="time_form" action="">
+                                            <div class="time numberinput">
+                                                <input type="text" id="time_std" class="std" placeholder="00" size="2" maxlength="2" />
+                                                <div class="up"></div>
+                                                <div class="down"></div>
+                                            </div>
+                                            <div class="time_text">:</div>
+                                            <div class="time numberinput">
+                                                <input type="text" id="time_min" class="min" placeholder="00" size="2" maxlength="2" />
+                                                <div class="up"></div>
+                                                <div class="down"></div>
+                                            </div>
+                                            <div class="time_text_end">h</div></form>
+                                        </td>
 
-									</tr>
+                                    </tr>
 
-									<tr>
-										<td class="filter_table_left">Schwierigkeit:</td>
-										<td class="filter_table_right">
-											<label class="label_chefhats" for="chef_1">
-												<div class="active"></div>
-				                            	<input type="radio" class="chefhats" id="chef_1" value="1" name="chefhats" />
-				                            </label>
-				                            <label class="label_chefhats" for="chef_2">
-				                            	<div class="active"></div>
-				                            	<input type="radio" class="chefhats" id="chef_2" value="2" name="chefhats" />
-				                            </label>
-				                            <label class="label_chefhats" for="chef_3">
-				                            	<div class="active"></div>
-				                            	<input type="radio" class="chefhats" id="chef_3" value="3" name="chefhats" />
-				                            </label>
-				                            <label class="label_chefhats" for="chef_4">
-				                            	<div class="active"></div>
-				                            	<input type="radio" class="chefhats" id="chef_4" value="4" name="chefhats" />
-				                            </label>
-				                            <label class="label_chefhats" for="chef_5">
-				                            	<div class="active"></div>
-				                            	<input type="radio" class="chefhats" id="chef_5" value="5" name="chefhats" />
-				                            </label>
-										</td>
-									</tr>
-									<tr>
-										<td class="filter_table_left">Kalorien:</td>
-										<td class="filter_table_right">
-											<label class="label_muffins" for="muffin_1">
-												<div class="active"></div>
-				                            	<input type="radio" class="muffins" id="muffin_1" value="1" name="muffins" />
-				                           	</label>
-				                           	<label class="label_muffins" for="muffin_2">
-				                           		<div class="active"></div>
-				                            	<input type="radio" class="muffins" id="muffin_2" value="2" name="muffins" />
-				                            </label>
-				                            <label class="label_muffins" for="muffin_3">
-				                            	<div class="active"></div>
-				                            	<input type="radio" class="muffins" id="muffin_3" value="3" name="muffins" />
-				                            </label>
-				                            <label class="label_muffins" for="muffin_4">
-				                            	<div class="active"></div>
-				                           		<input type="radio" class="muffins" id="muffin_4" value="4" name="muffins" />
-				                            </label>
-				                            <label class="label_muffins" for="muffin_5">
-				                            	<div class="active"></div>
-				                            	<input type="radio" class="muffins" id="muffin_5" value="5" name="muffins" />
-				                            </label>
-										</td>
-									</tr>
-								</table>
-								<div class="filter_devider"></div>
-								<div id="zutat_head">Zutaten:</div>
-								<ul id="ingredient_list">
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-									<li></li>
-								</ul>
-								<!-- <div id="tags_container"> -->
-								<div class="tags_head">Tags:</div>
-								<form class="tags_list"></form>
-								<!-- </div> -->
-							</div>
-						</div>
-						<div id="filter_bottom"></div>
-					</div>
-				</div>
+                                    <tr>
+                                        <td class="filter_table_left">Schwierigkeit:</td>
+                                        <td class="filter_table_right">
+                                            <label class="label_chefhats" for="chef_1">
+                                                <div class="active"></div>
+                                                <input type="radio" class="chefhats" id="chef_1" value="1" name="chefhats" />
+                                            </label>
+                                            <label class="label_chefhats" for="chef_2">
+                                                <div class="active"></div>
+                                                <input type="radio" class="chefhats" id="chef_2" value="2" name="chefhats" />
+                                            </label>
+                                            <label class="label_chefhats" for="chef_3">
+                                                <div class="active"></div>
+                                                <input type="radio" class="chefhats" id="chef_3" value="3" name="chefhats" />
+                                            </label>
+                                            <label class="label_chefhats" for="chef_4">
+                                                <div class="active"></div>
+                                                <input type="radio" class="chefhats" id="chef_4" value="4" name="chefhats" />
+                                            </label>
+                                            <label class="label_chefhats" for="chef_5">
+                                                <div class="active"></div>
+                                                <input type="radio" class="chefhats" id="chef_5" value="5" name="chefhats" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filter_table_left">Kalorien:</td>
+                                        <td class="filter_table_right">
+                                            <label class="label_muffins" for="muffin_1">
+                                                <div class="active"></div>
+                                                <input type="radio" class="muffins" id="muffin_1" value="1" name="muffins" />
+                                            </label>
+                                            <label class="label_muffins" for="muffin_2">
+                                                <div class="active"></div>
+                                                <input type="radio" class="muffins" id="muffin_2" value="2" name="muffins" />
+                                            </label>
+                                            <label class="label_muffins" for="muffin_3">
+                                                <div class="active"></div>
+                                                <input type="radio" class="muffins" id="muffin_3" value="3" name="muffins" />
+                                            </label>
+                                            <label class="label_muffins" for="muffin_4">
+                                                <div class="active"></div>
+                                                <input type="radio" class="muffins" id="muffin_4" value="4" name="muffins" />
+                                            </label>
+                                            <label class="label_muffins" for="muffin_5">
+                                                <div class="active"></div>
+                                                <input type="radio" class="muffins" id="muffin_5" value="5" name="muffins" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="filter_devider"></div>
+                                <div id="zutat_head">Zutaten:</div>
+                                <ul id="ingredient_list">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                                <!-- <div id="tags_container"> -->
+                                <div class="tags_head">Tags:</div>
+                                <form class="tags_list"></form>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <div id="filter_bottom"></div>
+                    </div>
+                </div>
 
-				<section id="content">
-					<article id="content_main">
+                <section id="content">
+                    <article id="content_main">
 
-					</article>
-				</section>
-			</div>
-			<footer>
-				<div id="footercontent">
-					<div id="copyright">© 2010-2014 anycook</div>
-					<div id="footer_links"><a href="#">Startseite</a> · <a href="http://blog.anycook.de" target="_blank">News</a> · <a href="http://blog.anycook.de/tagged/tutorial" target="_blank">Hilfe</a> · <a href="#/about_us">Über uns</a> · <a href="mailto:kontakt@anycook.de">Feedback</a> · <a target="_blank" href="https://github.com/anycook">GitHub</a> · <a target="_blank" href="http://docs.anycook.apiary.io/">API</a> · <a href="#/impressum">Impressum</a> · <a href="#/privacy">Datenschutz</a></div>
-				</div>
-			</footer>
-			<div id="container_bottom">
-				<div id="peak_container">
-					<div id="peak_bottom"></div>
-				</div>
+                    </article>
+                </section>
+            </div>
+            <footer>
+                <div id="footercontent">
+                    <div id="copyright">© 2010-2014 anycook</div>
+                    <div id="footer_links"><a href="#">Startseite</a> · <a href="http://blog.anycook.de" target="_blank">News</a> · <a href="http://blog.anycook.de/tagged/tutorial" target="_blank">Hilfe</a> · <a href="#/about_us">Über uns</a> · <a href="mailto:kontakt@anycook.de">Feedback</a> · <a target="_blank" href="https://github.com/anycook">GitHub</a> · <a target="_blank" href="http://docs.anycook.apiary.io/">API</a> · <a href="#/impressum">Impressum</a> · <a href="#/privacy">Datenschutz</a></div>
+                </div>
+            </footer>
+            <div id="container_bottom">
+                <div id="peak_container">
+                    <div id="peak_bottom"></div>
+                </div>
 
-			</div>
-			<div id="bookskin"></div>
-		</div>
+            </div>
+            <div id="bookskin"></div>
+        </div>
 
-		<div id="user_menu">
-			<div class="peak"></div>
-			<div class="menu">
-				<div class="top">
-					<div>eingeloggt als <a href="" class="username"></a></div>
-					<a href="#/profile/me" title="Mein Profil" id="menu_profile_image"><img /></a>
-				</div>
-				<p class="admin">
-					<a class="menulink" href="http://backend.anycook.de">Backend</a>
-				</p>
-				<p>
-					<a id="drafts" class="menulink" href="/#/drafts"><span class="name">Rezeptentwürfe</span><span id="draftnum">0</span></a>
-					<a class="menulink" href="/#/settings">Einstellungen</a>
-				</p>
-				<p>
-					<a id="logout" class="menulink"><span class="img"></span>abmelden</a>
-				</p>
-			</div>
-		</div>
+        <div id="user_menu">
+            <div class="peak"></div>
+            <div class="menu">
+                <div class="top">
+                    <div>eingeloggt als <a href="" class="username"></a></div>
+                    <a href="#/profile/me" title="Mein Profil" id="menu_profile_image"><img /></a>
+                </div>
+                <p class="admin">
+                    <a class="menulink" href="http://backend.anycook.de">Backend</a>
+                </p>
+                <p>
+                    <a id="drafts" class="menulink" href="/#/drafts"><span class="name">Rezeptentwürfe</span><span id="draftnum">0</span></a>
+                    <a class="menulink" href="/#/settings">Einstellungen</a>
+                </p>
+                <p>
+                    <a id="logout" class="menulink"><span class="img"></span>abmelden</a>
+                </p>
+            </div>
+        </div>
 
         <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/requirejs/require.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-
         <!-- Piwik -->
         <script type="text/javascript">
           var _paq = _paq || [];
@@ -258,8 +251,15 @@
           })();
 
         </script>
-        <noscript><p><img src="http://piwik.anycook.de/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
         <!-- End Piwik Code -->
+        <script src="bower_components/requirejs/require.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+
+
 
        </body>
 </html>
