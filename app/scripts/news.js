@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 
@@ -29,7 +29,7 @@ define([
 		updateLiveAtHome : function(){
 			var path = $.address.path();
 			var newestid = this.getNewestId();
-			
+
 			if(path === '/'){
 				var data = {newestid:newestid};
 				var self = this;
@@ -55,14 +55,14 @@ define([
 				if($container.length === 0){
 					$container = $ul;
 				}
-				
+
 				var empty = false;
 				if($ul.children().length === 0){
 					empty = true;
 				}
 
 				var newestRecipes = [];
-				
+
 				for(var i in json){
 					var $li = this.parseLife(json[i]);
 					if(Number(json[i].id) > newestid){
@@ -76,7 +76,7 @@ define([
 							newestRecipes.push(json[i].recipe);
 						}
 					}
-						
+
 					/*if(!empty){
 						var oldMarginTop = $('#news_inhalt div:first').css('margin-top');
 						var newMarginTop = 0 - $('#news_inhalt div:first').outerHeight();
@@ -137,19 +137,19 @@ define([
 					}
 					text+=array[array.length-1];
 				}
-					
+
 				pos = text.search(regex);
 			}
 
-			var imagePath = User.getUserImagePath(userid, 'small');
-			
+			var imagePath = life.user.image.small;
+
 			var $li = $('<li></li>').append('<div class="left"><img src="'+imagePath+'"></div><div class="right"></div>').data('id', life.id);
-			
+
 			var user = User.get();
 			if(user.checkLogin() && user.isFollowing(userid)){
 				$li.addClass('following');
 			}
-			
+
 			$li.children('.right').html(text);
 			return $li;
 		},

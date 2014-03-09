@@ -55,7 +55,7 @@ define([
 			}
 			$.when(User.initProfileInfo(userid)).then(function(profileData){
 				title.set(profileData.name);
-				var image = User.getUserImagePath(profileData.id, 'large');
+				var image = profileData.image.big;
 				$('.profile_image').attr('src', image);
 				$('.profile_title h1').text(profileData.name);
 

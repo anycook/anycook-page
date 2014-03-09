@@ -42,7 +42,7 @@ define([
 					var user = User.get();
 
 					var $messageAnswer = $('#message_answer').submit($.proxy(self.submitAnswer, self));
-					$messageAnswer.find('.messageimageborder').append('<img src=\''+user.getUserImagePath()+'\'/>');
+					$messageAnswer.find('.messageimageborder').append('<img src=\''+user.getImage()+'\'/>');
 					$messageAnswer.find('textarea').autosize();
 					var recipients = json.recipients;
 					var $recipientSpan = $('h1 span').last();
@@ -157,7 +157,7 @@ define([
 			var user = User.get();
 
 			var data = {
-				imagePath : User.getUserImagePath(sender.id),
+				imagePath : sender.image.small,
 				senderPath : User.getProfileURI(sender.id),
 				sender : sender.name,
 				text : message.text.replace(/\n/g,'<br/>'),

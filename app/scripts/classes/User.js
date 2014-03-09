@@ -35,6 +35,7 @@ define([
 		this.following = null;
 		this.follower = null;
 		this.id = null;
+        this.image = null;
 		this.schmeckt = [];
 		this.place = null;
 	}
@@ -53,6 +54,7 @@ define([
 			user.followers = response.followers;
 			user.following = response.following;
 			user.place = response.place;
+            user.image = response.image;
 			user.emailCandidate = response.emailCandidate;
 			$.when(user.getSchmecktRecipes()).then(function(schmeckt){
 				user.schmeckt = schmeckt;
@@ -78,6 +80,7 @@ define([
 			var profileUser = new User();
 			profileUser.id = json.id;
 			profileUser.name = json.name;
+            profileUser.image = json.image;
 			profileUser.facebookID = json.facebookID;
 			profileUser.schmeckt = json.schmeckt;
 			profileUser.text = json.text;
@@ -156,12 +159,14 @@ define([
 		return false;
 	};
 
-	User.getUserImagePath = function(userid, type){
+/*	User.getUserImagePath = function(userid, type){
 		return AnycookAPI.user.image(userid, type);
 	};
+    */
 
-	User.prototype.getUserImagePath = function(type){
-		return AnycookAPI.user.image(this.id, type);
+	User.prototype.getImage = function(type){
+        type = type || 'small';
+        return this.image[type];
 	};
 
 	User.login = function(mail, pwd, stayloggedin){

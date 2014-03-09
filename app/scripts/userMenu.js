@@ -17,7 +17,7 @@ define([
 			var $userMenu = $('#user_menu');
 			var user = User.get();
 
-			$userMenu.find('img').attr('src', User.getUserImagePath(user.id));
+			$userMenu.find('img').attr('src', user.getImage());
 			$userMenu.find('.username').attr('href', user.getProfileURI()).text(user.name);
 			$userMenu.find('#logout').click(function(){
 				var user = User.get();

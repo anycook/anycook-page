@@ -68,7 +68,7 @@ define([
 			}
 		},
 		loadAccount : function(user){
-			$('.profile_image img').attr('src', user.getUserImagePath('large'));
+			$('.profile_image img').attr('src', user.getImage('big'));
 			$('#account_name').val(user.name).blur($.proxy(this.saveAccount, this));
 			$('#account_mail').val(user.mail);
 			$('#account_aboutme').val(user.text).blur($.proxy(this.saveAccount, this));
