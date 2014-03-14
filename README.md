@@ -1,7 +1,7 @@
 anycook page
 ============
 [![Dependency Status](https://david-dm.org/anycook/anycook-page/dev-status.png?theme=shields.io)](https://david-dm.org/anycook/anycook-page#info=devDependencies&view=table)
-[![Build Status](https://jenkins.anycook.de:443/job/anycook-api/badge/icon)](https://jenkins.anycook.de:443/job/anycook-api/)
+[![Build Status](https://jenkins.anycook.de:443/buildStatus/icon?job=anycook-page)](https://jenkins.anycook.de:443/job/anycook-page/)
 
 
 
