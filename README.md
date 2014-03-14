@@ -4,7 +4,6 @@ anycook page
 [![Build Status](https://jenkins.anycook.de:443/buildStatus/icon?job=anycook-page)](https://jenkins.anycook.de:443/job/anycook-page/)
 
 
-
 Webclient for [anycook-api](https://github.com/anycook/anycook-api).
 
 ## Dependencies
