@@ -19,165 +19,165 @@
  */
 
 define([
-	'jquery',
-	'underscore',
-	'AnycookAPI',
-	'classes/User',
-	'tpl!templates/draftFrame'
+    'jquery',
+    'underscore',
+    'AnycookAPI',
+    'classes/User',
+    'tpl!templates/draftFrame'
 ], function( $, _, AnycookAPI, User, draftFrameTemplate){
-	'use strict';
+    'use strict';
 
-	var queue = [];
-	return {
-		init : function(callback){
-			AnycookAPI._put('/drafts',{}, callback);
-		},
-		load : function(){
-			var self = this;
-			AnycookAPI._get('/drafts', {}, function(drafts){
-				if(drafts.length === 0){
-					$('#nodrafts').show();
-					return;
-				}
-				var $list = $('#draft_list').on('click', '.delete', self.remove);
-				for(var i in drafts){
-					var draft = drafts[i];
-					$list.append(self.getBigFrameDraft(draft.id,draft.data));
-				}
-			});
-		},
-		num : function(lastnum){
-			if(lastnum === undefined) { lastnum = -1; }
+    var queue = [];
+    return {
+        init : function(callback){
+            AnycookAPI._put('/drafts',{}, callback);
+        },
+        load : function(){
+            var self = this;
+            AnycookAPI._get('/drafts', {}, function(drafts){
+                if(drafts.length === 0){
+                    $('#nodrafts').show();
+                    return;
+                }
+                var $list = $('#draft_list').on('click', '.delete', self.remove);
+                for(var i in drafts){
+                    var draft = drafts[i];
+                    $list.append(self.getBigFrameDraft(draft));
+                }
+            });
+        },
+        num : function(lastnum){
+            if(lastnum === undefined) { lastnum = -1; }
 
-			var user = User.get();
-			if(user.checkLogin()){
-				var self = this;
+            var user = User.get();
+            if(user.checkLogin()){
+                var self = this;
 
-				AnycookAPI._get('/drafts/num', {lastNum:lastnum}, function(num){
-					$('#drafts #draftnum').text(num);
-					var $messageBubble = $('#settings_btn_container .new_messages_bubble');
-					if(num>0) { $messageBubble.fadeIn(200).children().text(num); }
-					else { $messageBubble.fadeOut(200); }
+                AnycookAPI._get('/drafts/num', {lastNum:lastnum}, function(num){
+                    $('#drafts #draftnum').text(num);
+                    var $messageBubble = $('#settings_btn_container .new_messages_bubble');
+                    if(num>0) { $messageBubble.fadeIn(200).children().text(num); }
+                    else { $messageBubble.fadeOut(200); }
 
-					// $.anycook.drafts.num(num);
-					self.num(num);
-				}, function(){
+                    // $.anycook.drafts.num(num);
+                    self.num(num);
+                }, function(){
                     //error function
-                    console.log('failed to get last draft num. Trying again in 5 sec');
-                    setTimeout($.proxy(self.num, self), 5000);
+                    console.log('failed to get last draft num.');
+                    //setTimeout($.proxy(self.num, self), 5000);
                 });
-			}
-		},
-		open : function(id, callback){
-			return AnycookAPI._get('/drafts/'+id, {}, callback);
-		},
-		remove : function(event){
-			var $li = $(event.target).parents('li');
-			AnycookAPI._delete('/drafts/'+$li.data('id'),{}, function(){
-				$li.animate({height:0, opacity:0},{duration:500, complete:function(){
-					$(this).remove();
-					if($('#draft_list').children().length === 0){
-						$('#nodrafts').fadeIn(500);
-					}
-				}});
-			});
-		},
-		getBigFrameDraft : function(id,draft){
-			var image = !draft.image ? 'category/sonstiges.png' : draft.image;
-			var date = new Date(draft.timestamp);
-			var dateString = this.parseDraftDate(date);
+            }
+        },
+        open : function(id, callback){
+            return AnycookAPI._get('/drafts/'+id, {}, callback);
+        },
+        remove : function(event){
+            var $li = $(event.target).parents('li');
+            AnycookAPI._delete('/drafts/'+$li.data('id'),{}, function(){
+                $li.animate({height:0, opacity:0},{duration:500, complete:function(){
+                    $(this).remove();
+                    if($('#draft_list').children().length === 0){
+                        $('#nodrafts').fadeIn(500);
+                    }
+                }});
+            });
+        },
+        getBigFrameDraft : function(draft){
+            var image = !draft.image ? 'category/sonstiges.png' : draft.image;
+            var date = new Date(draft.timestamp);
+            var dateString = this.parseDraftDate(date);
 
-			var data = {
-				uri : encodeURI('#/recipeediting?id='+id),
-				name : !draft.name ? 'Noch kein Titel' : draft.name,
-				description : !draft.description ? 'Noch keine Beschreibung' : draft.description,
-				imagePath : AnycookAPI.upload.imagePath(image, 'recipe', 'small'),
-				date : dateString,
-				percent : Math.round(draft.percentage*100)+'%',
-				year : date.getFullYear()
-			};
+            var data = {
+                uri : encodeURI('#/recipeediting?id='+draft.id),
+                name : !draft.name ? 'Noch kein Titel' : draft.name,
+                description : !draft.description ? 'Noch keine Beschreibung' : draft.description,
+                imagePath : AnycookAPI.upload.imagePath(image, 'recipe', 'small'),
+                date : dateString,
+                percent : Math.round(draft.percentage*100)+'%',
+                year : date.getFullYear()
+            };
 
-			return $(draftFrameTemplate(data)).data('id', id);
-		},
-		parseDraftDate : function(date){
+            return $(draftFrameTemplate(data)).data('id', draft.id);
+        },
+        parseDraftDate : function(date){
 
-			var month = date.getMonth();
-			var day = date.getDate();
-			switch(month){
-				case 0:
-					month = 'Jan';
-					break;
-				case 1:
-					month = 'Feb';
-					break;
-				case 2:
-					month = 'Mär';
-					break;
-				case 3:
-					month = 'Apr';
-					break;
-				case 4:
-					month = 'Mai';
-					break;
-				case 5:
-					month = 'Jun';
-					break;
-				case 6:
-					month = 'Jul';
-					break;
-				case 7:
-					month = 'Aug';
-					break;
-				case 8:
-					month = 'Sep';
-					break;
-				case 9:
-					month = 'Okt';
-					break;
-				case 10:
-					month = 'Nov';
-					break;
-				case 11:
-					month = 'Dez';
-					break;
-			}
+            var month = date.getMonth();
+            var day = date.getDate();
+            switch(month){
+                case 0:
+                    month = 'Jan';
+                    break;
+                case 1:
+                    month = 'Feb';
+                    break;
+                case 2:
+                    month = 'Mär';
+                    break;
+                case 3:
+                    month = 'Apr';
+                    break;
+                case 4:
+                    month = 'Mai';
+                    break;
+                case 5:
+                    month = 'Jun';
+                    break;
+                case 6:
+                    month = 'Jul';
+                    break;
+                case 7:
+                    month = 'Aug';
+                    break;
+                case 8:
+                    month = 'Sep';
+                    break;
+                case 9:
+                    month = 'Okt';
+                    break;
+                case 10:
+                    month = 'Nov';
+                    break;
+                case 11:
+                    month = 'Dez';
+                    break;
+            }
 
-			//console.log(year, month, day);
-			return day+'. '+month;
-
-
-		},
-		save : function(type, data){
-			var user = User.get();
-			var id = $.address.parameter('id');
-			if(!user.checkLogin || id === undefined) { return; }
+            //console.log(year, month, day);
+            return day+'. '+month;
 
 
-			var newData = {id:id, data:{}};
-			newData.data[type] = data;
-			queue.push(newData);
-			if(queue.length === 1){
-				this.saveDoc();
-			}
-		},
-		saveDoc : function(){
-			var self = this;
-			if(queue.length > 0){
-				var data = queue[0];
-				AnycookAPI._postJSON('/drafts/'+data.id,data.data, function(){
-					queue.shift();
-					self.saveDoc();
-				});
-			}
-		},
-		getDraftFromRecipe : function(recipename){
-			var path = '/drafts/'+encodeURIComponent(recipename);
+        },
+        save : function(type, data){
+            var user = User.get();
+            var id = $.address.parameter('id');
+            if(!user.checkLogin || id === undefined) { return; }
 
-			AnycookAPI._put(path, {}, function(draftId){
-				if(draftId) {
-					$.address.value('/recipeediting?step=4&id='+draftId);
-				}
-			});
-		}
-	};
+
+            var newData = {id:id, data:{}};
+            newData.data[type] = data;
+            queue.push(newData);
+            if(queue.length === 1){
+                this.saveDoc();
+            }
+        },
+        saveDoc : function(){
+            var self = this;
+            if(queue.length > 0){
+                var data = queue[0];
+                AnycookAPI._postJSON('/drafts/'+data.id,data.data, function(){
+                    queue.shift();
+                    self.saveDoc();
+                });
+            }
+        },
+        getDraftFromRecipe : function(recipename){
+            var path = '/drafts/'+encodeURIComponent(recipename);
+
+            AnycookAPI._put(path, {}, function(draftId){
+                if(draftId) {
+                    $.address.value('/recipeediting?step=4&id='+draftId);
+                }
+            });
+        }
+    };
 });
