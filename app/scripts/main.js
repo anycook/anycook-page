@@ -320,7 +320,7 @@ require([
                     //require(['title'], function(title){
                          /* global _paq */
                         //_paq.push(['setDocumentTitle', title.get(), 'visit']);
-                    if(_paq){
+                    if(window['_paq'] !== undefined){
                         _paq.push(['setCustomUrl', 'http://anycook.de/#'+path, 'visit']);
                         _paq.push(['trackPageView', path]);
                     }
