@@ -243,6 +243,7 @@ define([
 
                     AnycookAPI.autocomplete.ingredient(term,excludedIngredients,function(data){
                         resp($.map(data, function(item){
+                            item = item.name;
                             return{
                                 label:item,
                                 data:item,
