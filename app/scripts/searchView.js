@@ -122,10 +122,10 @@ define([
                 if(data.tags){
                     for(var l=0; l<data.tags.length; l++){
                         if(l===0){
-                            array[array.length] = { label: '<div class="autocomplete-h1">Tags</div><div class="autocomplete-p">'+data.tags[l]+'</div>', value: data.tags[l], data:'tag'};
+                            array[array.length] = { label: '<div class="autocomplete-h1">Tags</div><div class="autocomplete-p">'+data.tags[l].name+'</div>', value: data.tags[l].name, data:'tag'};
                         }
                         else{
-                            array[array.length] = { label: '<div class="autocomplete-p">'+data.tags[l]+'</div>', value: data.tags[l], data:'tag'};
+                            array[array.length] = { label: '<div class="autocomplete-p">'+data.tags[l].name+'</div>', value: data.tags[l].name, data:'tag'};
                         }
                     }
                 }

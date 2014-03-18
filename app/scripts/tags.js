@@ -112,7 +112,7 @@ define([
                             AnycookAPI.autocomplete.tag(term,function(data){
                                 resp($.map(data, function(item){
                                     return{
-                                        label:item
+                                        label:item.name
                                     };
                                 }));
                             });
