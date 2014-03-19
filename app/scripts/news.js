@@ -65,7 +65,7 @@ define([
 
                 for(var i in json){
                     var $li = this.parseLife(json[i]);
-                    if(Number(json[i].id) > newestid){
+                    if(json[i].id > newestid){
 
                         $container.prepend($li);
                         /*if(!empty){
