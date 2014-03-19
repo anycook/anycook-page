@@ -57,11 +57,20 @@ define([
                 $.address.title(recipe.name + ' | anycook');
                 $('#recipe_headline').append(recipe.name);
                 $('#introduction').append(recipe.description);
-                var $author = $('<a></a>').attr('href', User.getProfileURI(recipe.author.id))
-                    .text(recipe.author.name);
-                $('#autoren').append($author);
                 filters.setFromRecipe(recipe);
                 $('.recipe_image').attr('src', recipe.image.big);
+            });
+
+            AnycookAPI.recipe.authors(recipeName, function(authors){
+                var authorsHtml = '';
+                for(var i = 0; i < authors.length; i++){
+                    var author = authors[i];
+                    var authorLink = self.getAuthorLink(author);
+                    if(i+1 === authors.length) { authorsHtml += authorLink; }
+                    else if (i+2 === authors.length) { authorsHtml += authorLink+' und '; }
+                    else { authorsHtml += authorLink+', '; }
+                }
+                $('#autoren').append(authorsHtml);
             });
 
 
@@ -356,6 +365,9 @@ define([
                     $('#schmecktmir').click($.proxy(self.schmecktmir, self));
                 }
             });
+        },
+        getAuthorLink : function(author){
+            return '<a href="'+User.getProfileURI(author.id)+'">'+author.name+'</a>';
         }
     };
 });
