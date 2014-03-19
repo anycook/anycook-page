@@ -178,7 +178,8 @@ define([
         getEvent : function(recipeName, login, json) {
             $.extend(json, {
                 datetime : date.getDateString(json.datetime,false),
-                recipeName : recipeName
+                recipeName : recipeName,
+                text : json.text || ''
             });
 
             var $li = $('<li></li>').addClass('event');
