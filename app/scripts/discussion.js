@@ -25,10 +25,11 @@ define([
     'date',
     'drafts',
     'loginMenu',
+    'tpl!templates/discussionElement',
     'tpl!templates/discussionEvent',
     'tpl!templates/discussionAnswerSmall',
     'jquery-autosize'
-], function($, _, AnycookAPI, User, date, drafts, loginMenu, discussionEventTemplate, discussionAnswerSmallTemplate){
+], function($, _, AnycookAPI, User, date, drafts, loginMenu, discussionElementTemplate, discussionEventTemplate, discussionAnswerSmallTemplate){
     'use strict';
     return {
         load : function(recipeName) {
@@ -39,6 +40,9 @@ define([
             var user = User.get();
             var login = user.checkLogin();
             if(login) {
+                $('#discussion_container')
+                    .on('click', '.answer_btn', $.proxy(this.answerBtnClick, this))
+                    .on('click', '.like', $.proxy(this.discussionLike, this));
                 $('#discussion_footer .nologin').hide();
                 $('#discussion_footer img').attr('src', user.getImage());
                 $('.comment_btn').click($.proxy(this.comment, this));
@@ -86,7 +90,7 @@ define([
                         var parentId = elements[i].parentId;
                         var $li;
                         if(parentId === -1){
-                            if(elements[i].syntax === null) {
+                            if(!elements[i].syntax) {
                                 $li = self.getElement(false, login, elements[i]);
                             }
                             else {
@@ -116,70 +120,22 @@ define([
                 self.loadContent(recipeName, newLastid);
             });
         },
-        getElement : function(children, login, json) {
-            var text = json.text === null ? '' : json.text;
-            var user = json.user;
-            var likes = json.likes;
+        getElement : function(isChild, login, json) {
+            $.extend(json, {
+                isChild : isChild,
+                login: login,
+                datetime : date.getDateString(json.datetime)
+            });
 
-            var likedByUser = json.likedByUser;
-
-            var datetime = date.getDateString(json.datetime);
-            var linktext = '/#!/profile/' + user.id;
-            var image = User.getUserImagePath(user.id);
-            var $li = $('<li></li>').addClass('comment').append('<a></a>');
-            $li.children('a').attr('href', linktext).append('<img src="' + image + '"/>');
-
-            if(Number(likes) > 0) {
-                likes = '+' + likes;
-            }
-            var $arrow = $('<div></div>');
-            var $comment = $('<div></div>').addClass('recipe_comment');
-
-            if(!children) {
-                $arrow.addClass('comment_arrow');
-            } else {
-                $arrow.addClass('comment_arrow_small');
-            }
-            var $commentHeadline = $('<div></div>').addClass('comment_headline').append('<a></a>');
-            $commentHeadline.children('a').attr('href', linktext).text(user.name);
-
-            var $date = $('<span></span>').addClass('comment_date').text(datetime);
-            $commentHeadline.append($date);
-
-            var $text = $('<div></div>').addClass('comment_text').text(text);
-            var $footer = $('<div></div>').addClass('comment_footer');
-
-            if(login){
-                var $answerBtn = $('<a></a>').addClass('answer_btn').text('antworten');
-                $answerBtn.on('click', $.proxy(this.answerBtnClick, this));
-                $footer.append($answerBtn);
-            }
-            var $like = $('<div class=\'like\'></div>');
-
-            if(likedByUser) { $like.addClass('liked_by_user'); }
-
-            var $commentLike = $('<div></div>').addClass('comment_like')
-                .append($like)
-                .append('<div class=\'like_nr\'>' + likes + '</div>');
-
-            $footer.append($commentLike);
-            if(login){
-                $like.click($.proxy(this.discussionLike, this));
-            }
-
-            $comment.append($commentHeadline).append($text).append($footer);
-            $li.append($arrow).append($comment);
-
-            if(!children) { $li.append('<ul></ul>'); }
-
-            return $li;
-
+            return $(discussionElementTemplate(json));
         },
         getEvent : function(recipeName, login, json) {
+            //json.syntax = json.syntax || null;
+
             $.extend(json, {
                 datetime : date.getDateString(json.datetime,false),
                 recipeName : recipeName,
-                text : json.text || ''
+                text : json.text || '',
             });
 
             var $li = $('<li></li>').addClass('event');
@@ -224,9 +180,9 @@ define([
         },
         answerBtnClick : function(event) {
             var $target = $(event.target);
-            var $container = $target.parents('.recipe_comment');
-            var id = $container.find('.comment_id').val();
-            var $ul = $container.siblings('ul');
+            var $li = $target.parents('li');
+            var id = $li.data('comment_id');
+            var $ul = $li.children('ul');
             if($ul.length === 0) { $ul = $target.closest('ul'); }
             var $childComment = $ul.children('.child_comment');
 
@@ -263,7 +219,7 @@ define([
         getChildComment : function(user){
             var $template = $(discussionAnswerSmallTemplate({
                 profileUri : user.getProfileURI(),
-                userImage : user.getUserImagePath('small')
+                userImage : user.image.small
             }));
 
             $template.find('textarea').autosize().keydown($.proxy(this.childComment, this));

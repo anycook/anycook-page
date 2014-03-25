@@ -1,0 +1,21 @@
+<li class="comment">
+    <a href="#/profile/<%= user.id %>">
+        <img src="<%= user.image.small %>" alt="<%= user.name %>">
+    </a>
+    <div class="comment_arrow<% if(isChild) { %>_small<% } %>"></div>
+    <div class="recipe_comment">
+        <div class="comment_headline">
+            <a href="#/profile/<%= user.id %>"><%= user.name %></a>
+            <span class="comment_date"><%= datetime %></span>
+        </div>
+        <div class="comment_text"><%= text %></div>
+        <div class="comment_footer">
+            <% if(login) { %><a class="answer_btn">antworten</a><% } %>
+            <div class="comment_like">
+                <div class="like <% if(likedByUser) { %>liked_by_user<% } %>"></div>
+                <div class="like_nr"><%= likes %></div>
+            </div>
+        </div>
+    </div>
+    <% if(!isChild) { %><ul></ul><% } %>
+</li>
