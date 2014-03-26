@@ -80,12 +80,15 @@ define([
                             var index = $.inArray(recipe.name, newestRecipes);
                             if(index > -1) { newestRecipes.splice(index, 1); }
                             else { recipes[recipe.name] = recipe; }
+
                             newestRecipes.unshift(recipe.name);
+
+                            if(newestRecipes.length > 3) { newestRecipes.splice(newestRecipes.length -1, 1); }
                         }
                     } else{
                         $container.append($li);
                         var recipe2 = json[i].recipe;
-                        if(recipe2 && newestRecipes.length < 3 && newestRecipes.indexOf(recipe2.name) === -1){
+                        if(recipe2 && newestRecipes.length < 3 && $('#newestRecipes p a').length < 3 && newestRecipes.indexOf(recipe2.name) === -1){
                             newestRecipes.push(recipe2.name);
                             recipes[recipe2.name] = recipe2;
                         }
@@ -106,7 +109,9 @@ define([
 
                 var $p = $('#newestRecipes p');
 
-                for(var j = 0; j<3 && j < newestRecipes.length; j++){
+                for(var k = 0; k < newestRecipes.length; k++) { $p.children().last().remove(); }
+
+                for(var j = newestRecipes.length - 1; j >= 0; j--){
                     //see jquery.recipeoverview.js
                     var recipe3 = recipes[newestRecipes[j]];
                     var img = recipe3.image.small;
@@ -117,7 +122,7 @@ define([
                     var $a = $('<a></a>').attr('href', href)
                         .append($img).append('<div><span>'+recipe3.name+'</span></div>');
 
-                    $p.append($a);
+                    $p.prepend($a);
                 }
             }
         },
