@@ -207,7 +207,7 @@ define([
 
             var $newIngredientList = $template.find('.new_ingredient_list');
 
-            if(!ingredients){
+            if(!ingredients || ingredients.length === 0){
                 $newIngredientList.append(this.getIngredientLine());
             }
             else{
