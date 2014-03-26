@@ -75,7 +75,7 @@ define([
                             }});
                         }*/
                         if(json[i].recipe){
-                            var index = $.inArray(json[i].recipe, newestRecipes);
+                            var index = newestRecipes.indexOf(json[i].recipe);
                             if(index > -1) { newestRecipes.splice(index, 1); }
                             newestRecipes.unshift(json[i].recipe);
                         }
