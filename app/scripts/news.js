@@ -75,11 +75,13 @@ define([
                             }});
                         }*/
                         if(json[i].recipe){
+                            var index = $.inArray(json[i].recipe, newestRecipes);
+                            if(index > -1) { newestRecipes.splice(index, 1); }
                             newestRecipes.unshift(json[i].recipe);
                         }
                     } else{
                         $container.append($li);
-                        if(json[i].recipe){
+                        if(newestRecipes.length < 3 && json[i].recipe && $.inArray(json[i].recipe, newestRecipes) === -1){
                             newestRecipes.push(json[i].recipe);
                         }
                     }
