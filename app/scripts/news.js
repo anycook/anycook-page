@@ -62,6 +62,7 @@ define([
                 }
 
                 var newestRecipes = [];
+                var recipes = {};
 
                 for(var i in json){
                     var $li = this.parseLife(json[i]);
@@ -74,15 +75,19 @@ define([
                                 $li.fadeIn(500);
                             }});
                         }*/
-                        if(json[i].recipe){
-                            var index = newestRecipes.indexOf(json[i].recipe);
+                        var recipe = json[i].recipe;
+                        if(recipe){
+                            var index = $.inArray(recipe.name, newestRecipes);
                             if(index > -1) { newestRecipes.splice(index, 1); }
-                            newestRecipes.unshift(json[i].recipe);
+                            else { recipes[recipe.name] = recipe; }
+                            newestRecipes.unshift(recipe.name);
                         }
                     } else{
                         $container.append($li);
-                        if(newestRecipes.length < 3 && json[i].recipe && $.inArray(json[i].recipe, newestRecipes) === -1){
-                            newestRecipes.push(json[i].recipe);
+                        var recipe = json[i].recipe;
+                        if(recipe && newestRecipes.length < 3 && newestRecipes.indexOf(recipe.name) === -1){
+                            newestRecipes.push(recipe.name);
+                            recipes[recipe.name] = recipe;
                         }
                     }
 
@@ -103,14 +108,14 @@ define([
 
                 for(var j = 0; j<3 && j < newestRecipes.length; j++){
                     //see jquery.recipeoverview.js
-                    var recipe = newestRecipes[j];
-                    var img = AnycookAPI.recipe.image(recipe);
+                    var recipe = recipes[newestRecipes[j]];
+                    var img = recipe.image.small;
 
                     var $img = $('<img src="'+img+'"/>');
 
-                    var href = Recipe.getURI(recipe);
+                    var href = Recipe.getURI(recipe.name);
                     var $a = $('<a></a>').attr('href', href)
-                        .append($img).append('<div><span>'+recipe+'</span></div>');
+                        .append($img).append('<div><span>'+recipe.name+'</span></div>');
 
                     $p.append($a);
                 }
@@ -140,8 +145,8 @@ define([
                     array = text.split('#g');
                     text = '';
                     for(var j = 0; j<array.length-1; ++j){
-                        uri = encodeURI('/#/recipe/'+life.recipe);
-                        link = '<a href="'+uri+'">'+life.recipe+'</a>';
+                        uri = encodeURI('/#/recipe/'+life.recipe.name);
+                        link = '<a href="'+uri+'">'+life.recipe.name+'</a>';
                         text+=array[j]+link;
                     }
                     text+=array[array.length-1];
