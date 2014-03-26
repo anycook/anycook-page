@@ -84,10 +84,10 @@ define([
                         }
                     } else{
                         $container.append($li);
-                        var recipe = json[i].recipe;
-                        if(recipe && newestRecipes.length < 3 && newestRecipes.indexOf(recipe.name) === -1){
-                            newestRecipes.push(recipe.name);
-                            recipes[recipe.name] = recipe;
+                        var recipe2 = json[i].recipe;
+                        if(recipe2 && newestRecipes.length < 3 && newestRecipes.indexOf(recipe2.name) === -1){
+                            newestRecipes.push(recipe2.name);
+                            recipes[recipe2.name] = recipe2;
                         }
                     }
 
@@ -108,14 +108,14 @@ define([
 
                 for(var j = 0; j<3 && j < newestRecipes.length; j++){
                     //see jquery.recipeoverview.js
-                    var recipe = recipes[newestRecipes[j]];
-                    var img = recipe.image.small;
+                    var recipe3 = recipes[newestRecipes[j]];
+                    var img = recipe3.image.small;
 
                     var $img = $('<img src="'+img+'"/>');
 
-                    var href = Recipe.getURI(recipe.name);
+                    var href = Recipe.getURI(recipe3.name);
                     var $a = $('<a></a>').attr('href', href)
-                        .append($img).append('<div><span>'+recipe.name+'</span></div>');
+                        .append($img).append('<div><span>'+recipe3.name+'</span></div>');
 
                     $p.append($a);
                 }
