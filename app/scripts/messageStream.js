@@ -44,7 +44,7 @@ define([
 		},
 		getNewMessageLightbox : function(){
 			var user = User.get();
-			var content = newMessageDialogTemplate({userImagePath : user.getUserImagePath()});
+			var content = newMessageDialogTemplate({userImagePath : user.image.small});
 			var $lightbox = lightbox.get('Neue Nachricht',
 				'Schreibe einem oder mehreren Usern eine Nachricht', content, 'abschicken');
 			$lightbox.find('form').submit($.proxy(this.submitNewMessage, this));
