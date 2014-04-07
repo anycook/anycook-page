@@ -22,6 +22,7 @@ define([
 		this.id = -1;
 		this.created = null;
 		this.active = false;
+        this.tasty = false;
 	}
 
 	Recipe.getRecipeName = function(){
@@ -52,6 +53,7 @@ define([
 		recipe.created = json.created;
 		recipe.active = json.active;
         recipe.image = json.image;
+        recipe.tasty = json.tasty;
 		return recipe;
 	};
 

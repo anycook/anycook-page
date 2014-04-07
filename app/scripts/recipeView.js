@@ -59,6 +59,11 @@ define([
                 $('#introduction').append(recipe.description);
                 filters.setFromRecipe(recipe);
                 $('.recipe_image').attr('src', recipe.image.big);
+                if(!recipe.tasty) { $('#schmecktmir').click($.proxy(self.schmecktmir, self)); }
+                else {
+                    $('#schmecktmir').addClass('on');
+                    $('#schmecktmir').click($.proxy(self.schmecktmirnicht, self));
+                }
             });
 
             AnycookAPI.recipe.authors(recipeName, function(authors){
@@ -103,14 +108,14 @@ define([
             var user = User.get();
 
             if(user.checkLogin()) {
-                AnycookAPI.recipe.schmeckt(recipeName, function(schmeckt){
+                /*AnycookAPI.recipe.schmeckt(recipeName, function(schmeckt){
                     if(!schmeckt) {
                         $('#schmecktmir').click($.proxy(self.schmecktmir, self));
                     } else {
                         $('#schmecktmir').addClass('on');
                         $('#schmecktmir').click($.proxy(self.schmecktmirnicht, self));
                     }
-                });
+                });*/
                 $('#tags').click($.proxy(this.showAddTags, this));
             } else {
                 $('#schmecktmir').click($.proxy(loginMenu.toggle, loginMenu));
