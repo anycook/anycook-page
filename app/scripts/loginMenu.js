@@ -67,7 +67,7 @@ define([
 				target.val('Username').css('color', '#b5b5b5');
 			}
 		},
-		submitForm : function(){
+		submitForm : function(event){
 			event.preventDefault();
 			var self = this;
             var $form = $('#login_menu form');
