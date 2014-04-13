@@ -369,6 +369,7 @@ define([
             $('#step2').trigger($.Event('resize'));
         },
         removeIngredientLine : function(event){
+
             var $li = $(event.target).parents('li.new_ingredient_line');
             if($li.siblings('.new_ingredient_line').length > 0){
                 $li.remove();
@@ -377,6 +378,8 @@ define([
                 this.draftIngredients();
                 $('#step2').trigger($.Event('resize'));
             }
+
+            return false;
         },
         draftIngredients : function(){
             drafts.save('ingredients', this.getIngredients());

@@ -104,8 +104,10 @@ define([
 			var self = this;
 
 			$('body').click(function(event){
-				var $target = $(event.target);
-				if($target.parents().andSelf().is('.lightbox') || $target.parents().andSelf().is('.lightbox-autocomplete')){
+                //var $lightbox = $(event.target).parents('.lightbox, .lightbox-autocomplete');
+                var $lightbox = $('.lightbox, .lightbox-autocomplete').has($(event.target));
+                //var $lightbox = $(event.target).parents('.lightbox');
+				if($lightbox.length){
 					return;
 				}
 
