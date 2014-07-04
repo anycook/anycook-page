@@ -445,7 +445,7 @@
 			<div id="team">
 				<h1>Team</h1>
 				<li>
-					<img src="http://10.1.0.200/user/8/image?type=large" alt="Jan Graßegger"/>
+					<img src="https://api.anycook.de/user/8/image?type=large" alt="Jan Graßegger"/>
 					<div class="teamMember">
 						<h2>Jan Graßegger</h2>
 						<h3>Entwicklung</h3>
@@ -455,7 +455,7 @@
 					</div>
 				</li>
 				<li>
-					<img src="http://10.1.0.200/user/2/image?type=large" alt="Daniel Plath"/>
+					<img src="https://api.anycook.de/user/2/image?type=large" alt="Daniel Plath"/>
 					<div class="teamMember">
 						<h2>Daniel Plath</h2>
 						<h3>Design</h3>
