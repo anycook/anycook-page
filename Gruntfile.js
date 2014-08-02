@@ -358,20 +358,6 @@ module.exports = function (grunt) {
                     removeCombined: true
                 }
             }
-        },
-
-        aws: grunt.file.exists('aws-credentials.json') ? grunt.file.readJSON('aws-credentials.json') : {},
-        s3: {
-            options: {
-                accessKeyId: '<%= aws.accessKeyId %>',
-                secretAccessKey: '<%= aws.secretAccessKey %>',
-                bucket: '<%= aws.bucket %>',
-                region: '<%= aws.region %>'
-            },
-            build: {
-                cwd: 'dist/',
-                src: '**'
-            }
         }
     });
 
@@ -431,10 +417,5 @@ module.exports = function (grunt) {
         'newer:jshint',
         'test',
         'build'
-    ]);
-
-    grunt.registerTask('upload', [
-        'default',
-        's3'
     ]);
 };
