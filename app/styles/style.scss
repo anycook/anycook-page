@@ -98,30 +98,59 @@ header{
 		form{
 			height:100%;
 			float:left;
+            position: relative;
+            background-color: white;
+
+            input{
+                font: $searchbarfont;
+                color: $darkgrey;
+                height: 100%;
+                width: 310px;
+                border:0;
+                border-radius:0;
+                padding:0;
+                @include no-box-shadow();
+                background-color: transparent;
+            }
+
 			#search{
-				font: $searchbarfont;
-				color: $darkgrey;
 				float:left;
-				height:	100%;
-				width:310px;
-				border:0;
-				border-radius:0;
-				padding:0;
-				@include no-box-shadow();
-				background-color:white;
-
-			}
-			#search::-webkit-input-placeholder{
-
-				font-style: italic;
-				text-align: inherit;
+                position: relative;
+                z-index: 1;
 			}
 
-			#search:-moz-placeholder{
+            #search::-webkit-input-placeholder{
+                font-style: italic;
+                text-align: inherit;
+                color: $placeholdergrey;
+            }
 
-				font-style: italic;
-				text-align: inherit;
-			}
+            #search:-moz-placeholder{
+                font-style: italic;
+                text-align: inherit;
+                color: $placeholdergrey;
+            }
+
+            #search::-moz-placeholder{
+                font-style: italic;
+                text-align: inherit;
+                color: $placeholdergrey;
+            }
+
+            #search::-ms-input-placeholder{
+                font-style: italic;
+                text-align: inherit;
+                color: $placeholdergrey;
+            }
+
+            #search_background{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 0;
+                color: $placeholdergrey;
+            }
 		}
 
 		#search_reset{

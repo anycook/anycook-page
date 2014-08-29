@@ -405,6 +405,7 @@ define([
             $ingredientLine.children('.new_ingredient').val(ingredient);
             $('#step2').trigger($.Event('resize'));
         },
+        //TODO move to stringtools
         formatMenge : function(event){
             var $target = $(event.target);
             var text = $target.val();

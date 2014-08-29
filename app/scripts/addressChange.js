@@ -45,6 +45,7 @@ define([
             $('#subnav').empty();
             $('#btn_container').find('.user_btn').removeClass('active');
             $('#main').find('.lightbox').remove();
+            $('#search_background').val('');
         },
         // behandelt change bei $.address.path
         handleChange : function(event){

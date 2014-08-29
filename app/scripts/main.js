@@ -389,6 +389,16 @@ require([
             of : '#searchbar',
             my : 'right top-1',
             at : 'right bottom'
+        },
+        response : function(event, ui) {
+            var content = ui.content;
+            if (content.length > 0) {
+                // TODO replace first chars with original.
+                var completion = content[0].value;
+                var input = $('#search').val();
+                completion = input + completion.substr(input.length);
+                $('#search_background').val(completion);
+            }
         }
     }).data( 'ui-autocomplete' )._renderItem = function( ul, item ) {
         return $( '<li></li>' )
@@ -398,10 +408,17 @@ require([
     };
 
     $('#search').keydown(function (event) {
+
         if(event.keyCode === 13){
             $('ul.ui-autocomplete').hide();
             $('#search_form').submit();
+        } else if (event.keyCode === 39) {
+            $('#search').val($('#search_background').val());
+        } else {
+            $('#search_background').val('');
         }
+    }).focusout(function () {
+        $('#search_background').val('');
     });
 
 
