@@ -480,7 +480,7 @@ define([
         },
         multiplyIngredients : function(perscount, recipe) {
 
-            $('#ingredient_list .amount').each(function(i) {
+            $('#ingredient_list .amount, .ingredients .amount').each(function(i) {
                 var amount = $(this).data('amount');
                 if(amount === undefined){
                     amount = $(this).text();

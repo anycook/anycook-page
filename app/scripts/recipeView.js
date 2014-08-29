@@ -191,16 +191,23 @@ define([
             // ingredients['Salz'] = '';
 
             var text = '';
-            for(var i in ingredients) {
-                if(ingredients[i].name.length === 0){
-                    continue;
-                }
-                text += ingredients[i].menge + ' ' + ingredients[i].name + ', ';
-            }
-            text = text.substring(0, text.length - 2);
+            if (ingredients.length > 0) {
 
-            if(text.length > 0) {
-                var $ingredients = $('<div></div>').addClass('ingredients').text(text);
+                var $ingredients = $('<div></div>').addClass('ingredients');
+                for(var i = 0; i < ingredients.length; i++) {
+                    var ingredient = ingredients[i];
+                    if(ingredient.name.length === 0){
+                        continue;
+                    }
+
+                    var $amount = $('<span class="amount"></span>').text(ingredient.menge);
+                    var $name = $('<span class="name"></span>').text(ingredient.name);
+                    $ingredients.append($amount).append(' ').append($name);
+                    if (i < ingredients.length - 1) {$ingredients.append(', ');}
+                }
+                text = text.substring(0, text.length - 2);
+
+
                 $ingredientStep.append($ingredients);
             }
 
