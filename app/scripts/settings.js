@@ -148,8 +148,8 @@ define([
 			$recipeImageContainer.removeClass('visible').children('#progressbar').hide();
 			$recipeImageContainer.children('.image_upload').show();
 			var user = User.get();
-			var $largeImg = $('<img/>').attr('src', user.getUserImagePath('large'));
-			var $smallImg = $('<img/>').attr('src', user.getUserImagePath('small'));
+			var $largeImg = $('<img/>').attr('src', user.getImage('large'));
+			var $smallImg = $('<img/>').attr('src', user.getImage('small'));
 			$('.profile_image').append($largeImg);
 			$('#menu_profile_image').empty().append($smallImg);
 		},
