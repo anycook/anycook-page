@@ -141,17 +141,19 @@ define([
 			AnycookAPI.setting.saveNotifications(notificationSettings);
 		},
 		completeUpload : function(){
-			var $recipeImageContainer = $('.profile_image');
-			$recipeImageContainer.children('img').remove();
+            $.when(User.init()).then(function(user) {
+                var $recipeImageContainer = $('.profile_image');
+                $recipeImageContainer.children('img').remove();
 
 
-			$recipeImageContainer.removeClass('visible').children('#progressbar').hide();
-			$recipeImageContainer.children('.image_upload').show();
-			var user = User.get();
-			var $largeImg = $('<img/>').attr('src', user.getImage('large'));
-			var $smallImg = $('<img/>').attr('src', user.getImage('small'));
-			$('.profile_image').append($largeImg);
-			$('#menu_profile_image').empty().append($smallImg);
+                $recipeImageContainer.removeClass('visible').children('#progressbar').hide();
+                $recipeImageContainer.children('.image_upload').show();
+                var $largeImg = $('<img src="' + user.getImage('big') + '"/>');
+                var $smallImg = $('<img/>').attr('src', user.getImage('small'));
+                $('.profile_image').append($largeImg);
+                $('#menu_profile_image').empty().append($smallImg);
+            });
+
 		},
 		saveAccount : function(event){
 			var $target = $(event.target);
