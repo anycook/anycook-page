@@ -34,9 +34,8 @@ define([
             var recipes = json.results;
 
             var currentRecipes = $('#result_container').data('recipes');
-            if(!currentRecipes || $('.frame_big').length === 0){
+            if(!currentRecipes || $('.frame_big').length === 0) {
                 currentRecipes = [];
-                $(document).scroll($.proxy(this.moreResultsScrollListener, this));
             }
 
             // var start = $('.frame_big').length;
@@ -54,6 +53,7 @@ define([
 
             currentRecipes = currentRecipes.concat(recipes);
             $('#result_container').data('recipes', currentRecipes).data('size', json.size);
+            $(document).one('scroll', $.proxy(this.moreResultsScrollListener, this));
         },
         searchAutocomplete: function(req,resp){
             var term = req.term;
@@ -162,17 +162,18 @@ define([
         moreResultsScrollListener : function(){
             var $bigFrames = $('.frame_big');
             if($.address.pathNames()[0] !== 'search' || $bigFrames.length === $('#result_container').data('size')){
-                $(document).unbind('scroll', $.proxy(this.moreResultsScrollListener, this));
                 return;
             }
 
             var scrollTop = $(window).scrollTop() + $(window).height();
             var top = $bigFrames.last().position().top;
-            if(scrollTop > top +100){
+            if(scrollTop > top + 100){
                 // addResults();
                 var start = $('.frame_big').length;
                 var search = Search.init();
                 search.search(start);
+            } else {
+                $(document).one('scroll', $.proxy(this.moreResultsScrollListener, this));
             }
 
         },
@@ -189,39 +190,6 @@ define([
                 });
             }
         },
-        /*handleSearchResults : function(result, terms){
-            $('#search').val('');
-            if(terms === 'Gerichte, Zutaten, Tags, ...')
-                return;
-
-            if(result.gerichte){
-                gotoGericht(result.gerichte);
-            }
-            else if(result.kategorien){
-                search.setKategorie(result.kategorien[0]);
-                search.flush();
-            }
-            else if(result.tags!){
-                search.addTag(result.tags[0]);
-                search.flush();
-            }
-            else if(result.zutaten){
-                search.addZutat(result.zutaten[0]);
-                search.flush();
-            }
-            else if(result.excludedingredients){
-                search.excludeIngredient(result.excludedingredients[0]);
-                search.flush();
-            }
-            else if(result.user){
-                gotoProfile(result.user[0]);
-            }
-            else if(terms !== ''){
-                search.addTerm(terms);
-                search.flush();
-            }
-            return false;
-        },*/
         addTerms : function(terms){
             /*if($('.search_term').length === 0){
                 $('#terms_text').show();
