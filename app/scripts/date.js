@@ -47,7 +47,7 @@ define([], function(){
 
 		},
 		getDateString : function(fromdatetime, prefix){
-            fromdatetime = fromdatetime.replace(' ', 'T');
+            if (typeof fromdatetime === 'string') { fromdatetime = fromdatetime.replace(' ', 'T'); }
 			var discdate = new Date(fromdatetime);
 			var today = new Date();
 			var yeardifference = today.getFullYear() - discdate.getFullYear();
