@@ -1,20 +1,20 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
@@ -58,20 +58,20 @@ define([
 				var height = $(this).height();
 				$('#recipe_editing_container').height(height);
 			});
-			
-			
-			//step1	
+
+
+			//step1
 			step1.load();
-						
+
 			//step2
 			step2.load();
-			
+
 			//step3
 			step3.load();
-			
+
 			//preview (step4)
 			$('#submit_recipe').click($.proxy(this.saveRecipe, this));
-			
+
 			//draft
 			var user = User.get();
 			if(user.checkLogin()){
@@ -102,7 +102,7 @@ define([
 
 			if(step1.isValid() && step2.isValid() &&
 				ingredientsCheck && personCheck && step3.isValid()){
-				
+
 				var recipe = {
 					name : step1.getRecipeName(),
 					steps : step2.getSteps(),
@@ -123,12 +123,12 @@ define([
 				if(user.checkLogin()){
 					userid = user.id;
 				}
-				
+
 				var id =  $.address.parameter('id');
 				if(id) {
 					recipe.mongoid = id;
 				}
-				
+
 
 				AnycookAPI.recipe.save(recipe, function(){
 					popup.show('Vielen Dank!', 'Dein Rezept wurde eingereicht und wird überprüft.<br/>Wir benachrichtigen dich, sobald dein Rezept akiviert wurde.<br/><br/>Dein anycook-Team');
@@ -136,7 +136,7 @@ define([
 						$.address.path('');
 						$('.fixedpopup').remove();
 					});
-					
+
 					$('.fixedpopup').show(1).delay(5000).fadeOut(500, function(){
 						$(this).remove();
 						var pathNames = $.address.pathNames();
@@ -145,7 +145,7 @@ define([
 						}
 					});
 				});
-								
+
 				return false;
 			}
 		},
@@ -155,13 +155,13 @@ define([
 			$editingContainer.removeClass('step2 step3');
 			var $navigation = $('.navigation');
 			$navigation.children().removeClass('active');
-			
+
 			var stepNum = Number(event.parameters.step);
 			if(!stepNum){
 				stepNum = 1;
 			}
-			
-			
+
+
 			var step1Left = 0;
 			switch(stepNum){
 			case 4:
@@ -229,8 +229,8 @@ define([
 				else {
 					animate();
 				}
-				
-				
+
+
 			}
 			return false;
 		},
@@ -273,25 +273,24 @@ define([
 				$('#step3 .std').val(json.time.std);
 				$('#step3 .min').val(json.time.min);
 			}
-			
+
 			if(json.skill){
 				$('#step3 .label_chefhats input[value=\''+json.skill+'\']').attr('checked', 'checked');
 				filters.handleRadios($('#step3 .label_chefhats'));
 			}
-			
+
 			if(json.calorie){
 				$('#step3 .label_muffins input[value=\''+json.calorie+'\']').attr('checked', 'checked');
 				filters.handleRadios($('#step3 .label_muffins'));
 			}
-			
-			
+
+
 			if(json.tags){
 				var $tagsbox = $('.tagsbox');
 				for(var i  in json.tags){
 					$tagsbox.append(tags.get(json.tags[i], 'remove'));
 				}
 			}
-				
 		},
 		resetNewRecipeHeight : function($container){
 			var height = $container.height()+20;
@@ -309,7 +308,7 @@ define([
 				id = window.setInterval($.proxy(this.watchForIngredients, this), 1000);
 				$(document).data('watchForIngredients', id);
 			}
-			
+
 			for(var i = 0; i < $newIngredients.length; i++){
 				if(step2.isValid()){
 					$(document).removeData('watchForIngredients');
@@ -318,7 +317,7 @@ define([
 					break;
 				}
 			}
-			
+
 		},
 		/*watchForLightboxIngredients : function(){
 			var id = $(document).data('watchForLightboxIngredients');
@@ -332,13 +331,13 @@ define([
 				id = window.setInterval('watchForLightboxIngredients()', 1000);
 				$(document).data('watchForLightboxIngredients', id);
 			}
-			
+
 			if(checkValidateLightboxIngredients()){
 				$(document).removeData('watchForLightboxIngredients');
 				window.clearInterval(id);
 				$('#ingredientoverview_error').fadeOut(300);
 			}
-			
+
 		},*/
 		loadPreview : function(data){
 			var image = data.image || 'category/sonstiges.png';
@@ -352,7 +351,13 @@ define([
 			recipeView.loadSteps(data.steps);
 			filters.setFromRecipe(data);
 			recipeView.loadIngredients(data.ingredients);
-			recipeView.loadTags(data.tags);
+
+            var tagObjects = [];
+            for (var i in data.tags) {
+                tagObjects.push({name : data.tags[i]});
+            }
+
+			recipeView.loadTags(tagObjects);
 			var id = $.address.parameter('id');
 			$('.tags_list a').attr('href', function(){
 				if(id){
@@ -361,7 +366,7 @@ define([
 				return '#/recipeediting?step=3';
 			});
 			$('#filter_main.blocked').one('click', function(){ $.address.parameter('step', 3); });
-			
+
 			$('#step4').trigger($.Event('resize'));
 			// if($.address.parameter('step') == 4)
 			// 	resetNewRecipeHeight($('#step4'));

@@ -266,7 +266,7 @@ define([
                         }, {
                             duration:300,
                             easing: 'swing',
-                            complete:function(){ $(this).remove(); }
+                            complete : function(){ $(this).remove(); }
                         });
                     }
                 });

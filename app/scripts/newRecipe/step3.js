@@ -80,20 +80,20 @@ define([
             });
 
             $('#step3 .std,#step3 .min')
-            .keydown($.proxy(this.keyTime, this))
-            .change($.proxy(this.draftTime, this))
-            .keyup($.proxy(this.draftTime, this))
-            .focus(function(){
-                self.isValid();
-                $('#time_error').fadeOut(300);
-            })
-            .siblings('.up, .down')
-            .click($.proxy(time.upDownListener, time))
-            .click($.proxy(this.draftTime, this))
-            .click(function(){
-                self.isValid();
-                $('#time_error').fadeOut(300);
-            });
+                .keydown($.proxy(this.keyTime, this))
+                .change($.proxy(this.draftTime, this))
+                .keyup($.proxy(this.draftTime, this))
+                .focus(function(){
+                    self.isValid();
+                    $('#time_error').fadeOut(300);
+                })
+                .siblings('.up, .down')
+                .click($.proxy(time.upDownListener, time))
+                .click($.proxy(this.draftTime, this))
+                .click(function(){
+                    self.isValid();
+                    $('#time_error').fadeOut(300);
+                });
 
             $('#new_recipe_tagsbox').click({
                 add : $.proxy(this.addTag, this),
@@ -127,9 +127,6 @@ define([
                 });
             });
 
-
-
-            //this.makeTagCloud();
             $('#open_preview').click($.proxy(this.submit, this));
         },
         addTag : function(tag){
