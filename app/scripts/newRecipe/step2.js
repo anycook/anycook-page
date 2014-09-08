@@ -471,6 +471,17 @@ define([
 
             $lightbox.find('.numberinput .up').click($.proxy(this.personsUp, this));
             $lightbox.find('.numberinput .down').click($.proxy(this.personsDown, this));
+            $lightbox.find('.new_ingredient_list').sortable({
+                axis: 'y',
+                // containment: 'parent',
+                cursorAt:{top : 0},
+                distance: 15,
+                forcePlaceholderSize : true,
+                opacity:0.75,
+                placeholder: 'ingredient-placeholder',
+                tolerance:'pointer',
+                //update: $.proxy(this.updateLightboxIngredients, this)
+            });
 
             this.showIngredientLightbox();
 
