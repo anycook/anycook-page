@@ -150,7 +150,7 @@ define([
         save : function(type, data){
             var user = User.get();
             var id = $.address.parameter('id');
-            if(!user.checkLogin || id === undefined) { return; }
+            if(!user.checkLogin || id === undefined || Object.keys(data).length === 0) { return; }
 
 
             var newData = {id:id, data:{}};
