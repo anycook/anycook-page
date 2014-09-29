@@ -319,26 +319,6 @@ define([
 			}
 
 		},
-		/*watchForLightboxIngredients : function(){
-			var id = $(document).data('watchForLightboxIngredients');
-			var $newIngredients = $('.lightbox .new_ingredient');
-			if($newIngredients.length === 0){
-				$(document).removeData('watchForLightboxIngredients');
-				window.clearInterval(id);
-				return;
-			}
-			if(!id){
-				id = window.setInterval('watchForLightboxIngredients()', 1000);
-				$(document).data('watchForLightboxIngredients', id);
-			}
-
-			if(checkValidateLightboxIngredients()){
-				$(document).removeData('watchForLightboxIngredients');
-				window.clearInterval(id);
-				$('#ingredientoverview_error').fadeOut(300);
-			}
-
-		},*/
 		loadPreview : function(data){
 			var image = data.image || 'category/sonstiges.png';
 			$('#step4 .recipe_image_container img').attr('src', AnycookAPI.upload.imagePath(image))

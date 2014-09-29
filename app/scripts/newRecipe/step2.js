@@ -624,7 +624,11 @@ define([
             if(newMenge === undefined){
                 newMenge = menge1+' + '+menge2;
             }
-            newMenge = newMenge.replace('.', ',');
+
+            if(typeof newMenge === 'string') {
+                newMenge = newMenge.replace('.', ',');
+            }
+
             return newMenge;
         },
     };
