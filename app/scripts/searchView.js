@@ -223,6 +223,7 @@ define([
 
             $.extend(json, {
                 uri : encodeURI('/#/recipe/' + json.name),
+                description : json.description || '',
                 imageURL : json.image.small,
                 time : {
                     std : std,
