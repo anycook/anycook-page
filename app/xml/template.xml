@@ -207,7 +207,7 @@
 	    			<div class="label_container">
 		    			<label class="label_chefhats" for="new_chef_1">
 							<div class="active"></div>
-		                	<input type="radio" class="chefhats" id="new_chef_1" value="1" name="chefhats" />
+		                	<input type="radio" class="chefhats" id="new_chef_1" value="1" name="new_chefhats" />
 		                </label>
 		                <label class="label_chefhats" for="new_chef_2">
 		                	<div class="active"></div>

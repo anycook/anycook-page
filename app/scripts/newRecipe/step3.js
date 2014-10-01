@@ -46,19 +46,22 @@ define([
 
             $('#step3 .label_chefhats, #step3 .label_muffins').click(function(event){
                 event.preventDefault();
-                var $inputs = $(this).children('input');
-                if($inputs.attr('checked')){
-                    $inputs.removeAttr('checked');
-                } else {
-                    $inputs.attr('checked', 'checked');
+                var $this = $(this);
+                var $input = $this.children('input');
+
+                var check = !$input.attr('checked');
+                $this.parent().find('input').removeAttr('checked');
+
+
+                if(check){
+                    $input.attr('checked', 'checked');
                 }
 
-                var $this = $(this);
                 filters.handleRadios($this);
-                var name = $inputs.attr('name') === 'new_muffins' ? 'calorie' : 'skill';
+                var name = $input.attr('name') === 'new_muffins' ? 'calorie' : 'skill';
 
-                if($inputs.attr('checked')){
-                    drafts.save(name, $inputs.val());
+                if($input.attr('checked')){
+                    drafts.save(name, $input.val());
                 }
                 else {
                     drafts.save(name, '0');
