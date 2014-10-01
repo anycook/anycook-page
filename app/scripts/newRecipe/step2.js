@@ -23,13 +23,14 @@ define([
     'AnycookAPI',
     'drafts',
     'lightbox',
+    'stringTools',
     'tpl!templates/newRecipe/ingredientStep',
     'tpl!templates/newRecipe/ingredientLine',
     'tpl!templates/lightboxContent/newIngredientsContent',
     'tpl!templates/lightboxContent/newIngredientsHeadline',
     'jquery.inputdecorator',
     'jquery.ui.sortable'
-], function($, _, AnycookAPI, drafts, lightbox, ingredientStepTemplate, ingredientLineTemplate, newIngredientsContentTemplate, newIngredientsHeadlineTemplate){
+], function($, _, AnycookAPI, drafts, lightbox, stringTools, ingredientStepTemplate, ingredientLineTemplate, newIngredientsContentTemplate, newIngredientsHeadlineTemplate){
     'use strict';
     return {
         load : function(){
@@ -224,7 +225,7 @@ define([
             };
 
             var $template = $(ingredientLineTemplate(data));
-            $template.find('.new_ingredient_menge').focusout($.proxy(this.formatMenge, this));
+            $template.find('.new_ingredient_menge').focusout($.proxy(stringTools.formatAmount, stringTools));
             $template.find('.remove_new_ingredient_line').click($.proxy(this.removeIngredientLine, this));
 
             var $ingredient = $template.find('.new_ingredient');
@@ -405,28 +406,6 @@ define([
             $ingredientLine.children('.new_ingredient').val(ingredient);
             $('#step2').trigger($.Event('resize'));
         },
-        //TODO move to stringtools
-        formatMenge : function(event){
-            var $target = $(event.target);
-            var text = $target.val();
-            if(text.length === 0){
-                return;
-            }
-            var textArr = $target.val().split('');
-            var newText = textArr[0];
-            for(var i = 0; i<textArr.length -1; i++){
-                if(textArr[i].match(/\d/) && textArr[i+1].match(/[a-z]/i)){
-                    newText += ' ';
-                }
-                if(textArr[i+1].match(/\./)){
-                    newText +=',';
-                }
-                else{
-                    newText += textArr[i+1];
-                }
-            }
-            $target.val(newText);
-        },
         //lightbox
         makeIngredientLightBox : function(){
             //ingredientOverview
@@ -545,7 +524,6 @@ define([
                 return false;
             }
 
-            var self = this;
             $('#step2 .new_ingredient_line').each(function(){
                 var $this = $(this);
                 var ingredient = $this.children('.new_ingredient').val();
@@ -554,7 +532,7 @@ define([
                 }
                 var menge = $this.children('.new_ingredient_menge').val();
                 if(ingredients[ingredient] !== undefined){
-                    ingredients[ingredient] = self.mergeMenge(ingredients[ingredient], menge);
+                    ingredients[ingredient] = stringTools.mergeAmount(ingredients[ingredient], menge);
                 }
                 else{
                     ingredients[ingredient] = menge;
@@ -595,41 +573,6 @@ define([
                 }
             }
             return false;
-        },
-        mergeMenge : function(menge1, menge2){
-            //TODO falls z.B. kg und g zusammen auftreten etc...
-
-            if(menge2.length === 0){
-                return menge1;
-            }
-            var newMenge;
-            menge1 = menge1.replace(/,/, '.');
-            menge2 = menge2.replace(/,/, '.');
-            var confirmRegex1 = /(\d+|\d+.\d+) [a-z]+/i;
-            var confirmRegex2 = /(\d+|\d+.\d+)/i;
-            if(menge1.match(confirmRegex1) && menge2.match(confirmRegex1)){
-                var menge1EinheitPos = menge1.search(/[a-z]+/i);
-                var menge2EinheitPos = menge2.search(/[a-z]+/i);
-                var menge1Einheit = menge1.substring(menge1EinheitPos);
-                var menge2Einheit = menge2.substring(menge2EinheitPos);
-
-                if(menge1Einheit === menge2Einheit){
-                    newMenge =  (Number(menge1.substring(0, menge1EinheitPos-1)) +
-                        Number(menge2.substring(0, menge1EinheitPos-1)))+' '+menge1Einheit;
-                }
-
-            }else if(menge1.match(confirmRegex2) && menge2.match(confirmRegex2)){
-                newMenge = Number(menge1) + Number(menge2);
-            }
-            if(newMenge === undefined){
-                newMenge = menge1+' + '+menge2;
-            }
-
-            if(typeof newMenge === 'string') {
-                newMenge = newMenge.replace('.', ',');
-            }
-
-            return newMenge;
-        },
+        }
     };
 });
