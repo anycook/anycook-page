@@ -150,7 +150,7 @@ define([
                     array = text.split('#g');
                     text = '';
                     for(var j = 0; j<array.length-1; ++j){
-                        uri = encodeURI('/#/recipe/'+life.recipe.name);
+                        uri = encodeURI('/#/recipe/'+life.recipe.name+'/'+life.recipe.id);
                         link = '<a href="'+uri+'">'+life.recipe.name+'</a>';
                         text+=array[j]+link;
                     }
