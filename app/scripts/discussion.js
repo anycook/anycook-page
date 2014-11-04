@@ -228,26 +228,36 @@ define([
         },
         comment : function() {
             var $textarea = $('#discussion_footer textarea');
+            if (this.sending) { return false; }
             var text = $textarea.val();
             if(text !== '') {
+                this.sending = true;
+                var self = this;
                 var parameterNames = $.address.pathNames();
                 var recipeName = parameterNames[1];
                 AnycookAPI.discussion.answer(recipeName, text, function(){
                     $textarea.val('');
+                    self.sending = false;
                 });
             }
         },
         childComment : function(event) {
             if(event.which === 13){
+                if (this.sending) { return false; }
+
                 var $target = $(event.target);
+
                 var pid = $target.parents('.comment').data('comment_id');
                 var text = $target.val();
                 if(text !== '') {
+                    this.sending = true;
                     var parameterNames = $.address.pathNames();
                     var recipeName = parameterNames[1];
+                    var self = this;
                     AnycookAPI.discussion.answer(recipeName, text, pid, function(){
                         $target.parents('.child_comment').fadeOut(200, function(){
                             $(this).remove();
+                            self.sending = false;
                         });
                     });
 
