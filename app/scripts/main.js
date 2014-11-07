@@ -316,10 +316,10 @@ require([
                 loginMenu.buildLogin();
 
                 $.address.bind('change', $.proxy(addressChange.handleChange, addressChange));
-                $.address.tracker(function(path){
+                $.address.tracker(function(){
                     /* global _gaq */
                     if(window._gaq !== undefined){
-                        _gaq.push(['_trackPageView'])
+                        _gaq.push(['_trackPageView']);
                     }
                 });
 
