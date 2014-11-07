@@ -317,15 +317,10 @@ require([
 
                 $.address.bind('change', $.proxy(addressChange.handleChange, addressChange));
                 $.address.tracker(function(path){
-                    //require(['title'], function(title){
-                         /* global _paq */
-                        //_paq.push(['setDocumentTitle', title.get(), 'visit']);
-                    if(window._paq !== undefined){
-                        _paq.push(['setCustomUrl', 'http://anycook.de/#'+path, 'visit']);
-                        _paq.push(['trackPageView', path]);
+                    /* global _gaq */
+                    if(window._gaq !== undefined){
+                        _gaq.push(['_trackPageView'])
                     }
-
-                    //});
                 });
 
 
