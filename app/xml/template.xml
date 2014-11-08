@@ -7,7 +7,7 @@
 	    		<a id="recipe_of_the_day"></a>
 	    	</div>
 	    	<div class="mid">
-	    		<a id="doodle" href="/#/search?tags=herbst"><img src="/img/doodle.png"/></a>
+	    		<a id="doodle" href="/#/search?tags=herbst"><img src="img/doodle.png"/></a>
 		    	<h1 class="welcome_headline">Willkommen auf anycook</h1>
 		    	<h2 class="welcome_subheadline">Das Rezeptesuchnetzwerk für Köche und alle, die es werden wollen.</h2>
 		    	<div class="login_or_register">
@@ -134,7 +134,7 @@
     			<h2>Schön, dass Du ein Rezept erstellen möchtest.</h2>
     			<p>In nur drei Schritten ist dein Rezept fertig. Fangen wir an!</p>
     			<div class="recipe_image_container image_container visible">
-    				<img class="recipe_image" src="/img/sonstiges.png"/>
+    				<img class="recipe_image" src="img/sonstiges.png"/>
     				<div class="image_layer"></div>
     				<div class="image_upload">
     					<div>
@@ -184,7 +184,7 @@
 	    		</div>
 	    		<div id="category_error" class="error">Bitte wähle eine Kategorie ein</div>
 	    		<div id="new_time">
-	    			<img src="/img/clock.png"/>
+	    			<img src="img/clock.png"/>
 	    			<h2>Dauer:</h2>
 	    			<div class="time_container">
 						<div class="time numberinput">
@@ -293,14 +293,14 @@
 	</template>
 	<template id="activate">
 		<div id='new_activation_success' class="content_message invisible">
-			<img src="/img/success_icon.png" />
+			<img src="img/success_icon.png" />
 				<div class="content">
 					<h1>Account aktiviert!</h1>
 					<p>Glückwunsch! Jetzt bist offiziell Teil von anycook-Community. Absofort kannst du dich mit deinen Zugangsdaten einloggen, Rezepte liken, Tags hinzufügen und vieles mehr. Viel Spaß beim entdecken. Wir freuen uns auf dich.<br/><br/>Dein anycook-Team</p>
 				</div>
 		</div>
 		<div id='new_activation_false' class="content_message invisible">
-			<img src="/img/false_icon.png" />
+			<img src="img/false_icon.png" />
 				<div class="content">
 					<h1>Account wurde nicht aktiviert!</h1>
 					<p>Schade! Da ist wohl etwas schief gelaufen Teil. Versuche es bitte noch einmal.<br/><br/>Dein anycook-Team</p>
@@ -399,7 +399,7 @@
 						bei der Erstellung von Rezepten möglichst viel Arbeit ab.
 					</p>
 				</div>
-				<a id="weimarmap" href="http://maps.google.com/maps?q=Karl-Hau%C3%9Fknecht-Stra%C3%9Fe+7,+Weimar,+Deutschland&amp;hl=de&amp;ie=UTF8&amp;sll=50.974082,11.326454&amp;sspn=0.005938,0.016512&amp;vpsrc=0&amp;hnear=Karl-Hau%C3%9Fknecht-Stra%C3%9Fe+7,+99423+Weimar,+Th%C3%BCringen,+Deutschland&amp;t=m&amp;z=16" target="_blank"><img class="googlemap" src="http://maps.google.com/maps/api/staticmap?center=Weimar&amp;zoom=13&amp;size=268x230&amp;maptype=roadmap&amp;sensor=false&amp;style=feature:poi|element:labels|visibility:off&amp;style=feature:administrative.neighborhood|element:labels|visibility:off&amp;style=feature:road.arterial|element:labels|visibility:off&amp;style=feature:road|element:labels|visibility:off&amp;style=feature:transit.station.rail|visibility:off"/><img class="mapoverlay" src="/img/maplayer.png"/></a>
+				<a id="weimarmap" href="http://maps.google.com/maps?q=Karl-Hau%C3%9Fknecht-Stra%C3%9Fe+7,+Weimar,+Deutschland&amp;hl=de&amp;ie=UTF8&amp;sll=50.974082,11.326454&amp;sspn=0.005938,0.016512&amp;vpsrc=0&amp;hnear=Karl-Hau%C3%9Fknecht-Stra%C3%9Fe+7,+99423+Weimar,+Th%C3%BCringen,+Deutschland&amp;t=m&amp;z=16" target="_blank"><img class="googlemap" src="http://maps.google.com/maps/api/staticmap?center=Weimar&amp;zoom=13&amp;size=268x230&amp;maptype=roadmap&amp;sensor=false&amp;style=feature:poi|element:labels|visibility:off&amp;style=feature:administrative.neighborhood|element:labels|visibility:off&amp;style=feature:road.arterial|element:labels|visibility:off&amp;style=feature:road|element:labels|visibility:off&amp;style=feature:transit.station.rail|visibility:off"/><img class="mapoverlay" src="img/maplayer.png"/></a>
 			</div>
 			<div class="row">
 				<div class="column right">
@@ -501,7 +501,7 @@
 				</div>
 			</div>
 			<div class="profile_buttons">
-				<!--<a id="search_profile" class="button"><img src="/img/loupe.png"/> Rezepte</a>-->
+				<!--<a id="search_profile" class="button"><img src="img/loupe.png"/> Rezepte</a>-->
 				<a id="follow" class="button">+ Folgen</a>
 				<a id="showRecipes" class="button">Rezepte durchsuchen</a>
 				<a id="sendmessage" class="button">Nachricht schreiben</a>
@@ -751,7 +751,7 @@
 				</form>
 				<p>Oder noch einfacher! Melde dich mit deinem Facebook-Account an:</p>
 				<div class="facebookLogin">
-                    <img src="/img/facebook/icon.png"/>
+                    <img src="img/facebook/icon.png"/>
                     <span>Anmelden</span>
                 </div>
 			</div>
@@ -771,7 +771,7 @@
 	<template id="notfound">
 		<div class="paperrip"></div>
 		<div class="notfound_content">
-			<img src="/img/404.png" alt="404" class="404img" />
+			<img src="img/404.png" alt="404" class="404img" />
 			<h1>Seite nicht gefunden</h1>
 			<p>Diese Seite existiert nicht mehr, gab es nie oder wurde geklaut. Suchst du vielleicht ein leckeres Rezept?</p>
 			<div class="404recipes"></div>
