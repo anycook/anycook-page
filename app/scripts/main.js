@@ -306,7 +306,7 @@ require([
         };
 
         var xmlOptions = {
-            xml: "xml/template.xml",
+            xml: 'xml/template.xml',
             error:xmlErrorFunction
         };
 
