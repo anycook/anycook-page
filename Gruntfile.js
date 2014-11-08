@@ -22,7 +22,8 @@ module.exports = function (grunt) {
         yeoman: {
             // Configurable paths
             app: 'app',
-            dist: 'dist'
+            dist: 'dist',
+            assetDomain: 'https://anycook.de.s3-website-eu-west-1.amazonaws.com'
         },
 
         // Watches files for changes and runs tasks based on the changed files
@@ -127,7 +128,6 @@ module.exports = function (grunt) {
             ]
         },
 
-
         // Mocha testing framework configuration options
         mocha: {
             all: {
@@ -137,9 +137,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
-
-
 
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
@@ -223,6 +220,28 @@ module.exports = function (grunt) {
             },
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
+        },
+
+        // replace script domain
+        'string-replace': {
+            files: {
+                src: '<%= yeoman.dist %>/index.html',
+                dest: '<%= yeoman.dist %>/index.html'
+            },
+            options : {
+                replacements: [{
+                    pattern: /<img(.*)src="\/(.*)"/ig,
+                    replacement: '<img$1src="<%= yeoman.assetDomain %>/$2"'
+                },
+                {
+                    pattern: /<script(.*)src="(.*)"/ig,
+                    replacement: '<script$1src="<%= yeoman.assetDomain %>/$2"'
+                },
+                {
+                    pattern: /<link(.*)href="(.*)"/ig,
+                    replacement: '<link$1href="<%= yeoman.assetDomain %>/$2"'
+                }]
+            }
         },
 
         // The following *-min tasks produce minified files in the dist folder
@@ -410,7 +429,8 @@ module.exports = function (grunt) {
         //'modernizr',
         'rev',
         'usemin',
-        'htmlmin',
+        'string-replace'
+        //'htmlmin',
     ]);
 
     grunt.registerTask('default', [
