@@ -230,6 +230,10 @@ module.exports = function (grunt) {
             },
             options : {
                 replacements: [{
+                    pattern: /<base href="(\/)">/ig,
+                    replacement: '<base href="<%= yeoman.assetDomain %>">'
+                }/*,
+                {
                     pattern: /<img(.*)src="\/(.*)"/ig,
                     replacement: '<img$1src="<%= yeoman.assetDomain %>/$2"'
                 },
@@ -240,7 +244,7 @@ module.exports = function (grunt) {
                 {
                     pattern: /<link(.*)href="(.*)"/ig,
                     replacement: '<link$1href="<%= yeoman.assetDomain %>/$2"'
-                }]
+                }*/]
             }
         },
 
