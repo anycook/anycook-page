@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             // Configurable paths
             app: 'app',
             dist: 'dist',
-            assetDomain: 'https://s3-eu-west-1.amazonaws.com/anycook.de'
+            assetDomain: 'https://s3-eu-west-1.amazonaws.com/anycook.de/'
         },
 
         // Watches files for changes and runs tasks based on the changed files
