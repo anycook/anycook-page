@@ -286,7 +286,9 @@ require([
     });
 
     //anycookapi
-    $.when(AnycookAPI.init()).then(function(){
+    $.when(AnycookAPI.init({
+        credentials: '/anycook-credentials.json'
+    })).then(function(){
         filters.loadAllCategories($('#kategorie_filter ul'));
 
         var xmlErrorFunction = function(event){
@@ -306,7 +308,6 @@ require([
         };
 
         var xmlOptions = {
-            xml: 'xml/template.xml',
             error:xmlErrorFunction
         };
 
