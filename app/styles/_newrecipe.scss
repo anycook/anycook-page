@@ -1,95 +1,95 @@
 .navigation{
-	float:left;
-	/*width:655px;*/
-	margin-left: (655px - 572px) / 2;
-	margin-bottom: 15px;
+    float:left;
+    /*width:655px;*/
+    margin-left: (655px - 572px) / 2;
+    margin-bottom: 15px;
 
-	.nav_button{
-		float:left;
-		background-color: $stepcolor;
-		border: 1px solid $inactivebuttonoutline;
-		border-radius: 10px;
-		width: 125px;
-		height: 18px;
-		margin: -16px 8px 0;
-		padding: 6px 0;
-		@include transition(all, 200ms, ease-in-out);
+    .nav_button{
+        float:left;
+        background-color: $stepcolor;
+        border: 1px solid $inactivebuttonoutline;
+        border-radius: 10px;
+        width: 125px;
+        height: 18px;
+        margin: -16px 8px 0;
+        padding: 6px 0;
+        @include transition(all, 200ms, ease-in-out);
 
-		font-size: 10pt;
-		color: $buttonfontcolor;
-		text-align: center;
+        font-size: 10pt;
+        color: $buttonfontcolor;
+        text-align: center;
 
-		&:hover{
-			text-decoration: none;
-		}
+        &:hover{
+            text-decoration: none;
+        }
 
-		&.inactive{
-			background-color: $background;
-			border-color:$lightgrey;
-			color: $smalllightfontcolor;
-			cursor: default;
-			@include transition(all, 200ms, ease-out);
-		}
+        &.inactive{
+            background-color: $background;
+            border-color:$lightgrey;
+            color: $smalllightfontcolor;
+            cursor: default;
+            @include transition(all, 200ms, ease-out);
+        }
 
-		&.active{
-			background-color: $activebuttonbackground;
-			border-color:$linkcolor;
-			color: $activebuttonfontcolor;
-			@include transition(all, 200ms, ease-in);
-		}
-	}
+        &.active{
+            background-color: $activebuttonbackground;
+            border-color:$linkcolor;
+            color: $activebuttonfontcolor;
+            @include transition(all, 200ms, ease-in);
+        }
+    }
 
 }
 
 #recipe_editing_container{
-	position:relative;
-	min-height: 750px;
-	width:655px;
-	overflow: hidden;
-	.sliding_container{
-		position:absolute;
-		width:655px;
-		top:0;
-		left:0;
+    position:relative;
+    min-height: 750px;
+    width:655px;
+    overflow: hidden;
+    .sliding_container{
+        position:absolute;
+        width:655px;
+        top:0;
+        left:0;
 
-		h2+p{
-			width:510px;
-		}
+        h2+p{
+            width:510px;
+        }
 
-		&#step1{
-			.recipe_image_container{
-				margin: 10px 1px;
+        &#step1{
+            .recipe_image_container{
+                margin: 10px 1px;
 
-				#progressbar{
-					background-color: #5a5a5a;
-					height: 22px;
-					margin-top: -30px;
-					padding-bottom: 2px;
-					border-radius: 5px;
+                #progressbar{
+                    background-color: #5a5a5a;
+                    height: 22px;
+                    margin-top: -30px;
+                    padding-bottom: 2px;
+                    border-radius: 5px;
 
-					box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.3);
+                    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.3);
 
-					.ui-progressbar-value, .ui-progressbar{
-						border-radius: 5px;
-						margin: 0;
-						border: 1px solid #5fa5b7;
-					}
-				}
+                    .ui-progressbar-value, .ui-progressbar{
+                        border-radius: 5px;
+                        margin: 0;
+                        border: 1px solid #5fa5b7;
+                    }
+                }
 
-				#file_upload{
-					display: none;
-				}
-			}
-		}
+                #file_upload{
+                    display: none;
+                }
+            }
+        }
 
-		&#step2{
-			left:655px;
+        &#step2{
+            left:655px;
 
-			ul#new_step_container{
-				list-style: none;
-				margin: 0 0 5px;
+            ul#new_step_container{
+                list-style: none;
+                margin: 0 0 5px;
 
-				.step-placeholder{
+                .step-placeholder{
               background:#ece9e3;
               border-radius: 10px;
               border:3px dashed #9c9c9c;
@@ -97,491 +97,491 @@
               width:503px;
         }
 
-				.new_ingredient_step{
-					position: relative;
-					padding:10px 0;
+                .new_ingredient_step{
+                    position: relative;
+                    padding:10px 0;
 
-					.new_step{
-						position:relative;
-						z-index: 2;
-						float:none;
-						margin-bottom: 0;
-						.mid{
-							.number_container{
-								margin: 8px 15px 8px 0;
-								border-right:1pt solid $lightgrey;
-								width: 110px;
-								height: 123px;
-								cursor: move;
+                    .new_step{
+                        position:relative;
+                        z-index: 2;
+                        float:none;
+                        margin-bottom: 0;
+                        .mid{
+                            .number_container{
+                                margin: 8px 15px 8px 0;
+                                border-right:1pt solid $lightgrey;
+                                width: 110px;
+                                height: 123px;
+                                cursor: move;
 
-								float:left;
-								.step_dragdrop{
-									height: 12px;
-									width: 54px;
-									margin: 0 28px;
-									float:left;
-									background: url("/img/dragdrop.png") repeat;
-								}
+                                float:left;
+                                .step_dragdrop{
+                                    height: 12px;
+                                    width: 54px;
+                                    margin: 0 28px;
+                                    float:left;
+                                    background: url("img/dragdrop.png") repeat;
+                                }
 
-								.number{
-									height: 99px;
-									margin:0;
-									line-height:90px;
-									border: 0;
-								}
-							}
+                                .number{
+                                    height: 99px;
+                                    margin:0;
+                                    line-height:90px;
+                                    border: 0;
+                                }
+                            }
 
-							textarea{
-								float:left;
-								width: 350px;
-								height:113px;
-								margin: 8px 0;
+                            textarea{
+                                float:left;
+                                width: 350px;
+                                height:113px;
+                                margin: 8px 0;
 
-							}
-						}
-					}
-					.new_ingredients{
-						position: relative;
-						z-index: 1;
-						width:462px;
-						/*float:left;*/
-						background-color: $imginnerbordercolor;
-						border: 1px solid $lightgrey;
-						border-top: 0;
-						margin: 0 12px;
-						padding: 7px 10px 5px;
+                            }
+                        }
+                    }
+                    .new_ingredients{
+                        position: relative;
+                        z-index: 1;
+                        width:462px;
+                        /*float:left;*/
+                        background-color: $imginnerbordercolor;
+                        border: 1px solid $lightgrey;
+                        border-top: 0;
+                        margin: 0 12px;
+                        padding: 7px 10px 5px;
 
-						h4{
-							margin-bottom: 2px;
+                        h4{
+                            margin-bottom: 2px;
 
-							&.zutaten_headline{
-								float:left;
-								margin-left:150px;
-							}
+                            &.zutaten_headline{
+                                float:left;
+                                margin-left:150px;
+                            }
 
-							&.menge_headline{
-								margin-left:371px;
-							}
-						}
+                            &.menge_headline{
+                                margin-left:371px;
+                            }
+                        }
 
-						.new_ingredient_question{
-							padding-left: 21px;
+                        .new_ingredient_question{
+                            padding-left: 21px;
 
-						}
+                        }
 
-						.yes, .no{
-							padding: 0 0 0 5px;
-							cursor: pointer;
-						}
-
-
-						.add_new_ingredient_line{
-							width: 20px;
-							height: 20px;
-							margin: 0 0 0 20px;
-							cursor:pointer;
-							background-image: url("/img/icons20x20.png");
-							background-position: -20px -80px;
-							position: relative;
-							span{
-								background-image: url("/img/icons20x20.png");
-								position: absolute;
-								top:0;
-								left:0;
-								bottom:0;
-								right:0;
-								opacity: 0;
-								background-position: -20px -100px;
-								@include transition(opacity, .1s, ease-out);
-							}
-
-							&:hover{
-								span{
-									opacity: 1;
-									@include transition(opacity, .1s, ease-out);
-								}
-							}
-						}
-					}
-
-					.remove_new_step{
-						position:absolute;
-						//margin: 20px 0 0 500px;
-						top:69px;
-						right: 100px;
-						height:27px;
-						width:27px;
-						background-image: url("/img/stepbtn27x27.png");
-						background-position: 0 0;
-						cursor: pointer;
-						//position: relative;
-						span{
-							background-image: url("/img/stepbtn27x27.png");
-							position: absolute;
-							top:0;
-							left:0;
-							bottom:0;
-							right:0;
-							opacity: 0;
-							background-position: 0 -27px;
-							@include transition(opacity, .1s, ease-out);
-						}
-
-						&:hover{
-							span{
-								opacity: 1;
-								@include transition(opacity, .1s, ease-out);
-							}
-						}
-
-					}
-
-				}
-
-			}
-			#add_new_step{
-				cursor:pointer;
-				height:27px;
-				float:left;
-
-				.img{
-					float:left;
-					width:27px;
-					height:27px;
-					background-image: url("/img/stepbtn27x27.png");
-					background-position: -27px 0;
-					position: relative;
-
-					span{
-						background-image: url("/img/stepbtn27x27.png");
-						position: absolute;
-						top:0;
-						left:0;
-						bottom:0;
-						right:0;
-						opacity: 0;
-						background-position: -27px -27px;
-						@include transition(opacity, .1s, ease-out);
-
-					}
-				}
-				&:hover{
-					.img{
-						span{
-							opacity: 1;
-							@include transition(opacity, .1s, ease-in);
-						}
-					}
-				}
-
-				.text{
-					color:$smalllightfontcolor;
-					padding: 4px 0 0 30px;
-				}
-			}
-
-			#no_ingredients_error{
-				float:right;
-			}
-
-			#ingredient_overview{
-				float:right;
-				margin-right:5px;
-			}
-		}
-
-		&#step3{
-			left:1310px;
-
-			p{
-				margin: 2px 0 5px;
-			}
-			#select_container{
-				height:22px;
-				width: 218px;
-				border-radius:4px;
-				@include box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
-				border: 1px solid $inactivebuttonoutline;
-				background-color:$stepcolor;
-				color:$buttonfontcolor;
-				border-radius:4px;
-				font:$standardfont;
-				padding: 4px 6px 1px;
-				position: relative;
-				text-align: center;
-
-				span{
-
-				}
-
-				div{
-					float:right;
-					background: url("/img/small_arrow8x8.png") no-repeat;
-					background-position: 0 -8px;
-					width:8px;
-					margin: 5px 3px;
-					height:8px;
-				}
-
-				&.open{
-					div{
-						background-position: 0 0;
-					}
-				}
+                        .yes, .no{
+                            padding: 0 0 0 5px;
+                            cursor: pointer;
+                        }
 
 
-				#category_select{
-					width:230px;
-					height:22px;
-					opacity:0;
-					position: absolute;
-					left:0;
+                        .add_new_ingredient_line{
+                            width: 20px;
+                            height: 20px;
+                            margin: 0 0 0 20px;
+                            cursor:pointer;
+                            background-image: url("img/icons20x20.png");
+                            background-position: -20px -80px;
+                            position: relative;
+                            span{
+                                background-image: url("img/icons20x20.png");
+                                position: absolute;
+                                top:0;
+                                left:0;
+                                bottom:0;
+                                right:0;
+                                opacity: 0;
+                                background-position: -20px -100px;
+                                @include transition(opacity, .1s, ease-out);
+                            }
 
-					&:focus{
-						outline:none;
-					}
+                            &:hover{
+                                span{
+                                    opacity: 1;
+                                    @include transition(opacity, .1s, ease-out);
+                                }
+                            }
+                        }
+                    }
 
-					option{
-						opacity:1;
-					}
-				}
+                    .remove_new_step{
+                        position:absolute;
+                        //margin: 20px 0 0 500px;
+                        top:69px;
+                        right: 100px;
+                        height:27px;
+                        width:27px;
+                        background-image: url("img/stepbtn27x27.png");
+                        background-position: 0 0;
+                        cursor: pointer;
+                        //position: relative;
+                        span{
+                            background-image: url("img/stepbtn27x27.png");
+                            position: absolute;
+                            top:0;
+                            left:0;
+                            bottom:0;
+                            right:0;
+                            opacity: 0;
+                            background-position: 0 -27px;
+                            @include transition(opacity, .1s, ease-out);
+                        }
 
-			}
+                        &:hover{
+                            span{
+                                opacity: 1;
+                                @include transition(opacity, .1s, ease-out);
+                            }
+                        }
 
-			#new_muffins, #new_skill, #new_time{
-				font: 13pt Georgia;
-				color: #5A5A5A;
-				margin-top:20px;
-				width:240px;
-				clear:both;
-				float:left;
-				img{
-					float:left;
-				}
-				h2{
-					float:left;
-				}
-				.time_container{
-					float:right;
-					margin-right: 4px;
-				}
-				.label_container{
-					float:right;
-					padding-top: 2px;
-				}
-			}
+                    }
 
-			#new_time img{
-				margin-right: 4px;
-			}
+                }
 
-			#new_muffins, #new_skill{
-				margin-top: 8px;
-			}
+            }
+            #add_new_step{
+                cursor:pointer;
+                height:27px;
+                float:left;
 
-			#new_tags_container{
-				clear:both;
-				margin:20px 280px 0 0;
-				width:400px;
-				float:left;
-			}
+                .img{
+                    float:left;
+                    width:27px;
+                    height:27px;
+                    background-image: url("img/stepbtn27x27.png");
+                    background-position: -27px 0;
+                    position: relative;
 
-			#tagcloud{
-				float:left;
-			}
-		}
-		&#step4{
-			.button{
-				float: right;
-				margin-top: 10px;
-			}
+                    span{
+                        background-image: url("img/stepbtn27x27.png");
+                        position: absolute;
+                        top:0;
+                        left:0;
+                        bottom:0;
+                        right:0;
+                        opacity: 0;
+                        background-position: -27px -27px;
+                        @include transition(opacity, .1s, ease-out);
 
-			#submit_recipe{
-				margin-left: 10px;
-			}
+                    }
+                }
+                &:hover{
+                    .img{
+                        span{
+                            opacity: 1;
+                            @include transition(opacity, .1s, ease-in);
+                        }
+                    }
+                }
 
-			#cancel_recipe{
-				display: none;
-			}
+                .text{
+                    color:$smalllightfontcolor;
+                    padding: 4px 0 0 30px;
+                }
+            }
 
-			a{
-				text-decoration: none;
-			}
-		}
-	}
+            #no_ingredients_error{
+                float:right;
+            }
+
+            #ingredient_overview{
+                float:right;
+                margin-right:5px;
+            }
+        }
+
+        &#step3{
+            left:1310px;
+
+            p{
+                margin: 2px 0 5px;
+            }
+            #select_container{
+                height:22px;
+                width: 218px;
+                border-radius:4px;
+                @include box-shadow2withinset(0, 2px, 0px, -1px, $inactivebuttondepth, 0, 2px, 0, 0, $inactivebuttonoutline, 0, 2px, 2px, rgba(255,255,255, 0.4));
+                border: 1px solid $inactivebuttonoutline;
+                background-color:$stepcolor;
+                color:$buttonfontcolor;
+                border-radius:4px;
+                font:$standardfont;
+                padding: 4px 6px 1px;
+                position: relative;
+                text-align: center;
+
+                span{
+
+                }
+
+                div{
+                    float:right;
+                    background: url("img/small_arrow8x8.png") no-repeat;
+                    background-position: 0 -8px;
+                    width:8px;
+                    margin: 5px 3px;
+                    height:8px;
+                }
+
+                &.open{
+                    div{
+                        background-position: 0 0;
+                    }
+                }
+
+
+                #category_select{
+                    width:230px;
+                    height:22px;
+                    opacity:0;
+                    position: absolute;
+                    left:0;
+
+                    &:focus{
+                        outline:none;
+                    }
+
+                    option{
+                        opacity:1;
+                    }
+                }
+
+            }
+
+            #new_muffins, #new_skill, #new_time{
+                font: 13pt Georgia;
+                color: #5A5A5A;
+                margin-top:20px;
+                width:240px;
+                clear:both;
+                float:left;
+                img{
+                    float:left;
+                }
+                h2{
+                    float:left;
+                }
+                .time_container{
+                    float:right;
+                    margin-right: 4px;
+                }
+                .label_container{
+                    float:right;
+                    padding-top: 2px;
+                }
+            }
+
+            #new_time img{
+                margin-right: 4px;
+            }
+
+            #new_muffins, #new_skill{
+                margin-top: 8px;
+            }
+
+            #new_tags_container{
+                clear:both;
+                margin:20px 280px 0 0;
+                width:400px;
+                float:left;
+            }
+
+            #tagcloud{
+                float:left;
+            }
+        }
+        &#step4{
+            .button{
+                float: right;
+                margin-top: 10px;
+            }
+
+            #submit_recipe{
+                margin-left: 10px;
+            }
+
+            #cancel_recipe{
+                display: none;
+            }
+
+            a{
+                text-decoration: none;
+            }
+        }
+    }
 }
 
 
 form.recipeediting{
-	clear:both;
+    clear:both;
 
-	$inputwidth: 340px;
+    $inputwidth: 340px;
 
-	h2{
-		//margin-top: 10px;
-		clear:both;
-	}
+    h2{
+        //margin-top: 10px;
+        clear:both;
+    }
 
 
-	p{
-		margin: 2px 0 5px;
-		clear:both;
-		width:510px;
-	}
+    p{
+        margin: 2px 0 5px;
+        clear:both;
+        width:510px;
+    }
 
-	input[type="text"]{
-		width: $inputwidth;
-		float:left;
-		margin-bottom: 10px;
-	}
-	textarea{
-		width: $inputwidth;
-		height: 110px;
-		padding: 4px 5px;
-		float:left;
-	}
+    input[type="text"]{
+        width: $inputwidth;
+        float:left;
+        margin-bottom: 10px;
+    }
+    textarea{
+        width: $inputwidth;
+        height: 110px;
+        padding: 4px 5px;
+        float:left;
+    }
 
-	.error{
-		margin: 7px 0 0 ($inputwidth + 12px);
-	}
+    .error{
+        margin: 7px 0 0 ($inputwidth + 12px);
+    }
 
-	input[type="submit"]{
-		float:right;
+    input[type="submit"]{
+        float:right;
 
-	}
+    }
 }
 
 ul.new_ingredient_list{
-	list-style: none;
+    list-style: none;
 
-	li{
-		height:30px;
-		margin-bottom: 6px;
-		.ingredient_dragdrop{
-			float:left;
-			cursor: move;
-			margin: 6px 8px 6px 1px;
-			width: 12px;
-			height: 18px;
-			background-image: url("/img/dragdrop.png");
-			background-repeat: repeat;
-		}
+    li{
+        height:30px;
+        margin-bottom: 6px;
+        .ingredient_dragdrop{
+            float:left;
+            cursor: move;
+            margin: 6px 8px 6px 1px;
+            width: 12px;
+            height: 18px;
+            background-image: url("img/dragdrop.png");
+            background-repeat: repeat;
+        }
 
 
-		.new_ingredient{
-			float:left;
-			width: 300px;
-			margin-right: 8px;
-		}
+        .new_ingredient{
+            float:left;
+            width: 300px;
+            margin-right: 8px;
+        }
 
-		.new_ingredient_menge{
-			float:left;
-			width: 80px;
-			margin-right: 4px;
-		}
+        .new_ingredient_menge{
+            float:left;
+            width: 80px;
+            margin-right: 4px;
+        }
 
-		.remove_new_ingredient_line{
-			width: 20px;
-			height: 20px;
-			margin: 5px 2px;
-			float:left;
-			cursor:pointer;
-			background-image: url("/img/icons20x20.png");
-			background-position: 0 -80px;
-			position: relative;
-			span{
-				background-image: url("/img/icons20x20.png");
-				position: absolute;
-				top:0;
-				left:0;
-				bottom:0;
-				right:0;
-				opacity: 0;
-				background-position: 0 -100px;
-				@include transition(opacity, .1s, ease-out);
-			}
+        .remove_new_ingredient_line{
+            width: 20px;
+            height: 20px;
+            margin: 5px 2px;
+            float:left;
+            cursor:pointer;
+            background-image: url("img/icons20x20.png");
+            background-position: 0 -80px;
+            position: relative;
+            span{
+                background-image: url("img/icons20x20.png");
+                position: absolute;
+                top:0;
+                left:0;
+                bottom:0;
+                right:0;
+                opacity: 0;
+                background-position: 0 -100px;
+                @include transition(opacity, .1s, ease-out);
+            }
 
-			&:hover{
-				span{
-					opacity: 1;
-					@include transition(opacity, .1s, ease-out);
-				}
-			}
-		}
-	}
+            &:hover{
+                span{
+                    opacity: 1;
+                    @include transition(opacity, .1s, ease-out);
+                }
+            }
+        }
+    }
 }
 
 .add_new_ingredient_line{
-	width: 20px;
-	height: 20px;
-	margin: 0 0 0 20px;
-	cursor:pointer;
-	background-image: url("/img/icons20x20.png");
-	background-position: -20px -80px;
-	position: relative;
-	span{
-		background-image: url("/img/icons20x20.png");
-		position: absolute;
-		top:0;
-		left:0;
-		bottom:0;
-		right:0;
-		opacity: 0;
-		background-position: -20px -100px;
-		@include transition(opacity, .1s, ease-out);
-	}
+    width: 20px;
+    height: 20px;
+    margin: 0 0 0 20px;
+    cursor:pointer;
+    background-image: url("img/icons20x20.png");
+    background-position: -20px -80px;
+    position: relative;
+    span{
+        background-image: url("img/icons20x20.png");
+        position: absolute;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        opacity: 0;
+        background-position: -20px -100px;
+        @include transition(opacity, .1s, ease-out);
+    }
 
-	&:hover{
-		span{
-			opacity: 1;
-			@include transition(opacity, .1s, ease-out);
-		}
-	}
+    &:hover{
+        span{
+            opacity: 1;
+            @include transition(opacity, .1s, ease-out);
+        }
+    }
 }
 
 .ingredient_overview{
-	width:516px;
-	min-height:360px;
+    width:516px;
+    min-height:360px;
 
-	.contentbox{
-		width:462px;
-		min-height:360px;
-		height:auto;
+    .contentbox{
+        width:462px;
+        min-height:360px;
+        height:auto;
 
-		.numberinput{
-			float:none;
-			display: inline-block;
-		}
-	}
+        .numberinput{
+            float:none;
+            display: inline-block;
+        }
+    }
 
 }
 
 
 #ingredientoverview_error{
-	float:left;
-	//test
+    float:left;
+    //test
 }
 
 #category_error, #time_error, #skill_error, #muffin_error{
-	position: absolute;
+    position: absolute;
 }
 
 #category_error{
-	margin: -27px 0 0 245px;
+    margin: -27px 0 0 245px;
 }
 
 #time_error{
-	margin: 22px 0 0 245px;
+    margin: 22px 0 0 245px;
 }
 
 #skill_error{
-	margin: 52px 0 0 245px;
+    margin: 52px 0 0 245px;
 }
 
 #muffin_error{
-	margin: 82px 0 0 245px;
+    margin: 82px 0 0 245px;
 }
 
 #open_preview{
-	float: right;
+    float: right;
 }

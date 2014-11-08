@@ -1,15 +1,15 @@
 
 
 .settings_saved{
-		float: right;
-		margin: -20px 10px 0 0;
-		color: $smalllightfontcolor;
-		display:none;
+        float: right;
+        margin: -20px 10px 0 0;
+        color: $smalllightfontcolor;
+        display:none;
 }
 
 .settings{
-	margin-top:25px;
-	float: left;
+    margin-top:25px;
+    float: left;
 
     .error_message, .info_message{
         float: left;
@@ -43,309 +43,309 @@
 
 
 #settings_content{
-	margin: 10px 0 0 10px;
+    margin: 10px 0 0 10px;
 
-	.profile_image{
-		position:relative;
-		float: left;
-		border: 8px solid $stepcolor;
-		outline: 1px solid $lightgrey;
-		width: 200px;
+    .profile_image{
+        position:relative;
+        float: left;
+        border: 8px solid $stepcolor;
+        outline: 1px solid $lightgrey;
+        width: 200px;
 
-		.image_upload{
-			margin-left:25px;
+        .image_upload{
+            margin-left:25px;
 
-			#file_upload{
-				display: none;
-			}
-		}
+            #file_upload{
+                display: none;
+            }
+        }
 
-		img{
-			float:left;
-			width:200px;
-		}
+        img{
+            float:left;
+            width:200px;
+        }
 
-		#progressbar{
-			width: 180px;
-			margin-left: 10px;
-		}
-	}
+        #progressbar{
+            width: 180px;
+            margin-left: 10px;
+        }
+    }
 
-	#account_data{
-		list-style: none;
-		float: left;
-		width: 350px;
-		padding-left: 30px;
+    #account_data{
+        list-style: none;
+        float: left;
+        width: 350px;
+        padding-left: 30px;
 
 
 
-		li{
-			float: left;
-			margin-bottom: 15px;
+        li{
+            float: left;
+            margin-bottom: 15px;
 
-			h2, input{
-				float: left;
-			}
+            h2, input{
+                float: left;
+            }
 
-			h2{
-				width: 85px;
-				padding-top: 3px;
-			}
+            h2{
+                width: 85px;
+                padding-top: 3px;
+            }
 
-			input{
-				width: 250px;
-			}
+            input{
+                width: 250px;
+            }
 
-			#about_me{
-				width: 100%;
-				margin-bottom: 7px;
-			}
+            #about_me{
+                width: 100%;
+                margin-bottom: 7px;
+            }
 
-			textarea{
-				float: left;
-				width: 335px;
-				height: 110px;
-				margin: 0;
+            textarea{
+                float: left;
+                width: 335px;
+                height: 110px;
+                margin: 0;
 
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 #settings_mail{
-	padding: 0 0 0 10px;
+    padding: 0 0 0 10px;
 
-	h2{
-		margin-top: 10px;
+    h2{
+        margin-top: 10px;
 
-	}
+    }
 
-	#mail_form{
-		//float: left;
-		height: 110px;
-		position: relative;
-		margin-left: 10px;
-	}
+    #mail_form{
+        //float: left;
+        height: 110px;
+        position: relative;
+        margin-left: 10px;
+    }
 
-	#account_mail{
-		width: 380px;
-		float: left;
-	}
+    #account_mail{
+        width: 380px;
+        float: left;
+    }
 
-	.status_messages{
-		min-height: 36px;
-		width: 100%;
-		float: left;
-	}
+    .status_messages{
+        min-height: 36px;
+        width: 100%;
+        float: left;
+    }
 
-	.tagsbox, #tagcloud{
-		width:390px;
-	}
+    .tagsbox, #tagcloud{
+        width:390px;
+    }
 
-	#save_btn{
-		width: 635px;
-		height: 40px;
-		float: left;
+    #save_btn{
+        width: 635px;
+        height: 40px;
+        float: left;
 
-	}
+    }
 
-	input[type="submit"]{
-		@include vertical-align;
-	}
+    input[type="submit"]{
+        @include vertical-align;
+    }
 
 }
 
 #settings_pass{
-	padding: 0 0 0 10px;
+    padding: 0 0 0 10px;
 
-	#pass_form{
-		float: left;
-		padding: 5px 0;
-		margin-left: 10px;
+    #pass_form{
+        float: left;
+        padding: 5px 0;
+        margin-left: 10px;
 
         .error_message, .info_message{
             width: 100%;
         }
-	}
+    }
 
     .passwords{
         overflow: hidden;
     }
 
-	#old_password_container, #new_password_container{
-		float: left;
+    #old_password_container, #new_password_container{
+        float: left;
 
-		input{
-			width:179px;
-			margin-right: 10px;
-		}
-	}
+        input{
+            width:179px;
+            margin-right: 10px;
+        }
+    }
 
-	#password_secure{
-		float: left;
-		width: 230px;
-		height: 65px;
-	}
+    #password_secure{
+        float: left;
+        width: 230px;
+        height: 65px;
+    }
 }
 
 
 .headbox{
-		height: 25px;
-		width: 400px;
-		padding: 12px 20px 10px;
-		margin-top: 15px;
-		border-radius: 5px;
-		position: relative;
+        height: 25px;
+        width: 400px;
+        padding: 12px 20px 10px;
+        margin-top: 15px;
+        border-radius: 5px;
+        position: relative;
 
-		h2{
-			font: 12pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
-			float: left;
-		}
+        h2{
+            font: 12pt "Lucida Sans Unicode","Lucida Grande",sans-serif;
+            float: left;
+        }
 
-		/*var for position*/
-		$bigcheckboxposition: 17px;
+        /*var for position*/
+        $bigcheckboxposition: 17px;
 
-		input{
-				position:absolute;
-				right: $bigcheckboxposition;
-				opacity: 0;
-				width: 16px;
-				height: 16px;
-				cursor: pointer;
-				z-index: 11;
+        input{
+                position:absolute;
+                right: $bigcheckboxposition;
+                opacity: 0;
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                z-index: 11;
 
-				&:hover + .bigcheckbox, &:active + .bigcheckbox{
-				background-position: 0px -22px;
-				}
+                &:hover + .bigcheckbox, &:active + .bigcheckbox{
+                background-position: 0px -22px;
+                }
 
-				&:checked + .bigcheckbox {
-					background-position: 0px -44px;
-				}
-			}
+                &:checked + .bigcheckbox {
+                    background-position: 0px -44px;
+                }
+            }
 
-		input + .bigcheckbox{
-			position:absolute;
-			right: $bigcheckboxposition;
-			width: 22px;
-			height: 22px;
-			background-image: url("/img/bigcheckbox22x22.png");
-			background-position: 0px 0px;
-			background-repeat: no-repeat;
-			z-index: 10;
-		}
+        input + .bigcheckbox{
+            position:absolute;
+            right: $bigcheckboxposition;
+            width: 22px;
+            height: 22px;
+            background-image: url("img/bigcheckbox22x22.png");
+            background-position: 0px 0px;
+            background-repeat: no-repeat;
+            z-index: 10;
+        }
 
 
 
 }
 
 #settings_notification{
-		padding: 0 0 0 10px;
+        padding: 0 0 0 10px;
 }
 
 #mail_notification{
-		background-color:$stepcolor;
-		border: 1px solid $lightbrown;
+        background-color:$stepcolor;
+        border: 1px solid $lightbrown;
 }
 
 #fb_notification{
-		background-color:#3b5998;
-		border: 1px solid #1e2d4c;
-		h2{
-			color: white;
-		}
+        background-color:#3b5998;
+        border: 1px solid #1e2d4c;
+        h2{
+            color: white;
+        }
 }
 
 .settings_content{
-	display:none;
-		position: relative;
-		z-index: 1;
-		width: 430px;
-		margin: 0 0 5px 5px;
-		background-color:$imginnerbordercolor;
-		border:1px solid $lightbrown;
-		border-top: 0;
+    display:none;
+        position: relative;
+        z-index: 1;
+        width: 430px;
+        margin: 0 0 5px 5px;
+        background-color:$imginnerbordercolor;
+        border:1px solid $lightbrown;
+        border-top: 0;
 
-		table{
-			width: 100%;
-			color: $darkfontcolor;
-			border-collapse: collapse;
+        table{
+            width: 100%;
+            color: $darkfontcolor;
+            border-collapse: collapse;
 
-			tr{
-				border-bottom:1px solid $lightbrown;
-				line-height: 37px;
+            tr{
+                border-bottom:1px solid $lightbrown;
+                line-height: 37px;
 
-				td{
-					padding-left: 10px;
-				}
-				td+td{
-					padding: 0 10px 0 0;
-				}
-
-
-
-			}
-			tr:last-child{
-				border-bottom:0px;
-			}
+                td{
+                    padding-left: 10px;
+                }
+                td+td{
+                    padding: 0 10px 0 0;
+                }
 
 
-		}
+
+            }
+            tr:last-child{
+                border-bottom:0px;
+            }
 
 
-	}
+        }
 
 
-	//RESET Password:
-	#resetpwstep1{
-		padding: 20px 0 0 10px;
+    }
 
-		p{
-			margin: 2px 0 5px;
-			clear: both;
-			width: 360px;
-		}
 
-		input[type=text]{
-			float: left;
-			width: 340px;
-		}
+    //RESET Password:
+    #resetpwstep1{
+        padding: 20px 0 0 10px;
 
-		.status_messages{
-			width: 235px;
-			height: 30px;
-			float: left;
-			display: inherit;
-			margin-left: 5px;
-			font:$standardfont;
-			font-size:8pt;
+        p{
+            margin: 2px 0 5px;
+            clear: both;
+            width: 360px;
+        }
 
-			div{
-				opacity: 0;
-				height: 0;
-				overflow: hidden;
-				@include vertical-align;
+        input[type=text]{
+            float: left;
+            width: 340px;
+        }
 
-				&.on{
-					opacity: 1;
-					height: auto;
-					@include transition-property(opacity);
-					@include transition-duration(.5s);
-				}
-			}
-		}
+        .status_messages{
+            width: 235px;
+            height: 30px;
+            float: left;
+            display: inherit;
+            margin-left: 5px;
+            font:$standardfont;
+            font-size:8pt;
 
-		input[type=submit]{
-			margin: 20px 0 0 0;
-		}
-	}
+            div{
+                opacity: 0;
+                height: 0;
+                overflow: hidden;
+                @include vertical-align;
 
-	#resetpwstep2{
-		padding: 4px 0 0 10px;
+                &.on{
+                    opacity: 1;
+                    height: auto;
+                    @include transition-property(opacity);
+                    @include transition-duration(.5s);
+                }
+            }
+        }
 
-		table{
-			td{
-				color: $darkfontcolor;
-				padding: 5px 10px 5px 0;
-			}
-		}
-	}
+        input[type=submit]{
+            margin: 20px 0 0 0;
+        }
+    }
+
+    #resetpwstep2{
+        padding: 4px 0 0 10px;
+
+        table{
+            td{
+                color: $darkfontcolor;
+                padding: 5px 10px 5px 0;
+            }
+        }
+    }

@@ -1,208 +1,208 @@
 /*Home sweet home*/
 
 #site1{
-	$topfontsize:13pt;
-	$bottomfontsize: $topfontsize - 2pt;
-	color:$darkfontcolor;
-	$borderpadding:80px;
-	margin-left:18px;
-	text-align: center;
-	.top_container{
-		font: $headlinefont;
-		font-size:$topfontsize;
-		margin: 0 auto;
-		padding: 0 $borderpadding 10px;
-		text-align: center;
-		a{
-			display:block;
-			font-style: italic;
-			margin-top:1px;
-			font-size: $bottomfontsize;
-			min-height:16px;
-		}
-		border-bottom: 1px solid $lightgrey;
-		width:200px;
-	}
-	.mid{
-		margin: 20px auto 40px;
-		#doodle{
-			width: 100%;
-			
-			img{
-				margin: auto 10px;
-				padding-right: 3px;
-				width: 319px;
-				height: 132px;
-				//background: url("/img/doodle.png") no-repeat;
-			}
-		}
-		
-		.welcome_headline{
-		  font-size:25pt;
-		  color: $darkfontcolor;
-		  text-shadow: 1px 2px 0px white;
-		}
-			
-		.welcome_subheadline{
-			font-size:13pt;
-			text-align: center;
-			color: $smalllightfontcolor;
-			position:relative;
-			display:block;
-			width:100%;
-			height: 34px;
-			margin:6px auto 0px;
-			font-style: italic;
-			text-shadow: 1px 2px 0px white;
-		}
-		
-		.login_container{
-		  width: 365px;
-		  height: 170px;
-		  position: relative;
-		  margin: 0 auto;
-		  
-		   input{
-		     width: 236px;
-	         height: 37px;
-	         margin: 0 auto;
-		     background-color: white;
-		     border-radius: 5px;
-		     padding: 0 12px;
-		     margin-bottom: 10px;
-		     font-style: italic;
-		     font-size: 18px;
-		     @include box-shadow-inset(0, 1px, 3px, rgba(0,0,0,0.3));
-		     @include box-shadow(0, 2px, 2px, rgba(255,255,255,0.75));
-		   }
-		   
-		   .login_submit{
-		     float: inherit;
-		     width: 260px;
-		   }
-		   
-		   p{
-		     font-size: 10pt;
-		   }
-		}
-		
+    $topfontsize:13pt;
+    $bottomfontsize: $topfontsize - 2pt;
+    color:$darkfontcolor;
+    $borderpadding:80px;
+    margin-left:18px;
+    text-align: center;
+    .top_container{
+        font: $headlinefont;
+        font-size:$topfontsize;
+        margin: 0 auto;
+        padding: 0 $borderpadding 10px;
+        text-align: center;
+        a{
+            display:block;
+            font-style: italic;
+            margin-top:1px;
+            font-size: $bottomfontsize;
+            min-height:16px;
+        }
+        border-bottom: 1px solid $lightgrey;
+        width:200px;
+    }
+    .mid{
+        margin: 20px auto 40px;
+        #doodle{
+            width: 100%;
+            
+            img{
+                margin: auto 10px;
+                padding-right: 3px;
+                width: 319px;
+                height: 132px;
+                //background: url("img/doodle.png") no-repeat;
+            }
+        }
+        
+        .welcome_headline{
+          font-size:25pt;
+          color: $darkfontcolor;
+          text-shadow: 1px 2px 0px white;
+        }
+            
+        .welcome_subheadline{
+            font-size:13pt;
+            text-align: center;
+            color: $smalllightfontcolor;
+            position:relative;
+            display:block;
+            width:100%;
+            height: 34px;
+            margin:6px auto 0px;
+            font-style: italic;
+            text-shadow: 1px 2px 0px white;
+        }
+        
+        .login_container{
+          width: 365px;
+          height: 170px;
+          position: relative;
+          margin: 0 auto;
+          
+           input{
+             width: 236px;
+             height: 37px;
+             margin: 0 auto;
+             background-color: white;
+             border-radius: 5px;
+             padding: 0 12px;
+             margin-bottom: 10px;
+             font-style: italic;
+             font-size: 18px;
+             @include box-shadow-inset(0, 1px, 3px, rgba(0,0,0,0.3));
+             @include box-shadow(0, 2px, 2px, rgba(255,255,255,0.75));
+           }
+           
+           .login_submit{
+             float: inherit;
+             width: 260px;
+           }
+           
+           p{
+             font-size: 10pt;
+           }
+        }
+        
 
-		
-	}
-	
-	.authors{
-		font-size:$topfontsize;
-		margin: 0 auto;
-		
-	}
-	
-	.bottom_container{
-		display: block;
-		clear: both;
-		border-top: 1px solid $lightgrey;
-		margin:0px auto;
-		padding:12px $borderpadding 0;
-		width:260px;
-		font: $headlinefont;
-		font-style:italic;
-		font-size: $bottomfontsize;
-		
-		div{
-			padding: 0 0 2px 0;
-		}
-	}
+        
+    }
+    
+    .authors{
+        font-size:$topfontsize;
+        margin: 0 auto;
+        
+    }
+    
+    .bottom_container{
+        display: block;
+        clear: both;
+        border-top: 1px solid $lightgrey;
+        margin:0px auto;
+        padding:12px $borderpadding 0;
+        width:260px;
+        font: $headlinefont;
+        font-style:italic;
+        font-size: $bottomfontsize;
+        
+        div{
+            padding: 0 0 2px 0;
+        }
+    }
 }
 
 #home{
-	$width: $contentwidth;
-	width: $width;
-	
-	h2{
-		text-align:center;
-		margin:0 0 8px 0 ;
-	}
-	
-	#display{
-		width:$contentwidth;
-		height:270px;
-		
-		background: url("/img/slideshow/1.png") no-repeat;
-		margin-bottom:18px;
-	}
-	
-	#informationbox{
-		float:left;
-		margin-bottom:12px;
-		width:100%;
-		
-		
-		#famous_tags{
-			float:left;
-			$width: 323px;
-			width: $width;
-			
-			
-			.content{
-				$width:$width - 2 - 4;
-				width:$width;
-				border:1px solid $lightgrey;
-				border-top: 0;
-				border-bottom: 0;
-				position: relative;
-				.top{
-					width:100%;
-					height: 6px;
-					background-image: url("/img/famous_tags321x6.png");
-					background-repeat: no-repeat;
-				}
-				
-				.mid{
-					$height:260px;
-					height:$height;
-					background-color:$stepcolor;
-					
-					.left_seam, .right_seam{
-						float:left;
-						margin: 5px 7px;
-						background-image:url("/img/seam_tags.png");
-						background-repeat: repeat-y;
-						width:2px;
-						height:$height - 10px;
-					}
-					
-					.right_seam{
-						float:right;
-					}
-				
-					#famous_tags_cloud{
-						float:left;
-						width:$width - 2 * 16px - 2 * 2px;
-						margin:10px 2px;
-						height: 260px - 2 * 10px;
-						overflow: hidden;
-						
-						.tag{
-							margin: 0 6px 6px 0;
-						}
-						
-						
-						
-					}
-				}
-				
-				.bottom{
-					width:100%;
-					height: 6px;
-					background-image: url("/img/famous_tags321x6.png");
-					background-repeat: no-repeat;
-					background-position-y: -6px;
-				}
-			}
-		}
-	}
-	
-	#dailyrecipe{
-		clear:both;
-		padding: 0 29px;
-	}
+    $width: $contentwidth;
+    width: $width;
+    
+    h2{
+        text-align:center;
+        margin:0 0 8px 0 ;
+    }
+    
+    #display{
+        width:$contentwidth;
+        height:270px;
+        
+        background: url("img/slideshow/1.png") no-repeat;
+        margin-bottom:18px;
+    }
+    
+    #informationbox{
+        float:left;
+        margin-bottom:12px;
+        width:100%;
+        
+        
+        #famous_tags{
+            float:left;
+            $width: 323px;
+            width: $width;
+            
+            
+            .content{
+                $width:$width - 2 - 4;
+                width:$width;
+                border:1px solid $lightgrey;
+                border-top: 0;
+                border-bottom: 0;
+                position: relative;
+                .top{
+                    width:100%;
+                    height: 6px;
+                    background-image: url("img/famous_tags321x6.png");
+                    background-repeat: no-repeat;
+                }
+                
+                .mid{
+                    $height:260px;
+                    height:$height;
+                    background-color:$stepcolor;
+                    
+                    .left_seam, .right_seam{
+                        float:left;
+                        margin: 5px 7px;
+                        background-image:url("img/seam_tags.png");
+                        background-repeat: repeat-y;
+                        width:2px;
+                        height:$height - 10px;
+                    }
+                    
+                    .right_seam{
+                        float:right;
+                    }
+                
+                    #famous_tags_cloud{
+                        float:left;
+                        width:$width - 2 * 16px - 2 * 2px;
+                        margin:10px 2px;
+                        height: 260px - 2 * 10px;
+                        overflow: hidden;
+                        
+                        .tag{
+                            margin: 0 6px 6px 0;
+                        }
+                        
+                        
+                        
+                    }
+                }
+                
+                .bottom{
+                    width:100%;
+                    height: 6px;
+                    background-image: url("img/famous_tags321x6.png");
+                    background-repeat: no-repeat;
+                    background-position-y: -6px;
+                }
+            }
+        }
+    }
+    
+    #dailyrecipe{
+        clear:both;
+        padding: 0 29px;
+    }
 }

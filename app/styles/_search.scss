@@ -1,188 +1,188 @@
 .frame_big{
-	position:relative;
-	$width: 596px;
-	$height: 130px;
-	$innerheight: 110px;
-	width:$width;
-	color:$darkfontcolor;
-	height:$height;
-	display:block;
-	border-top:1px solid $kategorieborder;
-	//border-bottom: 1px solid $lightgrey;
+    position:relative;
+    $width: 596px;
+    $height: 130px;
+    $innerheight: 110px;
+    width:$width;
+    color:$darkfontcolor;
+    height:$height;
+    display:block;
+    border-top:1px solid $kategorieborder;
+    //border-bottom: 1px solid $lightgrey;
     //@include transition(border-top-color, .1s, ease-out);
 
-	&:last-child{
-		border-bottom:1px solid $shadowbeige;
-	}
+    &:last-child{
+        border-bottom:1px solid $shadowbeige;
+    }
 
-	&:hover, &:focus{
-		outline:none;
-		text-decoration:none;
-		border-top-color: $lightgrey;
-		@include transition(border-top-color, .14s, ease-in);
-		@include box-shadow-spread(0, 3px, 2px, -2px, $shadowbeige);
-		@include transition(box-shadow, .15s, ease-in);
+    &:hover, &:focus{
+        outline:none;
+        text-decoration:none;
+        border-top-color: $lightgrey;
+        @include transition(border-top-color, .14s, ease-in);
+        @include box-shadow-spread(0, 3px, 2px, -2px, $shadowbeige);
+        @include transition(box-shadow, .15s, ease-in);
 
-		.frame_big_main{
-			background-color:$stepcolor;
-			@include transition(background-color, .15s, ease-in);
-		}
+        .frame_big_main{
+            background-color:$stepcolor;
+            @include transition(background-color, .15s, ease-in);
+        }
 
-		.frame_big_left, .frame_big_right{
-			opacity:1.0;
-			@include transition(opacity, .15s, ease-in);
-		}
+        .frame_big_left, .frame_big_right{
+            opacity:1.0;
+            @include transition(opacity, .15s, ease-in);
+        }
 
-	}
-
-
-	.frame_big_left, .frame_big_right{
-		opacity:0;
-		width:12px;
-		height:100%;
-		@include transition(opacity, .1s, ease-out);
-	}
-	.frame_big_left{
-		float:left;
-		background:url("/img/frame_big_left.png") no-repeat;
-	}
-
-	.frame_big_right{
-		background:url("/img/frame_big_right.png") no-repeat;
-		float:right;
-	}
-
-	.frame_big_main{
-		$width: $width - 32px;
-
-		float:left;
-		width:$width;
-		height:$innerheight;
-		$verticalpadding: $height / 2 - $innerheight / 2;
-		padding: $verticalpadding 4px;
-		@include transition(background-color, .1s, ease-out);
+    }
 
 
-		.recipe_img{
-			$width: 100px;
-			$height: 100px;
+    .frame_big_left, .frame_big_right{
+        opacity:0;
+        width:12px;
+        height:100%;
+        @include transition(opacity, .1s, ease-out);
+    }
+    .frame_big_left{
+        float:left;
+        background:url("img/frame_big_left.png") no-repeat;
+    }
 
-			height:$height;
-			width:$width;
+    .frame_big_right{
+        background:url("img/frame_big_right.png") no-repeat;
+        float:right;
+    }
 
-			float:left;
+    .frame_big_main{
+        $width: $width - 32px;
 
-			margin: 1px;
+        float:left;
+        width:$width;
+        height:$innerheight;
+        $verticalpadding: $height / 2 - $innerheight / 2;
+        padding: $verticalpadding 4px;
+        @include transition(background-color, .1s, ease-out);
 
-			position:relative;
-			border:3pt solid $imginnerbordercolor;
-			outline: 1px solid $lightgrey;
 
-			img{
-				height:$height;
-				width:$width;
-			}
+        .recipe_img{
+            $width: 100px;
+            $height: 100px;
 
-			.recipe_time{
-				background-color: white;
-				font: 7pt Lucida Grande;
-				text-align:center;
-				bottom:0;
-				position:absolute;
-				height:11px;
-				width:44px;
-				left:28px;
-				border-top-left-radius: 6px 11px;
-				border-top-right-radius: 6px 11px;
-			}
-		}
+            height:$height;
+            width:$width;
 
-		.recipe_text{
-			margin: 5px 10px;
-			float:left;
-			width:340px;
-			height:$innerheight - 10px;
-			overflow:hidden;
+            float:left;
 
-			h3{
-				font:$headlinefont;
-				font-size:14pt;
-			}
-			p{
-				margin-top:4px;
-				font-size:8pt;
-				color:$smalllightfontcolor;
-			}
-		}
+            margin: 1px;
 
-		.heart{
-			position: absolute;
-			top:0;
-			right:65px;
-			width:20px;
-			height:20px;
-			background:url("/img/icons20x20.png");
-			background-position: -20px * 2 0;
-			margin: 14px 8px;
+            position:relative;
+            border:3pt solid $imginnerbordercolor;
+            outline: 1px solid $lightgrey;
 
-			&.schmeckt{
+            img{
+                height:$height;
+                width:$width;
+            }
 
-				height:49px;
-				width:36px;
-				margin: -2px 0 0 0;
-				background:url("/img/result_heartflag.png");
-				background-position: 0;
-			}
-		}
+            .recipe_time{
+                background-color: white;
+                font: 7pt Lucida Grande;
+                text-align:center;
+                bottom:0;
+                position:absolute;
+                height:11px;
+                width:44px;
+                left:28px;
+                border-top-left-radius: 6px 11px;
+                border-top-right-radius: 6px 11px;
+            }
+        }
 
-		.schmeckt_num{
-			float:left;
-			font:$headlinefont;
-			font-size:16pt;
-			margin: -2px 0 0 54px;
-		}
-	}
+        .recipe_text{
+            margin: 5px 10px;
+            float:left;
+            width:340px;
+            height:$innerheight - 10px;
+            overflow:hidden;
+
+            h3{
+                font:$headlinefont;
+                font-size:14pt;
+            }
+            p{
+                margin-top:4px;
+                font-size:8pt;
+                color:$smalllightfontcolor;
+            }
+        }
+
+        .heart{
+            position: absolute;
+            top:0;
+            right:65px;
+            width:20px;
+            height:20px;
+            background:url("img/icons20x20.png");
+            background-position: -20px * 2 0;
+            margin: 14px 8px;
+
+            &.schmeckt{
+
+                height:49px;
+                width:36px;
+                margin: -2px 0 0 0;
+                background:url("img/result_heartflag.png");
+                background-position: 0;
+            }
+        }
+
+        .schmeckt_num{
+            float:left;
+            font:$headlinefont;
+            font-size:16pt;
+            margin: -2px 0 0 54px;
+        }
+    }
 }
 
 
 // #noresult_headline, #noresult_subline{
-// 	font:$headlinefont;
-// 	color: $darkfontcolor;
+//  font:$headlinefont;
+//  color: $darkfontcolor;
 // }
 
 // #noresult_headline{
-// 	padding-top: 50px;
-// 	font-size: 25pt;
-// 	border-top: 1px solid $lightgrey;
+//  padding-top: 50px;
+//  font-size: 25pt;
+//  border-top: 1px solid $lightgrey;
 // }
 
 // #noresult_subline{
-// 	padding: 2px 0 55px;
-// 	margin-bottom: 10px;
-// 	font-size: 14pt;
-// 	border-bottom: 1px solid $lightgrey;
+//  padding: 2px 0 55px;
+//  margin-bottom: 10px;
+//  font-size: 14pt;
+//  border-bottom: 1px solid $lightgrey;
 // }
 
 #noresults{
-	padding-left: 23px;
+    padding-left: 23px;
 
-	h1{
-		text-align: center;
-		font-size: 23pt;
-		color: #B5B5B5;
-		text-shadow: 0px 2px 3px white;
-		margin-top: 80px;
-	}
+    h1{
+        text-align: center;
+        font-size: 23pt;
+        color: #B5B5B5;
+        text-shadow: 0px 2px 3px white;
+        margin-top: 80px;
+    }
 
-	.subline{
-		width: 360px;
-		margin: 0 auto;
-		padding: 10px 0;
-		text-align: center;
-	}
+    .subline{
+        width: 360px;
+        margin: 0 auto;
+        padding: 10px 0;
+        text-align: center;
+    }
 
-	.recipeoverview{
-		margin-top: 40px;
-	}
+    .recipeoverview{
+        margin-top: 40px;
+    }
 
 }

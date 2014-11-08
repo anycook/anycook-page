@@ -37,7 +37,7 @@ body, div, ul,ol, li, h1,h2,h3,h4, p,th,td,form{
 }
 
 body{
-	background: url("/img/bg_texture.png");
+	background: url("img/bg_texture.png");
 	font: $standardfont;
 	// overflow-y: scroll;
 	min-width:1024px;
@@ -92,7 +92,7 @@ header{
 			margin: ( $height - 14px ) / 2 8px;
 			width:14px;
 			height: 14px;
-			background: url("/img/loupe.png") no-repeat;
+			background: url("img/loupe.png") no-repeat;
 		}
 
 		form{
@@ -158,7 +158,7 @@ header{
 			height:9px;
 			margin: ( $height - 9px ) / 2 8px;
 			float:left;
-			background:url("/img/searchreset.png") no-repeat;
+			background:url("img/searchreset.png") no-repeat;
 			opacity:0;
 			@include transition(opacity, 0.3s, ease-out);
 			&.on{
@@ -193,7 +193,7 @@ header{
 
 			#login_pin{
 				float:left;
-				background:url("/icons/anmelden_off.png") no-repeat;
+				background:url("icons/anmelden_off.png") no-repeat;
 				height:19px;
 				width:19px;
 				margin: 4px 0 0 6px;
@@ -216,13 +216,13 @@ header{
 			height:25px;
 			margin:0 2px;
 
-			background-image: url("/img/topbuttons40x25.png");
+			background-image: url("img/topbuttons40x25.png");
 			background-repeat: no-repeat;
 
 			span{
 				width:100%;
 				height:100%;
-				background-image: url("/img/topbuttons40x25.png");
+				background-image: url("img/topbuttons40x25.png");
 				background-repeat: no-repeat;
 				background-position: 0px -25px;
 				opacity: 0;
@@ -322,7 +322,7 @@ header{
 	#container_head_peak{
 			position:absolute;
 			float: left;
-			background: url("/img/bg_texture.png");
+			background: url("img/bg_texture.png");
 			overflow: hidden;
 
 			height:60px;
@@ -357,7 +357,7 @@ header{
 			position: absolute;
 			left:285px;
 			top: 36px;
-			background: url("/img/buchmitte_top.png") no-repeat $background;
+			background: url("img/buchmitte_top.png") no-repeat $background;
 			z-index: 22;
 	}
 
@@ -377,7 +377,7 @@ header{
 			.background{
 				position:absolute;
 				right:0;
-				background:url("/img/dogearTop9x7.png") no-repeat;
+				background:url("img/dogearTop9x7.png") no-repeat;
 				background-position:0 -7px;
 				height:7px;
 				width:9px;
@@ -458,7 +458,7 @@ header{
 		position: absolute;
 		overflow:hidden;
 		margin-left: $containerwidth / 2;
-		background:url("/img/right_stripes.png") repeat-y $background-right;
+		background:url("img/right_stripes.png") repeat-y $background-right;
 		height:100%;
 		left:50%;
 		z-index:15;
@@ -467,7 +467,7 @@ header{
 		#right_edge{
 			position:absolute;
 			top:100%;
-			background:url("/img/pages_edge.png") no-repeat;
+			background:url("img/pages_edge.png") no-repeat;
 			width:21px;
 			height:27px;
 			margin-top:-27px;
@@ -478,11 +478,11 @@ header{
 	#container_bottom{
 			width:100%;
 			//overflow: visible;
-			background:url("/img/pages_bottom.png") repeat-x;
+			background:url("img/pages_bottom.png") repeat-x;
 			height:27px;
 
 			#peak_bottom{
-				background: url("/img/peak_bottom.png") no-repeat;
+				background: url("img/peak_bottom.png") no-repeat;
 				height: 46px;
 				position: absolute;
 				width: 1016px;
@@ -503,7 +503,7 @@ header{
 		width: $containerwidth;
 		margin-left: -508px;
 		overflow-x:visible;
-		background: url("/img/buchmitte.png") repeat-y $background;
+		background: url("img/buchmitte.png") repeat-y $background;
 		background-position: 285px 0;
 
 
@@ -518,13 +518,13 @@ header{
               height: 15px;
               width: 29px;
               margin: 0 auto;
-              background: url("/img/loading_static.png") no-repeat 15px 0;
+              background: url("img/loading_static.png") no-repeat 15px 0;
               padding-left: 15px; //das Bild mittig aussrichten
 
 
               span{
                  float: left;
-                 background-image: url("/img/loading.gif");
+                 background-image: url("img/loading.gif");
                  width: 100%;
                  height: 100%;
                  opacity: 0;
@@ -542,7 +542,7 @@ header{
 
 			#filter_box{
 				float: left;
-				background: url("/img/filter_bg.png") repeat-y;
+				background: url("img/filter_bg.png") repeat-y;
 				margin: 6px 0 0 15px;
 				$width: 268px;
 				width:$width;
@@ -550,12 +550,12 @@ header{
 
 
 				#filter_head{
-					background: url("/img/filter_head_main.png");
+					background: url("img/filter_head_main.png");
 
 
 					#filter_head_top {
 						height: 15px;
-            background: url("/img/filter_head_top.png") no-repeat;
+            background: url("img/filter_head_top.png") no-repeat;
             background-position: 0 -12px;
 					}
 					#filter_head_main {
@@ -582,7 +582,7 @@ header{
 
 					#filter_head_bottom {
 						height: 13px;
-						background: url("/img/filter_head_bottom.png") no-repeat;
+						background: url("img/filter_head_bottom.png") no-repeat;
 					}
 
 
@@ -600,7 +600,7 @@ header{
 						float: left;
 						width: 100%;
 						height: 4px;
-						background: url("/img/dot.png") repeat-x;
+						background: url("img/dot.png") repeat-x;
 					}
 
 					#userfilter{
@@ -614,13 +614,13 @@ header{
 							height: 20px;
 							float: right;
 							cursor: pointer;
-							background-image: url("/img/icons20x20.png");
+							background-image: url("img/icons20x20.png");
 							background-position: 0 -80px;
 							position: relative;
 							@include vertical-align;
 
 							span{
-								background-image: url("/img/icons20x20.png");
+								background-image: url("img/icons20x20.png");
 								position: absolute;
 								top:0;
 								left:0;
@@ -694,7 +694,7 @@ header{
 						}
 
 						#kategorie_peak{
-							background: url("/img/categories_top.png") no-repeat;
+							background: url("img/categories_top.png") no-repeat;
 							background-position:0 0;
 							top:-1px;
 							width:16px;
@@ -746,7 +746,7 @@ header{
 
 							}
 							#kategorie_bottom{
-								background: url("/img/categories_bottom.png") no-repeat;
+								background: url("img/categories_bottom.png") no-repeat;
 								height:10px;
 								width:100%;
 								position:absolute;
@@ -776,7 +776,7 @@ header{
 									margin-bottom:5px;
 
 									.filter_table_left{
-										background: url("/icons/uhr.png") no-repeat;
+										background: url("icons/uhr.png") no-repeat;
 										width:100px;
 										padding-left:30px;
 									}
@@ -895,7 +895,7 @@ header{
 									margin: 0;
 									width:20px;
 									height:18px;
-									background-image:url("/img/icons20x20.png");
+									background-image:url("img/icons20x20.png");
 									background-repeat:no-repeat;
 									background-position: -20px -41px;
 									position: absolute;
@@ -994,7 +994,7 @@ header{
 
 				#filter_bottom{
 					height: 18px;
-					background: url("/img/filter_bottom.png");
+					background: url("img/filter_bottom.png");
 					float:left;
 					width:100%;
 				}
@@ -1028,7 +1028,7 @@ header{
       font:$standardfont;
       float:left;
       font-size: 9pt;
-      background: url("/img/bg_texture.png");
+      background: url("img/bg_texture.png");
       @include userselectnone;
 
       #footercontent{
@@ -1059,7 +1059,7 @@ header{
     // margin-top:75px;
     width:100%;
     height:4px;
-    background:url("/img/bookskin.png") repeat-x;
+    background:url("img/bookskin.png") repeat-x;
     // padding:8px 0;
     position:absolute;
     bottom:-4px;
@@ -1086,7 +1086,7 @@ header{
 		width: 18px;
 		position: absolute;
 		left: 153px;
-		background-image: url("/img/bubble_peak_top.png");
+		background-image: url("img/bubble_peak_top.png");
 	}
 
 	.menu{
@@ -1147,7 +1147,7 @@ header{
 					width:18px;
 					height:19px;
 					margin-right:2px;
-					background-image: url("/img/icons20x20.png");
+					background-image: url("img/icons20x20.png");
 					background-position: -82px -41px;
 				}
 
@@ -1182,7 +1182,7 @@ header{
 	width: 20px;
 	height: 20px;
 	background-position:0 0;
-	background-image: url("/img/icons20x20.png");
+	background-image: url("img/icons20x20.png");
 	background-repeat: no-repeat;
 
 	&.on{
@@ -1205,7 +1205,7 @@ header{
 		bottom:0;
 		left:0;
 		opacity: 0;
-		background: url("/img/icons20x20.png") no-repeat;
+		background: url("img/icons20x20.png") no-repeat;
 		@include transition(opacity, .1s, ease-out);
 		background-position:0 -20px;
 	}
