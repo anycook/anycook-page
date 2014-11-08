@@ -44,11 +44,11 @@
     }
     .frame_big_left{
         float:left;
-        background:url("img/frame_big_left.png") no-repeat;
+        background:url("../img/frame_big_left.png") no-repeat;
     }
 
     .frame_big_right{
-        background:url("img/frame_big_right.png") no-repeat;
+        background:url("../img/frame_big_right.png") no-repeat;
         float:right;
     }
 
@@ -121,7 +121,7 @@
             right:65px;
             width:20px;
             height:20px;
-            background:url("img/icons20x20.png");
+            background:url("../img/icons20x20.png");
             background-position: -20px * 2 0;
             margin: 14px 8px;
 
@@ -130,7 +130,7 @@
                 height:49px;
                 width:36px;
                 margin: -2px 0 0 0;
-                background:url("img/result_heartflag.png");
+                background:url("../img/result_heartflag.png");
                 background-position: 0;
             }
         }

@@ -120,7 +120,7 @@
                                     width: 54px;
                                     margin: 0 28px;
                                     float:left;
-                                    background: url("img/dragdrop.png") repeat;
+                                    background: url("../img/dragdrop.png") repeat;
                                 }
 
                                 .number{
@@ -180,11 +180,11 @@
                             height: 20px;
                             margin: 0 0 0 20px;
                             cursor:pointer;
-                            background-image: url("img/icons20x20.png");
+                            background-image: url("../img/icons20x20.png");
                             background-position: -20px -80px;
                             position: relative;
                             span{
-                                background-image: url("img/icons20x20.png");
+                                background-image: url("../img/icons20x20.png");
                                 position: absolute;
                                 top:0;
                                 left:0;
@@ -211,12 +211,12 @@
                         right: 100px;
                         height:27px;
                         width:27px;
-                        background-image: url("img/stepbtn27x27.png");
+                        background-image: url("../img/stepbtn27x27.png");
                         background-position: 0 0;
                         cursor: pointer;
                         //position: relative;
                         span{
-                            background-image: url("img/stepbtn27x27.png");
+                            background-image: url("../img/stepbtn27x27.png");
                             position: absolute;
                             top:0;
                             left:0;
@@ -248,12 +248,12 @@
                     float:left;
                     width:27px;
                     height:27px;
-                    background-image: url("img/stepbtn27x27.png");
+                    background-image: url("../img/stepbtn27x27.png");
                     background-position: -27px 0;
                     position: relative;
 
                     span{
-                        background-image: url("img/stepbtn27x27.png");
+                        background-image: url("../img/stepbtn27x27.png");
                         position: absolute;
                         top:0;
                         left:0;
@@ -316,7 +316,7 @@
 
                 div{
                     float:right;
-                    background: url("img/small_arrow8x8.png") no-repeat;
+                    background: url("../img/small_arrow8x8.png") no-repeat;
                     background-position: 0 -8px;
                     width:8px;
                     margin: 5px 3px;
@@ -463,7 +463,7 @@ ul.new_ingredient_list{
             margin: 6px 8px 6px 1px;
             width: 12px;
             height: 18px;
-            background-image: url("img/dragdrop.png");
+            background-image: url("../img/dragdrop.png");
             background-repeat: repeat;
         }
 
@@ -486,11 +486,11 @@ ul.new_ingredient_list{
             margin: 5px 2px;
             float:left;
             cursor:pointer;
-            background-image: url("img/icons20x20.png");
+            background-image: url("../img/icons20x20.png");
             background-position: 0 -80px;
             position: relative;
             span{
-                background-image: url("img/icons20x20.png");
+                background-image: url("../img/icons20x20.png");
                 position: absolute;
                 top:0;
                 left:0;
@@ -516,11 +516,11 @@ ul.new_ingredient_list{
     height: 20px;
     margin: 0 0 0 20px;
     cursor:pointer;
-    background-image: url("img/icons20x20.png");
+    background-image: url("../img/icons20x20.png");
     background-position: -20px -80px;
     position: relative;
     span{
-        background-image: url("img/icons20x20.png");
+        background-image: url("../img/icons20x20.png");
         position: absolute;
         top:0;
         left:0;

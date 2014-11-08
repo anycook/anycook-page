@@ -169,7 +169,7 @@ ul#newsstream, ul#messagestream{
             float: left;
             width: 16px;
             height: 21px;
-            background: url("img/comment_arrow16x21.png") no-repeat;
+            background: url("../img/comment_arrow16x21.png") no-repeat;
             margin: 16px -1px 0 3px;
         }
 
@@ -252,7 +252,7 @@ ul#newsstream, ul#messagestream{
 
 .messageimageborder{
     float:left;
-    background-image: url("img/stampborder.png");
+    background-image: url("../img/stampborder.png");
     background-repeat:no-repeat;
     width: 60px;
     height:60px;

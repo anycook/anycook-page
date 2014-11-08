@@ -38,7 +38,7 @@
                         float: left;
                         width: 20px;
                         height: 20px;
-                        background: url("img/icons20x20.png") no-repeat;
+                        background: url("../img/icons20x20.png") no-repeat;
                         background-position: -60px 0;
 
                         &.liked_by_user{
@@ -75,7 +75,7 @@
                     float: left;
                     width: 16px;
                     height: 21px;
-                    background: url("img/comment_arrow16x21.png") no-repeat;
+                    background: url("../img/comment_arrow16x21.png") no-repeat;
                     margin: 16px -1px 0 3px;    
                 }
                 
@@ -165,7 +165,7 @@
                     margin:  4px 0 0 10px;
                     
                     .up, .down{
-                      background-image:url("img/icons20x20.png");
+                      background-image:url("../img/icons20x20.png");
                       background-position:-60px -60px;
                       height:8px;
                       width:12px;
@@ -206,7 +206,7 @@
                     // position:relative;
                     // margin-bottom:15px;
                     // padding: 0 12px 0 18px;
-                    // background: url("img/recipe_event_yellow_left.png") repeat-y $discussionyellow;
+                    // background: url("../img/recipe_event_yellow_left.png") repeat-y $discussionyellow;
                     // border-top:1px solid $discussionyellowborder;
                     // border-bottom:1px solid $discussionyellowborder;
                     // @include box-shadow-inset(0, 2px, 2px, rgba(255,255,255, 0.4));
@@ -214,7 +214,7 @@
                     // width:$discussionwidth - 30;
 //                  
                     // &.active{
-                        // background:url("img/recipe_event_green_left.png") repeat-y $activebuttonbackground;
+                        // background:url("../img/recipe_event_green_left.png") repeat-y $activebuttonbackground;
                         // border-top:1px solid $activebuttonoutline;
                         // border-bottom:1px solid $activebuttonoutline;
 //                      
@@ -239,7 +239,7 @@
                             // }
                         // }
                         // .rightbackground{
-                            // background: url("img/recipe_event_green_right.png") repeat-y;
+                            // background: url("../img/recipe_event_green_right.png") repeat-y;
                         // }
                     // }
 //                  
@@ -285,7 +285,7 @@
 //                  
                     // .rightbackground{
                         // position:absolute;
-                        // background: url("img/recipe_event_yellow_right.png") repeat-y;
+                        // background: url("../img/recipe_event_yellow_right.png") repeat-y;
                         // top:0px;
                         // bottom:0px;
                         // right:0;
@@ -395,7 +395,7 @@
                 float: left;
                 width: 16px;
                 height: 21px;
-                background: url("img/comment_arrow16x21.png") no-repeat;
+                background: url("../img/comment_arrow16x21.png") no-repeat;
                 margin: 13px -1px 0 3px;    
         }
         

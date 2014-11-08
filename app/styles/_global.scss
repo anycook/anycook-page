@@ -362,7 +362,7 @@ textarea{
         position:absolute;
         width: 13px;
         height: 13px;
-        background-image: url("img/icons20x20.png");
+        background-image: url("../img/icons20x20.png");
         background-position: -40px -40px;
         background-repeat: no-repeat;
         display: table-cell;
@@ -380,7 +380,7 @@ input::-webkit-input-placeholder,input:-moz-placeholder{
 
 .tag{
     
-    background:url("img/tagspeak13x21.png") no-repeat;
+    background:url("../img/tagspeak13x21.png") no-repeat;
     height:21px;
     float:left;
     padding-left:13px;
@@ -505,7 +505,7 @@ input::-webkit-input-placeholder,input:-moz-placeholder{
         height:10px;
         float:right;
         border-left: 1px solid $lightgrey;
-        background-image:url("img/time_arrow_up6x10.png");
+        background-image:url("../img/time_arrow_up6x10.png");
         background-repeat:no-repeat;
         background-position-x: 2px;
         
@@ -514,7 +514,7 @@ input::-webkit-input-placeholder,input:-moz-placeholder{
         }
     }
     .down{
-        background-image:url("img/time_arrow_down6x10.png");
+        background-image:url("../img/time_arrow_down6x10.png");
         border-top: 1px solid $lightgrey;
     }
 }
@@ -539,7 +539,7 @@ input::-webkit-input-placeholder,input:-moz-placeholder{
     
     div{
         float: left;
-        background:url("img/backtothetop.png") no-repeat;
+        background:url("../img/backtothetop.png") no-repeat;
         height: 54px;
         width: 54px;
         margin: 0 28px;
@@ -590,7 +590,7 @@ input::-webkit-input-placeholder,input:-moz-placeholder{
         #cam{
             width:20px;
             height:20px;
-            background: url("img/icons20x20.png") no-repeat;
+            background: url("../img/icons20x20.png") no-repeat;
             background-position: -80px -20px;
             float: left;
             margin-top:1px;
