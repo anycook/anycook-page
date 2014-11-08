@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             // Configurable paths
             app: 'app',
             dist: 'dist',
-            assetDomain: 'https://anycook.de.s3-website-eu-west-1.amazonaws.com'
+            assetDomain: 'https://s3-eu-west-1.amazonaws.com/anycook.de'
         },
 
         // Watches files for changes and runs tasks based on the changed files
@@ -429,8 +429,8 @@ module.exports = function (grunt) {
         //'modernizr',
         'rev',
         'usemin',
-        'string-replace'
-        //'htmlmin',
+        'string-replace',
+        'htmlmin',
     ]);
 
     grunt.registerTask('default', [
