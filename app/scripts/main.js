@@ -244,12 +244,6 @@ require([
     'AnycookAPI.user'
 ], function($, AnycookAPI, Search, User, addressChange, drafts, loginMenu, searchView,
     scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile){
-    //setup
-    // if($.browser.msie){
-        // var version = Number($.browser.version);
-        // if(version<9)
-            // document.location.href='http://news.anycook.de/tagged/internet_explorer';
-    // }
 
     //CORS
     //source: http://api.jquery.com/jQuery.support/
@@ -261,7 +255,6 @@ require([
         var minWidth = 1024;
         var bodyWidth = $('body').width();
         var width = Math.max(minWidth, bodyWidth);
-        /*var $headerRight = $('#container_head_right');
         var left = $headerRight.offset().left;
         $headerRight.width(width-left);*/
         var $right  = $('#right');
@@ -339,7 +332,6 @@ require([
             });
         });
     });
-
 
     //startfadeIn
     if($.address.pathNames().length === 0){
@@ -460,7 +452,6 @@ require([
     $('#filter_table .label_chefhats, #filter_table .label_muffins').click(function(){
         if(!$('#filter_main').is('.blocked')){
             filters.checkOnOff(this);
-            // handleRadios(this);
         }
 
         // must return false or function is sometimes called twice
@@ -489,23 +480,14 @@ require([
     $('.tags_list').submit($.proxy(tags.submitTags, tags))
         .click(tagData, $.proxy(tags.makeInput, tags))
         .on('click', '.tag_remove', tagData, $.proxy(tags.remove, tags));
-    // $('.tags_table_right').click(makeNewTagInput);
 
     //timefilter
     $('#time_form').submit($.proxy(time.formSubmit, time));
     $('#time_std,#time_min').keydown($.proxy(time.key, time));
     $('.time .up, .time .down').click($.proxy(time.upDownListener, time));
 
-    //userfilter
-    //$('#userfilter').mouseenter(showUserfilterremove);
-    //$('#userfilter').mouseleave(hideUserfilterremove);
-    //$('#userfilterremove').click(removeUserfilter);
-
     //scrollListener
     $(document).scroll($.proxy(scroll.listen, scroll));
-
-    //ellipsis for .big_rezept p
-    // $('.big_rezept p').ellipsis({live:true});
 
     // search events
     $('html').on('startSearch', $.proxy(filters.setFromSession, filters))
@@ -522,10 +504,7 @@ require([
             //oauth  : true // enable OAuth 2.0
         });
 
-        //FB.Event.subscribe('auth.sessionChange', $.proxy(facebook.sessionChange, facebook));
         FB.Event.subscribe('auth.authResponseChange', $.proxy(facebook.sessionChange, facebook));
-        //FB.getLoginStatus($.proxy(facebook.sessionChange, facebook));
-        //facebook.login();
         $('body').on('click', '.facebookLogin', $.proxy(facebook.login, facebook));
     });
 
