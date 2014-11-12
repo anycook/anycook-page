@@ -50,8 +50,15 @@ define([
         // behandelt change bei $.address.path
         handleChange : function(event){
             var lastAddress = $(document).data('lastAddress');
-            if(!lastAddress || lastAddress.path !== event.path) {
+            if (event.type === 'change') {
                 $(document).data('lastAddress', event);
+            }
+
+            if(!lastAddress || event.type === 'login' || event.type === 'logout' || lastAddress.path !== event.path) {
+
+                if (event.type === 'login' || event.type === 'logout') {
+                    event = lastAddress;
+                }
 
                 var search;
 

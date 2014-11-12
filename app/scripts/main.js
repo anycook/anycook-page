@@ -319,7 +319,10 @@ require([
 
                 loginMenu.buildLogin();
 
-                $.address.bind('change', $.proxy(addressChange.handleChange, addressChange));
+                var handleChange = $.proxy(addressChange.handleChange, addressChange);
+
+                $('body').on('login', handleChange).on('logout', handleChange);
+                $.address.bind('change', handleChange);
                 $.address.tracker(function(){
                     /* global _gaq */
                     if(window._gaq !== undefined){
@@ -329,6 +332,8 @@ require([
 
 
                 $.address.update();
+
+
 
                 if(user.checkLogin()){ userMenu.load(); }
             });

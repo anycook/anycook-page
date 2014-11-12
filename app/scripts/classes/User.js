@@ -58,7 +58,7 @@ define([
             user.emailCandidate = response.emailCandidate;
             $.when(user.getSchmecktRecipes()).then(function(schmeckt){
                 user.schmeckt = schmeckt;
-                $('html').data('user', user);
+                User.put(user);
                 dfd.resolve(user);
             });
         },
@@ -97,7 +97,11 @@ define([
     };
 
     User.get = function(){
-        return $('html').data('user') || new User();
+        return $(document).data('user') || new User();
+    };
+
+    User.put = function(user) {
+        $(document).data('user', user);
     };
 
     User.getProfileURI = function(id){
@@ -173,7 +177,6 @@ define([
         var callback = false;
         AnycookAPI.session.login(mail, pwd, stayloggedin, function(response){
             callback = response !== 'false';
-            // checkNewMessageNum();
         });
         return callback;
     };
@@ -182,7 +185,6 @@ define([
         var callback = false;
         AnycookAPI.session.login.facebook(signedRequest, function(response){
             callback = response !== 'false';
-            // checkNewMessageNum();
         });
         return callback;
     };
@@ -198,9 +200,20 @@ define([
             require(['FB'], function(FB){
                 FB.getLoginStatus(function(response){
                     if(response.status === 'connected'){
-                        FB.logout(function() { dfd.resolve(); });
-                    } else { dfd.resolve(); }
+                        FB.logout(function() {
+                            User.put(new User());
+                            dfd.resolve();
+                        });
+                    } else {
+                        User.put(new User());
+                        dfd.resolve();
+                    }
                 });
+            },
+            // if script is blocked
+            function() {
+                User.put(new User());
+                dfd.resolve();
             });
         });
         return dfd.promise();

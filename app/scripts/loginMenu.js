@@ -80,7 +80,7 @@ define([
                     if(user.checkLogin()){
                         self.toggle();
                         userMenu.load();
-                        $.address.update();
+                        $('body').trigger('login');
                     }
                 });
 			},

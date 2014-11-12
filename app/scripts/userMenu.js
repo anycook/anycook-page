@@ -23,7 +23,7 @@ define([
                 var user = User.get();
                 $.when(user.logout()).then(function(){
                     self.remove();
-                    $.address.update();
+                    $('body').trigger('logout');
                 });
             });
 
