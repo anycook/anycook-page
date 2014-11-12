@@ -255,8 +255,6 @@ require([
         var minWidth = 1024;
         var bodyWidth = $('body').width();
         var width = Math.max(minWidth, bodyWidth);
-        var left = $headerRight.offset().left;
-        $headerRight.width(width-left);*/
         var $right  = $('#right');
         var left = $right.offset().left;
         $right.width(width-left);
