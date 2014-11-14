@@ -133,7 +133,7 @@ define([
 				if(json){
 					var image = json.image;
 					var shortname = json.shortname;
-					var fullname = json.fullname;
+					var fullname = json.fullName;
 					var redirect = json.redirect;
 					$('#reg_step2').append('<p id="register_forward">Wir können dich auch direkt <a href="'+redirect+'" target="_blank">weiterleiten</a>!</div><div id="register_mailprovider"><a href="'+redirect+'" target="_blank"><img src="./img/maillogos/'+image+'" alt="'+shortname+'"/></a><div id="register_copyright">&copy; '+fullname+'</div></p>');
 				}
