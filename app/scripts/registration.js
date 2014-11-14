@@ -72,7 +72,11 @@ define([
 				$('#reg_error_pass').addClass('right').text('OK!');
 				return true;
 			}else if(showerror){
-				$('#reg_error_pass').addClass('wrong').text('zu kurz');
+                if (passwd.length < 6) {
+				    $('#reg_error_pass').addClass('wrong').text('zu kurz');
+                } else {
+                    $('#reg_error_pass').addClass('wrong').text('muss Zahlen und Buchstaben enthalten');
+                }
 			}
 			return false;
 		},
