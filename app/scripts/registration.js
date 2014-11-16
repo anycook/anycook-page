@@ -19,8 +19,9 @@
  */
 define([
 	'jquery',
-	'AnycookAPI'
-], function($, AnycookAPI){
+	'AnycookAPI.mailproviders',
+    'tpl!templates/mailprovider'
+], function($, AnycookAPI, mailproviderTemplate){
 	'use strict';
 	return {
 		show : function(){
@@ -129,13 +130,9 @@ define([
 		showStep2 : function(username, mail){
 			$('#reg_step2 h1').text('Hey '+username+'!');
 			var domain = mail.split('@')[1];
-			AnycookAPI.session.getMailProvider(domain, function(json){
+			AnycookAPI.mailproviders.domain(domain, function(json){
 				if(json){
-					var image = json.image;
-					var shortname = json.shortname;
-					var fullname = json.fullName;
-					var redirect = json.redirect;
-					$('#reg_step2').append('<p id="register_forward">Wir können dich auch direkt <a href="'+redirect+'" target="_blank">weiterleiten</a>!</div><div id="register_mailprovider"><a href="'+redirect+'" target="_blank"><img src="./img/maillogos/'+image+'" alt="'+shortname+'"/></a><div id="register_copyright">&copy; '+fullname+'</div></p>');
+					$('#reg_step2').append(mailproviderTemplate(json));
 				}
 				$('#reg_step1').animate({left:-655}, {
 					step:function(now){

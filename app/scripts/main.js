@@ -29,6 +29,7 @@ require.config({
         'AnycookAPI.discussion': '../bower_components/anycook-api-js/src/anycookapi.discussion',
         'AnycookAPI.ingredient': '../bower_components/anycook-api-js/src/anycookapi.ingredient',
         'AnycookAPI.life': '../bower_components/anycook-api-js/src/anycookapi.life',
+        'AnycookAPI.mailproviders': '../bower_components/anycook-api-js/src/anycookapi.mailproviders',
         'AnycookAPI.message': '../bower_components/anycook-api-js/src/anycookapi.message',
         'AnycookAPI.recipe': '../bower_components/anycook-api-js/src/anycookapi.recipe',
         'AnycookAPI.registration': '../bower_components/anycook-api-js/src/anycookapi.registration',
@@ -89,6 +90,10 @@ require.config({
             exports: 'AnycookAPI'
         },
         'AnycookAPI.life' : {
+            deps : ['AnycookAPI'],
+            exports: 'AnycookAPI'
+        },
+        'AnycookAPI.mailproviders' : {
             deps : ['AnycookAPI'],
             exports: 'AnycookAPI'
         },
