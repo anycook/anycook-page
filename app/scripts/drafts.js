@@ -93,7 +93,6 @@ define([
                 description : !draft.description ? 'Noch keine Beschreibung' : draft.description,
                 imagePath : AnycookAPI.upload.imagePath(image, 'recipe', 'small'),
                 date : dateString,
-                percent : Math.round(draft.percentage*100)+'%',
                 year : date.getFullYear()
             };
 

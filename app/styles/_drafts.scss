@@ -1,7 +1,7 @@
 #nodrafts{
     padding-left: 23px;
     display:none;
-    
+
     h1{
         text-align: center;
         font-size: 23pt;
@@ -15,41 +15,34 @@
         text-align: center;
         margin-top: 10px;
     }
-    
+
 }
 
 #draft_list{
     list-style: none;
-    
+
     .date_container{
         float: left;
         width: 95px;
         padding: 5px 0 0 0;
     }
-    
+
     .recipe_text{
         width: 300px;
     }
-    
+
     li:last-child .frame_big.draft{
         border-bottom: 1px solid $shadowbeige;
     }
-    
+
     .frame_big.draft{
         float: left;
         position: relative;
-        
+
         .date_container{
             .year{
                 color: $smalllightfontcolor;
             }
-            
-            .percent{
-                bottom: 17px;
-                position: absolute;
-                color: $smalllightfontcolor;
-            }
-            
         }
     }
 
@@ -62,7 +55,7 @@
         background-image: url("../img/stepbtn27x27.png");
         background-position: 0 0;
         cursor: pointer;
-        
+
         span{
             background-image: url("../img/stepbtn27x27.png");
             position: absolute;
