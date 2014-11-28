@@ -200,7 +200,7 @@ define([
                         continue;
                     }
 
-                    var $amount = $('<span class="amount"></span>').text(ingredient.menge);
+                    var $amount = $('<span class="amount"></span>').text(ingredient.amount);
                     var $name = $('<span class="name"></span>').text(ingredient.name);
                     $ingredients.append($amount).append(' ').append($name);
                     if (i < ingredients.length - 1) {$ingredients.append(', ');}
@@ -218,15 +218,15 @@ define([
             var $ingredientList = $('#ingredient_list').empty();
             for(var i in ingredients){
                 var zutat = ingredients[i].name;
-                var menge = ingredients[i].menge;
+                var amount = ingredients[i].amount;
                 var singular = ingredients[i].singular;
-                if(singular !== undefined && singular !== null && stringTools.getValuefromString(menge) === 1){
+                if(singular !== undefined && singular !== null && stringTools.getValuefromString(amount) === 1){
                     zutat = singular;
                 }
 
                 var $li = $('<li></li>').append('<div></div>').append('<div></div>');
                 $li.children().first().addClass('ingredient').text(zutat);
-                $li.children().last().addClass('amount').text(menge);
+                $li.children().last().addClass('amount').text(amount);
                 $ingredientList.append($li);
             }
 

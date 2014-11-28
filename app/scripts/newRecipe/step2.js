@@ -213,15 +213,15 @@ define([
             }
             else{
                 for(var i in ingredients){
-                    $newIngredientList.append(this.getIngredientLine(ingredients[i].name, ingredients[i].menge));
+                    $newIngredientList.append(this.getIngredientLine(ingredients[i].name, ingredients[i].amount));
                 }
             }
             return $template;
         },
-        getIngredientLine : function(name, menge){
+        getIngredientLine : function(name, amount){
             var data = {
                 name : name || '',
-                menge : menge || ''
+                amount : amount || ''
             };
 
             var $template = $(ingredientLineTemplate(data));
@@ -333,8 +333,8 @@ define([
                 for(var j = 0; j< $ingredients.length;  j++){
                     var $ingredient = $($ingredients[j]);
                     var ingredient = $ingredient.children('.new_ingredient').val();
-                    var menge = $ingredient.children('.new_ingredient_menge').val();
-                    var ingredientMap = {name:ingredient, menge:menge};
+                    var amount = $ingredient.children('.new_ingredient_menge').val();
+                    var ingredientMap = {name:ingredient, amount:amount};
                     ingredients[ingredients.length] = ingredientMap;
                 }
                 var step = {id:id, text:stepText, ingredients:ingredients};
@@ -472,8 +472,8 @@ define([
             for(var i = 0; i<$lis.length; i++){
                 var $li = $lis.eq(i);
                 var name = $li.children('.new_ingredient').val();
-                var menge = $li.children('.new_ingredient_menge').val();
-                var ingredient =  {name:name, menge:menge};
+                var amount = $li.children('.new_ingredient_menge').val();
+                var ingredient =  {name:name, amount:amount};
                 ingredients[ingredients.length] = ingredient;
             }
 
@@ -530,12 +530,12 @@ define([
                 if(ingredient.length === 0){
                     return;
                 }
-                var menge = $this.children('.new_ingredient_menge').val();
+                var amount = $this.children('.new_ingredient_menge').val();
                 if(ingredients[ingredient] !== undefined){
-                    ingredients[ingredient] = stringTools.mergeAmount(ingredients[ingredient], menge);
+                    ingredients[ingredient] = stringTools.mergeAmount(ingredients[ingredient], amount);
                 }
                 else{
-                    ingredients[ingredient] = menge;
+                    ingredients[ingredient] = amount;
                 }
 
             });
