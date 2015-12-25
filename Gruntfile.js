@@ -142,38 +142,14 @@ module.exports = function(grunt) {
             }
         },
 
-        // Compiles Sass to CSS and generates necessary files if requested
-        // compass: {
-        //     options: {
-        //         sassDir: '<%= yeoman.app %>/styles',
-        //         cssDir: '.tmp/styles',
-        //         generatedImagesDir: '.tmp/images/generated',
-        //         imagesDir: '<%= yeoman.app %>/img',
-        //         javascriptsDir: '<%= yeoman.app %>/scripts',
-        //         fontsDir: '<%= yeoman.app %>/styles/fonts',
-        //         importPath: '<%= yeoman.app %>/bower_components',
-        //         httpImagesPath: '/img',
-        //         httpGeneratedImagesPath: '/images/generated',
-        //         httpFontsPath: '/styles/fonts',
-        //         relativeAssets: false,
-        //         assetCacheBuster: false
-        //     },
-        //     dist: {
-        //         options: {
-        //             generatedImagesDir: '<%= yeoman.dist %>/images/generated'
-        //         }
-        //     },
-        //     server: {
-        //         options: {
-        //             debugInfo: true
-        //         }
-        //     }
-        // },
         sass : {
             options: {
-                sourceMap: true
+                sourceMap: true,
+                includePaths: [
+                    '<%= yeoman.app %>/bower_components/compass-mixins/lib'
+                ]
             },
-            'style.css': 'style.scss'
+            '.tmp/styles/style.css': '<%= yeoman.app %>/styles/style.scss'
         },
 
         // Add vendor prefixed styles
