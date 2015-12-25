@@ -1,27 +1,27 @@
 /**
  * @license This file is part of anycook. The new internet cookbook
  * Copyright (C) 2014 Jan Graßegger
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see [http://www.gnu.org/licenses/].
- * 
+ *
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
 	'jquery',
 	'drafts',
 	'imageUpload',
-	'jquery.ui.progressbar',
+	'jquery-ui/progressbar',
 	'jquery.inputdecorator'
 ], function($, drafts, imageUpload){
 	'use strict';
@@ -44,8 +44,8 @@ define([
 				this : this
 			};
 			$('#file_upload').change(data, $.proxy(imageUpload.recipe, imageUpload));
-			
-			
+
+
 			$('#upload_button').click(function(event){
 				event.preventDefault();
 				$('#file_upload').trigger('click');
@@ -87,13 +87,13 @@ define([
 				$target.find('#new_recipe_name_error').fadeIn(300);
 				check=false;
 			}
-			
+
 			var $introduction = $target.find('#new_recipe_introduction');
 			if($introduction.val().length === 0){
 				$target.find('#new_recipe_introduction_error').fadeIn(300);
 				check=false;
 			}
-			
+
 			if(check){
 				$.address.parameter('step', '2');
 			}
@@ -128,7 +128,7 @@ define([
 			$recipeImageContainer.children('img').remove();
 			$recipeImageContainer.removeClass('visible').children('#progressbar').hide();
 			$recipeImageContainer.children('.image_upload').show();
-			
+
 			var $img = $('<img/>').addClass('recipe_image').attr('src', location);
 			$recipeImageContainer.append($img);
 			$img.load(function(){

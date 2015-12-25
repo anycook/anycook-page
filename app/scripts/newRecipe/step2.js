@@ -29,7 +29,7 @@ define([
     'tpl!templates/lightboxContent/newIngredientsContent',
     'tpl!templates/lightboxContent/newIngredientsHeadline',
     'jquery.inputdecorator',
-    'jquery.ui.sortable'
+    'jquery-ui/sortable'
 ], function($, _, AnycookAPI, drafts, lightbox, stringTools, ingredientStepTemplate, ingredientLineTemplate, newIngredientsContentTemplate, newIngredientsHeadlineTemplate){
     'use strict';
     return {

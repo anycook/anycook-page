@@ -2,17 +2,22 @@
   "name": "anycook-page",
   "private": true,
   "dependencies": {
-    "jquery": "~1.10.2",
+    "jquery": "~2.1.4",
     "requirejs": "~2.1.10",
-    "jquery.ui": "~1.10.4",
-    "underscore": "~1.5.2",
+    "jquery.ui": "~1.11.4",
+    "underscore": "~1.8.3",
     "jquery-address": "*",
     "jscrollpane": "~2.0.14",
     "requirejs-text": "~2.0.10",
     "jquery.autoellipsis": "~1.0.10",
-    "jquery-autosize": "~1.18.4",
+    "jquery-autosize": "~3.0.14",
     "anycook-api-js": "anycook/anycook-api-js",
-    "requirejs-tpl-jfparadis": "*"
+    "requirejs-tpl-jfparadis": "*",
+    "compass-mixins": "~1.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "underscore": "~1.8.3",
+    "jquery-autosize": "~3.0.14"
+  }
 }

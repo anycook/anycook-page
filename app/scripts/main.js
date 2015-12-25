@@ -40,22 +40,14 @@ require.config({
         'AnycookAPI.upload': '../bower_components/anycook-api-js/src/anycookapi.upload',
         'AnycookAPI.user': '../bower_components/anycook-api-js/src/anycookapi.user',
         'FB' : '//connect.facebook.net/de_DE/all',
-        'jquery' : '../bower_components/jquery/jquery',
+        'jquery' : '../bower_components/jquery/dist/jquery',
         'jquery.address' : '../bower_components/jquery-address/src/jquery.address',
         'jquery.autoellipsis' : '../bower_components/jquery.autoellipsis/src/jquery.autoellipsis',
-        'jquery-autosize' : '../bower_components/jquery-autosize/jquery.autosize',
+        'jquery-autosize' : '../bower_components/jquery-autosize/dist/autosize',
+        'jquery-ui' : '../bower_components/jquery.ui/ui',
         'jquery.inputdecorator' : 'lib/jquery.inputdecorator-0.1.2',
         'jquery.mousewheel' : '../bower_components/jscrollpane/script/jquery.mousewheel',
         'jquery.recipeoverview' : 'lib/jquery.recipeoverview',
-        'jquery.ui.core' : '../bower_components/jquery.ui/ui/jquery.ui.core',
-        'jquery.ui.effect' : '../bower_components/jquery.ui/ui/jquery.ui.effect',
-        'jquery.ui.menu' : '../bower_components/jquery.ui/ui/jquery.ui.menu',
-        'jquery.ui.mouse' : '../bower_components/jquery.ui/ui/jquery.ui.mouse',
-        'jquery.ui.position' : '../bower_components/jquery.ui/ui/jquery.ui.position',
-        'jquery.ui.progressbar' : '../bower_components/jquery.ui/ui/jquery.ui.progressbar',
-        'jquery.ui.sortable' : '../bower_components/jquery.ui/ui/jquery.ui.sortable',
-        'jquery.ui.widget' : '../bower_components/jquery.ui/ui/jquery.ui.widget',
-        'jquery.ui.autocomplete' : '../bower_components/jquery.ui/ui/jquery.ui.autocomplete',
         'jquery.xml' : 'lib/jquery.xml-0.4.1.min',
         'jscrollpane' : '../bower_components/jscrollpane/script/jquery.jscrollpane',
         'plusone' : 'lib/plusone',
@@ -156,42 +148,6 @@ require.config({
             deps : ['jquery'],
             exports : '$'
         },
-        'jquery.ui.core' : {
-            deps : ['jquery'],
-            exports : '$'
-        },
-        'jquery.ui.effect' : {
-            deps : ['jquery'],
-            exports : '$'
-        },
-        'jquery.ui.sortable' : {
-            deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.mouse'],
-            exports : '$'
-        },
-        'jquery.ui.widget' : {
-            deps : ['jquery', 'jquery.ui.core'],
-            exports : '$'
-        },
-        'jquery.ui.menu' : {
-            deps : ['jquery', 'jquery.ui.widget'],
-            exports : '$'
-        },
-        'jquery.ui.mouse' : {
-            deps : ['jquery', 'jquery.ui.widget'],
-            exports : '$'
-        },
-        'jquery.ui.position' : {
-            deps : ['jquery', 'jquery.ui.core'],
-            exports : '$'
-        },
-        'jquery.ui.progressbar' : {
-            deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget'],
-            exports : '$'
-        },
-        'jquery.ui.autocomplete' : {
-            deps : ['jquery', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.menu', 'jquery.ui.position'],
-            exports : '$'
-        },
         'jquery.xml' : {
             deps : ['jquery'],
             exports : '$'
@@ -230,7 +186,7 @@ require([
     'userMenu',
     'userProfile',
     'jquery.address',
-    'jquery.ui.autocomplete',
+    'jquery-ui/autocomplete',
     'jquery.xml',
     'AnycookAPI.autocomplete',
     'AnycookAPI.category',

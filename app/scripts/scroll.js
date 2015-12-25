@@ -20,7 +20,7 @@
 
 define([
 	'jquery',
-	'jquery.ui.effect'
+	'jquery-ui/effect'
 ], function($){
 	'use strict';
 	return {
