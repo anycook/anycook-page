@@ -240,7 +240,7 @@ require([
     //anycookapi
     $.when(AnycookAPI.init({
         baseUrl: 'https://api.anycook.de',
-        imageBase: 'https://s3-eu-west-1.amazonaws.com/images.anycook.de'
+        imageBase: 'https://images.anycook.de'
     })).then(function(){
         filters.loadAllCategories($('#kategorie_filter ul'));
 
