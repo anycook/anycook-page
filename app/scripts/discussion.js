@@ -79,6 +79,7 @@ define([
                     var $ul = $commentDiscussion.children('ul');
 
                     var elements = json.elements;
+                    var $li;
 
                     var onComplete = function(){
                         $li.animate({opacity: 1});
@@ -88,7 +89,6 @@ define([
                     for(var i in elements) {
                         newLastid = Math.max(newLastid, Number(elements[i].id));
                         var parentId = elements[i].parentId;
-                        var $li;
                         if(parentId === -1){
                             if(!elements[i].syntax) {
                                 $li = self.getElement(false, login, elements[i]);
@@ -106,13 +106,13 @@ define([
                         }
                         $li.data('id', elements[i].id);
 
-                        if(lastid>-1){
+                        if(lastid > -1){
                             var height = $li.height();
                             $li.css({'height': 0, 'opacity': 0});
                             $li.animate({'height': height},{complete: onComplete});
                         }
                     }
-                    $('#comment_discussion > ul > li.comment:odd').addClass('odd');
+                    $('#comment_discussion').find('ul > li.comment:odd').addClass('odd');
                     self.centercommenteventlikes();
                     $commentDiscussion.data('discussion', discussion);
                 }
