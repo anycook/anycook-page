@@ -2,8 +2,10 @@
     "name": "anycook-page",
     "version": "0.0.0",
     "devDependencies": {
+        "bower": "^1.7.9",
         "grunt": "~1.0.1",
         "grunt-autoprefixer": "~3.0.3",
+        "grunt-cli": "^1.2.0",
         "grunt-concurrent": "~2.3.1",
         "grunt-contrib-clean": "~1.0.0",
         "grunt-contrib-concat": "~1.0.1",
@@ -28,5 +30,10 @@
     },
     "engines": {
         "node": ">=0.10.0"
+    },
+    "scripts": {
+        "bower_install": "bower install",
+        "bower_update": "bower update",
+        "grunt": "grunt"
     }
 }
