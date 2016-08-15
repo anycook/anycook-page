@@ -8,18 +8,12 @@ Webclient for [anycook-api](https://github.com/anycook/anycook-api).
 
 ## Dependencies
 - [node.js](http://nodejs.org)
-- [compass](http://compass-style.org)
-- [yeoman](http://yeoman.io)
 
 ### Installation (on Mac OSX)
-1. Install [brew](http://brew.sh)
-	```ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"```
-2. Install node.js
+1. Install node.js
 	```brew install node```
-3. Install compass
-	```sudo gem install compass```
-4. Install yeoman & grunt-cli
-	```npm install -g yeoman grunt-cli```
+2. Install bower & grunt-cli
+	```npm install -g bower grunt-cli```
 
 ## Test environment
 You can test the whole anycook platform localy. To also test the API locally you need to checkout and run [anycook-api](https://github.com/anycook/anycook-api). The instructions can be found [here](https://github.com/anycook/anycook-api#test-environment).
