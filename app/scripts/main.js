@@ -136,10 +136,6 @@ require.config({
             deps: ['jquery'],
             exports: '$'
         },
-        'jquery-autosize': {
-            deps: ['jquery'],
-            exports: '$'
-        },
         'jquery.inputdecorator': {
             deps: ['jquery'],
             exports: '$'

@@ -25,7 +25,7 @@ define([
     'date',
     'tpl!templates/dialogBox',
     'jquery-autosize'
-], function($, _, AnycookAPI, User, date, dialogBoxTemplate) {
+], function($, _, AnycookAPI, User, date, dialogBoxTemplate, autosize) {
     'use strict';
     return {
         show: function(sessionid, startid) {
@@ -45,7 +45,7 @@ define([
                         .submit($.proxy(self.submitAnswer, self));
                     $messageAnswer.find('.messageimageborder')
                         .append('<img src=\'' + user.getImage() + '\'/>');
-                    $messageAnswer.find('textarea').autosize();
+                    autosize($messageAnswer.find('textarea'));
 
                     var recipients = json.recipients;
                     var $recipientSpan = $('h1 span').last();
