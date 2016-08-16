@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "jquery": "^3.1.0",
-    "requirejs": "~2.1.10",
+    "requirejs": "^2.2.0",
     "jquery.ui": "~1.11.4",
     "underscore": "~1.8.3",
     "jquery-address": "*",
@@ -13,7 +13,9 @@
     "jquery-autosize": "~3.0.14",
     "anycook-api-js": "anycook/anycook-api-js",
     "requirejs-tpl-jfparadis": "*",
-    "compass-mixins": "~1.0.2"
+    "compass-mixins": "~1.0.2",
+    "autosize": "jquery-autosize#^3.0.17",
+    "text": "requirejs-text#^2.0.15"
   },
   "devDependencies": {},
   "resolutions": {
