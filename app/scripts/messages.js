@@ -18,157 +18,166 @@
  * @author Jan Graßegger <jan@anycook.de>
  */
 define([
-	'jquery',
-	'underscore',
-	'AnycookAPI',
-	'classes/User',
-	'date',
-	'tpl!templates/dialogBox',
-	'jquery-autosize'
-], function($, _, AnycookAPI, User, date, dialogBoxTemplate){
-	'use strict';
-	return {
-		show : function(sessionid, startid){
-			if(startid === undefined){
-				startid = -1;
-			}
+    'jquery',
+    'underscore',
+    'AnycookAPI',
+    'classes/User',
+    'date',
+    'tpl!templates/dialogBox',
+    'jquery-autosize'
+], function($, _, AnycookAPI, User, date, dialogBoxTemplate) {
+    'use strict';
+    return {
+        show: function(sessionid, startid) {
+            if (startid === undefined) {
+                startid = -1;
+            }
 
-			var self = this;
+            var self = this;
 
-			AnycookAPI.message.session(sessionid, startid, function(json){
-				var messages = json.messages;
+            AnycookAPI.message.session(sessionid, startid, function(json) {
+                var messages = json.messages;
 
-				if(startid === -1){
-					var user = User.get();
+                if (startid === -1) {
+                    var user = User.get();
 
-					var $messageAnswer = $('#message_answer').submit($.proxy(self.submitAnswer, self));
-					$messageAnswer.find('.messageimageborder').append('<img src=\''+user.getImage()+'\'/>');
-					$messageAnswer.find('textarea').autosize();
-					var recipients = json.recipients;
-					var $recipientSpan = $('h1 span').last();
-					for(var i = 0; i<recipients.length; i++){
-						var recipient = recipients[i];
+                    var $messageAnswer = $('#message_answer')
+                        .submit($.proxy(self.submitAnswer, self));
+                    $messageAnswer.find('.messageimageborder')
+                        .append('<img src=\'' + user.getImage() + '\'/>');
+                    $messageAnswer.find('textarea').autosize();
 
-						if(recipient.id === user.id){
-							continue;
-						}
+                    var recipients = json.recipients;
+                    var $recipientSpan = $('h1 span').last();
+                    for (var i = 0; i < recipients.length; i++) {
+                        var recipient = recipients[i];
 
-						if($recipientSpan.children('a').length === recipients.length -2 &&
-							$recipientSpan.children('a').length !== 0) {
-							$recipientSpan.append('<span> und </span>');
-						}
-						else if($recipientSpan.children().length > 0){
-							$recipientSpan.append('<span>, </span>');
-						}
+                        if (recipient.id === user.id) {
+                            continue;
+                        }
 
-						var $a = $('<a></a>').attr('href', User.getProfileURI(recipient.id))
-							.text(recipient.name);
+                        if ($recipientSpan.children('a').length
+                            === recipients.length - 2 &&
+                            $recipientSpan.children('a').length !== 0) {
+                            $recipientSpan.append('<span> und </span>');
+                        }
+                        else if ($recipientSpan.children().length > 0) {
+                            $recipientSpan.append('<span>, </span>');
+                        }
 
-						$recipientSpan.append($a);
+                        var $a = $('<a></a>').attr('href',
+                            User.getProfileURI(recipient.id))
+                            .text(recipient.name);
 
-					}
-					$('#messagestream').jScrollPane();
-				}
+                        $recipientSpan.append($a);
 
-				// gettingMessages[sessionid] = false;
-				var path = $.address.pathNames();
-				var $lastli;
-				var lastid = startid;
-				if(path[0] === 'messagesession' && path[1] === sessionid){
-					//if(json === undefined) return;
-					var $messagestream = $('#messagestream');
-					var oldDataMap = $messagestream.data('messages') || {};
-					var datamap = {};
+                    }
+                    $('#messagestream').jScrollPane();
+                }
 
-					var $jspPane = $messagestream.find('.jspPane');
-					for(var j in messages){
-						lastid = messages[j].id;
-						var oldData = oldDataMap[lastid];
-						if(oldData){
-							continue;
-						}
-						$lastli = self.getContainerforSession(messages[j]);
-						$jspPane.append($lastli);
-						datamap[lastid] = messages[j];
+                var path = $.address.pathNames();
+                var $lastli;
+                var lastid = startid;
+                if (path[0] === 'messagesession' && path[1] === sessionid) {
+                    var $messagestream = $('#messagestream');
+                    var oldDataMap = $messagestream.data('messages') || {};
+                    var datamap = {};
 
+                    var $jspPane = $messagestream.find('.jspPane');
+                    for (var j in messages) {
+                        lastid = messages[j].id;
+                        var oldData = oldDataMap[lastid];
+                        if (oldData) {
+                            continue;
+                        }
+                        $lastli = self.getContainerforSession(messages[j]);
+                        $jspPane.append($lastli);
+                        datamap[lastid] = messages[j];
 
-						if(messages[j].unread){
-							AnycookAPI.message.read(sessionid, messages[j].id);
-						}
+                        if (messages[j].unread) {
+                            AnycookAPI.message.read(sessionid, messages[j].id);
+                        }
 
-						$.extend(oldDataMap, datamap);
-						$messagestream.data('messages', oldDataMap);
-					}
-					if(messages!== null && messages.length > 0){
+                        $.extend(oldDataMap, datamap);
+                        $messagestream.data('messages', oldDataMap);
+                    }
+                    if (messages !== null && messages.length > 0) {
+                        $messagestream.jScrollPane();
 
-						$messagestream.jScrollPane();
+                        var jspPaneHeight = $jspPane.outerHeight();
+                        var messageHeight = $messagestream.innerHeight();
+                        var oldtop = $jspPane.position().top;
+                        var newtop = messageHeight - jspPaneHeight;
 
-						var jspPaneHeight = $jspPane.outerHeight();
-						var messageHeight =  $messagestream.innerHeight();
-						var oldtop = $jspPane.position().top;
-						var newtop = messageHeight-jspPaneHeight;
+                        if (startid === -1) {
+                            if (newtop < 0) {
+                                $jspPane.css({top: newtop});
+                            }
+                        } else {
+                            var $messageContainer = $lastli.children(
+                                '.messagecontainer').addClass('new');
+                            if (newtop < 0) {
+                                $jspPane.css({top: oldtop}).animate(
+                                    {top: newtop}, {
+                                        duration: 'slow',
+                                        complete: function() {
+                                            $messageContainer
+                                                .removeClass('new');
+                                        }
+                                    });
+                            } else {
+                                $messageContainer.hide().fadeIn(1000).animate({
+                                        backgroundColor: '#E6E2D7',
+                                        borderColor: '#C2C0BE'
+                                    },
+                                    {
+                                        duration: 2000,
+                                        complete: function() {
+                                            $messageContainer
+                                                .removeClass('new');
+                                        }
+                                    });
+                            }
+                        }
 
-						// var lasttop = $lastli.position().top;
-						// var lastheight = $lastli.outerHeight(true);
-						// var oldtop = $messagestream.innerHeight() -(lasttop);
-						// var newtop = $messagestream.innerHeight() -(lasttop+lastheight);
+                        $messagestream.jScrollPane();
 
-						if(startid === -1){
-							if(newtop < 0) { $jspPane.css({top:newtop}); }
-						}else{
-							var $messageContainer = $lastli.children('.messagecontainer').addClass('new');
-							if(newtop < 0) {
-								$jspPane.css({top:oldtop}).animate({top:newtop}, {
-									duration:'slow',
-									complete:function(){
-										$messageContainer.removeClass('new');
-									}
-								});
-							}else{
-								$messageContainer.hide().fadeIn(1000).animate({backgroundColor:'#E6E2D7', borderColor:'#C2C0BE'},
-									{duration:2000, complete:function(){
-										$messageContainer.removeClass('new');
-									}});
-							}
-						}
+                    }
+                    self.show(sessionid, lastid);
+                }
+            });
+        },
+        submitAnswer: function(event) {
+            event.preventDefault();
+            var $textarea = $(event.target).find('textarea');
+            var message = $textarea.val();
+            var sessionid = $.address.pathNames()[1];
 
-						$messagestream.jScrollPane();
+            if (message.length === 0) {
+                return;
+            }
 
-					}
-					self.show(sessionid, lastid);
-				}
-			});
-		},
-		submitAnswer : function(event){
-			event.preventDefault();
-			var $textarea = $(event.target).find('textarea');
-			var message = $textarea.val();
-			var sessionid = $.address.pathNames()[1];
+            AnycookAPI.message.answer(sessionid, message);
 
-			if(message.length === 0) { return; }
+            $textarea.val('');
+        },
+        getContainerforSession: function(message) {
+            var sender = message.sender;
+            var user = User.get();
 
-			AnycookAPI.message.answer(sessionid, message);
+            var data = {
+                imagePath: sender.image.small,
+                senderPath: User.getProfileURI(sender.id),
+                sender: sender.name,
+                text: message.text.replace(/\n/g, '<br/>'),
+                date: date.getDateTimeString(message.datetime),
+                self: sender.id === user.id
+            };
 
-			//console.log(encodeURIComponent(message));
-			$textarea.val('');
-		},
-		getContainerforSession : function(message){
-			var sender = message.sender;
-			var user = User.get();
+            return $(dialogBoxTemplate(data));
 
-			var data = {
-				imagePath : sender.image.small,
-				senderPath : User.getProfileURI(sender.id),
-				sender : sender.name,
-				text : message.text.replace(/\n/g,'<br/>'),
-				date : date.getDateTimeString(message.datetime),
-				self : sender.id === user.id
-			};
-
-			return $(dialogBoxTemplate(data));
-
-		}
-	};
+        }
+    };
 });
 
 
