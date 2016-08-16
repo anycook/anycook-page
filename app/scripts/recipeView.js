@@ -92,16 +92,14 @@ define([
 
             AnycookAPI.recipe.ingredients(recipeName, versionid,
                 function(ingredients) {
-                    if (decodeURIComponent($.address.pathNames()[1])
-                        !== recipeName) {
+                    if (decodeURIComponent($.address.pathNames()[1]) !== recipeName) {
                         return;
                     }
                     self.loadIngredients(ingredients);
                 });
 
             AnycookAPI.recipe.tags(recipeName, function(tags) {
-                if (decodeURIComponent($.address.pathNames()[1])
-                    !== recipeName) {
+                if (decodeURIComponent($.address.pathNames()[1]) !== recipeName) {
                     return;
                 }
                 self.loadTags(tags);
@@ -192,8 +190,8 @@ define([
                 var zutat = ingredients[i].name;
                 var amount = ingredients[i].amount;
                 var singular = ingredients[i].singular;
-                if (singular !== undefined && singular !== null
-                    && stringTools.getValuefromString(amount) === 1) {
+                if (singular !== undefined && singular !== null &&
+                    stringTools.getValuefromString(amount) === 1) {
                     zutat = singular;
                 }
 
@@ -281,9 +279,9 @@ define([
             });
         },
         getAddTagsLightbox: function() {
-            var content = '<div id="recipe_tagsbox" class="tagsbox"></div'
-                          + '><p>Die bekanntesten Tags:</p>'
-                          + '<div id="recipe_tagcloud" class="tagcloud"></div>';
+            var content = '<div id="recipe_tagsbox" class="tagsbox"></div>' +
+                          '<p>Die bekanntesten Tags:</p>' +
+                          '<div id="recipe_tagcloud" class="tagcloud"></div>';
 
             var $lightbox = lightbox.get('Tags hinzufügen:',
                 'Hilf den anderen beim finden, in dem du neue Tags vorschlägst.',
@@ -310,9 +308,8 @@ define([
             var $share = $('#share').unbind('click').addClass('on');
             $share.children('.img').hide();
 
-            var twitterTarget = 'https://twitter.com/share?url='
-                                + encodeURIComponent(
-                                'http://anycook.de/' + recipeURI);
+            var twitterTarget = 'https://twitter.com/share?url=' +
+                                encodeURIComponent('http://anycook.de/' + recipeURI);
             var template = shareTemplate({
                 url: recipeURI,
                 twitterTarget: twitterTarget
@@ -368,8 +365,7 @@ define([
             });
         },
         getAuthorLink: function(author) {
-            return '<a href="' + User.getProfileURI(author.id) + '">'
-                   + author.name + '</a>';
+            return '<a href="' + User.getProfileURI(author.id) + '">' + author.name + '</a>';
         }
     };
 });

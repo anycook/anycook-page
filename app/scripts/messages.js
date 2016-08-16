@@ -56,8 +56,7 @@ define([
                             continue;
                         }
 
-                        if ($recipientSpan.children('a').length
-                            === recipients.length - 2 &&
+                        if ($recipientSpan.children('a').length === recipients.length - 2 &&
                             $recipientSpan.children('a').length !== 0) {
                             $recipientSpan.append('<span> und </span>');
                         }

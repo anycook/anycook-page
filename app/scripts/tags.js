@@ -88,8 +88,7 @@ define([
             if (!event.data) {
                 event.data = {};
             }
-            if (!event.data || !event.data.add || typeof event.data.add
-                                                  !== 'function') {
+            if (!event.data || !event.data.add || typeof event.data.add !== 'function') {
                 console.error('no add function defined');
                 $.extend(event.data, {
                     add: function(text) {

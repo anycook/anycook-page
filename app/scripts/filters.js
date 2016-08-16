@@ -116,19 +116,19 @@ define([
         loadAllCategories: function($target) {
             if ($target.children().size === 0) {
                 if ($target.parents('.step_1_right').length === 0) {
-                    $target
-                        .append('<li><span class="left">alle Kategorien</span>'
-                                + '<span class="right"></span></li>');
+                    $target.append('<li><span class="left">alle Kategorien</span>' +
+                                   '<span class="right"></span></li>');
                 }
 
                 AnycookAPI.category.sorted(function(json) {
                     var totalrecipes = 0;
                     for (var k in json) {
                         var category = json[k];
-                        $target.append('<li><span class="left">' + category.name
-                                       + '</span><span class="right">'
-                                       + category.recipeNumber
-                                       + '</span></li>');
+                        $target.append('<li><span class="left">' +
+                                       category.name +
+                                       '</span><span class="right">' +
+                                       category.recipeNumber +
+                                       '</span></li>');
                         totalrecipes += category.recipeNumber;
                     }
                     $($target.find('.right')[0]).text(totalrecipes);
@@ -476,8 +476,8 @@ define([
 
             var $personsForm = $('<div></div>')
                 .addClass('numberinput persons')
-                .append('<input type=\'text\'></input>'
-                        + '<div class=\'up\'></div><div class=\'down\'></div>');
+                .append('<input type=\'text\'></input>' +
+                        '<div class=\'up\'></div><div class=\'down\'></div>');
             var $input = $personsForm.children('input').first().attr({
                 id: 'persons_num',
                 value: personNum,
@@ -485,8 +485,7 @@ define([
                 maxlength: 2
             }).data('persons', personNum);
 
-            var person = '<span>' + personNum === 1 ? 'Person:' : 'Personen:'
-                                                                  + '</span>';
+            var person = '<span>' + personNum === 1 ? 'Person:' : 'Personen:' + '</span>';
             $zutatHead.append($personsForm).append(person);
 
             var persCount = null;
@@ -503,9 +502,9 @@ define([
                 } else if (e.which === 40) {//down
                     self.personsDown();
                     return false;
-                } else if (!(event.which >= 48 && event.which <= 57)
-                           && !(event.which >= 96 && event.which <= 105)
-                           && event.which !== 8 && event.which !== 46) {
+                } else if (!(event.which >= 48 && event.which <= 57) &&
+                           !(event.which >= 96 && event.which <= 105) &&
+                           event.which !== 8 && event.which !== 46) {
                     return false;
                 }
 
@@ -546,8 +545,7 @@ define([
                     if (recipe) {
                         var zutat = recipe.ingredients[i];
                         if (zutat.singular) {
-                            if (stringTools.getValuefromString(newValue)
-                                === 1) {
+                            if (stringTools.getValuefromString(newValue) === 1) {
                                 $(this).prev().text(zutat.singular);
                             } else {
                                 $(this).prev().text(zutat.name);
