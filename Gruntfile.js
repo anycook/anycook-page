@@ -117,6 +117,14 @@ module.exports = function(grunt) {
             ]
         },
 
+        bower: {
+            install: {
+                options: {
+                    copy: false
+                }
+            }
+        },
+
         sass : {
             options: {
                 sourceMap: true,
@@ -360,6 +368,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'bower',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
