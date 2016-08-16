@@ -30,123 +30,95 @@ define([
     'stringTools',
     'tags',
     'tpl!templates/share'
-], function($, _, AnycookAPI, gapi, Recipe, User, filters, lightbox, loginMenu, stringTools, tags, shareTemplate){
+], function($, _, AnycookAPI, gapi, Recipe, User, filters, lightbox, loginMenu,
+            stringTools, tags, shareTemplate) {
     'use strict';
     return {
-        profileRecipe : function(recipe){
-            var uri = '#!/recipe/'+encodeURIComponent(recipe);
+        profileRecipe: function(recipe) {
+            var uri = '#!/recipe/' + encodeURIComponent(recipe);
 
             var $img = $('<img/>').attr('src', AnycookAPI.recipe.image(recipe));
-            var $div =$('<div></div>').append('<span>'+recipe+'</span>');
+            var $div = $('<div></div>').append('<span>' + recipe + '</span>');
 
-            var $link = $('<a></a>').addClass('profile_rezept_bild').attr('href', uri)
+            var $link = $('<a></a>').addClass('profile_rezept_bild')
+                .attr('href', uri)
                 .append($img)
                 .append($div);
             return $link;
         },
-        load : function(recipeName, versionid) {
+        load: function(recipeName, versionid) {
             var self = this;
             filters.reset();
             recipeName = decodeURIComponent(recipeName);
 
-            var rezepturi = '#/recipe/'+recipeName;
+            var rezepturi = '#/recipe/' + recipeName;
             $('#subnav #recipe_btn').attr('href', rezepturi);
-            $('#subnav #discussion_btn').attr('href', rezepturi + '?page=discussion');
+            $('#subnav #discussion_btn').attr('href',
+                rezepturi + '?page=discussion');
 
-            AnycookAPI.recipe(recipeName, versionid, function(recipe){
+            AnycookAPI.recipe(recipeName, versionid, function(recipe) {
                 $.address.title(recipe.name + ' | anycook');
                 $('#recipe_headline').append(recipe.name);
                 $('#introduction').append(recipe.description);
                 filters.setFromRecipe(recipe);
                 $('.recipe_image').attr('src', recipe.image.big);
-                if(!recipe.tasty) { $('#schmecktmir').click($.proxy(self.schmecktmir, self)); }
+                if (!recipe.tasty) {
+                    $('#schmecktmir').click($.proxy(self.schmecktmir, self));
+                }
                 else {
-                    $('#schmecktmir').addClass('on');
-                    $('#schmecktmir').click($.proxy(self.schmecktmirnicht, self));
+                    var $tastes = $('#schmecktmir');
+                    $tastes.addClass('on');
+                    $tastes.click($.proxy(self.schmecktmirnicht, self));
                 }
             });
 
-            AnycookAPI.recipe.authors(recipeName, function(authors){
+            AnycookAPI.recipe.authors(recipeName, function(authors) {
                 var authorsHtml = '';
-                for(var i = 0; i < authors.length; i++){
+                for (var i = 0; i < authors.length; i++) {
                     var author = authors[i];
                     var authorLink = self.getAuthorLink(author);
-                    if(i+1 === authors.length) { authorsHtml += authorLink; }
-                    else if (i+2 === authors.length) { authorsHtml += authorLink+' und '; }
-                    else { authorsHtml += authorLink+', '; }
+                    if (i + 1 === authors.length) {
+                        authorsHtml += authorLink;
+                    }
+                    else if (i + 2 === authors.length) {
+                        authorsHtml += authorLink + ' und ';
+                    }
+                    else {
+                        authorsHtml += authorLink + ', ';
+                    }
                 }
                 $('#autoren').append(authorsHtml);
             });
 
+            AnycookAPI.recipe.ingredients(recipeName, versionid,
+                function(ingredients) {
+                    if (decodeURIComponent($.address.pathNames()[1])
+                        !== recipeName) {
+                        return;
+                    }
+                    self.loadIngredients(ingredients);
+                });
 
-
-            AnycookAPI.recipe.ingredients(recipeName, versionid, function(ingredients){
-                if(decodeURIComponent($.address.pathNames()[1]) !== recipeName){
-                    return;
-                }
-                self.loadIngredients(ingredients);
-            });
-
-            AnycookAPI.recipe.tags(recipeName, function(tags){
-                if(decodeURIComponent($.address.pathNames()[1]) !== recipeName){
+            AnycookAPI.recipe.tags(recipeName, function(tags) {
+                if (decodeURIComponent($.address.pathNames()[1])
+                    !== recipeName) {
                     return;
                 }
                 self.loadTags(tags);
             });
 
-            AnycookAPI.recipe.steps(recipeName, versionid, $.proxy(this.loadSteps, this));
-
-            //recipe_image
-
-
-            // var steps = recipe.steps;
-            // loadSteps(steps);
-            // loadFilter(recipe);
-            //$('#search').attr('value', recipe.name);
+            AnycookAPI.recipe.steps(recipeName, versionid,
+                $.proxy(this.loadSteps, this));
 
             //schmeckt-button
             var user = User.get();
 
-            if(user.checkLogin()) {
-                /*AnycookAPI.recipe.schmeckt(recipeName, function(schmeckt){
-                    if(!schmeckt) {
-                        $('#schmecktmir').click($.proxy(self.schmecktmir, self));
-                    } else {
-                        $('#schmecktmir').addClass('on');
-                        $('#schmecktmir').click($.proxy(self.schmecktmirnicht, self));
-                    }
-                });*/
+            if (user.checkLogin()) {
                 $('#tags').click($.proxy(this.showAddTags, this));
             } else {
                 $('#schmecktmir').click($.proxy(loginMenu.toggle, loginMenu));
                 $('#tags').click($.proxy(loginMenu.toggle, loginMenu));
             }
-
-
-
-            // if($.address.pathNames().length == 3 && user.level > 0){
-            // addEditingHandler();
-            // }
-
-            //Autoren
-            // var num_autoren = recipe.authors.length;
-            // var $autoren = $('#autoren span');
-        //
-            // for(var i in recipe.authors) {
-                // var author = recipe.authors[i];
-                // $autoren.append('<a href='#!/profile/' + author.id + ''>' + author.name + '</a>');
-                // if(i <= num_autoren - 3)
-                    // $autoren.append(', ');
-                // if(i == num_autoren - 2)
-                    // $autoren.append(' und ');
-            // }
-
-            //bezeichner
-            //$('#zubereitung').addClass('on');
-            //$('#zubereitung').attr('href', '#!/recipe/'+encodeURI(recipe.name));
-            //$('#addtags').attr('href', '#!/recipe/'+encodeURI(recipe.name)+'?page=addtags');
-            //$('#zubereitung').click(showZubereitung);
-            //$('#addtags').click(showaddTags);
 
             //icons
             $('#share').click($.proxy(this.showShare, this));
@@ -157,9 +129,9 @@ define([
             //addtagsbox
             // makeAddTags();
         },
-        loadSteps : function(steps) {
+        loadSteps: function(steps) {
             var $stepContainer = $('#step_container').empty();
-            for(var j = 0; j < steps.length; j++) {
+            for (var j = 0; j < steps.length; j++) {
                 var $step = this.getIngredientStep(steps[j]);
                 $stepContainer.append($step);
                 var stepheight = $step.children('.step').innerHeight();
@@ -169,104 +141,110 @@ define([
             }
             return true;
         },
-        getIngredientStep : function(step) {
+        getIngredientStep: function(step) {
             //step-part
             var $left = $('<div></div>').addClass('left');
             var $number = $('<div></div>').addClass('number').text(step.id);
-            var $numberContainer = $('<div></div>').addClass('number_container').append($number);
+            var $numberContainer = $('<div></div>').addClass(
+                'number_container').append($number);
 
             var $text = $('<div></div>').addClass('text').text(step.text);
-            var $mid = $('<div></div>').addClass('mid').append($numberContainer).append($text);
+            var $mid = $('<div></div>').addClass('mid').append(
+                $numberContainer).append($text);
 
             var $right = $('<div></div>').addClass('right');
-            var $step = $('<div></div>').addClass('step').append($left).append($mid).append($right);
+            var $step = $('<div></div>').addClass('step').append($left).append(
+                $mid).append($right);
 
-            var $ingredientStep = $('<li></li>').addClass('ingredient_step').append($step);
+            var $ingredientStep = $('<li></li>').addClass(
+                'ingredient_step').append($step);
             var ingredients = step.ingredients;
-
-            //TODO testdaten
-            // ingredients['Tomaten'] = '300g';
-            // ingredients['Mehl'] = '500g';
-            // ingredients['Knoblauch'] = '2 Zehen';
-            // ingredients['Salz'] = '';
 
             var text = '';
             if (ingredients.length > 0) {
 
                 var $ingredients = $('<div></div>').addClass('ingredients');
-                for(var i = 0; i < ingredients.length; i++) {
+                for (var i = 0; i < ingredients.length; i++) {
                     var ingredient = ingredients[i];
-                    if(ingredient.name.length === 0){
+                    if (ingredient.name.length === 0) {
                         continue;
                     }
 
-                    var $amount = $('<span class="amount"></span>').text(ingredient.amount);
-                    var $name = $('<span class="name"></span>').text(ingredient.name);
+                    var $amount = $('<span class="amount"></span>').text(
+                        ingredient.amount);
+                    var $name = $('<span class="name"></span>').text(
+                        ingredient.name);
                     $ingredients.append($amount).append(' ').append($name);
-                    if (i < ingredients.length - 1) {$ingredients.append(', ');}
+                    if (i < ingredients.length - 1) {
+                        $ingredients.append(', ');
+                    }
                 }
                 text = text.substring(0, text.length - 2);
-
 
                 $ingredientStep.append($ingredients);
             }
 
-            //all
             return $ingredientStep;
         },
-        loadIngredients : function(ingredients){
+        loadIngredients: function(ingredients) {
             var $ingredientList = $('#ingredient_list').empty();
-            for(var i in ingredients){
+            for (var i in ingredients) {
                 var zutat = ingredients[i].name;
                 var amount = ingredients[i].amount;
                 var singular = ingredients[i].singular;
-                if(singular !== undefined && singular !== null && stringTools.getValuefromString(amount) === 1){
+                if (singular !== undefined && singular !== null
+                    && stringTools.getValuefromString(amount) === 1) {
                     zutat = singular;
                 }
 
-                var $li = $('<li></li>').append('<div></div>').append('<div></div>');
+                var $li = $('<li></li>').append('<div></div>').append(
+                    '<div></div>');
                 $li.children().first().addClass('ingredient').text(zutat);
                 $li.children().last().addClass('amount').text(amount);
                 $ingredientList.append($li);
             }
 
-            if($ingredientList.children().length <6){
+            if ($ingredientList.children().length < 6) {
                 var length = $ingredientList.children().length;
-                for(var j = 0; j<= 6-length; j++){
+                for (var j = 0; j <= 6 - length; j++) {
                     $ingredientList.append('<li></li>');
                 }
             }
         },
-        loadTags : function(tagsList){
+        loadTags: function(tagsList) {
             var $tagsList = $('.tags_list').empty();
 
-            if(!tagsList){ return; }
+            if (!tagsList) {
+                return;
+            }
 
-            for(var i = 0; i < tagsList.length; i++){
+            for (var i = 0; i < tagsList.length; i++) {
                 $tagsList.append(tags.get(tagsList[i].name, 'link'));
             }
         },
-        showAddTags : function() {
+        showAddTags: function() {
             var self = this;
             var $lightbox = this.getAddTagsLightbox();
-            tags.makeCloud('#recipe_tagcloud', function(event){
+            tags.makeCloud('#recipe_tagcloud', function(event) {
                 var $clickedTag = $(event.target).parents('.tag');
                 var tag = $clickedTag.find('.tag_text').text();
                 self.addTag(tag);
 
                 $clickedTag.animate({
-                    opacity:0
+                    opacity: 0
                 }, {
-                    duration:150,
-                    complete:function(){
+                    duration: 150,
+                    complete: function() {
                         $(this).animate({
-                            width:0,
+                            width: 0,
                             margin: 0,
-                            padding:0
+                            padding: 0
                         }, {
-                            duration:300,
+                            duration: 300,
                             easing: 'swing',
-                            complete : function(){ $(this).remove(); }
+                            complete: function() {
+                                $(this).remove();
+                            }
                         });
                     }
                 });
@@ -276,43 +254,50 @@ define([
             lightbox.show($lightbox, top);
 
             $lightbox.find('.tagsbox').click({
-                add : $.proxy(this.addTag, this),
-                remove : $.proxy(this.removeTag, this)
+                add: $.proxy(this.addTag, this),
+                remove: $.proxy(this.removeTag, this)
             }, $.proxy(tags.makeInput, tags))
-                .on('click', '.tag_remove', function(){
+                .on('click', '.tag_remove', function() {
                     var tag = $(this).prev().text();
                     self.removeTag(tag);
                     return false;
                 });
 
-            $lightbox.find('form').submit($.proxy(self.submitSuggestTags, self));
+            $lightbox.find('form').submit(
+                $.proxy(self.submitSuggestTags, self));
 
             return false;
         },
-        addTag : function(tag){
+        addTag: function(tag) {
             var $tag = tags.get(tag, 'remove');
             $('#recipe_tagsbox input').remove();
             $('#recipe_tagsbox').append($tag);
         },
-        removeTag : function(tag){
-            $('#recipe_tagsbox .tag_text').each(function(){
-                if($(this).text() === tag) { $(this).parents('.tag').remove(); }
+        removeTag: function(tag) {
+            $('#recipe_tagsbox .tag_text').each(function() {
+                if ($(this).text() === tag) {
+                    $(this).parents('.tag').remove();
+                }
             });
         },
-        getAddTagsLightbox : function() {
-            var content = '<div id="recipe_tagsbox" class="tagsbox"></div><p>Die bekanntesten Tags:</p><div id="recipe_tagcloud" class="tagcloud"></div>';
+        getAddTagsLightbox: function() {
+            var content = '<div id="recipe_tagsbox" class="tagsbox"></div'
+                          + '><p>Die bekanntesten Tags:</p>'
+                          + '<div id="recipe_tagcloud" class="tagcloud"></div>';
 
-            var $lightbox = lightbox.get('Tags hinzufügen:', 'Hilf den anderen beim finden, in dem du neue Tags vorschlägst.', content, 'einreichen');
+            var $lightbox = lightbox.get('Tags hinzufügen:',
+                'Hilf den anderen beim finden, in dem du neue Tags vorschlägst.',
+                content, 'einreichen');
             $('#main').append($lightbox);
 
             return $lightbox;
         },
-        submitSuggestTags : function(event){
+        submitSuggestTags: function(event) {
             event.preventDefault();
             var pathNames = $.address.pathNames();
             var tags = [];
             var recipe = pathNames[1];
-            $('.tagsbox .tag_text').each(function(){
+            $('.tagsbox .tag_text').each(function() {
                 tags.push($(this).text());
             });
 
@@ -320,15 +305,17 @@ define([
             lightbox.hide();
             $('.tagsbox').empty();
         },
-        showShare : function() {
+        showShare: function() {
             var recipeURI = Recipe.getURI($.address.pathNames()[1]);
             var $share = $('#share').unbind('click').addClass('on');
             $share.children('.img').hide();
 
-            var twitterTarget = 'https://twitter.com/share?url=' + encodeURIComponent('http://anycook.de/' + recipeURI);
+            var twitterTarget = 'https://twitter.com/share?url='
+                                + encodeURIComponent(
+                                'http://anycook.de/' + recipeURI);
             var template = shareTemplate({
-                url : recipeURI,
-                twitterTarget : twitterTarget
+                url: recipeURI,
+                twitterTarget: twitterTarget
             });
             var $left = $share.children('.left').html(template);
 
@@ -336,7 +323,7 @@ define([
                 event.preventDefault();
                 window.open(twitterTarget, 'child', 'height=420,width=550');
             });
-            require(['FB'], function(FB){
+            require(['FB'], function(FB) {
                 FB.XFBML.parse(document.getElementById('share'));
             });
 
@@ -344,7 +331,7 @@ define([
 
             var self = this;
             $('body').click(function(event) {
-                if($(event.target).parents().addBack().is('#share')){
+                if ($(event.target).parents().addBack().is('#share')) {
                     return;
                 }
 
@@ -356,30 +343,33 @@ define([
                 $share.click($.proxy(self.showShare, self));
             });
         },
-        schmecktmir : function(){
+        schmecktmir: function() {
             var self = this;
             var gericht = $.address.pathNames()[1];
             $('#schmecktmir').unbind('click');
-            AnycookAPI.recipe.makeSchmeckt(gericht, function(response){
-                if(response !== 'false'){
+            AnycookAPI.recipe.makeSchmeckt(gericht, function(response) {
+                if (response !== 'false') {
                     $('#schmecktmir').addClass('on');
-                    $('#schmecktmir').click($.proxy(self.schmecktmirnicht, self));
+                    $('#schmecktmir').click(
+                        $.proxy(self.schmecktmirnicht, self));
                 }
             });
         },
-        schmecktmirnicht : function(){
+        schmecktmirnicht: function() {
             var self = this;
             var gericht = $.address.pathNames()[1];
             $('#schmecktmir').unbind('click');
-            AnycookAPI.recipe.unmakeSchmeckt(gericht,function(response){
-                if(response !== 'false'){
-                    $('#schmecktmir').removeClass('on');
-                    $('#schmecktmir').click($.proxy(self.schmecktmir, self));
+            AnycookAPI.recipe.unmakeSchmeckt(gericht, function(response) {
+                if (response !== 'false') {
+                    var $tastes = $('#schmecktmir');
+                    $tastes.removeClass('on');
+                    $tastes.click($.proxy(self.schmecktmir, self));
                 }
             });
         },
-        getAuthorLink : function(author){
-            return '<a href="'+User.getProfileURI(author.id)+'">'+author.name+'</a>';
+        getAuthorLink: function(author) {
+            return '<a href="' + User.getProfileURI(author.id) + '">'
+                   + author.name + '</a>';
         }
     };
 });
