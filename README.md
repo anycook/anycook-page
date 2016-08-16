@@ -1,7 +1,7 @@
 anycook page
 ============
 [![Dependency Status](https://david-dm.org/anycook/anycook-page/dev-status.png?theme=shields.io)](https://david-dm.org/anycook/anycook-page#info=devDependencies&view=table)
-[![Build Status](https://jenkins.gesundkrank.de/buildStatus/icon?job=anycook-page)](https://jenkins.gesundkrank.de/job/anycook-page/)
+[![Build Status](https://jenkins.gesundkrank.de/buildStatus/icon?job=anycook/anycook-page/master)](https://jenkins.gesundkrank.de/job/anycook/job/anycook-page/job/master/)
 
 
 Webclient for [anycook-api](https://github.com/anycook/anycook-api).
