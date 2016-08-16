@@ -66,7 +66,7 @@ define([
         hide : function(event){
             var $userMenu = $('#user_menu');
             var $target = $(event.target);
-            if (event.type === 'scroll' || !$target.parents().andSelf().is('#user_settings')|| $target.is('a')){
+            if (event.type === 'scroll' || !$target.parents().addBack().is('#user_settings')|| $target.is('a')){
                 $userMenu.removeClass('visible');
                 $('#user_settings').removeClass('focus');
             }

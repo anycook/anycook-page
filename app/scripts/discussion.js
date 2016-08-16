@@ -206,7 +206,7 @@ define([
                 $('body').click(function(event) {
                     var $target = $(event.target);
 
-                    if($('.child_comment').length > 0 && !$target.parents().andSelf().is('.child_comment')) {
+                    if($('.child_comment').length > 0 && !$target.parents().addBack().is('.child_comment')) {
                         $('.child_comment').remove();
                     }
                 });

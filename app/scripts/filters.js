@@ -114,7 +114,7 @@ define([
         },
         //kategorie
         loadAllCategories: function($target) {
-            if ($target.children().size() === 0) {
+            if ($target.children().size === 0) {
                 if ($target.parents('.step_1_right').length === 0) {
                     $target
                         .append('<li><span class="left">alle Kategorien</span>'
@@ -190,7 +190,7 @@ define([
         closeCategories: function(event) {
             var $target = $(event.target);
 
-            if (!$target.parents().andSelf().is('#kategorie_filter') && $(
+            if (!$target.parents().addBack().is('#kategorie_filter') && $(
                     '#kategorie_filter').hasClass('on')) {
                 this.handleCategories();
             }
@@ -202,13 +202,13 @@ define([
                 var $this = $(this);
                 var $input = $this.children('input');
                 if ($input.attr('checked')) {
-                    $this.prevAll().andSelf().addClass('on');
+                    $this.prevAll().addBack().addClass('on');
                 }
             });
         },
         mouseoverRadio: function(obj) {
             $(obj).nextAll().removeClass('on');
-            $(obj).prevAll().andSelf().addClass('on');
+            $(obj).prevAll().addBack().addClass('on');
         },
         removeChecked: function() {
             $('#filter_table label input[checked]').removeAttr('checked');
@@ -231,7 +231,7 @@ define([
         },
         checkOn: function($obj) {
             $obj.attr('checked', 'checked');
-            this.handleRadios($obj.parent().siblings().andSelf());
+            this.handleRadios($obj.parent().siblings().addBack());
         },
         textReplacement: function(input) {
             var originalvalue = input.val();

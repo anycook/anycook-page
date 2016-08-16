@@ -70,7 +70,7 @@ define([
 			var self = this;
 			$('body').click(function(event){
 				var $target = $(event.target);
-				if($target.parents().andSelf().is('.lightbox') || $target.parents().andSelf().is('.lightbox-autocomplete')) {
+				if($target.parents().addBack().is('.lightbox') || $target.parents().addBack().is('.lightbox-autocomplete')) {
 					return;
 				}
 

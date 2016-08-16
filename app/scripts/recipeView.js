@@ -344,7 +344,7 @@ define([
 
             var self = this;
             $('body').click(function(event) {
-                if($(event.target).parents().andSelf().is('#share')){
+                if($(event.target).parents().addBack().is('#share')){
                     return;
                 }
 

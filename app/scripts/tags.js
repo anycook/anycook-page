@@ -95,7 +95,7 @@ define([
             }
 
             if(event !== undefined){
-                if($target.parents().andSelf().is('.tag')) {
+                if($target.parents().addBack().is('.tag')) {
                     return;
                 }
             }
@@ -149,7 +149,7 @@ define([
                 $target.children('input').keydown(event.data, $.proxy(this.inputKeyListener, this));
 
                 $('body').click(function(event){
-                    if($(event.target).parents().andSelf().is($($target))) {
+                    if($(event.target).parents().addBack().is($($target))) {
                         return;
                     }
 
