@@ -46,6 +46,7 @@ require.config({
         'jquery-autosize': '../bower_components/jquery-autosize/dist/autosize',
         'jquery-ui': '../bower_components/jquery.ui/ui',
         'jquery.inputdecorator': 'lib/jquery.inputdecorator-0.1.2',
+        'jquery.migrate': '../bower_components/jquery-migrate/jquery-migrate',
         'jquery.mousewheel': '../bower_components/jquery-mousewheel/jquery.mousewheel',
         'jquery.recipeoverview': 'lib/jquery.recipeoverview',
         'jquery.xml': 'lib/jquery.xml-0.4.1.min',
@@ -141,6 +142,10 @@ require.config({
             deps: ['jquery'],
             exports: '$'
         },
+        'jquery.migrate': {
+            deps: ['jquery'],
+            exports: '$'
+        },
         'jquery.recipeoverview': {
             deps: ['jquery'],
             exports: '$'
@@ -180,6 +185,7 @@ require([
     'userProfile',
     'jquery.address',
     'jquery-ui/autocomplete',
+    'jquery.migrate',
     'jquery.xml',
     'AnycookAPI.autocomplete',
     'AnycookAPI.category',
