@@ -49,7 +49,8 @@ require.config({
         'jquery.mousewheel': '../bower_components/jscrollpane/script/jquery.mousewheel',
         'jquery.recipeoverview': 'lib/jquery.recipeoverview',
         'jquery.xml': 'lib/jquery.xml-0.4.1.min',
-        'jscrollpane': '../bower_components/jscrollpane/script/jquery.jscrollpane',
+        'jscrollpane': '../bower_components/jScrollPane/script/jquery.jscrollpane',
+        'mwheelintent': '../bower_components/jScrollPane/script/mwheelIntent',
         'plusone': 'lib/plusone',
         'text': '../bower_components/requirejs-text/text',
         'templates': '../templates',
@@ -140,6 +141,10 @@ require.config({
             deps: ['jquery'],
             exports: '$'
         },
+        'jquery.mousewheel': {
+            deps: ['jquery'],
+            exports: '$'
+        },
         'jquery.recipeoverview': {
             deps: ['jquery'],
             exports: '$'
@@ -149,7 +154,11 @@ require.config({
             exports: '$'
         },
         'jscrollpane': {
-            deps: ['jquery', 'jquery.mousewheel'],
+            deps: ['jquery', 'jquery.mousewheel', 'mwheelintent'],
+            exports: '$'
+        },
+        'mwheelintent': {
+            deps: ['jquery'],
             exports: '$'
         },
         'plusone': {

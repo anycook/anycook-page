@@ -7,7 +7,6 @@
     "jquery.ui": "~1.11.4",
     "underscore": "~1.8.3",
     "jquery-address": "*",
-    "jscrollpane": "~2.0.14",
     "requirejs-text": "~2.0.10",
     "jquery.autoellipsis": "~1.0.10",
     "jquery-autosize": "~3.0.14",
@@ -15,7 +14,8 @@
     "requirejs-tpl-jfparadis": "*",
     "compass-mixins": "~1.0.2",
     "autosize": "jquery-autosize#^3.0.17",
-    "text": "requirejs-text#^2.0.15"
+    "text": "requirejs-text#^2.0.15",
+    "jScrollPane": "jscrollpane#^2.0.23"
   },
   "devDependencies": {},
   "resolutions": {
