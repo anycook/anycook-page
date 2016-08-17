@@ -196,10 +196,8 @@ require([
     'AnycookAPI.tag',
     'AnycookAPI.upload',
     'AnycookAPI.user'
-], function($, AnycookAPI, Search, User, addressChange, drafts, loginMenu,
-            searchView,
-            scroll, facebook, filters, messageStream, tags, time, userMenu,
-            userProfile) {
+], function($, AnycookAPI, Search, User, addressChange, drafts, loginMenu, searchView,
+            scroll, facebook, filters, messageStream, tags, time, userMenu, userProfile) {
 
     //CORS
     //source: http://api.jquery.com/jQuery.support/
