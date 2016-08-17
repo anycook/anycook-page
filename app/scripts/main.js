@@ -46,7 +46,7 @@ require.config({
         'jquery-autosize': '../bower_components/jquery-autosize/dist/autosize',
         'jquery-ui': '../bower_components/jquery.ui/ui',
         'jquery.inputdecorator': 'lib/jquery.inputdecorator-0.1.2',
-        'jquery.mousewheel': '../bower_components/jscrollpane/script/jquery.mousewheel',
+        'jquery.mousewheel': '../bower_components/jquery-mousewheel/jquery.mousewheel',
         'jquery.recipeoverview': 'lib/jquery.recipeoverview',
         'jquery.xml': 'lib/jquery.xml-0.4.1.min',
         'jscrollpane': '../bower_components/jScrollPane/script/jquery.jscrollpane',
@@ -141,23 +141,11 @@ require.config({
             deps: ['jquery'],
             exports: '$'
         },
-        'jquery.mousewheel': {
-            deps: ['jquery'],
-            exports: '$'
-        },
         'jquery.recipeoverview': {
             deps: ['jquery'],
             exports: '$'
         },
         'jquery.xml': {
-            deps: ['jquery'],
-            exports: '$'
-        },
-        'jscrollpane': {
-            deps: ['jquery', 'jquery.mousewheel', 'mwheelintent'],
-            exports: '$'
-        },
-        'mwheelintent': {
             deps: ['jquery'],
             exports: '$'
         },

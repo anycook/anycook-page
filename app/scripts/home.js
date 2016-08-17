@@ -25,7 +25,8 @@ define([
     'header',
     'loginMenu',
     'news',
-    'jscrollpane'
+    'jscrollpane',
+    'jquery.mousewheel'
 ], function($, AnycookAPI, Recipe, User, header, loginMenu, news){
     'use strict';
     return {
