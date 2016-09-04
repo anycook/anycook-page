@@ -75,6 +75,11 @@ define([
 
 
                 var path = event.pathNames;
+
+                if (path.length > 0 && path[0].startsWith('!')) {
+                    $.address.path(event.path.substr(2));
+                    return;
+                }
                 //blockFilter(false);
                 if(path.length > 0){
                     $('#search_reset, #filter_reset').addClass('on');
