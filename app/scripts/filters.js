@@ -201,7 +201,7 @@ define([
             $obj.each(function() {
                 var $this = $(this);
                 var $input = $this.children('input');
-                if ($input.attr('checked')) {
+                if ($input.prop('checked')) {
                     $this.prevAll().addBack().addClass('on');
                 }
             });
@@ -211,7 +211,7 @@ define([
             $(obj).prevAll().addBack().addClass('on');
         },
         removeChecked: function() {
-            $('#filter_table label input[checked]').removeAttr('checked');
+            $('#filter_table label input[checked]').prop('checked', false);
         },
         checkOnOff: function(obj) {
             var $obj = $(obj).children('input').first();
@@ -230,7 +230,7 @@ define([
             search.flush();
         },
         checkOn: function($obj) {
-            $obj.attr('checked', 'checked');
+            $obj.prop('checked', true);
             this.handleRadios($obj.parent().siblings().addBack());
         },
         textReplacement: function(input) {

@@ -49,17 +49,17 @@ define([
                 var $this = $(this);
                 var $input = $this.children('input');
 
-                var check = !$input.attr('checked');
-                $this.parent().find('input').removeAttr('checked');
+                var check = !$input.prop('checked');
+                $this.parent().find('input').prop('checked', false);
 
                 if (check) {
-                    $input.attr('checked', 'checked');
+                    $input.prop('checked', true);
                 }
 
                 filters.handleRadios($this);
                 var name = $input.attr('name') === 'new_muffins' ? 'calorie' : 'skill';
 
-                if ($input.attr('checked')) {
+                if ($input.prop('checked')) {
                     drafts.save(name, $input.val());
                 }
                 else {
