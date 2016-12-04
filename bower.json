@@ -4,7 +4,6 @@
   "dependencies": {
     "jquery": "^3.1.0",
     "requirejs": "^2.2.0",
-    "jquery.ui": "~1.11.4",
     "underscore": "~1.8.3",
     "jquery-address": "*",
     "requirejs-text": "~2.0.10",
@@ -17,7 +16,7 @@
     "text": "requirejs-text#^2.0.15",
     "jScrollPane": "jscrollpane#^2.0.23",
     "jquery-mousewheel": "^3.1.13",
-    "jquery-ui": "^1.12.0",
+    "jquery-ui": "~1.12.1",
     "jquery-migrate": "^3.0.0"
   },
   "devDependencies": {},

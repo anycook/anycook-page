@@ -21,7 +21,7 @@ define([
 	'jquery',
 	'drafts',
 	'imageUpload',
-	'jquery-ui/progressbar',
+	'jquery-ui/widgets/progressbar',
 	'jquery.inputdecorator'
 ], function($, drafts, imageUpload){
 	'use strict';
