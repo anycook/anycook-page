@@ -114,7 +114,7 @@ define([
         },
         //kategorie
         loadAllCategories: function($target) {
-            if ($target.children().size === 0) {
+            if ($target.children().length === 0) {
                 if ($target.parents('.step_1_right').length === 0) {
                     $target.append('<li><span class="left">alle Kategorien</span>' +
                                    '<span class="right"></span></li>');
