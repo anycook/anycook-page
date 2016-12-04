@@ -24,43 +24,42 @@ define([
     'filters',
     'tags',
     'time'
-], function($, AnycookAPI, drafts, filters, tags, time){
+], function($, AnycookAPI, drafts, filters, tags, time) {
     'use strict';
     return {
-        load : function(){
+        load: function() {
             var self = this;
-            AnycookAPI.category.sorted(function(json){
+            AnycookAPI.category.sorted(function(json) {
                 var $categorySelect = $('#category_select');
-                for(var i in json){
-                    $categorySelect.append('<option>'+json[i].name+'</option>');
+                for (var i in json) {
+                    $categorySelect.append('<option>' + json[i].name + '</option>');
                 }
             });
-            $('#category_select').change(function(){
+            $('#category_select').change(function() {
                 var $this = $(this);
                 var text = $this.val();
-                $('#select_container span').text(text);
+                $('#select_container').find('span').text(text);
                 drafts.save('category', text);
                 self.isValid();
                 $('#category_error').fadeOut(300);
             });
 
-            $('#step3 .label_chefhats, #step3 .label_muffins').click(function(event){
+            $('#step3 .label_chefhats, #step3 .label_muffins').click(function(event) {
                 event.preventDefault();
                 var $this = $(this);
                 var $input = $this.children('input');
 
-                var check = !$input.attr('checked');
-                $this.parent().find('input').removeAttr('checked');
+                var check = !$input.prop('checked');
+                $this.parent().find('input').prop('checked', false);
 
-
-                if(check){
-                    $input.attr('checked', 'checked');
+                if (check) {
+                    $input.prop('checked', true);
                 }
 
                 filters.handleRadios($this);
                 var name = $input.attr('name') === 'new_muffins' ? 'calorie' : 'skill';
 
-                if($input.attr('checked')){
+                if ($input.prop('checked')) {
                     drafts.save(name, $input.val());
                 }
                 else {
@@ -68,17 +67,17 @@ define([
                 }
 
                 self.isValid();
-                if(name === 'calorie'){
+                if (name === 'calorie') {
                     $('#muffin_error').fadeOut(300);
                 }
-                else{
+                else {
                     $('#skill_error').fadeOut(300);
                 }
-            }).mouseover(function(){
+            }).mouseover(function() {
                 filters.mouseoverRadio(this);
             });
 
-            $('#step3 .label_container').mouseleave(function(){
+            $('#step3').find('.label_container').mouseleave(function() {
                 filters.handleRadios($(this).children());
             });
 
@@ -86,45 +85,47 @@ define([
                 .keydown($.proxy(this.keyTime, this))
                 .change($.proxy(this.draftTime, this))
                 .keyup($.proxy(this.draftTime, this))
-                .focus(function(){
+                .focus(function() {
                     self.isValid();
                     $('#time_error').fadeOut(300);
                 })
                 .siblings('.up, .down')
                 .click($.proxy(time.upDownListener, time))
                 .click($.proxy(this.draftTime, this))
-                .click(function(){
+                .click(function() {
                     self.isValid();
                     $('#time_error').fadeOut(300);
                 });
 
             $('#new_recipe_tagsbox').click({
-                add : $.proxy(this.addTag, this),
-                remove : $.proxy(this.removeTag, this)
+                add: $.proxy(this.addTag, this),
+                remove: $.proxy(this.removeTag, this)
             }, $.proxy(tags.makeInput, tags))
-                .on('click', '.tag_remove', function(){
+                .on('click', '.tag_remove', function() {
                     var tag = $(this).prev().text();
                     self.removeTag(tag);
                     return false;
                 });
-            tags.makeCloud('#new_recipe_tagcloud', function(event){
+            tags.makeCloud('#new_recipe_tagcloud', function(event) {
                 var $clickedTag = $(event.target).parents('.tag');
                 var tag = $clickedTag.find('.tag_text').text();
                 self.addTag(tag);
 
                 $clickedTag.animate({
-                    opacity:0
+                    opacity: 0
                 }, {
-                    duration:150,
-                    complete:function(){
+                    duration: 150,
+                    complete: function() {
                         $(this).animate({
-                            width:0,
+                            width: 0,
                             margin: 0,
-                            padding:0
+                            padding: 0
                         }, {
-                            duration:300,
+                            duration: 300,
                             easing: 'swing',
-                            complete:function(){ $(this).remove(); }
+                            complete: function() {
+                                $(this).remove();
+                            }
                         });
                     }
                 });
@@ -132,97 +133,100 @@ define([
 
             $('#open_preview').click($.proxy(this.submit, this));
         },
-        addTag : function(tag){
+        addTag: function(tag) {
             var $tag = tags.get(tag, 'remove');
-            $('#new_recipe_tagsbox input').remove();
-            $('#new_recipe_tagsbox').append($tag);
+            var $tagsBox = $('#new_recipe_tagsbox');
+            $tagsBox.find('input').remove();
+            $tagsBox.append($tag);
             this.draftTags();
         },
-        removeTag : function(tag){
-            $('#new_recipe_tagsbox .tag_text').each(function(){
-                if($(this).text() === tag) { $(this).parents('.tag').remove(); }
+        removeTag: function(tag) {
+            $('#new_recipe_tagsbox').find('.tag_text').each(function() {
+                if ($(this).text() === tag) {
+                    $(this).parents('.tag').remove();
+                }
             });
             this.draftTags();
         },
-        checkCategory : function(){
-            var category = $('#select_container span').text();
+        checkCategory: function() {
+            var category = $('#select_container').find('span').text();
             return category !== '' && category !== 'Kategorie auswählen';
         },
-        checkTime : function(){
+        checkTime: function() {
             var time = this.getTime();
             return time.std !== '0' || time.min !== '0';
         },
-        checkSkill : function(){
+        checkSkill: function() {
             var skill = this.getSkill();
             return skill !== undefined;
         },
-        checkCalorie : function(){
+        checkCalorie: function() {
             return this.getCalorie() !== undefined;
         },
-        getCategory : function(){
-            return $('#select_container span').text();
+        getCategory: function() {
+            return $('#select_container').find('span').text();
         },
-        getSkill : function(){
-            return $('#step3 .chefhats:checked').val();
+        getSkill: function() {
+            return $('#step3').find('.chefhats:checked').val();
         },
-        getCalorie : function(){
-            return $('#step3 .muffins:checked').val();
+        getCalorie: function() {
+            return $('#step3').find('.muffins:checked').val();
         },
-        getTime : function(){
-            var std = $('#step3 .std').val();
-            var min = $('#step3 .min').val();
-            var time = {std:std, min:min};
-            return time;
+        getTime: function() {
+            var $step3 = $('#step3');
+            var std = $step3.find('.std').val();
+            var min = $step3.find('.min').val();
+            return {std: std, min: min};
         },
-        draftTags : function(){
+        draftTags: function() {
             drafts.save('tags', this.getTags());
         },
-        draftTime : function(){
+        draftTime: function() {
             drafts.save('time', this.getTime());
         },
-        getTags : function(){
-            var $tags =  $('.tagsbox .tag_text');
+        getTags: function() {
+            var $tags = $('.tagsbox .tag_text');
             var tags = [];
-            for(var i = 0; i<$tags.length; i++){
-                var tag = $tags.eq(i).text();
-                tags[tags.length] = tag;
+            for (var i = 0; i < $tags.length; i++) {
+                tags[tags.length] = $tags.eq(i).text();
             }
             return tags;
         },
-        isValid: function(){
-            if(this.checkCategory() && this.checkTime() && this.checkSkill() && this.checkCalorie()){
+        isValid: function() {
+            if (this.checkCategory() && this.checkTime() && this.checkSkill() &&
+                this.checkCalorie()) {
                 $('#nav_step3').nextAll().removeClass('inactive');
                 return true;
-            }else{
+            } else {
                 $('#nav_step3').nextAll().addClass('inactive');
                 return false;
             }
         },
-        submit : function(){
+        submit: function() {
             var check = true;
-            if(!this.checkCategory()){
+            if (!this.checkCategory()) {
                 $('#category_error').fadeIn(300);
                 check = false;
             }
 
-            if(!this.checkTime()){
+            if (!this.checkTime()) {
                 $('#time_error').fadeIn(300);
                 check = false;
             }
 
-            if(!this.checkSkill()){
+            if (!this.checkSkill()) {
                 $('#skill_error').fadeIn(300);
                 check = false;
             }
 
-            if(!this.checkCalorie()){
+            if (!this.checkCalorie()) {
                 $('#muffin_error').fadeIn(300);
                 check = false;
             }
 
-            if(!check){
-                $('#open_preview').effect('shake', {distance:5, times:2}, 50);
-            }else{
+            if (!check) {
+                $('#open_preview').effect('shake', {distance: 5, times: 2}, 50);
+            } else {
                 $.address.parameter('step', '4');
             }
         }
