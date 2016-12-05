@@ -117,16 +117,9 @@ define([
                     tags: step3.getTags()
                 };
 
-                var userid = -1;
-
-                var user = User.get();
-                if (user.checkLogin()) {
-                    userid = user.id;
-                }
-
                 var id = $.address.parameter('id');
                 if (id) {
-                    recipe.mongoid = id;
+                    recipe.mongoId = id;
                 }
 
                 AnycookAPI.recipe.save(recipe, function() {
