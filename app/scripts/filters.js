@@ -43,12 +43,12 @@ define([
                 $('#kategorie_filter_hidden').val(search.kategorie);
             }
             if (search.skill !== null) {
-                $('.chefhats').removeAttr('checked');
+                $('.chefhats').prop('checked', false);
                 this.checkOn($('#chef_' + search.skill));
                 // handleRadios($('#filter_table .label_chefhats'));
             }
             if (search.kalorien !== null) {
-                $('.muffins').removeAttr('checked');
+                $('.muffins').prop('checked', false);
                 this.checkOn($('#muffin_' + search.kalorien));
                 // handleRadios($('#filter_table .label_muffins'));
             }
@@ -211,7 +211,7 @@ define([
             $(obj).prevAll().addBack().addClass('on');
         },
         removeChecked: function() {
-            $('#filter_table label input[checked]').prop('checked', false);
+            $('#filter_table').find('label input').prop('checked', false);
         },
         checkOnOff: function(obj) {
             var $obj = $(obj).children('input').first();
