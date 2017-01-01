@@ -19,31 +19,45 @@
  */
 
 define([
-	'jquery',
-	'jquery-ui/effect'
-], function($){
-	'use strict';
-	return {
-		listen : function(){
-			var filterheight = $('#filter_box').css('height');
-			filterheight = Number(filterheight.substr(0, filterheight.length-2))+50;
-			var scrollTop = $(document).scrollTop();
-			if(scrollTop > filterheight && $('#backtothetop').length === 0){
-				$('<div id="backtothetop"><div></div><label>zurück nach oben</label></div>').appendTo('body').hide();
-				var containerleft = $('#container').offset().left;
-				$('#backtothetop').css('left', containerleft+20).fadeIn(1000).click(this.backToTheTop);
-			}
-			else if(scrollTop < filterheight && $('#backtothetop').length > 0){
-				$('#backtothetop').fadeOut(700,function(){$('#backtothetop').remove();});
-			}
+    'jquery'
+], function($) {
+    'use strict';
+    $.extend($.easing, {
+        easeInOutQuad: function(pos) {
+            if ((pos /= 0.5) < 1) {
+                return 0.5 * Math.pow(pos, 2);
+            }
+            return -0.5 * ((pos -= 2) * pos - 2);
+        }
+    });
 
-		},
-		backToTheTop : function(time, callback){
-			if(time  === undefined || !(time instanceof Number)){
-				time = 1000;
-			}
-			callback = callback || function(){};
-			$('body').animate({scrollTop:0}, {duration:time, easing:'easeInOutQuart', complete: callback});
-		}
-	};
+    return {
+        init: function() {
+            $('#backtothetop').click(this.backToTheTop);
+        },
+        listen: function() {
+            var $backToTheTop = $('#backtothetop');
+
+            var filterheight = $('#filter_box').css('height');
+            filterheight = Number(filterheight.substr(0, filterheight.length - 2)) + 50;
+            var scrollTop = $(document).scrollTop();
+            if (scrollTop > filterheight) {
+                var containerleft = $('#container').offset().left;
+                $backToTheTop.css('left', containerleft + 20).fadeIn(1000);
+            }
+            else if (scrollTop < filterheight) {
+                $backToTheTop.fadeOut(700);
+            }
+        },
+        backToTheTop: function(time, callback) {
+            if (time === undefined || !(time instanceof Number)) {
+                time = 1000;
+            }
+            callback = callback || function() {
+                };
+            $('body').animate(
+                {scrollTop: 0},
+                {duration: time, easing: 'easeInOutQuad', complete: callback});
+        }
+    };
 });

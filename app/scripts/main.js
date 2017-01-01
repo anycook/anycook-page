@@ -459,6 +459,7 @@ require([
     $('.time .up, .time .down').click($.proxy(time.upDownListener, time));
 
     //scrollListener
+    scroll.init();
     $(document).scroll($.proxy(scroll.listen, scroll));
 
     // search events

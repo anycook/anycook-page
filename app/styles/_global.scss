@@ -510,6 +510,7 @@ input::-webkit-input-placeholder, input:-moz-placeholder {
 }
 
 #backtothetop {
+    display: none;
     position: fixed;
     cursor: pointer;
     top: 20px;
