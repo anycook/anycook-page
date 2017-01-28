@@ -47,6 +47,14 @@ define([
             $('#main').find('.lightbox').remove();
             $('#search_background').val('');
         },
+        goto: function(path) {
+            var history = window.history;
+            history.pushState({}, '', path);
+        },
+        currentPath: function() {
+            return window.location.host;
+        },
+
         // behandelt change bei $.address.path
         handleChange : function(event){
             var lastAddress = $(document).data('lastAddress');

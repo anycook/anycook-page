@@ -183,7 +183,6 @@ require([
     'time',
     'userMenu',
     'userProfile',
-    'jquery.address',
     'jquery-ui/widgets/autocomplete',
     'jquery.migrate',
     'jquery.xml',
@@ -208,6 +207,8 @@ require([
     //CORS
     //source: http://api.jquery.com/jQuery.support/
     $.support.cors = true;
+
+    var history = window.history;
 
     //makeWidth
     var updateWidth = function() {
@@ -249,12 +250,12 @@ require([
                     var user = User.get();
                     if (!user.checkLogin()) {
                         console.log('access only for logged-in users');
-                        $.address.path('');
+                        addressChange.goto('');
                         return false;
                     }
                     break;
                 case 404:
-                    $.address.path('notfound');
+                    addressChange.goto('notfound');
             }
             return true;
         };
@@ -270,19 +271,19 @@ require([
 
                 loginMenu.buildLogin();
 
-                var handleChange = $.proxy(addressChange.handleChange,
-                    addressChange);
+                var handleChange = $.proxy(addressChange.handleChange, addressChange);
 
                 $('body').on('login', handleChange).on('logout', handleChange);
-                $.address.bind('change', handleChange);
-                $.address.tracker(function() {
-                    /* global _gaq */
-                    if (window._gaq !== undefined) {
-                        _gaq.push(['_trackPageView']);
-                    }
-                });
+                window.addEventListener('popstate', handleChange);
+                // $.address.bind('change', handleChange);
+                // $.address.tracker(function() {
+                //     /* global _gaq */
+                //     if (window._gaq !== undefined) {
+                //         _gaq.push(['_trackPageView']);
+                //     }
+                // });
 
-                $.address.update();
+                // $.address.update();
 
                 if (user.checkLogin()) {
                     userMenu.load();
@@ -292,7 +293,7 @@ require([
     });
 
     //startfadeIn
-    if ($.address.pathNames().length === 0) {
+    if (addressChange.currentPath().length === 0) {
         $('#filter_container').delay(1000).animate({opacity: 1}, 1500);
     }
     else {
